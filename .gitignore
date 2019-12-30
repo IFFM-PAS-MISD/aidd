@@ -109,6 +109,9 @@ target/
 
 # figures
 *.png
+*.jpg
+*.tif
+*.tiff
 
 # IPython NB Checkpoints
 .ipynb_checkpoints/
