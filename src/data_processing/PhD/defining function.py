@@ -37,31 +37,31 @@ def func(path):
 
 
 # Reads the training images and store then in Img_train
-img_mask = " Dataset_Project/train_data/*_output/*Vz_*_500x500top.png"
+img_mask = 'E:/TestDataset/raw/num/Dataset_Project/train_data/*/RMS_flat_shell_Vz_*_*top.png'
 Img_train = func(img_mask)
 Training_IMG = np.asarray(Img_train)
 print('Training Images: ', Training_IMG.shape)
 
 # Reads the labels images for train images and store then in Train_label
-img_mask = "Dataset_Project/train_data/*.png"
+img_mask = 'E:/TestDataset/raw/num/Dataset_Project/train_labels/*.jpg'
 Train_label = func(img_mask)
 Label_Train = np.asarray(Train_label)
 print('Label images :', Label_Train.shape)
 
 # Reads test data and store them in Img_test
-img_mask = 'Dataset_Project/test_data/*/*Vz_*_500x500top.png'
+img_mask = 'E:/TestDataset/raw/num/Dataset_Project/test_data/*/*Vz_*_500x500top.png'
 Img_test = func(img_mask)
 Test_IMG = np.asarray(Img_test)
-print("Test Image : ", Test_IMG.shape)                      
+print("Test Image : ", Test_IMG.shape)
 
 # Reads the labels images for test images and store then in Test_label
-img_mask = 'Dataset_Project/test_labels/*.png'
+img_mask = 'E:/TestDataset/raw/num/Dataset_Project/test_labels/*.jpg'
 Test_label = func(img_mask)
 Label_Test = np.asarray(Test_label)
 print("Label test", Label_Test.shape)
 
-#cv2.imshow('image', Img_train[100])
+cv2.imshow('image', Img_train[100])
 #cv2.imshow('image', Train_label[100])
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 #print('training Image :', Img_train[100].shape)
