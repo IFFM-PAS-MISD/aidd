@@ -23,15 +23,15 @@ def func(path):
         height = 512
         dim = (width, height)
         img = cv2.resize(img, dim)
-        # Crop the image to get the right upper corner
-        crop_img = img[0:255, 256:511]
-        # cv2.imshow("cropped", crop_img)
-        # cv2.waitKey(0)
-        # print(crop_img.size)
-        # print(crop_img.shape)
-        # cv2.imshow('image',img)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
+        # Crop the image to get the right upper corner to produce 256*256 image size
+        crop_img = img[0:256, 256:511]
+        #cv2.imshow("cropped", crop_img)
+        #cv2.waitKey(0)
+        #print(crop_img.size)
+        #print(crop_img.shape)
+        #cv2.imshow('image',img)
+        #cv2.waitKey(0)
+        #cv2.destroyAllWindows()
         imge_mat.append(crop_img)
     return imge_mat
 
@@ -60,8 +60,13 @@ Test_label = func(img_mask)
 Label_Test = np.asarray(Test_label)
 print("Label test", Label_Test.shape)
 
-cv2.imshow('image', Img_train[100])
+#cv2.imshow('image', Img_train[100])
 #cv2.imshow('image', Train_label[100])
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+#cv2.waitKey(0)
+#cv2.destroyAllWindows()
 #print('training Image :', Img_train[100].shape)
+
+# Normalizing input
+Training_IMG = Training_IMG/255 -.5
+Test_IMG = Test_IMG /255 -.5
+
