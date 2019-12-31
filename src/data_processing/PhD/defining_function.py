@@ -5,6 +5,9 @@ import os
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
+from keras.utils import to_categorical
+from keras.utils import np_utils
+
 
 
 # In this part we import All images from all outputs_RMS_wave_dataset1_out
@@ -15,12 +18,12 @@ def func(path):
     for fn in img_names:
         img = cv2.imread(fn, 1)
         # Resize the image to be 512*512 instead of 500*500 so we can split it into four quarters
-        width = 512
-        height = 512
+        width = 128
+        height = 128
         dim = (width, height)
         img = cv2.resize(img, dim)
         # Crop the image to get the right upper corner to produce 256*256 image size
-        crop_img = img[0:255, 256:511]
+        crop_img = img[0:64, 64:128]
         #cv2.imshow("cropped", crop_img)
         #cv2.waitKey(0)
         #print(crop_img.size)
@@ -36,6 +39,7 @@ def func(path):
 img_mask = 'E:/TestDataset/raw/num/train_data/*/RMS_flat_shell_Vz_*_500x500top.png'
 Img_train = func(img_mask)                  
 Training_IMG = np.asarray(Img_train)
+Training_IMG = Training_IMG.astype('float32')
 Training_IMG = Training_IMG/255 -0.5
 print('Training Images: ', Training_IMG.shape)
 
@@ -51,6 +55,7 @@ print('Label images :', Label_Train.shape)
 img_mask = 'E:/TestDataset/raw/num/Dataset_Project/test_data/*/RMS_flat_shell_velocities_in_plane_*_500x500top.png'
 Img_test = func(img_mask)
 Test_IMG = np.asarray(Img_test)
+Test_IMG = Test_IMG.astype('float32')
 Test_IMG = Test_IMG /255 -0.5
 print("Test Image : ", Test_IMG.shape)
 
@@ -72,11 +77,9 @@ print("Label test", Label_Test.shape)
 #  This means that a column will be created for each
 #  output category and a binary variable is inputted for each category.
 
-from keras.utils import to_categorical
-Label_Train = to_categorical(Label_Train)
-
+Label_Train = np_utils.to_categorical(Label_Train,473)
 print(Label_Train.shape)
-Label_Test = to_categorical(Label_Test)
+Label_Test = np_utils.to_categorical(Label_Test,473)
 print(Label_Test.shape)
 
 
@@ -86,7 +89,7 @@ model = Sequential()
 
 #add model layers
 
-model.add(Conv2D(64, kernel_size=3, activation='relu',input_shape=(255,255,3)))
+model.add(Conv2D(64, kernel_size=3, activation='relu',input_shape=(64,64,3)))
 model.add(Conv2D(32, kernel_size=3, activation='relu'))
 model.add(Flatten())
 model.add(Dense(473,activation='softmax'))
@@ -98,6 +101,7 @@ model.compile(
     metrics=['accuracy'])
 # Training the model
 
-model.fit(Training_IMG,Label_Train, validation_data=(Training_IMG,Label_Train), epochs= 5)
+model.fit(Training_IMG,Label_Train, validation_data=(Test_IMG,Label_Test), epochs= 30)
 
-model.predict(Test_IMG[33])
+model.summary()
+
