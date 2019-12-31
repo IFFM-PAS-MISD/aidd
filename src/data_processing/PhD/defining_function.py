@@ -7,7 +7,8 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import to_categorical
 from keras.utils import np_utils
-
+import keras
+import matplotlib.pyplot as plt
 
 
 # In this part we import All images from all outputs_RMS_wave_dataset1_out
@@ -47,7 +48,7 @@ print('Training Images: ', Training_IMG.shape)
 ###img_mask = 'E:/TestDataset/raw/num/Dataset_Project/train_labels/*.jpg'
 ###Train_label = func(img_mask)
 ###Label_Train = np.asarray(Train_label)
-
+# Labels are put from 1-473 as the number of the images and then One_Hot_key is applied
 Label_Train = np.arange(0,473,1)
 print('Label images :', Label_Train.shape)
 
@@ -63,6 +64,7 @@ print("Test Image : ", Test_IMG.shape)
 ##img_mask = 'E:/TestDataset/raw/num/Dataset_Project/test_labels/*.jpg'
 ##Test_label = func(img_mask)
 ##Label_Test = np.asarray(Test_label)
+# Labels are put from 1-473 as the number of the images and then One_Hot_key is applied
 Label_Test = np.arange(0,49,1)
 print("Label test", Label_Test.shape)
 
@@ -89,19 +91,41 @@ model = Sequential()
 
 #add model layers
 
-model.add(Conv2D(64, kernel_size=3, activation='relu',input_shape=(64,64,3)))
-model.add(Conv2D(32, kernel_size=3, activation='relu'))
+model.add(Conv2D(64, kernel_size=3, activation='relu',input_shape=(64,64,3),padding='same'))
+model.add(Conv2D(32, kernel_size=3, activation='relu',padding='same'))
+model.add(Conv2D(32, kernel_size=3, activation='relu',padding='same'))
+model.add(Conv2D(32, kernel_size=3, activation='relu',padding='same'))
+model.add(Conv2D(32, kernel_size=3, activation='relu',padding='same'))
+model.add(Conv2D(32, kernel_size=3, activation='relu',padding='same'))
+model.add(Conv2D(32, kernel_size=3, activation='relu',padding='same'))
 model.add(Flatten())
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
+model.add(Dense(1000, activation= 'relu'))
 model.add(Dense(473,activation='softmax'))
 
 # Compile model using accuracy to measure model performance
 model.compile(
     optimizer='adam',
-    loss = 'categorical_crossentropy',
+    loss = 'binary_crossentropy',
     metrics=['accuracy'])
-# Training the model
 
+# Training the model
 model.fit(Training_IMG,Label_Train, validation_data=(Test_IMG,Label_Test), epochs= 30)
 
 model.summary()
+
+# evaluate the model and print the results
+score = model.evaluate(Test_IMG, Label_Test, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+
+
+
 
