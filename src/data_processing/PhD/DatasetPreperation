@@ -7,7 +7,7 @@ import io
 import gc
 import keras
 from keras.models import Sequential
-from keras.layers import Dense, Conv2D, MaxPool2D, Flatten
+from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, Dropout
 from keras.utils import np_utils
 
 # Force the Garbage Collector to release unreferenced memory
@@ -52,7 +52,7 @@ def Resize_Crop_Slice(path):
 def load_data(path):
     images_mat = []
     for fn in glob(path):
-        image = cv2.imread(fn, 1)
+        image = cv2.imread(fn, 0)
         images_mat.append(image)
     loaded_data = np.asarray(images_mat)
     return loaded_data
@@ -73,12 +73,19 @@ path4 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Labels/m_*_del
 
 
 Training_image = load_data(path1)
+Training_image =Training_image.reshape(18522,32,32,1)
 print('Training Images shape :', Training_image.shape)
+
+cv2.imshow('image',Training_image[1])
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
 Training_Labels = load_data(path2)
 print('Training Labels shape :', Training_Labels.shape)
 
 Testing_Images = load_data(path3)
+Testing_Images = Testing_Images.reshape(4655,32,32,1)
 print('Testing Images shape :', Testing_Images.shape)
 
 Testing_Labels = load_data(path4)
@@ -112,20 +119,24 @@ print(Testing_Labels.shape)
 # Configuring the model
 model = Sequential()
 
-model.add(Conv2D(16,3,padding='same', activation= 'relu',input_shape= (32,32,3)))
+model.add(Conv2D(32,3,padding='same', activation= 'relu',input_shape= (32,32,1)))
 model.add(MaxPool2D((2,2), strides= 2))
+model.add(Conv2D(64, 3, activation = 'relu',padding= 'same'))
+model.add(MaxPool2D((2,2), strides = 2))
 model.add(Flatten())
+model.add(Dropout(0.5))
 model.add(Dense(4096,activation= 'relu'))
+model.add(Dropout(0.5))
 model.add(Dense(1024, activation='softmax'))
 
 # Compile model using accuracy to measure model performance
 model.compile(
     optimizer='adam',
-    loss='binary_crossentropy',
+    loss='categorical_crossentropy',
     metrics=['accuracy'])
 
 # Training the model
-model.fit(Training_image, Training_Labels,  batch_size=64, validation_data=(Testing_Images, Testing_Labels), epochs=30)
+model.fit(Training_image, Training_Labels,  batch_size=98, validation_data=(Testing_Images, Testing_Labels), epochs=10)
 model.summary()
 prediction = model.predict(Testing_Images)
 print((prediction.shape))
