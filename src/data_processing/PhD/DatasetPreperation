@@ -1,0 +1,105 @@
+import numpy as np
+import cv2
+from glob import glob
+import image_slicer
+import zipfile
+import io
+import gc
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D, MaxPool2D
+
+# Force the Garbage Collector to release unreferenced memory
+gc.collect()
+
+
+# reszie and crop images( reszie image to 448*448 and crop the upper right side (224*224),
+# and slice the image into 49 tiles
+
+def Resize_Crop_Slice(path):
+    global zip
+    img_names = glob(path)
+    # resizing and cropping
+    for fn in img_names:
+        images = cv2.imread(fn, 1)
+        hight = 448
+        width = 448
+        dim = (hight, width)
+        images = cv2.resize(images, dim)
+        images = images[0:224, 224:448]
+        cv2.imwrite(fn, images)
+
+    # slicing the image into 49 tiles
+    size = range(np.size(img_names))
+    sliced_images = []
+    zipped = zip(size, img_names)
+    for i, fn in zipped:
+        print(fn)
+        # os.chdir('/home/abdalraheem/Desktop/lions')
+        tiles = image_slicer.slice(fn, 49)
+        sliced_images.append(tiles)
+        with zipfile.ZipFile('tiles.zip' + str(i), 'w') as zip:
+            for tile in tiles:
+                with io.BytesIO() as data:
+                    tile.save(data)
+                    zip.writestr(tile.generate_filename(path=None),
+                                 data.getvalue())
+
+
+# Loading images data and labels from their paths
+def load_data(path):
+    images_mat = []
+    for fn in glob(path):
+        image = cv2.imread(fn, 0)
+        images_mat.append(image)
+    loaded_data = np.asarray(images_mat)
+    return loaded_data
+
+
+path1 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Training_Images/*_output/RMS_flat_shell_Vz_*_500x500top_*_*.png'
+
+path2 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Training_Labels/m_*_delam*_position_no_*_a_*mm_b_*mm_angle_*_*_*.png'
+
+path3 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Images/*_output/RMS_flat_shell_Vz_*_500x500top_*_*.png'
+
+path4 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Labels/m_*_delam*_position_no_*_a_*mm_b_*mm_angle_*_*_*.png'
+
+#Resize_Crop_Slice(path1)
+#Resize_Crop_Slice(path2)
+#Resize_Crop_Slice(path3)
+#Resize_Crop_Slice(path4)
+
+
+Training_image = load_data(path1)
+print('Training Images shape :', Training_image.shape)
+
+Training_Labels = load_data(path2)
+print('Training Labels shape :', Training_Labels.shape)
+
+Testing_Images = load_data(path3)
+print('Testing Images shape :', Testing_Images.shape)
+
+Testing_Labels = load_data(path4)
+print('Testing Labels shape :', Testing_Labels.shape)
+
+Label = []
+# Labels must be in one and zero, change label to array of 18522*1 dim instead of 18522*3*3
+for i in range(Training_Labels.shape[0]):
+    Label.append(np.amax(Training_Labels[i]))
+
+Training_Labels = np.asarray(Label) / 255
+Training_Labels = np.reshape(Training_Labels, (18522, 1))
+
+print('Training Labels new shape:', Training_Labels.shape)
+
+Label = []
+# Labels must be in one and zero, change label to array of 4655*1 dim instead of 4655*32*32
+for i in range(Testing_Labels.shape[0]):
+    Label.append(np.amax(Testing_Labels[i]))
+
+Testing_Labels = np.asarray(Label) / 255
+Testing_Labels = np.reshape(Testing_Labels, (4655, 1))
+
+print('Testing Labels new shape:', Testing_Labels.shape)
+
+model = Sequential()
