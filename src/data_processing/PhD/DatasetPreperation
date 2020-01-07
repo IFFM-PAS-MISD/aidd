@@ -7,9 +7,11 @@ import io
 import gc
 import keras
 from keras.models import Sequential
-from keras.layers import Dense, Conv2D, MaxPool2D
+from keras.layers import Dense, Conv2D, MaxPool2D, Flatten
+from keras.utils import np_utils
 
 # Force the Garbage Collector to release unreferenced memory
+
 gc.collect()
 
 
@@ -50,7 +52,7 @@ def Resize_Crop_Slice(path):
 def load_data(path):
     images_mat = []
     for fn in glob(path):
-        image = cv2.imread(fn, 0)
+        image = cv2.imread(fn, 1)
         images_mat.append(image)
     loaded_data = np.asarray(images_mat)
     return loaded_data
@@ -102,4 +104,34 @@ Testing_Labels = np.reshape(Testing_Labels, (4655, 1))
 
 print('Testing Labels new shape:', Testing_Labels.shape)
 
+Training_Labels = np_utils.to_categorical(Training_Labels, 1024)
+print(Training_Labels.shape)
+Testing_Labels = np_utils.to_categorical(Testing_Labels, 1024)
+print(Testing_Labels.shape)
+
+# Configuring the model
 model = Sequential()
+
+model.add(Conv2D(16,3,padding='same', activation= 'relu',input_shape= (32,32,3)))
+model.add(MaxPool2D((2,2), strides= 2))
+model.add(Flatten())
+model.add(Dense(4096,activation= 'relu'))
+model.add(Dense(1024, activation='softmax'))
+
+# Compile model using accuracy to measure model performance
+model.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy'])
+
+# Training the model
+model.fit(Training_image, Training_Labels,  batch_size=64, validation_data=(Testing_Images, Testing_Labels), epochs=30)
+model.summary()
+prediction = model.predict(Testing_Images)
+print((prediction.shape))
+
+# evaluate the model and print the results
+score = model.evaluate(Testing_Images, Testing_Labels, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+
