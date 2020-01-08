@@ -1,16 +1,15 @@
-import numpy as np
-import cv2
-from glob import glob
-import image_slicer
-import zipfile
-import io
 import gc
-import keras
-from keras.models import Sequential
+import io
+import zipfile
+from glob import glob
+import cv2
+import image_slicer
+import numpy as np
 from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, Dropout
+from keras.models import Sequential
 from keras.utils import np_utils
-
-# Force the Garbage Collector to release unreferenced memory
+import tensorflow as tf
+import matplotlib.pyplot as plt
 
 gc.collect()
 
@@ -66,26 +65,26 @@ path3 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Images/*_outpu
 
 path4 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Labels/m_*_delam*_position_no_*_a_*mm_b_*mm_angle_*_*_*.png'
 
-#Resize_Crop_Slice(path1)
-#Resize_Crop_Slice(path2)
-#Resize_Crop_Slice(path3)
-#Resize_Crop_Slice(path4)
+# Resize_Crop_Slice(path1)
+# Resize_Crop_Slice(path2)
+# Resize_Crop_Slice(path3)
+# Resize_Crop_Slice(path4)
 
 
 Training_image = load_data(path1)
-Training_image =Training_image.reshape(18522,32,32,1)
+Training_image = Training_image.reshape(18522, 32, 32, 1)
 print('Training Images shape :', Training_image.shape)
 
-cv2.imshow('image',Training_image[1])
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.imshow('image',Training_image[1])
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
 
 Training_Labels = load_data(path2)
 print('Training Labels shape :', Training_Labels.shape)
 
 Testing_Images = load_data(path3)
-Testing_Images = Testing_Images.reshape(4655,32,32,1)
+Testing_Images = Testing_Images.reshape(4655, 32, 32,1)
 print('Testing Images shape :', Testing_Images.shape)
 
 Testing_Labels = load_data(path4)
@@ -119,24 +118,25 @@ print(Testing_Labels.shape)
 # Configuring the model
 model = Sequential()
 
-model.add(Conv2D(32,3,padding='same', activation= 'relu',input_shape= (32,32,1)))
-model.add(MaxPool2D((2,2), strides= 2))
-model.add(Conv2D(64, 3, activation = 'relu',padding= 'same'))
-model.add(MaxPool2D((2,2), strides = 2))
+model.add(Conv2D(32, 3, padding='same', activation='relu', input_shape=(32, 32, 1)))
+model.add(MaxPool2D((2, 2), strides=2))
+model.add(Conv2D(64, 3, activation='relu', padding='same'))
+model.add(MaxPool2D((2, 2), strides=2))
 model.add(Flatten())
 model.add(Dropout(0.5))
-model.add(Dense(4096,activation= 'relu'))
+model.add(Dense(4096, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1024, activation='softmax'))
 
 # Compile model using accuracy to measure model performance
+
 model.compile(
     optimizer='adam',
     loss='categorical_crossentropy',
     metrics=['accuracy'])
 
 # Training the model
-model.fit(Training_image, Training_Labels,  batch_size=98, validation_data=(Testing_Images, Testing_Labels), epochs=10)
+model.fit(Training_image, Training_Labels, batch_size=98, validation_data=(Testing_Images, Testing_Labels),epochs=1)
 model.summary()
 prediction = model.predict(Testing_Images)
 print((prediction.shape))
@@ -146,3 +146,18 @@ score = model.evaluate(Testing_Images, Testing_Labels, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
+#model.save_weights("Initial_Model.h5")
+#print("Saved model to disk")
+
+layer_output = model.get_layer("dense_2").output
+print(layer_output.Session().run(tf.constant[1,2,3]))
+
+# [<keras.layers.convolutional.Conv2D object at 0x0000023301E6AC88>,
+# <keras.layers.pooling.MaxPooling2D object at 0x000002330BB089C8>,
+# <keras.layers.convolutional.Conv2D object at 0x0000023305A40148>,
+# <keras.layers.pooling.MaxPooling2D object at 0x000002330BB08E08>,
+# <keras.layers.core.Flatten object at 0x000002330CF33608>,
+# <keras.layers.core.Dropout object at 0x000002330CF3B448>,
+# <keras.layers.core.Dense object at 0x000002330CF36888>,
+# <keras.layers.core.Dropout object at 0x000002330BB32D08>,
+# <keras.layers.core.Dense object at 0x000002330CF0EB88>]
