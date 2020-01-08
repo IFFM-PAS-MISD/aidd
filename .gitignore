@@ -127,3 +127,10 @@ bin/
 
 # exclude external models from source control
 /src/external/*
+
+# exclude hdf data files like cnn models
+*.h5
+
+# exclude zip files
+*.zip*
+
