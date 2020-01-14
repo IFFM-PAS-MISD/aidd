@@ -5,11 +5,14 @@ from glob import glob
 import cv2
 import image_slicer
 import numpy as np
+from keras import regularizers
 from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, Dropout
 from keras.models import Sequential
+from keras.optimizers import RMSprop, adam
 from keras.utils import np_utils
 import tensorflow as tf
 import matplotlib.pyplot as plt
+from keras_preprocessing.image import ImageDataGenerator
 
 gc.collect()
 
@@ -73,91 +76,81 @@ path4 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Labels/m_*_del
 
 Training_image = load_data(path1)
 Training_image = Training_image.reshape(18522, 32, 32, 1)
+Training_image = Training_image.astype('uint8') / 255
 print('Training Images shape :', Training_image.shape)
 
-# cv2.imshow('image',Training_image[1])
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-
+Testing_Images = load_data(path3)
+Testing_Images = Testing_Images.reshape(4655, 32, 32, 1)
+Testing_Images = Testing_Images.astype('uint8') / 255
+print('Testing Images shape :', Testing_Images.shape)
 
 Training_Labels = load_data(path2)
 print('Training Labels shape :', Training_Labels.shape)
-
-Testing_Images = load_data(path3)
-Testing_Images = Testing_Images.reshape(4655, 32, 32,1)
-print('Testing Images shape :', Testing_Images.shape)
 
 Testing_Labels = load_data(path4)
 print('Testing Labels shape :', Testing_Labels.shape)
 
 Label = []
-# Labels must be in one and zero, change label to array of 18522*1 dim instead of 18522*3*3
-for i in range(Training_Labels.shape[0]):
-    Label.append(np.amax(Training_Labels[i]))
+# Labels must be in one and zero, change label to array of 18522*1 dim instead of 18522*32*32
+for i in range(0, Training_Labels.shape[0]):
+    Label.append(np.max(Training_Labels[i]))
+
 
 Training_Labels = np.asarray(Label) / 255
-Training_Labels = np.reshape(Training_Labels, (18522, 1))
-
+#print(list(enumerate(Training_Labels)),'\n')  # TO view Labels in order
 print('Training Labels new shape:', Training_Labels.shape)
 
 Label = []
 # Labels must be in one and zero, change label to array of 4655*1 dim instead of 4655*32*32
 for i in range(Testing_Labels.shape[0]):
-    Label.append(np.amax(Testing_Labels[i]))
+    Label.append(np.max(Testing_Labels[i]))
 
 Testing_Labels = np.asarray(Label) / 255
-Testing_Labels = np.reshape(Testing_Labels, (4655, 1))
-
+print(list(enumerate(Testing_Labels)),'\n')
 print('Testing Labels new shape:', Testing_Labels.shape)
 
-Training_Labels = np_utils.to_categorical(Training_Labels, 1024)
-print(Training_Labels.shape)
-Testing_Labels = np_utils.to_categorical(Testing_Labels, 1024)
-print(Testing_Labels.shape)
+Training_Labels = np_utils.to_categorical(Training_Labels,2)
+Testing_Labels = np_utils.to_categorical(Testing_Labels,2)
+
 
 # Configuring the model
 model = Sequential()
-
-model.add(Conv2D(32, 3, padding='same', activation='relu', input_shape=(32, 32, 1)))
-model.add(MaxPool2D((2, 2), strides=2))
-model.add(Conv2D(64, 3, activation='relu', padding='same'))
-model.add(MaxPool2D((2, 2), strides=2))
-model.add(Flatten())
-model.add(Dropout(0.5))
-model.add(Dense(4096, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(1024, activation='softmax'))
+First_convolution_layer = model.add(Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=(32, 32, 1)))
+First_subsambling_Layer = model.add(MaxPool2D((2, 2), strides=2))
+Second_convolution_layer = model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+Second_subsambling_Layer = model.add(MaxPool2D((2, 2), strides=2))
+Flatting_Layer = model.add(Flatten())
+First_Dropout_layer = model.add(Dropout(0.5))
+First_FC_layer = model.add(Dense(4096, activation='relu'))
+Second_Dropout_layer = model.add(Dropout(0.5))
+#Second_FC_layer = model.add(Dense(1024, activation='relu'))
+Final_output = model.add(Dense(2, activation='softmax'))
 
 # Compile model using accuracy to measure model performance
 
 model.compile(
-    optimizer='adam',
-    loss='categorical_crossentropy',
+    optimizer=adam(lr=0.001),
+    loss='binary_crossentropy',
     metrics=['accuracy'])
 
 # Training the model
-model.fit(Training_image, Training_Labels, batch_size=98, validation_data=(Testing_Images, Testing_Labels),epochs=1)
+# validation_data=(Testing_Images, Testing_Labels)
+model.fit(Training_image, Training_Labels, batch_size=147, epochs=3)
+
 model.summary()
-prediction = model.predict(Testing_Images)
-print((prediction.shape))
 
 # evaluate the model and print the results
 score = model.evaluate(Testing_Images, Testing_Labels, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
-#model.save_weights("Initial_Model.h5")
-#print("Saved model to disk")
+# model.save_weights("Initial_Model.h5")
+# print("Saved model to disk")
+i = 55
+predections = model.predict(Testing_Images[i*49:(i+1)*49])
+print(predections)
+print(predections.shape)
 
-layer_output = model.get_layer("dense_2").output
-print(layer_output.Session().run(tf.constant[1,2,3]))
-
-# [<keras.layers.convolutional.Conv2D object at 0x0000023301E6AC88>,
-# <keras.layers.pooling.MaxPooling2D object at 0x000002330BB089C8>,
-# <keras.layers.convolutional.Conv2D object at 0x0000023305A40148>,
-# <keras.layers.pooling.MaxPooling2D object at 0x000002330BB08E08>,
-# <keras.layers.core.Flatten object at 0x000002330CF33608>,
-# <keras.layers.core.Dropout object at 0x000002330CF3B448>,
-# <keras.layers.core.Dense object at 0x000002330CF36888>,
-# <keras.layers.core.Dropout object at 0x000002330BB32D08>,
-# <keras.layers.core.Dense object at 0x000002330CF0EB88>]
+cv2.imshow('image', predections.reshape(49,2))
+cv2.waitKey(0)
+cv2.destroyAllWindows()
