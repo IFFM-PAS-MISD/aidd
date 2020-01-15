@@ -81,7 +81,7 @@ Training_image = Training_image.reshape(18522, 32, 32, 1)
 Training_image = Training_image.astype('float64')
 mean = np.mean(Training_image, axis=0)
 Training_image -= mean
-std =np.std(Training_image,axis=0)
+std = np.std(Training_image, axis=0)
 Training_image /= std
 
 print('Training Images shape :', Training_image.shape)
@@ -107,7 +107,7 @@ for i in range(0, Training_Labels.shape[0]):
     Label.append(np.max(Training_Labels[i]))
 
 Training_Labels = np.asarray(Label) / 255
-print(list(enumerate(Training_Labels)),'\n')  # TO view Labels in order
+print(list(enumerate(Training_Labels)), '\n')  # TO view Labels in order
 print('Training Labels new shape:', Training_Labels.shape)
 
 Label = []
@@ -119,11 +119,11 @@ Testing_Labels = np.asarray(Label) / 255
 print(list(enumerate(Testing_Labels)), '\n')
 print('Testing Labels new shape:', Testing_Labels.shape)
 
-#Training_Labels.reshape(18522,1)
-#Testing_Labels.reshape(4655,1)
+# Training_Labels.reshape(18522,1)
+# Testing_Labels.reshape(4655,1)
 
-Training_Labels = np_utils.to_categorical(Training_Labels,2)
-Testing_Labels = np_utils.to_categorical(Testing_Labels,2)
+Training_Labels = np_utils.to_categorical(Training_Labels, 2)
+Testing_Labels = np_utils.to_categorical(Testing_Labels, 2)
 
 # Configuring the model
 model = Sequential()
@@ -161,28 +161,33 @@ print('Test accuracy:', score[1])
 # model.save_weights("Initial_Model.h5")
 # print("Saved model to disk")
 
-p = 94
-output =[]
-predected_output = model.predict(Testing_Images[49*p:49*(p+1)])
+p = 0  # Testing data number
+
+output = []
+predected_output = model.predict(Testing_Images[49 * p:49 * (p + 1)])
 for i in range(49):
-    print('0 undamged, 1 dameged :',np.argmax(predected_output[i]))
+    print('0 undamged, 1 dameged :', np.argmax(predected_output[i]))
     output.append(np.argmax(predected_output[i]))
 
-
-output= np.asarray(output)
-output = output.reshape((7,7))
+output = np.asarray(output)
+output = output.reshape((7, 7))
 print(output.shape)
 print(output)
 
-final =np.zeros((224,224))
-for i in range(49):
-    for j,k in range(7,7):
-        for l,m in range(32,32):
-            final[l,m] = output[i]
+final = np.zeros((224, 224))
+
+for j in range(7):
+    for k in range(7):
+        r=output[j,k]
+        if r==0:
+            a=np.zeros((32, 32))
+        else:
+            a=np.ones((32, 32))
+        print(r)
+        final[(j)*32:(j)*32+32, (k)*32:(k)*32+32] = a
+
 print(final.shape)
-
-
-
-cv2.imshow('image', np.asarray(final))
+print('output',output[0,6])
+cv2.imshow('image', final)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
