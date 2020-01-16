@@ -4,11 +4,12 @@ from glob import glob
 import cv2
 import image_slicer
 import numpy as np
+#from keras import regularizers
 from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, Dropout
 from keras.models import Sequential
 from keras.optimizers import RMSprop, adam
 from keras.utils import np_utils
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import gc
 # garbage collector
 gc.collect()
@@ -63,13 +64,10 @@ path2 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Training_Labels/m_*_de
 path3 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Images/*_output/RMS_flat_shell_Vz_*_500x500top_*_*.png'
 
 path4 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Labels/m_*_delam*_position_no_*_a_*mm_b_*mm_angle_*_*_*.png'
-
 # Resize_Crop_Slice(path1)
 # Resize_Crop_Slice(path2)
 # Resize_Crop_Slice(path3)
 # Resize_Crop_Slice(path4)
-
-
 Training_image = load_data(path1)
 Training_image = Training_image.reshape(18522, 32, 32, 1)
 # Normalizing the input data
@@ -120,7 +118,7 @@ Testing_Labels = np_utils.to_categorical(Testing_Labels, 2)
 
 # Configuring the model
 model = Sequential()
-First_convolution_layer = model.add(Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=(32, 32, 1)))
+First_convolution_layer = model.add(Conv2D(64, (3, 3), padding='same', activation='relu', input_shape=(32, 32, 1)))
 First_Pooling_Layer = model.add(MaxPool2D((2, 2), strides=2))
 Second_convolution_layer = model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
 Second_Pooling_Layer = model.add(MaxPool2D((2, 2), strides=2))
@@ -139,7 +137,7 @@ model.compile(
     metrics=['accuracy'])
 
 # Training the model
-model.fit(Training_image, Training_Labels, batch_size=98, epochs=50)
+model.fit(Training_image, Training_Labels, batch_size=98, epochs=10)
 model.summary()
 
 # validation_data=(Testing_Images, Testing_Labels)
@@ -153,7 +151,7 @@ model.save("model1.h5")
 print("Saved model to disk")
 
 
-p = 379  # Testing data index
+p = 435  # Testing data index
 output = []
 predicted_output = model.predict(Testing_Images[49 * (p - 379):49 * (p - 378)])
 for i in range(49):
@@ -170,25 +168,20 @@ final = np.zeros((224, 224))
 # by populating final array with output array values 1,0 so it could be plotted.
 for j in range(7):
     for k in range(7):
-        r=output[j,k]
-        if r==0:
-            a=np.zeros((32, 32))
+        r = output[j, k]
+        if r == 0:
+            a = np.zeros((32, 32))
         else:
-            a=np.ones((32, 32))
+            a = np.ones((32, 32))
         #print(r)
-        final[(j)*32:(j)*32+32, (k)*32:(k)*32+32] = a
+        final[(j)*32: (j)*32+32, (k)*32: (k)*32+32] = a
 
 print(final.shape)
 test_path = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Images/'+str(p)+'_output/RMS_flat_shell_Vz_'+str(p)+'_500x500top.png'
-test_path =str(test_path)
+test_path = str(test_path)
 test_image = cv2.imread(test_path,0)
 test_image = np.asarray(test_image)
 test_image = test_image/255
-print(test_image.dtype)
-cv2.imshow('damage',test_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
 
 # Drawing Border around the damage
 and_array = np.ones((224,224))
@@ -198,11 +191,7 @@ for x in range (223):
                 and (final[x-1,y-1] == 1) and (final[x-1,y+1] == 1) and (final[x+1,y-1] == 1) and (final[x+1,y+1]):
             and_array[x,y] = 0
 
-final =cv2.bitwise_and(final,and_array)
-cv2.imshow('image', final)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
+final = cv2.bitwise_and(final,and_array)
 final_output = cv2.bitwise_or(final,test_image)
 cv2.imshow('local damage', final_output)
 cv2.waitKey(0)

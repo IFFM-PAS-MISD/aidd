@@ -180,8 +180,23 @@ for j in range(8):
         #print(r)
         final[(j)*32:(j)*32+32, (k)*32:(k)*32+32] = a
 
-print(final.shape)
-cv2.imshow('image',final)
+test_path = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Dataset_No_2_8_8_slices/Testing_images/'+str(p)+'_output/RMS_flat_shell_Vz_'+str(p)+'_500x500top.png'
+test_path = str(test_path)
+test_image = cv2.imread(test_path,0)
+test_image = np.asarray(test_image)
+test_image = test_image/255
+# Drawing Border around the damage
+and_array = np.ones((256,256))
+for x in range (255):
+    for y in range(255):
+        if (final[x,y] == 1) and (final[x-1,y] == 1) and (final[x-1,y] == 1) and (final[x,y+1] ==1) and (final[x,y-1] == 1) \
+                and (final[x-1,y-1] == 1) and (final[x-1,y+1] == 1) and (final[x+1,y-1] == 1) and (final[x+1,y+1]):
+            and_array[x,y] = 0
+
+final = cv2.bitwise_and(final,and_array)
+final_output = cv2.bitwise_or(final,test_image)
+cv2.imshow('local damage', final_output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
 
