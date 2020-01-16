@@ -141,7 +141,7 @@ model.compile(
     metrics=['accuracy'])
 
 # Training the model
-model.fit(Training_image, Training_Labels, batch_size=128, epochs=30)
+model.fit(Training_image, Training_Labels, batch_size=128, epochs=5)
 model.summary()
 
 # validation_data=(Testing_Images, Testing_Labels)
@@ -155,7 +155,7 @@ print('Test accuracy:', score[1])
 #print("Saved model to disk")
 
 
-p = 400  # Testing data index
+p = 470  # Testing data index
 output = []
 predicted_output = model.predict(Testing_Images[64 * (p - 379):64 * (p - 378)])
 for i in range(64):

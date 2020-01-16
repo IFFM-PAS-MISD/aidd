@@ -8,6 +8,7 @@ from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, Dropout
 from keras.models import Sequential
 from keras.optimizers import RMSprop, adam
 from keras.utils import np_utils
+import matplotlib.pyplot as plt
 import gc
 # garbage collector
 gc.collect()
@@ -138,6 +139,7 @@ model.compile(
     metrics=['accuracy'])
 
 # Training the model
+model.fit(Training_image, Training_Labels, batch_size=98, epochs=50)
 model.summary()
 
 # validation_data=(Testing_Images, Testing_Labels)
@@ -173,11 +175,35 @@ for j in range(7):
             a=np.zeros((32, 32))
         else:
             a=np.ones((32, 32))
-        print(r)
+        #print(r)
         final[(j)*32:(j)*32+32, (k)*32:(k)*32+32] = a
 
 print(final.shape)
-print('output',output[0,6])
+test_path = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/num/Testing_Images/'+str(p)+'_output/RMS_flat_shell_Vz_'+str(p)+'_500x500top.png'
+test_path =str(test_path)
+test_image = cv2.imread(test_path,0)
+test_image = np.asarray(test_image)
+test_image = test_image/255
+print(test_image.dtype)
+cv2.imshow('damage',test_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+# Drawing Border around the damage
+and_array = np.ones((224,224))
+for x in range (223):
+    for y in range(223):
+        if (final[x,y] == 1) and (final[x-1,y] == 1) and (final[x-1,y] == 1) and (final[x,y+1] ==1) and (final[x,y-1] == 1) \
+                and (final[x-1,y-1] == 1) and (final[x-1,y+1] == 1) and (final[x+1,y-1] == 1) and (final[x+1,y+1]):
+            and_array[x,y] = 0
+
+final =cv2.bitwise_and(final,and_array)
 cv2.imshow('image', final)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+final_output = cv2.bitwise_or(final,test_image)
+cv2.imshow('local damage', final_output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
