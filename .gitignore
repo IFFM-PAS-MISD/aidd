@@ -117,20 +117,32 @@ target/
 .ipynb_checkpoints/
 
 # exclude compiled binaries
-bin/
+bin/**
 
 # exclude data from source control by default
-/data/external/*
-/data/interim/*
-/data/processed/*
-/data/raw/*
+data/external/**
+data/interim/exp/**
+data/interim/num/**
+data/processed/exp/**
+data/processed/num/**
+data/raw/exp/**
+data/raw/num/**
 
 # exclude external models from source control
-/src/external/*
+src/external/**
 
 # exclude hdf data files like cnn models
 *.h5
 
 # exclude zip files
 *.zip*
+
+# exception to the rule
+!data/raw/exp/.gitkeep
+!data/raw/num/.gitkeep 
+!data/interim/exp/.gitkeep
+!data/interim/num/.gitkeep 
+!data/processed/exp/.gitkeep
+!data/processed/num/.gitkeep 
+!bin/.gitkeep
 
