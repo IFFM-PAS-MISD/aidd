@@ -2,10 +2,10 @@ import cv2
 import numpy as np
 from keras.models import load_model
 import gc
-import matplotlib.pyplot as plt
 from PIL import Image
 # garbage collector
 from keras.utils import np_utils
+import matplotlib.pyplot as plt
 gc.collect()
 
 #loading the Model_7_7
@@ -106,7 +106,7 @@ for i in range (97):
     #plt.imshow(final_output,cmap='gist_yarg', interpolation='nearest')
     #plt.show()
     imagepath ='E:/aidd/data/processed/model_7_7/'+str(p)+'.png'
-    #plt.savefig(imagepath)
-    cv2.imwrite(imagepath, final_output)
+    plt.savefig(imagepath)
+
 
 print('Inter section over Union fo all samples = ', IoU_Total/cout)

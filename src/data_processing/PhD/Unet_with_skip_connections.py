@@ -33,21 +33,21 @@ conv2 = Conv2D (filters = 16, kernel_size = (3,3), strides = 1, padding = 'same'
 added1 = keras.layers.Add()([conv1,conv2])
 
 p1 = (MaxPool2D ((2,2), strides = (2,2)))(added1)
+do1 = keras.layers.Dropout(0.5)(p1)
+conv4 = (Conv2D (filters = 16, kernel_size = (3,3), strides = 1, padding = 'same', activation = 'relu'))(do1)
+conv5 = (Conv2D (filters = 16 , kernel_size = (3,3), strides = 1, padding = 'same', activation = 'relu'))(conv4)
 
-conv4 = (Conv2D (filters = 16, kernel_size = (3,3), strides = 1, padding = 'same', activation = 'relu'))(p1)
-#conv5 = (Conv2D (filters = 16 , kernel_size = (3,3), strides = 1, padding = 'same', activation = 'relu'))(conv4)
+added2 = keras.layers.Add()([conv4,conv5])
 
-up1 = UpSampling2D ((2,2))(conv4)
-
+up1 = UpSampling2D ((2,2))(conv5)
 conv7 = (Conv2D (filters = 16, kernel_size = (3,3), strides = 1, padding = 'same', activation = 'relu'))(up1)
 conv8 = (Conv2D (filters = 16, kernel_size = (3,3), strides = 1, padding = 'same', activation ='relu'))(conv7)
-
 
 output = (Conv2D (1, (1, 1), padding ='same', activation='sigmoid'))(conv8)
 
 model = Model(inputs = inputs, outputs = output)
 
 model.compile (optimizer ='adam', loss ='binary_crossentropy', metrics = ['acc'])
-model.fit (np.array (x_train), np.array (y_train), batch_size = 16, epochs = 3, validation_split=0.2)
+model.fit (np.array (x_train), np.array (y_train), batch_size = 16, epochs = 8, validation_split=0.2)
 model.summary ()
 model.save('Unet_skip.h5')
