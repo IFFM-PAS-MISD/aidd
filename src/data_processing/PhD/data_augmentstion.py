@@ -1,6 +1,6 @@
 import random
 from random import shuffle
-
+import pandas as pd
 import numpy as np
 import cv2
 from glob import glob
@@ -11,6 +11,10 @@ from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, UpSampling2D, Input,
 from keras.models import Model
 from keras.optimizers import adam, rmsprop, sgd
 from sklearn.utils import shuffle
+from sklearn.model_selection import train_test_split
+
+
+
 
 # Force the Garbage Collector to release unreferenced memory
 gc.collect()
@@ -48,13 +52,14 @@ gc.collect()
 #np.save('Augmented_target_segmentation',y)
 
 
-image = np.load('Augmented_data_segmentation.npy')
-target = np.load('Augmented_target_segmentation.npy')
-image = image.reshape(1900,512,512,1)
-target = target.reshape(1900,512,512,1)
+x = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_data_segmentation.npy')
+x = x.reshape(1900, 512, 512, 1)
+y = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
+y = y.reshape(1900, 512, 512, 1)
+image, target = shuffle(x, y)
 
-image, target = shuffle(image, target)
-for i in range(1425):
+
+for i in range(1900):
     cv2.imshow('image', image[i])
     cv2.imshow('target', target[i])
     cv2.waitKey(0)

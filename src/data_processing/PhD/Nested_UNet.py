@@ -19,6 +19,8 @@ x = x.reshape(1900, 512, 512, 1)
 y = np.load('Augmented_target_segmentation.npy')
 y = y.reshape(1900, 512, 512, 1)
 #####################################
+# Randomly shuffle the dataset
+#####################################
 x, y = shuffle(x,y)
 #####################################
 x_train = x[:1520]
