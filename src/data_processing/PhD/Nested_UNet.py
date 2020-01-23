@@ -9,19 +9,23 @@ from keras.models import Model
 from keras.optimizers import adam, rmsprop, sgd
 
 # Force the Garbage Collector to release unreferenced memory
+from sklearn.utils import shuffle
+
 gc.collect()
 
 #####################################
-x = np.load('E:/src/Training samples.npy')
-x = x.reshape(475, 512, 512, 1)
-y = np.load('E:/src/Ground Truth.npy')
-y = y.reshape(475, 512, 512, 1)
+x = np.load('Augmented_data_segmentation.npy')
+x = x.reshape(1900, 512, 512, 1)
+y = np.load('Augmented_target_segmentation.npy')
+y = y.reshape(1900, 512, 512, 1)
 #####################################
-x_train = x[:379]
-test_x_samples = x[379:475]
+x, y = shuffle(x,y)
 #####################################
-y_train = y[0:379]
-tests_y_samples = y[379:475]
+x_train = x[:1520]
+y_train = y[:1520]
+#####################################
+test_x_samples = x[1520:]
+tests_y_samples = y[1520:]
 #####################################
 inputs = Input(shape=(512, 512, 1))
 #####################################
@@ -92,7 +96,7 @@ output = (Conv2D(1, (1, 1), padding='same', activation='sigmoid'))(c93)
 model = Model(inputs=inputs, outputs=output)
 #####################################
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
-model.fit(np.array(x_train), np.array(y_train), batch_size=16, epochs=5, validation_split=0.2)
+model.fit(np.array(x_train), np.array(y_train), batch_size=16, epochs=5, validation_split=0.1)
 model.summary()
-model.save('Nested_UNet.h5')
+model.save('Nested_UNet_augmneted_data.h5')
 #####################################

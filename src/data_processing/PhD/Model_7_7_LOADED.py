@@ -9,17 +9,17 @@ import matplotlib.pyplot as plt
 gc.collect()
 
 #loading the Model_7_7
-model = load_model('E:/src/model_7_7.h5')
+model = load_model('model_7_7.h5')
 # Summerize model
 model.summary()
 
 #load dataset
-Training_image = np.load('E:/DataSet_aidd/Training_Images_7_7.npy')
+Training_image = np.load('E:/src/datasets/bounding box/Training_Images_7_7.npy')
 Training_image = Training_image.reshape(18522,32,32,1)
-Testing_Images = np.load('E:/DataSet_aidd/Testing_Images_7_7.npy')
+Testing_Images = np.load('E:/src/datasets/bounding box/Testing_Images_7_7.npy')
 Testing_Images = Testing_Images.reshape(4753,32,32,1)
-Training_Labels = np.load('E:/DataSet_aidd/Training_Labels_7_7.npy')
-Testing_Labels = np.load('E:/DataSet_aidd/Testing_Labels_7_7.npy')
+Training_Labels = np.load('E:/src/datasets/bounding box/Training_Labels_7_7.npy')
+Testing_Labels = np.load('E:/src/datasets/bounding box/Testing_Labels_7_7.npy')
 # using one-hot-encoding to categorize both training labels and testing labels into two categories
 Testing_Labels = np_utils.to_categorical(Testing_Labels, 2)
 # evaluate the model
@@ -102,11 +102,5 @@ for i in range (97):
     cv2.imshow('Local damage', final_output)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    #Display_Image = Image.fromarray(final_output)
-    #plt.imshow(final_output,cmap='gist_yarg', interpolation='nearest')
-    #plt.show()
-    imagepath ='E:/aidd/data/processed/model_7_7/'+str(p)+'.png'
-    plt.savefig(imagepath)
-
 
 print('Inter section over Union fo all samples = ', IoU_Total/cout)

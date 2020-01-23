@@ -8,15 +8,15 @@ from PIL import Image
 from keras.utils import np_utils
 gc.collect()
 
-model = load_model('E:/src/model_8_8.h5') # loading the Model_7_7
+model = load_model('model_8_8.h5') # loading the Model_7_7
 model.summary() # Summarize model
 # load dataset
-Training_image = np.load('E:/DataSet_aidd/Training_Images_8_8.npy')
+Training_image = np.load('E:/src/datasets/bounding box/Training_Images_8_8.npy')
 Training_image = Training_image.reshape(24192,32,32,1)
-Testing_Images = np.load('E:/DataSet_aidd/Testing_Images_8_8.npy')
+Testing_Images = np.load('E:/src/datasets/bounding box/Testing_Images_8_8.npy')
 Testing_Images = Testing_Images.reshape(6208,32,32,1)
-Training_Labels = np.load('E:/DataSet_aidd/Training_Labels_8_8.npy')
-Testing_Labels = np.load('E:/DataSet_aidd/Testing_Labels_8_8.npy')
+Training_Labels = np.load('E:/src/datasets/bounding box/Training_Labels_8_8.npy')
+Testing_Labels = np.load('E:/src/datasets/bounding box/Testing_Labels_8_8.npy')
 # using one-hot-encoding to categorize both training labels and testing labels into two categories
 Testing_Labels = np_utils.to_categorical(Testing_Labels, 2)
 # evaluate the model
@@ -104,7 +104,5 @@ for i in range (97):
     plt.imshow(final_output,cmap='gist_yarg')
     plt.title('Localized damage')
     plt.show()
-    imagepath = 'E:/aidd/data/processed/model_8_8/' + str(p) + '.png'
-    plt.savefig(imagepath, dpi = 600)
 
 print('Inter section over Union fo all samples = ', IoU_Total/cout)
