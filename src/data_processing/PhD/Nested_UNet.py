@@ -14,9 +14,9 @@ from sklearn.utils import shuffle
 gc.collect()
 
 #####################################
-x = np.load('Augmented_data_segmentation.npy')
+x = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_data_segmentation.npy')
 x = x.reshape(1900, 512, 512, 1)
-y = np.load('Augmented_target_segmentation.npy')
+y = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
 y = y.reshape(1900, 512, 512, 1)
 #####################################
 # Randomly shuffle the dataset
@@ -65,30 +65,30 @@ c53 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activati
 #####################################
 u1 = UpSampling2D((2, 2))(c53)
 #####################################
-c61 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(u1)
-skip4 = keras.layers.Add()([c43,c61])
-c62 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip4)
+skip4 = keras.layers.Add()([c43,u1])
+c61 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip4)
+c62 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c61)
 c63 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c62)
 #####################################
 u2 = UpSampling2D((2, 2))(c63)
 #####################################
-c71 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(u2)
-skip3 = keras.layers.Add()([c33,c71])
-c72 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip3)
+skip3 = keras.layers.Add()([c33,u2])
+c71 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip3)
+c72 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c71 )
 c73 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c72)
 #####################################
 u3 = UpSampling2D((2, 2))(c73)
 #####################################
-c81 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(u3)
-skip2 = keras.layers.Add()([c23,c81])
-c82 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip2)
+skip2 = keras.layers.Add()([c23,u3])
+c81 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip2)
+c82 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c81)
 c83 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c82)
 #####################################
 u4 = UpSampling2D((2, 2))(c83)
 #####################################
-c91 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(u4)
-skip1 = keras.layers.Add()([c13,c91])
-c92 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip1)
+skip1 = keras.layers.Add()([c13,u4])
+c91 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip1)
+c92 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c91)
 c93 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(c92)
 #####################################
 # Output layer
@@ -100,5 +100,5 @@ model = Model(inputs=inputs, outputs=output)
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
 model.fit(np.array(x_train), np.array(y_train), batch_size=16, epochs=5, validation_split=0.1)
 model.summary()
-model.save('Nested_UNet_augmneted_data.h5')
+model.save('Nested_UNet_augmneted_data_skips_updated.h5')
 #####################################
