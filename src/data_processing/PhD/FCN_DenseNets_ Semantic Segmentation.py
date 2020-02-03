@@ -1,20 +1,48 @@
 import numpy as np
 from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, UpSampling2D, Input, merge
 from keras.models import Model
+from keras.activations import relu, sigmoid, softmax
+from keras.optimizers import adam, RMSprop
+from keras.losses import categorical_crossentropy, binary_crossentropy, mean_squared_error
 import keras
-from sklearn.utils import shuffle
-import tensorflow as tf
-import tensorflow.keras.backend as K
 import gc
+from sklearn.utils import shuffle
+from keras.backend.tensorflow_backend import set_session
+import tensorflow as tf
 
 
-
-
+# Hyper parameters
+#####################################
+lr = .0001
+rho = 0.995
+filters = 32
+filterSize = (3, 3)
+activation = relu, sigmoid
+batch_size = 4
+dropout = 0.2
+epochs = 5
+validation_split = 0.3
+#####################################
+# Loading the dataset
+#####################################
+x = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmneted_train_new_data_RMS_flat_shell_top.npy')
+x = x.reshape(1900, 512, 512, 1)
+y = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
+y = y.reshape(1900, 512, 512, 1)
+#####################################
+# Randomly shuffle the dataset
+#####################################
+x, y = shuffle(x, y)
+#####################################
+x_train = x[:1520]
+y_train = y[:1520]
+######################################
 # layers
 def layer(Layer_input):
     BN = keras.layers.BatchNormalization()(Layer_input)  # Batch Normalization
-    CN = keras.layers.Conv2D(filters=16, kernel_size=(3, 3), padding='same', activation='relu')(BN)  # Convolution
-    out = keras.layers.Dropout(0.2)(CN)  # Dropout
+    CN = keras.layers.Conv2D(filters=filters, kernel_size=filterSize, padding='same', activation='relu')(
+        BN)  # Convolution
+    out = keras.layers.Dropout(dropout)(CN)  # Dropout
     return out
 
 
@@ -23,7 +51,7 @@ def dense_block(DB_input, layers):
     global Concat
     for i in range(layers):
         temp = layer(DB_input)
-        Concat = keras.layers.Concatenate()([temp, DB_input])
+        Concat = keras.layers.Concatenate(axis=-1)([temp, DB_input])
         DB_input = temp
     out = Concat
     return out
@@ -32,16 +60,16 @@ def dense_block(DB_input, layers):
 # Transition Down (Max-pooling)
 def Transition_Down(TD_input):
     BN = keras.layers.BatchNormalization()(TD_input)
-    CN = keras.layers.Conv2D(filters=16, kernel_size=(1, 1), activation='relu')(BN)
-    Drop = keras.layers.Dropout(.2)(CN)
+    CN = keras.layers.Conv2D(filters=filters, kernel_size=filterSize, padding='same', activation='relu')(BN)
+    Drop = keras.layers.Dropout(dropout)(CN)
     down = keras.layers.MaxPooling2D((2, 2), strides=(2, 2))(Drop)
     return down
 
 
 # Transition Up (Unsampling)
 def Transition_Up(TU_input):
-    # Up = keras.layers.Conv2DTranspose(16, (3, 3), strides=(2, 2))(TU_input)
-    Up = keras.layers.UpSampling2D(size=(2, 2))(TU_input)
+    Up = keras.layers.Conv2DTranspose(16, (2, 2), strides=(2, 2))(TU_input)
+    # Up = keras.layers.Convolution2DTranspose(filters=16, kernel_size=(3, 3), strides=(2, 2))(TU_input)
     return Up
 
 
@@ -49,50 +77,32 @@ def Transition_Up(TU_input):
 def DenseNet_Model(x_train, y_train, DB_Num):
     inputs = Input(shape=(512, 512, 1))
     DB1 = dense_block(inputs, DB_Num[0])
-    Concat1 = keras.layers.Concatenate()([inputs,DB1])
+    Concat1 = keras.layers.Concatenate(axis=-1)([inputs, DB1])
     TD1 = Transition_Down(Concat1)
     DB2 = dense_block(TD1, DB_Num[1])
-    Concat2 = keras.layers.Concatenate()([TD1,DB2])
-    TD2 = Transition_Down(Concat2)
+    Concat2 = keras.layers.Concatenate(axis=-1)([TD1, DB2])
+    TD2 = Transition_Down(DB2)
     DB3 = dense_block(TD2, DB_Num[2])
     TU1 = Transition_Up(DB3)
-    #Concat3 = keras.layers.Concatenate()([TU1, Concat2])
-    DB4 = dense_block(TU1, DB_Num[3])
+    Concat3 = keras.layers.Concatenate(axis=-1)([TU1, Concat2])
+    DB4 = dense_block(Concat3, DB_Number[3])
     TU2 = Transition_Up(DB4)
-    #Concat4 = keras.layers.Concatenate()([TU2,Concat1])
-    DB5 = dense_block(TU2, DB_Num[4])
+    Concat4 = keras.layers.Concatenate(axis=-1)([TU2, Concat1])
+    DB5 = dense_block(Concat4, DB_Number[4])
     output = keras.layers.Conv2D(1, (1, 1), padding='same', activation='sigmoid')(DB5)
 
     segment_model = Model(inputs=inputs, outputs=output)
     segment_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
-    segment_model.fit(x_train, y_train, batch_size=5, epochs=5, validation_split=0.1)
+    segment_model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
     segment_model.summary()
 
     return segment_model
 
 
-#####################################
-# Loading the dataset
-#####################################
-x = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_data_segmentation_New_updates.npy')
-x = x.reshape(1900, 512, 512, 1)
-y = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
-y = y.reshape(1900, 512, 512, 1)
-
-#####################################
-# Randomly shuffle the dataset
-#####################################
-x, y = shuffle(x, y)
-#####################################
-x_train = x[:1520]
-y_train = y[:1520]
-#####################################
-test_x_samples = x[1520:]
-tests_y_samples = y[1520:]
-#####################################
-DB_Number = [3, 3, 3, 3, 3]
+DB_Number = [3, 3, 4, 3, 3]
 print(len(DB_Number))
 model = DenseNet_Model(x_train, y_train, DB_Number)
-model.save('FCN_DsensNets_Semantic_Segmentation.h5')
+model.save('FCN_DsensNets_Semantic_Segmentation' + '_filter' + str(filters) + '_epoch' + str(epochs) + '_kernal' + str(
+    filterSize) + '_drpout' + str(dropout) +'batch_size'+str(batch_size) + '.h5')
 
 gc.collect()
