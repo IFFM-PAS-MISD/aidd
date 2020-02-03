@@ -95,10 +95,7 @@ def DenseNet_Model(x_train, y_train, DB_Num):
     segment_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
     segment_model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
     segment_model.summary()
-
     return segment_model
-
-
 DB_Number = [3, 3, 4, 3, 3]
 print(len(DB_Number))
 model = DenseNet_Model(x_train, y_train, DB_Number)
