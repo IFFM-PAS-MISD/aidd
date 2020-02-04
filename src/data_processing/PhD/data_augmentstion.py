@@ -1,20 +1,7 @@
-import random
-from random import shuffle
-import pandas as pd
 import numpy as np
 import cv2
 from glob import glob
 import gc
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, UpSampling2D, Input, merge
-from keras.models import Model
-from keras.optimizers import adam, rmsprop, sgd
-from sklearn.utils import shuffle
-from sklearn.model_selection import train_test_split
-
-
-
 
 # Force the Garbage Collector to release unreferenced memory
 gc.collect()
@@ -24,7 +11,6 @@ gc.collect()
 def Data_Augmentation(path):
     img_names = glob(path)
     Augmented = []
-    # resizing
     for fn in img_names:
         print(fn)
         images = cv2.imread(fn, 0)
@@ -40,19 +26,16 @@ def Data_Augmentation(path):
     return loaded_data
 
 
-path1 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/images/RMS_wavefield_dataset1_out/*_output/RMS_flat_shell_Vz_*_500x500b*.png'
-#path2 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/images/dataset1_labels_out/m_*_delam*_position_no_*_a_*mm_b_*mm_angle_*.png'
+path1 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/images/RMS_wavefield_dataset1_out/*/RMS_flat_shell_Vz_*_500x500top.png'
 x = Data_Augmentation(path1)
 
 print(x.shape)
 #print(y.shape)
 
-np.save('Augmented_data_segmentation_New_updates',x)
-#np.save('Augmented_target_segmentation',y)
-#np.save("test_images",x)
+np.save("Augmneted_train_new_data_RMS_flat_shell_top",x)
 
-x = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_data_segmentation.npy')
-x = x.reshape(1900, 512, 512, 1)
+#x = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_data_segmentation.npy')
+#x = x.reshape(1900, 512, 512, 1)
 #y = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
 #y = y.reshape(1900, 512, 512, 1)
 #image, target = shuffle(x, y)

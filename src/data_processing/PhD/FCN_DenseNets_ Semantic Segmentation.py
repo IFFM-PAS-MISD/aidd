@@ -18,7 +18,7 @@ rho = 0.995
 filters = 32
 filterSize = (3, 3)
 activation = relu, sigmoid
-batch_size = 4
+batch_size = 2
 dropout = 0.2
 epochs = 5
 validation_split = 0.3
@@ -49,10 +49,11 @@ def layer(Layer_input):
 # Dense Block
 def dense_block(DB_input, layers):
     global Concat
+    activate = Dense(1,activation='relu')(DB_input)
     for i in range(layers):
-        temp = layer(DB_input)
-        Concat = keras.layers.Concatenate(axis=-1)([temp, DB_input])
-        DB_input = temp
+        temp = layer(activate)
+        Concat = keras.layers.Concatenate(axis=-1)([temp, activate])
+        activate = temp
     out = Concat
     return out
 
@@ -60,7 +61,8 @@ def dense_block(DB_input, layers):
 # Transition Down (Max-pooling)
 def Transition_Down(TD_input):
     BN = keras.layers.BatchNormalization()(TD_input)
-    CN = keras.layers.Conv2D(filters=filters, kernel_size=filterSize, padding='same', activation='relu')(BN)
+    active = Dense(1, activation="relu")(BN)
+    CN = keras.layers.Conv2D(filters=filters, kernel_size=(1,1), padding='same')(active)
     Drop = keras.layers.Dropout(dropout)(CN)
     down = keras.layers.MaxPooling2D((2, 2), strides=(2, 2))(Drop)
     return down
