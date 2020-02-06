@@ -9,6 +9,7 @@ from keras.optimizers import adam, rmsprop, sgd
 from keras import backend as K
 from sklearn.utils import shuffle
 import matplotlib.pyplot as plt
+from keras.models import model_from_json
 
 # Force the Garbage Collector to release unreferenced memory
 
@@ -21,17 +22,15 @@ filters = 16
 filter_size = (3, 3)
 batch_size = 16
 dropout = 0.5
-epochs = 3
+epochs = 15
 validation_split = 0.1
 #####################################
-x = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmneted_train_new_data_RMS_flat_shell_top.npy')
+x = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmneted_train_new_data_RMS_flat_shell_bottom.npy')
+x=x/255.
 x = x.reshape(1900, 512, 512, 1)
 y = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
+y=y/255.
 y = y.reshape(1900, 512, 512, 1)
-
-experimental = np.load('Experimental_test_images.npy')
-print(experimental.shape)
-experimental = experimental.reshape(276, 512, 512, 1)
 
 #####################################
 # Randomly shuffle the dataset
@@ -87,16 +86,15 @@ BN5 = keras.layers.BatchNormalization()(c53)
 #####################################
 d5 = MaxPool2D((2, 2), (2, 2))(BN5)
 #####################################
-# Boltneck1 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(d5)
-# Boltneck2 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(Boltneck1)
-# Boltneck3 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(Boltneck2)
-# BN6 = keras.layers.BatchNormalization()(Boltneck3)
+
+# Up sampling convolution followed by up-sampling
 
 #####################################
-# Up sampling convolution followed by up-sampling
-#####################################
+
 u1 = Conv2DTranspose(32, (3, 3), strides=(2, 2), padding='same', activation='relu')(d5)  # UpSampling2D((2, 2))(d5)
+
 #####################################
+
 skip5 = keras.layers.Concatenate()([c53, u1])
 c71 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(skip5)
 c72 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(c71)
@@ -104,8 +102,11 @@ c73 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same'
 BN7 = keras.layers.BatchNormalization()(c73)
 
 #####################################
+
 u2 = Conv2DTranspose(32, (3, 3), strides=(2, 2), padding='same', activation='relu')(BN7)  # UpSampling2D((2, 2))(BN7)
+
 #####################################
+
 skip4 = keras.layers.Concatenate()([c43, u2])
 c81 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(skip4)
 c82 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(c81)
@@ -113,7 +114,9 @@ c83 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same'
 BN8 = keras.layers.BatchNormalization()(c83)
 
 #####################################
+
 u3 = Conv2DTranspose(32, (3, 3), strides=(2, 2), padding='same', activation='relu')(BN8)  # UpSampling2D((2, 2))(BN8)
+
 #####################################
 skip3 = keras.layers.Concatenate()([c33, u3])
 c91 = Conv2D(filters=filters, kernel_size=filter_size, strides=1, padding='same', activation='relu')(skip3)
@@ -151,88 +154,38 @@ model = Model(inputs=inputs, outputs=output)
 
 
 # Custom loss function
-def custom_loss(y_true, y_pred,smooth =1):  #Dice score function
+def custom_loss(y_true, y_pred, smooth=1):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
-    intersection = K.sum(y_true_f * y_pred_f)
-    return -(2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
+    intersection = K.sum(K.abs(y_true_f * y_pred_f))
+    return  - ((intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) - intersection + smooth))
 
 
 # Custom metric
-def iou_loss_core(y_true, y_pred, smooth=1):
-    intersection = K.sum(K.abs(y_true * y_pred), axis=-1)
-    union = K.sum(y_true,-1) + K.sum(y_pred,-1) - intersection
-    iou = (intersection + smooth) / ( union + smooth)
+def iou_metric(y_true, y_pred, smooth=1):
+    y_true_f = K.flatten(y_true)
+    y_pred_f = K.flatten(y_pred)
+    intersection = K.sum(K.abs(y_true_f * y_pred_f))
+    union = K.sum(y_true_f) + K.sum(y_pred_f) - intersection
+    iou = (intersection + smooth) / (union + smooth)
     return iou
+
+
 ###################
-model.compile(optimizer='adam', loss=custom_loss, metrics=[iou_loss_core])
+model.compile(optimizer='adam', loss=custom_loss, metrics=[iou_metric])
 model.fit(np.array(x_train), np.array(y_train), batch_size=batch_size, epochs=epochs, validation_split=validation_split)
-model.summary()
-
-############################################
 score = model.evaluate(test_x_samples, tests_y_samples, verbose=0)
-#print('Test loss:', score[0])
-#print('Test accuracy:', score[1])
-######################################
-# Predicting the output of an image
-#####################################
-m_IoU = 0
-count = 0
-
-
-#####################################
-def Training():
-    prediction = model.predict(tests_y_samples, batch_size=1)
-    prediction = np.asarray(prediction)
-    #####################################
-    for i in range(380):
-        damage = np.squeeze(prediction[i], axis=2)
-        original = np.squeeze(test_x_samples[i], axis=2)
-        mask = np.squeeze(tests_y_samples[i], axis=2)
-        fig = plt.figure(figsize=(16, 9))
-        ax1 = fig.add_subplot(1, 3, 1)
-        plt.imshow(damage, cmap='tab20c')
-        ax2 = fig.add_subplot(1, 3, 2)
-        plt.imshow(original, cmap='gist_yarg')
-        # plt.imshow(damage,alpha=0.35,cmap='tab20c')
-        ax3 = fig.add_subplot(1, 3, 3)
-        plt.imshow(mask, cmap='gist_gray')
-        ax1.title.set_text('Detected Damage')
-        ax2.title.set_text('Original input Image')
-        ax3.title.set_text('Ground Truth / Label')
-        plt.show()
-        #####################################
-
-
-def exp():
-    prediction = model.predict(experimental, batch_size=1)
-    prediction = np.asarray(prediction)
-    #####################################
-    for i in range(380):
-        damage = np.squeeze(prediction[i], axis=2)
-        original = np.squeeze(experimental[i], axis=2)
-        fig = plt.figure(figsize=(16, 9))
-        ax1 = fig.add_subplot(1, 3, 1)
-        plt.imshow(damage, cmap='cool')
-        ax2 = fig.add_subplot(1, 3, 2)
-        plt.imshow(original, cmap='gist_yarg')
-        ax3 = fig.add_subplot(1, 3, 3)
-        plt.imshow(original, cmap='gist_yarg')
-        plt.imshow(damage, alpha=.65, cmap='gist_yarg')
-
-        ax3.title.set_text('Original Image with mask')
-        ax1.title.set_text('Detected Damage')
-        ax2.title.set_text('Original input Image')
-        plt.show()
-        #####################################
-
-
-Training()
-#exp()
-gc.collect()
+print('Test loss:', score[0])
+print('Test accuracy:', score[1] * 100)
+model.summary()
 ############################################
-
-
-model.save(
-    'E:/backup/models/SegNet_models/SegNet_encoder_decoder_new_data_without_botleneck_using_Conv2dTranspose_with_custom_loss.h5')
+# Evaluating the model using test set
 #####################################
+score = model.evaluate(test_x_samples, tests_y_samples, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+######################################
+model.save('Seg_test_custom_loss.h5')
+print("Saved model to disk")
+
+gc.collect()

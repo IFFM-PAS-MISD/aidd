@@ -7,6 +7,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, UpSampling2D, Input, merge, Dropout
 from keras.models import Model
 from keras.optimizers import adam, rmsprop, sgd
+import keras.backend as K
 
 # Force the Garbage Collector to release unreferenced memory
 gc.collect ()
@@ -61,6 +62,24 @@ conv15 = Conv2D (filters = 16, kernel_size = (3,3), strides = 1, padding = 'same
 
 output = (Conv2D (1, (1, 1), padding ='same', activation='sigmoid'))(conv15)
 model = Model(inputs = inputs, outputs = output)
+
+
+#####################################
+# Custom loss function (Dice score function)
+def custom_loss(y_true, y_pred,smooth =1):
+    y_true_f = K.flatten(y_true)
+    y_pred_f = K.flatten(y_pred)
+    intersection = K.sum(y_true_f * y_pred_f)
+    return -(2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
+
+
+# Custom metric IoU
+def iou_loss_core(y_true, y_pred, smooth=1):
+    intersection = K.sum(K.abs(y_true * y_pred), axis=-1)
+    union = K.sum(y_true,-1) + K.sum(y_pred,-1) - intersection
+    iou = (intersection + smooth) / ( union + smooth)
+    return iou
+############################################
 
 model.compile (optimizer ='adam', loss ='binary_crossentropy', metrics = ['acc'])
 model.fit (np.array (x_train), np.array (y_train), batch_size = 16, epochs = 5, validation_split=0.2)

@@ -15,24 +15,24 @@ def Data_Augmentation(path):
         print(fn)
         images = cv2.imread(fn, 0)
         images = cv2.resize(images, (512, 512))
-        horizontal_img = cv2.flip(images, 0)
-        vertical_img = cv2.flip(images, 1)
-        diagonal_img = cv2.flip(horizontal_img,1)
+        #horizontal_img = cv2.flip(images, 0)
+        #vertical_img = cv2.flip(images, 1)
+        #diagonal_img = cv2.flip(horizontal_img,1)
         Augmented.append(images)
-        Augmented.append(horizontal_img)
-        Augmented.append(vertical_img)
-        Augmented.append(diagonal_img)
+        #Augmented.append(horizontal_img)
+        #Augmented.append(vertical_img)
+        #Augmented.append(diagonal_img)
         loaded_data = np.asarray(Augmented)
     return loaded_data
 
 
-path1 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/images/RMS_wavefield_dataset1_out/*/RMS_flat_shell_Vz_*_500x500top.png'
+path1 = 'E:/Project_DataSet/PhD_PROJECT_DATA/data/raw/exp/*.png'
 x = Data_Augmentation(path1)
 
 print(x.shape)
 #print(y.shape)
 
-np.save("Augmneted_train_new_data_RMS_flat_shell_top",x)
+np.save("Experimental_test_images",x)
 
 #x = np.load('E:/src/datasets/Segmentation datasets/augemented/Augmented_data_segmentation.npy')
 #x = x.reshape(1900, 512, 512, 1)

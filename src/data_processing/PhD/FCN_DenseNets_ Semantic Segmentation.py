@@ -9,26 +9,30 @@ import gc
 from sklearn.utils import shuffle
 from keras.backend.tensorflow_backend import set_session
 import tensorflow as tf
+from keras import backend as K
 
 
 # Hyper parameters
 #####################################
 lr = .0001
 rho = 0.995
-filters = 32
+filters = 16
 filterSize = (3, 3)
 activation = relu, sigmoid
 batch_size = 2
 dropout = 0.2
 epochs = 5
-validation_split = 0.3
+validation_split = 0.1
 #####################################
 # Loading the dataset
 #####################################
 x = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmneted_train_new_data_RMS_flat_shell_top.npy')
+x=x/255.
 x = x.reshape(1900, 512, 512, 1)
 y = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
+y=y/255.
 y = y.reshape(1900, 512, 512, 1)
+
 #####################################
 # Randomly shuffle the dataset
 #####################################
@@ -70,9 +74,27 @@ def Transition_Down(TD_input):
 
 # Transition Up (Unsampling)
 def Transition_Up(TU_input):
-    Up = keras.layers.Conv2DTranspose(16, (2, 2), strides=(2, 2))(TU_input)
-    # Up = keras.layers.Convolution2DTranspose(filters=16, kernel_size=(3, 3), strides=(2, 2))(TU_input)
+    #Up = keras.layers.Conv2DTranspose(filters, (2, 2), strides=(2, 2))(TU_input)
+    Up = keras.layers.Convolution2DTranspose(filters=filters, kernel_size=(3, 3), strides=(2, 2), padding='same')(TU_input)
     return Up
+
+
+###################
+# Custom loss function
+def custom_loss(y_true, y_pred,smooth =1):  #Dice score function
+    y_true_f = K.flatten(y_true)
+    y_pred_f = K.flatten(y_pred)
+    intersection = K.sum(y_true_f * y_pred_f)
+    return -(2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
+###################
+# Custom metric
+def iou_metric(y_true, y_pred, smooth=1):
+    y_true_f = K.flatten(y_true)
+    y_pred_f = K.flatten(y_pred)
+    intersection = K.sum(K.abs(y_true_f * y_pred_f))
+    union = K.sum(y_true_f) + K.sum(y_pred_f) - intersection
+    iou = (intersection + smooth) / (union + smooth)
+    return iou
 
 
 # Keras Model (FCN Dense Net for semantic Segmentation
@@ -94,14 +116,14 @@ def DenseNet_Model(x_train, y_train, DB_Num):
     output = keras.layers.Conv2D(1, (1, 1), padding='same', activation='sigmoid')(DB5)
 
     segment_model = Model(inputs=inputs, outputs=output)
-    segment_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
+    segment_model.compile(optimizer='adam', loss=custom_loss, metrics=[iou_metric])
     segment_model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
     segment_model.summary()
     return segment_model
-DB_Number = [3, 3, 4, 3, 3]
+DB_Number = [4, 4, 4, 4, 4]
 print(len(DB_Number))
 model = DenseNet_Model(x_train, y_train, DB_Number)
-model.save('FCN_DsensNets_Semantic_Segmentation' + '_filter' + str(filters) + '_epoch' + str(epochs) + '_kernal' + str(
-    filterSize) + '_drpout' + str(dropout) +'batch_size'+str(batch_size) + '.h5')
+model.save('E:/backup/models/FCN_DenseNet_models/FCN_DsensNets_Semantic_Segmentation_filter_Using_Conv2DTranspose' + str(filters) + '_epoch_' + str(epochs) + '_kernal_' + str(
+    filterSize) + '_drpout_' + str(dropout) +'_batch_size_'+str(batch_size) +'_loss_updated.h5')
 
 gc.collect()
