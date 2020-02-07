@@ -170,7 +170,6 @@ def iou_metric(y_true, y_pred, smooth=1):
     iou = (intersection + smooth) / (union + smooth)
     return iou
 
-
 ###################
 model.compile(optimizer='adam', loss=custom_loss, metrics=[iou_metric])
 model.fit(np.array(x_train), np.array(y_train), batch_size=batch_size, epochs=epochs, validation_split=validation_split)
