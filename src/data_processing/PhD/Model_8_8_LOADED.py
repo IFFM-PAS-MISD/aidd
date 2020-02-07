@@ -110,5 +110,6 @@ for i in range (97):
     plt.imshow(final_output,cmap='gist_yarg')
     plt.title('Localized damage')
     plt.show()
+
     #####################################
 print('Inter section over Union fo all samples = ', IoU_Total/cout)
