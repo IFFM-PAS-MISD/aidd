@@ -16,7 +16,7 @@ gc.collect()
 #####################################
 # Loading dataset into x, y arrays and reshape them
 #####################################
-x = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmneted_train_new_data_RMS_flat_shell_top.npy')
+x = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmneted_train_new_data_RMS_flat_shell_bottom.npy')
 x = x.reshape(1900, 512, 512, 1)
 y = np.load('E:/backup/datasets/Segmentation datasets/augemented/Augmented_target_segmentation.npy')
 y = y.reshape(1900, 512, 512, 1)
@@ -37,24 +37,26 @@ test_x_samples, tests_y_samples = shuffle(test_x_samples, tests_y_samples)
 
 experimental = np.load('Experimental_test_images.npy')
 print(experimental.shape)
+experimental = experimental / 255.
 experimental = experimental.reshape(44, 512, 512, 1)
 
 #####################################
 # Loading the model
 ############################################
-model_name = 'E:/backup/models/FCN_DenseNet_models/FCN_DsensNets_Semantic_Segmentation_filter_Using_Conv2DTranspose32_epoch_5_kernal_(3, 3)_drpout_0.2_batch_size_2_Vsplit_0.1'
-model = load_model(model_name+'.h5',compile=False)
+model_name = 'E:/backup/models/FCN_DenseNet_models/' \
+             'FCN_DsensNets_Semantic_Segmentation_filter_Using_Conv2DTranspose16_epoch_20_kernal_(3, 3)_drpout_0.2_batch_size_4_loss_updated_changed_DB _layer'
+model = load_model(model_name + '.h5', compile=False)
 model.summary()
 #####################################
 # Evaluating the model using test set
 #####################################
-# loaded_model.compile(loss=custom_loss, optimizer='adam', metrics=[iou_loss_core])
 #score = model.evaluate(test_x_samples, tests_y_samples, verbose=0)
 #print('Test loss:', score[0])
 #print('Test accuracy:', score[1])
 ######################################
 # Predicting the output of an image
 #####################################
+
 m_IoU = 0
 count = 0
 
@@ -64,7 +66,7 @@ def Testing():
     prediction = model.predict(tests_y_samples, batch_size=1)
     prediction = np.asarray(prediction)
 
-    for i in range(380):
+    for i in range(50):
         damage = np.squeeze(prediction[i], axis=2)
         original = np.squeeze(test_x_samples[i], axis=2)
         mask = np.squeeze(tests_y_samples[i], axis=2)
@@ -73,15 +75,13 @@ def Testing():
         plt.imshow(damage, cmap='tab20c')
         ax2 = fig.add_subplot(1, 3, 2)
         plt.imshow(original, cmap='gist_yarg')
-        # plt.imshow(damage,alpha=0.35,cmap='tab20c')
         ax3 = fig.add_subplot(1, 3, 3)
         plt.imshow(mask, cmap='gist_gray')
         ax1.title.set_text('Detected Damage')
         ax2.title.set_text('Original input Image')
         ax3.title.set_text('Ground Truth / Label')
-        plt.savefig('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/FCN_DsensNets_'+str(i))
-        plt.show()
-
+        plt.savefig('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/FCN_DsensNets_' + str(i))
+        # plt.show()
 
 
 def exp():
@@ -102,11 +102,11 @@ def exp():
         ax3.title.set_text('Original Image with mask')
         ax1.title.set_text('Detected Damage')
         ax2.title.set_text('Original input Image')
-        plt.savefig('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Exp/FCN_DsensNets_'+str(i))
-        #plt.show()
+        plt.savefig('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Exp/FCN_DsensNets_' + str(i))
+        # plt.show()
 
 
 
 Testing()
-#exp()
+exp()
 gc.collect()
