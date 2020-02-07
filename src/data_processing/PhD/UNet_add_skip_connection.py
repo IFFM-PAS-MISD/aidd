@@ -119,3 +119,4 @@ model.fit(np.array(x_train), np.array(y_train), batch_size=16, epochs=5, validat
 model.summary()
 model.save('UNet_augmneted_data_skips_updated_kernal_sizes_updated_New_data_with_custom_loss_fuction.h5')
 #####################################
+
