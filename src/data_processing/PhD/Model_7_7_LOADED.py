@@ -94,7 +94,7 @@ for i in range (97):
     print('shape of the test sample',Test_image.shape)
     Test_image = Test_image / 255
     #####################################
-    # Drawing Border around the damage
+      # Drawing Border around the damage
     #####################################
     and_array = np.ones((224,224))
     for x in range (223):

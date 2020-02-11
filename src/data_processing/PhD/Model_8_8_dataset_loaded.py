@@ -42,6 +42,7 @@ Final_output = model.add(Dense(2))  # we did not use an activation function
 
 # Compile model using accuracy to measure model performance
 
+
 model.compile(
     optimizer=adam(lr=0.001),
     loss='mse',
