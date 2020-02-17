@@ -1,0 +1,198 @@
+
+%% 
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+%% SP 2008/03/01
+
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
+%% my added packages
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+%\usepackage{breqn}
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+\newcommand{\ud}{\mathrm{d}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\veca}[2]{\mathbf{#1}{#2}}
+\renewcommand{\bm}[1]{\mathbf{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\graphicspath{{figs/}}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+\journal{Composite Structures}
+\begin{document}
+	\begin{frontmatter}
+		\addcontentsline{toc}{section}{References}
+		%% Title, authors and addresses
+		%% use the tnoteref command within \title for footnotes;
+		%% use the tnotetext command for theassociated footnote;
+		%% use the fnref command within \author or \address for footnotes;
+		%% use the fntext command for theassociated footnote;
+		%% use the corref command within \author for corresponding author footnotes;
+		%% use the cortext command for theassociated footnote;
+		%% use the ead command for the email address,
+		%% and the form \ead[url] for the home page:
+		%% \title{Title\tnoteref{label1}}
+		%% \tnotetext[label1]{}
+		%% \author{Name\corref{cor1}\fnref{label2}}
+		%% \ead{email address}
+		%% \ead[url]{home page}
+		%% \fntext[label2]{}
+		%% \cortext[cor1]{}
+		%% \address{Address\fnref{label3}}
+		%% \fntext[label3]{}
+		
+		\title{Full wavefield processing by using FCN for delamination detection}
+		
+		%% use optional labels to link authors explicitly to addresses:
+		%% \author[label1,label2]{}
+		\address[IFFM]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
+		
+		\author{Pawel Kudela\corref{cor1}\fnref{IFFM}}
+		\ead{pk@imp.gda.pl}
+		\author{Abdalraheem A. Ijjeh\fnref{IFFM}}
+		\author{Saed Ullah \fnref{IFFM}}
+		%\ead{pfiborek@imp.gda.pl}
+		%\author{Tomasz Wandowski \fnref{IFFM}}	
+		
+		\cortext[cor1]{Corresponding author}
+		
+		\begin{abstract}
+			%% Text of abstract
+.
+		\end{abstract}
+		
+		\begin{keyword}
+			%% keywords here, in the form: keyword \sep keyword
+			Lamb waves \sep dispersion curves \sep structural heath monitoring \sep damage detection \sep deep learning \sep Convolutional neural networks. \sep fully convolutional neural network
+			%% PACS codes here, in the form: \PACS code \sep code
+			
+			%% MSC codes here, in the form: \MSC code \sep code
+			%% or \MSC[2008] code \sep code (2000 is the default)
+			
+		\end{keyword}
+		
+	\end{frontmatter}
+	%% main text
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Introduction}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Structural Health Monitoring Overview}
+	Structural Health Monitoring (SHM) has been defined in the literature as  acquisition validation and analysis of the technical data to facilitate life cycle management decisions\cite{R.1999} furthermore, SHM is consisted to give us a full diagnostic about structures, damages, its evolution and the residual lifetime . Accordingly, SHM involves dealing with sensors, smart materials, data transmission, computational power, and processing ability inside the structures, and it can be applied in different types of structures i.e. civil and aeronautic structures, smart and composite materials. As a result for applying SHM, it prevents catastrophic events to happen for structures due to the scheduled monitoring bases. furthermore, SHM helps with reducing the cost of maintenance by its ability to detect and localize the damages and faulty parts. The characteristics of damage in a particular structure play a key role in defining the architecture of  SHM system . due to the fact that once we are able to define the damage type we can decide what type of sensors and actuators are required\cite{Kessler2002}. 
+	\paragraph{}
+	
+	Composites materials are excessively popular in nowadays life. e.g. Cars, planes, boats, etc. have been made from composites such as fiberglass because they're lighter than metals but often just as strong, which leads us to the laminates materials, which are composites in which layers of different materials are bonded together with adhesive, to give added strength, flexibility, and durability. Nonetheless, the main disadvantages of composite materials that we are dealing with during the design, manufacturing, and repair over metallic parts that they tend to fail by distributed and interacting damages modes. Also, damage detection in composite materials is more difficult to the anisotropy of the material, the conductivity of the fibers and the fact that much damage, therefore, occurs beneath the top surface of the laminate and is therefore not easily detectable.
+	\paragraph{}
+	
+	
+	
+	\subsection{Review of Damage detection Techniques within composite materials }	
+	Different approaches were applied for detecting damages in composite materials. Yet, A well-known method that is used for that purpose are the Lamb wave techniques. In general, we can define Lamb waves as an elastic vibration that can propagate in solid structures (plates wrapped into cylindrical pipes or vessels or plates cut into thin strips, etc.) with free boundaries. In which, Lamb waves consist of two types of waves, symmetric ($S0,S1,S2...$) and anti-symmetric ($A0,A1,A2...$) modes , and each mode can propagate independently of the other. Lamb wave ($A0$ mode) is commonly used due to the fact is can propagate for long distances with little dispersion, and no higher modes are present to turbulence the resulting response wave\cite{Valed2000}.
+	\paragraph{}
+	
+	The earliest application of Lamb waves on composite materials was performed by Saravanos, in which he explored the possibility of detecting delamination in composite beams using Lamb waves\cite{doi:10.2514/6.1994-1754}. later, Percival and Birt, who started focusing their work on the two fundamental Lamb wave modes have concluded the same\cite{Percival1997}. Damage Detection in composite materials of other forms was also inspected by Seale, who examined fatigue and thermal damage\cite{Seale1998}. Also, Tang examined the sensitivity of Lamb wave propagation to fiber fracture\cite{Tang1989}.
+	\paragraph{}
+	
+	There are plenty of methods which utilizes Lamb waves for damage detection in SHM. One of the successful approaches has been done by two separate groups (Cawley and Soutis) at Imperical College, Cawley's group has developed polyvinylidenefluride(PVDS) transducers in which it can generate Lamb waves and receive it, those generated waves are highly focused. Soltis's group main focus was on sensor placement and signal processing issues \cite{Valed2000,Valed2000a,Valed2001}. They have chosen to use lead–zirconate–titanate (PZT) actuators and sensors over PVDF since they require a factor of ten less voltage to generate Lamb waves. Moreover, implemented Lamb wave techniques in SHM are broadly reported to be beneficial, efficient and sensitive in detecting damages in metallic structures, disbonds and delaminations in composite structures\cite{Boller2000,Diamanti2004,Su2006,Raghavan2007,Diamanti2007} \newline Authors in\cite{Ng2009} 
+	  
+	\paragraph{}
+
+	In this work, we went a step further, we used a large collection of signals (animation of propagating elastic waves), which are registered on very dense grid of points resembles scanning laser vibrometer measurements. Such collection of signals is often called full wave-field. 
+	 It was found
+
+	\paragraph{}
+	
+	
+	
+	
+	\section{Work description}
+	
+	
+	\section{}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+	
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Conclusions}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\appendix
+	\section{}
+
+
+	\section*{}
+
+	
+	\section*{ }
+	\bibliography{ref,aiaa_6.1994-1754}{}
+	\bibliographystyle{num_order}
+	
+	
+\end{document}
+
+
