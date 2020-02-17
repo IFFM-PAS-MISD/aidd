@@ -82,12 +82,29 @@ target/
 .idea
 
 # TeX/LaTeX
+# TeX/LaTeX
+*.xwm
 *.aux
+*.toc
+*.mw
+*.backup
+*.brf
+*.tdo
 *.bbl
 *.blg
-*.synctex.gz
-*.xwm
+*.el
+*.log
+*.dvi
+*.nav
 *.pdf
+*.glo
+*.idx
+*.ilg
+*.ind
+*.nlo
+*.nls
+*.out
+*.synctex.gz
 
 # Matlab
 *.asv
