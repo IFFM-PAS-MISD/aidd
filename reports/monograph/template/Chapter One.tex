@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[b5paper,11pt, titlepage]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdftex]{graphicx,color}
+%\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage[numbers,sort&compress]{natbib} % sort and compress citations
+%\usepackage[none]{hyphenat} % brak podzia³u wyrazów
+\usepackage{geometry}
+\newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
+\usepackage{multirow}
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\textbf{Modelowanie struktur anizotropowych \\Wstêpne badania eksperymentalne\\
+%	\vspace{10cm}}
+%\normalsize{Abstract} }
+%\normalsize{W ramach projektu pt.: \\ \textit{Wp³yw jednoczesnego oddzia³ywania temperatury i wilgotnoœci \\na struktury %anizotropowe: od teorii do badañ doœwiadczalnych\\}
+%NCN OPUS 12}}
+	
+%{Micha³ Jurek}
+
+%\date{ }
+	
+%\date{Gdañsk, Maj 2018\\ (Nr Arch. 221/2018)}
+
+
+	
+%\maketitle
+%\newpage
+%\tableofcontents
+%\newpage
+%\listoffigures
+%\listoftables
+%\newpage
+
+\chapter{Literature Review}
+
+\textbf{Abdalraheem Abullah Ijjeh}
+
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Structural Health Monitoring and motivations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Structural health monitoring (SHM) intends to describe a real-time evaluation of the component materials, of the different parts, and the full construction of these parts as a whole during the structure life-cycle \cite{Balageas2010}. Furthermore, SHM supports detecting and characterizing damages in structures as a whole or in their parts which may impair the ability to fully and safely deliver the demanded duty \cite{Yuan2016}.
+ \paragraph{}
+ The purpose of SHM is to distinguish any potential change that occurs at structure that could decay the performance of the whole system, at the earliest possible time so that an action can be taken to reduce the downtime, operational costs, and maintenance costs, consequently, reducing the risk of catastrophic failure, injury, or even loss of life. Moreover, SHM improves the work organization of maintenance services within trying to replace scheduled and periodic maintenance inspection with performance-based maintenance (long term) or at least (short term) through decreasing maintenance labor, in particular by avoiding dismounting parts where there is no hidden defect, and through reducing the individual involvement\cite{Balageas2010}.
+ \paragraph{}
+We can look at SHM as an improved method to perform Non-Destructive Evaluation, Nonetheless, SHM involves sensors that are integrated into structures, data transmission, computational power, and processing ability within structures\cite{Balageas2010}. The typical organization of a SHM system is depicted in Fig. 1.1, in which a typical SHM system is built from a diagnostic part (low level), which holds the levels responsible of detection, localization, and evaluation of any damage, and a prognosis part (high level), which includes the production of information concerning the outcomes from the diagnosed damage.
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=14cm]{Graphics/figure1_1.jpg}
+	\end{center}
+	\caption{Figure National SHM system \cite{Yuan2016}} 
+	\label{fig:bc}
+\end{figure}
+
+
+\section{Structural Health Monitoring for Composite Materials}
+A composite material can be described as a compound of two or more different materials to achieve new features that can�t be achieved by those of specific components functioning separately. Distinct from metallic alloys, each material has its characteristics\cite{Campbell2010}. Composite materials have a reinforcing and matrix phases that are usually categorized into\cite{Jones1999}:
+
+\begin{itemize}
+	\item Fiber-reinforced composite materials that consist of three parts: the fibers as the dispersed phase, the matrix as the continuous phase, and the fine inter-phase region, also known as the interface\cite{Cantwell1991}.
+	\item Laminated composite materials that are an assembly of layers of fiber-reinforced composite material that can be combined to implement necessary design features\cite{Ramirez1999}.
+	\item Particulate composite materials that are characterized as being composed of particles suspended in a matrix.
+
+\end{itemize}
+
+When comparing composite materials to regular metallic materials, we can notice that  composites have more advantages over metallic, those advantages can be summarized into\cite{Campbell2010}:
+
+\begin{itemize}
+	\item Low density with high strength and stiffness. 
+	\item Greater vibration damping capacity, and more temperature resistant.
+	\item Strong texture in microstructures that makes it easy to design and satisfy different application needs. 
+\end{itemize}
+
+Composite materials are not immune to some difficulties. Due to the nature of multiphase materials, composites materials present different anisotropic characteristics. Their material capacities, mainly associating with manufacturing processes, are dispersive\cite{Awad2012}. Furthermore, composites materials are sensitive to impact damages resulting from the lack of reinforcement in the out-of-plane direction\cite{Cai2012}. Under a high energy impact, little penetration rises in composites materials. On the other hand, for low to medium energy impact, matrix crack will happen and interact, causing the delamination process\cite{Cai2012}. Fiber breakage would also occur at the opposite side to the impact\cite{Montalvao2006}, furthermore, damages can be produced in composites by mistaken procedures through production and assembling, aging or service condition\cite{Cai2012}. Generally, composites materials damages can happen due to fiber breakage, matrix cracking, fiber-matrix debonding and delamination among layers, most of which happen below the top surfaces and are hardly visible\cite{Cai2012}. these damages can seriously decrease the composites performance, therefore, they should be detected in time to avoid catastrophic structural collapses.  Damage can only be discovered by analyzing the responses of the structure, obtained by sensors, before and after it happens,
+hence, we cannot expect to have �damage sensors�, the only way to detect the damage is by processing and comparing and differentiating the signals received from the sensors before and after damage\cite{s18041094},  then attempting to classify the parameters, that are sensitive to minor damage and that can be distinguished from the response to natural and environmental disturbances\cite{s18041094}. Consequently, SHM  methods are very essential in damage detection, since SHM implies different types of sensors mixed with damage detection techniques. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Guided waves based Structural Health Monitoring}
+In Structural health monitoring, Guided waves are essentially elastic waves propagating within bounded structures, due to the fact that there is no such infinite plane, for that reason, they are being guided by the structure boundaries. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+we should talk in details about lamb waves + equations + fig.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Damage Detection and Localization techniques in SHM }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Implemented methods using sensor network}
+\subsection{Approach using Hybrid PZT - Laser Vibrometer }
+
+\section{Introduction to Our work }
+\subsection{Project motivations and objectives }
+
+\subsection{tools used for measurement and generating dataset}
+\subsection{Introduction to AI and Deep learning }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		%\includegraphics[width=14cm]{Graphics/bc.jpg}
+	\end{center}
+	\caption{Figure caption.} 
+	\label{fig:bc}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h]
+	\centering
+	\caption{Table caption}
+	\begin{tabular}{cccc}
+		\hline
+		\textbf{a}	& \textbf{x} & \textbf{y} & \textbf{z} \\
+		\hline
+		-50 & -0.289 & -0.289 & -0.598\\ 
+		-40 & -0.248 & -0.248 & -0.512\\ 
+		\hline 
+	\end{tabular} 
+	\label{tab:xyz}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The scheme of experimental setup is shown in Fig.~\ref{fig:bc}.  
+The values are collected in Tab.~\ref{tab:xyz}.
+
+
+The details are described in a book~\cite{udd2011fiber}. 
+
+Similar case was analysed by Hill et al.~\cite{hill1978photosensitivity}
+
+Additional information:
+\begin{itemize}
+	\item fonts Times New Roman, 11pt
+	\item keep figures separately in greyscale with resolution 600 dpi (publisher requirement)
+	\item 20-30 pages
+	\item Bibliography references in the order of citations within the text
+\end{itemize}
+
+\bibliography{E:/aidd_new/aidd/reports/monograph/template/refrences/ref} % bibliography data in report.bib
+\bibliographystyle{E:/aidd_new/aidd/reports/monograph/template/refrences/spiebib.bst} % makes bibtex use spiebib.bst
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
