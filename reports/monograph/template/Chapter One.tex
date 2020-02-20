@@ -10,6 +10,7 @@
 \usepackage{geometry}
 \newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
 \usepackage{multirow}
+\graphicspath{ {E:/aidd_new/aidd/reports/monograph/template/Graphics/} }
 
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\tablename}{Tab.}
@@ -41,7 +42,7 @@
 
 \chapter{Literature Review}
 
-\textbf{Abdalraheem Abullah Ijjeh}
+\textbf{Abdalraheem Abullah Yousef Ijjeh}
 
 \tableofcontents
 \newpage
@@ -62,13 +63,21 @@
  where there is no hidden defect, and through reducing the individual 
  involvement\cite{Balageas2010}.
  \paragraph{}
-We can look at SHM as an improved method to perform Non-Destructive Evaluation, Nonetheless, SHM involves sensors that are integrated into structures, data transmission, computational power, and processing ability within structures\cite{Balageas2010}. The typical organization of a SHM system is depicted in Fig. 1.1, in which a typical SHM system is built from a diagnostic part (low level), which holds the levels responsible of detection, localization, and evaluation of any damage, and a prognosis part (high level), which includes the production of information concerning the outcomes from the diagnosed damage.
+We can look at SHM as an improved method to perform Non-Destructive Evaluation, 
+Nonetheless, SHM involves sensors that are integrated into structures, data 
+transmission, computational power, and processing ability within 
+structures\cite{Balageas2010}. The typical organization of a SHM system is 
+depicted in Fig \ref{fig:NationalSHM}, in which a typical SHM system is built 
+from a diagnostic part (low level), which holds the levels responsible of 
+detection, localization, and evaluation of any damage, and a prognosis part 
+(high level), which includes the production of information concerning the 
+outcomes from the diagnosed damage.
 \begin{figure} [h!]
 	\begin{center}
-		\includegraphics[width=\textwidth]{Graphics/figure1_1.jpg}
+		\includegraphics[width=\textwidth]{figure1_1.jpg}
 	\end{center}
 	\caption{Figure National SHM system \cite{Yuan2016}} 
-	\label{fig:bc}
+	\label{fig:NationalSHM}
 \end{figure}
 
 
@@ -93,7 +102,8 @@ When comparing composite materials to regular metallic materials, we can notice 
 \begin{itemize}
 	\item Low density with high strength and stiffness. 
 	\item Greater vibration damping capacity, and more temperature resistant.
-	\item Strong texture in microstructures that makes it easy to design and satisfy different application needs. 
+	\item Strong texture in micro-structures that makes it easy to design and 
+	satisfy different application needs. 
 \end{itemize}
 
 Composite materials are not immune to some difficulties.
@@ -153,7 +163,8 @@ infinite plane, accordingly, they are being guided by the structure's
 boundaries. 
 \paragraph{}
 There a few benefits from adopting guided wave-based schemes for SHM in
-structures, the price of transducers are generally cheap and affordable, also 
+structures over Vibration based methods, the price of transducers are generally 
+cheap and affordable, also 
 usually, due to the lightweight of those transducers, it can be implemented 
 easily in the structure, in addition, it is possible to scan a relatively large 
 area compared to a little number of transducers\cite{Mitra2016}. 
@@ -161,6 +172,7 @@ Moreover, an important advantage for guided waves over a vibration-based scheme
 is their high sensitivity for detecting small damages due to the ability to 
 high-frequency excitation, and in case of low-frequency ambient vibration, it 
 does not affect the guided waves propagation\cite{Mitra2016,Croxford2007}.
+
 \paragraph{} 
 Various types of guided waves have been investigated for the purpose of SHM. 
 A well-known approach is the use of Lamb waves, that propagate 
@@ -177,18 +189,22 @@ Due to the multi-mode and dispersion properties, the propagation of Lamb waves
 is quite complex\cite{Ostachowicz2012}. 
 In practical applications, two forms of lamb waves arise depending on the 
 distribution of the displacement on the top and bottom bounding surfaces, these 
-forms are symmetric, denoted as $S0,S1,S2,...., $and asymmetric, denoted as 
-$A0,A1,A2,....,$ \cite{Ostachowicz2012}. Fig 1.2 presents Lamb wave for $S0$ 
-and $A0$ modes\cite{Willberg2015}.
+forms are symmetric, denoted as \(S0,S1,S2,...., \)and asymmetric, denoted as 
+\(A0,A1,A2,....,\) \cite{Ostachowicz2012}. Fig \ref{fig:LambModes} presents 
+Lamb 
+wave for \(S0\) 
+and \(A0\) modes\cite{Willberg2015}.
 
 
 \begin{figure} [h!]
 	\begin{center}
-		\includegraphics[width=\textwidth]{Graphics/Figure1_2_Lamb_wave.jpg}
+	 	\centering
+		\includegraphics[width=\textwidth]{Figure1_2_Lamb_wave.jpg}
 	\end{center}
 	\caption{Lamb wave mode shapes \cite{Yuan2016}} 
-	\label{fig:bc}
+	\label{fig:LambModes}
 \end{figure} 
+
 \paragraph{}
 Regardless of Lamb waves promising characteristics, using them for SHM 
 applications holds some essential challenges. 
