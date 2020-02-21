@@ -49,7 +49,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Structural Health Monitoring and motivations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Structural health monitoring (SHM) intends to describe a real-time evaluation of the component materials, of the different parts, and the full construction of these parts as a whole during the structure life-cycle \cite{Balageas2010}. Furthermore, SHM supports detecting and characterizing damages in structures as a whole or in their parts which may impair the ability to fully and safely deliver the demanded duty \cite{Yuan2016}.
+ Structural health monitoring (SHM) intends to describe a real-time evaluation 
+ of the component materials, of the different parts, and the full construction 
+ of these parts as a whole during the structure life-cycle~\cite{Balageas2010}. 
+ Furthermore, SHM supports detecting and characterizing damages in structures 
+ as a whole or in their parts which may impair the ability to fully and safely 
+ deliver the demanded duty~\cite{Yuan2016}.
  \paragraph{}
  The purpose of SHM is to distinguish any potential change that occurs at 
  structure that could decay the performance of the whole system, at the 
@@ -61,12 +66,12 @@
  performance-based maintenance (long term) or at least (short term) through 
  decreasing maintenance labor, in particular by avoiding dismounting parts 
  where there is no hidden defect, and through reducing the individual 
- involvement\cite{Balageas2010}.
+ involvement~\cite{Balageas2010}.
  \paragraph{}
 We can look at SHM as an improved method to perform Non-Destructive Evaluation, 
 Nonetheless, SHM involves sensors that are integrated into structures, data 
 transmission, computational power, and processing ability within 
-structures\cite{Balageas2010}. The typical organization of a SHM system is 
+structures~\cite{Balageas2010}. The typical organization of a SHM system is 
 depicted in Fig \ref{fig:NationalSHM}, in which a typical SHM system is built 
 from a diagnostic part (low level), which holds the levels responsible of 
 detection, localization, and evaluation of any damage, and a prognosis part 
@@ -76,28 +81,53 @@ outcomes from the diagnosed damage.
 	\begin{center}
 		\includegraphics[width=\textwidth]{figure1_1.jpg}
 	\end{center}
-	\caption{Figure National SHM system \cite{Yuan2016}} 
+	\caption{Figure National SHM system~\cite{Yuan2016}} 
 	\label{fig:NationalSHM}
 \end{figure}
-
+\paragraph{}
+Generally,  we can categorize SHM strategies into two main schemes, local and 
+global schemes. Local schemes were discussed in 
+~\cite{Grimberg2001,Maldague1993,Raghavan2007}
+and global schemes were discussed in~\cite{Adams2002,Doebling1998,Uhl2004}. 
+Local schemes monitor a small area of the structure enclosing the transducers 
+that used for registering the data signals after the structure being exited. 
+For this purpose few phenomena are used like Ultrasonic 
+waves~\cite{Raghavan2007}, eddy currents~\cite{Grimberg2001}, thermal 
+field~\cite{Maldague1993} and acoustic emission~\cite{Pao1978}. On the other 
+hand, Global schemes in SHM are performed if a global motion of the structure 
+is induced during its operation~\cite{Balageas2010}. For this purpose, 
+vibration techniques are utilized, in which two types of techniques are 
+introduced, the signal based~\cite{Ihn2004} and the 
+model-based~\cite{natke2000model}.
+The signal-based approaches analyze measured responses of the structure after 
+ambient excitation and possible damages~\cite{Stepinski2013}. 
+The model-based approaches use various types of models of a monitored structure 
+to detect and localize damage in the structure by utilizing relations 
+between the model parameters and distinct damages~\cite{Stepinski2013}. 
 
 \section{Structural Health Monitoring for Composite Materials}
 A composite material can be described as a compound of two or more different 
 materials to achieve new features that can’t be achieved by those of specific 
 components functioning separately.
 Distinct from metallic alloys, each material has its 
-characteristics\cite{Campbell2010}.
+characteristics~\cite{Campbell2010}.
 Composite materials have a reinforcing and 
-matrix phases that are usually categorized into\cite{Jones1999}:
+matrix phases that are usually categorized into~\cite{Jones1999}:
 
 \begin{itemize}
-	\item Fiber-reinforced composite materials that consist of three parts: the fibers as the dispersed phase, the matrix as the continuous phase, and the fine inter-phase region, also known as the interface\cite{Cantwell1991}.
-	\item Laminated composite materials that are an assembly of layers of fiber-reinforced composite material that can be combined to implement necessary design features\cite{Ramirez1999}.
+	\item Fiber-reinforced composite materials that consist of three parts: the 
+	fibers as the dispersed phase, the matrix as the continuous phase, and the 
+	fine inter-phase region, also known as the interface~\cite{Cantwell1991}.
+	\item Laminated composite materials that are an assembly of layers of 
+	fiber-reinforced composite material that can be combined to implement 
+	necessary design features~\cite{Ramirez1999}.
 	\item Particulate composite materials that are characterized as being composed of particles suspended in a matrix.
 
 \end{itemize}
 
-When comparing composite materials to regular metallic materials, we can notice that  composites have more advantages over metallic, those advantages can be summarized into\cite{Campbell2010}:
+When comparing composite materials to regular metallic materials, we can notice 
+that  composites have more advantages over metallic, those advantages can be 
+summarized into~\cite{Campbell2010}:
 
 \begin{itemize}
 	\item Low density with high strength and stiffness. 
@@ -110,55 +140,62 @@ Composite materials are not immune to some difficulties.
 Due to the nature of multiphase materials, composites materials present 
 different anisotropic characteristics. 
 Their material capacities, mainly associating with manufacturing processes, are 
-dispersive\cite{Awad2012}. 
+dispersive~\cite{Awad2012}. 
 Furthermore, composites materials are sensitive to impact damages resulting 
-from the lack of reinforcement in the out-of-plane direction\cite{Cai2012}. 
+from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}. 
 Under a high energy impact, little penetration rises in composites materials. 
 On the other hand, for low to medium energy impact, matrix crack will happen 
-and interact, causing the delamination process\cite{Cai2012}. 
+and interact, causing the delamination process~\cite{Cai2012}. 
 Fiber breakage would also occur at the opposite side to the 
-impact\cite{Montalvao2006}, furthermore, damages can be produced in composites 
+impact~\cite{Montalvao2006}, furthermore, damages can be produced in composites 
 by mistaken procedures through production and assembling, aging or service 
-condition\cite{Cai2012}. 
+condition~\cite{Cai2012}. 
 Generally, composites materials damages can happen due to fiber breakage, 
 matrix cracking, fiber-matrix debonding and delamination among layers, most of 
-which happen below the top surfaces and are hardly visible\cite{Cai2012}. 
+which happen below the top surfaces and are hardly visible~\cite{Cai2012}. 
 These damages can seriously decrease the composites performance, therefore, 
 they should be detected in time to avoid catastrophic structural collapses.  
 Damage can only be discovered by analyzing the responses of the structure, 
 obtained by sensors, before and after it happens,
 hence, we cannot expect to have “damage sensors”, the only way to detect the 
 damage is by processing and comparing and differentiating the signals received 
-from the sensors before and after damage\cite{s18041094},  then attempting to 
+from the sensors before and after damage~\cite{s18041094},  then attempting to 
 classify the parameters, that are sensitive to minor damage and that can be 
 distinguished from the response to natural and environmental 
-disturbances\cite{s18041094}. 
+disturbances~\cite{s18041094}. 
 Consequently, SHM  methods are very essential in damage detection, since SHM 
 implies different types of sensors mixed with damage detection techniques. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Guided waves based Structural Health Monitoring}
 
-
+The approach behind adopting elastic waves propagation methods in Structural 
+health monitoring includes generating elastic waves in the examined structure 
+and recording their amplitude as a function of time~\cite{Ostachowicz2012}. The 
+produced waves are traveling in packets, those packets keep propagating until 
+they reflect from discontinuities, edges or damage in the structure, the 
+reflected waves hold information about the location and the size of the damage. 
+\paragraph{}
 Designing a strong and robust SHM system demands the existence of qualified 
 personalities in various scientific fields\cite{Willberg2015a}, e.g. 
 mechanical and electrical engineering, as well as in computer science, 
-mathematics, and physics\cite{Willberg2013}.
+mathematics, and physics~\cite{Willberg2013}.
 Moreover, it requires a deep understanding of various material types, and the 
 design of transducers and how it works in networks, also there is a need to be 
 familiar with signal processing methods and damage evaluation 
-techniques\cite{Willberg2013}.
+techniques~\cite{Willberg2013}.
 \paragraph{}
 There have been various SHM techniques introduced and
 performed in recent years for different types of structures. Vibration-based 
-procedures are one such regularly investigated in the field with various 
-extensive 
-articles and books\cite{Doebling1998,Deraemaeker2010,Beskhyroun2012}.
+procedures which was mentioned earlier are one such regularly investigated in 
+the field with various extensive 
+articles and books~\cite{Doebling1998,Deraemaeker2010,Beskhyroun2012}.
+
 In this literature will we focus on other SHM techniques that are the guided 
 wave-based SHM techniques in composite materials, which has brought large 
-attention in the past two decades\cite{Mitra2016}.
+attention in the past two decades~\cite{Mitra2016}.
 Guided waves which are essentially elastic waves propagating within bounded 
-structures\cite{Mitra2016}, and due to the fact that there is no such 
+structures~\cite{Mitra2016}, and due to the fact that there is no such 
 infinite plane, accordingly, they are being guided by the structure's 
 boundaries. 
 \paragraph{}
@@ -167,33 +204,33 @@ structures over Vibration based methods, the price of transducers are generally
 cheap and affordable, also 
 usually, due to the lightweight of those transducers, it can be implemented 
 easily in the structure, in addition, it is possible to scan a relatively large 
-area compared to a little number of transducers\cite{Mitra2016}. 
+area compared to a little number of transducers~\cite{Mitra2016}. 
 Moreover, an important advantage for guided waves over a vibration-based scheme 
 is their high sensitivity for detecting small damages due to the ability to 
 high-frequency excitation, and in case of low-frequency ambient vibration, it 
-does not affect the guided waves propagation\cite{Mitra2016,Croxford2007}.
+does not affect the guided waves propagation~\cite{Mitra2016,Croxford2007}.
 
 \paragraph{} 
 Various types of guided waves have been investigated for the purpose of SHM. 
 A well-known approach is the use of Lamb waves, that propagate 
-within thin-plates and shells bounded by stress-free surfaces\cite{Mitra2016}.
+within thin-plates and shells bounded by stress-free surfaces~\cite{Mitra2016}.
 Lamb waves were given their name after Horace Lamb, who discovered them and 
 developed a theory to describe the phenomena of their propagation 
-\cite{Ostachowicz2012}. 
+~\cite{Ostachowicz2012}. 
 However, Lamb could not able to generate those waves physically, until 
-Worlton\cite{Worlton1961} who saw the opportunity to utilize lamb waves 
-characteristics in damage detection\cite{Ostachowicz2012}.
+Worlton~\cite{Worlton1961} who saw the opportunity to utilize lamb waves 
+characteristics in damage detection~\cite{Ostachowicz2012}.
 Lamb waves, in general, are generated and received by piezoelectric (PZT) 
-transducers\cite{Cai2012}.
+transducers~\cite{Cai2012}.
 Due to the multi-mode and dispersion properties, the propagation of Lamb waves 
-is quite complex\cite{Ostachowicz2012}. 
+is quite complex~\cite{Ostachowicz2012}. 
 In practical applications, two forms of lamb waves arise depending on the 
 distribution of the displacement on the top and bottom bounding surfaces, these 
 forms are symmetric, denoted as \(S0,S1,S2,...., \)and asymmetric, denoted as 
-\(A0,A1,A2,....,\) \cite{Ostachowicz2012}. Fig \ref{fig:LambModes} presents 
+\(A0,A1,A2,....,\) ~\cite{Ostachowicz2012}. Fig \ref{fig:LambModes} presents 
 Lamb 
 wave for \(S0\) 
-and \(A0\) modes\cite{Willberg2015}.
+and \(A0\) modes~\cite{Willberg2015}.
 
 
 \begin{figure} [h!]
@@ -201,27 +238,41 @@ and \(A0\) modes\cite{Willberg2015}.
 	 	\centering
 		\includegraphics[width=\textwidth]{Figure1_2_Lamb_wave.jpg}
 	\end{center}
-	\caption{Lamb wave mode shapes \cite{Yuan2016}} 
+	\caption{Lamb wave mode shapes ~\cite{Yuan2016}} 
 	\label{fig:LambModes}
 \end{figure} 
-
 \paragraph{}
+
 Regardless of Lamb waves promising characteristics, using them for SHM 
 applications holds some essential challenges. 
 The dispersive nature of Lamb waves propagating modes in which can convert into 
 each other in the presence of damages and other changes in the mechanical 
-impedance\cite{Willberg2015}. 
+impedance~\cite{Willberg2015}. 
 Moreover, ascribed to some flaws in the bonding within actuators sensors and 
 the structure, random noise will emerge in the relevant sensors due to the high 
 sensitivity of Lamb waves toward structural perturbations. 
 Also, noise arising from environmental sources, like temperature changing, or 
 anisotropy of the material also summed up to the received signals making them 
-very complicated and difficult to recognize and interpret\cite{Willberg2015}.
+very complicated and difficult to recognize and interpret~\cite{Willberg2015}.
+Moreover, an essential point concerns the choice of a carrier frequency for the 
+Lamb waves because the higher the frequency is, the damage detection of small 
+size is more likely detected. however,  when the frequency increases, the 
+number of propagating wave modes will increase accordingly, as a result of 
+occurring multiple wave modes and because of the different velocities of each 
+wave mode which cause a problem with reflection identification and 
+misinterpretation of the damage location and shape size~\cite{Ostachowicz2012}. 
+It was found that each wave mode shows a varying sensitivity to individual 
+damage. Authors in~\cite{Kessler2002,Ihn2008,Ihn2004} found that \(A0\) mode is 
+suitable for delaminations to be detected in composite materials, and for 
+\(S0\) mode it was found suitable for cracks detection in metal 
+elements~\cite{Ihn2004,Ihn2008}.It was also observed that the design of the 
+transducer effects in a great manner the produced and registered wave 
+mode~\cite{Ostachowicz2010}.
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Damage Detection and Localization using guided waves for SHM  }
+\section{Damage Detection and Localization by Guided Waves for SHM}
+A damage can be defined as changes occurred in a system, either 
+deliberately or accidentally, that adversely alter the current or future 
+performance of the system~\cite{Farrar2012}. 
 
 
 
@@ -231,15 +282,12 @@ very complicated and difficult to recognize and interpret\cite{Willberg2015}.
 
 \section{Introduction to Our work }
 \subsection{Project motivations and objectives }
-
 \subsection{tools used for measurement and dataset generation }
 \subsection{Introduction to AI and Deep learning }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
