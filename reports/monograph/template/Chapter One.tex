@@ -72,7 +72,7 @@ We can look at SHM as an improved method to perform Non-Destructive Evaluation,
 Nonetheless, SHM involves sensors that are integrated into structures, data 
 transmission, computational power, and processing ability within 
 structures~\cite{Balageas2010}. The typical organization of a SHM system is 
-depicted in Fig \ref{fig:NationalSHM}, in which a typical SHM system is built 
+depicted in Fig. \ref{fig:NationalSHM}, in which a typical SHM system is built 
 from a diagnostic part (low level), which holds the levels responsible of 
 detection, localization, and evaluation of any damage, and a prognosis part 
 (high level), which includes the production of information concerning the 
@@ -270,7 +270,8 @@ mode~\cite{Ostachowicz2010}.
 \section{Damage Detection and Localization by Guided Waves for SHM}
 A damage can be defined as changes occurred in a system, either 
 deliberately or accidentally, that adversely alter the current or future 
-performance of the system~\cite{Farrar2012}. For damage detection and localization purpose traditionally, in SHM systems, a combination of piezoelectric transducers (PZTs) are utilised for exciting the structure and sensing the reflected signals. Based on the arrangement of PZTs, two main approaches are available: Pulse echo and Pitch-catch as presented in Fig. 1.3. In pulse-echo, the same transducer is used to actuate and receive the guided waves. In the pitch-catch approach, two transducers are used, one for actuating and the other for receiving.
+performance of the system~\cite{Farrar2012}. For damage detection and localization purpose traditionally, in SHM systems, a combination of piezoelectric transducers (PZTs) are utilised for exciting the structure and sensing the reflected signals. Based on the arrangement of PZTs, two main approaches are available: Pulse echo and Pitch-catch as presented in Fig. \ref{fig:Pulse_echo_Pitch_catch}.
+In pulse-echo, the same PZT transducer is used to generate and receive the Lamb waves, while in the pitch-catch approach, two PZT transducers are used, the first PZT generates Lamb waves and the other PZT receives it.
 
 \begin{figure} [h!]
 	\begin{center}
@@ -281,6 +282,17 @@ performance of the system~\cite{Farrar2012}. For damage detection and localizati
 	\label{fig:Pulse_echo_Pitch_catch}
 \end{figure}
 
+PZT transducers configurations for damage detection and localization for SHM generally are classified into two main arrangements which are concentrated and distributed arrangement. Hence, a lot of work was performed in the literature utilizing PZT configurations for generating and sensing  Lamb waves.
+\paragraph{}
+The following research articles are examples in which they used the concentrated transducers arrangement within their methods.
+The author in~\cite{Giurgiutiu2006}implanted  PZT wafer active sensor (PWAS) in phased array to investigate Lamb waves within plates, in which the results which he obtained were encouraging regarding the location of the damage and it is size.
+Additionally, the author in~\cite{Wilcox2003}, investigated Omni-directional wave transducer arrays for the rapid inspection of large areas of plate structures. In this work, two arrangements of PZTs were examined. The first one consists of a densely circular area with PZTs in which it presented an excellent concentrated peak at the location of the reflector, though it requires plenty of transducers. The other arrangement consists of a single circular ring of PZTs which hardly efficient in any circumstance that involves various reflectors.
+Moreover, in~\cite{Malinowski2009} authors performed a numerical analysis on an array of PZTs of a star shape for various damage scenarios. Their method confirmed a good damage localization.
+\paragraph{}
+Furthermore, the distributed arrangement was implemented in many research articles. In this arrangement, the examined area is spread entirely with PZT transducers. Authors in~\cite{Schubert2008}, introduced and tested Different types of the before-mentioned arrangements. 
+Moreover,  authors in~\cite{Qiang2009} used a rectangular network of transducers
+on a composite material, while a triangular network of transducers was examined in~\cite{Wandowski2009} for an isotropic specimen.
+\paragraph{}
 It can be concluded from previous works that using these approaches for damage detection and localization is only suitable for simple structures. 
 Furthermore, the estimation of damage size is more challenging to be extracted by the registered signals at PZTs despite their locations. 
 These challenges arise due to various limitations like the added mass and attached cables to the structure alter the propagating waves. 
@@ -294,20 +306,22 @@ SLDV was a solution of applying a dense array of PZTs to localize damage in a st
 Additionally, SLDV was employed for full wavefield measurements instead of array of PZTs. 
 An SLDV links computer-controlled XY scanning mirror with a camera inside the optical head, which densely scans the vibrating surface of the structure and get a large number of high-resolution measurements\cite{Helfrick2011}. 
 Consequently, the structure's vibration can be measured accurately and the propagation of guided waves also can be registered accurately\cite{Ostachowicz2014}.
-%%%%%%%%%%%%%%%%%%%%
 \paragraph{}
 However, in many situations, it is needed to examine an object in three dimensions. 
 In such situations, a 3D vibrometer is used which holds three 1D scanning vibrometers in addition to the data acquisition system and a control system.
 A 3D vibrometer measures a location with three independent beams that hit the target from three different directions, which yields a measurement of the complete in-plane and out-of-plane velocity of the target.
+\paragraph{}
+SLDV has been broadly used for sensing of Lamb wave. 
+There are several works in the literature are concentrated on imaging method for damage detection from the grid point data sensed and recorded by SLDV.
+For instance, authors in~\cite{Yu2013} applied a frequency wavenumber domain analysis utilising a 2D Fourier transform to detect a crack an aluminium plate. Wavenumber frequency filtering of SLDV sensed Lamb wave responses were applied to image damage in~\cite{Ruzzene2007}. 
+Authors in~\cite{Kudela2015} introduced a new method of imaging crack growth in a structure.
+In which they employed a full wavefield data captured by SLDV.
+Also, authors in~\cite{Harb2015} utilized SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
+Moreover, SLDV has been used to scan and capture Lamb waves in honeycomb core sandwich structure to detect damage influence in~\cite{Lamboul2013}.
+\paragraph{}
 Despite all the advantages of utilizing a SLDV, there are some disadvantages. 
 The first drawback concerns the specimen's surface which must be smooth and distinguished by a proper reflectivity, otherwise, the captured signal to noise ratio will be decreased\cite{Ostachowicz2014}. 
 Furthermore, experimenting using  SLDV requires much time since the SLDV performs measurements at a single point in space at a time due to registering a full wavefield of lamb waves the process of measurements must be repeated by keeping the same excitation and pause until the wave completely attenuates\cite{Ostachowicz2014}.
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction to Our work }
 \subsection{Project motivations and objectives }
