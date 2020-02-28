@@ -1,0 +1,55 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage{fullpage}
+\usepackage{hyperref}
+
+\renewcommand{\baselinestretch}{2}
+\author{Abdalraheem Abdullah Yousef Ijjeh \\
+Supervised by: \\
+Dr. Pawel Kudela}
+\title{\Huge Quarterly report \\
+\huge For the period \\ 2019-12-02 to 2020-03-02
+ \\ \Large In accordance with Project\\
+Feasibility studies of artificial intelligence-driven diagnostics\\ Institute of Fluid-Flow Machinery, Polish Academy of Sciences
+ \\ Gdansk, Poland}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Project Progress report}
+
+\section{Project prerequisites}
+\subsection{General useful software}
+\begin{enumerate}
+\item I have learned to use and to work with LaTeX, By finishing a course on edx entitled Scientists\href{https://courses.edx.org/courses/course-v1:IITBombayX+LaTeX101x+3T2019/course/}{ LaTeX for Students, Engineers, and Scientists}. References, figures, and tables are much easier to handle now.  
+
+\item I have started using Mendeley to organize papers, articles, and books I have read.
+\item I have started working on Git and GitHub to keep track of my running work.
+\end{enumerate}
+
+\subsection{Prerequisites topics for AI have and deep learning}
+\begin{enumerate}
+\item I finished a full course on coursera entitled by  \href{https://www.coursera.org/specializations/deep-learning#courses}{ Deep Learning Specialization}  
+.which contains five topics:
+\begin{itemize}
+\item Neural Networks and Deep Learning
+\item Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization
+\item Structuring Machine Learning Projects
+\item Convolutional Neural Networks
+\item Sequence Models
+\end{itemize}
+\item I have improved my programming skills in python by reading several topics on keras and tensorflow as backend using gpu for deep learning, moreover, I have read a book entitled "Deep Learning with Python".
+\end{enumerate}
+
+\subsection{Project work flow}
+\begin{enumerate}
+\item  I have started studying articles related to our work in Structural Health Monitoring specifically in composite materials for damage detection and localization techniques with guided waves for SHM.  
+
+\item I have Prepared different datasets for training on various deep learning models from  the numerical data which was by generated my Supervisor Dr. Pawel Kudela.
+
+\item The first completed models I have made on keras under python were for detecting the delamination in plates using bounding box techniques, for this purpose I have made two models one by slicing the training image to \(7\times7\) tiles and each tile is \(32\times32\)pixels, the second model by slicing the training image to \(8\times8\) tiles and each tile is \(32\times32\) pixels.
+\item The second task was for detecting and localizing delimitations in -plates, for this purpose I have performed several models on keras under python based on well-known segmentation techniques in the literature, for now, I have prepared three models: one based on UNet technique, the second model on SegNet technique, and the third model on Fully Convolutional Dense Network (FCN DenseNet).
+\item We have tested the models using experimental data images, accordingly, we need to tune the hyper parameters to get better accuracies.
+\item Currently, I  am in the process of preparing the literature review chapter for my thesis.
+\item We are in the preparation of writing an article based on our results on these models.
+\end{enumerate}
+\end{document}
