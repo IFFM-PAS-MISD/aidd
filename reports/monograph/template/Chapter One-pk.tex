@@ -1,0 +1,355 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[b5paper,11pt, titlepage]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdftex]{graphicx,color}
+%\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage[numbers,sort&compress]{natbib} % sort and compress citations
+%\usepackage[none]{hyphenat} % brak podzia³u wyrazów
+\usepackage{geometry}
+\newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
+\usepackage{multirow}
+\graphicspath{ {E:/aidd_new/aidd/reports/monograph/template/Graphics/} }
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\textbf{Modelowanie struktur anizotropowych \\Wstêpne badania eksperymentalne\\
+%	\vspace{10cm}}
+%\normalsize{Abstract} }
+%\normalsize{W ramach projektu pt.: \\ \textit{Wp³yw jednoczesnego oddzia³ywania temperatury i wilgotnoœci \\na struktury %anizotropowe: od teorii do badañ doœwiadczalnych\\}
+%NCN OPUS 12}}
+	
+%{Micha³ Jurek}
+
+%\date{ }
+	
+%\date{Gdañsk, Maj 2018\\ (Nr Arch. 221/2018)}
+
+
+	
+%\maketitle
+%\newpage
+%\tableofcontents
+%\newpage
+%\listoffigures
+%\listoftables
+%\newpage
+
+\chapter{Literature Review}
+
+\textbf{Abdalraheem Abdullah Yousef Ijjeh}
+
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[SHM and motivations]{Structural Health Monitoring and motivations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Structural health monitoring (SHM) intends to describe a real-time evaluation 
+ of the materials of a structural component or the full construction during the structure life-cycle~\cite{Balageas2010}. 
+ Furthermore, SHM supports detecting and characterizing defects in structures 
+ as a whole or in their parts.
+ Detection of structural defect is critical because they may impair the safety of the structure during its operation~\cite{Yuan2016}. 
+
+ The purpose of SHM is to distinguish any potential change that occurs at 
+ a structure that could decay the performance of the whole system, at the 
+ earliest possible time so that an action can be taken to reduce the downtime, 
+ operational costs and maintenance costs, consequently reducing the risk of 
+ catastrophic failure, injury, or even loss of life.
+ Moreover, SHM improves the work organization of maintenance services replacing scheduled and periodic maintenance inspection with performance-based maintenance.
+ It decreases maintenance labour, in particular by avoiding dismounting undamaged parts and through reducing the individual involvement~\cite{Balageas2010}.
+
+We can look at SHM as an improved method to perform Non-Destructive Evaluation, 
+Nonetheless, SHM involves sensors that are integrated into structures, data 
+transmission, computational power, and processing ability within 
+structures~\cite{Balageas2010}. 
+The typical organization of a SHM system is depicted in Fig.~\ref{fig:NationalSHM}. 
+Such a system is built from a diagnostic part (low level) and a prognosis part (high level).
+The diagnostic part is responsible for detection, localization, and evaluation of any damage.
+The prognosis part includes the production of information concerning the outcomes of the diagnosed damage.
+\begin{figure} [h!]
+	\begin{center}
+		%\includegraphics[width=\textwidth]{figure1_1.jpg}
+	\end{center}
+	\caption{National SHM system~\cite{Yuan2016}} 
+	\label{fig:NationalSHM}
+\end{figure}
+
+Generally,  we can categorize SHM strategies into two main schemes, local and 
+global schemes. Local schemes were discussed in Refs.~\cite{Grimberg2001,Maldague1993,Raghavan2007}
+and global schemes were discussed in Refs.~\cite{Adams2002,Doebling1998,Uhl2004}. 
+Local schemes aim at monitoring a small area of the structure enclosing the transducers that are used for registering the data signals after the structure being exited. 
+For this purpose, few phenomena are used like ultrasonic waves~\cite{Raghavan2007}, eddy currents~\cite{Grimberg2001}, thermal field~\cite{Maldague1993} and acoustic emission~\cite{Pao1978}. 
+On the other hand, global schemes are related to the global behaviour of the structure~\cite{Balageas2010}. 
+For this purpose, vibration techniques are utilized which can be classified as the signal-based and the model-based.
+The signal-based approaches analyse measured responses of the structure after 
+ambient excitation in order to identify possible defects~\cite{Stepinski2013}. 
+The model-based approaches use various types of models of a monitored structure 
+to detect and localize damage in the structure by utilizing relations 
+between the model parameters and distinct damage features~\cite{Stepinski2013}. 
+
+\section[SHM for Composite Materials]{Structural Health Monitoring for Composite Materials}
+A composite material can be described as a compound of two or more different 
+materials to achieve new features that cannot be achieved by those of specific 
+components functioning separately.
+Distinct from metallic alloys, each material has its characteristics~\cite{Campbell2010}.
+Composite materials have a reinforcing and matrix phases that are usually categorized into~\cite{Jones1999}:
+
+\begin{itemize}
+	\item Fibre-reinforced composite materials that consist of three parts: the 
+	fibres as the dispersed phase, the matrix as the continuous phase, and the fine inter-phase region, also known as the interface~\cite{Cantwell1991}.
+	\item Laminated composite materials that are an assembly of layers of a fibre-reinforced composite material that can be combined to implement 
+	necessary design features~\cite{Ramirez1999}.
+	\item Particulate composite materials that are characterized as being composed of particles suspended in a matrix.
+
+\end{itemize}
+
+When comparing composite materials to regular metallic materials, we can notice 
+that composites have more advantages over metallic materials. 
+The advantages can be summarized in~\cite{Campbell2010}:
+
+\begin{itemize}
+	\item low density with high strength and stiffness, 
+	\item greater vibration damping capacity, and more temperature resistance,
+	\item strong texture in micro-structures that makes it easy to design and 
+	satisfy different application needs. 
+\end{itemize}
+
+However, composite materials possess some disadvantages.
+Due to the nature of multiphase materials, composites materials present 
+different anisotropic characteristics. 
+Their material capacities, mainly associated with manufacturing processes, are 
+dispersive~\cite{Awad2012}. 
+Furthermore, composites materials are sensitive to impacts resulting 
+from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}. 
+Under a high energy impact, little penetration rises in composite materials. 
+On the other hand, for low to medium energy impact, matrix crack will happen 
+and interact, causing the delamination process~\cite{Cai2012}. 
+Fibre breakage would also occur at the opposite side to the 
+impact~\cite{Montalvao2006}, furthermore, defects can be produced in composites 
+by mistaken procedures through production and assembling, ageing or service 
+condition~\cite{Cai2012}. 
+
+Generally, composites material defects can happen due to fibre breakage, 
+matrix cracking, fibre-matrix debonding and delamination among layers, most of 
+which happen below the top surfaces and are barely visible~\cite{Cai2012}. 
+These defects can seriously decrease the performance of composites,  therefore, 
+they should be detected in time to avoid catastrophic structural collapses.  
+Damage can only be discovered by analysing the responses of the structure, 
+obtained by sensors, before and after it happens, hence, we cannot expect to have �damage sensors�.
+The only way to detect the damage is by processing and comparing the signals received from the sensors before and after damage occurrence~\cite{s18041094}. 
+Then one can attempt to classify the parameters, that are sensitive to minor damage and that can be distinguished from the response to natural and environmental disturbances~\cite{s18041094}. 
+Consequently, SHM  methods are very essential in damage detection, since SHM 
+implies different types of sensors mixed with damage detection techniques. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Guided waves based SHM]{Guided waves based Structural Health Monitoring}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The approach behind adopting elastic waves propagation methods in SHM includes generating elastic waves in the examined structure and recording their amplitude as a function of time~\cite{Ostachowicz2012}. 
+The produced waves are travelling in packets, those packets keep propagating until 
+they reflect from discontinuities, edges or damage in the structure. The reflected waves hold information about the location and the size of the damage. 
+
+Designing a robust SHM system requires knowledge in various scientific fields~\cite{Willberg2015a}, e.g. mechanical and electrical engineering, as well as in computer science, mathematics, and physics~\cite{Willberg2013}.
+Moreover, it requires a deep understanding of various material types and the design of transducers working alone and in networks. 
+Also, there is a need to be familiar with signal processing methods and damage evaluation techniques~\cite{Willberg2013}.
+
+There have been various SHM techniques introduced and performed in recent years for different types of structures. 
+Vibration-based procedures, which were mentioned earlier, are one such regularly investigated in the field with various extensive articles and books~\cite{Doebling1998,Deraemaeker2010,Beskhyroun2012}.
+
+In this literature will we focus on the guided wave-based SHM techniques for composite materials, which has brought large attention in the past two decades~\cite{Mitra2016}.
+Guided waves which are essentially elastic waves propagating within bounded 
+structures~\cite{Mitra2016}, e.g. in a thin-plate, they are being guided by the boundaries of the plate. 
+
+There are a few benefits from adopting guided wave-based sche\-mes for SHM in structures over vibration based methods. 
+The transducers that are utilised in SHM systems are generally affordable, also usually, due to the lightweight of those transducers, it can be implemented easily in the structure.
+In addition, it is possible to scan a relatively large area compared to a little number of transducers~\cite{Mitra2016}. 
+Moreover, an important advantage for guided waves over a vibration-based scheme 
+is their high sensitivity for detecting small defects due to the ability to use high-frequency signals (excited and registered).
+In such a case, low-frequency ambient vibration does not affect the guided waves propagation~\cite{Mitra2016,Croxford2007}.
+
+Various types of guided waves have been investigated for the purpose of SHM. 
+A well-known approach is the use of Lamb waves, that propagate 
+within thin-plates and shells bounded by stress-free surfaces~\cite{Mitra2016}.
+Lamb waves were given their name after Horace Lamb, who discovered them and 
+developed a theory to describe the phenomena of their propagation 
+~\cite{Ostachowicz2012}. 
+However, Lamb could not able to generate those waves physically, until 
+Worlton~\cite{Worlton1961} who saw the opportunity to utilise Lamb waves 
+characteristics in damage detection~\cite{Ostachowicz2012}.
+Lamb waves, in general, are generated and received by piezoelectric (PZT) 
+transducers~\cite{Cai2012}.
+Due to the multi-mode and dispersion properties, the propagation of Lamb waves 
+is quite complex~\cite{Ostachowicz2012}. 
+In practical applications, two forms of Lamb waves arise depending on the 
+distribution of the displacement on the top and bottom bounding surfaces, these 
+forms are symmetric, denoted as \(S0,S1,S2,...., \)and antisymmetric, denoted as 
+\(A0,A1,A2,....,\) ~\cite{Ostachowicz2012}. Fig \ref{fig:LambModes} presents 
+Lamb waves for \(S0\) and \(A0\) modes~\cite{Willberg2015}.
+
+
+\begin{figure} [h!]
+	\begin{center}
+	 	\centering
+		%\includegraphics[width=\textwidth]{Figure1_2_Lamb_wave.jpg}
+	\end{center}
+	\caption{Displacement distribution in Lamb wave modes~\cite{Yuan2016}} 
+	\label{fig:LambModes}
+\end{figure} 
+\paragraph{}
+
+Regardless of Lamb waves promising characteristics, using them for SHM 
+applications hold some essential challenges. 
+Among them are the dispersive nature of Lamb wave propagating modes that can convert into each other in the presence of defects and other changes in the mechanical 
+impedance~\cite{Willberg2015}. 
+Moreover, ascribed to some flaws in the bonding within actuators sensors and 
+the structure, random noise will emerge in the relevant sensors due to the high 
+sensitivity of Lamb waves toward structural perturbations. 
+Also, noise arising from environmental sources, like temperature changing, or 
+anisotropy of the material also summed up to the received signals making them 
+very complicated and challenging to recognize and interpret~\cite{Willberg2015}.
+Moreover, an essential point concerns the choice of a carrier frequency for the 
+Lamb waves because the higher the frequency is, the damage detection of small 
+size is more likely detected.
+However,  when the frequency increases, the number of propagating wave modes will increase accordingly.
+As a result, multiple wave modes propagate and each wave mode has different velocity which causes a problem with reflection identification and misinterpretation of the location and the size of the damage~\cite{Ostachowicz2012}. 
+It was found that each wave mode shows a varying sensitivity to individual 
+damage. 
+Authors in~\cite{Kessler2002,Ihn2008,Ihn2004} found that \(A0\) mode is suitable for delaminations to be detected in composite materials, and \(S0\) mode was found suitable for cracks detection in metallic elements~\cite{Ihn2004,Ihn2008}.
+It was also observed that the design of the transducer influences in a great manner the excited and registered wave modes~\cite{Ostachowicz2010}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Damage Detection and Localisation]{Damage Detection and Localisation\\ by~Guided-Wave Based SHM}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A damage can be defined as changes occurred in a system, either deliberately or accidentally, that adversely alter the current or future performance of the system~\cite{Farrar2012}. 
+Generally, Guided-Wave Based SHM systems can be built upon processing of signals registered by piezoelectric transducers (PZTs) or Scanning Laser Dopper Vibrometry (SLDV).
+\paragraph{Piezoelectric transducer arrays} 
+Traditionally, PZTs are uti\-lised in SHM systems for exciting the structure and sensing the reflected signals. 
+Based on the arrangement of PZTs, two main approaches are available: \emph{pulse-echo} and \emph{pitch-catch} as presented in Fig. \ref{fig:Pulse_echo_Pitch_catch}.
+In \emph{pulse-echo}, the same PZT transducer is used to generate and receive the Lamb waves, while in the \emph{pitch-catch} approach, two PZT transducers are used, the first PZT generates Lamb waves and the other PZT receives it.
+
+\begin{figure} [h!]
+	\begin{center}
+	\centering
+	%\includegraphics[width=\textwidth]{Figure1_3_Pulse_ech0_Pitch_catch.png}
+	\end{center}
+	\caption{(a) Pulse echo	(b) Pitch catch} 
+	\label{fig:Pulse_echo_Pitch_catch}
+\end{figure}
+
+PZT transducers configurations for damage detection and localisation for SHM generally are classified into two main arrangements which are \emph{concentrated} and \emph{distributed} arrangement. 
+Hence, a lot of work was performed in the literature utilising PZT configurations for generating and sensing  Lamb waves.
+
+The following research articles are examples in which the authors used the \emph{concentrated} transducers arrangement.
+Giurgiutiu~\cite{Giurgiutiu2006} implemented PZT wafer active sensor (PWAS) in phased array to investigate Lamb waves in plates.
+The results which he obtained were encouraging regarding the location of the damage and its size.
+Additionally, the author in~\cite{Wilcox2003}, investigated omni-directional wave transducer arrays for the rapid inspection of large areas of plate structures. 
+In this work, two arrangements of PZTs were examined. 
+The first one consists of a densely circular area with PZTs in which it presented an excellent concentrated peak at the location of the reflector, though it requires plenty of transducers. 
+The other arrangement consists of a single circular ring of PZTs which is quite efficient in any circumstance that involves various reflectors.
+Moreover, Malinowski et al.~\cite{Malinowski2009} performed a numerical analysis on an array of PZTs of a star shape for various damage scenarios. Their method confirmed a good damage localisation.
+
+Furthermore, the \emph{distributed} arrangement was implemented in many research articles. 
+In this arrangement, PZT transducers are spread on the entire area which is inspected. Schubert~\cite{Schubert2008} tested different types of the above-mentioned arrangements. 
+Moreover,  authors in~\cite{Qiang2009} used a rectangular network of transducers
+on a composite material, whereas a triangular network of transducers was examined in~\cite{Wandowski2009} for an isotropic specimen.
+
+It can be concluded from previous works that using these approaches for damage detection and localization is only suitable for simple structures. 
+Furthermore, the estimation of damage size is very challenging.
+It is because of limited information extracted from the registered signals at discrete PZT locations. 
+These challenges arise due to various limitations e.g. the added mass and attached cables to the structure alter the propagating waves. 
+Additionally, it is difficult to distinguish the registered signals among different objects e.g. bolts and rivets, the edges, and the actual damage. Another challenge is induced by the temperature which affects the propagating waves.
+Therefore, it becomes important to compensate for this issue~\cite{Marzani1999}.
+Consequently, to overcome these limitations, a full wavefield measurement approach was introduced. 
+As a result of utilising a full wavefield, a damage influence map is produced, which makes it possible to estimate the size of the damage~\cite{Ostachowicz2014}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Scanning Laser Dopper Vibrometry} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+SLDV was developed and presented in the experimental research in the earlies of 1980s. 
+SLDV employs Doppler frequency shift principle to measure the velocity of a moving object in which the amount of the shifted frequency depends on the velocity of the moving object~\cite{Stanbridge1999}. 
+SLDV links computer-controlled XY scanning mirror with a camera inside the optical head, which densely scans the vibrating surface of the structure and get a large number of high-resolution measurements~\cite{Helfrick2011}. 
+Processing of such a large data set leads to damage maps of resolution impossible to obtain by using PZT arrays.
+Essentially, the grid of points resembles a dense array of PZTs. 
+Application of such a dense array of PZTs would be otherwise impractical.  
+Hence, SLDV is employed for full wavefield measurements instead of PZT arrays. 
+
+Consequently, vibrations of a structure can be measured accurately and the propagation of guided waves also can be registered accurately~\cite{Ostachowicz2014}.
+
+However, in many situations, it is needed to examine an object in three dimensions. 
+In such situations, a 3D vibrometer is used which holds three 1D scanning vibrometer heads in addition to the data acquisition system and a control system.
+A 3D vibrometer measures a location with three independent beams that hit the target from three different directions, which yields a measurement of the complete in-plane and out-of-plane velocity of the target.
+
+SLDV has been broadly used for sensing of Lamb wave. 
+There are several works in the literature that are concentrated on imaging method for damage detection by using the signals sensed at a grid of points and recorded by SLDV.
+For instance, authors in~\cite{Yu2013} applied a frequency wavenumber domain analysis utilising a 2D Fourier transform to detect a crack in an aluminium plate. 
+The method of wavenumber frequency filtering of SLDV data was applied for damage imaging in~\cite{Ruzzene2007}. 
+Authors in~\cite{Kudela2015} introduced a new method of imaging crack growth in a structure.
+In the proposed method, they employed a full wavefield data captured by SLDV.
+Also, authors in~\cite{Harb2015} utilized SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
+Moreover, SLDV has been used to scan and capture Lamb waves in honeycomb core sandwich structure to detect damage influence in~\cite{Lamboul2013}.
+
+Despite all the advantages of utilizing SLDV, there are some disadvantages. 
+The first drawback concerns the surface of the specimen which must be smooth and characterised by a proper reflectivity, otherwise, the captured signal to noise ratio will be decreased~\cite{Ostachowicz2014}. 
+Furthermore, experimenting using  SLDV requires much time since the SLDV performs measurements at a single point in space at a time.
+Due to registering a full wavefield of Lamb waves, the process of measurements must be repeated by keeping the same excitation and pause until the wave completely attenuates~\cite{Ostachowicz2014}.
+
+\section{Introduction to Our work }
+\subsection{Project motivations and objectives }
+\subsection{tools used for measurement and dataset generation }
+\subsection{Introduction to AI and Deep learning }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		%\includegraphics[width=14cm]{Graphics/bc.jpg}
+	\end{center}
+	\caption{Figure caption.} 
+	\label{fig:bc}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h]
+	\centering
+	\caption{Table caption}
+	\begin{tabular}{cccc}
+		\hline
+		\textbf{a}	& \textbf{x} & \textbf{y} & \textbf{z} \\
+		\hline
+		-50 & -0.289 & -0.289 & -0.598\\ 
+		-40 & -0.248 & -0.248 & -0.512\\ 
+		\hline 
+	\end{tabular} 
+	\label{tab:xyz}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The scheme of experimental setup is shown in Fig.~\ref{fig:bc}.  
+The values are collected in Tab.~\ref{tab:xyz}.
+
+
+%The details are described in a book~\cite{udd2011fibre}. 
+
+%Similar case was analyzed by Hill et al.~\cite{hill1978photosensitivity}
+
+
+\bibliography{refrences/ref} % 
+%bibliography data in report.bib
+\bibliographystyle{abbrv}
+ % makes bibtex use spiebib.bst
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
