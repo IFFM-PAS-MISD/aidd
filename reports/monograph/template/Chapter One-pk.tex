@@ -10,6 +10,8 @@
 \usepackage{geometry}
 \newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
 \usepackage{multirow}
+\usepackage{amsmath}
+
 \graphicspath{ {E:/aidd_new/aidd/reports/monograph/template/Graphics/} }
 
 \renewcommand{\figurename}{Fig.}
@@ -377,12 +379,77 @@ In this approach of learning the process consists of three parts: the agent whic
 
 \paragraph{Transfer learning} is different when compared to the traditional machine learning approaches and this difference is due to that traditional machine learning methods are designed to particular tasks, that means their learning and knowledge can not be transferred from one model to another.
 Therefore, when starting a new machine learning task we have to start from scratch.
-On the contrary, in transfer learning, the model knowledge (e.g features and weights) can be transferred from a previously learned task to a new learning task
+On the contrary, in transfer learning, the model knowledge (e.g features and weights) can be transferred from a previously learned task to a new learning task.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Machine learning techniques are suffering from a lack of the ability to process raw data immediately. 
+Therefore, building a machine learning system requires a well-trained experts in the field to design a feature extractor that is capable to extract data representations of proper features from a raw data~\cite{Lecun2015}.
+
+\paragraph{Deep Learning}is a subfield of Machine Learning.
+In which, deep learning was emerged as a solution to the feature engineering extraction issue.
+Deep Learning is a representation learning that automatically distinguishes  the proper data representations required for models like classification and detection.
+Deep learning was inspired by the human brain method of learning. 
+In which it has a huge number of neurons that are densely connected to form a hierarichal stucture that is capable of receiving data at the visual cortex which can identify distinct shapes of edges of an object.
+Then, these learned patterns  are shifted down to the brain area which is capable to detect more complex pattrens. 
+ 
+Deep Learning is a hierarchical learning~\cite{Ongsulee2018}, in which
+data representations is acquired from the raw input data using non-linear function~\cite{Lecun2015}. 
+At shallow levels, the acquired representation data has simple learnable extracted features, those extracted features keep shifting to more complex learnable features as moving to deeper levels.
+
+Deep Learning is constructed from a network of artificial neurons structured in a cascade layers, hence, the term "deep" came from the multiple layers.
+An artificial neuron has several input and output weighted connections, with a non linear activation function as mentioned earlier that is applied on the  incoming data. 
+By performing this operation a non-linearity is injected to the network, which is important for the learning process.
+Since, if the non-linearity was not considered, no matter how many layers are there in the network, it would act like a single-layer neuron. 
+Simply, because by just linearly adding these layers it will produce another linear output, consequently, the neuron can not update its weights therefore, no learning happens. Artificial neuron structure is presented in Fig~\ref{fig:artificial Neuron}.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{fig_neron.png}
+	\end{center}
+	\caption{Structure of artificial neuron} 
+	\label{fig:artificial Neuron}
+\end{figure}
+
+
+There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+
+
+
+\begin{equation}
+	Relu(z) = 
+	\begin{cases}
+		0,  \text{  if}\ z<0\\
+		z,  \text{  otherwise}
+	\end{cases}
+	\label{Eq:relu}
+\end{equation}
+
+\begin{equation}
+	 \sigma(z) = \frac{1}{1+e^{-z}}
+	 \label{sigmoid}
+\end{equation}
+
+\begin{equation}
+	tanh(z)=  \frac{e^z-e^{-z}}{e^z+e^{-z}}
+	\label{tanh}
+\end{equation}
+
+\begin{equation}
+	z= \sum_{i=0}^{n}  w_i\times x_i +b
+	\label{z}
+\end{equation}
+
+
+
+
+
+Different artificial neural networks (ANN) were implemented in deep learning like Deep Neural Network (DNN), Convolution Neural Network (CNN), Deep Belief networks (DBN) and Recurrent Neural network (RNN).
+
+
+
 
 
 \subsection {talk about SHM in AI +Related work}
-
-
 
 
 %%%%%%%%%%%%%%%%%%
@@ -425,7 +492,7 @@ The values are collected in Tab.~\ref{tab:xyz}.
 %Similar case was analyzed by Hill et al.~\cite{hill1978photosensitivity}
 
 
-\bibliography{refrences/ref} % 
+\bibliography{refrences/report} % 
 %bibliography data in report.bib
 \bibliographystyle{abbrv}
  % makes bibtex use spiebib.bst
