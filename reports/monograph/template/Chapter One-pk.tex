@@ -156,7 +156,7 @@ The approach behind adopting elastic waves propagation methods in SHM includes g
 The produced waves are travelling in packets, those packets keep propagating until 
 they reflect from discontinuities, edges or damage in the structure. The reflected waves hold information about the location and the size of the damage. 
 
-Designing a robust SHM system requires knowledge in various scientific fields~\cite{Willberg2015a}, e.g. mechanical and electrical engineering, as well as in computer science, mathematics, and physics~\cite{Willberg2013}.
+Designing a robust SHM system requires knowledge in various scientific fields e.g. mechanical and electrical engineering, as well as in computer science, mathematics, and physics~\cite{Willberg2013}.
 Moreover, it requires a deep understanding of various material types and the design of transducers working alone and in networks. 
 Also, there is a need to be familiar with signal processing methods and damage evaluation techniques~\cite{Willberg2013}.
 
@@ -189,17 +189,17 @@ Due to the multi-mode and dispersion properties, the propagation of Lamb waves
 is quite complex~\cite{Ostachowicz2012}. 
 In practical applications, two forms of Lamb waves arise depending on the 
 distribution of the displacement on the top and bottom bounding surfaces, these 
-forms are symmetric, denoted as \(S0,S1,S2,...., \)and antisymmetric, denoted as 
-\(A0,A1,A2,....,\) ~\cite{Ostachowicz2012}. Fig \ref{fig:LambModes} presents 
-Lamb waves for \(S0\) and \(A0\) modes~\cite{Willberg2015}.
+forms are symmetric, denoted as \(S_0,S_1,S_2,...., \)and antisymmetric, denoted as 
+\(A_0,A_1,A_2,....,\) ~\cite{Ostachowicz2012}. 
+Fig.~\ref{fig:LambModes} illustrates the propagation of Lamb waves for \(A_0\) and \(S_0\) modes in a structure.
 
 
 \begin{figure} [h!]
 	\begin{center}
 	 	\centering
-		\includegraphics[width=\textwidth]{Figure1_2_Lamb_wave.jpg}
+		\includegraphics[width=\textwidth]{fig_Lamb_wave_modes.png}
 	\end{center}
-	\caption{Displacement distribution in Lamb wave modes~\cite{Yuan2016}} 
+	\caption{Lamb wave modes: (a)  \(A_0 \) mode, (b) \( S_0\) mode} 
 	\label{fig:LambModes}
 \end{figure} 
 \paragraph{}
@@ -316,7 +316,7 @@ However, in recent years, AI has returned to the stage due to several reasons. T
 In which a GPU exceeds the traditional CPUs, due to the high capability of parallel computing, which makes it more efficient in running algorithms for large data~\cite{}.
 The second reason is the tremendous Data available in the current time, which can a remarkable development the learning process of an AI system, since, its effectiveness depends on learning from its environment. 
 
-In general, AI can be divided into two classes: Strong AI and weak AI. Table~\ref{tab:Strong_Weak_AI} presents the main differences between them.
+In general, AI can be divided into two classes: Strong AI and weak AI. Tab.~\ref{tab:Strong_Weak_AI} presents the main differences between them.
 \begin{table}[h]
 	\centering
 	\caption{Artificial Intelligence classes}
@@ -334,7 +334,7 @@ In general, AI can be divided into two classes: Strong AI and weak AI. Table~\re
 Arthur Samuel in 1959 defined it as "the ability of a computer to learn without being explicitly programmed"~\cite{munoz2014machine}.
 The conventional way of software engineering is through creating rules by human and combine them with data to create a solution to problem.
 Alternatively, when it comes to machine learning, it utilises data and answers to learn the rules behind a problem~\cite{franoischollet2017learning}.
-In Fig~\ref{fig:Machine_learning} the conventional software programming and Machine learning are presented in (a) and (b) respectively.
+In Fig.~\ref{fig:Machine_learning} the conventional software programming and Machine learning are presented in (a) and (b) respectively.
 In machine learning, machines have to run into a learning process to learn inference rules which are responsible for controlling the relations within a phenomenon. Hence, it is called a Machine Learning.
 \begin{figure} [h!]
 	\begin{center}
@@ -347,7 +347,7 @@ In machine learning, machines have to run into a learning process to learn infer
 
 There are different methods can be implemented when performing machine learning. 
 Generally, those methods are grouped into three traditional approaches: Supervised learning, Unsupervised learning and Reinforcement learning, and a Transfer learning approach.
-Fig shows the three different types of Machine learning approaches.
+Fig.~\ref{fig:Machine_learning_approaches} shows the three different types of Machine learning approaches.
 \begin{figure} [h!]
 	\begin{center}
 		\centering
@@ -367,7 +367,7 @@ In this case, the model does not know the ground truth labels of the input value
 Consequently, unsupervised learning is more difficult than supervised learning, due to removing the supervision which implies the problem becomes less defined.
 The most well-known techniques used in Unsupervised learning is clustering~\cite{Russell2010}. In which it creates subgroups within the input data based on their characteristics.
 \paragraph{Reinforcement learning}is based on the trial and error principle, which means the algorithm learns through actions that explore the environment in a way that results with the greatest rewards~\cite{Russell2010}.
-In this approach of learning the process consists of three parts: the agent which is responsible for making decisions, the environment that relates to any interaction with the agent, and the actions that are made by the agent. Fig~\ref{fig:ReinforcementLearning} illustrates the Reinforcement learning approach.
+In this approach of learning the process consists of three parts: the agent which is responsible for making decisions, the environment that relates to any interaction with the agent, and the actions that are made by the agent. Fig.~\ref{fig:ReinforcementLearning} illustrates the Reinforcement learning approach.
 \begin{figure} [h!]
 	\begin{center}
 		\centering
@@ -400,7 +400,7 @@ Deep Learning is constructed from a network of artificial neurons structured in 
 An artificial neuron has several input and output weighted connections, with a non linear activation function as mentioned earlier that is applied on the  incoming data. 
 By performing this operation a non-linearity is injected to the network, which is important for the learning process.
 Since, if the non-linearity was not considered, no matter how many layers are there in the network, it would act like a single-layer neuron. 
-Simply, because by just linearly adding these layers it will produce another linear output, consequently, the neuron can not update its weights therefore, no learning happens. Artificial neuron structure is presented in Fig~\ref{fig:artificial Neuron}.
+Simply, because by just linearly adding these layers it will produce another linear output, consequently, the neuron can not update its weights therefore, no learning happens. Artificial neuron structure is presented in Fig.~\ref{fig:artificial Neuron}.
 \begin{figure} [h!]
 	\begin{center}
 		\centering
@@ -411,7 +411,9 @@ Simply, because by just linearly adding these layers it will produce another lin
 \end{figure}
 
 
-There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+
+
 
 
 
@@ -439,13 +441,35 @@ There are several non-linear functions used in artificial neural networks such a
 	\label{z}
 \end{equation}
 
+In deep learning, supervised learning is the traditional approach for learning~\cite{Lecun2015}. 
+In supervised learning, the neural network builds its knowledge from the given labelled dataset, where the ground truth output is known previously.
+By updating the network parameters and weights, the network learns to find the desired output by itself.
+Initially, the network does a comparison between the calculated output (predicted) and the ground truth output (target).
+For this purpose, an objective function or (cost function) is used to estimate the difference (error or loss) between the predicted output and the target.
+The cost function aims is to minimize the estimated value of error or loss, accordingly, a process called Backpropagation is performed.
+
+Backpropagation is the key part of learning neural networks, in which it pushes back the cost function estimation across all the neurons.
+Consequently, all weights and biases in all layers are modified in a way the cost function is minimized in the next estimation.
+A well-know backpropagation method used in deep learning is the Gradient Descent (GD) optimization~\cite{Lecun2015}.
+Fig.~\ref{fig:GD} illustrates the concept of GD, in which weights \(\{w_0,w_1,...,w_n\}\)are initially assigned at random.
+GD aims to reduce the cost function \(J(w)\) at each step to reach the minimum cost \(J_{min}(w)\) by calculating the gradient which represents the slope of the cost function.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{Fig_Gradient_decent.png}
+	\end{center}
+	\caption{The process of Gradient Descent} 
+	\label{fig:GD}
+\end{figure}
+Accordingly, the weights are modified as shown in Eqn~\ref{weight_updates} where the partial derivative \(\frac{\delta J(w)}{\delta w_i}\) is the gradient, and \(\alpha \) represents the learning rate for the neural network, which means the amount of modification to the weights during the learning process~\cite{Russell2010}, accordingly, it monitors the rate at which the neural network learns.
+
+\begin{equation}
+w_{i+1}= w_{i} -\alpha \frac{\delta J(w)}{\delta w_i} 
+\label{weight_updates}
+\end{equation}
 
 
-
-
-Different artificial neural networks (ANN) were implemented in deep learning like Deep Neural Network (DNN), Convolution Neural Network (CNN), Deep Belief networks (DBN) and Recurrent Neural network (RNN).
-
-
+Different artificial neural networks (ANN) were implemented in deep learning such as: Convolution Neural Network (CNN), Deep Belief networks (DBN) and Recurrent Neural network (RNN).
 
 
 
@@ -495,7 +519,7 @@ The values are collected in Tab.~\ref{tab:xyz}.
 \bibliography{refrences/report} % 
 %bibliography data in report.bib
 \bibliographystyle{abbrv}
- % makes bibtex use spiebib.bst
+% makes bibtex use spiebib.bst
 
 
 
