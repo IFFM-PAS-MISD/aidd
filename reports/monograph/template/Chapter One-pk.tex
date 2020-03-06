@@ -12,7 +12,7 @@
 \usepackage{multirow}
 \usepackage{amsmath}
 
-\graphicspath{ {E:/aidd_new/aidd/reports/monograph/template/Graphics/} }
+\graphicspath{ {E:/aidd_new/aidd/reports/monograph/template/Graphics/Figures/} }
 
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\tablename}{Tab.}
@@ -441,10 +441,10 @@ There are several non-linear functions used in artificial neural networks such a
 	\label{z}
 \end{equation}
 
-In deep learning, supervised learning is the traditional approach for learning~\cite{Lecun2015}. 
-In supervised learning, the neural network builds its knowledge from the given labelled dataset, where the ground truth output is known previously.
+In deep learning, supervised learning is the traditional approach for learning. 
+In supervised learning, a neural network builds its knowledge from the given labelled dataset, where the ground truth output is known previously~\cite{Lecun2015}.
 By updating the network parameters and weights, the network learns to find the desired output by itself.
-Initially, the network does a comparison between the calculated output (predicted) and the ground truth output (target).
+Initially, a network does a comparison between the calculated output (predicted) and the ground truth output (target).
 For this purpose, an objective function or (cost function) is used to estimate the difference (error or loss) between the predicted output and the target.
 The cost function aims is to minimize the estimated value of error or loss, accordingly, a process called Backpropagation is performed.
 
@@ -468,8 +468,49 @@ w_{i+1}= w_{i} -\alpha \frac{\delta J(w)}{\delta w_i}
 \label{weight_updates}
 \end{equation}
 
+\paragraph{In}recent years, Convolutional Neural Networks (CNNs or ConvNets)
+became one of the most utilised artificial neural networks architectures in deep learning.
+ConvNets were initially developed in 1980s by Kunihiko Fukushima who was inspired by the discoveries of Hubel and Wiesel about the cat's visual cortex. 
+Fukushima introduced an artificial neural network that is capable of recognizing complex patterns of images by presenting two extra layers to the network: the convolution layer and the downsampling or (pooling) layer~\cite{Fukushima1980}.
 
-Different artificial neural networks (ANN) were implemented in deep learning such as: Convolution Neural Network (CNN), Deep Belief networks (DBN) and Recurrent Neural network (RNN).
+ConvNets are primarily utilised for image processing, data classification, data segmentation and natural language processing (NLP).
+Moreover, ConvNets was designed to process data as tensors~\cite{Fukushima1980}with different dimensions. 
+For a 1D data tensor, it can represent various data forms, such as signals and sequences, in addition to languages.
+For a 2D data tensor, it can represent an image in grey scale,
+moreover, by combining three 2D tensors a coloured 3D image is produced due to different intensities of the pixels in the (RGB) channels.
+A 4D tensors represents volumetric data, such as a sequence of 3D images  or a video.
+
+Fig.~\ref{fig:Convnet} illustrates  the typical architecture of a ConvNet which consists of three main parts: convolutional layers, downsampling layers, and dense layers that come at the end.
+In the convolutional layers, an  n- convolution filers or (kernels), each one contains a set of weights, with a size \((w_f,h_f,d_f)\), convolves with input data of a size\((w,h,d)\).
+The convolution operation is not more than a sliding window all over the input data with cross-correlation (dot product).
+The result of the convolution operation are feature maps, consequently, each feature map is locally connected to the previous layer. 
+Typically, the feature map size is diminished due to the convolution operation, however, the feature map can keep the same size of the input by applying some padding over the previous input. Eqns~\ref{new_hight} and~\ref{new_width} illustrates the calculations of new dimensions of the resulted feature map, where \(p\) is the padding size, \(f\) is the convolution filter size and \(s\) is the stride size, that defines how much the convolution filter slides each step during convolution.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{Fig_Convnet.png}
+	\end{center}
+	\caption{Convolutional Neural Network architecture} 
+	\label{fig:Convnet}
+\end{figure}
+\begin{equation}
+		h_{new} = \frac{h_{old}+2p-f}{s}+1  
+		\label{new_hight}
+\end{equation}
+\begin{equation}
+		w_{new} = \frac{w_{old}+2p-f}{s}+1
+		\label{new_width}
+\end{equation}
+
+It is a common practice, a convolutional operation is followed by a non-linear activation function, commonly a Relu is applied which changes all negative values in the feature map to zero, followed by a downsampling operation (pooling). 
+The idea behind pooling operation is to join related features into one. typically, a Maxpool operation is applied, that picks the maximum value in a local pool filter in one feature map (or n-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, consequently, reducing computation complexity, hence the managing overfitting.
+The process of convolution, non-linearity, and pooling can be repeated several times and stacked. 
+The final operation in Convent is a fully connected neural network (dense network), which takes its input from the previous layer, and the backpropagation is performed through the ConvNet as simple as any regular neural network, accordingly, all the weights in the ConvNet including convolutional filters weights are trained~\cite{Lecun2015}.
+
+\paragraph{ConvNets}became popular after the competition of the Large Scale Visual Recognition Challenge 2012 (ILSVRC2012). 
+When Alex Krizhevsky at al. introduced AlexNet, which is a deep ConvNet applied on a large dataset of 1000,000 images and 1000 different classes, AlexNet results were magnificent, this success came a result of the development in the GPUs technology and the use of the non-linear activation function Relu~\cite{Lecun2015}.
+In the next years, several spectacular ConvNets architectures were presented.
+
 
 
 
@@ -507,8 +548,8 @@ Different artificial neural networks (ANN) were implemented in deep learning suc
 %\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The scheme of experimental setup is shown in Fig.~\ref{fig:bc}.  
-The values are collected in Tab.~\ref{tab:xyz}.
+%The scheme of experimental setup is shown in Fig.~\ref{fig:bc}.  
+%The values are collected in Tab.~\ref{tab:xyz}.
 
 
 %The details are described in a book~\cite{udd2011fibre}. 
