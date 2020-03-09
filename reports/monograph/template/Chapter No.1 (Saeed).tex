@@ -1,0 +1,102 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[b5paper,11pt, titlepage]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdftex]{graphicx,color}
+%\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage[numbers,sort&compress]{natbib} % sort and compress citations
+%\usepackage[none]{hyphenat} % brak podzia³u wyrazów
+\usepackage{geometry}
+\newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
+\usepackage{multirow}
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\textbf{Modelowanie struktur anizotropowych \\Wstêpne badania eksperymentalne\\
+%	\vspace{10cm}}
+%\normalsize{Abstract} }
+%\normalsize{W ramach projektu pt.: \\ \textit{Wp³yw jednoczesnego oddzia³ywania temperatury i wilgotnoœci \\na struktury anizotropowe: od teorii do badañ doœwiadczalnych\\}
+%NCN OPUS 12}}
+	
+%{Micha³ Jurek}
+
+%\date{ }
+	
+%\date{Gdañsk, Maj 2018\\ (Nr Arch. 221/2018)}
+
+
+	
+%\maketitle
+%\newpage
+%\tableofcontents
+%\newpage
+%\listoffigures
+%\listoftables
+%\newpage
+
+\chapter{An Introduction to Structural Health Monitoring (SHM)}
+\textbf{Saeed Ullah}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+text
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		%\includegraphics[width=14cm]{Graphics/bc.jpg}
+	\end{center}
+	\caption{Figure caption.} 
+	\label{fig:bc}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h]
+\centering
+	\caption{Table caption}
+	\begin{tabular}{cccc}
+		\hline
+	\textbf{a}	& \textbf{x} & \textbf{y} & \textbf{z} \\
+		\hline
+		-50 & -0.289 & -0.289 & -0.598\\ 
+		-40 & -0.248 & -0.248 & -0.512\\ 
+		\hline 
+	\end{tabular} 
+	\label{tab:xyz}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The scheme of experimental setup is shown in Fig.~\ref{fig:bc}.  
+The values are collected in Tab.~\ref{tab:xyz}.
+
+
+The details are described in a book~\cite{udd2011fiber}. 
+
+Similar case was analysed\cite{Badrinarayanan2017a} by Hill et al.
+Additional information:
+\begin{itemize}
+\item fonts Times New Roman, 11pt
+\item keep figures separately in greyscale with resolution 600 dpi (publisher requirement)
+\item 20-30 pages
+\item Bibliography\cite references in the order of citations within the text
+\end{itemize}
+
+\bibliography{report} % 
+%bibliography data in report.bib
+\bibliographystyle{abbrv}
+% makes bibtex use spiebib.bst
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
