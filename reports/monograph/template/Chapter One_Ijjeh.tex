@@ -347,7 +347,7 @@ In machine learning, machines have to run into a learning process to learn infer
 
 There are different methods can be implemented when performing machine learning. 
 Generally, those methods are grouped into three traditional approaches: Supervised learning, Unsupervised learning and Reinforcement learning, and a Transfer learning approach.
-Fig.~\ref{fig:Machine_learning_approaches} shows the three different types of Machine learning approaches.
+Fig.~\ref{fig:Machine_learning_approaches} shows the different types of Machine learning approaches.
 \begin{figure} [h!]
 	\begin{center}
 		\centering
@@ -514,10 +514,30 @@ In the next years, several spectacular ConvNets architectures were presented (e.
 
 
 
-\subsection{AI based SHM}
+\subsection{Deep Learning based SHM Techniques}
 
 talk about AI in SHM and list some techniques.
+talk about deep learning if different approaches for SHM:\\
+medical\\
+civil engineering \\
+aerospace\\
+composite materials\\
+%%%%%%%%%%%%%%%%%%%%%%%%
 
+SHM systems are implemented using data-driven methods, those methods require a huge amount of data that are captured by monitoring the status of the structure.
+
+Damage detection can be configured in structures by monitoring the changes in the extracted features which result from estimating the current state (dynamic signature) of the structure~\cite{	Yi-zhou Lin}.\\
+
+
+Full wavefield scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. Authors in ~\cite{Yassmin} proposed a compressive Sensing technique using CNN to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.\\
+
+
+Furthermore, authors in~\cite{Joseph Melville1 et al.} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by LSDV. Using this data to train a deep neural network of 4-hidden layers including 2- convolutional layers for features extraction and 2- fully connected layers. Their results show good results when compared with traditional machine learning SVM.
+Moreover, the author in~\cite{Joseph Melville_k-means} introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. However, their works was not implemented to further step: damage localization and classification.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%
 %\subsection{Project motivations and objectives }
@@ -557,12 +577,10 @@ talk about AI in SHM and list some techniques.
 %The details are described in a book~\cite{udd2011fibre}. 
 
 %Similar case was analyzed by Hill et al.~\cite{hill1978photosensitivity}
-
-
+\renewcommand{\bibname}{References}
 \bibliography{refrences/report} % 
-%bibliography data in report.bib
 \bibliographystyle{abbrv}
-% makes bibtex use spiebib.bst
+
 
 
 
