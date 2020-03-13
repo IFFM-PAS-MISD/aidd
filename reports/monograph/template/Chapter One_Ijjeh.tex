@@ -41,19 +41,20 @@
 %\listoffigures
 %\listoftables
 %\newpage
+\tableofcontents
 
-\chapter{Literature Review}
+\chapter[Literature Review]{Literature Review of Structural Health Monitoring Systems}
 
 \textbf{Abdalraheem Abdullah Yousef Ijjeh}
 
-\tableofcontents
-\newpage
+%\tableofcontents
+%\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[SHM and motivations]{Structural Health Monitoring and motivations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  Structural health monitoring (SHM) intends to describe a real-time evaluation 
  of the materials of a structural component or the full construction during the structure life-cycle~\cite{Balageas2010}. 
- Furthermore, SHM supports detecting and characterizing defects in structures 
+ Furthermore, SHM supports detecting and characterising defects in structures 
  as a whole or in their parts.
  Detection of structural defect is critical because they may impair the safety of the structure during its operation~\cite{Yuan2016}. 
 
@@ -81,7 +82,7 @@ The prognosis part includes the production of information concerning the outcome
 	\label{fig:NationalSHM}
 \end{figure}
 
-Generally,  we can categorize SHM strategies into two main schemes, local and 
+In general, we can categorize SHM strategies into two main schemes, local and 
 global schemes. Local schemes were discussed in Refs.~\cite{Grimberg2001,Maldague1993,Raghavan2007}
 and global schemes were discussed in Refs.~\cite{Adams2002,Doebling1998,Uhl2004}. 
 Local schemes aim at monitoring a small area of the structure enclosing the transducers that are used for registering the data signals after the structure being exited. 
@@ -91,7 +92,7 @@ For this purpose, vibration techniques are utilized which can be classified as t
 The signal-based approaches analyse measured responses of the structure after 
 ambient excitation in order to identify possible defects~\cite{Stepinski2013}. 
 The model-based approaches use various types of models of a monitored structure 
-to detect and localize damage in the structure by utilizing relations 
+to detect and localize damage in the structure by utilising relations 
 between the model parameters and distinct damage features~\cite{Stepinski2013}. 
 
 \section[SHM for Composite Materials]{Structural Health Monitoring for Composite Materials}
@@ -102,7 +103,7 @@ Distinct from metallic alloys, each material has its characteristics~\cite{Campb
 Composite materials have a reinforcing and matrix phases that are usually categorized into~\cite{Jones1999}:
 
 \begin{itemize}
-	\item Fibre-reinforced composite materials that consist of three parts: the 
+	\item Fibre reinforced composite materials that consist of three parts: the 
 	fibres as the dispersed phase, the matrix as the continuous phase, and the fine inter-phase region, also known as the interface~\cite{Cantwell1991}.
 	\item Laminated composite materials that are an assembly of layers of a fibre-reinforced composite material that can be combined to implement 
 	necessary design features~\cite{Ramirez1999}.
@@ -221,7 +222,7 @@ However,  when the frequency increases, the number of propagating wave modes wil
 As a result, multiple wave modes propagate and each wave mode has different velocity which causes a problem with reflection identification and misinterpretation of the location and the size of the damage~\cite{Ostachowicz2012}. 
 It was found that each wave mode shows a varying sensitivity to individual 
 damage. 
-Authors in~\cite{Kessler2002,Ihn2008,Ihn2004} found that \(A0\) mode is suitable for delaminations to be detected in composite materials, and \(S0\) mode was found suitable for cracks detection in metallic elements~\cite{Ihn2004,Ihn2008}.
+Authors in~\cite{Kessler2002b,Ihn2008} found that \(A0\) mode is suitable for delaminations to be detected in composite materials, and \(S0\) mode was found suitable for cracks detection in metallic elements~\cite{Ihn2004,Ihn2008}.
 It was also observed that the design of the transducer influences in a great manner the excited and registered wave modes~\cite{Ostachowicz2010}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -297,7 +298,7 @@ In the proposed method, they employed a full wavefield data captured by SLDV.
 Also, authors in~\cite{Harb2015} utilized SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
 Moreover, SLDV has been used to scan and capture Lamb waves in honeycomb core sandwich structure to detect damage influence in~\cite{Lamboul2013}.
 
-Despite all the advantages of utilizing SLDV, there are some disadvantages. 
+Despite all the advantages of utilising SLDV, there are some disadvantages. 
 The first drawback concerns the surface of the specimen which must be smooth and characterised by a proper reflectivity, otherwise, the captured signal to noise ratio will be decreased~\cite{Ostachowicz2014}. 
 Furthermore, experimenting using  SLDV requires much time since the SLDV performs measurements at a single point in space at a time.
 Due to registering a full wavefield of Lamb waves, the process of measurements must be repeated by keeping the same excitation and pause until the wave completely attenuates~\cite{Ostachowicz2014}.
@@ -471,9 +472,9 @@ w_{i+1}= w_{i} -\alpha \frac{\delta J(w)}{\delta w_i}
 \paragraph{In}recent years, Convolutional Neural Networks (CNNs or ConvNets)
 became one of the most utilised artificial neural networks architectures in deep learning.
 ConvNets were initially developed in 1980s by Kunihiko Fukushima who was inspired by the discoveries of Hubel and Wiesel about the cat's visual cortex. 
-Fukushima introduced an artificial neural network that is capable of recognizing complex patterns of images by presenting two extra layers to the network: the convolution layer and the downsampling or (pooling) layer~\cite{Fukushima1980}.
+Fukushima introduced an artificial neural network that is capable of recognising complex patterns of images by presenting two extra layers to the network: the convolution layer and the downsampling or (pooling) layer~\cite{Fukushima1980}.
 
-ConvNets are primarily utilised for image processing, data classification, data segmentation and natural language processing (NLP).
+ConvNets are primarily utilised for image processing, data classification, data segmentation and Natural Language Processing (NLP).
 Moreover, ConvNets was designed to process data as tensors~\cite{Fukushima1980}with different dimensions. 
 For a 1D data tensor, it can represent various data forms, such as signals and sequences, in addition to languages.
 For a 2D data tensor, it can represent an image in grey scale,
@@ -514,39 +515,46 @@ In next years, several spectacular ConvNets architectures were presented (e.g VG
 
 
 
-\subsection{Deep Learning based SHM Techniques}
+\section{Deep Learning based SHM Techniques}
 
-talk about AI in SHM and list some techniques.
-talk about deep learning if different approaches for SHM:\\
-medical\\
-civil engineering \\
-aerospace\\
-composite materials\\
-%%%%%%%%%%%%%%%%%%%%%%%%
+The importance of SHM systems originated from their ability to monitor the structure's condition in real-time.
+SHM systems are implemented using data-driven methods, which require a huge amount of data that are captured by monitoring the status of a structure.
 
-SHM systems are implemented using data-driven methods, those methods require a huge amount of data that are captured by monitoring the status of the structure.
+Damage estimation can be performed by monitoring the changes in the extracted features that result from estimating the current state of the structure~\cite{Lin2017a}.
+In general, the process of extracting features of the defects occurred in structures can be achieved in different domains: time domain, frequency domain, time-frequency domain, impedance domain, and modal analysis domain~\cite{Khan2019}.
+The process of extracting features from structures in conventional techniques needs a lot of time and requires experts in the field. 
+Therefore, introducing machine learning methods to the feature extraction process became necessary, hence machine learning methods have the capability to generalise and learn new features by themselves which improves there functionality in damage estimation.
 
-Damage detection can be configured in structures by monitoring the changes in the extracted features which result from estimating the current state (dynamic signature) of the structure~\cite{	Yi-zhou Lin}.\\
+In~\cite{Worden2007}authors have proposed several axioms related to SHM systems implemented using machine learning methods. 
+According to them, damage detection can be performed in unsupervised learning, however, recognising the damage type and how significant it is can not be performed without supervised learning. 
+Moreover, the feature extraction process is essential for damage detection and it can be performed through analysing and processing the signals captured by the sensors (e.g. PZT actuators), then converting it to damage information.
+Therefore, introducing machine learning methods to the feature extraction process became necessary, hence machine learning methods have the capability to generalise and learn new features by themselves which improves there functionality in damage estimation.
 
-
-Full wavefield scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. Authors in ~\cite{Yassmin} proposed a compressive Sensing technique using CNN to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.\\
-
-
-Furthermore, authors in~\cite{Joseph Melville1 et al.} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by LSDV. Using this data to train a deep neural network of 4-hidden layers including 2- convolutional layers for features extraction and 2- fully connected layers. Their results show good results when compared with traditional machine learning SVM.
-Moreover, the author in~\cite{Joseph Melville_k-means} introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. However, their works was not implemented to further step: damage localization and classification.
+In recent years data-driven methods based on Machine learning and especially deep learning have been increased in a significant way. 
+In the following, methods for damage estimations based on machine learning and deep learning techniques for features extraction are presented. 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Full wavefield scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. Authors in~\cite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.\\
 
-%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%
-%\subsection{Project motivations and objectives }
-%\subsection{tools used for measurement and dataset generation }
-%\subsection{Introduction to AI and Deep learning }
+Furthermore, authors in~\cite{Melville2018}proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by LSDV. Using this data to train a deep neural network of 4-hidden layers including 2- convolutional layers for features extraction and 2- fully connected layers. Their results show good results when compared with traditional machine learning SVM.
+Moreover, the author in~\cite{Melville2017}introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. However, their works was not implemented to further step: damage localization and classification.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Authors in~\cite{Vitola2016}developed a damage detection and classification methodology that was examined on aluminium plates.
+accordingly, a group of PZT transducers placed on the plate surface to sense wave propagation in the structure.
+The methodology is based on the use of principal component analysis (PCA), and machine learning techniques for recognising patterns. 
+PCA means to analyse a large amount of information, by finding the principal components, however, the PCA method is not invariant to scaling, hence data must be normalized~\cite{Tibaduiza2016}. 
+Next, normalised data is fed to several machine learning models for training. 
+For this purpose, several classification algorithms were applied, Decision trees, KNN and SVM. 
+However, only few of these models presented good outputs in damage detection.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure} [h!]
