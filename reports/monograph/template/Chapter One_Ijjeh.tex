@@ -6,11 +6,13 @@
 \usepackage[cp1250]{inputenc}
 \usepackage{indentfirst}
 \usepackage[numbers,sort&compress]{natbib} % sort and compress citations
+
 %\usepackage[none]{hyphenat} % brak podzia³u wyrazów
 \usepackage{geometry}
 \newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
 \usepackage{multirow}
 \usepackage{amsmath}
+%\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 
 \graphicspath{ {E:/aidd_new/aidd/reports/monograph/template/Graphics/Figures/} }
 
@@ -41,14 +43,14 @@
 %\listoffigures
 %\listoftables
 %\newpage
-\tableofcontents
+%\tableofcontents
 
-\chapter[Literature Review]{Literature Review of Structural Health Monitoring Systems}
+\chapter{Literature Review}
 
 \textbf{Abdalraheem Abdullah Yousef Ijjeh}
 
-%\tableofcontents
-%\newpage
+\tableofcontents
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[SHM and motivations]{Structural Health Monitoring and motivations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -362,11 +364,11 @@ The training data is a collection of variables together with its labels e.g. a s
 
 During the learning process, the machine gets a collection of inputs simultaneously with the corresponding label (ground truth).
 Accordingly, by comparing its predicted output with the correct output to find errors, it modifies the model and the learning occurs~\cite{Ongsulee2018}. 
-Supervised learning uses patterns to predict the values of the output label  for new unlabeled data by applying methods like Regression and Classification~\cite{Ongsulee2018}.
+Supervised learning uses patterns to predict the values of the output label  for new unlabeled data by applying methods like Regression and Classification~\cite{Ongsulee2018}. Fig~\ref{fig:Machine_learning_approaches} presents most used algorithms for Classification purposes like: k-nearest neighbors algorithm (KNN), decision trees, Naive Bayes algorithm which is based on probabilistic approach, through implementing Bayes' theorem, Support vector Machine SVM and Logistic regression. And for Regression purposes algorithms like linear and polynomial regression are implemented.
 \paragraph{Unsupervised Learning}is applied to such data with no historical labels~\cite{Ongsulee2018}. 
 In this case, the model does not know the ground truth labels of the input values. Therefore, the algorithm needs to figure out some common characteristics among the input values.
 Consequently, unsupervised learning is more difficult than supervised learning, due to removing the supervision which implies the problem becomes less defined.
-The most well-known techniques used in Unsupervised learning is clustering~\cite{Russell2010}. In which it creates subgroups within the input data based on their characteristics.
+The most well-known techniques used in Unsupervised learning is clustering~\cite{Russell2010}. In which it creates subgroups within the input data based on their characteristics, Fig~\ref{fig:Machine_learning_approaches} presents most Clustering algorithms like:k-means algorithm, which intends to split n observations into k clusters, where each observation relates to the cluster that has the nearest mean distance.   
 \paragraph{Reinforcement learning}is based on the trial and error principle, which means the algorithm learns through actions that explore the environment in a way that results with the greatest rewards~\cite{Russell2010}.
 In this approach of learning the process consists of three parts: the agent which is responsible for making decisions, the environment that relates to any interaction with the agent, and the actions that are made by the agent. Fig.~\ref{fig:ReinforcementLearning} illustrates the Reinforcement learning approach.
 \begin{figure} [h!]
@@ -533,27 +535,47 @@ Therefore, introducing machine learning methods to the feature extraction proces
 In recent years data-driven methods based on Machine learning and especially deep learning have been increased in a significant way. 
 In the following, methods for damage estimations based on machine learning and deep learning techniques for features extraction are presented. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%PZT + SVM
+Authors in ~\cite{Das2010} presented a method for estimating several types of defects (delamination, saw cut, notches and drilled holes)in composite material. For this purpose, a collection of PZT transducers were attached to the surface of the structure to generating and registering Lamb waves propagation. 
+Accordingly, a time-frequency domain were utilised to extract features relates to the defects from the registered response. Those extracted features were fed to one-class SVM, which performs classification and damage estimation. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Full wavefield scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. Authors in~\cite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + SVM
+Moreover, in~\cite{Dib2018}, authors proposed a novelty classifier based on one class SVM for detecting damage. The method was conducted by extracting data from damage impact on glass-fibre composite plate, then evaluating the performance on the classifier. To extract the necessary features form the propagated wave, the registered signal was segmented into L time bins, then, the Fourier transform was applied on each time bin.
+Accordingly, the features vector was constructed from the signal phase and its amplitude for each segmented time bin.
 
-
-Furthermore, authors in~\cite{Melville2018}proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by LSDV. Using this data to train a deep neural network of 4-hidden layers including 2- convolutional layers for features extraction and 2- fully connected layers. Their results show good results when compared with traditional machine learning SVM.
-Moreover, the author in~\cite{Melville2017}introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. However, their works was not implemented to further step: damage localization and classification.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Authors in~\cite{Vitola2016}developed a damage detection and classification methodology that was examined on aluminium plates.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + PCA+ KNN + SVM
+Authors in~\cite{Vitola2016} developed a damage detection and classification methodology that was examined on aluminium plates.
 accordingly, a group of PZT transducers placed on the plate surface to sense wave propagation in the structure.
 The methodology is based on the use of principal component analysis (PCA), and machine learning techniques for recognising patterns. 
 PCA means to analyse a large amount of information, by finding the principal components, however, the PCA method is not invariant to scaling, hence data must be normalized~\cite{Tibaduiza2016}. 
 Next, normalised data is fed to several machine learning models for training. 
 For this purpose, several classification algorithms were applied, Decision trees, KNN and SVM. 
-However, only few of these models presented good outputs in damage detection.
+However, only few of these models presented good outputs in damage detection. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + ConvNet
+In~\cite{Sammons2016}, authors utilised x-ray computed tomography for estimating the delaminations in a CFRP. For this purpose, they utilised the Convolutional Network (ConvNet ) for performing image segmentation of the defected input images to estimate the delaminations. There ConvNet was capable of identifying  and quantifying small delaminations, 
+however, the ConveNet could not recognise delaminations with large sizes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + ConvNet
+Moreover, authors in \cite{Chetwynd2008} have investigated curved carbon fibre composite panel for damage localisation. 
+Accordingly, stiffeners were used during the experiments to represent real-life damage. 
+For this purpose, authors attached a combination of (PZT) transducers on the panel used to generate and receive Lamb waves that propagate through the structure. 
+During their propagation through the structure will encounter defects, which affects their propagation response. 
+The collected response was transformed into a novel scaler index using outlier analysis~\cite{Beniger1980}, which was then fed to Multi-Layer Perceptron neural network (MLP). The MLP used for classification and regression applications of damage detection. Classification operation is responsible for predicting whether there is damage or not in a specific location. Where the regression operation is responsible for the exact estimation of the damage location.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Ful wavefield +ConvNets
+\paragraph{Full wavefield}scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. Authors in~\cite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.
+Furthermore, authors in~\cite{Melville2018}proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by LSDV. Using this data to train a deep neural network of 4-hidden layers including 2- convolutional layers for features extraction and 2- fully connected layers. Their results show good results when compared with traditional machine learning SVM.
+Moreover, the author in~\cite{Melville2017}introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. However, their works was not implemented to further step: damage localization and classification.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
+\section{Thesis overview}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -586,8 +608,10 @@ However, only few of these models presented good outputs in damage detection.
 
 %Similar case was analyzed by Hill et al.~\cite{hill1978photosensitivity}
 \renewcommand{\bibname}{References}
-\bibliography{refrences/report} % 
+\bibliography{refrences/report} 
 \bibliographystyle{abbrv}
+
+
 
 
 
