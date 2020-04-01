@@ -578,8 +578,9 @@ For this purpose, authors attached a combination of (PZT) transducers on the pan
 During their propagation through the structure will encounter defects, which affects their propagation response. 
 The collected response was transformed into a novel scaler index using outlier analysis~\cite{Beniger1980}, which was then fed to Multi-Layer Perceptron neural network (MLP). The MLP used for classification and regression applications of damage detection. Classification operation is responsible for predicting whether there is damage or not in a specific location. Where the regression operation is responsible for the exact estimation of the damage location.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Ful wavefield +ConvNets
-\paragraph{Full wavefield}scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. 
-Authors in~\cite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. 
+
+Full wavefield scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. 
+Accordingly, authors in~\cite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. 
 Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.
 Furthermore, authors in~\cite{Melville2018}proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by LSDV. Using this data to train a deep neural network of 4-hidden layers including 2- convolutional layers for features extraction and 2- fully connected layers. Their results show good results when compared with traditional machine learning SVM.
 Moreover, the author in~\cite{Melville2017}introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. 
@@ -591,6 +592,25 @@ However, their works was not implemented for further step which is damage locali
 
 
 \section{Thesis overview}
+
+The aim of this thesis is to develop an Artificial Intelligence (AI) driven diagnostic system for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).
+In which we are going to investigate delamination defects due to the fact it is one of the most dangerous damage type.
+
+The thesis will be focused on feasibility studies of machine learning approaches for elastic wave propagation analysis. 
+Data corresponding to elastic wave propagation patterns are very complex and it is difficult to explicitly program instructions which will output damage intensity map of an element of a structure based on anomalies in propagating elastic waves (e.g. reflections from delamination).
+Therefore, in this thesis, we aim to employ deep neural networks (DNN) as a possible solution for detecting defects such as delaminations by feeding and training the DNN with the acquired data. 
+Accordingly, the DNN learns to distinguish and classify several types of delaminations. 
+When comparing DNN with traditional machine learning techniques it was found that the DNN is much more scalable to the size of data utilised for supervised learning.
+Accordingly, when increasing the neural network size it shows a higher performance.
+Therefore, we assume that it is possible to use the end-to-end approach in which DNN processes animation of propagating waves (input) directly into the damage intensity map (output). 
+
+In this thesis,  a modern end-to-end deep learning approach is proposed in opposite to traditional pipeline approach with intermediate components (hand-crafted feature extraction). 
+End-to-end deep learning simplifies building process of the reasoning system and does not require so many hand-designed components which often fail to accurately characterise the acquired signal. Such an approach is possible only with a large dataset. 
+Computation of dataset in the form of full wavefield of propagating waves is time-intensive. 
+This issue will be addressed by the proposed parallel implementation of spectral element method and GPU computation. 
+For the first time, full wavefield data of propagating elastic waves will be used as an input to deep neural networks. 
+Innovative research studies of Convolutional Neural Networks (CNN) 
+would be the first step towards automatic reasoning system set to an elastic wave-based diagnostic of delaminations in composite laminates. Such an innovative approach gives a chance to stimulate progress in the field of Non-Destructive Test (NDT) and SHM. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
