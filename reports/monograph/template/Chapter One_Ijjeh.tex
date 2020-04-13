@@ -591,12 +591,11 @@ However, their works was not implemented for further step which is damage locali
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Thesis overview}
+\section{Thesis description}
 
 The aim of this thesis is to develop an Artificial Intelligence (AI) driven diagnostic system for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).
 In which we are going to investigate delamination defects due to the fact it is one of the most dangerous damage type.
-
-The thesis will be focused on feasibility studies of machine learning approaches for elastic wave propagation analysis. 
+\paragraph{The thesis}will be focused on feasibility studies of machine learning approaches for elastic wave propagation analysis. 
 Data corresponding to elastic wave propagation patterns are very complex and it is difficult to explicitly program instructions which will output damage intensity map of an element of a structure based on anomalies in propagating elastic waves (e.g. reflections from delamination).
 Therefore, in this thesis, we aim to employ deep neural networks (DNN) as a possible solution for detecting defects such as delaminations by feeding and training the DNN with the acquired data. 
 Accordingly, the DNN learns to distinguish and classify several types of delaminations. 
@@ -604,7 +603,7 @@ When comparing DNN with traditional machine learning techniques it was found tha
 Accordingly, when increasing the neural network size it shows a higher performance.
 Therefore, we assume that it is possible to use the end-to-end approach in which DNN processes animation of propagating waves (input) directly into the damage intensity map (output). 
 
-In this thesis,  a modern end-to-end deep learning approach is proposed in opposite to traditional pipeline approach with intermediate components (hand-crafted feature extraction). 
+\paragraph{In this thesis,}a modern end-to-end deep learning approach is proposed in opposite to traditional pipeline approach with intermediate components (hand-crafted feature extraction). 
 End-to-end deep learning simplifies building process of the reasoning system and does not require so many hand-designed components which often fail to accurately characterise the acquired signal. Such an approach is possible only with a large dataset. 
 Computation of dataset in the form of full wavefield of propagating waves is time-intensive. 
 This issue will be addressed by the proposed parallel implementation of spectral element method and GPU computation. 
