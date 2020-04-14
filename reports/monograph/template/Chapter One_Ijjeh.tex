@@ -311,8 +311,7 @@ Due to registering a full wavefield of Lamb waves, the process of measurements m
 %\subsection[Introduction to AL, ML and deep learning]{Introduce AI, machine %learning, and deep learning} 
 The phrase Artificial Intelligence (AI) refers to the ability of machines to imitate the human mind in such a way as "learning and problem-solving"~\cite{Russell2010}.
 Artificial Intelligence has various definitions, however, it can be defined as any device that can sense its environment and consequently takes steps that maximize its opportunity of accomplishing its goals~\cite{Russell2010}.
-\paragraph{}
-Historically, Artificial Intelligence was in introduced in 1956 at the Dartmouth summer conference by John McCarthy.
+\paragraph{Historically,}v Artificial Intelligence was in introduced in 1956 at the Dartmouth summer conference by John McCarthy.
 For many years after, AI has been in what so-called AI winter due to the lack of powerful computational computers and its algorithms were not fully understood mathematically.
 \paragraph{}
 However, in recent years, AI has returned to the stage due to several reasons. The first reason was the advanced evolution occurred in technology that produced high computational powers e.g. Graphics Processing Unit (GPU). 
@@ -348,6 +347,7 @@ In machine learning, machines have to run into a learning process to learn infer
 	\label{fig:Machine_learning}
 \end{figure}
 
+\paragraph{}
 There are different methods can be implemented when performing machine learning. 
 Generally, those methods are grouped into three traditional approaches: Supervised learning, Unsupervised learning and Reinforcement learning, and a Transfer learning approach.
 Fig.~\ref{fig:Machine_learning_approaches} shows the different types of Machine learning approaches.
@@ -472,7 +472,7 @@ w_{i+1}= w_{i} -\alpha \frac{\delta J(w)}{\delta w_i}
 \label{weight_updates}
 \end{equation}
 
-\paragraph{In}recent years, Convolutional Neural Networks (CNNs or ConvNets)
+\paragraph{In recent years,} Convolutional Neural Networks (CNNs or ConvNets)
 became one of the most utilised artificial neural networks architectures in deep learning.
 ConvNets were initially developed in 1980s by Kunihiko Fukushima who was inspired by the discoveries of Hubel and Wiesel about the cat's visual cortex. 
 Fukushima introduced an artificial neural network that is capable of recognising complex patterns of images by presenting two extra layers to the network: the convolution layer and the downsampling or (pooling) layer~\cite{Fukushima1980}.
@@ -483,7 +483,6 @@ For a 1D data tensor, it can represent various data forms, such as signals and s
 For a 2D data tensor, it can represent an image in grey scale,
 moreover, by combining three 2D tensors a coloured 3D image is produced due to different intensities of the pixels in the (RGB) channels.
 A 4D tensors represents volumetric data, such as a sequence of 3D images  or a video.
-
 Fig.~\ref{fig:Convnet} illustrates  the typical architecture of a ConvNet which consists of three main parts: convolutional layers, downsampling layers, and dense layers that come at the end.
 In the convolutional layers, an  n- convolution filers or (kernels), each one contains a set of weights, with a size \((w_f,h_f,d_f)\), convolves with input data of a size\((w,h,d)\).
 The convolution operation is not more than a sliding window all over the input data with cross-correlation (dot product).
@@ -511,7 +510,7 @@ The idea behind pooling operation is to join related features into one. typicall
 The process of convolution, non-linearity, and pooling can be repeated several times and stacked. 
 The final operation in Convent is a fully connected neural network (dense network), which takes its input from the previous layer, and the backpropagation is performed through the ConvNet as simple as any regular neural network, accordingly, all the weights in the ConvNet including convolutional filters weights are trained~\cite{Lecun2015}.
 
-\paragraph{ConvNets}became popular after the competition of the Large Scale Visual Recognition Challenge 2012 (ILSVRC2012). 
+ConvNets became popular after the competition of the Large Scale Visual Recognition Challenge 2012 (ILSVRC2012). 
 When Alex Krizhevsky at al. introduced AlexNet, which is a deep ConvNet applied on a large dataset of 1000,000 images and 1000 different classes, AlexNet results were magnificent, this success came a result of the development in the GPUs technology and the use of the non-linear activation function Relu~\cite{Lecun2015}.
 In next years, several spectacular ConvNets architectures were presented (e.g VGG-16, ResNet, Inception-v4 and others).
 
@@ -578,8 +577,7 @@ For this purpose, authors attached a combination of (PZT) transducers on the pan
 During their propagation through the structure will encounter defects, which affects their propagation response. 
 The collected response was transformed into a novel scaler index using outlier analysis~\cite{Beniger1980}, which was then fed to Multi-Layer Perceptron neural network (MLP). The MLP used for classification and regression applications of damage detection. Classification operation is responsible for predicting whether there is damage or not in a specific location. Where the regression operation is responsible for the exact estimation of the damage location.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Ful wavefield +ConvNets
-
-Full wavefield scanning using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. 
+\paragraph{Full wavefield scanning} using LSDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. 
 Accordingly, authors in~\cite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by LSDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. 
 Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.
 Furthermore, authors in~\cite{Melville2018}proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by LSDV. Using this data to train a deep neural network of 4-hidden layers including 2- convolutional layers for features extraction and 2- fully connected layers. Their results show good results when compared with traditional machine learning SVM.
