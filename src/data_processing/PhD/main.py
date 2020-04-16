@@ -44,7 +44,7 @@ experimental = experimental.reshape(44, 512, 512, 1)
 # Loading the model
 ############################################
 model_name = 'E:/backup/models/FCN_DenseNet_models/' \
-             'FCN_DsensNets_Semantic_Segmentation_filter_Using_Conv2DTranspose16_epoch_20_kernal_(3, 3)_drpout_0.2_batch_size_4_loss_updated_changed_DB _layer'
+             'FCN_DsensNets_Semantic_Segmentation_filter_Using_Conv2DTranspose8_epoch_17_kernal_(3, 3)_drpout_0.2_batch_size_8_loss_updated_changed_DB _layer_Iou_and_loss_changed'
 model = load_model(model_name + '.h5', compile=False)
 model.summary()
 #####################################
@@ -66,7 +66,7 @@ def Testing():
     prediction = model.predict(tests_y_samples, batch_size=1)
     prediction = np.asarray(prediction)
 
-    for i in range(50):
+    for i in range(380):
         damage = np.squeeze(prediction[i], axis=2)
         original = np.squeeze(test_x_samples[i], axis=2)
         mask = np.squeeze(tests_y_samples[i], axis=2)
