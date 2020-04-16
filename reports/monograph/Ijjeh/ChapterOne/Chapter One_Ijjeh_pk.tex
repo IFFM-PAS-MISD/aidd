@@ -1,0 +1,665 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[b5paper,11pt, titlepage]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdftex]{graphicx,color}
+%\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage[numbers,sort&compress]{natbib} % sort and compress citations
+
+%\usepackage[none]{hyphenat} % brak podzia³u wyrazów
+\usepackage{geometry}
+\newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
+\usepackage{multirow}
+\usepackage{amsmath}
+%\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+
+\graphicspath{ {Graphics/Figures/} }
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{\textbf{Modelowanie struktur anizotropowych \\Wstêpne badania eksperymentalne\\
+%	\vspace{10cm}}
+%\normalsize{Abstract} }
+%\normalsize{W ramach projektu pt.: \\ \textit{Wp³yw jednoczesnego oddzia³ywania temperatury i wilgotnoœci \\na struktury %anizotropowe: od teorii do badañ doœwiadczalnych\\}
+%NCN OPUS 12}}
+	
+%{Micha³ Jurek}
+
+%\date{ }
+	
+%\date{Gdañsk, Maj 2018\\ (Nr Arch. 221/2018)}
+
+
+	
+%\maketitle
+%\newpage
+%\tableofcontents
+%\newpage
+%\listoffigures
+%\listoftables
+%\newpage
+%\tableofcontents
+
+\chapter[ML for SHM: Review]{Machine Learning for SHM: Literature Review}
+
+\textbf{Abdalraheem Abdullah Yousef Ijjeh}
+
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[SHM and motivations]{Structural Health Monitoring and motivations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Structural health monitoring (SHM) intends to describe a real-time evaluation 
+ of the materials of a structural component or the full construction during the structure life-cycle~\cite{Balageas2010}. 
+ Furthermore, SHM supports detecting and characterising defects in structures 
+ as a whole or in their parts.
+ Detection of structural defect is critical because they may impair the safety of the structure during its operation~\cite{Yuan2016}. 
+
+ The purpose of SHM is to distinguish any potential change that occurs at 
+ a structure that could decay the performance of the whole system, at the 
+ earliest possible time so that an action can be taken to reduce the downtime, 
+ operational costs and maintenance costs, consequently reducing the risk of 
+ catastrophic failure, injury, or even loss of life.
+ Moreover, SHM improves the work organization of maintenance services replacing scheduled and periodic maintenance inspection with performance-based maintenance.
+ It decreases maintenance labour, in particular by avoiding dismounting undamaged parts and through reducing the individual involvement~\cite{Balageas2010}.
+
+We can look at SHM as an improved method to perform Non-Destructive Evaluation, 
+Nonetheless, SHM involves sensors that are integrated into structures, data 
+transmission, computational power, and processing ability within 
+structures~\cite{Balageas2010}. 
+The typical organization of a SHM system is depicted in Fig.~\ref{fig:NationalSHM}. 
+Such a system is built from a diagnostic part (low level) and a prognosis part (high level).
+The diagnostic part is responsible for detection, localization, and evaluation of any damage.
+The prognosis part includes the production of information concerning the outcomes of the diagnosed damage.
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=\textwidth]{figure1_1.jpg}
+	\end{center}
+	\caption{National SHM system~\cite{Yuan2016}} 
+	\label{fig:NationalSHM}
+\end{figure}
+
+In general, we can categorize SHM strategies into two main schemes, local and 
+global schemes. Local schemes were discussed in Refs.~\cite{Grimberg2001,Maldague1993,Raghavan2007}
+and global schemes were discussed in Refs.~\cite{Adams2002,Doebling1998,Uhl2004}. 
+Local schemes aim at monitoring a small area of the structure enclosing the transducers that are used for registering the data signals after the structure being exited. 
+For this purpose, few phenomena are used like ultrasonic waves~\cite{Raghavan2007}, eddy currents~\cite{Grimberg2001}, thermal field~\cite{Maldague1993} and acoustic emission~\cite{Pao1978}. 
+On the other hand, global schemes are related to the global behaviour of the structure~\cite{Balageas2010}. 
+For this purpose, vibration techniques are utilized which can be classified as the signal-based and the model-based.
+The signal-based approaches analyse measured responses of the structure after 
+ambient excitation in order to identify possible defects~\cite{Stepinski2013}. 
+The model-based approaches use various types of models of a monitored structure 
+to detect and localize damage in the structure by utilising relations 
+between the model parameters and distinct damage features~\cite{Stepinski2013}. 
+
+\section[SHM for Composite Materials]{Structural Health Monitoring for Composite Materials}
+A composite material can be described as a compound of two or more different 
+materials to achieve new features that cannot be achieved by those of specific 
+components functioning separately.
+Distinct from metallic alloys, each material has its characteristics~\cite{Campbell2010}.
+Composite materials have a reinforcing and matrix phases that are usually categorized into~\cite{Jones1999}:
+
+\begin{itemize}
+	\item Fibre reinforced composite materials that consist of three parts: the 
+	fibres as the dispersed phase, the matrix as the continuous phase, and the fine inter-phase region, also known as the interface~\cite{Cantwell1991}.
+	\item Laminated composite materials that are an assembly of layers of a fibre-reinforced composite material that can be combined to implement 
+	necessary design features~\cite{Ramirez1999}.
+	\item Particulate composite materials that are characterized as being composed of particles suspended in a matrix.
+
+\end{itemize}
+
+When comparing composite materials to regular metallic materials, we can notice 
+that composites have more advantages over metallic materials. 
+The advantages can be summarized in~\cite{Campbell2010}:
+
+\begin{itemize}
+	\item low density with high strength and stiffness, 
+	\item greater vibration damping capacity, and more temperature resistance,
+	\item strong texture in micro-structures that makes it easy to design and 
+	satisfy different application needs. 
+\end{itemize}
+
+However, composite materials possess some disadvantages.
+Due to the nature of multiphase materials, composites materials present 
+different anisotropic characteristics. 
+Their material capacities, mainly associated with manufacturing processes, are 
+dispersive~\cite{Awad2012}. 
+Furthermore, composites materials are sensitive to impacts resulting 
+from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}. 
+Under a high energy impact, little penetration rises in composite materials. 
+On the other hand, for low to medium energy impact, matrix crack will happen 
+and interact, causing the delamination process~\cite{Cai2012}. 
+Fibre breakage would also occur at the opposite side to the 
+impact~\cite{Montalvao2006}, furthermore, defects can be produced in composites 
+by mistaken procedures through production and assembling, ageing or service 
+condition~\cite{Cai2012}. 
+
+Generally, composites material defects can happen due to fibre breakage, 
+matrix cracking, fibre-matrix debonding and delamination among layers, most of 
+which happen below the top surfaces and are barely visible~\cite{Cai2012}. 
+These defects can seriously decrease the performance of composites,  therefore, 
+they should be detected in time to avoid catastrophic structural collapses.  
+Damage can only be discovered by analysing the responses of the structure, 
+obtained by sensors, before and after it happens, hence, we cannot expect to have �damage sensors�.
+The only way to detect the damage is by processing and comparing the signals received from the sensors before and after damage occurrence~\cite{s18041094}. 
+Then one can attempt to classify the parameters, that are sensitive to minor damage and that can be distinguished from the response to natural and environmental disturbances~\cite{s18041094}. 
+Consequently, SHM  methods are very essential in damage detection, since SHM 
+implies different types of sensors mixed with damage detection techniques. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Guided waves based SHM]{Guided waves based Structural Health Monitoring}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The approach behind adopting elastic waves propagation methods in SHM includes generating elastic waves in the examined structure and recording their amplitude as a function of time~\cite{Ostachowicz2012}. 
+The produced waves are travelling in packets, those packets keep propagating until 
+they reflect from discontinuities, edges or damage in the structure. The reflected waves hold information about the location and the size of the damage. 
+
+Designing a robust SHM system requires knowledge in various scientific fields e.g. mechanical and electrical engineering, as well as in computer science, mathematics, and physics~\cite{Willberg2013}.
+Moreover, it requires a deep understanding of various material types and the design of transducers working alone and in networks. 
+Also, there is a need to be familiar with signal processing methods and damage evaluation techniques~\cite{Willberg2013}.
+
+There have been various SHM techniques introduced and performed in recent years for different types of structures. 
+Vibration-based procedures, which were mentioned earlier, are one such regularly investigated in the field with various extensive articles and books~\cite{Doebling1998,Deraemaeker2010,Beskhyroun2012}.
+
+In this literature will we focus on the guided wave-based SHM techniques for composite materials, which has brought large attention in the past two decades~\cite{Mitra2016}.
+Guided waves which are essentially elastic waves propagating within bounded 
+structures~\cite{Mitra2016}, e.g. in a thin-plate, they are being guided by the boundaries of the plate. 
+
+There are a few benefits from adopting guided wave-based sche\-mes for SHM in structures over vibration based methods. 
+The transducers that are utilised in SHM systems are generally affordable, also usually, due to the lightweight of those transducers, it can be implemented easily in the structure.
+In addition, it is possible to scan a relatively large area compared to a little number of transducers~\cite{Mitra2016}. 
+Moreover, an important advantage for guided waves over a vibration-based scheme 
+is their high sensitivity for detecting small defects due to the ability to use high-frequency signals (excited and registered).
+In such a case, low-frequency ambient vibration does not affect the guided waves propagation~\cite{Mitra2016,Croxford2007}.
+
+Various types of guided waves have been investigated for the purpose of SHM. 
+A well-known approach is the use of Lamb waves, that propagate 
+within thin-plates and shells bounded by stress-free surfaces~\cite{Mitra2016}.
+Lamb waves were given their name after Horace Lamb, who discovered them and 
+developed a theory to describe the phenomena of their propagation 
+~\cite{Ostachowicz2012}. 
+However, Lamb could not able to generate those waves physically, until 
+Worlton~\cite{Worlton1961} who saw the opportunity to utilise Lamb waves 
+characteristics in damage detection~\cite{Ostachowicz2012}.
+Lamb waves, in general, are generated and received by piezoelectric (PZT) 
+transducers~\cite{Cai2012}.
+Due to the multi-mode and dispersion properties, the propagation of Lamb waves 
+is quite complex~\cite{Ostachowicz2012}. 
+In practical applications, two forms of Lamb waves arise depending on the 
+distribution of the displacement on the top and bottom bounding surfaces, these 
+forms are symmetric, denoted as \(S_0,S_1,S_2,...., \)and antisymmetric, denoted as 
+\(A_0,A_1,A_2,....,\) ~\cite{Ostachowicz2012}. 
+Fig.~\ref{fig:LambModes} illustrates the propagation of Lamb waves for \(A_0\) and \(S_0\) modes in a structure.
+
+
+\begin{figure} [h!]
+	\begin{center}
+	 	\centering
+		\includegraphics[width=\textwidth]{fig_Lamb_wave_modes.png}
+	\end{center}
+	\caption{Lamb wave modes: (a)  \(A_0 \) mode, (b) \( S_0\) mode} 
+	\label{fig:LambModes}
+\end{figure} 
+\paragraph{}
+
+Regardless of Lamb waves promising characteristics, using them for SHM 
+applications hold some essential challenges. 
+Among them are the dispersive nature of Lamb wave propagating modes that can convert into each other in the presence of defects and other changes in the mechanical 
+impedance~\cite{Willberg2015}. 
+Moreover, ascribed to some flaws in the bonding within actuators sensors and 
+the structure, random noise will emerge in the relevant sensors due to the high 
+sensitivity of Lamb waves toward structural perturbations. 
+Also, noise arising from environmental sources, like temperature changing, or 
+anisotropy of the material also summed up to the received signals making them 
+very complicated and challenging to recognize and interpret~\cite{Willberg2015}.
+Moreover, an essential point concerns the choice of a carrier frequency for the 
+Lamb waves because the higher the frequency is, the damage detection of small 
+size is more likely detected.
+However,  when the frequency increases, the number of propagating wave modes will increase accordingly.
+As a result, multiple wave modes propagate and each wave mode has different velocity which causes a problem with reflection identification and misinterpretation of the location and the size of the damage~\cite{Ostachowicz2012}. 
+It was found that each wave mode shows a varying sensitivity to individual 
+damage. 
+Authors in~\cite{Kessler2002b,Ihn2008} found that \(A0\) mode is suitable for delaminations to be detected in composite materials, and \(S0\) mode was found suitable for cracks detection in metallic elements~\cite{Ihn2004,Ihn2008}.
+It was also observed that the design of the transducer influences in a great manner the excited and registered wave modes~\cite{Ostachowicz2010}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Damage Detection and Localisation]{Damage Detection and Localisation\\ by~Guided-Wave Based SHM}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A damage can be defined as changes occurred in a system, either deliberately or accidentally, that adversely alter the current or future performance of the system~\cite{Farrar2012}. 
+Generally, Guided-Wave Based SHM systems can be built upon processing of signals registered by piezoelectric transducers (PZTs) or Scanning Laser Doppler Vibrometry (SLDV).
+\paragraph{Piezoelectric transducer arrays} 
+Traditionally, PZTs are uti\-lised in SHM systems for exciting the structure and sensing the reflected signals. 
+Based on the arrangement of PZTs, two main approaches are available: \emph{pulse-echo} and \emph{pitch-catch} as presented in Fig. \ref{fig:Pulse_echo_Pitch_catch}.
+In \emph{pulse-echo}, the same PZT transducer is used to generate and receive the Lamb waves, while in the \emph{pitch-catch} approach, two PZT transducers are used, the first PZT generates Lamb waves and the other PZT receives it.
+
+\begin{figure} [h!]
+	\begin{center}
+	\centering
+	\includegraphics[width=\textwidth]{Figure1_3_Pulse_ech0_Pitch_catch.png}
+	\end{center}
+	\caption{(a) Pulse echo	(b) Pitch catch} 
+	\label{fig:Pulse_echo_Pitch_catch}
+\end{figure}
+
+PZT transducers configurations for damage detection and localisation for SHM generally are classified into two main arrangements which are \emph{concentrated} and \emph{distributed} arrangement. 
+Hence, a lot of work was performed in the literature utilising PZT configurations for generating and sensing  Lamb waves.
+
+The following research articles are examples in which the authors used the \emph{concentrated} transducers arrangement.
+Giurgiutiu~\cite{Giurgiutiu2006} implemented PZT wafer active sensor (PWAS) in phased array to investigate Lamb waves in plates.
+The results which he obtained were encouraging regarding the location of the damage and its size.
+Additionally, the author in~\cite{Wilcox2003}, investigated omni-directional wave transducer arrays for the rapid inspection of large areas of plate structures. 
+In this work, two arrangements of PZTs were examined. 
+The first one consists of a densely circular area with PZTs in which it presented an excellent concentrated peak at the location of the reflector, though it requires plenty of transducers. 
+The other arrangement consists of a single circular ring of PZTs which is quite efficient in any circumstance that involves various reflectors.
+Moreover, Malinowski et al.~\cite{Malinowski2009} performed a numerical analysis on an array of PZTs of a star shape for various damage scenarios. Their method confirmed a good damage localisation.
+
+Furthermore, the \emph{distributed} arrangement was implemented in many research articles. 
+In this arrangement, PZT transducers are spread on the entire area which is inspected. Schubert~\cite{Schubert2008} tested different types of the above-mentioned arrangements. 
+Moreover,  authors in~\cite{Qiang2009} used a rectangular network of transducers
+on a composite material, whereas a triangular network of transducers was examined in~\cite{Wandowski2009} for an isotropic specimen.
+
+It can be concluded from previous works that using these approaches for damage detection and localization is only suitable for simple structures. 
+Furthermore, the estimation of damage size is very challenging.
+It is because of limited information extracted from the registered signals at discrete PZT locations. 
+These challenges arise due to various limitations e.g. the added mass and attached cables to the structure alter the propagating waves. 
+Additionally, it is difficult to distinguish the registered signals among different objects e.g. bolts and rivets, the edges, and the actual damage. Another challenge is induced by the temperature which affects the propagating waves.
+Therefore, it becomes important to compensate for this issue~\cite{Marzani1999}.
+Consequently, to overcome these limitations, a full wavefield measurement approach was introduced. 
+As a result of utilising a full wavefield, a damage influence map is produced, which makes it possible to estimate the size of the damage~\cite{Ostachowicz2014}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Scanning Laser Doppler Vibrometer} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+SLDV was developed and presented in the experimental research in the earlies of 1980s. 
+SLDV employs Doppler frequency shift principle to measure the velocity of a moving object in which the amount of the shifted frequency depends on the velocity of the moving object~\cite{Stanbridge1999}. 
+SLDV links computer-controlled XY scanning mirror with a camera inside the optical head, which densely scans the vibrating surface of the structure and get a large number of high-resolution measurements~\cite{Helfrick2011}. 
+Processing of such a large data set leads to damage maps of resolution impossible to obtain by using PZT arrays.
+Essentially, the grid of points resembles a dense array of PZTs. 
+Application of such a dense array of PZTs would be otherwise impractical.  
+Hence, SLDV is employed for full wavefield measurements instead of PZT arrays. 
+
+Consequently, vibrations of a structure can be measured accurately and the propagation of guided waves also can be registered accurately~\cite{Ostachowicz2014}.
+
+However, in many situations, it is needed to examine an object in three dimensions. 
+In such situations, a 3D vibrometer is used which holds three 1D scanning vibrometer heads in addition to the data acquisition system and a control system.
+A 3D vibrometer measures a location with three independent beams that hit the target from three different directions, which yields a measurement of the complete in-plane and out-of-plane velocity of the target.
+
+SLDV has been broadly used for sensing of Lamb wave. 
+There are several works in the literature that are concentrated on imaging method for damage detection by using the signals sensed at a grid of points and recorded by SLDV.
+For instance, authors in~\cite{Yu2013} applied a frequency wavenumber domain analysis utilising a 2D Fourier transform to detect a crack in an aluminium plate. 
+The method of wavenumber frequency filtering of SLDV data was applied for damage imaging in~\cite{Ruzzene2007}. 
+Authors in~\cite{Kudela2015} introduced a new method of imaging crack growth in a structure.
+In the proposed method, they employed a full wavefield data captured by SLDV.
+Also, authors in~\cite{Harb2015} utilized SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
+Moreover, SLDV has been used to scan and capture Lamb waves in honeycomb core sandwich structure to detect damage influence in~\cite{Lamboul2013}.
+
+Despite all the advantages of utilising SLDV, there are some disadvantages. 
+The first drawback concerns the surface of the specimen which must be smooth and characterised by a proper reflectivity, otherwise, the captured signal to noise ratio will be decreased~\cite{Ostachowicz2014}. 
+Furthermore, experimenting using  SLDV requires much time since the SLDV performs measurements at a single point in space at a time.
+Due to registering a full wavefield of Lamb waves, the process of measurements must be repeated by keeping the same excitation and pause until the wave completely attenuates~\cite{Ostachowicz2014}.
+
+\section[Introduction to AI, ML and deep learning]{Introduction to AI, machine learning, \\and deep learning}
+
+%%%%%%%%%%%%%%%%%%
+%\subsection[Introduction to AL, ML and deep learning]{Introduce AI, machine %learning, and deep learning} 
+The phrase Artificial Intelligence (AI) refers to the ability of machines to imitate the human mind in such a way as "learning and problem-solving"~\cite{Russell2010}.
+Artificial Intelligence has various definitions, however, it can be defined as any device that can sense its environment and consequently takes steps that maximize its opportunity of accomplishing its goals~\cite{Russell2010}.
+
+Historically, AI was introduced in 1956 at the Dartmouth summer conference by John McCarthy.
+For many years after, AI has been in what so-called AI winter due to the lack of  computational power.
+Moreover, its algorithms were not fully understood mathematically.
+
+However, in recent years, AI has returned to the stage due to several reasons. The first reason was the advanced evolution occurred in technology that produced high computational powers e.g. Graphics Processing Unit (GPU). 
+GPU computational power exceeds the traditional Central Processing Units (CPUs), due to the high capability of parallel computing, which makes it more efficient in running algorithms for large data.
+The second reason is the tremendous Data available nowadays, which can remarkably improve the learning process of an AI system, since, its effectiveness depends on learning from its environment. 
+
+In general, AI can be divided into two classes: Strong AI and weak AI. Tab.~\ref{tab:Strong_Weak_AI} presents the main differences between them.
+\begin{table}[h]
+	\renewcommand{\arraystretch}{1.1}
+	\centering
+	\caption{Artificial Intelligence classes}
+	\begin{tabular}{p{2cm}p{4cm}p{4cm}} 
+		\hline
+		\textbf{Category} & \textbf{Strong AI} & \textbf{Weak AI} \\ \hline
+		\textbf{Definition} & Sort of AI that possesses the same human intellectual capabilities, or exceeds it. & Sort of AI that is utilised for a specific application design. \\ \hline
+		
+		\textbf{Purpose} &To surpass and replace the human mind  &  To imitate the human intellectual thinking. \\  \hline
+	\end{tabular}
+	\label{tab:Strong_Weak_AI}
+\end{table}
+
+\paragraph{Machine learning,} is a subfield of AI which belongs to computer science field. 
+Arthur Samuel in 1959 defined it as "the ability of a computer to learn without being explicitly programmed"~\cite{munoz2014machine}.
+The conventional way of software engineering is through creating rules by human and combine them with data to create a solution to a problem.
+Alternatively, when it comes to machine learning, it utilises data and answers to learn the rules behind the problem~\cite{franoischollet2017learning}.
+In Fig.~\ref{fig:Machine_learning} the conventional software programming and Machine learning are presented in (a) and (b) respectively.
+In machine learning, machines have to run into a learning process to learn inference rules which are responsible for controlling the relations within a phenomenon. Hence, it is called a Machine Learning.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{fig_1_4_machine_learning.png}
+	\end{center}
+	\caption{(a) Conventional Programming	(b) Machine learning} 
+	\label{fig:Machine_learning}
+\end{figure}
+
+There are different methods which can be implemented when performing machine learning. 
+Generally, those methods are grouped into three traditional approaches: Supervised learning, Unsupervised learning, Reinforcement learning, and Transfer learning approach.
+Fig.~\ref{fig:Machine_learning_approaches} shows the different types of Machine learning approaches.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics[width=\textwidth]{fig_1_5_ML_Approaches.png}
+	\end{center}
+	\caption{Machine Learning Approaches} 
+	\label{fig:Machine_learning_approaches}
+\end{figure}
+\paragraph{Supervised learning}is the task of learning a machine the inference rules from the training data, and how to map inputs with outputs.
+The training data is a collection of variables together with its labels e.g. a set of civil images of structures that are labelled as cracked or undamaged.
+
+During the learning process, the machine gets a collection of inputs simultaneously with the corresponding label (ground truth).
+Accordingly, by comparing its predicted output with the correct output to find errors, it modifies the model and the learning occurs~\cite{Ongsulee2018}. 
+Supervised learning uses patterns to predict the values of the output label  for new unlabeled data by applying methods like Regression and Classification~\cite{Ongsulee2018}. Fig~\ref{fig:Machine_learning_approaches} presents most used algorithms for Classification purposes like: K Nearest Neighbors algorithm (KNN) where K represents the number of the nearest neighbours used for classification of the observations in a test sample, based on their characteristics e.g. the mean distance, moreover, Decision Trees where the data keeps splitting according to a specific parameter, moreover, Naive Bayes algorithm which is based on probabilistic approach, through implementing Bayes' theorem, furthermore, Support vector Machine SVM and Logistic regression. And for Regression purposes algorithms like linear and polynomial regression are implemented.
+\paragraph{Unsupervised Learning}is applied to such data with no historical labels~\cite{Ongsulee2018}. 
+In this case, the model does not know the ground truth labels of the input values. Therefore, the algorithm needs to figure out some common characteristics among the input values.
+Consequently, unsupervised learning is more difficult than supervised learning, due to removing the supervision which implies the problem becomes less defined.
+The most well-known techniques used in Unsupervised learning is clustering~\cite{Russell2010}. In which it creates subgroups within the input data based on their characteristics, Fig~\ref{fig:Machine_learning_approaches} presents most Clustering algorithms like:k-means algorithm, which intends to split n observations into k clusters, where each observation relates to the cluster that has the nearest mean distance.   
+\paragraph{Reinforcement learning}is based on the trial and error principle, which means the algorithm learns through actions that explore the environment in a way that results with the greatest rewards~\cite{Russell2010}.
+In this approach of learning the process consists of three parts: the agent which is responsible for making decisions, the environment that relates to any interaction with the agent, and the actions that are made by the agent. Fig.~\ref{fig:ReinforcementLearning} illustrates the procedure of the reinforcement learning approach.
+Fig~\ref{fig:Machine_learning_approaches} presents some examples of reinforcement learning.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{Fig_1_6_Reinforcement.png}
+	\end{center}
+	\caption{Reinforcement Learning} 
+	\label{fig:ReinforcementLearning}
+\end{figure}
+
+\paragraph{Transfer learning} is different when compared to the traditional machine learning approaches and this difference is due to that traditional machine learning methods are designed to particular tasks, that means their learning and knowledge can not be transferred from one model to another.
+Therefore, when starting a new machine learning task we have to start from scratch.
+On the contrary, in transfer learning, the model knowledge (e.g features and weights) can be transferred from a previously learned task to a new learning task.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\paragraph{Deep Learning}is a subfield of Machine Learning.
+In which, deep learning was emerged as a solution to the feature engineering extraction issue.
+Deep Learning is a representation learning that automatically distinguishes  the proper data representations required for models like classification and detection.
+Deep learning was inspired by the human brain method of learning. 
+In which it has a huge number of neurons that are densely connected to form a hierarichal stucture that is capable of receiving data at the visual cortex which can identify distinct shapes of edges of an object.
+Then, these learned patterns  are shifted down to the brain area which is capable to detect more complex pattrens. 
+ 
+Deep Learning is a hierarchical learning~\cite{Ongsulee2018}, in which
+data representations is acquired from the raw input data using non-linear function~\cite{Lecun2015}. 
+At shallow levels, the acquired representation data has simple learnable extracted features, those extracted features keep shifting to more complex learnable features as moving to deeper levels.
+
+Deep Learning is constructed from a network of artificial neurons structured in a cascade layers, hence, the term "deep" came from the multiple layers.
+An artificial neuron has several input and output weighted connections, with a non linear activation function as mentioned earlier that is applied on the  incoming data. 
+By performing this operation a non-linearity is injected to the network, which is important for the learning process.
+Since, if the non-linearity was not considered, no matter how many layers are there in the network, it would act like a single-layer neuron. 
+Simply, because by just linearly adding these layers it will produce another linear output, consequently, the neuron can not update its weights therefore, no learning happens. Artificial neuron structure is presented in Fig.~\ref{fig:artificial Neuron}.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{fig_neron.png}
+	\end{center}
+	\caption{Structure of artificial neuron} 
+	\label{fig:artificial Neuron}
+\end{figure}
+
+
+There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+
+
+
+
+
+\begin{equation}
+	Relu(z) = 
+	\begin{cases}
+		0,  \text{  if}\ z<0\\
+		z,  \text{  otherwise}
+	\end{cases}
+	\label{Eq:relu}
+\end{equation}
+
+\begin{equation}
+	 \sigma(z) = \frac{1}{1+e^{-z}}
+	 \label{sigmoid}
+\end{equation}
+
+\begin{equation}
+	\tanh(z)=  \frac{e^z-e^{-z}}{e^z+e^{-z}}
+	\label{tanh}
+\end{equation}
+
+\begin{equation}
+	z= \sum_{i=0}^{n}  w_i\times x_i +b
+	\label{z}
+\end{equation}
+
+In deep learning, supervised learning is the traditional approach for learning. 
+In supervised learning, a neural network builds its knowledge from the given labelled dataset, where the ground truth output is known previously~\cite{Lecun2015}.
+By updating the network parameters and weights, the network learns to find the desired output by itself.
+Initially, a network does a comparison between the calculated output (predicted) and the ground truth output (target).
+For this purpose, an objective function or (cost function) is used to estimate the difference (error or loss) between the predicted output and the target.
+The cost function aims is to minimize the estimated value of error or loss, accordingly, a process called Backpropagation is performed.
+
+Backpropagation is the key part of learning in neural networks, in which it pushes back the cost function estimation across all the neurons.
+Consequently, all weights and biases in all layers are modified in a way the cost function is minimized in the next estimation.
+A well-know backpropagation method used in deep learning is the Gradient Descent (GD) optimization~\cite{Lecun2015}.
+Fig.~\ref{fig:GD} illustrates the concept of GD, in which weights \(\{w_0,w_1,...,w_n\}\) are initially assigned randomly.
+GD aims to reduce the cost function \(J(w)\) at each step to reach the minimum cost \(J_{min}(w)\) by calculating the gradient which represents the slope of the cost function.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{Fig_Gradient_decent.png}
+	\end{center}
+	\caption{The process of Gradient Descent} 
+	\label{fig:GD}
+\end{figure}
+Accordingly, the weights are modified as shown in Eqn~\ref{weight_updates} where the partial derivative \(\frac{\partial J(w)}{\partial w_i}\) is the gradient, and \(\alpha \) represents the learning rate for the neural network, which means the amount of modification to the weights during the learning process~\cite{Russell2010}, accordingly, it monitors the rate at which the neural network learns.
+
+\begin{equation}
+w_{i+1}= w_{i} -\alpha \frac{\partial J(w)}{\partial w_i} 
+\label{weight_updates}
+\end{equation}
+
+\paragraph{Convolutional Neural Network} In recent years, Convolutional Neural Networks (CNNs or ConvNets)
+became one of the most utilised artificial neural network architecture in deep learning.
+ConvNets were initially developed in 1980s by Kunihiko Fukushima who was inspired by the discoveries of Hubel and Wiesel about the cat's visual cortex. 
+Fukushima introduced an artificial neural network that is capable of recognising complex patterns of images by presenting two extra layers to the network: the convolution layer and the downsampling or (pooling) layer~\cite{Fukushima1980}.
+
+ConvNets are primarily utilised for image processing, data classification, data segmentation and Natural Language Processing (NLP).
+Moreover, ConvNets was designed to process data as tensors~\cite{Fukushima1980} with different dimensions. 
+For a 1D data tensor, it can represent various data forms, such as signals and sequences, in addition to languages.
+For a 2D data tensor, it can represent an image in grey scale,
+moreover, by combining three 2D tensors a coloured 3D image is produced due to different intensities of the pixels in the (RGB) channels.
+A 4D tensors represents volumetric data, such as a sequence of 3D images  or a video.
+
+Fig.~\ref{fig:Convnet} illustrates  the typical architecture of a ConvNet which consists of three main parts: convolutional layers, downsampling layers, and dense layers that come at the end.
+In the convolutional layers, \( n\) convolution filers or (kernels), each one contains a set of weights, with a size \((w_f,h_f,d_f)\), convolves with input data of a size \((w,h,d)\).
+The convolution operation is not more than a sliding window all over the input data with cross-correlation (dot product).
+The result of the convolution operation are feature maps, consequently, each feature map is locally connected to the previous layer. 
+Typically, the feature map size is diminished due to the convolution operation, however, the feature map can keep the same size of the input by applying some padding over the previous input. Eqns~\ref{new_hight} and~\ref{new_width} illustrates the calculations of new dimensions of the resulted feature map, where \(p\) is the padding size, \(f\) is the convolution filter size and \(s\) is the stride size, that defines how much the convolution filter slides each step during convolution.
+\begin{figure} [h!]
+	\begin{center}
+		\centering
+		\includegraphics{Fig_Convnet.png}
+	\end{center}
+	\caption{Convolutional Neural Network architecture} 
+	\label{fig:Convnet}
+\end{figure}
+\begin{equation}
+		h_{new} = \frac{h_{old}+2p-f}{s}+1  
+		\label{new_hight}
+\end{equation}
+\begin{equation}
+		w_{new} = \frac{w_{old}+2p-f}{s}+1
+		\label{new_width}
+\end{equation}
+
+It is a common practice, a convolutional operation is followed by a non-linear activation function.
+Usually, the Relu is applied which changes all negative values in the feature map to zero, followed by a downsampling operation (pooling). 
+The idea behind pooling operation is to join related features into one. typically, a Maxpool operation is applied, that picks the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, consequently, reducing computation complexity, hence the managing overfitting.
+The process of convolution, non-linearity, and pooling can be repeated several times and stacked. 
+The final operation in ConvNet is a fully connected neural network (dense network), which takes its input from the previous layer, and the backpropagation is performed through the ConvNet as simple as any regular neural network, accordingly.
+All weights in the ConvNet including convolutional filters weights are trained~\cite{Lecun2015}.
+
+ConvNets became popular after the competition of the Large Scale Visual Recognition Challenge 2012 (ILSVRC2012). 
+When Alex Krizhevsky at al. introduced AlexNet, which is a deep ConvNet applied on a large dataset of 1,000,000 images and 1,000 different classes.
+ AlexNet results were magnificent. 
+ The success has stimulated the progress of the development in the GPUs technology and the use of the non-linear activation function Relu~\cite{Lecun2015}.
+In next years, several spectacular ConvNets architectures were presented (e.g VGG-16, ResNet, Inception-v4 and others).
+
+
+
+
+\section{Deep Learning based SHM Techniques}
+
+The importance of SHM systems originated from their ability to monitor the condition of structures in a real-time.
+SHM systems are implemented using data-driven methods, which require a huge amount of data that are captured by monitoring the status of a structure.
+
+Damage estimation can be performed by monitoring the changes in the extracted features that result from estimating the current state of the structure~\cite{Lin2017a}.
+In general, the process of extracting features of the defects occurred in structures can be achieved in different domains: time domain, frequency domain, time-frequency domain, impedance domain, and modal analysis domain~\cite{Khan2019}.
+The process of extracting features from structures in conventional techniques needs a lot of time and requires experts in the field. 
+Therefore, introducing machine learning methods to the feature extraction process became necessary.
+Hence machine learning methods have the capability to generalise and learn new features by themselves which improves their functionality in damage estimation.
+
+
+In~\cite{Worden2007} authors have proposed several axioms related to SHM systems implemented using machine learning methods. 
+According to them, damage detection can be performed in unsupervised learning, however, recognising the damage type and how significant it is can not be performed without supervised learning. 
+Moreover, the feature extraction process is essential for damage detection and it can be performed through analysing and processing the signals captured by the sensors (e.g. PZT actuators), then converting it to damage information.
+Therefore, introducing machine learning methods to the feature extraction process became necessary, hence machine learning methods have the capability to generalise and learn new features by themselves which improves their functionality in damage estimation.
+
+In recent years data-driven methods based on Machine learning and especially deep learning have been increased in a significant way. 
+In the following, methods for damage estimations based on machine learning and deep learning techniques for features extraction are presented. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%PZT + SVM
+Authors in ~\cite{Das2010} presented a method for estimating several types of defects (delamination, saw cut, notches and drilled holes) in composite material. For this purpose, a collection of PZT transducers were attached to the surface of the structure to generate and register Lamb waves propagation. 
+Accordingly, a time-frequency domain were utilised to extract features relates to defects from the registered response. Those extracted features were fed to one-class SVM, which performs classification and damage estimation. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + SVM
+Moreover, in~\cite{Dib2018}, authors proposed a novelty classifier based on one-class SVM for detecting damage. The method was conducted by extracting data from damage impact on glass-fibre composite plate, then evaluating the performance on the classifier. To extract the necessary features from the propagated wave, the registered signal was segmented into L time bins, then, the Fourier transform was applied on each time bin.
+Accordingly, the features vector was constructed from the signal phase and its amplitude for each segmented time bin.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + PCA+ KNN + SVM
+Vitola et al.~\cite{Vitola2016} developed a damage detection and classification methodology that was examined on aluminium plates.
+An array of PZT transducers was placed on the plate surface to sense wave propagation in the structure.
+The methodology is based on the use of principal component analysis (PCA), and machine learning techniques for recognising patterns. 
+PCA means to analyse a large amount of information by finding the principal components.
+However, the PCA method is not invariant to scaling, hence data must be normalized~\cite{Tibaduiza2016}. 
+Next, normalised data is fed to several machine learning models for training. 
+For this purpose, several classification algorithms were applied, Decision trees, KNN and SVM. 
+However, only few of these models presented good outputs in damage detection. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%% KNN
+
+Godin et al.~\cite{Godin2004} applied Acoustic Emission signals (AE) in their approach, which happen due to a sudden release of stored energy when damage occurs.
+AE signals contain important information about the discriminative features 
+for the damage type such as fibre breakage, de-cohesion of the interface or a crack in the matrix in composite materials.
+Authors in this work presented supervised and unsupervised classifiers to recognise different damage patterns through grouping AE signals from the tensile tests of unidirectional glass/polyester composite into a number of different classes. 
+For clustering AE signals, K-means algorithm was used. AE signals were clustered based on several metrics such as the AE signal duration, amplitude, rise time and the number of counts to the peak.
+Accordingly, the clustered labelled data is fed into a KNN supervised classifier.
+A trained classifier is able to classify new coming data accordingly.
+Regarding the unsupervised classification, Kohonen classifier was utilised~\cite{58325}, which is a self-organising map (SOM) which is a neural network consisting of neurons as processing units. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%% KNN
+
+Authors in~\cite{Pashmforoush2014} proposed a technique to classify damage of various lay-up configurations in glass/polyester composites.
+For this purpose, the K-means algorithm with the genetic algorithm were utilised. PCA was used to reduce the data dimensionality.
+Next, a combination of the K-means algorithm with the genetic algorithm is used for clustering the data. 
+The reason for applying the genetic algorithm is to find the optimal number of cluster centres for the KNN algorithm.
+Parameters of the AE signals such as peak amplitude, frequency, rise time, energy and the duration were estimated for each cluster and utilised as discriminative features. 
+AE signal frequency was found to be a good feature for discrimination. Accordingly, AE signals with the highest frequency were corresponding to fibre breakage, and AE signals with the lowest frequency were corresponding to matrix cracking, and the frequencies range in-between were corresponding to the debonding defect. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + ConvNet
+Sammons et al.~\cite{Sammons2016}, utilised x-ray computed tomography for estimating the delaminations in a CFRP. For this purpose, they utilised the Convolutional Network (ConvNet ) for performing image segmentation of the defected input images to estimate the delaminations. There ConvNet was capable of identifying  and quantifying small delaminations. 
+Unfortunately, the ConveNet could not recognise delaminations with large sizes.
+%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + ConvNet
+
+Moreover, authors in \cite{Chetwynd2008} have investigated curved carbon fibre composite panel for damage localisation. 
+Accordingly, stiffeners were used during the experiments to represent real-life damage. 
+For this purpose, authors attached a combination of PZT transducers on the panel used to generate and receive Lamb waves that propagate through the structure. 
+During their propagation through the structure, Lamb waves encounter defects, which affects their propagation response. 
+The collected response was transformed into a novel scaler index using outlier analysis~\cite{Beniger1980}, which was then fed to Multi-Layer Perceptron neural network (MLP). The MLP used for classification and regression applications of damage detection. Classification operation is responsible for predicting whether there is damage or not in a specific location. Where the regression operation is responsible for the exact estimation of the damage location.
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Ful wavefield +ConvNets
+
+Full wavefield scanning using SLDV is a time consuming, however, by simply reducing the number of scanning points will result in low-quality images. 
+Authors in~\cite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by SLDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. 
+Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. Accordingly, the damage features will be altered.
+Furthermore, authors in~\cite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by SLDV. Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. Their results show good results when compared with traditional machine learning SVM.
+Moreover, the author in~\cite{Melville2017} introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. 
+The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. 
+However, their works was not implemented for further step which is damage localization and classification.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+
+\section{Thesis description}
+
+The aim of this thesis is to develop an Artificial Intelligence (AI) driven diagnostic system for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).
+In which we are going to investigate delamination defects due to the fact it is one of the most dangerous damage type.
+\paragraph{The thesis}will be focused on feasibility studies of machine learning approaches for elastic wave propagation analysis. 
+Data corresponding to elastic wave propagation patterns are very complex and it is difficult to explicitly program instructions which will output damage intensity map of an element of a structure based on anomalies in propagating elastic waves (e.g. reflections from delamination).
+Therefore, in this thesis, we aim to employ deep neural networks (DNN) as a possible solution for detecting defects such as delaminations by feeding and training the DNN with the acquired data. 
+Accordingly, the DNN learns to distinguish and classify several types of delaminations. 
+When comparing DNN with traditional machine learning techniques it was found that the DNN is much more scalable to the size of data utilised for supervised learning.
+Accordingly, when increasing the neural network size it shows a higher performance.
+Therefore, we assume that it is possible to use the end-to-end approach in which DNN processes animation of propagating waves (input) directly into the damage intensity map (output). 
+
+\paragraph{In this thesis,}a modern end-to-end deep learning approach is proposed in opposite to traditional pipeline approach with intermediate components (hand-crafted feature extraction). 
+End-to-end deep learning simplifies building process of the reasoning system and does not require so many hand-designed components which often fail to accurately characterise the acquired signal. Such an approach is possible only with a large dataset. 
+Computation of dataset in the form of full wavefield of propagating waves is time-intensive. 
+This issue will be addressed by the proposed parallel implementation of spectral element method and GPU computation. 
+For the first time, full wavefield data of propagating elastic waves will be used as an input to deep neural networks. 
+Innovative research studies of Convolutional Neural Networks (CNN) 
+would be the first step towards automatic reasoning system set to an elastic wave-based diagnostic of delaminations in composite laminates. Such an innovative approach gives a chance to stimulate progress in the field of Non-Destructive Test (NDT) and SHM. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure} [h!]
+%	\begin{center}
+%		%\includegraphics[width=14cm]{Graphics/bc.jpg}
+%	\end{center}
+%	\caption{Figure caption.} 
+%end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{table}[h]
+%%	\caption{Table caption}
+%	\begin{tabular}{cccc}
+%		\hline
+%		\textbf{a}	& \textbf{x} & \textbf{y} & \textbf{z} \\
+%%		-50 & -0.289 & -0.289 & -0.598\\ 
+%		-40 & -0.248 & -0.248 & -0.512\\ 
+%		\hline 
+%	\end{tabular} 
+%	\label{tab:xyz}
+%\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%The scheme of experimental setup is shown in Fig.~\ref{fig:bc}.  
+%The values are collected in Tab.~\ref{tab:xyz}.
+
+
+%The details are described in a book~\cite{udd2011fibre}. 
+
+%Similar case was analyzed by Hill et al.~\cite{hill1978photosensitivity}
+\renewcommand{\bibname}{References}
+\bibliography{refrences/report} 
+\bibliographystyle{abbrv}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
