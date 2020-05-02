@@ -44,13 +44,17 @@
 %\listoftables
 %\newpage
 %\tableofcontents
+\newpage
+\section*{Acknowledgments}
+
+The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454
 
 \chapter[ML for SHM: Review]{Machine Learning for SHM: Literature Review}
 
 \textbf{Abdalraheem Abdullah Yousef Ijjeh}
-
 \tableofcontents
 \newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[SHM and motivations]{Structural Health Monitoring and motivations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -61,10 +65,7 @@
  Detection of structural defect is critical because they may impair the safety of the structure during its operation~\cite{Yuan2016}. 
 
  The purpose of SHM is to distinguish any potential change that occurs at 
- a structure that could decay the performance of the whole system, at the 
- earliest possible time so that an action can be taken to reduce the downtime, 
- operational costs and maintenance costs, consequently reducing the risk of 
- catastrophic failure, injury, or even loss of life.
+ a structure that could decay the performance of the whole system, at the possible earliest time so action can be taken to reduce the downtime, maintenance costs and operational costs, consequently reducing the risk of catastrophic failure, injury, or even loss of life.
  Moreover, SHM improves the work organization of maintenance services replacing scheduled and periodic maintenance inspection with performance-based maintenance.
  It decreases maintenance labour, in particular by avoiding dismounting undamaged parts and through reducing the individual involvement~\cite{Balageas2010}.
 
@@ -74,7 +75,7 @@ transmission, computational power, and processing ability within
 structures~\cite{Balageas2010}. 
 The typical organization of a SHM system is depicted in Fig.~\ref{fig:NationalSHM}. 
 Such a system is built from a diagnostic part (low level) and a prognosis part (high level).
-The diagnostic part is responsible for detection, localization, and evaluation of any damage.
+The diagnostic part is responsible for detection, localisation, and evaluation of any damage.
 The prognosis part includes the production of information concerning the outcomes of the diagnosed damage.
 \begin{figure} [h!]
 	\begin{center}
@@ -90,11 +91,11 @@ and global schemes were discussed in Refs.~\cite{Adams2002,Doebling1998,Uhl2004}
 Local schemes aim at monitoring a small area of the structure enclosing the transducers that are used for registering the data signals after the structure being exited. 
 For this purpose, few phenomena are used like ultrasonic waves~\cite{Raghavan2007}, eddy currents~\cite{Grimberg2001}, thermal field~\cite{Maldague1993} and acoustic emission~\cite{Pao1978}. 
 On the other hand, global schemes are related to the global behaviour of the structure~\cite{Balageas2010}. 
-For this purpose, vibration techniques are utilized which can be classified as the signal-based and the model-based.
+For this purpose, vibration techniques are utilised which can be classified as the signal-based and the model-based.
 The signal-based approaches analyse measured responses of the structure after 
 ambient excitation in order to identify possible defects~\cite{Stepinski2013}. 
 The model-based approaches use various types of models of a monitored structure 
-to detect and localize damage in the structure by utilising relations 
+to detect and localise damage in the structure by utilising relations 
 between the model parameters and distinct damage features~\cite{Stepinski2013}. 
 
 \section[SHM for Composite Materials]{Structural Health Monitoring for Composite Materials}
@@ -216,7 +217,7 @@ the structure, random noise will emerge in the relevant sensors due to the high
 sensitivity of Lamb waves toward structural perturbations. 
 Also, noise arising from environmental sources, like temperature changing, or 
 anisotropy of the material also summed up to the received signals making them 
-very complicated and challenging to recognize and interpret~\cite{Willberg2015}.
+very complicated and challenging to recognise and interpret~\cite{Willberg2015}.
 Moreover, an essential point concerns the choice of a carrier frequency for the 
 Lamb waves because the higher the frequency is, the damage detection of small 
 size is more likely detected.
@@ -264,7 +265,7 @@ In this arrangement, PZT transducers are spread on the entire area which is insp
 Moreover,  authors in~\cite{Qiang2009} used a rectangular network of transducers
 on a composite material, whereas a triangular network of transducers was examined in~\cite{Wandowski2009} for an isotropic specimen.
 
-It can be concluded from previous works that using these approaches for damage detection and localization is only suitable for simple structures. 
+It can be concluded from previous works that using these approaches for damage detection and localisation is only suitable for simple structures. 
 Furthermore, the estimation of damage size is very challenging.
 It is because of limited information extracted from the registered signals at discrete PZT locations. 
 These challenges arise due to various limitations e.g. the added mass and attached cables to the structure alter the propagating waves. 
@@ -297,7 +298,7 @@ For instance, authors in~\cite{Yu2013} applied a frequency wavenumber domain ana
 The method of wavenumber frequency filtering of SLDV data was applied for damage imaging in~\cite{Ruzzene2007}. 
 Authors in~\cite{Kudela2015} introduced a new method of imaging crack growth in a structure.
 In the proposed method, they employed a full wavefield data captured by SLDV.
-Also, authors in~\cite{Harb2015} utilized SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
+Also, authors in~\cite{Harb2015} utilised SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
 Moreover, SLDV has been used to scan and capture Lamb waves in honeycomb core sandwich structure to detect damage influence in~\cite{Lamboul2013}.
 
 Despite all the advantages of utilising SLDV, there are some disadvantages. 
@@ -310,7 +311,7 @@ Due to registering a full wavefield of Lamb waves, the process of measurements m
 %%%%%%%%%%%%%%%%%%
 %\subsection[Introduction to AL, ML and deep learning]{Introduce AI, machine %learning, and deep learning} 
 The phrase Artificial Intelligence (AI) refers to the ability of machines to imitate the human mind in such a way as "learning and problem-solving"~\cite{Russell2010}.
-Artificial Intelligence has various definitions, however, it can be defined as any device that can sense its environment and consequently takes steps that maximize its opportunity of accomplishing its goals~\cite{Russell2010}.
+Artificial Intelligence has various definitions, however, it can be defined as any device that can sense its environment and consequently takes steps that maximise its opportunity of accomplishing its goals~\cite{Russell2010}.
 
 Historically, AI was introduced in 1956 at the Dartmouth summer conference by John McCarthy.
 For many years after, AI has been in what so-called AI winter due to the lack of  computational power.
@@ -397,7 +398,7 @@ In which, deep learning was emerged as a solution to the feature engineering ext
 Deep Learning is a representation learning that automatically distinguishes  the proper data representations required for models like classification and detection.
 Deep learning was inspired by the human brain method of learning. 
 In which it has a huge number of neurons that are densely connected to form a hierarichal stucture that is capable of receiving data at the visual cortex which can identify distinct shapes of edges of an object.
-Then, these learned patterns  are shifted down to the brain area which is capable to detect more complex pattrens. 
+Then, these learned patterns  are shifted down to the brain area which is capable to detect more complex patterns. 
  
 Deep Learning is a hierarchical learning~\cite{Ongsulee2018}, in which
 data representations is acquired from the raw input data using non-linear function~\cite{Lecun2015}. 
@@ -418,7 +419,7 @@ Simply, because by just linearly adding these layers it will produce another lin
 \end{figure}
 
 
-There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
 
 
 
@@ -453,11 +454,11 @@ In supervised learning, a neural network builds its knowledge from the given lab
 By updating the network parameters and weights, the network learns to find the desired output by itself.
 Initially, a network does a comparison between the calculated output (predicted) and the ground truth output (target).
 For this purpose, an objective function or (cost function) is used to estimate the difference (error or loss) between the predicted output and the target.
-The cost function aims is to minimize the estimated value of error or loss, accordingly, a process called Backpropagation is performed.
+The cost function aims is to minimise the estimated value of error or loss, accordingly, a process called Backpropagation is performed.
 
 Backpropagation is the key part of learning in neural networks, in which it pushes back the cost function estimation across all the neurons.
-Consequently, all weights and biases in all layers are modified in a way the cost function is minimized in the next estimation.
-A well-know backpropagation method used in deep learning is the Gradient Descent (GD) optimization~\cite{Lecun2015}.
+Consequently, all weights and biases in all layers are modified in a way the cost function is minimised in the next estimation.
+A well-know backpropagation method used in deep learning is the Gradient Descent (GD) optimisation~\cite{Lecun2015}.
 Fig.~\ref{fig:GD} illustrates the concept of GD, in which weights \(\{w_0,w_1,...,w_n\}\) are initially assigned randomly.
 GD aims to reduce the cost function \(J(w)\) at each step to reach the minimum cost \(J_{min}(w)\) by calculating the gradient which represents the slope of the cost function.
 \begin{figure} [h!]
@@ -585,7 +586,7 @@ Sammons et al.~\cite{Sammons2016}, utilised x-ray computed tomography for estima
 Unfortunately, the ConveNet could not recognise delaminations with large sizes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + ConvNet
 
-Moreover, authors in \cite{Chetwynd2008} have investigated curved carbon fibre composite panel for damage localisation. 
+Moreover, authors in~\cite{Chetwynd2008} have investigated curved carbon fibre composite panel for damage localisation. 
 Accordingly, stiffeners were used during the experiments to represent real-life damage. 
 For this purpose, authors attached a combination of PZT transducers on the panel used to generate and receive Lamb waves that propagate through the structure. 
 During their propagation through the structure, Lamb waves encounter defects, which affects their propagation response. 
@@ -598,7 +599,7 @@ Although, the proposed technique enhanced the image resolution, however, there i
 Furthermore, authors in~\cite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by SLDV. Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. Their results show good results when compared with traditional machine learning SVM.
 Moreover, the author in~\cite{Melville2017} introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. 
 The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. 
-However, their works was not implemented for further step which is damage localization and classification.
+However, their works was not implemented for further step which is damage localisation and classification.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -617,9 +618,6 @@ Thus, new approaches that involve Machine and Deep Learning techniques are utili
 As a result, the process of damage features extracting became more convenient and easier since the machine is responsible for learning the new features and accordingly  detect and localise the damage. 
 In consequence, it is concluded that the advantage of this approach is the improvement of feature damage extracting procedure.
 
-
-
-and
 %\section{Thesis description}
 
 %The aim of this thesis is to develop an Artificial Intelligence (AI) driven diagnostic %system for delamination identification in composite laminates such as carbon fibre %reinforced polymers (CFRP).
