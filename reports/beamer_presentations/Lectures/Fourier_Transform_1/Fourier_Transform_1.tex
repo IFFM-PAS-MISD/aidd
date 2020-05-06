@@ -1,0 +1,141 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+%\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
+%\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
+\usepackage{pgfpages}
+\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+\setbeameroption{show notes on second screen=bottom}
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}}
+%\includeonlyframes{frame1,frame2,frame3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+%\usepackage{FiraSans}
+
+%\usepackage{comment}
+%\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows}  
+
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+\captionsetup[figure]{labelformat=empty}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+\usefonttheme[onlymath]{Serif} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Application of Fourier transform in selected problems of mechanics, signal processing and imaging}
+\subtitle{Lecture Series}
+\author{\textbf{Paweł Kudela} }
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery\\Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright \includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%
+\note{My name is Pawel Kudela. 
+I am an associate professor at the Institute of Fluid Machinery, Polish Academy of Sciences.
+I will give you a few lectures in the frame of the doctoral school.
+Today's topic is a Fourier transform.
+You can look at the Fourier transform from various perspectives such as mathematical formula or numerical algorithm.
+But my intention is to give you some intuition about the mathematics behind the Fourier transform and look at it from engineer perspective so you can confidently use it as a tool in your particular problem.
+I will be using Matlab to illustrate examples of practical applications of the Fourier transform.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame1]{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{I will start with the mathematical formulation of the \textbf{Continuous Fourier Transform}.
+Next, I will move to the \textbf{Discrete Fourier Transform}.
+I will cover also inverse Fourier Transform. 
+Then, I will explain how to apply Fourier transforms to selected problem of mechanics which will be \textbf{Heat transfer problem}. 
+Finally I will show you a few examples of \textbf{Signal filtering} and \textbf{Image filtering}.
+At the end you will be given an \textbf{Assignment} so I encourage you to listen carefully.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Continuous Fourier Transform}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame2]{Continuous Fourier Transform}
+  \begin{itemize}
+  	\item One
+    \item Two
+  \end{itemize}
+\end{frame}
+\note{Note}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discrete Fourier Transform}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Aliasing}
+\begin{alertblock}{Aliasing}
+	Aliasing is
+\end{alertblock}
+\end{frame}
+\note{Aliasing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Heat transfer problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Signal filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Image filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Assignment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setbeamercolor{palette primary}{fg=black, bg=white}
+\begin{frame}[standout]
+  Thank you for your attention!\\ \vspace{12pt}
+  Questions?\\ \vspace{12pt}
+  \url{pk@imp.gda.pl}
+\end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
