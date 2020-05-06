@@ -6,6 +6,7 @@
 \setbeameroption{show notes}
 %\setbeameroption{show notes on second screen=right}
 \setbeameroption{show notes on second screen=bottom}
+
 %\graphicspath{{../../figures/}}
 \graphicspath{{figs/}}
 %\includeonlyframes{frame1,frame2,frame3}
@@ -24,7 +25,9 @@
 \usepackage{tikz}
 \usepackage{bm}
 %\usepackage{FiraSans}
-
+\usepackage{mathrsfs} % for Fourier and Laplace symbols
+\usepackage{verbatim}
+%\usepackage{eulervm} % alternative math fonts
 %\usepackage{comment}
 %\usetikzlibrary{external} % speedup compilation
 %\tikzexternalize % activate!
@@ -37,22 +40,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metropolis theme custom modification file
 \input{metropolis_mods.tex}
-\usefonttheme[onlymath]{Serif} 
+%\usefonttheme[onlymath]{Serif} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Custom commands
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % matrix command 
-\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%  metropolis compatible (FiraSans auto replacement)
+\newcommand{\matr}[1]{\boldsymbol{#1}}
 %\newcommand{\matr}[1]{#1}          % pure math version
 %\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
 % vector command 
-\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% metropolis compatible (FiraSans auto replacement)
+\newcommand{\vect}[1]{\boldsymbol{#1}}
 % bold symbol
 \newcommand{\bs}[1]{\boldsymbol{#1}}
 % derivative upright command
 \DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
 \newcommand{\ud}{\mathrm{d}}
+\newcommand{\myexp}{\mathrm{e}}
 % 
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
@@ -101,19 +109,109 @@ At the end you will be given an \textbf{Assignment} so I encourage you to listen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Continuous Fourier Transform}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame2]{Continuous Fourier Transform}
-  \begin{itemize}
-  	\item One
-    \item Two
-  \end{itemize}
+\begin{frame}[label=frame2]{Jean-Baptiste Joseph Fourier}
+\begin{columns}[T]
+  \column{0.5\textwidth}
+		Jean-Baptiste Joseph \alert{Fourier} 1768--1830
+		 \begin{itemize}
+			\item Mathematician
+			\item Physicist
+			\item \emph{The Analytic Theory of Heat}
+			\item Fourier series
+			\item Fourier transform
+		\end{itemize}
+  \column{0.5\textwidth}
+  	\begin{figure}
+  		\includegraphics[width=0.7\textwidth]{Fourier2.jpg}
+  	\end{figure}
+\end{columns}
 \end{frame}
-\note{Note}
+%%%%%%%%%%%%%%%%%%%%
+\note{Jean-Baptiste Joseph Fourier was a French mathematician and physicist best known for initiating the investigation of Fourier series.
+Fourier, the son of a tailor, first attended the local military school conducted by Benedictine monks. 
+It is said that he saved wax from the candle ends so that he could study at night.
+He showed such proficiency in mathematics in his early years that he later became a teacher in mathematics at the same school. 	
+As a student, he received lessons from eminent teachers like Lagrange, Laplace and Monge.
+After passing out from school, he entered the Benedictine abbey with the intention of becoming a priest. 
+However, he slowly became involved in politics; joined the local Revolutionary Committee.
+He was imprisoned briefly during the French Revolution.	
+In 1798 Fourier accompanied Napoleon on his expedition to Egypt. 
+He was engaged in extensive research on Egyptian antiquities, gave advice on engineering and diplomatic undertakings.
+On his return, Napoleon appointed him Prefect (Governor) of the Department of Is\`{e}re in Grenoble. 
+He showed great administrative ability while continuing his Egyptological and mathematical work.
+At that time, he began to experiment on the propagation of heat.
+And here our story begins.
+ }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Fourier's idea}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{frame}
+\note{He had an idea that any periodic function can be rewritten as a weighted sum of sines and cosines of different frequencies.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame3]{Continuous Fourier Transform - definition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{equation*}
+	F(\omega) = \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
+	\end{equation*}
+	where \(i=\sqrt{-1}\) denotes imaginary component\\
+Other notations
+	\begin{equation*}
+	\hat{g}(\omega) = \int \limits_{-\infty}^{\infty} g(t)\, \myexp^{-i \omega t} \ud t 
+	\end{equation*}
+	\begin{equation*}
+	\mathscr{F}\{f(t)\}= 	\left(\mathscr{F} f \right)(\omega)=\mathcal{F} \left[f(t) \right](\omega) =\mathcal{F}(\omega) =  \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
+	\end{equation*}
+The Fourier transform can be denoted by:\\
+ \(\mathcal{F}\) which can be produced in LaTeX by: \verb+\mathcal{F}+\\
+\(\mathscr{F}\) which can be produced in LaTeX by: \verb+\mathscr{F}+\\
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Transform is a result of a transformation.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame4]{Forward and inverse Fourier transform}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\column{0.5\textwidth}	
+	\centering
+	Forward\\
+	\begin{equation*}
+	\hat{g}(\omega) = \int \limits_{-\infty}^{\infty} g(t)\, \myexp^{-i \omega t} \ud t 
+	\end{equation*}
+	\begin{equation*}
+	\mathcal{F} \left[f(t) \right](\omega)=\int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
+	\end{equation*}
+	\begin{equation*}
+	f(t) \rightarrow \mathcal{F} \rightarrow F(\omega)
+	\end{equation*}
+	Mapping between the time domain \(t\) \\and the frequency domain \(\omega\)
+	\column{0.5\textwidth}
+	\centering
+	Inverse\\
+	\begin{equation*}
+	g(t) = \frac{1}{2 \pi} \int \limits_{-\infty}^{\infty} \hat{g}(\omega)\, \myexp^{i \omega t} \ud t 
+	\end{equation*}
+    \begin{equation*}	
+    \mathcal{F}^{-1} \left[F(\omega) \right](t)=\frac{1}{2 \pi}  \int \limits_{-\infty}^{\infty} F(\omega)\, \myexp^{i \omega t} \ud t 
+	\end{equation*}
+	\begin{equation*}
+	F(\omega) \rightarrow \mathcal{F}^{-1} \rightarrow f(t)
+	\end{equation*}
+	Mapping between the frequency domain  \(\omega\) \\and the time domain \(t\)
+	
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Fourier transform is an equation. 
+It is a result of a transformation or mapping between one domain and other domain.
+Forward Fourier transform is a mapping between the time domain \(t\) and the frequency domain \(\omega\).
+Inverse Fourier transfor is a mapping  between the frequency domain  \(\omega\) and the time domain \(t\).}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discrete Fourier Transform}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Aliasing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{alertblock}{Aliasing}
 	Aliasing is
 \end{alertblock}
