@@ -44,13 +44,18 @@
 %\listoftables
 %\newpage
 %\tableofcontents
+\newpage
+\pagenumbering{roman}
+\section*{Acknowledgments}
+
+The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454
 
 \chapter[ML for SHM: Review]{Machine Learning for SHM: Literature Review}
 
 \textbf{Abdalraheem Abdullah Yousef Ijjeh}
-
 \tableofcontents
 \newpage
+\pagenumbering{arabic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[SHM and motivations]{Structural Health Monitoring and motivations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -61,10 +66,7 @@
  Detection of structural defect is critical because they may impair the safety of the structure during its operation~\cite{Yuan2016}. 
 
  The purpose of SHM is to distinguish any potential change that occurs at 
- a structure that could decay the performance of the whole system, at the 
- earliest possible time so that an action can be taken to reduce the downtime, 
- operational costs and maintenance costs, consequently reducing the risk of 
- catastrophic failure, injury, or even loss of life.
+ a structure that could decay the performance of the whole system, at the possible earliest time so action can be taken to reduce the downtime, maintenance costs and operational costs, consequently reducing the risk of catastrophic failure, injury, or even loss of life.
  Moreover, SHM improves the work organization of maintenance services replacing scheduled and periodic maintenance inspection with performance-based maintenance.
  It decreases maintenance labour, in particular by avoiding dismounting undamaged parts and through reducing the individual involvement~\cite{Balageas2010}.
 
@@ -72,9 +74,9 @@ We can look at SHM as an improved method to perform Non-Destructive Evaluation (
 Nonetheless, SHM involves sensors that are integrated into structures, data 
 transmission, computational power, and processing ability within 
 structures~\cite{Balageas2010}. 
-The typical organization of a SHM system is depicted in Fig.~\ref{fig:NationalSHM}. 
+The typical SHM system organization is depicted in Fig.~\ref{fig:NationalSHM}. 
 Such a system is built from a diagnostic part (low level) and a prognosis part (high level).
-The diagnostic part is responsible for detection, localization, and evaluation of any damage.
+The diagnostic part is responsible for detection, localisation, and evaluation of any damage.
 The prognosis part includes the production of information concerning the outcomes of the diagnosed damage.
 \begin{figure} [h!]
 	\begin{center}
@@ -89,13 +91,13 @@ global schemes. Local schemes were discussed in Refs.~\cite{Grimberg2001,Maldagu
 and global schemes were discussed in Refs.~\cite{Adams2002,Doebling1998,Uhl2004}. 
 Local schemes aim at monitoring a small area of the structure enclosing the transducers that are used for registering the data signals after the structure being exited. 
 For this purpose, few phenomena are used like ultrasonic waves~\cite{Raghavan2007}, eddy currents~\cite{Grimberg2001}, thermal field~\cite{Maldague1993} and acoustic emission~\cite{Pao1978}. 
-On the other hand, global schemes are related to the global behaviour of the structure~\cite{Balageas2010}. 
-For this purpose, vibration techniques are utilized which can be classified as the signal-based and the model-based.
+differently, global schemes are related to the global behaviour of the structure~\cite{Balageas2010}. 
+For this purpose, vibration techniques are utilised which can be sorted as the signal-based and the model-based.
 The signal-based approaches analyse measured responses of the structure after 
 ambient excitation in order to identify possible defects~\cite{Stepinski2013}. 
-The model-based approaches use various types of models of a monitored structure 
-to detect and localize damage in the structure by utilising relations 
-between the model parameters and distinct damage features~\cite{Stepinski2013}. 
+The model-based approaches use various sorts of models of a monitored structure 
+to detect and localise damage %in the structure 
+by utilising relations between the model parameters and distinct damage features~\cite{Stepinski2013}. 
 
 \section[SHM for Composite Materials]{Structural Health Monitoring for Composite Materials}
 A composite material can be described as a compound of two or more different 
@@ -105,8 +107,7 @@ Distinct from metallic alloys, each material has its characteristics~\cite{Campb
 Composite materials have a reinforcing and matrix phases that are usually categorized into~\cite{Jones1999}:
 
 \begin{itemize}
-	\item Fibre reinforced composite materials that consist of three parts: the 
-	fibres as the discontinuous phase, the matrix as the continuous phase, and the fine inter-phase region, also known as the interface~\cite{Cantwell1991}.
+	\item Fibre reinforced composite materials that consist of three parts: the fibres as the discontinuous phase, the matrix as the continuous phase, in addition to the fine inter-phase region known as the interface~\cite{Cantwell1991}.
 	\item Laminated composite materials that are an assembly of layers of a fibre-reinforced composite material that can be combined to implement 
 	necessary design features~\cite{Ramirez1999}.
 	\item Particulate composite materials that are characterized as being composed of particles suspended in a matrix.
@@ -130,7 +131,7 @@ different anisotropic characteristics.
 Their material capacities, mainly associated with manufacturing processes, are 
 dispersive~\cite{Awad2012}. 
 Furthermore, composites materials are sensitive to impacts resulting 
-from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}. 
+from the shortage of reinforcement in the out-of-plane direction~\cite{Cai2012}. 
 Under a high energy impact, little penetration rises in composite materials. 
 On the other hand, for low to medium energy impact, matrix crack will happen 
 and interact, causing the delamination process~\cite{Cai2012}. 
@@ -139,15 +140,13 @@ impact~\cite{Montalvao2006}, furthermore, defects can be produced in composites
 by mistaken procedures through production and assembling, ageing or service 
 condition~\cite{Cai2012}. 
 
-Generally, composites material defects can happen due to fibre breakage, 
-matrix cracking, fibre-matrix debonding and delamination among layers, most of 
-which happen below the top surfaces and are barely visible~\cite{Cai2012}. 
+Generally, composites material defects can happen due to matrix cracking, fibre breakage, fibre-matrix debonding and delamination between layers, which frequently happen below the top surfaces and are barely visible~\cite{Cai2012}. 
 These defects can seriously decrease the performance of composites,  therefore, 
 they should be detected in time to avoid catastrophic structural collapses.  
-Damage can only be discovered by analysing the responses of the structure, 
+Defects can only be discovered by analysing the responses of the structure, 
 obtained by sensors, before and after it happens, hence, we cannot expect to have “damage sensors”.
-The only way to detect the damage is by processing and comparing the signals received from the sensors before and after damage occurrence~\cite{s18041094}. 
-Then one can attempt to classify the parameters, that are sensitive to minor damage and that can be distinguished from the response to natural and environmental disturbances~\cite{s18041094}. 
+Detecting the damage is achieved by processing and comparing the signals received from the sensors ahead and following damage occurrence~\cite{s18041094}. 
+Then one can attempt to classify the parameters, which are sensitive to insignificant  damage and that can be distinguished from the response to natural and environmental disturbances~\cite{s18041094}. 
 Consequently, SHM  methods are very essential in damage detection, since SHM 
 implies different types of sensors mixed with damage detection techniques. 
 
@@ -159,7 +158,7 @@ The approach behind adopting elastic waves propagation methods in SHM includes g
 The produced waves are travelling in packets, those packets keep propagating until 
 they reflect from discontinuities, edges or damage in the structure. The reflected waves hold information about the location and the size of the damage. 
 
-Designing a robust SHM system requires knowledge in various scientific fields e.g. mechanical and electrical engineering, as well as in computer science, mathematics, and physics~\cite{Willberg2013}.
+Designing a robust SHM system requires knowledge in various scientific fields e.g. electrical engineering and mechanical engineering, as well as in mathematics, computer science, and physics~\cite{Willberg2013}.
 Moreover, it requires a deep understanding of various material types and the design of transducers working alone and in networks. 
 Also, there is a need to be familiar with signal processing methods and damage evaluation techniques~\cite{Willberg2013}.
 
@@ -178,7 +177,7 @@ is their high sensitivity for detecting small defects due to the ability to use 
 In such a case, low-frequency ambient vibration does not affect the guided waves propagation~\cite{Mitra2016,Croxford2007}.
 
 Various types of guided waves have been investigated for the purpose of SHM. 
-A well-known approach is the use of Lamb waves, that propagate 
+A common technique is the use of Lamb waves, which propagate 
 within thin-plates and shells bounded by stress-free surfaces~\cite{Mitra2016}.
 Lamb waves were given their name after Horace Lamb, who discovered them and 
 developed a theory to describe the phenomena of their propagation 
@@ -209,14 +208,14 @@ Fig.~\ref{fig:LambModes} illustrates the propagation of Lamb waves for \(A_0\) a
 
 Regardless of Lamb waves promising characteristics, using them for SHM 
 applications hold some essential challenges. 
-Among them are the dispersive nature of Lamb wave propagating modes that can convert into each other in the presence of defects and other changes in the mechanical 
+Among them are the dispersive nature of Lamb wave propagating modes that can turn into each other in the presence of defects and other changes in the mechanical 
 impedance~\cite{Willberg2015}. 
 Moreover, ascribed to some flaws in the bonding within actuators sensors and 
 the structure, random noise will emerge in the relevant sensors due to the high 
 sensitivity of Lamb waves toward structural perturbations. 
 Also, noise arising from environmental sources, like temperature changing, or 
 anisotropy of the material also summed up to the received signals making them 
-very complicated and challenging to recognize and interpret~\cite{Willberg2015}.
+very complicated and challenging to recognise and interpret~\cite{Willberg2015}.
 Moreover, an essential point concerns the choice of a carrier frequency for the 
 Lamb waves because the higher the frequency is, the damage detection of small 
 size is more likely detected.
@@ -264,7 +263,7 @@ In this arrangement, PZT transducers are spread on the entire area which is insp
 Moreover,  authors in~\cite{Qiang2009} used a rectangular network of transducers
 on a composite material, whereas a triangular network of transducers was examined in~\cite{Wandowski2009} for an isotropic specimen.
 
-It can be concluded from previous works that using these approaches for damage detection and localization is only suitable for simple structures. 
+It can be concluded from previous works that using these approaches for damage detection and localisation is only suitable for simple structures. 
 Furthermore, the estimation of damage size is very challenging.
 It is because of limited information extracted from the registered signals at discrete PZT locations. 
 These challenges arise due to various limitations e.g. the added mass and attached cables to the structure alter the propagating waves. 
@@ -278,7 +277,7 @@ As a result of utilising a full wavefield, a damage influence map is produced, w
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 SLDV was developed and presented in the experimental research in the earlies of 1980s. 
-SLDV employs Doppler frequency shift principle to measure the velocity of a moving object in which the amount of the shifted frequency depends on the velocity of the moving object~\cite{Stanbridge1999}. 
+SLDV employs Doppler frequency shift principle to estimate the velocity of a moving object in which the amount of the shifted frequency depends on the velocity of the moving object~\cite{Stanbridge1999}. 
 SLDV links computer-controlled XY scanning mirror with a camera inside the optical head, which densely scans the vibrating surface of the structure and get a large number of high-resolution measurements~\cite{Helfrick2011}. 
 Processing of such a large data set leads to damage maps of resolution impossible to obtain by using PZT arrays.
 Essentially, the grid of points resembles a dense array of PZTs. 
@@ -289,7 +288,7 @@ Consequently, vibrations of a structure can be measured accurately and the propa
 
 However, in many situations, it is needed to examine an object in three dimensions. 
 In such situations, a 3D vibrometer is used which holds three 1D scanning vibrometer heads in addition to the data acquisition system and a control system.
-A 3D vibrometer measures a location with three independent beams that hit the target from three different directions, which yields a measurement of the complete in-plane and out-of-plane velocity of the target.
+A 3D vibrometer measures a location with three independent beams that hit the target from three different directions, which yields a measurement of the complete out-of-plane and in-plane velocity of the target.
 
 SLDV has been broadly used for sensing of Lamb wave. 
 There are several works in the literature that are concentrated on imaging method for damage detection by using the signals sensed at a grid of points and recorded by SLDV.
@@ -297,7 +296,7 @@ For instance, authors in~\cite{Yu2013} applied a frequency wavenumber domain ana
 The method of wavenumber frequency filtering of SLDV data was applied for damage imaging in~\cite{Ruzzene2007}. 
 Authors in~\cite{Kudela2015} introduced a new method of imaging crack growth in a structure.
 In the proposed method, they employed a full wavefield data captured by SLDV.
-Also, authors in~\cite{Harb2015} utilized SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
+Also, authors in~\cite{Harb2015} utilised SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
 Moreover, SLDV has been used to scan and capture Lamb waves in honeycomb core sandwich structure to detect damage influence in~\cite{Lamboul2013}.
 
 Despite all the advantages of utilising SLDV, there are some disadvantages. 
@@ -310,7 +309,7 @@ Due to registering a full wavefield of Lamb waves, the process of measurements m
 %%%%%%%%%%%%%%%%%%
 %\subsection[Introduction to AL, ML and deep learning]{Introduce AI, machine %learning, and deep learning} 
 The phrase Artificial Intelligence (AI) refers to the ability of machines to imitate the human mind in such a way as "learning and problem-solving"~\cite{Russell2010}.
-Artificial Intelligence has various definitions, however, it can be defined as any device that can sense its environment and consequently takes steps that maximize its opportunity of accomplishing its goals~\cite{Russell2010}.
+Artificial Intelligence has various definitions, however, it can be defined as any device that can sense its environment and consequently takes steps that maximise its opportunity of accomplishing its goals~\cite{Russell2010}.
 
 Historically, AI was introduced in 1956 at the Dartmouth summer conference by John McCarthy.
 For many years after, AI has been in what so-called AI winter due to the lack of  computational power.
@@ -351,7 +350,7 @@ In machine learning, machines have to run into a learning process to learn infer
 \end{figure}
 
 There are different methods which can be implemented when performing machine learning. 
-Generally, those methods are grouped into three traditional approaches: Supervised learning, Unsupervised learning, Reinforcement learning, and Transfer learning approach.
+Generally, those methods are grouped into three traditional approaches: Supervised learning, Unsupervised learning, and Reinforcement learning. In addition to Transfer learning approach.
 Fig.~\ref{fig:Machine_learning_approaches} shows the different types of Machine learning approaches.
 \begin{figure} [h!]
 	\begin{center}
@@ -366,7 +365,7 @@ The training data is a collection of variables together with its labels e.g. a s
 
 During the learning process, the machine gets a collection of inputs simultaneously with the corresponding label (ground truth).
 Accordingly, by comparing its predicted output with the correct output to find errors, it modifies the model and the learning occurs~\cite{Ongsulee2018}. 
-Supervised learning uses patterns to predict the values of the output label  for new unlabeled data by applying methods like Regression and Classification~\cite{Ongsulee2018}. Fig~\ref{fig:Machine_learning_approaches} presents most used algorithms for Classification purposes like: K Nearest Neighbors algorithm (KNN) where K represents the number of the nearest neighbours used for classification of the observations in a test sample, based on their characteristics e.g. the mean distance, moreover, Decision Trees where the data keeps splitting according to a specific parameter, moreover, Naive Bayes algorithm which is based on probabilistic approach, through implementing Bayes' theorem, furthermore, Support vector Machine SVM and Logistic regression. And for Regression purposes algorithms like linear and polynomial regression are implemented.
+Supervised learning utilises patterns to predict the values of the output label  for new unlabeled data by applying methods like Regression and Classification~\cite{Ongsulee2018}. Fig~\ref{fig:Machine_learning_approaches} presents most used algorithms for Classification purposes like: K Nearest Neighbors algorithm (KNN) where K represents the number of the nearest neighbours used for classification of the observations in a test sample, based on their characteristics e.g. the mean distance, moreover, Decision Trees where the data keeps splitting according to a specific parameter, moreover, Naive Bayes algorithm which is based on probabilistic approach, through implementing Bayes' theorem, furthermore, Support vector Machine SVM and Logistic regression. And for Regression purposes algorithms like linear and polynomial regression are implemented.
 \paragraph{Unsupervised Learning}is applied to such data with no historical labels~\cite{Ongsulee2018}. 
 In this case, the model does not know the ground truth labels of the input values. Therefore, the algorithm needs to figure out some common characteristics among the input values.
 Consequently, unsupervised learning is more difficult than supervised learning, due to removing the supervision which implies the problem becomes less defined.
@@ -397,7 +396,7 @@ In which, deep learning was emerged as a solution to the feature engineering ext
 Deep Learning is a representation learning that automatically distinguishes  the proper data representations required for models like classification and detection.
 Deep learning was inspired by the human brain method of learning. 
 In which it has a huge number of neurons that are densely connected to form a hierarichal stucture that is capable of receiving data at the visual cortex which can identify distinct shapes of edges of an object.
-Then, these learned patterns  are shifted down to the brain area which is capable to detect more complex pattrens. 
+Then, these learned patterns  are shifted down to the brain area which is capable to detect more complex patterns. 
  
 Deep Learning is a hierarchical learning~\cite{Ongsulee2018}, in which
 data representations is acquired from the raw input data using non-linear function~\cite{Lecun2015}. 
@@ -418,7 +417,7 @@ Simply, because by just linearly adding these layers it will produce another lin
 \end{figure}
 
 
-There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
 
 
 
@@ -453,11 +452,11 @@ In supervised learning, a neural network builds its knowledge from the given lab
 By updating the network parameters and weights, the network learns to find the desired output by itself.
 Initially, a network does a comparison between the calculated output (predicted) and the ground truth output (target).
 For this purpose, an objective function or (cost function) is used to estimate the difference (error or loss) between the predicted output and the target.
-The cost function aims is to minimize the estimated value of error or loss, accordingly, a process called Backpropagation is performed.
+The cost function aims is to minimise the estimated value of error or loss, accordingly, a process called Backpropagation is performed.
 
 Backpropagation is the key part of learning in neural networks, in which it pushes back the cost function estimation across all the neurons.
-Consequently, all weights and biases in all layers are modified in a way the cost function is minimized in the next estimation.
-A well-know backpropagation method used in deep learning is the Gradient Descent (GD) optimization~\cite{Lecun2015}.
+Consequently, all weights and biases in all layers are modified in a way the cost function is minimised in the next estimation.
+A well-know backpropagation method used in deep learning is the Gradient Descent (GD) optimisation~\cite{Lecun2015}.
 Fig.~\ref{fig:GD} illustrates the concept of GD, in which weights \(\{w_0,w_1,...,w_n\}\) are initially assigned randomly.
 GD aims to reduce the cost function \(J(w)\) at each step to reach the minimum cost \(J_{min}(w)\) by calculating the gradient which represents the slope of the cost function.
 \begin{figure} [h!]
@@ -531,7 +530,7 @@ The importance of SHM systems originated from their ability to monitor the condi
 SHM systems are implemented using data-driven methods, which require a huge amount of data that are captured by monitoring the status of a structure.
 
 Damage estimation can be performed by monitoring the changes in the extracted features that result from estimating the current state of the structure~\cite{Lin2017a}.
-In general, the process of extracting features of the defects occurred in structures can be achieved in different domains: time domain, frequency domain, time-frequency domain, impedance domain, and modal analysis domain~\cite{Khan2019}.
+In general, the process of extracting features of the defects occurred in structures can be achieved in different domains: frequency domain, time domain, time-frequency domain, impedance domain, and modal analysis domain~\cite{Khan2019}.
 The process of extracting features from structures in conventional techniques needs a lot of time and requires experts in the field. 
 Therefore, introducing machine learning methods to the feature extraction process became necessary.
 Hence machine learning methods have the capability to generalise and learn new features by themselves which improves their functionality in damage estimation.
@@ -585,7 +584,7 @@ Sammons et al.~\cite{Sammons2016}, utilised x-ray computed tomography for estima
 Unfortunately, the ConveNet could not recognise delaminations with large sizes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + ConvNet
 
-Moreover, authors in \cite{Chetwynd2008} have investigated curved carbon fibre composite panel for damage localisation. 
+Moreover, authors in~\cite{Chetwynd2008} have investigated curved carbon fibre composite panel for damage localisation. 
 Accordingly, stiffeners were used during the experiments to represent real-life damage. 
 For this purpose, authors attached a combination of PZT transducers on the panel used to generate and receive Lamb waves that propagate through the structure. 
 During their propagation through the structure, Lamb waves encounter defects, which affects their propagation response. 
@@ -598,7 +597,7 @@ Although, the proposed technique enhanced the image resolution, however, there i
 Furthermore, authors in~\cite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by SLDV. Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. Their results show good results when compared with traditional machine learning SVM.
 Moreover, the author in~\cite{Melville2017} introduced a method for detecting damage in structures based on the k-means algorithm. The method is known as "dictionary learning" which uses full wavefield data collected from thin metal plates. 
 The method was applied to structures with different material types and thickness, that were not used during training to prove how well the model in damage detection in various conditions. 
-However, their works was not implemented for further step which is damage localization and classification.
+However, their works was not implemented for further step which is damage localisation and classification.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
