@@ -5,7 +5,7 @@
 \usepackage{pgfpages}
 \setbeameroption{show notes}
 %\setbeameroption{show notes on second screen=right}
-\setbeameroption{show notes on second screen=bottom}
+%\setbeameroption{show notes on second screen=bottom} % does not work for animations
 
 %\graphicspath{{../../figures/}}
 \graphicspath{{figs/}}
@@ -32,7 +32,8 @@
 %\usetikzlibrary{external} % speedup compilation
 %\tikzexternalize % activate!
 %\usetikzlibrary{shapes,arrows}  
-
+% the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
+\usepackage{animate}
 %\usepackage{bibentry}
 %\nobibliography*
 \usepackage{caption}%
@@ -143,11 +144,51 @@ At that time, he began to experiment on the propagation of heat.
 And here our story begins.
  }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Fourier's idea}
+\begin{frame}[fragile]{Fourier's idea}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\begin{equation*}
+\frac{4}{\pi}\left( \frac{\cos \pi x}{1} - \frac{\cos (3 \pi x) }{3} + \frac{\cos (5 \pi x)}{5} - \frac{\cos (7 \pi x)}{7} +  \ldots \right) = \left\{ \begin{array}{rll} 1& \mathrm{if} & x<0.5\\ 0 & \mathrm{if}& x=0.5\\ -1& \mathrm{if} & x>0.5 \end{array} \right.
+\end{equation*}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+		% 3 frames per second
+		%\animategraphics[controls,loop,autoplay]{3}{Fourier_series_}{1}{25}
+		\animategraphics[loop,autoplay]{3}{Fourier_series_}{1}{25}
+		%	\animategraphics[controls,loop,autoplay,width=\linewidth]{3}{Fourier_series_}{1}{25}
+	\column{0.5\textwidth}
+	\centering
+			\includegraphics{step_function}
+	\end{columns}
+%%%%%%%%%%%%%%%%%%%%
 \end{frame}
-\note{He had an idea that any periodic function can be rewritten as a weighted sum of sines and cosines of different frequencies.}
+\note{Fourier was obsessed with the physics of heat and developed the Fourier series and transform to model heat-flow problems.
+He had an idea that any periodic function can be rewritten as a weighted sum of sines and cosines of different frequencies.
+The resulting wave is periodic, but not harmonic.
+
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Heat flow}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{equation*}
+T(x,t)=	\frac{4}{\pi}\left( \frac{\cos \pi x}{1} \, \myexp^{-\alpha 1^2 t} - \frac{\cos (3 \pi x) }{3} \, \myexp^{-\alpha 3^2 t} + \frac{\cos (5 \pi x)}{5} \, \myexp^{-\alpha 5^2 t}  -   \ldots \right)
+	\end{equation*}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+		\centering
+		% 2 frames per second
+		\animategraphics[controls,loop]{2}{Fourier_series_rod_temperatures_}{1}{27}
+		\column{0.5\textwidth}
+		\centering
+		
+	\end{columns}
+	%%%%%%%%%%%%%%%%%%%%
+\end{frame}
+\note{a
+	
+	
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile,label=frame3]{Continuous Fourier Transform - definition}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,7 +201,7 @@ Other notations
 	\hat{g}(\omega) = \int \limits_{-\infty}^{\infty} g(t)\, \myexp^{-i \omega t} \ud t 
 	\end{equation*}
 	\begin{equation*}
-	\mathscr{F}\{f(t)\}= 	\left(\mathscr{F} f \right)(\omega)=\mathcal{F} \left[f(t) \right](\omega) =\mathcal{F}(\omega) =  \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
+	\mathscr{F}\{E(t)\}= 	\left(\mathscr{F} E \right)(\omega)=\mathcal{F} \left[E(t) \right](\omega) =\tilde{E}(\omega) =  \int \limits_{-\infty}^{\infty} E(t)\, \myexp^{-i \omega t} \ud t 
 	\end{equation*}
 The Fourier transform can be denoted by:\\
  \(\mathcal{F}\) which can be produced in LaTeX by: \verb+\mathcal{F}+\\
@@ -183,7 +224,7 @@ The Fourier transform can be denoted by:\\
 	\mathcal{F} \left[f(t) \right](\omega)=\int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
 	\end{equation*}
 	\begin{equation*}
-	f(t) \rightarrow \mathcal{F} \rightarrow F(\omega)
+	f(t) \rightarrow \mathcal{F} \left[f(t) \right] \quad  \textrm{or:} \quad f(t)  \rightarrow F(\omega)
 	\end{equation*}
 	Mapping between the time domain \(t\) \\and the frequency domain \(\omega\)
 	\column{0.5\textwidth}
@@ -196,7 +237,7 @@ The Fourier transform can be denoted by:\\
     \mathcal{F}^{-1} \left[F(\omega) \right](t)=\frac{1}{2 \pi}  \int \limits_{-\infty}^{\infty} F(\omega)\, \myexp^{i \omega t} \ud t 
 	\end{equation*}
 	\begin{equation*}
-	F(\omega) \rightarrow \mathcal{F}^{-1} \rightarrow f(t)
+	F(\omega) \rightarrow \mathcal{F}^{-1} \left[F(\omega) \right] \quad   \textrm{or:} \quad 	F(\omega) \rightarrow f(t)
 	\end{equation*}
 	Mapping between the frequency domain  \(\omega\) \\and the time domain \(t\)
 	
