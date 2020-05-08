@@ -1,14 +1,14 @@
-\frametitle{Heat flow}
+\frametitle{Fourier series vs Fourier transform}
+Fourier coefficients are:
 \begin{equation*}
-T(x,t)=	\frac{4}{\pi}\left( \frac{\cos \pi x}{1} \, \myexp^{-\alpha 1^2 t} - \frac{\cos (3 \pi x) }{3} \, \myexp^{-\alpha 3^2 t} + \frac{\cos (5 \pi x)}{5} \, \myexp^{-\alpha 5^2 t}  -   \ldots \right)
-	\end{equation*}
-	\begin{columns}[T]
-		\column{0.5\textwidth}
-		\centering
-		% 2 frames per second
-		\animategraphics[controls,loop]{2}{Fourier_series_rod_temperatures_}{1}{27}
-		\column{0.5\textwidth}
-		\centering
-		
-	\end{columns}
-	%%%%%%%%%%%%%%%%%%%%
+a_n= \frac{2}{P}	\int_P s(t)\, \cos \left(2 \pi t \frac{\textcolor{red}{n}}{P}\right) \ud t \quad 	b_n= \frac{2}{P}	\int_P s(t)\, \sin\left(2 \pi t \frac{\textcolor{red}{n}}{P}\right) \ud t
+\end{equation*}
+Fourier forward transform:
+\begin{equation*}
+S(\omega) =  \int \limits_{-\infty}^{\infty} s(t) \cos (\omega t)  \ud t \, - \,  i   \int \limits_{-\infty}^{\infty}  s(t) \sin(\omega t)  \ud t
+\end{equation*}
+\(\omega = 2 \pi f\)
+\begin{equation*}
+S(\omega) =  \int \limits_{-\infty}^{\infty} s(t) \cos (2 \pi t \textcolor{red}{f})  \ud t \, - \,  i   \int \limits_{-\infty}^{\infty}  s(t) \sin(2 \pi t \textcolor{red}{f})  \ud t
+\end{equation*}
+\(P\rightarrow \infty\) \url{https://dspillustrations.com/pages/posts/misc/the-complex-fourier-series-and-its-relation-to-the-fourier-transform.html}

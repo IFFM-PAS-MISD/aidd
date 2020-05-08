@@ -42,7 +42,7 @@ for k=1:N
     yticks([-1,0,1]); % works in new matlab
     axis([0 1 -1.5,1.5]);
     
-        set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+        set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
         % remove unnecessary white space
         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
         fig.PaperPositionMode   = 'auto';
@@ -55,13 +55,15 @@ figfilename='step_function';
 figure;
 x1=0:1/100:0.5;
 y1= zeros(1,length(x1))+1;
-plot(x1,y1,'Color',[0.9375, 0, 0],'Linewidth',1); % red
+%plot(x1,y1,'Color',[0.9375, 0, 0],'Linewidth',1); % red
+plot(x1,y1,'Color',logoblue,'Linewidth',1); % red
 title('Step function','Fontsize',11);
 hold on;
 plot(0.5,0,'ko','MarkerSize',4,'markerfacecolor','k');
 x2=0.5:1/100:1;
 y2= zeros(1,length(x1))-1;
-plot(x2,y2,'Color',[0,0,0.625],'Linewidth',1); % blue
+%plot(x2,y2,'Color',[0,0,0.625],'Linewidth',1); % blue
+plot(x2,y2,'Color',logoblue,'Linewidth',1); % blue
 set(gca,'Fontsize',10,'linewidth',1);
 fig = gcf;
 set(fig,'Color','w');
@@ -69,7 +71,7 @@ xticks([0,0.5,1]);
 yticks([-1,0,1]); % works in new matlab
 axis([0 1 -1.5,1.5]);
 
-set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
 % remove unnecessary white space
 set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
 fig.PaperPositionMode   = 'auto';

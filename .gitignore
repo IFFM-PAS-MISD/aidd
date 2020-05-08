@@ -105,6 +105,8 @@ target/
 *.nls
 *.out
 *.synctex.gz
+*.md5
+*.vrb
 
 # Matlab
 *.asv

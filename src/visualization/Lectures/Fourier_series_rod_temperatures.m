@@ -56,12 +56,14 @@ Tcold=zeros(length(yrod),length(xrod))-1;
    
     x1=0:1/100:0.5;
     y1= zeros(1,length(x1))+1;
-    plot(x1,y1,'Color',cmap_new(end,:),'Linewidth',1);
+    %plot(x1,y1,'Color',cmap_new(end,:),'Linewidth',1);
+    plot(x1,y1,'Color',logoblue,'Linewidth',1);
     axis off;
     hold on;
     x2=0.5:1/100:1;
     y2= zeros(1,length(x1))-1;
-    plot(x2,y2,'Color',cmap_new(1,:),'Linewidth',1);
+    %plot(x2,y2,'Color',cmap_new(1,:),'Linewidth',1);
+    plot(x2,y2,'Color',logoblue,'Linewidth',1);
     line([0,1],[1.5 1.5],'Color','k','Linewidth',1);
     line([1,1],[1.5 -1.5],'Color','k','Linewidth',1);
     ax = gca;
@@ -70,7 +72,7 @@ Tcold=zeros(length(yrod),length(xrod))-1;
     ax.YLim = [-1.5  1.5];
     set(gca,'Fontsize',10,'Linewidth',1);
     axis on;
-    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column texrodt)
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
     % remove unnecessary white space
     set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
     fig.PaperPositionMode   = 'auto';
@@ -105,12 +107,14 @@ Tcold=zeros(length(yrod),length(xrod))-1;
    
     x1=0:1/100:0.5;
     y1= zeros(1,length(x1))+1;
-    plot(x1,y1,'Color',cmap_new(end,:),'Linewidth',1);
+    %plot(x1,y1,'Color',cmap_new(end,:),'Linewidth',1);
+    plot(x1,y1,'Color',logoblue,'Linewidth',1);
     axis off;
     hold on;
     x2=0.5:1/100:1;
     y2= zeros(1,length(x1))-1;
-    plot(x2,y2,'Color',cmap_new(1,:),'Linewidth',1);
+    %plot(x2,y2,'Color',cmap_new(1,:),'Linewidth',1);
+    plot(x2,y2,'Color',logoblue,'Linewidth',1);
     line([0,1],[1.5 1.5],'Color','k','Linewidth',1);
     line([1,1],[1.5 -1.5],'Color','k','Linewidth',1);
     ax = gca;
@@ -119,7 +123,7 @@ Tcold=zeros(length(yrod),length(xrod))-1;
     ax.YLim = [-1.5  1.5];
     set(gca,'Fontsize',10,'Linewidth',1);
     axis on;
-    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column texrodt)
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
     % remove unnecessary white space
     set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
     fig.PaperPositionMode   = 'auto';
@@ -154,12 +158,14 @@ Tcold=zeros(length(yrod),length(xrod))-1;
    
     x1=0:1/100:0.5;
     y1= zeros(1,length(x1))+1;
-    plot(x1,y1,'Color',cmap_new(end,:),'Linewidth',1);
+    %plot(x1,y1,'Color',cmap_new(end,:),'Linewidth',1);
+    plot(x1,y1,'Color',logoblue,'Linewidth',1);
     axis off;
     hold on;
     x2=0.5:1/100:1;
     y2= zeros(1,length(x1))-1;
-    plot(x2,y2,'Color',cmap_new(1,:),'Linewidth',1);
+    %plot(x2,y2,'Color',cmap_new(1,:),'Linewidth',1);
+    plot(x2,y2,'Color',logoblue,'Linewidth',1);
     line([0,1],[1.5 1.5],'Color','k','Linewidth',1);
     line([1,1],[1.5 -1.5],'Color','k','Linewidth',1);
     ax = gca;
@@ -168,7 +174,7 @@ Tcold=zeros(length(yrod),length(xrod))-1;
     ax.YLim = [-1.5  1.5];
     set(gca,'Fontsize',10,'Linewidth',1);
     axis on;
-    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column texrodt)
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
     % remove unnecessary white space
     set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
     fig.PaperPositionMode   = 'auto';
@@ -217,7 +223,7 @@ for t=[0:1/(NumberOfTimeSteps-1):1]
     line([1,1],[1.5 -1.5],'Color','k','Linewidth',1);
     
 
-    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column texrodt)
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
     % remove unnecessary white space
     set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
     fig.PaperPositionMode   = 'auto';
