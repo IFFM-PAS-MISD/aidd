@@ -16,12 +16,12 @@ model.summary()
 #####################################
 # Loading dataset into x, y arrays and reshape them
 #####################################
-Training_image = np.load('E:/src/datasets/bounding box/Training_Images_7_7.npy')
+Training_image = np.load('E:/backup/datasets/bounding box/Training_Images_7_7.npy')
 Training_image = Training_image.reshape(18522,32,32,1)
-Testing_Images = np.load('E:/src/datasets/bounding box/Testing_Images_7_7.npy')
+Testing_Images = np.load('E:/backup/datasets/bounding box/Testing_Images_7_7.npy')
 Testing_Images = Testing_Images.reshape(4753,32,32,1)
-Training_Labels = np.load('E:/src/datasets/bounding box/Training_Labels_7_7.npy')
-Testing_Labels = np.load('E:/src/datasets/bounding box/Testing_Labels_7_7.npy')
+Training_Labels = np.load('E:/backup/datasets/bounding box/Training_Labels_7_7.npy')
+Testing_Labels = np.load('E:/backup/datasets/bounding box/Testing_Labels_7_7.npy')
 #####################################
 # using one-hot-encoding to categorize both training labels and testing labels into two categories
 #####################################
@@ -36,6 +36,7 @@ print("%s: %.2f%%" % (model.metrics_names[1], score[1]*100))
 #####################################
 IoU_Total = 0
 cout = 0
+Missed_Sample = 0
 for i in range (97):
     #####################################
     ## Visualizing the predicted output and compare it to the ground truth image
@@ -79,6 +80,8 @@ for i in range (97):
     U = np.count_nonzero(UnionArray)
     print(I,U)
     IoU = I / U
+    if IoU == 0:
+        Missed_Sample += 1
     if IoU>0:
         IoU_Total += IoU
         cout +=1
@@ -106,8 +109,9 @@ for i in range (97):
     final = cv2.bitwise_and(final,and_array)
     final_output = cv2.bitwise_or(final, Test_image)
     #####################################
-    cv2.imshow('Local damage', final_output)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    #cv2.imshow('Local damage', final_output)
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
     #####################################
 print('Inter section over Union fo all samples = ', IoU_Total/cout)
+print("FP Missed samples :", Missed_Sample)
