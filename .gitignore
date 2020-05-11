@@ -107,6 +107,8 @@ target/
 *.synctex.gz
 *.md5
 *.vrb
+*.auxlock
+*.snm
 
 # Matlab
 *.asv
