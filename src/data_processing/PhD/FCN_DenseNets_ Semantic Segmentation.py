@@ -86,14 +86,18 @@ def Transition_Up(TU_input):
 
 
 ###################
-# Custom loss function
+# Custom loss functions
 def custom_loss(y_true, y_pred, smooth=0):  # Dice score function
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(K.abs(y_true_f * y_pred_f))
     return -(2. * intersection + smooth) / (K.sum(K.abs(y_true_f)) + K.sum(K.abs(y_pred_f)) - intersection + smooth)
 
-
+#Dice loss / F1
+def dice_loss(y_true, y_pred):
+  numerator = 2 * tf.reduce_sum(y_true * y_pred, axis=-1)
+  denominator = tf.reduce_sum(y_true + y_pred, axis=-1)
+  return 1 - (numerator + 1) / (denominator + 1)
 ###################
 # Custom metric
 def iou_metric(y_true, y_pred, smooth=0):
@@ -111,7 +115,6 @@ def DenseNet_Model(x_train, y_train, DB_Num):
 
     Conv = Conv2D(filters, filterSize, padding='same')(inputs)
     # Conv = keras.layers.Concatenate()([Conv, inputs])
-
     DB1 = dense_block(inputs, DB_Num[0])
     Concat1 = keras.layers.Concatenate(axis=-1)([Conv, DB1])
     TD1 = Transition_Down(Concat1)
@@ -137,7 +140,7 @@ def DenseNet_Model(x_train, y_train, DB_Num):
     output = keras.layers.Conv2D(1, (1, 1), activation='sigmoid', padding='same')(DB7)  # activation='sigmoid',
 
     segment_model = Model(inputs=inputs, outputs=output)
-    segment_model.compile(optimizer=adam(lr=lr), loss=custom_loss, metrics=[iou_metric])
+    segment_model.compile(optimizer=adam(lr=lr), loss=dice_loss, metrics=[iou_metric])
     segment_model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
     score = segment_model.evaluate(test_x_samples, tests_y_samples, batch_size=8, verbose=1)
     print(score[0], score[1])
@@ -145,7 +148,7 @@ def DenseNet_Model(x_train, y_train, DB_Num):
     return segment_model
 
 
-DB_Number = [4, 5, 6, 7, 6, 5, 4]  # adding extra two DBs [0,1,2,3,4,5,6]
+DB_Number = [4, 4, 4, 4, 4, 4, 4]  # adding extra two DBs [0,1,2,3,4,5,6]
 print(len(DB_Number))
 model = DenseNet_Model(x_train, y_train, DB_Number)
 model.save(
