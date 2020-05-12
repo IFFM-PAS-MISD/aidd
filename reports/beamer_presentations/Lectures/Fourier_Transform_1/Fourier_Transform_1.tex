@@ -540,33 +540,8 @@ If \(x\) units are in meters, than \(f\) units are in one over meter;
 If \(x\) units are in secunds, than \(f\) units are in hertz.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Aliasing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{alertblock}{Aliasing}
-	It is irreversible signal distortion in the sampling process resulting from failure to meet the assumptions about the sampling theorem. 
-	Distortion is manifested by the presence of erroneous frequency components (aliases) in the resulting signal.
-\end{alertblock}
-Aliasing results from the ambiguous representation of the periodic signal by a series of its instantaneous values (samples) taken at equal intervals.
-
-If the continuous signal contains components up to frequency \(f_{max}\), it is necessary to choose:
-\begin{equation*}
-\Delta x < \frac{1}{2 f_{max}}
-\end{equation*}
-in order to avoid aliasing. In other words, the minimum sampling frequency is \(2 f_{max}\).
-\end{frame}
-\note{
-The DFT can be regarded as an approximation of the continuous Fourier transform, which it approaches when N goes to infinity and/or \(\Delta x\) goes to zero. 
-In practice, \(N\) and \(\Delta x\) are always finite, which causes some undesirable
-effects. 
-Two important effects of the sampling are: aliasing and finite frequency resolution.
-
-Aliasing is an effect that causes different signals to become indistinguishable (or aliases of one another) when sampled.
-It also often refers to the distortion or artifact that results when a signal reconstructed from samples is different from the original continuous signal.
-Aliasing can occur in signals sampled in time, for instance digital audio, and is referred to as temporal aliasing. 
-It can also occur in spatially sampled signals (e.g. moiré patterns in digital images); this type of aliasing is called spatial aliasing.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Examples}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \only<1>{
 	\hspace{10mm} \(u(t) = 0.5 \cos (2 \pi 10 t + \pi/6)\)
 	\begin{columns}[T]
@@ -601,9 +576,145 @@ It can also occur in spatially sampled signals (e.g. moiré patterns in digital 
 		\end{column}
 	\end{columns}
 }
+\only<3>{
+	\hspace{10mm} \(u(t) = 0.5 \cos (2 \pi 10 t + \pi/6) + 0.3 \sin (2 \pi 5 t + \pi/6) \)
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}	
+			\begin{center}
+				\includegraphics{FFT_example_sin_cos_time.png}	
+				\includegraphics{FFT_example_sin_cos_real.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics{FFT_example_sin_cos_frequency.png}	
+				\includegraphics{FFT_example_sin_cos_imag.png}
+			\end{center}
+		\end{column}
+	\end{columns}
+}
+\only<4>{
+	\hspace{10mm} \(u(t) =  \left\{ \begin{array}{ll} 1& -T/2 \geq t \leq T/2 \\ 0 & \mathrm{otherwise} \end{array} \right.  ,\quad T = 10\)
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}	
+			\begin{center}
+				\includegraphics{FFT_example_rectangular_pulse_wide_time.png}	
+				\includegraphics{FFT_example_rectangular_pulse_wide_real.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics{FFT_example_rectangular_pulse_wide_frequency.png}	
+				\includegraphics{FFT_example_rectangular_pulse_wide_imag.png}
+			\end{center}
+		\end{column}
+	\end{columns}
+}
+\only<5>{
+	\hspace{10mm} \(u(t) =  \left\{ \begin{array}{ll} 1& -T/2 \geq t \leq T/2 \\ 0 & \mathrm{otherwise} \end{array} \right.  ,\quad T = 1\)
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}	
+			\begin{center}
+				\includegraphics{FFT_example_rectangular_pulse_narrow_time.png}	
+				\includegraphics{FFT_example_rectangular_pulse_narrow_real.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics{FFT_example_rectangular_pulse_narrow_frequency.png}	
+				\includegraphics{FFT_example_rectangular_pulse_narrow_imag.png}
+			\end{center}
+		\end{column}
+	\end{columns}
+}
+\only<6>{
+	%\vspace{-5mm}
+	{\Large \(u(t) =\myexp^{\frac{-2 \log(2) (t-t0)^2}{\sigma^2}} \cos\left(2 \pi f_c (t - t_0)\right), \quad f_c = 375\, \mathrm{THz},\, \sigma =  8\, \mathrm{fs}\)}
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}	
+			\begin{center}
+				\includegraphics{FFT_example_gauss_time.png}	
+				\includegraphics{FFT_example_gauss_real.png}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics{FFT_example_gauss_frequency.png}	
+				\includegraphics{FFT_example_gauss_imag.png}
+			\end{center}
+		\end{column}
+	\end{columns}
+}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{Real values of continuous Fourier transform of rectangular pulse happens to be a sinc function. 
+However, discrete Fourier transform was applied here so the result only resembles sinc function.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Aliasing (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Aliasing}
+		It is irreversible signal distortion in the sampling process resulting from failure to meet the assumptions about the sampling theorem. 
+		Distortion is manifested by the presence of erroneous frequency components (aliases) in the resulting signal.
+	\end{alertblock}
+	Aliasing results from the ambiguous representation of the periodic signal by a series of its instantaneous values (samples) taken at equal intervals.
+	
+	If the continuous signal contains components up to frequency \(f_{max}\), it is necessary to choose:
+	\begin{equation*}
+	\Delta x < \frac{1}{2 f_{max}}
+	\end{equation*}
+	in order to avoid aliasing. In other words, the minimum sampling frequency is \(2 f_{max}\).\\
+	For example, our hearing ability is up to about 22 kHz.
+	Therefore, the sampling frequency for music recording should be at least 44 kHz.
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	The DFT can be regarded as an approximation of the continuous Fourier transform, which it approaches when N goes to infinity and/or \(\Delta x\) goes to zero. 
+	In practice, \(N\) and \(\Delta x\) are always finite, which causes some undesirable
+	effects. 
+	Two important effects of the sampling are: aliasing and finite frequency resolution.
+	
+	Aliasing is an effect that causes different signals to become indistinguishable (or aliases of one another) when sampled.
+	It also often refers to the distortion or artifact that results when a signal reconstructed from samples is different from the original continuous signal.
+	Aliasing can occur in signals sampled in time, for instance digital audio, and is referred to as temporal aliasing. 
+	It can also occur in spatially sampled signals (e.g. moiré patterns in digital images); this type of aliasing is called spatial aliasing.
+	In order to avoid aliasing, the sampling frequency should be at least twice the maximum frequency component of analysed signal.
+	For example, our hearing ability is up to about 22 kHz.
+	Therefore, the sampling frequency for music recording should be at least 44 kHz.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Aliasing (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+			\begin{center}
+			\includegraphics{Aliasing_1.png}	
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\only<1->
+		{
+   			\begin{flalign*}
+         		& f_s = 1 \\
+   		 		&\color{red}{s_1=\sin(2 \pi \,1/8 \,f_s t)}\\
+   		 		&\color{logoblue}{s_2=\sin\left(2 \pi (1/8-1) f_s t\right)}
+  			 \end{flalign*}
+		}
+		\only<2>
+		{
+			\begin{flalign*}
+				&\color{logoblue}{s_2=\sin(2 \pi \underbrace{(1/8-1) f_s}_{f_{max}=7/8 f_s} t)} \\
+				&\hat{f_s} = 2 f_{max} = 14/8 f_s = 1.75 f_s\\
+				&1.75\times 9\, \mathrm{points} \approx 16\, \mathrm{points}
+			\end{flalign*}
+		}
+	\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+At sampling interval denoted by black dots	these sine functions are aliases of each other.
+We are not able to disgtinguish them.
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Heat transfer problem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

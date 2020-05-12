@@ -82,7 +82,6 @@ target/
 .idea
 
 # TeX/LaTeX
-# TeX/LaTeX
 *.xwm
 *.aux
 *.toc
@@ -109,6 +108,7 @@ target/
 *.vrb
 *.auxlock
 *.snm
+*.synctex(busy)
 
 # Matlab
 *.asv
