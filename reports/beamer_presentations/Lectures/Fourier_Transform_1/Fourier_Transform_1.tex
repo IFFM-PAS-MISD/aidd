@@ -10,7 +10,7 @@
 %\graphicspath{{../../figures/}}
 \graphicspath{{figs/}}
 %\includeonlyframes{frame1,frame2,frame3}
-%\includeonlyframes{frame6}
+%\includeonlyframes{frame10}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -272,6 +272,9 @@ Eventually, tilde over upper case letter can be used.
 	\begin{equation*}
 	f(t) \rightarrow \mathcal{F} \left[f(t) \right] \quad  \textrm{or:} \quad f(t)  \rightarrow F(\omega)
 	\end{equation*}
+	\begin{equation*}
+	f(t) \xrightarrow{\mathcal{F}} \hat{f}(\omega)
+	\end{equation*}
 	Mapping between the time domain \(t\) \\and the frequency domain \(\omega\)
 	\column{0.5\textwidth}
 	\centering
@@ -285,6 +288,9 @@ Eventually, tilde over upper case letter can be used.
 	\begin{equation*}
 	F(\omega) \rightarrow \mathcal{F}^{-1} \left[F(\omega) \right] \quad   \textrm{or:} \quad 	F(\omega) \rightarrow f(t)
 	\end{equation*}
+	\begin{equation*}
+	\hat{f}(\omega) \xrightarrow{\mathcal{F}^{-1}}  f(t)
+	\end{equation*}
 	Mapping between the frequency domain  \(\omega\) \\and the time domain \(t\)
 	
 \end{columns}
@@ -295,7 +301,9 @@ It is a result of a transformation or mapping between one domain and another dom
 In the presented example, the Forward Fourier transform is a mapping between the time domain \(t\) and the frequency domain \(\omega\).
 The Inverse Fourier transform is a mapping  between the frequency domain  \(\omega\) and the time domain \(t\).
 All of these notations can be used interchangeably.
-If you look carefully at this equations you will see some differences.
+I like the last one with the Fourier transform symbol over an arrow.
+
+If you look carefully at these equations you will see some differences.
 In the forward Forward Fourier transform the exponent term is negative, whereas in the Inverse Fourier transform the exponent term is positive.
 Furthermore, in the inverse Fourier transform we have additional scaling factor: one over two pi.
 It is important to note that in both cases the integral interval is \((-\infty, \infty)\).
@@ -520,7 +528,7 @@ corresponding spatial coordinates:
 \begin{equation*}
 x(j) = x_{start} +(j-1)  \Delta x, \quad j=1 \ldots N
 \end{equation*}
-The sequence  \( u(j) \) is a \emph{sampling} of the physical quantity in \(N\) points with \emph{sampling interval} \(\Delta x\).\\
+The sequence  \( u(j) \) is a \alert{sampling} of the physical quantity in \(N\) points with \alert{sampling interval} \(\Delta x\).\\
 What is the interpretation of the Fourier transform \(U(k)\)?\\
 These are complex values that specify the amplitude and phase of the set of \(N\) Fourier components, that jointly exactly represent the original sequence.
 The frequencies of the Fourier components are \alert{equidistant}:
@@ -650,6 +658,41 @@ If \(x\) units are in secunds, than \(f\) units are in hertz.
 \note{Real values of continuous Fourier transform of rectangular pulse happens to be a sinc function. 
 However, discrete Fourier transform was applied here so the result only resembles sinc function.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame10]{Sampling}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\only<1>{\includegraphics{Aliasing_1.png}}
+				\only<2>{\includegraphics{Aliasing_2.png}}
+				\only<3>{\includegraphics{Aliasing_3.png}}	
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+				\only<1->{\alert{Sampling} is a process of converting a signal (continuous function) into a sequence of values (discrete function).\\}				
+				\only<2->{
+					\begin{equation*}
+						f_s=1 \rightarrow \Delta t = \frac{1}{f_s} = 1
+					\end{equation*}
+				\(f_s\) \alert{sampling frequency} (sampling rate) is the number of data samples acquired per second\\
+				\(\Delta t\) is the \alert{sampling interval}\\
+			    }    
+				\only<3>{Insufficient sampling rate (number of discrete points) causes that it is impossible to restore original continuous signal.
+				Instead we can obtain its \alert{alias}.}
+		\end{column}
+	\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+\alert{Sampling} is a process of converting a signal (continuous function) into a sequence of values (discrete function).
+Let's select sampling frequency \(f_s=1\). 
+The sampling interval \(\Delta t\) is the inverse of sampling frequency which in our example is also one.
+The results of sampling are given by black dots.
+It can be seen that such a number of points is insufficient to restore original continous signal.
+Instead we can obtain its alias, namely other function which at this sampling rate is indistinguishable. 
+It is clearly visible that the red function has different frequency than the blue function.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Aliasing (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Aliasing}
@@ -658,19 +701,19 @@ However, discrete Fourier transform was applied here so the result only resemble
 	\end{alertblock}
 	Aliasing results from the ambiguous representation of the periodic signal by a series of its instantaneous values (samples) taken at equal intervals.
 	
-	If the continuous signal contains components up to frequency \(f_{max}\), it is necessary to choose:
+	If the continuous signal contains components up to the frequency \(f_{max}\), it is necessary to choose the \alert{sampling interval}:
 	\begin{equation*}
-	\Delta x < \frac{1}{2 f_{max}}
+	\boxed{\Delta t < \frac{1}{2 f_{max}}}
 	\end{equation*}
-	in order to avoid aliasing. In other words, the minimum sampling frequency is \(2 f_{max}\).\\
+	in order to avoid aliasing. In other words, the \alert{minimum sampling frequency is \(2 f_{max}\)}.\\
+	This is known as the \alert{Nyquist–Shannon sampling theorem}.\\
 	For example, our hearing ability is up to about 22 kHz.
 	Therefore, the sampling frequency for music recording should be at least 44 kHz.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
-	The DFT can be regarded as an approximation of the continuous Fourier transform, which it approaches when N goes to infinity and/or \(\Delta x\) goes to zero. 
-	In practice, \(N\) and \(\Delta x\) are always finite, which causes some undesirable
-	effects. 
+	The DFT can be regarded as an approximation of the continuous Fourier transform, which it approaches when N goes to infinity and/or sampling interval goes to zero. 
+	In practice, \(N\) and sampling interval are always finite, which causes some undesirable effects. 
 	Two important effects of the sampling are: aliasing and finite frequency resolution.
 	
 	Aliasing is an effect that causes different signals to become indistinguishable (or aliases of one another) when sampled.
@@ -678,6 +721,7 @@ However, discrete Fourier transform was applied here so the result only resemble
 	Aliasing can occur in signals sampled in time, for instance digital audio, and is referred to as temporal aliasing. 
 	It can also occur in spatially sampled signals (e.g. moiré patterns in digital images); this type of aliasing is called spatial aliasing.
 	In order to avoid aliasing, the sampling frequency should be at least twice the maximum frequency component of analysed signal.
+	This is known as the \alert{Nyquist–Shannon sampling theorem}.
 	For example, our hearing ability is up to about 22 kHz.
 	Therefore, the sampling frequency for music recording should be at least 44 kHz.
 }
@@ -687,42 +731,150 @@ However, discrete Fourier transform was applied here so the result only resemble
 \begin{columns}[T]
 	\begin{column}{0.5\textwidth}
 			\begin{center}
-			\includegraphics{Aliasing_1.png}	
+				\only<1-2>{\includegraphics{Aliasing_3.png}	}
+				\only<3>{\includegraphics{Aliasing_4.png}}
+				\only<4>{\includegraphics{Aliasing_5.png}}
 		\end{center}
 	\end{column}
 	\begin{column}{0.5\textwidth}
-		\only<1->
-		{
    			\begin{flalign*}
-         		& f_s = 1 \\
-   		 		&\color{red}{s_1=\sin(2 \pi \,1/8 \,f_s t)}\\
-   		 		&\color{logoblue}{s_2=\sin\left(2 \pi (1/8-1) f_s t\right)}
+	   			\only<1->
+	   			{
+	         		& f_s = 1 \\
+	   		 		&\color{red}{s_1=\sin(2 \pi \,1/8 \,f_s t)}\\
+	   		 		&\color{logoblue}{s_2=\sin\left(2 \pi (1/8-1) f_s t\right)}\\
+	   		 	}
+   		 		\only<2->
+   		 		{
+   		 			&\color{logoblue}{s_2=\sin(2 \pi \underbrace{(1/8-1) f_s}_{f_{max}=7/8 f_s} t)} \\
+   		 		}	
+   	 			\only<3->
+   	 			{
+   	 				&\color{magenta}{\hat{f_s} = 2 f_{max} = 14/8 f_s = 1.75 f_s}\\
+   	 				&\color{magenta}{1.75\times 8\, \mathrm{intervals} = 14\, \mathrm{intervals} \rightarrow 15\, \mathrm{points}}\\
+   	 			}
+    			\only<4>
+    			{
+    				&\color{green}{\hat{f_s} \approx 2.86 f_{max} = 2.5 f_s}\\
+    				&\color{green}{2.5 \times 8\, \mathrm{intervals} = 20\, \mathrm{intervals} \rightarrow 21\, \mathrm{points}}
+    			}
   			 \end{flalign*}
-		}
-		\only<2>
-		{
-			\begin{flalign*}
-				&\color{logoblue}{s_2=\sin(2 \pi \underbrace{(1/8-1) f_s}_{f_{max}=7/8 f_s} t)} \\
-				&\hat{f_s} = 2 f_{max} = 14/8 f_s = 1.75 f_s\\
-				&1.75\times 9\, \mathrm{points} \approx 16\, \mathrm{points}
-			\end{flalign*}
-		}
 	\end{column}
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
-At sampling interval denoted by black dots	these sine functions are aliases of each other.
+Let's go back to our example of aliasing.
+At the sampling interval denoted by black dots	these two sine functions are aliases of each other.
 We are not able to disgtinguish them.
+Let's try to find out how many point we actually needs to properly sample the blue signal given by the blue formula.
+Because it is a sine function we can identify easily the maximum frequency component \(f_{max}\).
+Now, we now from the Nyquist–Shannon sampling theorem that we should use sampling frequency which is at least twice of that.
+As a result, we have obtained fifteen magenta points which is still not enough to capture wave crests.
+We need sligthly more points.
+As you can see green points are enough to represent the original signal.
+In practice, we often use oversampling with a factor of 10 or even more.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Heat transfer problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Heat transfer problem - FFT for PDEs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+	\only<1->{
+One dimensional heat conduction equation:
+\begin{equation*}
+u_t = \alpha^2 u_{xx} \quad  \mathrm{or} \quad \frac{\partial u}{\partial t} = \alpha^2 \frac{\partial^2 u}{\partial^2x}
+\end{equation*}
+\(u\) - temperature\\
+\(t\) - time\\
+\(x\) - space\\
+\(\alpha\) - is a real coefficient called the diffusivity of the medium\\
+\vspace{5mm}}
+\only<5>{
+\begin{tikzpicture}
+\draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$x$}; % x axis
+\draw[thick,logoblue] (2.5,0)--(2.5,2)--(5,2)--(5,0);
+\node[logoblue,below] at (2.5,0) {$\frac{L}{2}-\frac{L}{10}$};
+\node[logoblue,below] at (5,0) {$\frac{L}{2}+\frac{L}{10}$};
+\node[logoblue,right] at (5,2) {1};
+\filldraw[black] (2.5,0) circle (2pt);
+\filldraw[black] (5,0) circle (2pt);
+\end{tikzpicture}}
+\end{column}
+\begin{column}{0.5\textwidth}
+\only<2->{
+\begin{equation*}
+u(x,t) \xrightarrow{\mathcal{F}} \hat{u}(\kappa,t)
+\end{equation*}
+\begin{equation*}
+u_x \xrightarrow{\mathcal{F}} i \kappa \hat{u}
+\end{equation*}
+\begin{equation*}
+u_{xx} \xrightarrow{\mathcal{F}} (i \kappa)(i \kappa) \hat{u} = - \kappa^2 \hat{u}
+\end{equation*}}
+\only<3->{
+\begin{equation*}
+u_t = \alpha^2 u_{xx} \xrightarrow{\mathcal{F}} \alert{\hat{u}_{t} = -\alpha^2 \kappa^2 \hat{u}}
+\end{equation*}}
+\centering
+\only<4->{
+\(n\) decoupled ODEs\\
+one for each \(\kappa_j\)
+\begin{equation*}
+  \left[ \begin{array}{l} \hat{u}_{t1} \\ \hat{u}_{t2}\\ \vdots \\ \hat{u}_{tn} \end{array} \right] = -\alpha^2 \left[ \begin{array}{l} \kappa_1^2 \hat{u}_1 \\ \kappa_2^2 \hat{u}_2\\ \vdots \\ \kappa_n^2 \hat{u}_n \end{array} \right]
+\end{equation*}}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Fourier transform can be used to approximate partial differential.
+So it is easy to compute derivatives in space in this case just by Fourier transforming and multiplying by kappa or kapp square.
+Inspired by Steve Brunton: https://www.youtube.com/watch?v=BkA7ncY0b7I
+S. L. Brunton and J. N. Kutz, Data Driven Science \& Engineering: Machine Learning, Dynamical Systems, and Control, Cambridge Textbook, 2019
+
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Signal filtering}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Image filtering}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assignment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Assignment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}	
+	\item Write a code in Matlab or other preferred language like Python of Julia which plots a function:
+	\begin{equation*}
+	s(t) = 0.5 \left[1 - \cos(2 \pi f_m t) \right] \sin(2 \pi f_c t)
+	\end{equation*}
+	and its Fourier transform. 
+	Please comment on obtained figures for frequency pairs:
+	\begin{itemize}
+		\item \(f_c = 100\) kHz,  \(f_m = 20\) kHz
+		\item \(f_c = 100\) kHz,  \(f_m = 5\) kHz.
+	\end{itemize}
+  \item Let's suppose, that we are using a software that provides a results in a form of a function sampled at Gauss-Lobatto-Legendre points which are non-equidistant.
+  Our task is to perform the Fourier transform of that data. 
+  What will be the strategy of performing the Fourier transform on sampling points which are non-equidistant? \\
+  \vspace{5mm}
+  \begin{tikzpicture}
+  \draw[thick,->,logoblue] (-1,0)--(1.4,0) node[right] {$x$}; % x axis
+  \filldraw[black] (-1,0) circle (2pt);
+  \filldraw[black] (-0.765,0) circle (2pt);
+  \filldraw[black] ( -0.2852,0) circle (2pt);
+  \filldraw[black] ( 0.2852,0) circle (2pt);
+   \filldraw[black] (0.765,0) circle (2pt);
+   \filldraw[black] (1,0) circle (2pt);
+  \end{tikzpicture}
+  
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=black, bg=white}
 \begin{frame}[standout]
