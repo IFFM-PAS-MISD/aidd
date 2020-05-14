@@ -32,9 +32,10 @@ ylabel('u(t)','Fontsize',11);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % magnitude
-subplot(2,2,2);stem(f,2*abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
+subplot(2,2,2);stem(f(1:N/2+1),2*abs(U(1:N/2+1)),'r','filled','MarkerSize',3); %magnitudes vs frequencies 
+% (only half of the spectrum)
 xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
-title('Single-Sided Spectrum');
+title('Single-sided spectrum');
 xlim([0 30]);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -60,6 +61,7 @@ fig.PaperPositionMode   = 'auto';
 return;
 %% Example 2 - cosine - method with fftshift
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear all;
 A = 0.5;                            %amplitude of the cosine wave
 fc=10;                              %frequency of the cosine wave [Hz]
 phase=30;                         %desired phase shift of the cosine in degrees
