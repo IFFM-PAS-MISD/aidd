@@ -1,14 +1,15 @@
-\frametitle{Fourier series vs Fourier transform}
-Fourier coefficients are:
+\frametitle{Interpretation of variables}
+displacements - sequence \( u(j) = u_1, u_2, \ldots, u_{N}\)\\
+corresponding spatial coordinates:
 \begin{equation*}
-a_n= \frac{2}{P}	\int_P s(t)\, \cos \left(2 \pi t \frac{\textcolor{red}{n}}{P}\right) \ud t \quad 	b_n= \frac{2}{P}	\int_P s(t)\, \sin\left(2 \pi t \frac{\textcolor{red}{n}}{P}\right) \ud t
+x(j) = x_{start} +(j-1)  \Delta x, \quad j=1 \ldots N
 \end{equation*}
-Fourier forward transform:
+The sequence  \( u(j) \) is a \alert{sampling} of the physical quantity in \(N\) points with \alert{sampling interval} \(\Delta x\).\\
+What is the interpretation of the Fourier transform \(U(k)\)?\\
+These are complex values that specify the amplitude and phase of the set of \(N\) Fourier components, that jointly exactly represent the original sequence.
+The frequencies of the Fourier components are \alert{equidistant}:
 \begin{equation*}
-S(\omega) =  \int \limits_{-\infty}^{\infty} s(t) \cos (\omega t)  \ud t \, - \,  i   \int \limits_{-\infty}^{\infty}  s(t) \sin(\omega t)  \ud t
+f_k = (k-1) \Delta f, \quad k = 1 \ldots N, \quad \Delta f = \frac{1}{N \Delta x}
 \end{equation*}
-\(\omega = 2 \pi f\)
-\begin{equation*}
-S(\omega) =  \int \limits_{-\infty}^{\infty} s(t) \cos (2 \pi t \textcolor{red}{f})  \ud t \, - \,  i   \int \limits_{-\infty}^{\infty}  s(t) \sin(2 \pi t \textcolor{red}{f})  \ud t
-\end{equation*}
-\(P\rightarrow \infty\) \url{https://dspillustrations.com/pages/posts/misc/the-complex-fourier-series-and-its-relation-to-the-fourier-transform.html}
+Units \(x\) [m] \(\rightarrow\) \(f\) [1/m]\\
+ \hspace{10mm}\(x\) [s] \(\rightarrow\) \(f\) [Hz]
