@@ -7,20 +7,30 @@ import keras
 import gc
 from sklearn.utils import shuffle
 import tensorflow as tf
-from keras import backend as K
+from keras import backend as K, metrics
+
+
+
+#config = tf.ConfigProto( device_count = {'GPU': 1 , 'CPU': 64} )
+#sess = tf.Session(config=config)
+#keras.backend.set_session(sess)
+
+#import os
+#os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # see issue #152
+#os.environ["CUDA_VISIBLE_DEVICES"] = '-1'
 
 # Hyper parameters
 #####################################
 
 lr = .0001
 rho = 0.995
-filters = 8
+filters = 16
 filterSize = (3, 3)
 activation = relu, sigmoid
-batch_size = 8
+batch_size = 4
 dropout = 0.2
-epochs = 17
-validation_split = 0.1
+epochs = 5
+validation_split = 0.2
 #####################################
 # Loading the dataset
 #####################################
@@ -108,7 +118,28 @@ def iou_metric(y_true, y_pred, smooth=0):
     iou = (intersection + smooth) / (union + smooth)
     return iou
 
+########################
+def recall(y_true, y_pred):
+    y_true = K.ones_like(y_true)
+    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    all_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+    recall = true_positives / (all_positives + K.epsilon())
+    return recall
 
+def precision(y_true, y_pred):
+    y_true = K.ones_like(y_true)
+    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
+    precision = true_positives / (predicted_positives + K.epsilon())
+    return precision
+
+def f1_score(y_true, y_pred):
+    precision_m = precision(y_true, y_pred)
+    recall_m = recall(y_true, y_pred)
+    return 2 * ((precision_m * recall_m) / (precision_m + recall_m + K.epsilon()))
+########################
+def custom_acc(y_true, y_pred):
+    return 1-dice_loss(y_true, y_pred)
 # Keras Model (FCN Dense Net for semantic Segmentation
 def DenseNet_Model(x_train, y_train, DB_Num):
     inputs = Input(shape=(512, 512, 1))
@@ -140,7 +171,7 @@ def DenseNet_Model(x_train, y_train, DB_Num):
     output = keras.layers.Conv2D(1, (1, 1), activation='sigmoid', padding='same')(DB7)  # activation='sigmoid',
 
     segment_model = Model(inputs=inputs, outputs=output)
-    segment_model.compile(optimizer=adam(lr=lr), loss=dice_loss, metrics=[iou_metric])
+    segment_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[f1_score,precision,recall])
     segment_model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
     score = segment_model.evaluate(test_x_samples, tests_y_samples, batch_size=8, verbose=1)
     print(score[0], score[1])
@@ -148,7 +179,7 @@ def DenseNet_Model(x_train, y_train, DB_Num):
     return segment_model
 
 
-DB_Number = [4, 4, 4, 4, 4, 4, 4]  # adding extra two DBs [0,1,2,3,4,5,6]
+DB_Number = [3, 3, 3, 3, 3, 3, 3]  # adding extra two DBs [0,1,2,3,4,5,6]
 print(len(DB_Number))
 model = DenseNet_Model(x_train, y_train, DB_Number)
 model.save(
