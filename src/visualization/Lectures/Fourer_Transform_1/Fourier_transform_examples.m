@@ -44,7 +44,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % magnitude
 figure;stem(f,abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
 figfilename = 'FFT_example_cos_frequency';
-xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 xlim([-30 30]);
 ylim([0,0.3]);
 xticks([-20, -10,0,10,20]);
@@ -61,7 +61,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % real
 figure;stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_cos_real';
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 xlim([-30 30]);
 ylim([0,0.25]);
 xticks([-20, -10,0,10,20]);
@@ -78,7 +78,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % imag
 figure;stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_cos_imag';
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 xlim([-30 30]);
 ylim([-0.25,0.25]);
 xticks([-20, -10,0,10,20]);
@@ -127,7 +127,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % magnitude
 figure;stem(f,abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
 figfilename = 'FFT_example_sin_frequency';
-xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 xlim([-30 30]);
 ylim([0,0.3]);
 xticks([-20, -5,0,5,20]);
@@ -144,7 +144,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % real
 figure;stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_sin_real';
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 xlim([-30 30]);
 ylim([0,0.25]);
 xticks([-20, -5,0,5,20]);
@@ -161,7 +161,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % imag
 figure;stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_sin_imag';
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 xlim([-30 30]);
 ylim([-0.25,0.25]);
 xticks([-20, -5,0,5,20]);
@@ -212,7 +212,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % magnitude
 figure;stem(f,abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
 figfilename = 'FFT_example_sin_cos_frequency';
-xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 xlim([-30 30]);
 ylim([0,0.3]);
 xticks([-20, -10,-5,0,5,10,20]);
@@ -229,7 +229,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % real
 figure;stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_sin_cos_real';
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 xlim([-30 30]);
 ylim([0,0.25]);
 xticks([-20, -10,-5,0,5,10,20]);
@@ -246,7 +246,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % imag
 figure;stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_sin_cos_imag';
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 xlim([-30 30]);
 ylim([-0.25,0.25]);
 xticks([-20, -10,-5,0,5,10,20]);
@@ -292,7 +292,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % amplitude spectrum
 figure;stem(f,abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
 figfilename = 'FFT_example_rectangular_pulse_wide_frequency';
-xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 xlim([-2 2]);
 xticks([-2, -1, 0, 1, 2]);
 xticklabels({'-20/T','-10/T',0,'10/T','20/T'});
@@ -309,7 +309,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % real
 figure;stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_rectangular_pulse_wide_real';
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 xlim([-2 2]);
 ylim([-10,10]);
 set(gca,'Fontsize',10,'linewidth',1);
@@ -324,7 +324,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % imag
 figure;stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_rectangular_pulse_wide_imag';
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 xlim([-2 2]);
 ylim([-10,10]);
 set(gca,'Fontsize',10,'linewidth',1);
@@ -368,7 +368,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % amplitude spectrum
 figure;stem(f,abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
 figfilename = 'FFT_example_rectangular_pulse_narrow_frequency';
-xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 xlim([-2 2]);
 %ylim([-10,10]);
 xticks([-2, -1, 0, 1, 2]);
@@ -385,7 +385,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % real
 figure;stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_rectangular_pulse_narrow_real';
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 xlim([-2 2]);
 %ylim([-10,10]);
 set(gca,'Fontsize',10,'linewidth',1);
@@ -400,7 +400,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % imag
 figure;stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_rectangular_pulse_narrow_imag';
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 xlim([-2 2]);
 %ylim([-2,2]);
 set(gca,'Fontsize',10,'linewidth',1);
@@ -451,7 +451,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 % amplitude spectrum
 figure;stem(freq/1e+12,2*abs(X(1:NFFT/2+1)),'r','filled','MarkerSize',3); %magnitudes vs frequencies
 figfilename = 'FFT_example_gauss_frequency';
-xlabel('f [THz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+xlabel('f [THz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 xlim([260 500]);
 xticks([260, 375, 500]);
 set(gca,'Fontsize',10,'linewidth',1);
@@ -466,7 +466,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;stem(freq/1e+12,real(X(1:NFFT/2+1)),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_gauss_real';
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 xlim([260 500]);
 xticks([260, 375, 500]);
 %ylim([-0.4,0.6]);
@@ -482,7 +482,7 @@ print([output_path,figfilename],'-dpng', '-r600');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;stem(freq/1e+12,imag(X(1:NFFT/2+1)),'r','filled','MarkerSize',3); %Real vs frequencies
 figfilename = 'FFT_example_gauss_imag';
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 xlim([260 500]);
 xticks([260, 375, 500]);
 %ylim([-2,2]);

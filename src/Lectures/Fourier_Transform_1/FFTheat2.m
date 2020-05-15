@@ -11,31 +11,29 @@ x = -L/2:dx:L/2-dx; % Define x domain
 
 % Define discrete wavenumbers
 kappa = (2*pi/L)*[-N/2:N/2-1];
-kappa = fftshift(kappa);    % Re-order fft wavenumbers
 
 % Initial condition
 u0 = 0*x;
 u0((L/2 - L/10)/dx:(L/2 + L/10)/dx) = 1;
 
-% Simulate in Fourier frequency domain
-t = 0:0.1:10;
-[t,uhat]=ode45(@(t,uhat)rhsHeat2(uhat,kappa,a),t,fft(u0));
-
-for k = 1:length(t) % iFFT to return to spatial domain
-    u(k,:) = ifft(uhat(k,:));
+% Simulate in Fourier wavenumber (kappa) domain
+t = [0:0.8:80]'; % integration time steps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% duhat(t,kappa)/dt = -a^2+kappa^2 uhat(t,kappa) -> uhat(t,kappa)
+[t,uhat]=ode45(@(t,uhat) rhsHeat2(uhat,kappa,a),t,fftshift(fft(u0))); % for more details type: help ode45
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+u=zeros(length(t),N);
+for k = 1:length(t) % IFFT to return to spatial domain
+    u(k,:) = ifft(ifftshift(uhat(k,:)));
 end
 
-
-% Plot solution in time
-figure, waterfall((u(1:10:end,:)));
-figure, imagesc(flipud(u));
-
 %% FIGURES (PRODUCTION)
+% Plot solution in time
+figure; waterfall((u(1:10:end,:)));
+figure; imagesc(flipud(u));
 figure
-CC = colormap(jet(100));
-dt = 0.1;
-for k = 1:100
-    u(k,:) = ifft(uhat(k,:));
+CC = colormap(jet(length(t)));
+for k = 1:length(t)
     if(mod(k-1,10)==0)
         plot(x,u(k,:),'Color',CC(k,:),'LineWidth',1.5)
         hold on, grid on, drawnow
@@ -49,7 +47,6 @@ for k = 1:100
         pause(0.5);
     end   
 end
-
 
 %
 figure

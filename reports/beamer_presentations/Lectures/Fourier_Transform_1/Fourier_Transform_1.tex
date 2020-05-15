@@ -790,9 +790,9 @@ u_t = \alpha^2 u_{xx} \quad  \mathrm{or} \quad \frac{\partial u}{\partial t} = \
 \(u\) - temperature\\
 \(t\) - time\\
 \(x\) - space\\
-\(\alpha\) - is a real coefficient called the diffusivity of the medium\\
+\(\alpha\) - diffusivity of the medium\\
 \vspace{5mm}}
-\only<5>{
+\only<5>{Initial condition \(u(x,0)\)\\
 \begin{tikzpicture}
 \draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$x$}; % x axis
 \draw[thick,logoblue] (2.5,0)--(2.5,2)--(5,2)--(5,0);
@@ -839,6 +839,64 @@ S. L. Brunton and J. N. Kutz, Data Driven Science \& Engineering: Machine Learni
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Signal filtering}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Signal filtering(1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Low-pass filter}
+A low-pass filter (LPF) is a filter that passes signals with a frequency lower than a selected cut-off frequency and attenuates signals with frequencies higher than the cut-off frequency.
+\end{alertblock}
+\begin{tikzpicture}
+\draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$f$ [Hz]}; % x axis
+\draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
+\draw[thick,red] (0,3.5)--(3,3.5)--(6,0); % low-pass filter
+\draw[thin,dashed,green] (3,3.5)--(3,0); % cut off frequency
+\node[logoblue,below] at (3,0) {$f_c$};
+\node[logoblue,above] at (2,0.14) {Passband};
+\node[logoblue,above] at (4,0.1) {Stopband};
+\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Signal filtering(2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{High-pass filter}
+A high-pass filter (HPF) is a filter that passes signals with a frequency higher than a certain cut-off frequency and attenuates signals with frequencies lower than the cut-off frequency.
+\end{alertblock}
+\begin{tikzpicture}
+\draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$f$ [Hz]}; % x axis
+\draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
+\draw[thick,red] (0,0)--(3,3.5)--(6,3.5); % high-pass filter
+\draw[thin,dashed,green] (3,3.5)--(3,0); % cut off frequency
+\node[logoblue,below] at (3,0) {$f_c$};
+\node[logoblue,above] at (2,0.1) {Stopband};
+\node[logoblue,above] at (4,0.14) {Passband};
+\end{tikzpicture}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Signal filtering(3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Band-pass filter}
+A band-pass filter (BPF) is a filter that passes frequencies within a certain range and rejects (attenuates) frequencies outside that range.\\
+These filters can be created by combining a low-pass filter with a high-pass filter.
+\end{alertblock}	
+	\begin{tikzpicture}
+	\draw[thick,->,logoblue] (0,0)--(9,0) node[right] {$f$ [Hz]}; % x axis
+	\draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
+	\draw[thick,red] (0,0)--(2,3.5)--(5,3.5)--(7,0); % band-pass filter
+	\draw[thin,dashed,green] (2,3.5)--(2,0); % cut off frequency f_L
+	\node[logoblue,below] at (2,0) {$f_L$};
+	\draw[thin,dashed,green] (5,3.5)--(5,0); % cut off frequency f_H
+	\node[logoblue,below] at (5,0) {$f_H$};
+	\node[logoblue,above] at (1.1,0.1) {Stopband};
+	\node[logoblue,above] at (3.5,0.14) {Passband};
+	\node[logoblue,above] at (5.8,0.1) {Stopband};
+	\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \section{Image filtering}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assignment}

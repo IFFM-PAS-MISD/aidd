@@ -32,23 +32,26 @@ ylabel('u(t)','Fontsize',11);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % magnitude
-subplot(2,2,2);stem(f(1:N/2+1),2*abs(U(1:N/2+1)),'r','filled','MarkerSize',3); %magnitudes vs frequencies 
+subplot(2,2,2);
+stem(f(1:N/2+1),2*abs(U(1:N/2+1)),'r','filled','MarkerSize',3); %magnitudes vs frequencies 
 % (only half of the spectrum)
-xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+xlabel('f [Hz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 title('Single-sided spectrum');
 xlim([0 30]);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % real
-subplot(2,2,3);stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+subplot(2,2,3);
+stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 title('Two-sided frequency plot','Fontsize',11);
 %xlim([-30 30]);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % imag
-subplot(2,2,4);stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+subplot(2,2,4);
+stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 title('Two-sided frequency plot','Fontsize',11);
 %xlim([-30 30]);
 set(gca,'Fontsize',10,'linewidth',1);
@@ -58,10 +61,9 @@ set(fig,'Color','w');
 set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
 fig.PaperPositionMode   = 'auto';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-return;
+%return;
 %% Example 2 - cosine - method with fftshift
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear all;
 A = 0.5;                            %amplitude of the cosine wave
 fc=10;                              %frequency of the cosine wave [Hz]
 phase=30;                         %desired phase shift of the cosine in degrees
@@ -86,20 +88,23 @@ ylabel('u(t)','Fontsize',11);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % magnitude
-subplot(2,2,2);stem(f,abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
-xlabel('f [Hz]','Fontsize',11); ylabel('|U(k)|','Fontsize',11);
+subplot(2,2,2);
+stem(f,abs(U),'r','filled','MarkerSize',3); %magnitudes vs frequencies
+xlabel('f [Hz]','Fontsize',11); ylabel('|U(f)|','Fontsize',11);
 xlim([-30 30]);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % real
-subplot(2,2,3);stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
-xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(k))','Fontsize',11);
+subplot(2,2,3);
+stem(f,real(U),'r','filled','MarkerSize',3); %Real vs frequencies
+xlabel('f [Hz]','Fontsize',11); ylabel('Re(U(f))','Fontsize',11);
 xlim([-30 30]);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % imag
-subplot(2,2,4);stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
-xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(k))','Fontsize',11);
+subplot(2,2,4);
+stem(f,imag(U),'r','filled','MarkerSize',3); %Real vs frequencies
+xlabel('f [Hz]','Fontsize',11); ylabel('Im(U(f))','Fontsize',11);
 xlim([-30 30]);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,7 +118,8 @@ fig.PaperPositionMode   = 'auto';
 % i.e, it will return values only in the [-pi/2 , pi/2]  interval. 
 % atan2 is the four quadrant arctangent i.e, it will return values in the [-pi , pi]  interval. 
 phase=atan2(imag(U),real(U))*180/pi; %phase information from definition
-figure;plot(f,phase); %phase vs frequencies
+figure;
+plot(f,phase); %phase vs frequencies
 xlabel('f [Hz]','Fontsize',11); ylabel({'\phi'},'Fontsize',11);
 xlim([-160,160]);
 fig = gcf;set(fig,'Color','w');
@@ -135,7 +141,8 @@ U2=U;%store the FFT results in another array
 threshold = max(abs(U))/10000; %tolerance threshold
 U2(abs(U)<threshold) = 0; %maskout values that are below the threshold
 phase=atan2(imag(U2),real(U2))*180/pi; %phase information
-figure;stem(f,phase,'r','filled','MarkerSize',3); %phase vs frequencies
+figure;
+stem(f,phase,'r','filled','MarkerSize',3); %phase vs frequencies
 xlabel('f [Hz]','Fontsize',11); ylabel({'\phi'},'Fontsize',11);
 xlim([-160,160]);
 fig = gcf;set(fig,'Color','w');
@@ -147,7 +154,8 @@ fig = gcf;set(fig,'Color','w');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 u_recon = N*ifft(ifftshift(U),N); %reconstructed signal
 t =[0:1:length(u_recon)-1]/fs; %recompute time index 
-figure; plot(t,u_recon,'Color',[0,0,1],'linewidth',1);%reconstructed signal
+figure; 
+plot(t,u_recon,'Color',[0,0,1],'linewidth',1);%reconstructed signal
 xlabel('t [s]','Fontsize',11);
 ylabel('u(t)','Fontsize',11);
 title('Reconstructed signal');
