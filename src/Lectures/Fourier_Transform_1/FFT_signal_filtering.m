@@ -61,7 +61,6 @@ fig = gcf;set(fig,'Color','w');
 set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
 fig.PaperPositionMode   = 'auto';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%return;
 %% signal filtering (basic low-pass filter)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fc_low_pass = 200e3; % cut-off frequency for the low-pass filter (200 kHz)

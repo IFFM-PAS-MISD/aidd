@@ -109,12 +109,13 @@ I will be using Matlab to illustrate examples of practical applications of the F
 Next, I will move to the \textbf{Discrete Fourier Transform}.
 I will cover also inverse Fourier Transform. 
 Then, I will explain how to apply Fourier transforms to selected problem of mechanics which will be \textbf{Heat transfer problem}. 
-Finally I will show you a few examples of \textbf{Signal filtering} and \textbf{Image filtering}.
+Finally I will show you a few examples of \textbf{Signal filtering} and \textbf{Image processing}.
 At the end you will be given an \textbf{Assignment} so I encourage you to listen carefully.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Fourier Series}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame2]{Jean-Baptiste Joseph Fourier}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{columns}[T]
   \column{0.5\textwidth}
 		Jean-Baptiste Joseph \alert{Fourier} 1768--1830
@@ -518,6 +519,7 @@ The algorithm manages to reduce the complexity of computing the DFT from \(O\lef
 Therefore, the following formulae were implemented in MATLAB by using the FFT.
 Note that lower case letter and upper case letter u are used in appropriate places.
 Also indices \(j\) and \(k\) are placed in round brackets which is compliant with MATLAB notations.
+The index \(k\) denotes sample number and the index \(j\) denotes harmonic number.
 fft and ifft commands are used in MATLAB for disrete Fourier transform and inverse discrete Fourier transform, respectively.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -897,7 +899,60 @@ These filters can be created by combining a low-pass filter with a high-pass fil
 %%%%%%%%%%%%%%%%%%%%
 \note{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-\section{Image filtering}
+\section{Image processing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Image processing (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Purposes: image enhancement, object detection, segmentation.
+\begin{block}{Image enhancement}
+	Image enhancement is the process of adjusting digital images so that the results are more suitable for display or further processing.
+\end{block}
+	\begin{itemize}
+		\item Noise removal
+		\item Deblurring 
+		\item Filtering
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Image processing (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\begin{column}{0.4\textwidth}
+		\begin{figure}
+			\animategraphics[controls,autoplay,loop,width=0.8\textwidth]{3}{Lena}{1}{46}
+			%\includegraphics[width=0.8\textwidth]{Lena1.png}
+			\caption{Lenna}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.6\textwidth}
+	1D FFT
+	\begin{equation*}
+		f(t) \xrightarrow{\mathcal{F}} \hat{f}(\omega)
+	\end{equation*}
+	2D FFT
+	\begin{equation*}
+		f(x,y) \xrightarrow{\mathcal{F}} \hat{f}(k_x,k_y)
+	\end{equation*}
+	\(k_x,\, k_y\) - wavenumbers in \(x\) and \(y\) direction, respectively.\\
+	Image processing strategy:
+	\begin{equation*}
+	\alert{I(x,y) \xrightarrow{\mathcal{F}} \hat{I}(k_x,k_y) \rightarrow \hat{I}(k_x,k_y) \cdot \hat{M}(k_x,k_y)  \xrightarrow{\mathcal{F}^{-1}}  I(x,y)}
+	\end{equation*}
+	\(\cdot\) is element-wise multiplication; (.* in Matlab)
+	\end{column}
+	\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{The Lenna picture is one of the most widely used standard test image used for compression algorithms.
+It comes from Playboy magazine from 1972.
+We will use it as well for some image processing examples by using 2D FFT as it is shown in the animation.
+As you remember, 1D FFT in case of signals is a mapping between the time domain and frequency domain.
+2D FFT on the other hand is a mapping between 2D spatial domain (x,y) and 2D wavenumber domain.
+The strategy is the same as in case of signal filtering.
+First, we transfom image to the wavenumber domain, then apply a filter mask m hat, and finally going back to the spatial domain by using the inverse Fourier transform.}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assignment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

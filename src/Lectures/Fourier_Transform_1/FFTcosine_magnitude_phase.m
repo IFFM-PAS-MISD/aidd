@@ -61,7 +61,6 @@ set(fig,'Color','w');
 set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
 fig.PaperPositionMode   = 'auto';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%return;
 %% Example 2 - cosine - method with fftshift
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 A = 0.5;                            %amplitude of the cosine wave
@@ -123,6 +122,7 @@ plot(f,phase); %phase vs frequencies
 xlabel('f [Hz]','Fontsize',11); ylabel({'\phi'},'Fontsize',11);
 xlim([-160,160]);
 fig = gcf;set(fig,'Color','w');
+%%
 % The phase spectrum is completely noisy. Unexpected !!!. 
 % The phase spectrum is noisy due to fact that the inverse tangents are computed from the ratio 
 % of imaginary part to real part of the FFT result. Even a small floating rounding off error will amplify the result 

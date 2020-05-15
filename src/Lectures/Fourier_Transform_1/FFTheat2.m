@@ -31,6 +31,7 @@ end
 % Plot solution in time
 figure; waterfall((u(1:10:end,:)));
 figure; imagesc(flipud(u));
+%%
 figure
 CC = colormap(jet(length(t)));
 for k = 1:length(t)
@@ -47,7 +48,7 @@ for k = 1:length(t)
         pause(0.5);
     end   
 end
-
+%%
 %
 figure
 subplot(1,2,1)
