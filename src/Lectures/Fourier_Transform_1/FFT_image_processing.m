@@ -40,8 +40,8 @@ set(fig, 'Units','centimeters', 'Position',[1 11 fig_width fig_height]);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Example 2 - blur - low-pass
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-R=15;
-%R=50;
+%R=15;
+R=50;
 sigma=R;
 [M_l] = LowPassMask(I_hat,R);
 [M_B] = LowPassMaskButterworth(I_hat,R,1); % lower radius - higher blur

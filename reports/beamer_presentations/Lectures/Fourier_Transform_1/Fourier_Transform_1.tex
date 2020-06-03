@@ -1,9 +1,9 @@
 %\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
-\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
-%\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
+%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
 %\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
 \usepackage{pgfpages}
-\setbeameroption{show notes}
+%\setbeameroption{show notes}
 %\setbeameroption{show notes on second screen=right}
 %\setbeameroption{show notes on second screen=bottom} % does not work for animations
 
@@ -265,7 +265,7 @@ Eventually, tilde over upper case letter can be used.
 	\centering
 	Forward\\
 	\begin{equation*}
-	\hat{g}(\omega) = \int \limits_{-\infty}^{\infty} g(t)\, \myexp^{-i \omega t} \ud t 
+	\hat{f}(\omega) = \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
 	\end{equation*}
 	\begin{equation*}
 	\mathcal{F} \left[f(t) \right](\omega)=\int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
@@ -399,7 +399,7 @@ S(\omega) =  \int \limits_{-\infty}^{\infty} s(t) \cos (\omega t)  \ud t \, - \,
 \end{equation*}
 \(\omega = 2 \pi f\)
 \begin{equation*}
-S(\omega) =  \int \limits_{\textcolor{green}{-\infty}}^{\textcolor{green}{\infty}} s(t) \cos (2 \pi t \textcolor{red}{f})  \ud t \, - \,  i   \int \limits_{\textcolor{green}{-\infty}}^{\textcolor{green}{\infty}}  s(t) \sin(2 \pi t \textcolor{red}{f})  \ud t 
+S(\textcolor{red}{f}) =  \int \limits_{\textcolor{green}{-\infty}}^{\textcolor{green}{\infty}} s(t) \cos (2 \pi t \textcolor{red}{f})  \ud t \, - \,  i   \int \limits_{\textcolor{green}{-\infty}}^{\textcolor{green}{\infty}}  s(t) \sin(2 \pi t \textcolor{red}{f})  \ud t 
 \end{equation*}
 \(P\rightarrow \infty\) \url{https://dspillustrations.com/pages/posts/misc/the-complex-fourier-series-and-its-relation-to-the-fourier-transform.html}
 \end{frame}
@@ -794,7 +794,9 @@ u_t = \alpha^2 u_{xx} \quad  \mathrm{or} \quad \frac{\partial u}{\partial t} = \
 \(x\) - space\\
 \(\alpha\) - diffusivity of the medium\\
 \vspace{5mm}}
-\only<5>{Initial condition \(u(x,0)\)\\
+\only<5>{Initial condition \(u(x,0)\)\\}
+\only<6>{Initial condition \(u(x,0) \xrightarrow {\mathcal{F}} \hat{u}(\kappa,0)\)\\}
+\only<5->{
 \begin{tikzpicture}
 \draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$x$}; % x axis
 \draw[thick,logoblue] (2.5,0)--(2.5,2)--(5,2)--(5,0);
@@ -811,12 +813,16 @@ u_t = \alpha^2 u_{xx} \quad  \mathrm{or} \quad \frac{\partial u}{\partial t} = \
 u(x,t) \xrightarrow{\mathcal{F}} \hat{u}(\kappa,t)
 \end{equation*}
 \begin{equation*}
-u_x \xrightarrow{\mathcal{F}} i \kappa \hat{u}
+u_x \xrightarrow{\mathcal{F}} i \kappa \hat{u} (\kappa, t)
 \end{equation*}
 \begin{equation*}
-u_{xx} \xrightarrow{\mathcal{F}} (i \kappa)(i \kappa) \hat{u} = - \kappa^2 \hat{u}
+u_{xx} \xrightarrow{\mathcal{F}}  - \kappa^2 \hat{u}(\kappa , t)
+\end{equation*}
+\begin{equation*}
+u_{t} \xrightarrow{\mathcal{F}} \hat{u}_t = \frac{\partial \hat{u}(\kappa,t)}{\partial t}
 \end{equation*}}
 \only<3->{
+\vspace{-3mm}
 \begin{equation*}
 u_t = \alpha^2 u_{xx} \xrightarrow{\mathcal{F}} \alert{\hat{u}_{t} = -\alpha^2 \kappa^2 \hat{u}}
 \end{equation*}}
@@ -831,15 +837,60 @@ one for each \(\kappa_j\)
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{Fourier transform can be used to approximate partial differential.
-So it is easy to compute derivatives in space in this case just by Fourier transforming and multiplying by kappa or kapp square.
-Inspired by Steve Brunton: https://www.youtube.com/watch?v=BkA7ncY0b7I
-S. L. Brunton and J. N. Kutz, Data Driven Science \& Engineering: Machine Learning, Dynamical Systems, and Control, Cambridge Textbook, 2019
-
+\note{{\scriptsize Heat conduction equation has a form of a partial differential equation which can be written as derivative of temperature field over time is equal to alpha square times second derivative of temperature field over x.
+So, u is the temperature, t is the time, x is space and alpha is the diffusivity of the medium.
+It turns out that, the Fourier transform can be used to approximate partial differentials.
+You already know how to apply one-dimensional Fourier transform to signals.
+Now, we will be using Fourier transform for mapping spatial domain x into wavenumber domain denoted here by kappa.
+We do not apply Fourier transform to the time domain.
+Fourier transform has very nice property which allows to use it for approximation of partial derivatives.
+So it is easy to compute derivatives in space in this case just by Fourier transforming and multiplying by i kappa or minus kappa square for the first and second derivative, respectively.
+In case of the left hand side of the partial differential equation, we transform u from spatial domain to frequency domain but the differentiation in respect to time is applied afterwards.
+Essentially, we applied the Fourier transform to the whole partial differential equation.
+As you can see now we have only differentiation in respect to time so this is the system of ordinary differential equations (ODE) which is easy to solve.
+Actually, it is n decoupled ODEs, one for each kappa j. This system of ODEs can be written in a matrix form.
+Here, kappa 1 to n are just a numbers.
 }
-
+%Inspired by Steve Brunton: https://www.youtube.com/watch?v=BkA7ncY0b7I
+%S. L. Brunton and J. N. Kutz, Data Driven Science \& Engineering: Machine Learning, Dynamical Systems, and Control, Cambridge Textbook, 2019
+}
+\newpage
+\note{In order to have well-posed problem we need to add initial conditions at the time equal zero.
+Let's assume that our initial conditions can be represented by the top-hat function.
+In order to better visualize it, you can think of three rods: the rod in the middle is hot and the rods at the left hand side and right hand side are cold. 
+We would like to know how the tempereture evolve with time immediately after the rods  come into contact.
+Because we are solving this problem in wavenumber domain, we also have to transform function of intial condition from the space domain to the time domain.
+Once, the system of ODEs is solved in the wavenumber domain, we will apply inverse Fourier transform in order to obtain spatial temperature distribution.
+OK, Let's try to code it in Matlab.
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Signal filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Digital filters}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Digital filter purposes:
+\begin{enumerate}
+	\item separation of signals that have been combined
+	\item restoration of signals that have been distorted in some way. 
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Digital filters are used for two general purposes: (1) separation of signals that have been combined, and (2) restoration of signals that have been distorted in some way. 
+Signal separation is needed when a signal has been contaminated with interference, noise, or other signals. 
+For example, imagine a device for measuring the electrical activity of a baby's heart while still in the womb. 
+The raw signal will likely be corrupted by the breathing and heartbeat of the mother. 
+A filter might be used to separate these signals so that they can be individually analyzed. 	
+Signal restoration is used when a signal has been distorted in some way. 
+For example, an audio recording made with poor equipment may be filtered to better represent the sound as it actually occurred.
+ Another example is the deblurring of an image acquired with an improperly focused lens, or a shaky camera.	
+	
+Analog (electronic) filters can be used for the same tasks; 
+however, digital filters can achieve far superior results. 
+
+Digital filters are a very important part of digital signal processing (DSP). 
+In fact, their extraordinary performance is one of the key reasons that digital signal processing has become so popular. 
+
+I will introduce you the most popular digital filters.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Signal filtering(1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -849,15 +900,15 @@ A low-pass filter (LPF) is a filter that passes signals with a frequency lower t
 \begin{tikzpicture}
 \draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$f$ [Hz]}; % x axis
 \draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
-\draw[thick,red] (0,3.5)--(3,3.5)--(6,0); % low-pass filter
+\draw[thick,red] (0,3.5)--(3,3.5)--(4.5,0)--(6,0); % low-pass filter
 \draw[thin,dashed,green] (3,3.5)--(3,0); % cut off frequency
 \node[logoblue,below] at (3,0) {$f_c$};
 \node[logoblue,above] at (2,0.14) {Passband};
-\node[logoblue,above] at (4,0.1) {Stopband};
+\node[logoblue,above] at (5.5,0.1) {Stopband};
 \end{tikzpicture}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{A low-pass filter (LPF) is a filter that passes signals with a frequency lower than a selected cut-off frequency and attenuates signals with frequencies higher than the cut-off frequency.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Signal filtering(2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -867,15 +918,19 @@ A high-pass filter (HPF) is a filter that passes signals with a frequency higher
 \begin{tikzpicture}
 \draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$f$ [Hz]}; % x axis
 \draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
-\draw[thick,red] (0,0)--(3,3.5)--(6,3.5); % high-pass filter
+\draw[thick,red] (0,0)--(2.5,0)--(3,3.5)--(6,3.5); % high-pass filter
 \draw[thin,dashed,green] (3,3.5)--(3,0); % cut off frequency
 \node[logoblue,below] at (3,0) {$f_c$};
-\node[logoblue,above] at (2,0.1) {Stopband};
+\node[logoblue,above] at (1.5,0.1) {Stopband};
 \node[logoblue,above] at (4,0.14) {Passband};
 \end{tikzpicture}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{Most discussions on filter design only give examples of low-pass filters. 
+It is because low-pass filter can be converted to high-pass filter.
+There are two methods for the low-pass to high-pass conversion: spectral inversion and spectral reversal. Both are equally useful.
+
+A high-pass filter (HPF) is a filter that passes signals with a frequency higher than a certain cut-off frequency and attenuates signals with frequencies lower than the cut-off frequency.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Signal filtering(3)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -886,18 +941,32 @@ These filters can be created by combining a low-pass filter with a high-pass fil
 	\begin{tikzpicture}
 	\draw[thick,->,logoblue] (0,0)--(9,0) node[right] {$f$ [Hz]}; % x axis
 	\draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
-	\draw[thick,red] (0,0)--(2,3.5)--(5,3.5)--(7,0); % band-pass filter
+	\draw[thick,red] (0,0)--(1.5,0)--(2,3.5)--(4,3.5)--(4.5,0)--(7,0); % band-pass filter
 	\draw[thin,dashed,green] (2,3.5)--(2,0); % cut off frequency f_L
 	\node[logoblue,below] at (2,0) {$f_L$};
-	\draw[thin,dashed,green] (5,3.5)--(5,0); % cut off frequency f_H
-	\node[logoblue,below] at (5,0) {$f_H$};
-	\node[logoblue,above] at (1.1,0.1) {Stopband};
-	\node[logoblue,above] at (3.5,0.14) {Passband};
+	\draw[thin,dashed,green] (4,3.5)--(4,0); % cut off frequency f_H
+	\node[logoblue,below] at (4,0) {$f_H$};
+	\node[logoblue,above] at (0.8,0.1) {Stopband};
+	\node[logoblue,above] at (3,0.14) {Passband};
 	\node[logoblue,above] at (5.8,0.1) {Stopband};
 	\end{tikzpicture}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
+\note{Band-pass filter can be obtained by convolving low-pass and high-pass filters.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Signal filtering(4)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The filtering strategy which we will be using is as follows:
+\begin{equation*}
+\alert{s(t) \xrightarrow{\mathcal{F}} \hat{s}(\omega) \rightarrow \hat{s}(\omega) \cdot \hat{M}(\omega)  \xrightarrow{\mathcal{F}^{-1}}  s(t)}
+\end{equation*}
+\(\cdot\) is element-wise multiplication; (.* in Matlab)	
+
+\(\hat{M}\) a kernel, convolution matrix, or mask
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
 \note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \section{Image processing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -914,7 +983,10 @@ Purposes: image enhancement, object detection, segmentation.
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{Image processing can have various purposes such as image enhancement, object detection, image segmentation, etc.
+We often want to enhance an image in certain way.
+Image enhancement is the process of adjusting digital images so that the results are more suitable for display or further processing.
+It can be use for example for noise removal, debluring or filtering.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Image processing (2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -945,21 +1017,34 @@ Purposes: image enhancement, object detection, segmentation.
 	\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{The Lenna picture is one of the most widely used standard test image used for compression algorithms.
-It comes from Playboy magazine from 1972.
+\note{The Lenna picture is one of the most widely used standard test image in the field of compression algorithms.
+It is a picture of the Swedish model Lena Forsen which comes from Playboy magazine from 1972.
 We will use it as well for some image processing examples by using 2D FFT as it is shown in the animation.
-As you remember, 1D FFT in case of signals is a mapping between the time domain and frequency domain.
+{\scriptsize There is a story behind this image.
+Alexander Sawchuk, assistant professor at the University of Southern California Signal and Image Processing Institute along with graduate student was searching the lab for a good image to scan for a conference paper. 
+They wanted to have something more distinctive from boring test photos. 
+They were looking for a photo with a human face with a good dynamic range.
+Then, somebody just came in with a recent issue of Playboy. 
+Engineers took part of that photo and scanned it which resulted in the 512 by 512 pixel image.
+This scan became one of the most used images in computer history.
+But let's go back to the main topic.}
+}
+\newpage
+\note{As you remember, 1D FFT in case of signals is a mapping between the time domain and frequency domain.
 2D FFT on the other hand is a mapping between 2D spatial domain (x,y) and 2D wavenumber domain.
 The strategy is the same as in case of signal filtering.
-First, we transfom image to the wavenumber domain, then apply a filter mask m hat, and finally going back to the spatial domain by using the inverse Fourier transform.}
-
+First, we transfom image to the wavenumber domain. Image here is denoted by the captial I. Then we apply a filter mask m hat, and finally going back to the spatial domain by using the inverse Fourier transform.
+It should be noted that element-wise multiplication is performed in the wavenumber domain.
+Such operation is performed in Matlab by using dot asterix symbol.
+Let's move to Matlab so you can code such animations yourself.
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assignment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Assignment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}	
-	\item Write a code in Matlab or other preferred language like Python of Julia which plots a function:
+	\item Write a code in Matlab or other preferred language like Python or Julia which plots a function:
 	\begin{equation*}
 	s(t) = 0.5 \left[1 - \cos(2 \pi f_m t) \right] \sin(2 \pi f_c t)
 	\end{equation*}
@@ -986,7 +1071,19 @@ First, we transfom image to the wavenumber domain, then apply a filter mask m ha
 \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{I have prepared two tasks for you. 
+In the first task, I want you to write a code in Matlab  or other preferred language like Python or Julia.
+But I think that it will be easiest to use Matlab scripts which are attached to this lecture as a starting point.
+The code should plot a function defined here. It should perform Fourier transform of this function and plot its magnitude.
+As you can see there are two sets of frequency parameters for definition of this function.
+I want you to write a few sentences describing what you see in the time domain and frequency domain for each frequency pair.
+
+In the second task, I want you to write an answer to the following problem.
+Let's suppose, that we are using a software that provides a results in a form of a function sampled at Gauss-Lobatto-Legendre points which are non-equidistant (like here).
+Our task is to perform the Fourier transform of that data. 
+So we have an arbitrary function sampled at these points.
+What will be the strategy of performing the Fourier transform on sampling points which are non-equidistant?
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=black, bg=white}
@@ -996,6 +1093,12 @@ First, we transfom image to the wavenumber domain, then apply a filter mask m ha
   \url{pk@imp.gda.pl}
 \end{frame}
 }
+\note{Thank you for your attention!
+I hope that you have learnt something from my presentation.
+I am aware that the presentation was given in a quite condensed form.
+Therefore, I expect that you might not grasp everything.
+So, if you have any questions please drop me a line.
+See you next time!}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % END OF SLIDES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,5 +1,5 @@
 clear all; close all;
-% Basic example of Fourier transform of sine function
+% Basic example of Fourier transform of cosine function
 fig_width = 14; fig_height = 6; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Example 1 - cosine - method without fftshift
@@ -19,9 +19,10 @@ u=A*cos(2*pi*fc*t+phi);     %time domain signal with phase shift
 U = 1/N*fft(u,N);     %N-point complex DFT
 % amplitude spectrum
 df=fs/N;                            %frequency resolution
-sampleIndex = j;                  %non-ordered index for FFT plot
+sampleIndex = 1:N;                  %non-ordered index for FFT plot
 f=(sampleIndex-1)*df;          %x-axis index converted to frequencies
 % Results in two-sided frequency plot which is symmetric with respect to frequency f(N/2+1) instead of 0
+% Nyquist frequency at the (N/2+1)th Matlab index is common to both positive and negative frequency sides
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Example 1 - plotting results
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,7 +76,8 @@ N=256; %N=2^nextpow2(length(u)); %number of points in FFT
 U = 1/N*fftshift(fft(u,N));     %N-point complex DFT
 % amplitude spectrum
 df=fs/N;                            %frequency resolution
-sampleIndex = -N/2:N/2-1;   %ordered index for FFT plot
+sampleIndex = -N/2:N/2-1;   %ordered index for FFT plot (when N is even)
+%sampleIndex = -(N+1)/2:(N+1)/2-1;   %ordered index for FFT plot (when N is odd)
 f=sampleIndex*df;               %x-axis index converted to ordered frequencies
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Example 2 - plotting results
@@ -84,6 +86,7 @@ figure; subplot(2,2,1);
 plot(t,u,'Color',[0,0,1],'linewidth',1); %plot the signal
 xlabel('t [s]','Fontsize',11);
 ylabel('u(t)','Fontsize',11);
+xlim([0,0.8]);
 set(gca,'Fontsize',10,'linewidth',1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % magnitude

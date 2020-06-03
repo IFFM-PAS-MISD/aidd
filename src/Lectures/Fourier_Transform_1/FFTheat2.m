@@ -15,7 +15,7 @@ kappa = (2*pi/L)*[-N/2:N/2-1];
 % Initial condition
 u0 = 0*x;
 u0((L/2 - L/10)/dx:(L/2 + L/10)/dx) = 1;
-
+%%
 % Simulate in Fourier wavenumber (kappa) domain
 t = [0:0.8:80]'; % integration time steps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
