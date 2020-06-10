@@ -1,0 +1,16 @@
+\frametitle{Continuous Fourier Transform - definition}
+\begin{equation*}
+	F(\omega) = \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t
+	\end{equation*}
+	where \(i=\sqrt{-1}\) denotes imaginary component\\
+Other notations
+	\begin{equation*}
+	\hat{g}(\omega) = \int \limits_{-\infty}^{\infty} g(t)\, \myexp^{-i \omega t} \ud t
+	\end{equation*}
+	\begin{equation*}
+	\mathscr{F}\{E(t)\}= 	\left(\mathscr{F} E \right)(\omega)=\mathcal{F} \left[E(t) \right](\omega) =\tilde{E}(\omega) =  \int \limits_{-\infty}^{\infty} E(t)\, \myexp^{-i \omega t} \ud t
+	\end{equation*}
+The Fourier transform can be denoted by:\\
+ \(\mathcal{F}\) which can be produced in LaTeX by: \verb+\mathcal{F}+\\
+\(\mathscr{F}\) which can be produced in LaTeX by: \verb+\mathscr{F}+\\
+
