@@ -6,7 +6,7 @@ fig_width = 14; fig_height = 6;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 A = 0.5;                            %amplitude of the cosine wave
 fc=10;                              %frequency of the cosine wave [Hz]
-phase=30;                         %desired phase shift of the cosine in degrees
+phase=0;                         %desired phase shift of the cosine in degrees
 fs=32*fc;                           %sampling frequency with oversampling factor 32
 dt = 1/fs;                          % sampling interval [s]
 N=256;                              % number of points in FFT, also number of sampling points
@@ -14,7 +14,7 @@ tstart = 0;                          % initial time point [s]
 j=1:N;                                 % sample index
 t=tstart+(j-1)*dt;                % time vector, 0.77 seconds duration
 phi = phase*pi/180;             %convert phase shift in degrees in radians
-u=A*cos(2*pi*fc*t+phi);     %time domain signal with phase shift
+u=A*sin(2*pi*fc*t+phi);     %time domain signal with phase shift
 % Fourier transform
 U = 1/N*fft(u,N);     %N-point complex DFT
 % amplitude spectrum
@@ -66,11 +66,11 @@ fig.PaperPositionMode   = 'auto';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 A = 0.5;                            %amplitude of the cosine wave
 fc=10;                              %frequency of the cosine wave [Hz]
-phase=30;                         %desired phase shift of the cosine in degrees
+phase=0;                         %desired phase shift of the cosine in degrees
 fs=32*fc;                           %sampling frequency with oversampling factor 32
 t=0:1/fs:2-1/fs;                  %time vector, 2 seconds duration
 phi = phase*pi/180;             %convert phase shift in degrees in radians
-u=A*cos(2*pi*fc*t+phi);     %time domain signal with phase shift (640 samples)
+u=A*sin(2*pi*fc*t+phi);     %time domain signal with phase shift (640 samples)
 % Fourier transform
 N=256; %N=2^nextpow2(length(u)); %number of points in FFT
 U = 1/N*fftshift(fft(u,N));     %N-point complex DFT

@@ -1,0 +1,521 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
+%\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+%\setbeameroption{show notes on second screen=bottom} % does not work for animations
+
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}{figs/longitudinal-wave-png/}}
+%\includeonlyframes{frame1,frame2,frame3}
+%\includeonlyframes{frame10}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+%\usepackage{FiraSans}
+\usepackage{mathrsfs} % for Fourier and Laplace symbols
+\usepackage{verbatim}
+%\usepackage{eulervm} % alternative math fonts
+%\usepackage{comment}
+\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows}  
+% the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
+\usepackage{animate}
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+\captionsetup[figure]{labelformat=empty}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+%\usefonttheme[onlymath]{Serif} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+%\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%  metropolis compatible (FiraSans auto replacement)
+\newcommand{\matr}[1]{\boldsymbol{#1}}
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+%\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% metropolis compatible (FiraSans auto replacement)
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\myexp}{\mathrm{e}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\renewcommand{\Re}{\operatorname{\mathbb{R}e}}
+\renewcommand{\Im}{\operatorname{\mathbb{I}m}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Fundamentals of elastic wave propagation phenomenon}
+\subtitle{Lecture Series}
+\author{\textbf{Paweł Kudela} }
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery\\Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright \includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%
+\note{Welcome. My name is Pawel Kudela. 
+I am an associate professor at the Institute of Fluid Machinery, Polish Academy of Sciences.
+Today I will be talking about waves with the focus on elastic wave propagation phenomenon. I will talk about its usefulness in practical applications.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[allowframebreaks]{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Types of wave}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame2]{Types of wave}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation*}
+\frac{\partial^2 \Psi(x,t)}{\partial t^2} = \upsilon_p^2 \, \frac{\partial^2 \Psi(x,t)}{\partial x^2}
+\end{equation*}
+\begin{figure}
+	\includegraphics[width=0.9\textwidth]{wave_types.png}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+This is the simples form of the wave equation. It is a second partial derivatives of physical quantity in respect to time equal to coefficient \(\upsilon_p\) square times a second partial derivative in respect to space. The coefficient  \(\upsilon_p\)  usually refers to wave velocity.
+This equation can describe the problem of taut string, sound waves, electromechanical waves and longitudinal waves propagating in a rod.
+Of course psi has different quantity for each penomenon; for vibrating taut string it will be the displacement, for sound waves it will be the pressure. 
+Electromagnetic waves are created by a fusion of electric and magnetic fields.
+Whereas propagating waves in a rod will be considered in terms of longitudinal displacements.
+It is interesting to note that electromagnetic waves do not need a medium to travel.
+It is also important to mention that propagating waves transmits energy from one point to another but without transporting a mass. 
+Propagating waves can also be used for sending information.
+ }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Types of wave}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Various classifications of elastic waves can be used. 
+	Based on oscillation form:
+	\begin{itemize}
+		\item standing waves
+		\item propagating (progressing) waves
+	\end{itemize}
+	Based on analysed physical quantity:
+	\begin{itemize}
+		\item electromagnetic waves (Microwaves, X-ray, radio waves, ultraviolet waves)
+		\item mechanical waves (water waves, ultrasonic waves, elastic waves, guided waves)
+		\item matter waves
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\footnotesize
+There are many types of waves that it is easy to get confused. 
+That is why we will start with the basic principles first and we will progress then towards more complex problems.
+Based on oscilation form we can divide waves into standing waves and propagating or progressing waves.
+An example of standing waves would be vibrating guitar string or structure vibrating at harmonic frequency.
+An example of propagating waves will be sound wave or seismic wave.
+
+Based on analysed physical quantity we can distinguish electromagnetic waves, mechanical waves and matter waves.
+All light waves such as Microwaves, X-ray, radio waves, ultraviolet waves are examples of electromagnetic waves. 
+They can propagate through a vacuum.
+In opposite to electromagnetic waves, mechanical waves are not capable of transmitting its energy through the vacuum.
+Mechanical waves require a medium in order to transport their energy from one location to another. It has a form of oscilations of particles in a medium.
+Elastic and guided waves, on which I will elaborate more, belongs to the group of propagating mechanical waves. 
+
+Matter waves sometimes are called de Broglie Matter Waves after the name of scientist who proposed a new speculative hypothesis that electrons and other particles of matter can behave like waves. 
+Now it is a central part of the theory of quantum mechanics, being an example of wave–particle duality.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Types of wave}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Acoustic waves based on wave frequency can be divided into:
+\begin{itemize}
+		\item infrasonic waves:  0.001 Hz - 20 Hz (earthquakes monitoring)
+		\item sound waves (audible): 20 Hz - 20 kHz 
+		\item ultrasonic waves (non-audible for humans): above 20 kHz
+		\begin{itemize}
+			\item chemistry (sonication, ultrasonication, mixing, production of nanoparticles)
+			\item food processing (mixing, homogenization, emulsification): 20 kHz - 1MHz
+			\item medical applications (e.g. ultrasonic nebulizer) and non-destructive testing 20 kHz - 2 MHz
+			\item diagnostics and NDE 2 MHz - 200 MHz
+		\end{itemize}	
+	\end{itemize}
+\begin{figure}
+	\includegraphics[width=0.9\textwidth]{Sound_wave_spectrum.png}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Our body's physical sensors respond to oscillations with a well defined wavelength and frequency — We personally detect two kinds of waves in our environment to help us build a picture of the world we live in: sound and light. 
+Our detectors for these waves — ears and eyes — are evolved to respond differently to different frequencies, giving us perception of pitch and color. 
+As a result, an analysis in signals in terms of sinusoidal oscillations tends to make sense to us.
+Voice frequency band ranges from approximately 300 to 3400 Hz.	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Standing waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Standing waves}	
+	Standing wave (stationary wave) is the wave that remains in a constant position (there is no shifting of the waveform).
+\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Standing wave (stationary wave) is the wave that remains in a constant position. 
+There is no shifting of the waveform; waveform goes always throgh the same nodes.
+Stadning waves can arise due to interference. The sum of two counter propagating waves (of equal amplitude and frequency) creates standing wave.
+Standing waves commonly arise when a boundary blocks further propagation of the wave, thus causing wave reflection, and therefore introducing a counter propagating wave (for example guitar string).
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Elastic waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Elastic waves}
+Elastic waves are mechanical waves propagating in an elastic medium as an effect of forces associated with volume deformation (compression and extension) and shape deformation (shear) of medium elements.
+\end{alertblock}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Basic definitions}
+% https://www.compadre.org/nexusph/course/Sinusoidal_waves
+%https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html
+% propagating sine wave 
+% no damping, no end (infinite string under tension, oscilate)
+% standing wave
+% no damping, fixed end, oscilate
+% first harmonic, f1=0.41 Hz
+% second harmonic, f2=0.83 Hz
+% third harmonic f3=1.24 Hz
+% fourth harmonic f4=1.66 Hz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Travelling line}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\only<1->{
+				\begin{equation*}
+					y=\frac{1}{3} x
+				\end{equation*}
+		    }	
+		    \only<2->{
+		    	\begin{equation*}
+		    	x \rightarrow x - 6 t
+		    	\end{equation*}
+		    }	
+		    \only<3->{
+		    	\begin{equation*}
+		    		y=\frac{1}{3} (x-6 t)
+		    	\end{equation*}
+		    }	
+	        \only<4->{
+	       	\begin{equation*}
+	       	\color{logoblue}
+	       	t=0 \quad y=\frac{1}{3} x
+	       	\end{equation*}
+	       }
+		     \only<5->{
+		    	\begin{equation*}
+		    	\color{green}
+		    	t=1 \quad y=\frac{1}{3} (x-2)
+		    	\end{equation*}
+		    }	
+			\end{column}
+		\begin{column}{0.5\textwidth}
+			\only<1-2>{
+			\includegraphics[width=0.9\textwidth]{travelling_line_1.png}
+		  	}
+	  	 	\only<3-4>{
+	  	 	\includegraphics[width=0.9\textwidth]{travelling_line_2.png}
+	  	 	}
+  	 		\only<5-6>{
+  	 			\includegraphics[width=0.9\textwidth]{travelling_line_3.png}
+  	 		}
+   			\only<6>{
+	   		\begin{flalign*}	
+	   			&+ \textrm{direction} \quad x \rightarrow x - \upsilon t\\
+	   			&- \textrm{direction} \quad x \rightarrow x + \upsilon t
+	   		\end{flalign*}	
+	   		}
+		\end{column}
+	\end{columns}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{We will start with very simple equation: y equal one third of x which is the equation of stright line as it is shown here.
+Let's suppose that I want this line to move,
+Move it with a speed of 6 meters per second.
+All I have to do now is to replace the x in the equation by x minus six t.
+Notice the minus sign, it means that our line will go to plus x direction.
+The equation becomes: y equal one third of x minus six t.
+And at the time t equal zero you already have the line.
+At t equal one the line is parallel and it moved in this direction with the speed of six meters per second.
+So it is telling us that if we ever wanted to move with the speed v in the plus direction all we have to do is replace in our equation x with x minus v times t
+and if we want to move in minus x direction we need to replace x with x minus v times t.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Basic terminology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.9\textwidth]{Fig_1_7.jpg}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+		\begin{itemize}
+		\item Phase velocity \(c_p\) - velocity of wave crests
+		\item Group velocity \(c_g\) - velocity of wave packets
+		\item Wavelength \(\lambda\) - distance between two consecutive crests or two consecutive troughs
+		\item Wavenumber \(k\)
+		\item Frequency \(f\)
+		\end{itemize}
+		\end{column}
+\end{columns}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What is wave dispersion?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Empty 2-columns}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		
+	\end{column}
+	\begin{column}{0.5\textwidth}
+			
+	\end{column}
+\end{columns}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{1D wave propagation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lamb waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Ultrasonic testing vs guided wave testing (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\includegraphics[width=0.6\textwidth]{1280px-UT_vs_GWT.jpg}
+	\caption{source: wikipedia}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+On the upper figure, bulk waves are introduced to the structure by the transducer head.
+They are propagating through the thickness of inspected element. 
+Based on the characteristics of bulk waves such as velocity and amplitude of reflected signal we can assess only small area but with quite high precision regarding defect occurence. Then we need to move the transducer head to inspect other part of the structure.
+
+On the lower figure, waves are guided by the shape of the structural element. 
+Hence the name - guided waves. 
+You can imagine that this is a pipe transporting for example gas or oil and there is a device in the form of a ring of transducers which excite elastic waves. 
+Similar ring of transducers can be placed far away and register incoming waves.
+ If there is any anomaly, change of waveform, it would mean that there is a damage in between transducer rings. 
+ In this way inspected area is very large. 
+ Actuators and sensors can be placed permanently and the structure can be monitored online. 
+ However, the precision of inspection can be lower than in case of ultrasonic testing. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Ultrasonic testing vs guided wave testing (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\alert{Bulk waves} exist in infinite homogenous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
+These waves can be decomposed into infinite plane waves propagating along arbitrary direction within the solid.
+
+\alert{Guided waves} are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
+\vspace{5mm}
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+	\textbf{Ultrasonic waves}	
+	\begin{itemize}
+		\item Frequency range: 2 MHz - 200 MHz
+		\item Wavelength \(\lambda << h\) thickness 
+		\item shorter wavelengths
+	\end{itemize}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+	\textbf{Guided waves}	
+	\begin{itemize}
+		\item Typical frequency range: 10 kHz - 1 MHz
+		\item Wavelength \(\lambda > h\) thickness 
+		\item longer wavelengths
+	\end{itemize}
+	\end{column}
+\end{columns}			
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Elastic wave propagation types depending on particle motion:
+\begin{itemize}
+	\item  \alert{The longitudinal wave}is a compressional wave in which the particle motion is in the same direction as the propagation of the wave
+	\item \alert{The shear wave} is a wave motion in which the particle motion is perpendicular to the direction of the propagation
+	\item \alert{Surface (Rayleigh) waves} have an elliptical particle motion and travel across the surface of a material. Their velocity is approximately 90\% of the shear wave velocity of the material and their depth of penetration is approximately equal to one
+	wavelength
+	\item \alert{Plate (Lamb) waves} have a complex vibration occurring in materials where thickness is less than the wavelength of elastic wave introduced into it.
+\end{itemize}
+		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	The most common methods of ultrasonic examination utilize either
+	longitudinal waves or shear waves. Other forms of elastic wave propagation exist,
+	including surface waves and Lamb waves. 	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\animategraphics[controls,autoplay,loop,width=0.5\textwidth]{5}{frame}{1}{74}
+	\caption{\alert{Longitudinal wave}  - plane pressure pulse wave (source: wikipedia)}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{Fig_1_1.jpg}
+		\caption{\alert{Shear horizontal wave} }
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{Fig_1_3.jpg}
+		\caption{\alert{Rayleigh waves} }
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{Fig_1_4.jpg}
+		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love }
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\begin{figure}
+		\includegraphics[width=0.9\textwidth]{Fig_1_5.jpg}
+		\caption{Fundamental symmetric, S0, \alert{Lamb wave} mode }	
+		\end{figure}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{figure}
+		\includegraphics[width=0.9\textwidth]{Fig_1_6.jpg}
+		\caption{Fundamental antisymmetric, A0, \alert{Lamb wave} mode }
+		\end{figure}
+	\end{column}
+\end{columns}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Challenges in simulations of elastic wave propagation phenomenon}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Excitation and measurement techniques}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Assignment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Assignment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer the following questions:
+\begin{enumerate}	
+  \item What is the difference between wave propagation and vibrations?
+  \item What is the difference between bulk waves and Lamb waves?
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setbeamercolor{palette primary}{fg=black, bg=white}
+\begin{frame}[standout]
+  Thank you for your attention!\\ \vspace{12pt}
+  Questions?\\ \vspace{12pt}
+  \url{pk@imp.gda.pl}
+\end{frame}
+}
+\note{Thank you for your attention!
+I hope that you have learnt something from my presentation.
+So, if you have any questions please drop me a line.
+See you next time!}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
