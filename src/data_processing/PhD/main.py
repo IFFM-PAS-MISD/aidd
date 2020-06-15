@@ -41,20 +41,37 @@ experimental = experimental.reshape(44, 512, 512, 1)
 #####################################
 # Loading the model
 ############################################
-model_name = 'E:/backup/models/FCN_DenseNet_models/FCN_Dense_net_Precision_BCE_ConvFilter_16_changing_layers_size_.h5'
+
+#FCN_Dense_net_Precision_BCE_ConvFilter_16_changing_layers_size_  #FCN model
+# New_data_unet_adding_dropout_latest_100Epoches    #Unet model
+
+model_name = 'E:/backup/models/SegNet_models/SegNet_Upsampling_added_skip_layer_function.h5'
 model = load_model(model_name, compile=False)
 #model.summary()
 
 # Organize figures in folders based on the used threshold
-def file_organizer(k):
+
+path_fcn_figures_src = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/FCN_Dense_image_number_'
+path_fcn_figures_dst = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Figure_'
+
+path_unet_figuers_src = 'E:/aidd_new/aidd/reports/figures/UNet/Num/Unet_image_number_'
+path_uent_figures_dst = 'E:/aidd_new/aidd/reports/figures/UNet/Num/Figure_'
+
+
+path_segnet_figuers_src = 'E:/aidd_new/aidd/reports/figures/SegNet/Num/Segnet_image_number_'
+path_segnet_figures_dst = 'E:/aidd_new/aidd/reports/figures/SegNet/Num/Figure_'
+
+
+
+def file_organizer(k,step):
+
     for i in range(380):
-        for j in range(0, k, 1):
+        for j in range(0, k, step):
             z = (j + 1) / k
-            shutil.move('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/FCN_Dense_image_number_' + str(
-                i + 1) + '_threshold_' + str(z) + '_.png',
-                        'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Figure_' + str(
-                            i + 1) + '/FCN_Dense_image_number_' + str(i + 1) + '_threshold_' + str(z) + '_.png')
+            shutil.move(path_segnet_figuers_src + str(i + 1) + '_threshold_' + str(z) + '_.png',
+            path_segnet_figures_dst + str(i + 1) + '/Segnet_image_number_' + str(i + 1) + '_threshold_' + str(z) + '_.png')
             gc.collect()
+
 
 
 # Thresholding function convert the image values to 0 or 1 based on the used threshold
@@ -99,7 +116,11 @@ def IoU(predicted_image, truth_img):
     return IoU1
 
 # Saves the IoU values to a csv file
-file_name = 'IoU_FCN_DenseNets.csv'
+
+#file_name_FCN = 'IoU_FCN_DenseNets.csv'
+#file_name = 'IoU_UNet.csv'
+file_name = 'IoU_Segnet.csv'
+
 def append_list_as_row(file_name, list_of_Iou, image_number,threshold_list):
     with open(file_name, 'a', newline='') as f:
         writer = csv.writer(f)
@@ -108,6 +129,9 @@ def append_list_as_row(file_name, list_of_Iou, image_number,threshold_list):
         writer.writerows([list_of_Iou])
         gc.collect()
 
+path_fcn_figures_folder= 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Figure_'
+path_unet_figures_folder = 'E:/aidd_new/aidd/reports/figures/UNet/Num/Figure_'
+path_segnet_figuers_folder = 'E:/aidd_new/aidd/reports/figures/SegNet/Num/Figure_'
 
 # Plots the original delamination, predicted and the label figures
 def ploting(original,predict,ground,tr,image_number):
@@ -124,16 +148,20 @@ def ploting(original,predict,ground,tr,image_number):
     ax3.title.set_text('Ground Truth')
     fig.tight_layout()
     #plt.show()
-    Path('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Figure_'+str(image_number+1)).mkdir(parents=True, exist_ok=True)
-    plt.savefig('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/FCN_Dense_image_number_'+ str(image_number+1)+'_threshold_'+str(tr)+'_.png') #Threshold_'+str(tr)+'
+
+    # creates folder to contain different IoU values for diffferent threshold values for the same sample
+    Path(path_segnet_figuers_folder+str(image_number+1)).mkdir(parents=True, exist_ok=True)
+
+    plt.savefig(path_segnet_figuers_src+ str(image_number+1)+'_threshold_'+str(tr)+'_.png') #Threshold_'+str(tr)+'
     plt.close('all')
     gc.collect()
 
 
 def main_loop():
     # loop for different threshold values
-    end = 100 # parameter for the end step of the threshold counter
-    for z in range(0, end, 1):
+    end = 10 # parameter for the end step of the threshold counter
+    step = 5 # counter step
+    for z in range(0, end, step):
         layer_outputs = [layer.output for layer in model.layers[:]]
         activation = model.predict(test_x_samples, batch_size=1)
         last_layer_activation = activation[:]
@@ -155,7 +183,7 @@ def main_loop():
             ploting(original, Predict_Img, mask,tr,i)
         append_list_as_row(file_name, IoU_list, image_number,threshold_list)
 
-    file_organizer(end)  # sort all images based on their thresholds in folders
+    file_organizer(end,step)  # sort all images based on their thresholds in folders
     gc.collect()
 
 
@@ -163,27 +191,28 @@ def main_loop():
 # Predicting the output of an image
 #####################################
 
-#def Testing():
-#    prediction = model.predict(test_x_samples, batch_size=1)
-#    prediction = np.asarray(prediction)
-#
-#    for i in range(380):
-#        damage = np.squeeze(prediction[i], axis=2)
-#        original = np.squeeze(test_x_samples[i], axis=2)
-#        mask = np.squeeze(tests_y_samples[i], axis=2)
-#        ploting(original,damage,mask)
-#        fig = plt.figure(figsize=(16, 9))
-#        ax1 = fig.add_subplot(1, 3, 1)
-#        plt.imshow(damage, cmap='tab20c')
-#        ax2 = fig.add_subplot(1, 3, 2)
-#        plt.imshow(original, cmap='gist_yarg')
-#        ax3 = fig.add_subplot(1, 3, 3)
-#        plt.imshow(mask, cmap='gist_gray')
-#        ax1.title.set_text('Detected Damage')
-#        ax2.title.set_text('Original input Image')
-#        ax3.title.set_text('Ground Truth / Label')
-#        plt.savefig('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/FCN_Dense_' + str(i))
-#        plt.show()
+def Testing():
+    prediction = model.predict(test_x_samples, batch_size=1)
+    prediction = np.asarray(prediction)
+
+    for i in range(380):
+        damage = np.squeeze(prediction[i], axis=2)
+        original = np.squeeze(test_x_samples[i], axis=2)
+        mask = np.squeeze(tests_y_samples[i], axis=2)
+        fig = plt.figure(figsize=(16, 9))
+        ax1 = fig.add_subplot(1, 3, 1)
+        plt.imshow(damage, cmap='tab20c')
+        ax2 = fig.add_subplot(1, 3, 2)
+        plt.imshow(original, cmap='gist_yarg')
+        ax3 = fig.add_subplot(1, 3, 3)
+        plt.imshow(mask, cmap='gist_gray')
+        ax1.title.set_text('Detected Damage')
+        ax2.title.set_text('Original input Image')
+        ax3.title.set_text('Ground Truth / Label')
+        plt.savefig('E:/aidd_new/aidd/reports/figures/SegNet/Num/SegNet_' + str(i+1))
+        #plt.show()
+        plt.close('all')
+
 
 
 def exp():
@@ -191,8 +220,7 @@ def exp():
     prediction = np.asarray(prediction)
 
     for i in range(44):
-        damage = thresholding(prediction[i],0.95)
-        damage = np.squeeze(damage, axis=2)
+        damage = np.squeeze(prediction[i], axis=2)
         original = np.squeeze(experimental[i], axis=2)
         fig = plt.figure(figsize=(16, 9))
         ax1 = fig.add_subplot(1, 3, 1)
@@ -205,7 +233,7 @@ def exp():
         ax3.title.set_text('Original Image with mask')
         ax1.title.set_text('Detected Damage')
         ax2.title.set_text('Original input Image')
-        plt.savefig('E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Exp/FCN_Dense_' + str(i))
+        plt.savefig('E:/aidd_new/aidd/reports/figures/SegNet/Exp/SegNet_' + str(i+1))
         #plt.show()
         plt.close('all')
         gc.collect()
@@ -214,7 +242,7 @@ def exp():
 
 
 #Testing()
-main_loop()
+#main_loop()
 #exp()
 gc.collect()
 
