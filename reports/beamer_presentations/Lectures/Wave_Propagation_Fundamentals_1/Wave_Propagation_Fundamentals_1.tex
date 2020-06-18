@@ -175,6 +175,7 @@ Acoustic waves based on wave frequency can be divided into:
 			\item diagnostics and NDE 2 MHz - 200 MHz
 		\end{itemize}	
 	\end{itemize}
+\vspace{10mm}
 \begin{figure}
 	\includegraphics[width=0.9\textwidth]{Sound_wave_spectrum.png}
 \end{figure}
@@ -186,21 +187,6 @@ Our detectors for these waves — ears and eyes — are evolved to respond diffe
 As a result, an analysis in signals in terms of sinusoidal oscillations tends to make sense to us.
 Voice frequency band ranges from approximately 300 to 3400 Hz.	
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Standing waves}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{alertblock}{Standing waves}	
-	Standing wave (stationary wave) is the wave that remains in a constant position (there is no shifting of the waveform).
-\end{alertblock}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-Standing wave (stationary wave) is the wave that remains in a constant position. 
-There is no shifting of the waveform; waveform goes always throgh the same nodes.
-Stadning waves can arise due to interference. The sum of two counter propagating waves (of equal amplitude and frequency) creates standing wave.
-Standing waves commonly arise when a boundary blocks further propagation of the wave, thus causing wave reflection, and therefore introducing a counter propagating wave (for example guitar string).
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Elastic waves}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -214,19 +200,9 @@ Elastic waves are mechanical waves propagating in an elastic medium as an effect
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Basic definitions}
-% https://www.compadre.org/nexusph/course/Sinusoidal_waves
-%https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html
-% propagating sine wave 
-% no damping, no end (infinite string under tension, oscilate)
-% standing wave
-% no damping, fixed end, oscilate
-% first harmonic, f1=0.41 Hz
-% second harmonic, f2=0.83 Hz
-% third harmonic f3=1.24 Hz
-% fourth harmonic f4=1.66 Hz
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Travelling line}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]
 		\begin{column}{0.5\textwidth}
 			\only<1->{
@@ -289,18 +265,239 @@ So it is telling us that if we ever wanted to move with the speed v in the plus 
 and if we want to move in minus x direction we need to replace x with x minus v times t.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Travelling wave}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\only<1>{
+				\begin{equation*}
+				y=2 \sin (3 x)
+				\end{equation*}
+			}	
+		   	\only<2->{
+		   	\begin{equation*}
+		   	y=2 \sin (\underbrace{3}_{k} x)
+		   	\end{equation*}
+		   }
+			\only<3->{
+				\begin{equation*}
+				x \rightarrow x - 6 t
+				\end{equation*}
+			}	
+			\only<4->{
+				\begin{equation*}
+			    y=2 \sin \left(\underbrace{3}_{k} (x -\underbrace{6}_{\upsilon} t) \right)
+				\end{equation*}
+			}	
+			\only<5->{
+				\begin{equation*}
+				\color{logoblue}
+				t=0 \quad y=2 \sin (3 x)
+				\end{equation*}
+			}
+			\only<6->{
+				\begin{equation*}
+				\color{green}
+				t=1 \quad y=2 \sin (3 x -6)
+				\end{equation*}
+			}	
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\only<1-2>{
+				\includegraphics[width=0.9\textwidth]{travelling_sine_1.png}
+			}
+		   \only<3-5>{
+		   	\includegraphics[width=0.9\textwidth]{travelling_sine_2.png}
+		   }
+		   \only<6>{
+		   	\includegraphics[width=0.9\textwidth]{travelling_sine_3.png}
+		   }
+		   \only<2-6>{
+		   	\begin{equation*}
+		   	k=\frac{2 \pi}{\lambda} = 3
+		   	\end{equation*}
+		   }		
+		   \only<6>{
+		   	\begin{flalign*}	
+		   	&+ \textrm{direction} \quad x \rightarrow x - \upsilon t\\
+		   	&- \textrm{direction} \quad x \rightarrow x + \upsilon t
+		   	\end{flalign*}	
+		   }
+		\end{column}
+	\end{columns}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\footnotesize Now I'm going to change to something which is real wave.
+y equal to twice sine of three x; that's a wave, it is not moving yet.
+And lambda which we call wavelength in this case is two pi over three.
+We can also define lambda between consequtive wave peaks.
+I will introduce new symbol k which we call wavenumber and k is simply defined as
+two pi over lambda, so in our case it is three. If you know this number you can immediately tell what the wavelenght is.
+Now I want to have this wave to move. 
+I want to have travelling wave.
+And I want to move it with the speed of 6 meters per secund in the positive direction.
+So the receipe is very simple.
+All I have to do is to replace x by x minus six t.
+And now if you look at this equation and plot it a little bit later than time t zero you will see that indeed it has moved in the positive direction.
+And it is moving with the speed of 6 meters per sucund.
+So this equation holds all characteristics of the oscilation.
+It holds the amplitude which is 2. 
+k holds the information about the wavelenght and this information tells you what the speed is and a minus sign, which is important, tells you that it propagates in positive direction.
+If we want to have travelling wave to the left or munus direction we have to have plus sign here.
+Peaks of the wave denoted by blue dots are called wave crests and valleys denoted by red dots are called troughs.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Travelling wave - basic definitions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]	
+		\begin{column}[T]{0.5\textwidth}
+			\only<1->{
+				\includegraphics[width=0.9\textwidth]{travelling_wave_string.png}
+			}
+			\only<1->{
+			\begin{equation*}
+			y=2 \sin \left(\underbrace{3}_{k} (x -\underbrace{6}_{\upsilon} t) \right)
+			\end{equation*}
+		   }	
+			\only<2->{
+			\begin{equation*}
+			y = 2 \sin (\underbrace{3}_{k} x -\underbrace{18}_{\omega} t)
+			\end{equation*}
+			}
+		\only<3>{\url{https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html}}
+		\end{column}
+		\begin{column}[T]{0.5\textwidth}
+			\centering
+			\only<1->{
+		Period of one oscillation
+			\begin{equation*}
+			T=\frac{2 \pi}{\omega}
+			\end{equation*}
+		Wavelength
+			\begin{equation*}
+			\lambda = \upsilon T = \frac{\upsilon}{f}
+			\end{equation*}
+		Frequency 
+		\begin{equation*}
+			f = \frac{\upsilon}{\lambda}	
+		\end{equation*}
+		}
+		\only<3->{
+			Velocity
+			\begin{equation*}
+			\boxed{\upsilon = \frac{\omega}{k}}	
+			\end{equation*}
+		}
+	 \end{column}
+	\end{columns}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{We can make such a travelling wave by attaching a string to a wheel rotating with angular frequency omega and radius R. 
+If the radius has two units it will give us the same amplitude.
+So the one period of oscilation is two pi over omega.
+The wave is going to propagate with velocity v.
+Hence, in order to travel the distance Lambda we need to multiply velocity v by one period T which gives us wavelength.
+We can also define freqency as as ratio of velocity to wavelenght.
+And now I can write the equation in somewhat different form in which we can distinct spatial part and time part.
+This is wavenumber k and this is now angular frequecy omega.
+Then I can find velocity which is omega over k.
+}
+% https://www.compadre.org/nexusph/course/Sinusoidal_waves
+%https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html
+% propagating sine wave 
+% no damping, no end (infinite string under tension, oscilate)
+% standing wave
+% no damping, fixed end, oscilate
+% first harmonic, f1=0.41 Hz
+% second harmonic, f2=0.83 Hz
+% third harmonic f3=1.24 Hz
+% fourth harmonic f4=1.66 Hz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Standing waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\only<1->{
+	\begin{alertblock}{Standing waves}	
+		Standing wave (stationary wave) is the wave that remains in a constant position (there is no shifting of the waveform).
+	\end{alertblock}}
+	\only<2->{
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\centering
+		\(\longrightarrow\)
+		\begin{equation*}
+		y_1 = y_0 \sin(k x - \omega t)
+		\end{equation*}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\centering
+		\(\longleftarrow\)
+		\begin{equation*}
+		y_1 = y_0 \sin(k x + \omega t)
+		\end{equation*}
+	\end{column}
+\end{columns}}
+\only<3->{
+		\begin{equation*}
+			y = y_1 + y_2
+		\end{equation*}
+		\begin{equation*}
+			\sin(\theta_1) + \sin(\theta_2) = 2\, \sin\left( \frac{\theta_1 + \theta_2}{2} \right) \cos\left( \frac{\theta_1 - \theta_2}{2} \right)
+		\end{equation*}
+		\begin{equation*}
+		y = 2\, y_0 \sin(k x) \, \cos(\omega t)
+		\end{equation*}
+}
+
+\only<4->{
+	from boundary conditions
+	\begin{equation*}
+	y = 2\, y_0 \sin\left(\frac{m \pi}{L} x\right) \, \cos(\omega t)
+	\end{equation*}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Standing wave (stationary wave) is the wave that remains in a constant position. 
+There is no shifting of the waveform; waveform goes always throgh the same nodes.
+Stadning waves can arise due to interference. The sum of two counter propagating waves (of equal amplitude and frequency) creates standing wave.
+Standing waves commonly arise when a boundary blocks further propagation of the wave, thus causing wave reflection, and therefore introducing a counter propagating wave (such example is a guitar string).
+	
+Let's suppose that I have travelling wave in right direction and I have another wave which is exactly identical in terms of amplitude, but it is travelling in opposite direction.
+This plus sign tells me that it is going in this direction.
+So if this is a string the net result is the sum of the two.
+By employing trigonometric manipulation like this we can get this equation:
+Notice that the amplitude has doubled.
+And this is very different from travelling wave.
+Nowhere you will see kx minus omega t.
+All the timing information is separete from the spatial information.
+}
+\begin{frame}{Standing waves (normal modes)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\animategraphics[controls,autoplay,loop,width=0.8\textwidth]{3}{standing_wave_}{1}{33}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Basic terminology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{columns}[T]
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
+				\only<1>{
 				\includegraphics[width=0.9\textwidth]{Fig_1_7.jpg}
+				}
+				\only<2>{
+					\includegraphics[width=0.9\textwidth]{Fig_1_8.jpg}
+				}
 			\end{figure}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 		\begin{itemize}
-		\item Phase velocity \(c_p\) - velocity of wave crests
-		\item Group velocity \(c_g\) - velocity of wave packets
+		\item Phase velocity \(c_p=\frac{\omega}{k}\) - velocity of wave crests
+		\item Group velocity \(c_g = \frac{\drv \omega}{\drv k}\) - velocity of wave packets
 		\item Wavelength \(\lambda\) - distance between two consecutive crests or two consecutive troughs
 		\item Wavenumber \(k\)
 		\item Frequency \(f\)
@@ -311,6 +508,75 @@ and if we want to move in minus x direction we need to replace x with x minus v 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Wave modulation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Consider two right propagating waves of equal amplitude, and different frequency and wavenumber
+\begin{equation*}
+u(x,t)=U_0 \left[ \sin(k_1 x - \omega_1 t) + \sin( k_2 x - \omega_2 t)\right]
+\end{equation*}
+
+\begin{equation*}
+u(x,t)=2 U_0\, \cos\left(\frac{k_1- k_2}{2}  x - \frac{\omega_1-\omega_2}{2}  t\right) \, \sin\left(\frac{ k_1 + k_2} x -\frac{ \omega_1 + \omega_2}{2} t \right)
+\end{equation*}
+
+\begin{equation*}
+u(x,t)=2 U_0\, \color{darkblue}{\underbrace{\cos(\Delta k x - \Delta \omega   t)}_{\textrm{Modulation}}} \, \color{red}{\underbrace{\sin( k_0  x - \omega t)}_{\textrm{Carrier wave}}}
+\end{equation*}
+
+\begin{itemize}
+	\item Beating phenomenon
+	\item Propagation of a wave packet (assembly of waves)
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Wave modulation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+		\includegraphics[width=0.9\textwidth]{Fig_1_9.jpg}
+	\end{figure}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Wave modulation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Propagation speed of modulating wave defines the propagation speed of the wave packet
+\begin{equation*}
+\Delta k x - \Delta \omega t = const \quad \rightarrow \quad x = \frac{\Delta \omega}{\Delta k} t + const
+\end{equation*}
+
+\begin{equation*}
+c_g = \frac{\Delta \omega}{\Delta k}
+\end{equation*}
+To the limit \(\Delta \omega \rightarrow 0, \Delta k \rightarrow 0\)
+\begin{equation*}
+\hspace{2.8cm}\boxed{c_g = \frac{\drv \omega}{\drv k}} \quad \textrm{\color{red}{Group velocity}}
+\end{equation*}
+\begin{itemize}
+	\item \makebox[3.2cm][l]{non-dispersive media} \(c_g = c_p\)
+	\item \makebox[3.2cm][l]{dispersive media} \(c_g \neq c_p \)
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Group vs phase velocity}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{group_vs_phase_velocity.png}
+	\end{figure}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+phase velocity - angle between a line connecting zero and angular frequency value and wavenumber axis
+group velocity - tangent
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{What is wave dispersion?}
