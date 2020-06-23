@@ -1,6 +1,6 @@
 %\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
-%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
-\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+%\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
 %\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
 \usepackage{pgfpages}
 %\setbeameroption{show notes}
@@ -33,8 +33,8 @@
 %\tikzexternalize % activate!
 %\usetikzlibrary{shapes,arrows}  
 % the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
-%\usepackage{animate}
-\usepackage[draft]{animate}
+\usepackage{animate}
+%\usepackage[draft]{animate}
 \usepackage{ifthen}
 \newcounter{angle}
 \setcounter{angle}{0}
@@ -1034,6 +1034,27 @@ throw-off \(\hat{k}^e = \hat{E} \hat{A} i k \)
 \note{
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Higher order rod theories}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\only<1>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_1.png}
+	}
+	\only<2>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_2.png}
+	}
+	\only<3>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_3.png}
+	}
+	\only<4>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_4.png}
+	}
+\end{figure}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Guided waves}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ultrasonic testing vs guided wave testing (1)}
@@ -1228,7 +1249,7 @@ He derived theory and dispersion relations.
 	
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Challenges in simulations of elastic wave propagation phenomenon}
+%\section{Challenges in simulations of elastic wave propagation phenomenon}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Excitation and measurement techniques}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1273,6 +1294,7 @@ He derived theory and dispersion relations.
 		Vibrometer allows measurements of vibration velocities in range 0.01~$\mu$m/s $-$ 10 m/s for frequencies from DC up to 1.5~MHz for measuring distance from 40~cm up to dozens of meters. Scanning resolution is 0.002$^{\circ}$  which provides possibility of defining about 300 000 points in laser working area.}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
+% https://www.youtube.com/watch?v=o0qkmG_S4QY
 \note{
 This picture shows the elements of the review of the Lamba wave propagation measurement. These are signal generators, amplifier, sample, laser vibrometer head and analogue to digital converters. 
 The laser vibrometer measures the vibration velocities along the laser beam. 
@@ -1315,6 +1337,11 @@ Answer to the following questions:
 I hope that you have learnt something from my presentation.
 So, if you have any questions please drop me a line.
 See you next time!}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Empty}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1325,7 +1352,7 @@ See you next time!}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Empty 2-columns}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]
 		\begin{column}{0.5\textwidth}
 			
@@ -1338,7 +1365,3 @@ See you next time!}
 %%%%%%%%%%%%%%%%%%%%
 \note{
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% END OF SLIDES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\end{document}
