@@ -1,27 +1,33 @@
 \documentclass[11pt,a4paper]{article}
-	\title{Full Wavefield Processing by Using CNN for Delamination Detection}
-	%\address[IFFM]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
-	\author{Abdalraheem A. Ijjeh}
-%	\author{Saeed Ullah \fnref{IFFM}}
-%	\author{Pawel Kudela\corref{cor1}\fnref{IFFM}}
-%	\ead{pk@imp.gda.pl}
+	\title{Feasibility Study of Full Wavefield Processing by Using CNN for Delamination Detection}
+%	\address{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
+	\author{Pawel Kudela, Abdalraheem Ijjeh, Saed Ullah \\
+	\footnotesize\textit{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland} 
+	}
+
+
+
+
+
 
 \begin{document}
 	\maketitle
 	Composite materials are widely used in various industries, due to their characteristics such as high strength, low density, resistance to fatigue, and corrosion.  
 	However, composites materials are sensitive to impacts resulting from the lack of reinforcement in the out-of-plane direction. 
-	Under a high energy impact, little penetration rises in composite materials. On the other hand, for low to medium energy impact, matrix crack will happen and interact, causing the delamination process. Delamination can alter the compression strength of composite laminate, and it will gradually affect the composite to encounter failure by buckling. 
+	Under a high energy impact, little penetration rises in composite materials. On the other hand, for low to medium energy impact, damage will be initiated by matrix cracks which will cause a delamination process in the structure. 
+	Delamination can alter the compression strength of composite laminate, and it will gradually affect the composite to encounter failure by buckling. 
 	The tension encountered by the composite structure creates cracks and produces delamination between the laminates which leads to more damage. These defects can seriously decrease the performance of composites,  therefore, they should be detected in time to avoid catastrophic structural collapses.
 	Damage detection and localisation techniques have been widely applied in the field of Structural Health Monitoring (SHM) to monitor the integrity of structures to prolong their life time and  to minimize or delay their failure by estimating the size and the location of the damage at the early stages.
-	Traditional SHM techniques for damage detection are based on hand-crafted feature extraction, which implies that the damage detection process involves a comparison between the sensed data from the structure (i.e. base-line) and the current status of the structure to determine any changes occurred. Accordingly, these processes require a huge amount of data preprocessing and feature extraction to be applied to the captured data. 
+	Traditional SHM techniques for damage detection are based on hand-crafted feature extraction, which implies that the damage detection process involves a comparison between the sensed data from the structure (i.e. base line) and the current status of the structure to determine any changes occurred. Accordingly, these processes require a huge amount of data preprocessing and feature extraction to be applied to the captured data. 
 	
-	In recent years,the accelerated progress in the field of artificial intelligence (AI) technologies, mainly in the deep learning field, offered the opportunity for being implemented and integrated with the SHM approaches.
+	In recent years, the accelerated progress in the field of artificial intelligence (AI) technologies, mainly in the deep learning field, offered the opportunity for being implemented and integrated with the SHM approaches.
 	Consequently, issues of data preprocessing and feature extraction are solved when applying deep learning techniques. 
 	Alternatively, end-to-end models are presented, in which the whole unprocessed data are fed in the model, hence, it will learn by itself to recognise the patterns and detect the damage.
+
+	In this work, delamination detection in composite materials such as carbon fibre reinforced polymers (CFRP) is developed using deep learning techniques. 
+	One of the key points of our work is the computation of a large dataset of full wavefield of propagating elastic waves to simulate the experimentally generated data which resembles measurements acquired by scanning laser Doppler vibrometer (SLDV).
 	
-	In conducting this work, delamination detection in composite materials is developed using deep learning techniques. 
-	One of the key points of our work is the large dataset collected using scanning laser Doppler vibrometer (SLDV) instead of signals registered at a few points (sensor locations). 
-	For our knowledge, it is the first time, full wavefield data of propagating elastic waves will be used as an input to deep neural networks.
+	For our knowledge, it is the first time, large full wavefield dataset of propagating elastic waves will be used as an input to deep neural networks.
 	In this work, we are going to develop a dense convolutional neural network (CNN) model, that is capable to detect the delamination and localize it using bounding boxes techniques.
 	The input images were re-scaled and split into smaller slices to be fed into the dense CNN model to reduce the model processing complexity.  
 	Our model shows a high delamination detection accuracy for various delamination locations and sizes.
