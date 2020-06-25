@@ -142,31 +142,79 @@ There are plenty of methods which utilizes Lamb waves for damage detection in S
 
 In this work, we went a step further, we used a large collection of signals (animation of propagating elastic waves), which are registered on very dense grid of points resembles scanning laser vibrometer measurements. Such collection of signals is often called full wave-field. 
 It was found
-\section{Data Acquisition}
-	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dataset}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, we have generated a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a plate made of carbon fibre-reinforced plastic (CFRP).
+The time domain spectral element method was used for simulation of Lamb wave interaction with delamination.
+For each case single delamination was modelled by using the method of splitting nodes between appropriate spectral elements. 
+It was assumed that the composite laminate is made of eight layers of total thickness 3.9 mm.
+The delamination was modelled between the third and fourth layer (see Fig.~\ref{fig:plate_setup} for details).
+It should be noted that the figure shows exaggerated cross-section through the delamination. 
+Zero-volume delamination was assumed in the model. 
+For each case delamination location was selected randomly so that interaction of guided waves excited at the plate centre with delamination is different for each case.
+It includes cases when delamination is located at the edge of the plate which is the most difficult to identify by signal processing methods.
+Additionally, the size of the delamination was randomly simulated by selecting ellipse minor and major axis from the interval 5--20 mm.
+Also the angle between delamination major axis and horizontal axis was randomly selected.
 \begin{figure}
-	\includegraphics{logo_box.eps}
+	\centering
+	\includegraphics[scale=0.8]{plate_delam_arrangement_MSSP.png}
+	\caption{Setup for computing Lamb wave interactions with delamination.}
+	\label{fig:plate_setup}
 \end{figure}
-\section*{ }
-%\bibliography{ref,report}{}
-%\bibliographystyle{num_order}
-%\end{document}	
 
-\section{Method}
+The output from the top and bottom surface of the plate in the form of particle velocities at the nodes of spectral elements were projected on the uniform grid of 500\(\times\)500 points by using shape functions of elements (see Parallel spectral element method for guided wave based structural health monitoring paper for detail).
+It essentially resembles measurements acquired by scanning laser Doppler vibrometer (SLDV) in the transverse direction (perpendicular to the plate surface).
 
-In this work, A deep learning approach for delamination detection within composite materials is presented. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Signal processing strategy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.8]{FCN_adaptive_filtering_diagram_MSSP.png}
+	\caption{Diagram of signal processing strategy by the proposed Fully Convolutional Network (left branch) in comparison to signal processing utilising adaptive wavenumber filtering method (right branch). }
+	\label{fig:sig_proc_strategy}
+\end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\subsection{Adaptive wavenumber filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fully Convolutional Network approach}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, A deep learning approach for delamination detection in composite materials is presented. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Data preprocessing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It should be noted that the output from the wave propagation model is in the form of 3D matrix which contains amplitudes of propagating waves at location \((x, y)\) and time \(t\). We can look at it as a set of frames of propagating waves at discrete time moments \(t_k\).
+
+The data preprocessing as it is indicated in Fig. ?? include a step of computation of root mean square value:
+\begin{equation}
+\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N} s(x,y,t_k)^2}
+\end{equation}
+where number of sampling points \(N\) was 512.
+In this way, dataset was collapsed to 475 2D matrices in which amplitudes are stored as double precision values.
+The next step was conversion of these matrices to greyscale images (colour image quantisation).
+Colour scale values of obtained images vary between (\(0 - 255\)) hence normalization
+to a range of (\(0-1\)) was applied to enhance the optimizer function during the learning process. 
+Furthermore data augmentation was achieved by flipping images vertically, horizontally and diagonally to enhance the learning process through enabling the model to learn and recognize new complex patterns.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Basic concept of Fully Convolutional Network}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The main purpose of such approach is to automatically perform feature extraction by training a model using full wavefield images, hence, it will learn by itself to recognise the patterns and detect the delamination and localize it.
 In our work we are using fully convolutional network (FCN), which aims to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
 Therefore, several models were implemented for that purpose.
 
 The idea behind FCN is to stack a group of convolutional layers in an encoder-decoder style. 
-The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsamples the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
+The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsample the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
 
-In this work, we have generated a large dataset of 475 images of a full wavefield of propagating elastic waves to simulate the experimentally generated data which resembles measurements acquired by scanning laser Doppler vibrometer (SLDV).
-Each image contains different delamination damage in a different size, location, shape(ellipse, circle) and angle between delamination major axis and horizontal axis.
-The image values vary between (\(0 - 255\)) were normalized to a range of (\(0-1\)) to enhances the optimizer function during the learning process. 
-In order to reduce overfitting in the models, some techniques were applied such as adding dropouts to layers and data augmentation for the dataset by flipping vertically, horizontally and diagonally to enhance the learning process through enabling the model to learn and recognize new complex patterns.
+
+In order to reduce overfitting in the models, some techniques were applied such as adding dropouts to layers.
+
 For the output layer, we have applied two activation functions in separate experiments, the first one is softmax and the second one is sigmoid. 
 The softmax function calculates the probability of the damaged and the undamaged for every single pixel, hence, the summation of the two probabilities must equal one. Eqn.~\ref{softmax} illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
 \begin{equation}
@@ -213,8 +261,9 @@ The optimizer is responsible for updating the model learnable parameters such as
 In our work, Adam optimizer was applied, which is considered as a combination of RMSprob and Stochastic Gradient Descent (SGD)~\cite{Kingma2015}. 
 
 In the next subsections we are going to present three FCN models for pixel wise semantic segmentation in order to detect and localize delaminations.
-
-\subsection{U-net based model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{U-net based model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Our first FCN model is the U-net model, which was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation constructed from two parts encoder and decoder. 
 This architecture consists of three sections: The downsampling section, The bottleneck, and the upsampling section. 
 The downsampling section holds several contraction blocks. 
@@ -247,7 +296,7 @@ For this model we have applied a (\(3\times3\))Transposed convolution with (\(2\
 Transposed convolution layer differs from the regular upsampling function, by introducing learnable parameters regarding the transposed convolution filters that enhance the learning process of the model, therefore, new patterns are recognized. 
 
 
-\subsection{FCN-DenseNet based model}
+\subsubsection{FCN-DenseNet based model}
 FCN-DenseNet was introduced by Simon Jegou et al.~\cite{Jegou} for semantic segmentation, it was originally based on the DenseNet model proposed by Gao Huang et al.~\cite{Huang}. 
 The main advantage of FCN-DenseNet over DenseNet is the extra utilising of feature maps by adding the upsampling path to the model.
 FCN-DenseNet is composed of downsampling path, upsampling path and skip connection.
@@ -305,7 +354,7 @@ Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentatio
 
 
 
-\subsection{FCN-VGG16}
+\subsubsection{FCN-VGG16}
 In this model we address the use of VGG16-based encoder~\cite{Simonyan2015} with 13-convolutional layers.
 VGG16 encoder is composed of convolutional layers, pooling layers and dense layers, and it was used for classification purposes. 
 In our last model, we employed an encoder decoder scheme for pixel wise image segmentation. 
@@ -329,7 +378,7 @@ Skip connections were added between downsampling blocks and the corresponding up
 
 \section{Results and Discussions}
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
