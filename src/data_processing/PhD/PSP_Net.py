@@ -17,7 +17,7 @@ rho = 0.995
 filters = 16
 filterSize = (3, 3)
 activation = relu, sigmoid
-batch_size = 2
+batch_size = 4
 dropout = 0.2
 epochs = 2
 validation_split = 0.2
@@ -71,8 +71,8 @@ green = UpSampling2D((8,8), interpolation='bilinear')(green)
 Concat = keras.layers.Concatenate()([Conv,red,blue,orange,green])
 
 output = Conv2D(16,(3,3), dilation_rate=2, padding='same', activation='relu')(Concat)
-output = Conv2D(16,(3,3), dilation_rate=2, padding='same', activation='relu')(Concat)
-output = Conv2D(1,(3,3),  dilation_rate=2, padding='same', activation='sigmoid')(Concat)
+output = Conv2D(16,(3,3), dilation_rate=2, padding='same', activation='relu')(output)
+output = Conv2D(1,(3,3),  dilation_rate=2, padding='same', activation='sigmoid')(output)
 #output = keras.layers.Softmax()(output)
 
 model = Model(inputs=input_x, outputs=output)
