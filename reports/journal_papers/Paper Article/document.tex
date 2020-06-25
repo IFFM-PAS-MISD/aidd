@@ -47,6 +47,8 @@
 \usepackage{subcaption}
 \usepackage{booktabs} % for nice tables
 \usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+%\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
 %\usepackage{breqn}
 \usepackage{multirow}
 % matrix command 
@@ -58,7 +60,7 @@
 \newcommand{\veca}[2]{\mathbf{#1}{#2}}
 \renewcommand{\bm}[1]{\mathbf{#1}}
 \newcommand{\bs}[1]{\boldsymbol{#1}}
-\graphicspath{{Figures/}}
+\graphicspath{{Figures/}{//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/}}
 %\graphicspath{ {Graphics/Figures/} }
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
@@ -142,8 +144,14 @@ In this work, we went a step further, we used a large collection of signals (ani
 It was found
 \section{Data Acquisition}
 	
+\begin{figure}
+	\includegraphics{logo_box.eps}
+\end{figure}
+\section*{ }
+%\bibliography{ref,report}{}
+%\bibliographystyle{num_order}
+%\end{document}	
 
-	
 \section{Method}
 
 In this work, A deep learning approach for delamination detection within composite materials is presented. 
