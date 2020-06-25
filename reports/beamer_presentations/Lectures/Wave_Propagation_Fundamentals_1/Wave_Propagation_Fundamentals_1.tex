@@ -1,6 +1,6 @@
 %\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
-%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
-\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+%\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
 %\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
 \usepackage{pgfpages}
 %\setbeameroption{show notes}
@@ -34,6 +34,7 @@
 %\usetikzlibrary{shapes,arrows}  
 % the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
 \usepackage{animate}
+%\usepackage[draft]{animate}
 \usepackage{ifthen}
 \newcounter{angle}
 \setcounter{angle}{0}
@@ -107,7 +108,7 @@ Today I will be talking about waves with the focus on elastic wave propagation p
 \section{Types of wave}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame2]{Types of wave}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation*}
 \frac{\partial^2 \Psi(x,t)}{\partial t^2} = \upsilon_p^2 \, \frac{\partial^2 \Psi(x,t)}{\partial x^2}
 \end{equation*}
@@ -187,9 +188,9 @@ Our detectors for these waves — ears and eyes — are evolved to respond diffe
 As a result, an analysis in signals in terms of sinusoidal oscillations tends to make sense to us.
 Voice frequency band ranges from approximately 300 to 3400 Hz.	
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Elastic waves}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{alertblock}{Elastic waves}
 Elastic waves are mechanical waves propagating in an elastic medium as an effect of forces associated with volume deformation (compression and extension) and shape deformation (shear) of medium elements.
 \end{alertblock}
@@ -198,11 +199,11 @@ Elastic waves are mechanical waves propagating in an elastic medium as an effect
 %%%%%%%%%%%%%%%%%%%%
 \note{
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Basic definitions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Travelling line}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Travelling line}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]
 		\begin{column}{0.5\textwidth}
 			\only<1->{
@@ -265,7 +266,7 @@ So it is telling us that if we ever wanted to move with the speed v in the plus 
 and if we want to move in minus x direction we need to replace x with x minus v times t.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Travelling wave}
+\begin{frame}[t]{Travelling wave}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]
 		\begin{column}{0.5\textwidth}
@@ -347,7 +348,7 @@ If we want to have travelling wave to the left or munus direction we have to hav
 Peaks of the wave denoted by blue dots are called wave crests and valleys denoted by red dots are called troughs.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Travelling wave - basic definitions}
+\begin{frame}[t]{Travelling wave - basic definitions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]	
 		\begin{column}[T]{0.5\textwidth}
@@ -470,8 +471,9 @@ And this is very different from travelling wave.
 Nowhere you will see kx minus omega t.
 All the timing information is separete from the spatial information.
 }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Standing waves (normal modes)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 	\animategraphics[controls,autoplay,loop,width=0.8\textwidth]{3}{standing_wave_}{1}{33}
 \end{figure}
@@ -566,8 +568,8 @@ To the limit \(\Delta \omega \rightarrow 0, \Delta k \rightarrow 0\)
 %%%%%%%%%%%%%%%%%%%%
 \note{
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Group vs phase velocity}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Group vs phase velocity (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}
 		\includegraphics[width=0.5\textwidth]{group_vs_phase_velocity.png}
@@ -578,38 +580,485 @@ To the limit \(\Delta \omega \rightarrow 0, \Delta k \rightarrow 0\)
 phase velocity - angle between a line connecting zero and angular frequency value and wavenumber axis
 group velocity - tangent
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Group vs phase velocity (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\begin{figure}
+			\animategraphics[autoplay,loop,width=0.6\textwidth]{5}{wave_phase_equal_group_velocity_}{1}{50}
+			\caption{\(c_g = c_p\)}
+		\end{figure}
+		\begin{figure}
+			\animategraphics[autoplay,loop,width=0.6\textwidth]{5}{wave_opposite_group_phase_velocity_}{1}{50}
+			\caption{\(c_g>0,\,c_p<0\)}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{figure}
+			\animategraphics[autoplay,loop,width=0.6\textwidth]{5}{wave_phase_faster_than_group_velocity_}{1}{50}
+			\caption{\(c_p > c_g\)}
+		\end{figure}
+	   \begin{figure}
+	   	\animategraphics[autoplay,loop,width=0.6\textwidth]{5}{wave_phase_slower_than_group_velocity_}{1}{50}
+	   	\caption{\(c_p < c_g\)}
+	   \end{figure}
+	\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+For positive group velocity and negative phase velocity the wave is dancing like Michael Jackson. It is like his feet are going to the left whereas his body is going to the right.	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{What is wave dispersion?}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Empty}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dispersion curves (1)}
+	\begin{alertblock}{Definition}
+		A \textbf{dispersion relation} relates the wavelength $\lambda$ or wavenumber $k$ of a wave to its frequency $\omega$.\\
+		\begin{equation*}
+		\boxed{k=k(\omega)} \quad \textrm{or} \quad \boxed{\omega = \omega(k)}
+		\end{equation*}
+		\vspace{10pt}
+		$k(\omega)$ $[\frac{\mathrm{rad}}{\mathrm{m}}] \quad k(f)$ $[\frac{1}{\mathrm{m}}]$
+	\end{alertblock}
+	\begin{block}{Phase velocity}
+		\begin{equation*}
+		c_p = \frac{\omega}{k} = const\quad \textrm{non-dispersive}
+		\end{equation*}
+	\end{block}
+	\begin{block}{Group velocity}
+		\begin{equation*}
+		c_g = \frac{\drv \omega}{\drv k} = const \quad \textrm{non-dispersive}
+		\end{equation*}
+	\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+What is the phenomenon of dispersion?
+This is the relationship between the wavenumber or wavelength and its frequency. 
+I usually use the wavenumber and the linear frequency, hence the unit of the wave number is one over a meter. 
+The condition necessary to have non-dispersive wave is that phase velocity must be constant.
+It implies that the group velocity is also constant and actually equal to phase velocity.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dispersion curves (2)}
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{linear_dispersion.png}
+	\end{figure}
+A nondispersive medium is characterized by:
+	\begin{itemize}
+	\item A linear dispersion relation
+	\item The phase velocity is constant at all frequencies
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dispersion effect (1)}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+		\begin{figure}
+			\includegraphics[width=0.7\textwidth]{dispersion/excitation_narrow_time.png}
+			\includegraphics[width=0.7\textwidth]{dispersion/excitation_wide_time.png}
+		\end{figure}
+		\column{0.5\textwidth}
+		\newcommand{\modelname}{dispersion_effect}
+		\begin{figure}
+			\includegraphics[width=0.7\textwidth]{dispersion/excitation_narrow_frequency.png}
+			\includegraphics[width=0.7\textwidth]{dispersion/excitation_wide_frequency.png}
+		\end{figure}
+	\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+To demonstrate to you what the phenomenon of wave dispersion reveals, I have prepared an example. 
+Consider two signals: one with a 200 kHz carrier frequency that looks like this and the other with a 20 kHz carrier frequency that looks like this.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dispersion effect (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\only<1>{
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth]{dispersion/A0_dispersion_less_dispersive.png}
+			\caption{Less dispersive region}
+		\end{figure}
+		\column{0.5\textwidth}
+		\newcommand{\modelname}{dispersion_effect}
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth]{dispersion/A0_dispersion_dispersive.png}
+			\caption{Dispersive region}
+		\end{figure}
+	}
+	\only<2>{
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth]{dispersion/A0_phase_velocity_less_dispersive.png}
+			\caption{Less dispersive region}
+		\end{figure}
+		\column{0.5\textwidth}
+		\newcommand{\modelname}{dispersion_effect}
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth]{dispersion/A0_phase_velocity_dispersive.png}
+			\caption{Dispersive region}
+		\end{figure}
+	}
+	\only<3>{
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth]{dispersion/A0_group_velocity_less_dispersive.png}
+			\caption{Less dispersive region}
+		\end{figure}
+		\column{0.5\textwidth}
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth]{dispersion/A0_group_velocity_dispersive.png}
+			\caption{Dispersive region}
+		\end{figure}
+	}
+\end{columns}
+\begin{center}
+	\only<2>{\alert{Phase velocities}}
+	\only<3>{\alert{Group velocities}}
+\end{center}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Let's superimpose the frequency spectra on the dispersion curves. 
+The spectrum on the left is in a region with less dispersion than the spectrum on the right. 
+You can see that the frquencies of our signal on the left hand side are on almost linear portion of the dispersion curves whereas the frequencies of the signal on the right hand side are on a nonlinear portion of the dispersion curve. 
+
+This effect is easier to explain by taking into account phase velocities. 
+The flatter the curve, the smaller the wave dispersion. 
+The same is true for group velocities.
+So if we want to avoid or alleviete the effect of dispersion we need to use narrow frequency band excitation signal with carrier frequency which corresponds to flat region of dispersion curves expressed as relationship between wave velocity and frequencies.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dispersion effect (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\animategraphics[autoplay,loop,width=0.8\textwidth]{1}{dispersion/dispersion_effect_less_dispersive_L_}{1}{11}
+	\end{figure}
+\vspace{-5mm}
+	\begin{figure}
+		\animategraphics[autoplay,loop,width=0.8\textwidth]{1}{dispersion/dispersion_effect_dispersive_L_}{1}{11}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+The dispersion effect is visible in this animation. 
+The wave shape at the top does not change much with the propagation distance, while the wave at the bottom is dispersive and deforms with the propagation distance.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{1D wave propagation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Longitudinal waves in rod (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{rod_segment_with_loads.png}
+\caption{Segment of a rod}
+\end{figure}
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\(E\) Young's modulus\\
+		\(\rho\) mass density\\
+		\(\eta\) viscous damping per unit volume\\
+		\(q(x,t)\) external force per unit length\\
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		According to Newton's second law of motion:
+		\begin{equation*}
+		\sum Fx = m a_x
+		\end{equation*}
+	\end{column}
+\end{columns}		
+
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Empty 2-columns}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Longitudinal waves in rod (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{rod_segment_with_loads.png}
+	\end{figure}
 \begin{columns}[T]
 	\begin{column}{0.5\textwidth}
-		
+			Following the assumption of only one displacement \(u(x)\), the axial strain is given by:
+		\begin{equation*}
+		\varepsilon_{xx}  = \frac{\partial u}{\partial x}
+		\end{equation*}
 	\end{column}
 	\begin{column}{0.5\textwidth}
-			
+		Considering 1D form of Hooke's law (linear elastic material):
+		\begin{equation*}
+		\sigma_{xx} = E \varepsilon_{xx}
+		\end{equation*}
 	\end{column}
-\end{columns}		
+\end{columns}
+	Resultant axial force:
+	\begin{equation*}
+	F=\int_A \sigma_{xx} \drv A = EA \frac{\partial u}{\partial x}
+	\end{equation*}
+	
+	\begin{equation*}
+    -F + (F + \Delta F) + q \Delta x - \eta A \Delta x \dot{u} = \rho A \Delta x \ddot{u}
+	\end{equation*}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{1D wave propagation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Lamb waves}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Longitudinal waves in rod (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\only<1->{
+If \(\Delta\) quantities are small
+	\begin{equation*}
+	\frac{\partial F}{\partial x} = \rho A \frac{\partial^2 u}{\partial t^2} + \eta A \frac{\partial u}{\partial t} - q
+	\end{equation*}	
+	Substitute
+	\begin{equation*}
+	F= EA \frac{\partial u}{\partial x}
+	\end{equation*}
+	
+  \begin{equation*}
+  \frac{\partial }{\partial x} \left[ EA \frac{\partial u}{\partial x} \right]= \rho A \frac{\partial^2 u}{\partial t^2} + \eta A \frac{\partial u}{\partial t} - q
+\end{equation*}	
+}
+\only<2->{
+In the special case of uniform properties and no damping homogenous equation is:
+\begin{equation*}
+c_0^2 \frac{\partial^2 u(x,t)}{\partial x^2} - \frac{\partial^2 u(x,t)}{\partial t^2} = 0, \quad c_0 = \sqrt{\frac{EA}{\rho A}}
+\end{equation*}	
+D'Alembert general solution
+\begin{equation*}
+u(x,t) = f(x-c_0 t) + g(x+c_0 t)
+\end{equation*}	
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+D'Alembert  solution does not hold for the general rods therefore will not be pursued any further. Homogenous equation can also be solved by using separation of variables. But we will consider more general case on next slides.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Elementary rod theory - spectral  analysis (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation*}
+\frac{\partial }{\partial x} \left[ EA \frac{\partial u}{\partial x} \right] - \rho A \frac{\partial^2 u}{\partial t^2}  - \eta A \frac{\partial u}{\partial t} = - q
+\end{equation*}	
+\(\xrightarrow{\mathcal{F}} \)
+	\begin{equation*}
+	\frac{\drv}{\drv x}\left[EA \frac{\drv \hat{u}}{\drv x}\right] + \omega^2 \rho A \hat{u} - i \omega \eta A \hat{u} = -\hat{q} 
+	\end{equation*}	
+Assumption: \(EA\) is not changing along the rod\\
+Homogeneous equation (without external force):	
+	\begin{equation*}
+	EA \frac{\drv^2 \hat{u}}{\drv x^2} + \left(\omega^2 \rho A  - i \omega \eta A \right)\hat{u} = 0
+	\end{equation*}	
+Assume solution in the form:
+	\begin{equation*}
+	\hat{u}(x) = \matr{A} \myexp^{-k_1x} + \matr{B} \myexp^{+k_1x}
+	\end{equation*}	
+	\(\matr{A}, \matr{B}\) undetermined amplitudes at each frequency
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Elementary rod theory - spectral  analysis (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\only<1->{
+Spectrum relation:
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\centering
+	damped case:	
+		\begin{equation*}
+			k_1 = \sqrt{\frac{\omega^2 \rho A - i \omega \eta A}{EA}}
+		\end{equation*}	
+		\begin{equation*}
+		 c_p = \frac{\omega}{k} = \frac{\omega}{\sqrt{\frac{\omega^2 \rho A - i \omega \eta A}{EA}}}
+		 \end{equation*}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\centering
+	undamped case:	
+		\begin{equation*}
+			k_1 = \sqrt{\frac{\omega^2 \rho A}{EA}}
+		\end{equation*}	
+			\begin{equation*}
+		   c_p = \frac{\omega}{k} = \sqrt{\frac{EA}{\rho A}} = c_0, \quad c_g = \frac{\drv \omega}{\drv k}\sqrt{\frac{EA}{\rho A}} = c_0
+		\end{equation*}	
+	\end{column}
+\end{columns}	
+}
+\only<2->{
+\(\xrightarrow{\mathcal{F}^{-1}} \)
+\begin{equation*}
+u(x,t) = \sum \matr{A} \myexp^{-i(k_1 x - \omega t)} + \sum \matr{B} \myexp^{+i (k_1 x +\omega t)}
+\end{equation*}	
+}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Elementary rod theory - spectral  analysis (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.6\textwidth]{elastic_vs_viscoelastic_rod_Doyle.png}
+		\caption{Comparison of elastic and viscoelastic materials in terms of spectrum relations for rod}
+	\end{figure}	
+{\scriptsize
+\begin{biblio}{Source}
+	\biblioref{Doyle J.F.}{1997}{ Wave Propagation in Structures: Spectral Analysis Using Fast Discrete Fourier Transforms}{Springer}
+\end{biblio}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Spectral rod element}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{spectral_rod.png}
+		\caption{Spectral rod element along with throw-off element}
+	\end{figure}	
+General longitudinal displacement
+\begin{equation*}
+	\hat{u}(x) = \matr{A} \myexp^{-i k_1 x} +\matr{B} \myexp^{-i k_1 (L-x)}
+\end{equation*}
+\( \matr{A}, \matr{B}\) determined from boundary conditions
+
+Nodal displacements (degrees of freedom):
+\begin{equation*}
+\hat{u}(0) = \hat{u}_1 = \matr{A} + \matr{B} \myexp^{- i k_1 L} \quad  \hat{u}(L) = \hat{u}_2 = \matr{A} \myexp^{- i k_1 L} + \matr{B}
+\end{equation*}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Spectral rod element: shape functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+	\includegraphics[width=0.8\textwidth]{spectral_rod.png}
+\end{figure}	
+\begin{equation*}
+\hat{u}(x) = \hat{N}_1(x) \hat{u}_1 + \hat{N}_2(x) \hat{u}_2
+\end{equation*}
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\begin{align*}
+		&\hat{N}_1(x) = \left[ \myexp^{-i k _1 x} - \myexp^{-i k_1 (2L-x)}\right]/\Delta\\
+		&\hat{N}_2(x) = \left[ -\myexp^{-i k _1(L+x) } + \myexp^{-i k_1 (L-x)}\right]/\Delta\\
+		&\Delta = 1-\myexp^{-i 2 k_1 L}
+		\end{align*}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{align*}
+	&\hat{N}_1(x) = \csc(k L) \sin\left(k (L-x)\right)\\
+	&\hat{N}_2(x) = \csc(k L) \sin(k  x)
+	\end{align*}	
+	\end{column}
+\end{columns}	
+For throw-off element
+\begin{equation*}
+\hat{N}_1(x) = \myexp^{-i k x}
+\end{equation*}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Spectral rod element: dynamic stiffness matrix}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation*}
+F= EA \frac{\partial u}{\partial x}, \quad \hat{u}(x) = \hat{N}_1(x) \hat{u}_1 + \hat{N}_2(x) \hat{u}_2
+\end{equation*}
+\begin{align*}
+& \hat{F}_1 = -\hat{F}(0) = -\hat{E}\hat{A} \left( \frac{\partial N_1(0)}{\partial x} \hat{u}_1 +  \frac{\partial N_2(0)}{\partial x} \hat{u}_2 \right)\\
+& \hat{F}_2 = +\hat{F}(L) = +\hat{E}\hat{A} \left( \frac{\partial N_1(L)}{\partial x} \hat{u}_1 +  \frac{\partial N_2(L)}{\partial x} \hat{u}_2 \right)
+\end{align*}	
+\begin{equation*}
+\left\{
+	\begin{array}{c}
+	\hat{F}_1 \\ 
+	\hat{F}_2 
+	\end{array} 
+	\right\} = \hat{E}\hat{A}  
+     \left[  
+     \begin{array}{rr}
+      - \frac{\partial N_1(0)}{\partial x}  &  - \frac{\partial N_2(0)}{\partial x}  \\
+       \frac{\partial N_1(L)}{\partial x}  &  \frac{\partial N_2(L)}{\partial x} 
+       \end{array}
+       \right]
+       \left\{ \begin{array}{l}\hat{u}_1 \\ \hat{u}_2\end{array}\right\} = 
+       \left[  \begin{array}{ll} \hat{k}_{11}^e & \hat{k}_{12}^e\\
+       \hat{k}_{21}^e & \hat{k}_{22}^e \end{array}\right]
+       \left\{ \begin{array}{l} \hat{u}_1 \\ \hat{u}_2\end{array}\right\}
+\end{equation*}
+\begin{equation*}
+\begin{array}{ll}
+ \hat{k}_{11}^e = k \hat{E}\hat{A} \cot (k L), \quad &\hat{k}_{12}^e = -k \hat{E}\hat{A} \csc (k L)\\
+ \hat{k}_{21}^e =-k \hat{E}\hat{A} \csc (k L), \quad &\hat{k}_{22}^e = k \hat{E}\hat{A} \cot (k L)
+\end{array}
+\end{equation*}
+throw-off \(\hat{k}^e = \hat{E} \hat{A} i k \)
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Measured waves in a rod}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\begin{figure}
+			\animategraphics[autoplay,loop,width=1.05\textwidth]{5}{animation-rod-laser-sync/along_}{1}{201}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{figure}
+			\animategraphics[autoplay,loop,width=0.9\textwidth]{5}{animation-rod-laser-sync/across_}{1}{201}
+		\end{figure}
+	\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Higher order rod theories}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\only<1>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_1.png}
+	}
+	\only<2>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_2.png}
+	}
+	\only<3>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_3.png}
+	}
+	\only<4>{
+	\includegraphics[width=0.8\textwidth]{Fig_4_4.png}
+	}
+\end{figure}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Guided waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ultrasonic testing vs guided wave testing (1)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 	\includegraphics[width=0.6\textwidth]{1280px-UT_vs_GWT.jpg}
 	\caption{source: wikipedia}
@@ -661,9 +1110,9 @@ These waves can be decomposed into infinite plane waves propagating along arbitr
 \note{
 	
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Waves used in non-destructive testing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Elastic wave propagation types depending on particle motion:
 \begin{itemize}
 	\item  \alert{The longitudinal wave}is a compressional wave in which the particle motion is in the same direction as the propagation of the wave
@@ -716,9 +1165,9 @@ Elastic wave propagation types depending on particle motion:
 \note{
 	
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Waves used in non-destructive testing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}
 		\includegraphics[width=0.5\textwidth]{Fig_1_4.jpg}
 		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love }
@@ -728,9 +1177,9 @@ Elastic wave propagation types depending on particle motion:
 \note{
 	
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Waves used in non-destructive testing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{columns}[T]
 	\begin{column}{0.5\textwidth}
 		\begin{figure}
@@ -750,16 +1199,114 @@ Elastic wave propagation types depending on particle motion:
 \note{
 	
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Challenges in simulations of elastic wave propagation phenomenon}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lamb waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Lamb waves}	
+		Lamb waves are plane waves propagating in thin plates.\\
+		Shear vertical waves in conjunction with longitudinal P waves interacts with plate surfaces resulting in complex wave mechanism which leads to creation of Lamb waves.
+\end{alertblock}
+Horace Lamb discovered these type of waves in 1917.
+He derived theory and dispersion relations.
+\begin{columns}[T]
+	\begin{column}{0.5\textwidth}
+		\centering
+		symmetric modes
+		\begin{equation*}
+		  \frac{\tan(q h)}{\tan(p h)} = -\frac{4 k^2 p q}{\left(q^2 - k^2\right)^2}
+		\end{equation*}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\centering
+		antisymmetric modes
+		\begin{equation*}
+		\frac{\tan(q h)}{\tan(p h)} = -\frac{\left(q^2 - k^2\right)^2}{4 k^2 p q}
+		\end{equation*}
+	\end{column}
+\end{columns}
+	
+\centering
+\(q=q(\omega,k), \quad p=p(\omega,k) \)
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dispersion curves of Lamb waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\only<1>{
+	\includegraphics[width=0.8\textwidth]{Fig_1_12.png}	
+	}
+	\only<2>{
+		\includegraphics[width=0.8\textwidth]{Fig_1_13.png}	
+	}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Challenges in simulations of elastic wave propagation phenomenon}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Excitation and measurement techniques}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Piezoelectricity}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\animategraphics[autoplay,loop,width=0.7\textwidth]{3}{piezoelectricity_effect/piezoelectricity_effect_}{1}{25}
+				\caption{Source: \url{https://commons.wikimedia.org/wiki/File:SchemaPiezo.gif }}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+		Piezoelectricity is the electric charge that accumulates in certain solid materials (such as crystals, certain ceramics,) in response to applied mechanical stress.	\\
+		Lead zirconate titanate\\
+		Pb[Zr\textsubscript{x}Ti\textsubscript{1-x}]O\textsubscript{3} \\
+		 more commonly known as PZT, is the most commonly used piezoelectric ceramic today
+		\end{column}
+	\end{columns}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{SLDV measurements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth]{wibrometr-laserowy-1d_small-description.png}
+		\end{figure}
+		\column{0.5\textwidth}
+		\begin{enumerate}
+			\item Signal generator: TTI 1241 
+			\item Amplifier: Piezo Systems EPA-104-230 $\pm$200 Vp
+			\item Specimen
+			\item Scanning head: Polytec PSV-400
+			\item DAQ system: Polytec
+		\end{enumerate}
+	\end{columns}
+	{\small
+		Vibrometer allows measurements of vibration velocities in range 0.01~$\mu$m/s $-$ 10 m/s for frequencies from DC up to 1.5~MHz for measuring distance from 40~cm up to dozens of meters. Scanning resolution is 0.002$^{\circ}$  which provides possibility of defining about 300 000 points in laser working area.}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+% https://www.youtube.com/watch?v=o0qkmG_S4QY
+\note{
+This picture shows the elements of the review of the Lamba wave propagation measurement. These are signal generators, amplifier, sample, laser vibrometer head and analogue to digital converters. 
+The laser vibrometer measures the vibration velocities along the laser beam. 
+Theoretically, vibration measurement up to 1.5 MHz is included. 
+In practice it depends on many parameters such as vibration amplitude, type of decoder, distance of the laser from the sample, attenuation of the material, etc.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assignment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Assignment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Answer the following questions:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer to the following questions:
 \begin{enumerate}	
   \item What is the difference between wave propagation and vibrations?
   \item What is the difference between bulk waves and Lamb waves?
@@ -768,8 +1315,17 @@ Answer the following questions:
 %%%%%%%%%%%%%%%%%%%%
 \note{
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{References}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{biblio}{Recommended books}
+	\biblioref{Rose J.L.}{1999}{ Ultrasonic Waves in Solid Media}{Cambridge University Press}
+	\biblioref{Doyle J.F.}{1997}{ Wave Propagation in Structures: Spectral Analysis Using Fast Discrete Fourier Transforms}{Springer}
+	\biblioref{Ostachowicz W., Kudela P., Krawczuk M., Zak A.}{2012}{ Guided Waves in Structures for SHM: The Time Domain Spectral Element Method}{Wiley}
+\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=black, bg=white}
 \begin{frame}[standout]
   Thank you for your attention!\\ \vspace{12pt}
@@ -781,7 +1337,31 @@ Answer the following questions:
 I hope that you have learnt something from my presentation.
 So, if you have any questions please drop me a line.
 See you next time!}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % END OF SLIDES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Empty 2-columns}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			
+		\end{column}
+	\end{columns}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
