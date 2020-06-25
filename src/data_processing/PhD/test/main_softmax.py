@@ -214,10 +214,7 @@ def main_loop():
 path_segnet_figuers_folder_no_threshold = 'E:/aidd_new/aidd/reports/figures/VGG_encoder_decoder/Num/Fig_unthreshold_softmax'
 path_fcn_figuers_folder_no_threshold = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Fig_unthreshold_softmax'
 path_unet_figuers_folder_no_threshold = 'E:/aidd_new/aidd/reports/figures/UNet/Num/Fig_unthreshold_softmax'
-
 Path(path_unet_figuers_folder_no_threshold).mkdir(parents=True, exist_ok=True) # create folder for the original images
-
-
 def Testing():
     prediction = model.predict(test_x_samples, batch_size=1)
    #prediction = np.asarray(prediction)
