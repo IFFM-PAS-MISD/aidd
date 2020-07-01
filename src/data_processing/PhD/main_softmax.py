@@ -50,8 +50,8 @@ experimental = np.load('exp_ERMS.npy')
 experimental_label = np.load('exp_label.npy')
 experimental = experimental / 255.0
 experimental_label =experimental_label/ 255.0
-experimental = experimental.reshape(22, 512, 512, 1)
-experimental_label = experimental_label.reshape(22,512,512,1)
+experimental = experimental.reshape(23, 512, 512, 1)
+experimental_label = experimental_label.reshape(23,512,512,1)
 
 ########################################################################################################################
 #################################################### Loading the model #################################################
@@ -247,7 +247,7 @@ def exp():
     prediction = model.predict(experimental, batch_size=1)
     prediction = np.asarray(prediction)
 
-    for i in range(22):
+    for i in range(23):
         damage = (prediction[i])
         #print(damage)
         damage  = np.argmax(damage,axis=2)
