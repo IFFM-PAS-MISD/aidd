@@ -19,7 +19,7 @@
 %% with harvard style bibliographic references
 %% SP 2008/03/01
 
-\documentclass[preprint,10pt]{elsarticle}
+\documentclass[preprint,9pt]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
@@ -98,10 +98,10 @@
 		%% \author[label1,label2]{}
 		\address[IFFM]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
 		
-		\author{Pawel Kudela\fnref{IFFM}}
+		\author{Abdalraheem A. Ijjeh\fnref{IFFM}}
 		\author{Saeed Ullah \fnref{IFFM}}
-		\author{Abdalraheem A. Ijjeh\corref{cor1}\fnref{IFFM}}
-		\ead{aijjeh@imp.gda.pl}
+		\author{Pawel Kudela\corref{cor1}\fnref{IFFM}}
+		\ead{pk@imp.gda.pl}
 		%\ead{pfiborek@imp.gda.pl}
 		%\author{Tomasz Wandowski \fnref{IFFM}}	
 		
@@ -127,63 +127,126 @@
 
 	\section{Introduction}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Structural Health Monitoring Overview}
-Structural Health Monitoring (SHM) can be defined as the acquisition, validation and analysis of the technical data to facilitate life cycle management decisions~\cite{R.1999}. Furthermore, SHM is consisted to provide extensive diagnostic information about structures, defects, its evolution and the residual lifetime. Accordingly, SHM involves dealing with sensors, smart materials, data transmission, computational power, and processing ability inside the structures. SHM can be applied in different types of structures i.e. civil and aeronautic structures, smart and composite materials. As a result for applying SHM, it prevents catastrophic events to happen for structures due to the scheduled monitoring bases. furthermore, SHM helps with reducing the cost of maintenance by its ability to detect and localize the damages and faulty parts. The characteristics of damage in a particular structure play a key role in defining the architecture of  SHM system. Due to the fact that once we are able to define the damage type we can decide what type of sensors and actuators are required~\cite{Kessler2002}. 
-
-Composites materials are excessively popular in nowadays life. e.g. Cars, planes, boats, etc. have been made from composites such as fiberglass because they are lighter than metals but often just as strong, which leads us to the laminates materials, which are composites in which layers of different materials are bonded together with adhesive, to give added strength, flexibility, and durability. Nonetheless, the main disadvantages of composite materials that we are dealing with during the design, manufacturing, and repair over metallic parts that they tend to fail by distributed and interacting damage modes. Also, damage detection in composite materials is more difficult to the anisotropy of the material, the conductivity of the fibers and the fact that much damage, therefore, occurs beneath the top surface of the laminate and is therefore not easily detectable.
-
-\subsection{Review of Damage detection Techniques within composite materials }	
-Different approaches were applied for detecting damage in composite materials. Yet, A well-known method that is used for that purpose are the Lamb wave techniques. In general, we can define Lamb waves as an elastic vibration that can propagate in solid structures (plates wrapped into cylindrical pipes or vessels or plates cut into thin strips, etc.) with free boundaries. In which, Lamb waves consist of two types of waves, symmetric ($S0,S1,S2...$) and anti-symmetric ($A0,A1,A2...$) modes , and each mode can propagate independently of the other. Lamb waves ($A0$ mode) are commonly used due to the fact that it can propagate for long distances with little dispersion, and no higher modes are present to turbulence the resulting response wave~\cite{Valed2000}.
+	Composite materials have a wide range of applications in various industries, due to their characteristics such as high strength, low density, resistance to fatigue, and corrosion.  
+	However, damage can occur in composites materials due to impacts resulting from the lack of reinforcement in the out-of-plane direction.
+	In particular, laminated composite materials are more sensitive to delamination damage due to weak transverse tensile and interlaminar shear strengths.
+	Delamination can alter the compression strength of composite laminate, and gradually affect the composite to encounter failure by buckling. 
+	Delaminations can seriously decrease the performance of composites structures, accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
 	
-The earliest application of Lamb waves on composite materials was performed by Saravanos~\cite{doi:10.2514/6.1994-1754}, in which he explored the possibility of detecting delamination in composite beams using Lamb waves. Later, Percival and Birt~\cite{Percival1997}, who started focusing their work on the two fundamental Lamb wave modes have concluded the same. Damage Detection in composite materials of other forms was also inspected by Seale~\cite{Seale1998}, who examined fatigue and thermal damage. Also, Tang~\cite{Tang1989} examined the sensitivity of Lamb wave propagation to fiber fracture.
+	One of the conventional techniques for damage identification for nondestructive evaluation (NDE) involves arrays of transducers that can be mounted or embedded in the structures for registering the response of the guided wave propagation.
+	However, damage identification regarding structures with curved and deformable geometry can be inaccurate when using transducers array, also, damage influence maps resulted from transducer array have low resolution, due to the small number of sensing points. 
+    Accordingly, this issue of low resolution damage influence map can be solved by utilising a Scanning Laser Doppler Vibrometry (SLDV), which is a non-contact technique dedicated to full wavefield measuring vibration and guided wave propagation by registering measurements for a dense mesh of measuring points spanned over the area of the investigated structure.
+    Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localization. 
+    
+    Conventional damage detection and localization methods focus on patterns extraction from registered measurements (whether from transducers array or SLDV) and accordingly make decisions based on the patterns ~\cite{Gul2009}. 
+    Moreover, conventional methods for patterns recognition requires feature selection and classification (handcrafted features). 
+	These conventional methods can perform efficient damage detection, however, these methods depend on selected features from their scope of measurement, accordingly, introducing new patterns will cause them to fail in detecting the damage.
+	Moreover, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features~\cite{Gulgec2019}.
+    
+    \begin{enumerate}
+    	\item Talk about the need for AI to overcome issues of conventional methods.
+		\item Related work 
+		\item Talk about the novelty of our work 
+		\item solve the references issue
+    \end{enumerate}
 
-There are plenty of methods which utilizes Lamb waves for damage detection in SHM. One of the successful approaches has been done by two separate groups (Cawley and Soutis) at Imperical College, Cawley's group has developed polyvinylidenefluride(PVDS) transducers in which it can generate Lamb waves and receive it, those generated waves are highly focused. Soltis's group main focus was on sensor placement and signal processing issues~\cite{Valed2000,Valed2000a,Valed2001}. They have chosen to use Lead–Zirconate–Titanate (PZT) actuators and sensors over PVDF since they require a factor of ten less voltage to generate Lamb waves. Moreover, implemented Lamb wave techniques in SHM are broadly reported to be beneficial, efficient and sensitive in detecting defects in metallic structures, disbonds and delaminations in composite structures~\cite{Boller2000,Diamanti2004,Su2006,Raghavan2007,Diamanti2007} \newline Authors in~\cite{Ng2009} 
-	
+    
+	In this work, we investigate delamination since it is one of the most dangerous damage types.
 
-In this work, we went a step further, we used a large collection of signals (animation of propagating elastic waves), which are registered on very dense grid of points resembles scanning laser vibrometer measurements. Such collection of signals is often called full wave-field. 
-It was found
-\section{Data Acquisition}
-	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dataset}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, we have generated a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a plate made of carbon fibre-reinforced plastic (CFRP).
+The time domain spectral element method was used for simulation of Lamb wave interaction with delamination.
+For each case single delamination was modelled by using the method of splitting nodes between appropriate spectral elements. 
+It was assumed that the composite laminate is made of eight layers of total thickness 3.9 mm.
+The delamination was modelled between the third and fourth layer (see Fig.~\ref{fig:plate_setup} for details).
+It should be noted that the figure shows exaggerated cross-section through the delamination. 
+Zero-volume delamination was assumed in the model. 
+For each case delamination location was selected randomly so that interaction of guided waves excited at the plate centre with delamination is different for each case.
+It includes cases when delamination is located at the edge of the plate which is the most difficult to identify by signal processing methods.
+Additionally, the size of the delamination was randomly simulated by selecting ellipse minor and major axis from the interval 5--20 mm.
+Also the angle between delamination major axis and horizontal axis was randomly selected.
 \begin{figure}
-	\includegraphics{logo_box.eps}
+	\centering
+	\includegraphics[scale=0.8]{plate_delam_arrangement_MSSP.png}
+	\caption{Setup for computing Lamb wave interactions with delamination.}
+	\label{fig:plate_setup}
 \end{figure}
-\section*{ }
-%\bibliography{ref,report}{}
-%\bibliographystyle{num_order}
-%\end{document}	
 
-\section{Method}
+The output from the top and bottom surface of the plate in the form of particle velocities at the nodes of spectral elements were projected on the uniform grid of 500\(\times\)500 points by using shape functions of elements (see Parallel spectral element method for guided wave based structural health monitoring paper for detail).
+It essentially resembles measurements acquired by scanning laser Doppler vibrometer (SLDV) in the transverse direction (perpendicular to the plate surface).
 
-In this work, A deep learning approach for delamination detection within composite materials is presented. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Signal processing strategy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.8]{FCN_adaptive_filtering_diagram_MSSP.png}
+	\caption{Diagram of signal processing strategy by the proposed Fully Convolutional Network (left branch) in comparison to signal processing utilising adaptive wavenumber filtering method (right branch). }
+	\label{fig:sig_proc_strategy}
+\end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\subsection{Adaptive wavenumber filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fully Convolutional Network approach}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, A deep learning approach for delamination detection in composite materials is presented. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Data preprocessing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It should be noted that the output from the wave propagation model is in the form of 3D matrix which contains amplitudes of propagating waves at location \((x, y)\) and time \(t\). We can look at it as a set of frames of propagating waves at discrete time moments \(t_k\).
+
+The data preprocessing as it is indicated in Fig. ?? include a step of computation of root mean square value:
+\begin{equation}
+\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N} s(x,y,t_k)^2}
+\end{equation}
+where number of sampling points \(N\) was 512.
+In this way, dataset was collapsed to 475 2D matrices in which amplitudes are stored as double precision values.
+The next step was conversion of these matrices to greyscale images (colour image quantisation).
+Colour scale values of obtained images vary between (\(0 - 255\)) hence normalization
+to a range of (\(0-1\)) was applied to enhance the optimizer function during the learning process. 
+Furthermore data augmentation was achieved by flipping images vertically, horizontally and diagonally to enhance the learning process through enabling the model to learn and recognize new complex patterns.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Basic concept of Fully Convolutional Network}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The main purpose of such approach is to automatically perform feature extraction by training a model using full wavefield images, hence, it will learn by itself to recognise the patterns and detect the delamination and localize it.
 In our work we are using fully convolutional network (FCN), which aims to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
 Therefore, several models were implemented for that purpose.
 
 The idea behind FCN is to stack a group of convolutional layers in an encoder-decoder style. 
-The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsamples the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
+The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsample the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
 
-In this work, we have generated a large dataset of 475 images of a full wavefield of propagating elastic waves to simulate the experimentally generated data which resembles measurements acquired by scanning laser Doppler vibrometer (SLDV).
-Each image contains different delamination damage in a different size, location, shape(ellipse, circle) and angle between delamination major axis and horizontal axis.
-The image values vary between (\(0 - 255\)) were normalized to a range of (\(0-1\)) to enhances the optimizer function during the learning process. 
-In order to reduce overfitting in the models, some techniques were applied such as adding dropouts to layers and data augmentation for the dataset by flipping vertically, horizontally and diagonally to enhance the learning process through enabling the model to learn and recognize new complex patterns.
+
+In order to reduce overfitting in the models, some techniques were applied such as adding dropouts to layers.
+
 For the output layer, we have applied two activation functions in separate experiments, the first one is softmax and the second one is sigmoid. 
-The softmax function calculates the probability of the damaged and the undamaged for every single pixel, hence, the summation of the two probabilities must equal one. Eqn.~\ref{softmax} illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
+The softmax function calculates the probability of the damaged and the undamaged for every single pixel, hence, the summation of the two probabilities must equal one. Eqn.~\ref{softmax} illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged.
+To predict the output label of the detection (\(y_{pred}\)) which represent the probability of damaged and undamaged we applied the \(argmax\) function to select the maximum probability of the softmax activation function.
 \begin{equation}
-\footnotesize
 P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
 \label{softmax}
 \end{equation} 
+\begin{equation}
+y_{pred} = aragmax_{i}\left( \left[P(x)_{i}\right]\right)
+\label{argmax}
+\end{equation}
+
 When using sigmoid in the output layer, it produces a vector of values between (\(0\) and \(1\)) indicating the damage weight for each pixel. 
 Low values indicate low damage probability and high output values indicate high damage probability. Eqn.~\ref{sigmoid} illustrates the sigmoid function, 
 where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Eqn~\ref{z}.
 \begin{equation}
-\footnotesize
 	\sigma(z) = \frac{1}{1+e^{-z}}
 	\label{sigmoid}
 \end{equation}
 \begin{equation}
-\footnotesize
 	z= \sum_{i=0}^{n}  w_i\times x_i +b
 	\label{z}
 \end{equation}
@@ -191,13 +254,11 @@ Selecting the loss function is a crucial task in deep learning since it measures
 We have applied two types of losses based on the used function in the final activation layer: Binary cross-entropy (BCE) loss function applied with a sigmoid activation function in the output layer, Categorical cross-entropy (CCE) loss function with a softmax activation in the output layer which is also called softmax loss function.
 Eqn.~\ref{BCE} illustrates the BCE, where \(\hat{Y}\) represents the predicted vector values and \(Y\) represents the ground truth vector values, when \(\hat{Y} \approx Y\) then the BCE will be almost \(0\) meaning that the model was able to predict the output, so, the aim is to reduce the loss function to the minimum value.
 \begin{equation}
-\footnotesize
 	BCE = (1-Y)log(1-\hat{Y})+Ylog(\hat{Y})
 	\label{BCE}
 \end{equation}
 Eqn.~\ref{CCE} illustrates the CCE, where \( P(x)_{i}\) is the softmax value of the target class. 
 \begin{equation}
-\footnotesize
 CCE = -log\left( P(x)_{i} \right)
 \label{CCE}
 \end{equation}
@@ -209,18 +270,18 @@ As we mentioned earlier the ground truth values are either \((0\) or \(1)\) thus
 The union can be calculated by summing all values in both the predicted and the ground truth  vectors, then we subtract the intersection from their sum.
 Our main goal is to maximize the IoU accuracy metric, since the higher the IoU, the higher the accuracy of the predicted delamination damage.
 \begin{equation}
-\footnotesize
 IoU = \frac{Intersection}{Union} = \frac{\hat{Y} \cap Y}{\hat{Y} \cup Y} 
 \label{IoU}
 \end{equation}
 
-Our goal during training the model is to minimize the loss and maximize the accuracy metric by converting it into an optimization problem. 
+Furthermore, during training the model our focus is to minimize the loss and maximize the accuracy metric by converting it into an optimization problem. 
 The optimizer is responsible for updating the model learnable parameters such as filters weights and biases in a way the overall loss is minimized and the accuracy is maximized.
 In our work, Adam optimizer was applied, which is considered as a combination of RMSprob and Stochastic Gradient Descent (SGD)~\cite{Kingma2015}. 
 
 In the next subsections we are going to present three FCN models for pixel wise semantic segmentation in order to detect and localize delaminations.
-
-\subsection{U-net based model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{U-net based model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Our first FCN model is the U-net model, which was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation constructed from two parts encoder and decoder. 
 This architecture consists of three sections: The downsampling section, The bottleneck, and the upsampling section. 
 The downsampling section holds several contraction blocks. 
@@ -237,7 +298,7 @@ Furthermore, to enhance the model training performance we applied a technique ca
 The term "batch" was added because, during training, we normalize the output of the previous layer for each batch, applying a transformation that keeps the mean activation value close to \(0\) and the activation standard deviation close to \(1\), which eventually enhances the learning rate.
 \begin{figure} [h!]
 	\begin{center}
-		\includegraphics[scale= 0.7]{Unet_model.png}
+		\includegraphics[scale= 0.8]{Unet_model.png}
 	\end{center}
 	\caption{U-Net architecture.} 
 	\label{fig:Unet}
@@ -253,7 +314,7 @@ For this model we have applied a (\(3\times3\))Transposed convolution with (\(2\
 Transposed convolution layer differs from the regular upsampling function, by introducing learnable parameters regarding the transposed convolution filters that enhance the learning process of the model, therefore, new patterns are recognized. 
 
 
-\subsection{FCN-DenseNet based model}
+\subsubsection{FCN-DenseNet based model}
 FCN-DenseNet was introduced by Simon Jegou et al.~\cite{Jegou} for semantic segmentation, it was originally based on the DenseNet model proposed by Gao Huang et al.~\cite{Huang}. 
 The main advantage of FCN-DenseNet over DenseNet is the extra utilising of feature maps by adding the upsampling path to the model.
 FCN-DenseNet is composed of downsampling path, upsampling path and skip connection.
@@ -266,8 +327,9 @@ Figure~\ref{dense_block} presents the architecture of dense block has an input (
 Transition down layer was introduced to reduce the spatial dimensionality of the feature maps, to perform that a (\(1\times 1\))  convolution followed by (\(2\times2\)) Maxpool operation are applied. 
 
 \begin{figure} [h!]
-	\centering 
-	\includegraphics[scale=0.8]{DenseBlock_layer.png}
+	\begin{center}
+		\includegraphics{DenseBlock_layer.png}
+	\end{center}
 	\caption{Dense Block architecture.} 
 	\label{dense_block}
 \end{figure}
@@ -301,14 +363,17 @@ The bottleneck dense block consist of 4 layers
 The output of the bottleneck is directed into upsampling path starting with transition up layer.
 Accordingly, the output of the transition up layer is concatenated with the corresponding dense block output in the downsampling path, the final layer in the network is  (\(1\times1\)) convolution followed by a sigmoid function to calculate the probability of damage for each pixel.
 \begin{figure} [h!]
-	\centering
-	\includegraphics[scale=.7]{FCN_dense_net.png}
+	\begin{center}
+		\includegraphics[scale= 0.8]{FCN_dense_net.png}
+	\end{center}
 	\caption{FCN-DenseNet architecture.} 
 	\label{fcn}
 \end{figure}
 Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
 
-\subsection{FCN-VGG16}
+
+
+\subsubsection{FCN-VGG16}
 In this model we address the use of VGG16-based encoder~\cite{Simonyan2015} with 13-convolutional layers.
 VGG16 encoder is composed of convolutional layers, pooling layers and dense layers, and it was used for classification purposes. 
 In our last model, we employed an encoder decoder scheme for pixel wise image segmentation. 
@@ -322,8 +387,9 @@ The upsampling path is introduced to recover spatial resolution, it also has \(5
 For upsampling, bilinear interpolation with (\(2\times2\)) kernel size is applied.
 Skip connections were added between downsampling blocks and the corresponding upsampling blocks in order to enhance recovering fine-grained details by enabling feature reusability from earlier layers.
 \begin{figure} [h!]
-	\centering 
-	\includegraphics[scale=0.7]{VGG16_encoder_decoder.png}
+	\begin{center}
+		\includegraphics[scale=0.8]{VGG16_encoder_decoder.png}
+	\end{center}
 	\caption{VGG16 encoder decoder architecture.} 
 	\label{vgg16}
 \end{figure}
@@ -331,7 +397,7 @@ Skip connections were added between downsampling blocks and the corresponding up
 
 \section{Results and Discussions}
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -343,7 +409,7 @@ Skip connections were added between downsampling blocks and the corresponding up
 
 	
 \section*{ }
-\bibliography{report}{}
+\bibliography{report.bib}{}
 \bibliographystyle{num_order}
 	
 	
