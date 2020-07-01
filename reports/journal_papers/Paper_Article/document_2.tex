@@ -113,7 +113,7 @@
 		
 		\begin{keyword}
 			%% keywords here, in the form: keyword \sep keyword
-			Lamb waves \sep dispersion curves \sep structural heath monitoring \sep damage detection \sep deep learning \sep Convolutional neural networks CNN. \sep fully convolutional neural network FCN
+			Lamb waves \sep structural heath monitoring \sep damage detection \sep deep learning \sep Convolutional neural networks CNN. \sep fully convolutional neural network FCN
 			%% PACS codes here, in the form: \PACS code \sep code
 			
 			%% MSC codes here, in the form: \MSC code \sep code
@@ -124,93 +124,112 @@
 	\end{frontmatter}
 	%% main text
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Introduction}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Composite materials have a wide range of applications in various industries, due to their characteristics such as high strength, low density, resistance to fatigue and corrosion.  
-	However, damage can occur in composites materials due to impacts resulting from the lack of reinforcement in the out-of-plane direction~\cite{Francesconi2019}.
-	In particular, laminated composite materials are more sensitive to delamination damage due to weak transverse tensile and interlaminar shear strengths.
-	Moreover, delamination can alter the compression strength of composite laminate, and gradually affect the composite to encounter failure by buckling. 
-	Further, delamination can seriously decrease the performance of composites structures, accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Composite materials have a wide range of applications in various industries, due to their characteristics such as high strength, low density, resistance to fatigue, and corrosion.  
+However, damage can occur in composites materials due to impacts resulting from the lack of reinforcement in the out-of-plane direction~\cite{Francesconi2019}.
+In particular, laminated composite materials are more sensitive to delamination damage due to weak transverse tensile and interlaminar shear strengths.
+Delamination can alter the compression strength of composite laminate, and gradually affect the composite to encounter failure by buckling. 
+Delaminations can seriously decrease the performance of composites structures, accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
 	
-	One of the conventional techniques for damage identification for non~destructive testing (NDT) involves arrays of transducers that can be mounted or embedded in the structures for registering the response of the guided waves propagation.
-	However, damage identification regarding structures with curved and deformable geometry can be inaccurate when using transducers array, also, damage influence maps resulted from transducer array have low resolution, due to the small number of sensing points. 
-    Accordingly, this issue of low resolution damage influence map can be solved by utilising a Scanning Laser Doppler Vibrometry (SLDV), which is a non-contact technique dedicated to full wavefield measuring vibration and the propagation of guided waves  by registering measurements for a dense mesh of measuring points spanned over the area of the investigated structure.
-    Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localization. 
-    
-    Conventional damage detection and localization methods focus on patterns extraction from registered measurements and accordingly make decisions based on the patterns ~\cite{Gul2009}. 
-    Moreover, conventional methods for patterns recognition requires feature selection and classification (handcrafted features). 
-	These conventional methods can perform efficient damage detection, however, these methods depend on selected features from their scope of measurement, accordingly, introducing new patterns will cause them to fail in detecting the damage.
-	Moreover, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features~\cite{Gulgec2019}.
-    Perhaps the most challenging part for damage detection is determining the unknown relationship between registered measurements and damage patterns~\cite{Gulgec2019}. 
-    The accelerated progress in the field of artificial intelligence (AI) technologies in recent years, and mainly in deep learning, 
-    revealed new dimensions for solving problems and offered the opportunity for being implemented and integrated with the NDT and further with structural health monitoring (SHM) approaches.
-    Therefore, issues regarding data preprocessing and feature extraction can be handled when applying deep learning techniques. 
-    Alternatively, end-to-end models are presented, in which the whole unprocessed data are fed in the model, hence, it will learn by itself to recognise the patterns and detect the damage.
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	In the following, methods for damage estimations based on machine learning and deep learning techniques for features extraction are presented in the field of SHM/NDT.
-  
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	One of the earliest work for delamination assessment in composite structures using deep learning techniques was performed by Islam et al.~\cite{islam1994damage}. 
-  	They have trained a neural network model with frequencies for the first five modes as input, obtained from modal analysis data by piezoceramic sensors in both damaged and undamaged composite beams.
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	Okafor et al~\cite{okafor1996delamination} applied a feed-forward backpropagation neural network to assess the delamination size in a smart composite beam. 
-  	For training the neural network model, authors used Non-dimensional delamination sizes and corresponding the first four modal frequencies. 
-  	The trained model was tested with new cases of delamination using the first four normalized frequencies of test cases as input to the network. 
-  	Their model predicted the dimensionless delamination size between (0.22 and 0.82) cm successfully,  however, the model could not predict the dimensionless delamination size below 0.08 cm.
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	Moreover, Chakraborty et al.~\cite{chakraborty2005artificial} proposed a neural network model for detecting delamination shape, size and location in a fibre reinforced plastic composite laminate.
-  	Authors used natural frequencies as inputs and the corresponding size, shape and location of delamination as outputs of the model. 
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	Authors in ~\cite{roseiro2005neural}  proposed a damage detection method in laminated composite plates to locate and quantify damage through utilising piezoelectric sensors and artificial neural networks. 
-  	The model trained using the Levenberg-Marquardt algorithm using data collected from piezoelectric sensors.  
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	Further, De Fenza et al~\cite{de2015application} proposed a method for damage detection for aluminium and composite materials plates using Lamb waves by a neural network model for automatic feature extraction and probability ellipse based method. 
-  	The neural network model and probability ellipse were applied on the Damage Index (DI) computed by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	Ewald et al.~\cite{Ewald2019} proposed a deep learning technique for SHM on guided Lamb waves "DeepSHM". 
-  	They have pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the convolutional neural network (CNN) for training to acquire the neural weights. They achieved different classification accuracies ranging from \(\%17\) to \(\%99.9\).
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 	Authors in~\cite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data acquired by SLDV. Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. 
-  	Their results show good results when compared with traditional machine learning SVM.
-  	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  	Sammons et al.~\cite{sammons2016segmenting}, utilised X-ray computed tomography for estimating the delaminations in a CFRP. For this purpose, they utilised the CNN for performing image segmentation of the defected input images to estimate the delaminations. There ConvNet was capable of identifying  and quantifying small delaminations. 
-  	Unfortunately, the ConveNet could not recognise delaminations with large sizes.
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Furthermore, Esfandabadi et al.~\cite{esfandabadideep} applied 20 layers based Very-deep super-resolution (VDSR) architecture, (VDSR is a variant of CNN) on a guided ultrasonic wavefield for enhancing quality of image resolution and quality of the acquired wavefield. 
-	The model was trained on \(652\) wavefield images (\(326\) with defect) and (\(326\) without defects) generated by piezoelectric transducers and acquired with SLDV. 
-	Authors have used various aluminium and CFRP plates to prepare the dataset.
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-	In this work, delamination detection is developed using deep learning techniques.
-	For this purpose, we have implemented a few models for exploring the feasibility of applying such techniques for detecting delaminations.
-	One of the key points of our work is the computation of a large dataset of full wavefield of propagating elastic waves to simulate the experimentally generated data which resembles measurements acquired by SLDV. 
-	Moreover, we have computed the delamination using conventional methods to present the potentials of deep learning approaches over the conventional approaches.
-	
-	For our knowledge, it is the first time, a large full wavefield dataset of propagating elastic waves will be fed as an input to deep neural networks.
-	In this work, we are going to develop several pixel-wise segmentation models, that are capable of detecting and localizing the delamination, through segmenting the input image into damage and undamaged parts.
+One of the conventional techniques for damage identification for non-destru\-ctive testing (NDT) involves arrays of transducers that can be mounted or embedded in the structures for registering the response of the guided wave propagation.
+However, damage identification regarding structures with curved and deformable geometry can be inaccurate when using an array of transducers.
+Also, damage influence maps resulted from processing of signals registered by the array of transducers have low resolution, due to the small number of sensing points. 
+Accordingly, this issue of low resolution damage influence map can be solved by utilising a Scanning Laser Doppler Vibrometry (SLDV), which is a non-contact technique dedicated to full wavefield measurements of vibration and guided wave propagation.
+The measurements are conducted on a dense mesh of measurement points spanned over the area of the investigated structure.
+Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localization~\cite{Michaels2007,Park2014,Tian2015a,Kudela2015}.
+Full wavefield processing techniques even allow for damage size estimation~\cite{Girolamo2018a,Kudela2018} which is difficult to perform in case of transducer arrays especially for composite structures.
+Therefore, the latter methods are evaluated mostly for damage detection and localisation in metallic structures~\cite{Michaels2008,Huang2018a,Wang2020}.
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Certain algorithms such as the time reversal algorithm can benefit from combining piezoceramic transducers (as actuators) with SLDV for sensing~\cite{Girolamo2018a, Miniaci2019}.
+    
+Conventional damage detection and localization methods focus on patterns extraction from registered measurements and accordingly make decisions based on these patterns ~\cite{Gul2009}. 
+Moreover, conventional methods for pattern recognition requires feature selection and classification (handcrafted features). 
+These conventional methods can perform efficient damage detection, however, these methods depend on selected features from their scope of measurement.
+Accordingly, introducing new patterns will cause them to fail in detecting the damage.
+Moreover, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features~\cite{Gulgec2019}.
+Perhaps the most challenging part for damage detection is determining the unknown relationship between registered measurements and damage patterns~\cite{Gulgec2019}. 
+    
+The accelerated progress in the field of artificial intelligence (AI) technologies in recent years, and mainly in deep learning, revealed new dimensions for solving problems and offered the opportunity for being implemented and integrated with the NDT and further with structural health monitoring (SHM) approaches.
+Therefore, issues regarding data preprocessing and feature extraction can be handled when applying deep learning techniques. 
+Nowadays, end-to-end approaches are presented, in which the whole unprocessed data are fed in the model, hence, it will learn by itself to recognise the patterns and detect the damage.
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the following, methods for damage size estimation based on machine learning and deep learning techniques are presented which are targeted in the field of SHM/NDT.
+  	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+One of the earliest work for delamination location and size assessment in composite structures using deep learning techniques was performed by Islam et al.~\cite{islam1994damage}. 
+They have trained a neural network model with frequencies for the first five modes obtained from modal analysis data. 
+The data was acquired by piezoceramic sensors in both damaged and undamaged composite beams.
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Okafor et al~\cite{okafor1996delamination} applied a feed-forward backpropagation neural network to assess the delamination size in a smart composite beam. 
+ For training the neural network model, authors used delamination sizes and corresponding the first four modal frequencies. 
+ The trained model was tested with new cases of delamination using the first four normalized frequencies of test cases as an input to the network. 
+ Their model predicted the delamination size between 0.22~cm and 0.82~cm successfully.
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Moreover, Chakraborty et al.~\cite{chakraborty2005artificial} proposed a neural network model for detecting delamination shape, size and location in a fibre reinforced plastic composite laminate.
+ Authors used natural frequencies as inputs and the corresponding size, shape and location of delamination as outputs of the model. 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Authors in ~\cite{roseiro2005neural}  proposed a damage detection method in laminated composite plates to locate and quantify damage through utilising the electrical potential of piezoelectric sensors and artificial neural networks. 
+ The model was trained using the Levenberg-Marquardt algorithm. High accuracy of damage location was achieved.
+ But tests were performed only based on the numerical model.  
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ Sammons et al.~\cite{sammons2016segmenting}, utilised X-ray computed tomography for estimating the delaminations in a CFRP. 
+ For this purpose, they utilised the CNN for performing image segmentation of the defected input images to estimate the delaminations. 
+ Their ConvNet was capable of identifying and quantifying small delaminations. 
+ Unfortunately, the ConveNet could not recognise delaminations with large sizes.
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ Further, De Fenza et al~\cite{de2015application} proposed a method for damage detection for aluminium and composite materials plates using Lamb waves by a neural network model for automatic feature extraction and probability ellipse based method. 
+ The neural network model and probability ellipse were applied on the damage index (DI) computed by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves "DeepSHM". 
+ They pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the convolutional neural network (CNN) for training to acquire the neural weights. 
+ They achieved different classification accuracies ranging from \(\%17\) to \(\%99.9\).
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Authors in~\cite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data acquired by SLDV. 
+ Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. 
+ Their results show good results when compared with traditional support vector machine (SVM) methods.
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Furthermore, Esfandabadi et al.~\cite{esfandabadideep} applied 20 layers based very-deep super-resolution (VDSR) architecture, (VDSR is a variant of CNN) on a guided ultrasonic wavefield for enhancing quality of image resolution and quality of the acquired wavefield. 
+VDSR was applied in conjunction with compressive sensing theory with the aim of reducing the acquisition time of the ultrasonic wavefield.
+The model was trained on \(652\) wavefield images (\(326\) with defect) and (\(326\) without defects) generated by piezoelectric transducers and acquired by SLDV. 
+Authors have used various aluminium and CFRP plates to prepare the dataset.
+It was concluded that high-resolution images can be obtained, even when only the 10\% of the original scan points were retained.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Motivated by high potentials of deep learning techniques, in this work, we are exploring the feasibility of applying such techniques for detecting delaminations in CFRP plates. 
+One of the key points of our work is the computation of a large dataset of full wavefield of propagating guided waves by using the parallel version of the time domain spectral element method~\cite{Kudela2020}. 
+Numerically generated data resembles measurements acquired by SLDV. 
+	
+For our knowledge, it is the first time, a large full wavefield dataset of propagating guided waves will be fed as an input to deep neural networks with the aim of delamination size estimation.
+
+In this work, we are presenting a pixel-wise segmentation model which is capable of detecting and localising the delamination, through segmentation of the input image into damaged and undamaged parts.
+Moreover, the pixel-wise segmentation model enables the precise shape and size estimation of defects.
+The capabilities and potentials of the proposed method are compared to the conventional wavefield signal processing method i.e. adaptive wavenumber filtering~\cite{Kudela2015,Radzienski2019}.
+The quantitative comparison was performed by using intersection over the union of detected delamination area with respect to the ground truth. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Methodology}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Dataset}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	In this work, we have generated a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a plate made of carbon fibre-reinforced plastic (CFRP).
-	The time domain spectral element method was used for simulation of Lamb wave interaction with delamination.
-	For each case single delamination was modelled by using the method of splitting nodes between appropriate spectral elements. 
-	It was assumed that the composite laminate is made of eight layers of total thickness 3.9 mm.
+	The time-domain spectral element method was used for simulation of Lamb wave interaction with delamination~\cite{Kudela2020}.
+	For each case, single delamination was modelled by using the method of splitting nodes between appropriate spectral elements. 
+	It was assumed that the composite laminate is made of eight layers of a total thickness of 3.9 mm.
 	The delamination was modelled between the third and fourth layer (see Fig.~\ref{fig:plate_setup} for details).
-	It should be noted that the figure shows exaggerated cross-section through the delamination. 
+	It should be noted that the figure shows an exaggerated cross-section through the delamination. 
 	Zero-volume delamination was assumed in the model. 
 	For each case delamination location was selected randomly so that interaction of guided waves excited at the plate centre with delamination is different for each case.
 	It includes cases when delamination is located at the edge of the plate which is the most difficult to identify by signal processing methods.
-	Additionally, the size of the delamination was randomly simulated by selecting ellipse minor and major axis from the interval 5--20 mm.
-	Also the angle between delamination major axis and horizontal axis was randomly selected.
+	Additionally, the size of the delamination was randomly simulated by selecting the ellipse minor and major axis from the interval 10--40 mm.
+	Also, the angle between the delamination major axis and the horizontal axis was randomly selected.
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.8]{plate_delam_arrangement_MSSP.png}
@@ -451,7 +470,7 @@
 
 	
 	\section*{ }
-	\bibliography{MSSP_paper1}{}
+	\bibliography{MSSP_paper1}
 	\bibliographystyle{num_order}
 	
 	
