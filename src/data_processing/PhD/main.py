@@ -119,9 +119,9 @@ def IoU(predicted_image, truth_img):
     return IoU1
 ########################################################################################################################
 ########################################### Saves the IoU values to a csv file #########################################
-file_name = 'IoU_FCN_DenseNets.csv'
+#file_name = 'IoU_FCN_DenseNets.csv'
 #file_name = 'IoU_UNet.csv'
-#file_name = 'IoU_VGG16_encoder_decoder.csv'
+file_name = 'IoU_VGG16_encoder_decoder.csv'
 
 def append_list_as_row(file_name, list_of_Iou, image_number,threshold_list):
     with open(file_name, 'a', newline='') as f:
@@ -151,14 +151,14 @@ def plotting(original,predict,ground,tr,image_number,C):
     if C==0:
         plt.imshow(original, cmap='Greys')
         plt.axis('off')
-        plt.savefig(folder_path+'/Original_Figure_' + str(image_number + 1) +'_.png') #Threshold_'+str(tr)+'
+        #plt.savefig(folder_path+'/Original_Figure_' + str(image_number + 1) +'_.png') #Threshold_'+str(tr)+'
         plt.imshow(ground, cmap='gist_gray')
         plt.axis('off')
-        plt.savefig(folder_path+'/GT_Figure_' + str(image_number + 1) + '_.png') #Threshold_'+str(tr)+'
+        #plt.savefig(folder_path+'/GT_Figure_' + str(image_number + 1) + '_.png') #Threshold_'+str(tr)+'
 
     plt.imshow(predict, cmap=cmap)
     plt.axis('off')
-    plt.savefig(folder_path+'/Predicted_Figure_' + str(image_number + 1) + '_threshold_' + str(tr) + '_.png') #Threshold_'+str(tr)+'
+    #plt.savefig(folder_path+'/Predicted_Figure_' + str(image_number + 1) + '_threshold_' + str(tr) + '_.png') #Threshold_'+str(tr)+'
     plt.close('all')
     gc.collect()
 
@@ -250,7 +250,8 @@ def exp():
 
     for i in range(22):
         damage = np.squeeze(prediction[i], axis=2)
-        damage = thresholding(damage,1)
+        damage = thresholding(damage,0.5)
+        print(damage)
         original = np.squeeze(experimental[i], axis=2)
         label = np.squeeze(experimental_label[i], axis=2)
         fig = plt.figure(figsize=(16, 9))
@@ -281,8 +282,8 @@ def exp():
 ############################################ Running functions  ########################################################
 ########################################################################################################################
 #Testing()
-#main_loop()
-exp()
+main_loop()
+#exp()
 ########################################################################################################################
 gc.collect()
 
