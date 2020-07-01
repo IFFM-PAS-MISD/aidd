@@ -5,7 +5,8 @@ load project_paths projectroot src_path;
 % allow overwriting existing results if true
 %overwrite=false;
 overwrite=true;
-test_case=[1:12,15:24]; % select file numbers for processing
+%test_case=[1:12,15:24]; % select file numbers for processing
+test_case=[25:27]; % select file numbers for processing
 %% Processing parameters
 Nx = 500;   % number of points after interpolation in X direction
 Ny = 500;   % number of points after interpolation in Y direction
@@ -45,8 +46,10 @@ list = {'GFRP_nr6_50kHz_5HC_8Vpp_x20_10avg_110889', ...          % 1  Length = ?
         'CFRP_100kHz_20Vpp_x10_53261p_strona_oklejona_plastelina_naciecia_prostokatne_256_256', ... %21
         'CFRP3_5_teflon10x10mm_50kHz_47085p_20Vppx20_10avg_prostokatne', ... %22
         'CFRP3_5_teflon10x10mm_100kHz_47085p_20Vppx20_20avg_prostokatne', ... %23
-        'CFRP3_5_teflon15x15mm_50kHz_47085p_20Vppx20_10avg_prostokatne' %24
-         };              
+        'CFRP3_5_teflon15x15mm_50kHz_47085p_20Vppx20_10avg_prostokatne',... %24           
+         'CFRP_teflon_3_375_375p_50kHz_5HC_x3_15Vpp',...%25
+         'CFRP_teflon_3c_375_375p_50kHz_5HC_x3_15Vpp',...%26
+         'CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp'};%27              
 
 
 disp('Interpolation and RMS calcualation');
