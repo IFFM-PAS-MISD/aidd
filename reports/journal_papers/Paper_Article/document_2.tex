@@ -218,15 +218,7 @@ The quantitative comparison was performed by using intersection over the union o
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\input{dataset}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Signal processing strategy}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.8]{FCN_adaptive_filtering_diagram_MSSP.png}
-		\caption{Diagram of signal processing strategy by the proposed Fully Convolutional Network (left branch) in comparison to signal processing 	utilising adaptive wavenumber filtering method (right branch). }
-		\label{fig:sig_proc_strategy}
-	\end{figure}
+	\input{Signal_processing_strategy}
 	\input{Adaptive_wavenumber_filtering}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -247,199 +239,19 @@ The quantitative comparison was performed by using intersection over the union o
 	The next step was conversion of these matrices to greyscale images (colour image quantisation).
 	Colour scale values of obtained images vary between (\(0 - 255\)) hence normalization
 	to a range of (\(0-1\)) was applied to enhance the optimizer function during the learning process. 
+	
+	Furthermore data augmentation were achieved by flipping images horizontally, vertically and diagonally, by performing that we increased the dataset size four times, (\(1900\)) images were produced.
+	
+	Such data augmentation can enhance the learning process by produce new different patterns which can enhance the model performance to generalize and improve the model accuracy of damage detection
+	
+	Initially, we split the dataset into three portions: \(80\%\) for the training set, \(20\%\) for testing set and \(20\%\) of the training set as separated to the validation set.
+	
 	Furthermore data augmentation was achieved by flipping images vertically, horizontally and diagonally to enhance the learning process through enabling the model to learn and recognize new complex patterns.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\input{section_fully_convolutional_networks}
 	\input{FCN_models}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Results and Discussions}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%first figure
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure} [h!]
-		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{RMS_flat_shell_Vz_433_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion0deg_direct}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{m1_rand_single_delam_433.png}
-			\caption{}
-			\label{fig:m1_rand_single_delam_433}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{ERMSF_flat_shell_Vz_433_500x500bottom.png}
-			\caption{}
-			\label{fig:ERMSF_flat_shell_Vz_433}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_433_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion45deg_direct}
-		\end{subfigure}
-
-	%	\begin{subfigure}[b]{0.47\textwidth}
-	%		\centering
-	%		\includegraphics[scale=1]{FCN_DenseNet_Predicted_433_sigmoid_thresholded_0.1.png}
-	%		\caption{sigmoid,n(433), tr (0.1)}
-	%		\label{fig:predict_433_sigmoid_tr_0.1}
-	%	\end{subfigure}
-		
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1]{FCN_DenseNet_Predicted_433_softmax.png}
-%			\caption{softmax, n(433)}
-%			\label{fig:predict_433_softmax}
-%		\end{subfigure}
-		\caption{}
-		\label{fig:optimized_direct}
-	\end{figure} 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%second figure
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure} [h!]
-		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{RMS_flat_shell_Vz_438_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion15deg_direct}
-		\end{subfigure}
-		\hfill
-			\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{m1_rand_single_delam_438.png}
-			\caption{}
-			\label{fig:m1_rand_single_delam_438}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{ERMSF_flat_shell_Vz_438_500x500bottom.png}
-			\caption{}
-			\label{fig:ERMSF_flat_shell_Vz_438}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_438_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion75deg_direct}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-		\includegraphics[scale=1]{FCN_DenseNet_Predicted_438_sigmoid_thresholded_0.1.png}
-		\caption{sigmoid,n(438), tr (0.1)}
-		\label{fig:predict_438_sigmoid_tr_0.1}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{FCN_DenseNet_Predicted_438_softmax.png}
-			\caption{softmax, n(438)}
-			\label{fig:predict_438_softmax}
-		\end{subfigure}
-
-		\caption{}
-		\label{fig:predictions}
-	\end{figure} 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	% third figure
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure} [h!]
-		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{RMS_flat_shell_Vz_454_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion30deg_direct}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{m1_rand_single_delam_454.png}
-			\caption{}
-			\label{fig:m1_rand_single_delam_454}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{ERMSF_flat_shell_Vz_454_500x500bottom.png}
-			\caption{sigmoid,n(454), tr (0.1)}
-			\label{fig:ERMSF_flat_shell_Vz_454}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_454_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion90deg_direct}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{FCN_DenseNet_Predicted_454_sigmoid_thresholded_0.1.png}
-			\caption{sigmoid,n(454), tr (0.1)}
-			\label{fig:predict_454_sigmoid_tr_0.1}
-		\end{subfigure}
-		\hfill	
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{FCN_DenseNet_Predicted_454_softmax.png}
-			\caption{softmax, n(454)}
-			\label{fig:predict_454_softmax}
-		\end{subfigure}
-	
-	
-		\caption{}
-		\label{fig:predictions}
-	\end{figure} 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	In this section we are going to present results
-	\begin{figure} [h!]
-		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
-			\caption{ERMS CFRP teflon}
-			\label{fig:Delamination}
-		\end{subfigure}			
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-		\centering 	
-		\includegraphics[scale=1]{label_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
-		\caption{Ground truth} 
-		\label{fig:damage_label}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{Predicted_Predicted_ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_7__threshold_0.1_sigmoid.png}
-			\caption{sigmoid for the output layer} 
-			\label{fig:EXP_predict_sigmoid}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{Predicted_Predicted_ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_7_softmax.png}
-			\caption{softmax for the output layer} 
-			\label{fig:EXP_predict_softmax}
-		\end{subfigure}
-			\caption{}
-			\label{}
-		\end{figure}
-	
-
+	\input{results_and_discussions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
