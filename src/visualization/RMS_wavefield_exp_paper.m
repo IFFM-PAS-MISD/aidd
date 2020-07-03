@@ -5,6 +5,8 @@ load project_paths projectroot src_path;
 % allow overwriting existing results if true
 %overwrite=false;
 overwrite=true;
+%test_case=[1:12,15:24]; % select file numbers for processing
+test_case=[27]; % select file numbers for processing
 % retrieve model name based on running file and folder
 currentFile = mfilename('fullpath');
 [pathstr,name,ext] = fileparts( currentFile );
@@ -12,38 +14,26 @@ idx = strfind( pathstr,filesep );
 modelfolder = pathstr(idx(end)+1:end); % name of folder
 modelname = name; 
 % prepare output paths
-dataset_output_path = prepare_data_processing_paths('processed','num',modelname);
 figure_output_path = prepare_figure_paths(modelname);
-image_label_path=fullfile(projectroot,'data','interim','exp',filesep);
-
-test_case=[27]; % select file numbers for processing
-
 %% input for figures
-Cmap = jet(256); 
+Cmap = gray(256); 
 caxis_cut = 0.8;
 fig_width =5; % figure widht in cm
 fig_height=5; % figure height in cm
-%% Input for signal processing
-
-WL = [0.5 0.5];
-%mask_thr = 5;% percentage of points removed by filter mask, should be in range 0.5 - 5 
-mask_thr = 2;
-PLT = 0.5;% if PLT = 0 do no create plots; 0<PLT<=0.5 only ERMSF plot ;0.5<PLT<=1 - RMS plots;  1<PLT - all plots
-
-threshold = 0.0018; % threshold for binarization
 %% Processing parameters
 Nx = 500;   % number of points after interpolation in X direction
 Ny = 500;   % number of points after interpolation in Y direction
 Nmed = 3;   % median filtering window size e.g. Nmed = 2 gives 2 by 2 points window size
+m = 2.5;    % weight scale for wieghted RMS
+
+trs = 0.95; % 
+thrs = 20;  % if energy drops below x% stop processing ERMS
 %%
 % create path to the experimental raw data folder
 raw_data_path = fullfile( projectroot, 'data','raw','exp', filesep );
 
 % create path to the experimental interim data folder
 interim_data_path = fullfile( projectroot, 'data','interim','exp', filesep );
-
-% create path to the experimental processed data folder
-processed_data_path = fullfile( projectroot, 'data','processed','exp', filesep );
 
 % full field measurements
 list = {'GFRP_nr6_50kHz_5HC_8Vpp_x20_10avg_110889', ...          % 1  Length = ?;Width = ?;           
@@ -69,21 +59,21 @@ list = {'GFRP_nr6_50kHz_5HC_8Vpp_x20_10avg_110889', ...          % 1  Length = ?
         'CFRP_100kHz_20Vpp_x10_53261p_strona_oklejona_plastelina_naciecia_prostokatne_256_256', ... %21
         'CFRP3_5_teflon10x10mm_50kHz_47085p_20Vppx20_10avg_prostokatne', ... %22
         'CFRP3_5_teflon10x10mm_100kHz_47085p_20Vppx20_20avg_prostokatne', ... %23
-        'CFRP3_5_teflon15x15mm_50kHz_47085p_20Vppx20_10avg_prostokatne',... %24
+        'CFRP3_5_teflon15x15mm_50kHz_47085p_20Vppx20_10avg_prostokatne',... %24           
          'CFRP_teflon_3_375_375p_50kHz_5HC_x3_15Vpp',...%25
          'CFRP_teflon_3c_375_375p_50kHz_5HC_x3_15Vpp',...%26
          'CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp'};%27              
 
 
-disp('Adaptive filtering calcualation');
+disp('Interpolation and RMS calcualation');
 folder  = raw_data_path;
 nFile   = length(test_case);
 success = false(1, nFile);
 for k = test_case
     filename = list{k};
-    processed_filename = ['ERMSF_',filename]; % filename of processed .mat data
+    processed_filename = ['RMS_',filename]; % filename of processed .mat data
     % check if already exist
-    if(overwrite||(~overwrite && ~exist([figure_output_path,processed_filename,'.png'], 'file')))
+    if(overwrite||(~overwrite && ~exist([interim_data_path,processed_filename,'.png'], 'file')))
         try 
             % load raw experimental data file
             disp('loading data');
@@ -103,55 +93,85 @@ for k = test_case
                        Data(:,:,frame) = mymedian3x3(Data(:,:,frame)); % 3x3 median filtering
                  end
              end
-             %% Adaptive filtering
-                        [RMSF,ERMSF,WRMSF] = AdaptiveFiltering(Data,time,WL,mask_thr,PLT);
-                        %% interpolate on Nx x Ny grid
-                        ERMSF_interp = interp2(X,Y,ERMSF,XI,YI,'spline');
-                       %% save picture
-                       figure;
-                       imagesc(ERMSF_interp);
-                       colormap(Cmap);
-                       set(gca,'YDir','normal');axis square;axis off;
-                       set(gcf,'color','white');
-                       
-                       Smin=0;
-                       Smax=max(max(ERMSF_interp));
-                       set(gcf,'Renderer','zbuffer');
-                       caxis([caxis_cut*Smin,caxis_cut*Smax]);
-                        set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
-                        set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
-                        % remove unnecessary white space
-                        %set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-                        set(gcf,'PaperPositionMode','auto');
-
-                        print([figure_output_path,processed_filename],'-dpng', '-r600'); 
-                       %% binarization                
-                        %Binary = uint8(ERMSF_interp >= threshold);
-                        Binary = (ERMSF_interp >= 0.5*max(max(ERMSF_interp)));
-                        %save(filename,'ERMSF_interp','WL','mask_thr','Binary','threshold');
-                        % plot
-%                         whitethreshold = .05;
-%                         blackthreshold = .05;
-%                         CmapB = 1-([blackthreshold:1/255:1-whitethreshold ; blackthreshold:1/255:1-whitethreshold ; blackthreshold:1/255:1-whitethreshold]');
-                         figure
-                         imagesc(flipud(Binary));
-                         CMap=[0,0,0; 1,1,1];
-                         colormap(CMap);
-%                         colormap(1-CmapB)
-%                         set(gca,'YDir','normal');
-                        axis square;axis off;
-                        set(gcf,'color','white');
-                        set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
-                        set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
-                        print([figure_output_path,'Binary_',processed_filename],'-dpng', '-r600'); 
-                        %imwrite(flipud(Binary),[figure_output_path,'Binary_',processed_filename,'.png'],'png');         
-                        %% intersection over union
-                        labelname=[image_label_path,'label_',filename,'.png'];
-                        A=imread(labelname)/255;
-                        IoU=intersect_over_union_fun(flipud(Binary),logical(A));
-                        area=sum(sum(Binary))/(Nx*Ny)*WL(1)*1e3*WL(2)*1e3; % [mm^2]
-                        disp('Intersection over union: ');IoU
             
+            %% Attenuation compensation
+            E = zeros(nft,1);
+            E2 = ones(nft,1);
+
+            % Energy
+            for frame = 1:nft
+                E(frame) = sqrt(sum(sum(abs(Data(:,:,frame).^2))));
+            end
+            [maxx ~] = max(E);
+
+            strt = 1;
+            while strt < nft
+                if E(strt) > trs*maxx 
+                    break
+                else
+                 strt = strt + 1;
+                end
+            end
+
+            E2(strt:end) = E(strt:end)./maxx;
+
+            endd = strt;
+
+            while endd < nft
+                if E(endd) < thrs/100*maxx
+                    break
+                else
+                 endd = endd + 1;
+                end
+            end
+            E2(endd+1:end) = [];
+
+            EData = zeros(nx,ny,endd-strt);
+            for frame = strt:endd
+                EData(:,:,frame-strt+1) = Data(:,:,frame)/E2(frame);
+            end
+
+            %% RMS
+            % interpolated RMS
+            RMS_small = abs(sqrt(sum(Data.^2,3)));
+            RMS_interp = interp2(X,Y,RMS_small,XI,YI,'spline');
+
+            % interpolated ERMS
+            ERMS_small = abs(sqrt(sum(EData.^2,3)));
+            ERMS_interp = interp2(X,Y,ERMS_small,XI,YI,'spline');
+
+            % interpolated WRMS
+            Weighted_Data_small = zeros([nx,ny,nft]);
+            for frame=1:nft
+                Weighted_Data_small(:,:,frame) = Data(:,:,frame)*sqrt(frame^m);
+            end
+            WRMS_small = abs(sqrt(sum(Weighted_Data_small(:,:,1:end).^2,3)));
+            WRMS_interp = interp2(X,Y,WRMS_small,XI,YI,'spline');
+            %% images
+            %A = rms2image(RMS_interp, [interim_data_path,processed_filename]);
+            B = rms2image(ERMS_interp, [interim_data_path,'E',processed_filename]);
+            
+             %% save picture
+           figure;
+           imagesc(B);
+           colormap(Cmap);
+           %set(gca,'YDir','normal');
+           axis square;axis off;
+           set(gcf,'color','white');
+
+           Smin=0;
+           Smax=max(max(B));
+           set(gcf,'Renderer','zbuffer');
+           caxis([caxis_cut*Smin,caxis_cut*Smax]);
+            set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+            set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+            % remove unnecessary white space
+            %set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+            set(gcf,'PaperPositionMode','auto');
+
+            print([figure_output_path,'E',processed_filename],'-dpng', '-r600'); 
+            
+         
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename);
             fprintf('Successfully processed:\n%s\n', name);% successfully processed
