@@ -50,8 +50,8 @@ experimental = np.load('exp_ERMS.npy')
 experimental_label = np.load('exp_label.npy')
 experimental = experimental / 255.0
 experimental_label =experimental_label/ 255.0
-experimental = experimental.reshape(22, 512, 512, 1)
-experimental_label = experimental_label.reshape(22,512,512,1)
+experimental = experimental.reshape(23, 512, 512, 1)
+experimental_label = experimental_label.reshape(23,512,512,1)
 
 ########################################################################################################################
 #################################################### Loading the model #################################################
@@ -74,7 +74,7 @@ fcn_path = 'E:/backup/models/FCN_DenseNet_models/'
 unet_path = 'E:/backup/models/UNet_models/'
 vgg16_path = 'E:/backup/models/SegNet_models/'
 
-model_name = vgg16_path+'SegNet_Encoder_decoder_added_skip_100_epoches_3_3_conv_vgg_16_archi_layers.h5'
+model_name = fcn_path+'FCN_Dense_net_IoU_100_epoches_.h5'
 model = load_model(model_name, compile=False)
 model.summary()
 
@@ -239,42 +239,48 @@ path_Vgg16_seg_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figur
 path_unet_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figures/UNet/Exp/Fig_unthreshold_100_iou_metricc'
 path_fcn_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Exp/Fig_unthreshold_100_iou_metricc'
 
-Path(path_Vgg16_seg_figuers_folder_no_threshold_exp).mkdir(parents=True, exist_ok=True) # create folder for the EXP
-
+Path(path_fcn_figuers_folder_no_threshold_exp).mkdir(parents=True, exist_ok=True) # create folder for the EXP
+file_iou_exp = 'exp_iou.csv'
 ########################################################################################################################
 ############################################ Ploting the prediction for experimental images ############################
 ########################################################################################################################
 def exp():
-    prediction = model.predict(experimental, batch_size=1)
-    prediction = np.asarray(prediction)
+    #prediction = model.predict(experimental, batch_size=1)
+    #prediction = np.asarray(prediction)
+    for j in range(0,1000):
+        prediction = model.predict(experimental, batch_size=1)
+        prediction = np.asarray(prediction)
+        image_number = []  # holds the image number in the loop
+        IoU_list = []  # hold the IoU values for certain threshold
+        threshold_list = []  # holds the different thresholds for different rounds
+        tr = (j + 1) / 1000  # threshold
 
-    for i in range(22):
-        damage = np.squeeze(prediction[i], axis=2)
-        damage = thresholding(damage,0.5)
-        print(damage)
-        original = np.squeeze(experimental[i], axis=2)
-        label = np.squeeze(experimental_label[i], axis=2)
-        fig = plt.figure(figsize=(16, 9))
-        ax1 = fig.add_subplot(1, 3, 1)
-        plt.imshow(damage, cmap=cmap)
-        plt.axis('off')
-        ax2 = fig.add_subplot(1, 3, 2)
-        plt.imshow(original, cmap='Greys')
-        plt.axis('off')
-        ax3 = fig.add_subplot(1, 3, 3)
-        plt.imshow(label, cmap='Greys')
-        plt.imshow(damage, alpha=.65, cmap=cmap)
-        plt.axis('off')
-
-        ax3.title.set_text('Original Image with mask')
-        ax1.title.set_text('Detected Damage')
-        ax2.title.set_text('Original input Image')
-        print(i+1)
-        IoU(damage,label)
-        plt.savefig(path_Vgg16_seg_figuers_folder_no_threshold_exp + '/Fig_epx' + str(i + 1))
+        #for i in range(23):
+        damage = np.squeeze(prediction[6], axis=2)
+        damage = thresholding(damage,tr)
+        #print(damage)
+        #original = np.squeeze(experimental[i], axis=2)
+        label = np.squeeze(experimental_label[6], axis=2)
+        #plt.imshow(damage, cmap=cmap)
+        #plt.axis('off')
+        #plt.savefig(path_fcn_figuers_folder_no_threshold_exp+'/Predicted_damage_' + str(i + 1) +'_.png')
+        #plt.imshow(original, cmap='Greys')
+        #plt.axis('off')
+        #plt.savefig(path_fcn_figuers_folder_no_threshold_exp+'/Original_damage_' + str(i + 1) +'_.png')
+        #plt.imshow(label, cmap='gist_gray')
+        #plt.axis('off')
+        #plt.savefig(path_fcn_figuers_folder_no_threshold_exp+'/Mask_' + str(i + 1) +'_.png')
+        print(tr)
+        iou = IoU(damage,label)
+        #plt.savefig(path_Vgg16_seg_figuers_folder_no_threshold_exp + '/Fig_epx' + str(i + 1))
         #plt.show()
         plt.close('all')
         gc.collect()
+        threshold_list.append(tr)
+        image_number.append(6 + 1)
+        IoU_list.append(iou)
+        append_list_as_row(file_iou_exp,IoU_list,image_number,threshold_list)
+
 
 
 
@@ -282,8 +288,8 @@ def exp():
 ############################################ Running functions  ########################################################
 ########################################################################################################################
 #Testing()
-main_loop()
-#exp()
+#main_loop()
+exp()
 ########################################################################################################################
 gc.collect()
 
