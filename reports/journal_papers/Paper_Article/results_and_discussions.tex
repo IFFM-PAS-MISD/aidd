@@ -3,23 +3,11 @@
 	In this section we are going to present some results for delamination detection in accordance with a conventional and a deep learning techniques. 
 	
 	Previously, we mentioned that a sigmoid and a softmax functions are used at the output layer for our model, hence we have two versions of the FCN-DenseNet model with different output layer function.
-	The sigmoid function at the output layer computes the damage probability for each pixel,hence the damage probability ranges from (\(0 - 1\)), therefor, we applied a threshold on the output values of the sigmoid to exclude low damage probabilities. We select threshold = \(0.5\) in our experiment, therefore any value less than \(0.5\) will be excluded.
-	For the softmax function at the output layer, it computes two probabilities for each pixel: [damaged and undamaged], then an \(argmax\) function is applied to select the highest probability. 
+	The sigmoid function at the output layer computes the damage probability for each pixel,hence the damage probability ranges from (\(0 - 1\)), therefore, there is a need for a threshold function to exclude low probabilities of predicted damage. 
+	For all following results, the threshold was set to \(0.5\), therefore any value less than \(0.5\) will be excluded from the damage map.
+	For the softmax function at the output layer, it computes two probabilities for each pixel: [damaged and undamaged], then an \(argmax\) function is applied to select the highest probability between the two probabilities. 
 
-%	We ran our FCN-DenseNet models for \(100\) epochs, in order to train the models on our dataset which was separated as follows in table\ref{tab:dataset_sep}.
-%	\begin{table}[]
-%		\centering
-%		\caption{}
-%		\label{tab:dataset_sep}
-%		\begin{tabular}{ccc}
-%			\hline
-%			& Original dataset & Augumented \\ \hline
-%			Training & 307 & 1216 \\ \hline
-%			Validation & 76 & 304 \\ \hline
-%			Testing & \multicolumn{2}{c}{95} \\ \hline
-%		\end{tabular}
-%	\end{table}
-
+	In the following, we are going to present three scenarios of a full wavefield of propagating elastic waves contains delaminations with different locations, shapes and angles.
 	In fig.~\ref{fig:RMS438} a scenario of a delamination located at the edge of the plate is presented.
 	Figs.~\ref{fig:dispersion15deg_direct} and fig.~\ref{fig:m1_rand_single_delam_438} show the full wavefield at bottom  of the plate with a delamination located at the edge of the plate, and the ground truth image respectively.
 	Figs.~\ref{fig:ERMSF_flat_shell_Vz_438} shows the detected delamination using the adaptive wavenumber filtering with IoU = \(0.10\) and fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_438} shows the binary thresholded output.
@@ -246,7 +234,7 @@
 		\end{figure}
 	
 	Every single value of the IoU estimated for all testing images using FCN-DenseNet with a sigmoid at the output layers.
-	It is expected as we increase the threshold value the IoU will decrease due to some detected output values are excluded. Fig.~\ref{fig:iou_fcn} shows how IoU is decreasing along with the threshold increment in the range of \(0-1\) with a step value of \(0.01\).
+	It is expected as we increase the threshold value the IoU will decrease due to some of the detected output values will be excluded, therefore, selecting the proper threshold value is important for maximizing IoU. Fig.~\ref{fig:iou_fcn} shows how IoU is decreasing along with the threshold increment in the range of \(0-1\) with a step value of \(0.01\).
 	
 	\begin{figure}
 		\centering
