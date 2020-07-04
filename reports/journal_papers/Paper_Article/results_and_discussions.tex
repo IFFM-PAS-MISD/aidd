@@ -1,63 +1,33 @@
 \section{Results and Discussions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	In this section we are going to present some results of delamination detection and compare the conventional and the deep learning techniques.
+	In this section we are going to present some results for delamination detection in accordance with a conventional and a deep learning techniques. 
 	
+	Previously, we mentioned that a sigmoid and a softmax functions are used at the output layer for our model, hence we have two versions of the FCN-DenseNet model with different output layer function.
+	The sigmoid function at the output layer computes the damage probability for each pixel,hence the damage probability ranges from (\(0 - 1\)), therefor, we applied a threshold on the output values of the sigmoid to exclude low damage probabilities. We select threshold = \(0.5\) in our experiment, therefore any value less than \(0.5\) will be excluded.
+	For the softmax function at the output layer, it computes two probabilities for each pixel: [damaged and undamaged], then an \(argmax\) function is applied to select the highest probability. 
 
-	We have built two version of FCN-DensNEt models based on the output layer.
-	The first model has a sigmoid function in its output layer, and the second model has a softmax function in its output layer.
-	As mentioned earlier, sigmoid function produces  
-	
-	
+%	We ran our FCN-DenseNet models for \(100\) epochs, in order to train the models on our dataset which was separated as follows in table\ref{tab:dataset_sep}.
+%	\begin{table}[]
+%		\centering
+%		\caption{}
+%		\label{tab:dataset_sep}
+%		\begin{tabular}{ccc}
+%			\hline
+%			& Original dataset & Augumented \\ \hline
+%			Training & 307 & 1216 \\ \hline
+%			Validation & 76 & 304 \\ \hline
+%			Testing & \multicolumn{2}{c}{95} \\ \hline
+%		\end{tabular}
+%	\end{table}
+
+	In fig.~\ref{fig:RMS438} a scenario of a delamination located at the edge of the plate is presented.
+	Figs.~\ref{fig:dispersion15deg_direct} and fig.~\ref{fig:m1_rand_single_delam_438} show the full wavefield at bottom  of the plate with a delamination located at the edge of the plate, and the ground truth image respectively.
+	Figs.~\ref{fig:ERMSF_flat_shell_Vz_438} shows the detected delamination using the adaptive wavenumber filtering with IoU = \(0.10\) and fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_438} shows the binary thresholded output.
+	In fig.~\ref{fig:predict_438_sigmoid_tr_0.5} and \ref{fig:predict_438_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
+	The sigmoid detect the delamination with IoU = \(0.73\), and for the softmax with IoU = \(0.65\)
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%first figure
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure} [h!]
-		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{RMS_flat_shell_Vz_433_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion0deg_direct}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{m1_rand_single_delam_433.png}
-			\caption{}
-			\label{fig:m1_rand_single_delam_433}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{ERMSF_flat_shell_Vz_433_500x500bottom.png}
-			\caption{}
-			\label{fig:ERMSF_flat_shell_Vz_433}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_433_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion45deg_direct}
-		\end{subfigure}
-
-	%	\begin{subfigure}[b]{0.47\textwidth}
-	%		\centering
-	%		\includegraphics[scale=1]{FCN_DenseNet_Predicted_433_sigmoid_thresholded_0.1.png}
-	%		\caption{sigmoid,n(433), tr (0.1)}
-	%		\label{fig:predict_433_sigmoid_tr_0.1}
-	%	\end{subfigure}
-		
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1]{FCN_DenseNet_Predicted_433_softmax.png}
-%			\caption{softmax, n(433)}
-%			\label{fig:predict_433_softmax}
-%		\end{subfigure}
-		\caption{}
-		\label{fig:optimized_direct}
-	\end{figure} 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%second figure
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure} [h!]
 		\centering
@@ -86,26 +56,95 @@
 			\centering
 			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_438_500x500bottom.png}
 			\caption{}
-			\label{fig:dispersion75deg_direct}
+			\label{fig:Binary_ERMSF_flat_shell_Vz_438}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-		\includegraphics[scale=1]{FCN_DenseNet_Predicted_438_sigmoid_thresholded_0.1.png}
-		\caption{sigmoid,n(438), tr (0.1)}
-		\label{fig:predict_438_sigmoid_tr_0.1}
+		\includegraphics[scale=1]{FCN_DenseNet_Predicted_438_sigmoid_thresholded_0.5.png}
+		\caption{sigmoid \((tr = 0.1)\)}
+		\label{fig:predict_438_sigmoid_tr_0.5}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
 			\includegraphics[scale=1]{FCN_DenseNet_Predicted_438_softmax.png}
-			\caption{softmax, n(438)}
+			\caption{softmax}
 			\label{fig:predict_438_softmax}
 		\end{subfigure}
 
 		\caption{}
-		\label{fig:predictions}
+		\label{fig:RMS438}
 	\end{figure} 
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% second figure
+	Fig.~\ref{fig:RMS454} presents the second scenario of a delamination located near the up left corner.
+	Figs.~\ref{fig:dispersion30deg_direct} and fig.~\ref{fig:m1_rand_single_delam_454} show the full wavefield at bottom  of the plate with a delamination located at the edge of the plate, and the ground truth image respectively.
+	Figs.~\ref{fig:ERMSF_flat_shell_Vz_454} shows the detected delamination using the adaptive wavenumber filtering with IoU = \(0.61\) and fig.~\ref{fig:Binary_ERMSF} shows the binary thresholded output.
+	As shown for adaptive filtering it still depict the edges as a damage, therefore, we apply binary thresholding.
+	In fig.~\ref{fig:predict_454_sigmoid_tr_0.5} and fig.~\ref{fig:predict_454_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
+	The sigmoid detect the delamination with IoU = \(0.58\), and for the softmax with IoU = \(0.60\).
+	
+	As we can see, the outputs of the FCN-DenseNet is only detecting the delamination with, because it recognise a patterns of damage.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure} [h!]
+		\centering
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1]{RMS_flat_shell_Vz_454_500x500bottom.png}
+			\caption{RMS bottom}
+			\label{fig:dispersion30deg_direct}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1]{m1_rand_single_delam_454.png}
+			\caption{Groud truth}
+			\label{fig:m1_rand_single_delam_454}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1]{ERMSF_flat_shell_Vz_454_500x500bottom.png}
+			\caption{ERMSF}
+			\label{fig:ERMSF_flat_shell_Vz_454}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_454_500x500bottom.png}
+			\caption{Binary ERMSF}
+			\label{fig:Binary_ERMSF}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1]{FCN_DenseNet_Predicted_454_sigmoid_thresholded_0.5.png}
+			\caption{sigmoid (tr =\(0.5\))}
+			\label{fig:predict_454_sigmoid_tr_0.5}
+		\end{subfigure}
+		\hfill	
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1]{FCN_DenseNet_Predicted_454_softmax.png}
+			\caption{softmax}
+			\label{fig:predict_454_softmax}
+		\end{subfigure}
+	
+	
+		\caption{}
+		\label{fig:RMS454}
+	\end{figure} 
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	In fig.\ref{fig:RMS433} we present a scenario where the adaptive wavenumber filtering is able to detect the delamination whereas the FCN model failed.
+	As shown in fig.\ref{fig:RMS433}(a) the RMS from the bottom of of the plate, and the delamination mask can be seen in fig.\ref{fig:RMS433}(b). 
+	In this case, applying adaptive wavenumber filtering on the RMS bottom image to detect the delamination shows better response than FCN model 
+	as shown in fig.\ref{fig:RMS433} (c) energy-based root mean square indexes of wavenumber filtered signals (ERMSF) and (d) the binary thresholded ERMSF. 
+	
+	Delaminations located near edges or corners are difficult to detect due to reflected waves have similar patterns for both conventional and deep learning techniques. 
+	However, to solve this issue for the FCN model, we need to enhance the feature extraction process by obtaining more data to train the model to recognize and learn new patterns.	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% third figure
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,83 +152,124 @@
 		\centering
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1]{RMS_flat_shell_Vz_454_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion30deg_direct}
+			\includegraphics[scale=1]{RMS_flat_shell_Vz_433_500x500bottom.png}
+			\caption{RMS bottom}
+			\label{fig:dispersion0deg_direct}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1]{m1_rand_single_delam_454.png}
-			\caption{}
-			\label{fig:m1_rand_single_delam_454}
+			\includegraphics[scale=1]{m1_rand_single_delam_433.png}
+			\caption{ground truth}
+			\label{fig:m1_rand_single_delam_433}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1]{ERMSF_flat_shell_Vz_454_500x500bottom.png}
-			\caption{sigmoid,n(454), tr (0.1)}
-			\label{fig:ERMSF_flat_shell_Vz_454}
+			\includegraphics[scale=1]{ERMSF_flat_shell_Vz_433_500x500bottom.png}
+			\caption{ERMSF}
+			\label{fig:ERMSF_flat_shell_Vz_433}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_454_500x500bottom.png}
-			\caption{}
-			\label{fig:dispersion90deg_direct}
+			\includegraphics[scale=1]{Binary_ERMSF_flat_shell_Vz_433_500x500bottom.png}
+			\caption{binary ERMSF}
+			\label{fig:dispersion45deg_direct}
 		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{FCN_DenseNet_Predicted_454_sigmoid_thresholded_0.1.png}
-			\caption{sigmoid,n(454), tr (0.1)}
-			\label{fig:predict_454_sigmoid_tr_0.1}
-		\end{subfigure}
-		\hfill	
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1]{FCN_DenseNet_Predicted_454_softmax.png}
-			\caption{softmax, n(454)}
-			\label{fig:predict_454_softmax}
-		\end{subfigure}
-	
-	
+		
+		%	\begin{subfigure}[b]{0.47\textwidth}
+		%		\centering
+		%		\includegraphics[scale=1]{FCN_DenseNet_Predicted_433_sigmoid_thresholded_0.1.png}
+		%		\caption{sigmoid,n(433), tr (0.1)}
+		%		\label{fig:predict_433_sigmoid_tr_0.1}
+		%	\end{subfigure}
+		
+		%		\begin{subfigure}[b]{0.47\textwidth}
+		%			\centering
+		%			\includegraphics[scale=1]{FCN_DenseNet_Predicted_433_softmax.png}
+		%			\caption{softmax, n(433)}
+		%			\label{fig:predict_433_softmax}
+		%		\end{subfigure}
 		\caption{}
-		\label{fig:predictions}
+		\label{fig:RMS433}
 	\end{figure} 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-
+	In fig.\ref{fig:Exp_ERMS_teflon} we present an experimental scenario, of CFRP with Teflon inserted and a frequency of \(50 Hz\) is used to excite the transducers.
+	As shown if fig.~\ref{fig:ERMSF_CFRP_teflon} the adaptive filtering is able to detect the delamination and fig.~\ref{fig:Binary_ERMSF_CFRP} shows the binary thresholded output. 
+	The FCN-DesneNet model detected the delamintaion with both a sigmoid and softmax functions in fig.~\ref{fig:EXP_predict_sigmoid} and fig.~\ref{fig:EXP_predict_softmax} respectively.
 	\begin{figure} [h!]
 		\centering
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
 			\includegraphics[scale=1]{ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
-			\caption{ERMS CFRP teflon}
+			\caption{ERMS CFRP Teflon inserted}
 			\label{fig:Delamination}
 		\end{subfigure}			
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
-		\centering 	
-		\includegraphics[scale=1]{label_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
-		\caption{Ground truth} 
-		\label{fig:damage_label}
+			\centering 	
+			\includegraphics[scale=1]{label_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
+			\caption{Ground truth} 
+			\label{fig:damage_label}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1]{Predicted_Predicted_ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_7__threshold_0.1_sigmoid.png}
-			\caption{sigmoid for the output layer} 
+			\includegraphics[scale=1]{ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
+			\caption{ERMSF} 
+			\label{fig:ERMSF_CFRP_teflon}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{Binary_ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
+		\caption{Binary ERMSF} 
+		\label{fig:Binary_ERMSF_CFRP}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1]{Predicted_Predicted_ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_7__threshold_0.5_sigmoid.png}
+			\caption{FCN DenseNet: sigmoid \((tr = 0.5)\)} 
 			\label{fig:EXP_predict_sigmoid}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
 			\includegraphics[scale=1]{Predicted_Predicted_ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_7_softmax.png}
-			\caption{softmax for the output layer} 
+			\caption{FCN DenseNet: softmax} 
 			\label{fig:EXP_predict_softmax}
 		\end{subfigure}
 			\caption{Experimental results}
-			\label{}
+			\label{fig:Exp_ERMS_teflon}
 		\end{figure}
+	
+	Every single value of the IoU estimated for all testing images using FCN-DenseNet with a sigmoid at the output layers.
+	It is expected as we increase the threshold value the IoU will decrease due to some detected output values are excluded. Fig.~\ref{fig:iou_fcn} shows how IoU is decreasing along with the threshold increment in the range of \(0-1\) with a step value of \(0.01\).
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{fcn_densenet_iou.png}
+		\centering
+		\caption{IoU for FCN-DenseNet with sigmoid of a range of thresholds (0-1)} 
+		\label{fig:iou_fcn}
+	\end{figure}
+
+	Table\ref{tab:iou} show  maximum, minimum and mean IoU for the adaptive filtering and FCN-DenseNet for sigmoid \((tr = 0.5)\) and softmax 
+	\begin{table}
+	\centering
+	\caption{IoU for all models, sigmoid at threshold = 0.5}
+	\label{tab:iou}
+	\resizebox{\textwidth}{!}{\begin{tabular}{ccccccccccccc}
+		\hline
+		&  &  &  &  &  & \multicolumn{7}{c}{FCN-Dense Model} \\ \cline{7-13} 
+		&  & \multicolumn{3}{c}{Adaptive filtering} &  & \multicolumn{3}{c}{sigmoid} &  & \multicolumn{3}{c}{softmax} \\ \cline{3-5} \cline{7-9} \cline{11-13} 
+		&  & minimum & maximum & mean &  & minimum & maximum & mean &  & \multicolumn{1}{c}{minimum} & \multicolumn{1}{c}{maximum} & \multicolumn{1}{c}{mean} \\ \cline{3-13} 
+		\multicolumn{2}{c}{IoU} &0&0.648&0.373& &0&0.933&0.616&  &0&0.878&0.623\\ 
+		\hline
+	\end{tabular}}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%
+
 	
