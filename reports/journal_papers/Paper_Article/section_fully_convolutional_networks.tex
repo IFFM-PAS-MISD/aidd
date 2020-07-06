@@ -22,7 +22,7 @@ To predict the output label of the detection (\(y_{pred}\)) which represent the 
 		\label{argmax}
 	\end{equation}
 
-When using sigmoid in the output layer, it produces a vector of values between (\(0\) and \(1\)) indicating the damage weight for each pixel. 
+When using sigmoid which in the output layer, it produces a vector of values between (\(0\) and \(1\)) indicating the damage weight for each pixel. 
 Low values indicate low damage probability and high output values indicate high damage probability. Eq.~\ref{sigmoid} illustrates the sigmoid function, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Eq~\ref{z}.	
 	\begin{equation}
 		\sigma(z) = \frac{1}{1+e^{-z}}
@@ -61,4 +61,4 @@ Furthermore, during training the model our focus is to minimize the loss and max
 The optimizer is responsible for updating the model learnable parameters such as filters weights and biases in a way the overall loss is minimized and the accuracy is maximized.
 In the proposed approach, Adam optimizer was applied, which is considered as a combination of RMSprop and Stochastic Gradient Descent (SGD)~\cite{Kingma2015}. 
 
-In the next subsections we are going to present three FCN models for pixel wise semantic segmentation in order to detect and localize delaminations.
+In the next subsection we are going to present a FCN model for pixel wise semantic segmentation in order to detect and localize delaminations.
