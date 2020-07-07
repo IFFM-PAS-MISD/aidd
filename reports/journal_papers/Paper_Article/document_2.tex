@@ -22,14 +22,14 @@
 \documentclass[preprint,9pt]{elsarticle}
 
 %% Use the option review to obtain double line spacing
-%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+%documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
 %% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
 %% for a journal layout:
 %% \documentclass[final,1p,times,authoryear]{elsarticle}
 %% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
 %% \documentclass[final,3p,times,authoryear]{elsarticle}
-%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%%\documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
 %% \documentclass[final,5p,times,authoryear]{elsarticle}
 %% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
 
@@ -42,6 +42,7 @@
 %\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
 \usepackage[colorlinks=true,citecolor=green]{hyperref}
 %% my added packages
+\usepackage{float}
 \usepackage{verbatim}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -140,10 +141,10 @@ Delaminations can seriously decrease the performance of composites structures, a
 One of the conventional techniques for damage identification for non-destru\-ctive testing (NDT) involves arrays of transducers that can be mounted or embedded in the structures for registering the response of the guided wave propagation.
 However, damage identification regarding structures with curved and deformable geometry can be inaccurate when using an array of transducers.
 Also, damage influence maps resulted from processing of signals registered by the array of transducers have low resolution, due to the small number of sensing points. 
-Accordingly, this issue of low resolution damage influence map can be solved by utilising a Scanning Laser Doppler Vibrometry (SLDV), which is a non-contact technique dedicated to full wavefield measurements of vibration and guided wave propagation.
+Accordingly, this issue of low-resolution damage influence map can be solved by utilising a Scanning Laser Doppler Vibrometry (SLDV), which is a non-contact technique dedicated to full wavefield measurements of vibration and guided wave propagation.
 The measurements are conducted on a dense mesh of measurement points spanned over the area of the investigated structure.
 Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localization~\cite{Michaels2007,Park2014,Tian2015a,Kudela2015}.
-Full wavefield processing techniques even allow for damage size estimation~\cite{Girolamo2018a,Kudela2018} which is difficult to perform in case of transducer arrays especially for composite structures.
+Full wavefield processing techniques even allow for damage size estimation~\cite{Girolamo2018a,Kudela2018} which is difficult to perform in case of transducer arrays, especially for composite structures.
 Therefore, the latter methods are evaluated mostly for damage detection and localisation in metallic structures~\cite{Michaels2008,Huang2018a,Wang2020}.
 
 Certain algorithms such as the time reversal algorithm can benefit from combining piezoceramic transducers (as actuators) with SLDV for sensing~\cite{Girolamo2018a, Miniaci2019}.
@@ -166,44 +167,44 @@ In the following, methods for damage size estimation based on machine learning a
 One of the earliest work for delamination location and size assessment in composite structures using deep learning techniques was performed by Islam et al.~\cite{islam1994damage}. 
 They have trained a neural network model with frequencies for the first five modes obtained from modal analysis data. 
 The data was acquired by piezoceramic sensors in both damaged and undamaged composite beams.
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Okafor et al~\cite{okafor1996delamination} applied a feed-forward backpropagation neural network to assess the delamination size in a smart composite beam. 
- For training the neural network model, authors used delamination sizes and corresponding the first four modal frequencies. 
- The trained model was tested with new cases of delamination using the first four normalized frequencies of test cases as an input to the network. 
- Their model predicted the delamination size between 0.22~cm and 0.82~cm successfully.
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Moreover, Chakraborty et al.~\cite{chakraborty2005artificial} proposed a neural network model for detecting delamination shape, size and location in a fibre reinforced plastic composite laminate.
- Authors used natural frequencies as inputs and the corresponding size, shape and location of delamination as outputs of the model. 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Authors in ~\cite{roseiro2005neural}  proposed a damage detection method in laminated composite plates to locate and quantify damage through utilising the electrical potential of piezoelectric sensors and artificial neural networks. 
- The model was trained using the Levenberg-Marquardt algorithm. High accuracy of damage location was achieved.
- But tests were performed only based on the numerical model.  
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
- Sammons et al.~\cite{sammons2016segmenting}, utilised X-ray computed tomography for estimating the delaminations in a CFRP. 
- For this purpose, they utilised the convolutional neural network (CNN) for performing image segmentation of the defected input images to estimate the delaminations. 
- Their ConvNet was capable of identifying and quantifying small delaminations. 
- Unfortunately, the ConveNet could not recognise delaminations with large sizes.
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
- Further, De Fenza et al.~\cite{de2015application} proposed a method for damage detection for aluminium and composite materials plates using Lamb waves by a neural network model for automatic feature extraction and probability ellipse based method. 
- The neural network model and probability ellipse were applied on the damage index (DI) computed by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves "DeepSHM". 
- They pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the CNN for training to acquire the neural weights. 
- They achieved different classification accuracies ranging from \(\%17\) to \(\%99.9\).
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Authors in~\cite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data acquired by SLDV. 
- Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. 
- Their results show good results when compared with traditional support vector machine (SVM) methods.
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Furthermore, Esfandabadi et al.~\cite{esfandabadideep} applied 20 layers based very-deep super-resolution (VDSR) architecture, (VDSR is a variant of CNN) on a guided ultrasonic wavefield for enhancing quality of image resolution and quality of the acquired wavefield. 
+Okafor et al~\cite{okafor1996delamination} applied a feed-forward backpropagation neural network to assess the delamination size in a smart composite beam. 
+For training the neural network model, authors used delamination sizes and corresponding the first four modal frequencies. 
+The trained model was tested with new cases of delamination using the first four normalized frequencies of test cases as an input to the network. 
+Their model predicted the delamination size between 0.22~cm and 0.82~cm successfully.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Moreover, Chakraborty et al.~\cite{chakraborty2005artificial} proposed a neural network model for detecting delamination shape, size and location in a fibre reinforced plastic composite laminate.
+Authors used natural frequencies as inputs and the corresponding size, shape and location of delamination as outputs of the model. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Authors in ~\cite{roseiro2005neural}  proposed a damage detection method in laminated composite plates to locate and quantify damage through utilising the electrical potential of piezoelectric sensors and artificial neural networks. 
+The model was trained using the Levenberg-Marquardt algorithm. High accuracy of damage location was achieved.
+But tests were performed only based on the numerical model.  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Sammons et al.~\cite{sammons2016segmenting}, utilised X-ray computed tomography for estimating the delaminations in a carbon fibre reinforced polymer (CFRP). 
+For this purpose, they utilised the convolutional neural network (CNN) for performing image segmentation of the defected input images to estimate the delaminations. 
+Their CNN was capable of identifying and quantifying small delaminations. 
+Unfortunately, the ConveNet could not recognise delaminations with large sizes.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+Further, De Fenza et al.~\cite{de2015application} proposed a method for damage detection for aluminium and composite materials plates using Lamb waves by a neural network model for automatic feature extraction and probability ellipse based method. 
+The neural network model and probability ellipse were applied on the damage index (DI) computed by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves "DeepSHM". 
+They pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the CNN for training to acquire the neural weights. 
+They achieved different classification accuracies ranging from \(17\%\) to \(99.9\%\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Authors in~\cite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data acquired by SLDV. 
+Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. 
+Their technique show good results when compared with traditional support vector machine (SVM) methods.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Furthermore, Esfandabadi et al.~\cite{esfandabadideep} applied 20 layers based very-deep super-resolution (VDSR) architecture, (VDSR is a variant of CNN) on a guided ultrasonic wavefield for enhancing the quality of image resolution and quality of the acquired wavefield. 
 VDSR was applied in conjunction with compressive sensing theory with the aim of reducing the acquisition time of the ultrasonic wavefield.
 The model was trained on \(652\) wavefield images (\(326\) with defect) and (\(326\) without defects) generated by piezoelectric transducers and acquired by SLDV. 
 Authors have used various aluminium and CFRP plates to prepare the dataset.
-It was concluded that high-resolution images can be obtained, even when only the 10\% of the original scan points were retained.
+It was concluded that high-resolution images can be obtained, even when only the 10\% of the original scan points were retained
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Motivated by high potentials of deep learning techniques, in this work, we are exploring the feasibility of applying such techniques for detecting delaminations in CFRP plates. 
@@ -213,67 +214,62 @@ Numerically generated data resembles measurements acquired by SLDV.
 For our knowledge, it is the first time, a large full wavefield dataset of propagating guided waves will be fed as an input to deep neural networks with the aim of delamination size estimation.
 
 In this work, we are presenting a pixel-wise segmentation model which is capable of detecting and localising the delamination, through segmentation of the input image into damaged and undamaged parts.
+For this purpose, we have created a deep learning model based on a fully convolutional neural network (FCN).
+FCN is considered as a type of CNN, in which the densely connected network is replaced by fully convolutional layers. 
+FCNs are by themselves can be trained end-to-end and pixels-to-pixels, without the need for performing a process of feature extraction. 
+
 Moreover, the pixel-wise segmentation model enables the precise shape and size estimation of defects.
 The capabilities and potentials of the proposed method are compared to the conventional wavefield signal processing method i.e. adaptive wavenumber filtering~\cite{Kudela2015,Radzienski2019}.
 The quantitative comparison was performed by using intersection over the union of detected delamination area with respect to the ground truth. 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Methodology}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{dataset}
-	\input{Signal_processing_strategy}
-	\input{Adaptive_wavenumber_filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{dataset}
+\input{Signal_processing_strategy}
+\input{Adaptive_wavenumber_filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fully Convolutional Network approach}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, a deep learning approach for delamination detection in composite materials is presented. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Data preprocessing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It should be noted that the output from the wave propagation model is in the form of 3D matrix which contains amplitudes of propagating waves at location \((x, y)\) and time \(t\). We can look at it as a set of frames of propagating waves at discrete time moments \(t_k\).
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Fully Convolutional Network approach}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	In this section, a deep learning approach for delamination detection in composite materials is presented. 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsubsection{Data preprocessing}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	It should be noted that the output from the wave propagation model is in the form of 3D matrix which contains amplitudes of propagating waves at location \((x, y)\) and time \(t\). We can look at it as a set of frames of propagating waves at discrete time moments \(t_k\).
-
-	The data preprocessing as it is indicated in Fig.~\ref{fig:sig_proc_strategy} include a step of computation of root mean square value:
-	\begin{equation}
-		\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N} s(x,y,t_k)^2}
-		\label{eq:rms}
-	\end{equation}
-	where the number of sampling points \(N\) was 512.
-	In this way, the dataset was collapsed to 475 2D matrices in which amplitudes are stored as double-precision values.
-	The next step was the conversion of these matrices to greyscale images (colour image quantisation).
-	Colour scale values of obtained images vary between (\(0 - 255\)) hence normalization
-	to a range of (\(0-1\)) was applied to enhance the optimizer function during the learning process. 
+The data preprocessing as it is indicated in Fig.~\ref{fig:sig_proc_strategy} include a step of computation of root mean square value:
+\begin{equation}
+	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N} s(x,y,t_k)^2}
+	\label{eq:rms}
+\end{equation}
+where the number of sampling points \(N\) was 512.
+In this way, the dataset was collapsed to 475 2D matrices in which amplitudes are stored as double-precision values.
+The next step was the conversion of these matrices to greyscale images (colour image quantisation).
+Colour scale values of obtained images vary between (\(0 - 255\)) hence normalization
+to a range of (\(0-1\)) was applied to enhance the optimizer function during the learning process. 
 	
-	Furthermore, data augmentation was achieved by flipping images horizontally, vertically and diagonally. 
-	It increased the dataset size four times -- \(1900\) images were produced.
+Furthermore, data augmentation was achieved by flipping images horizontally, vertically and diagonally. 
+It increased the dataset size four times -- \(1900\) images were produced.
 	
-	Such data augmentation can enhance the learning process by enabling the model to learn and recognize new complex patterns.
+Such data augmentation can enhance the learning process by enabling the model to learn and recognize new complex patterns.
 	
-	The data set was split into two portions:  \(80\%\) for the training set and \(20\%\) for the testing set.
-	Additionally, the validation set was created as a \(20\%\) of the training set.
+The data set was split into two portions:  \(80\%\) for the training set and \(20\%\) for the testing set.
+Additionally, the validation set was created as a \(20\%\) of the training set.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{section_fully_convolutional_networks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{FCN_models}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{results_and_discussions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\input{Conclusions}
+%\appendix
+\section*{Acknowledgements}
+\section*{ }
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{section_fully_convolutional_networks}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{FCN_models}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{results_and_discussions}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Conclusions}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-	%\appendix
-
-
-	\section*{Acknowledgements}
-
-	
-	\section*{ }
-	\bibliography{MSSP_paper1}
-	\bibliographystyle{num_order}
-	
-	
+\bibliography{MSSP_paper1}
+\bibliographystyle{num_order}
 \end{document}
 
 
