@@ -1,18 +1,19 @@
 \section{Results and Discussions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	In this section we are going to show some results for delamination detection in accordance with a adaptive wavenumber filtering and a FCN-DenseNet model. 
-	As we mentioned earlier, a sigmoid and a softmax functions are used at the output layer for our model, hence we have two versions of the FCN-DenseNet model with different output layer function.
-	The sigmoid function at the output layer computes the damage probability for each pixel,hence the damage probability ranges from (\(0 - 1\)), therefore, there is a need for a threshold function to exclude low probabilities of predicted damage. 
+	In this section, we are going to show some results for delamination detection in accordance with a adaptive wavenumber filtering and a FCN-DenseNet model. 
+%	As we mentioned earlier, a sigmoid and a softmax functions are used at the output layer for our model, hence we have two versions of the FCN-DenseNet model with different output layer function.
+	The sigmoid function at the output layer computes the damage probability for each pixel, hence the damage probability ranges from (\(0 - 1\)), therefore, there is a need for a threshold function to exclude low probabilities of predicted damage. 
 	For all following results, the threshold \(tr = 0.5\), therefore any value less than \(0.5\) will be excluded from the damage map.
-	For the softmax function at the output layer, it computes two probabilities for each pixel: [damaged and undamaged], then an \(argmax\) function is applied to select the highest probability between the two probabilities, therefore there is no need for thresholding. 
+	For the softmax function at the output layer, it computes two probabilities for each pixel: (damaged and undamaged), then an \(\argmax\) function is applied to select the highest probability between the two probabilities, therefore there is no need for thresholding. 
 	The FCN-DenseNet models was trained on augmented dataset up to 100 epochs, and the architecture of the FCN-DenseNet  was implemented using the open-source platform of Keras API~\cite{chollet2015keras} running on top of TensorFlow on a GeForce RTX 2080  GPU from NVIDIA.
 	For all scenarios, we selected a red colour to represent the detected delamination (damaged), and the blue colour to represents the healthy state (undamaged).
 	
 	In the following, we are going to present three scenarios of full wavefield images with delaminations of different locations, shapes and angles.
-	Figs.[~\ref{fig:RMS_flat_shell_Vz_438},~\ref{fig:m1_rand_single_delam_438}] show a full wavefield at bottom of the plate with delamination located at the top edge of the plate, and its ground truth image respectively. 
-	Figs.~\ref{fig:ERMSF_flat_shell_Vz_438} shows the detected delamination using the adaptive wavenumber filtering, as seen the delamination is detected, but still there are some noise detected at the edges. 
-	To exclude noise from the ERMSF a binary threshold is applied as shown in fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_438}, as shown from the binary ERMSF the delamination located, but still there is some noise at the corners, for this case the IoU = \(0.10\).
-	In figs.[~\ref{fig:predict_438_sigmoid_tr_0.5}, ~\ref{fig:predict_438_softmax}] we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
+	Figs.~(\ref{fig:RMS_flat_shell_Vz_438},~\ref{fig:m1_rand_single_delam_438}) show a full wavefield at the bottom of the plate with delamination located at the top edge of the plate, and its ground truth image respectively. 
+	Fig.~\ref{fig:ERMSF_flat_shell_Vz_438} shows the detected delamination using the adaptive wavenumber filtering, as seen the delamination is detected, but still there are some noise detected at the edges. 
+	To eliminate low calculated values from the energy-based root mean square index of wavenumber filtered signals (ERMSF) a binary threshold is applied as shown in fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_438}.
+	As shown from the binary ERMSF the delamination located, but still there is some noise at the corners, the calculated IoU for is (\(0.10\)).
+	In figs.~(\ref{fig:predict_438_sigmoid_tr_0.5}, ~\ref{fig:predict_438_softmax}) we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
 	As shown, the FCN-DenseNet models detect the delamination without any noise at the edges, as the FCN-DenseNet learned the delamination patterns from the large numerically generated dataset and can differentiate among different complex patterns such as noise.   
 	The IoU = \(0.73\) for sigmoid, and IoU = \(0.65\) for the softmax.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,7 +67,7 @@
 	\end{figure} 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	In the next scenario, we present delamination located near the up left image.
-	Figs.[~\ref{fig:dispersion30deg_direct}, ~\ref{fig:m1_rand_single_delam_454}] show the full wavefield at bottom of the plate with a delamination located at the up left of the image, with its ground truth image respectively.
+	Figs.~(\ref{fig:dispersion30deg_direct}, ~\ref{fig:m1_rand_single_delam_454}) show the full wavefield at bottom of the plate with a delamination located at the up left of the image, with its ground truth image respectively.
 	Fig.~\ref{fig:ERMSF_flat_shell_Vz_454} shows the detected delamination using the adaptive wavenumber filtering.
 	As shown for adaptive filtering it still depict some noise at the edges, therefore, binary thresholding was applied as shown in fig.~\ref{fig:Binary_ERMSF}, the IoU for this case is \(0.61\).
 	In fig.~\ref{fig:predict_454_sigmoid_tr_0.5} and fig.~\ref{fig:predict_454_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
@@ -119,30 +120,31 @@
 		\caption{Second scenario}
 		\label{fig:RMS454}
 	\end{figure} 
+\clearpage
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	Figs.[~\ref{fig:unthresholded438}, ~\ref{fig:unthresholded454}] show the original damage maps without thresholding for the FCN-DenseNet with sigmoid function for the first and second scenarios respectively. 
-	As shown from the figs, the predicted output has a range or probabilities of damage. 
-	Accordingly, we apply threshold to exclude these low damage probabilities.
-	\begin{figure} [!h] 
-		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[scale=1]{sigmoid_unthresholded438.png}
-		\caption{}
-		\label{fig:unthresholded438}
-		\end{subfigure}
-	\hfill	
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering 	
-		\includegraphics[scale=1]{sigmoid_unthresholded454.png}
-		\caption{}
-		\label{fig:unthresholded454}
-	\end{subfigure}
-	\caption{Unthresholded damage maps for FCN-DenseNet/sigmoid}
-	\label{fig:unthresholded}
-	\end{figure}
+%	Figs.[~\ref{fig:unthresholded438}, ~\ref{fig:unthresholded454}] show the original damage maps without thresholding for the FCN-DenseNet with sigmoid function for the first and second scenarios respectively. 
+%	As shown from the figs, the predicted output has a range or probabilities of damage. 
+%	Accordingly, we apply threshold to exclude these low damage probabilities.
+%	\begin{figure} [!h] 
+%		\centering
+%		\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[scale=1]{sigmoid_unthresholded438.png}
+%		\caption{}
+%		\label{fig:unthresholded438}
+%		\end{subfigure}
+%	\hfill	
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering 	
+%		\includegraphics[scale=1]{sigmoid_unthresholded454.png}
+%		\caption{}
+%		\label{fig:unthresholded454}
+%	\end{subfigure}
+%	\caption{Unthresholded damage maps for FCN-DenseNet/sigmoid}
+%	\label{fig:unthresholded}
+%	\end{figure}
 	In fig.~\ref{fig:RMS433} we present the third scenario where the adaptive wavenumber filtering can detect the delamination whereas the FCN-DenseNet model failed.
-	Figs.[~\ref{fig:RMS_flat_shell_Vz_433}, ~\ref{fig:m1_rand_single_delam_433}] show a full wavefield at bottom of the plate with delamination located at the upper left corner of the image and its corresponding ground truth respectively.
+	Figs.~(\ref{fig:RMS_flat_shell_Vz_433}, ~\ref{fig:m1_rand_single_delam_433}) show a full wavefield at bottom of the plate with delamination located at the upper left corner of the image and its corresponding ground truth respectively.
 	As shown in fig.~\ref{fig:ERMSF_flat_shell_Vz_433} the adaptive filtering technique detected delamination using but with low values, hence when binary thresholding is applied there was no IoU for the detected damage as show in fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_433}. 
 	Delaminations located near edges or corners are difficult to detect due to reflected waves have similar patterns for both conventional and deep learning techniques. 
 	However, to solve this issue for the FCN model, we need to enhance the feature extraction process by obtaining more data to train the model to recognize and learn new patterns.	
@@ -181,10 +183,10 @@
 		\caption{Third scenario}
 		\label{fig:RMS433}
 	\end{figure} 
-	In table~\ref{tab:iou} we present the (maximum, minimum and mean) IoU for the adaptive filtering and FCN-DenseNet for sigmoid and softmax for all testing images.
+	In table~\ref{tab:iou} we present the (maximum, minimum and mean) IoU for the adaptive filtering and FCN-DenseNet for sigmoid (threshold = \(0.5\)) and softmax for all testing images.
 	\begin{table}
 		\centering
-		\caption{IoU for all models, sigmoid at threshold = 0.5}
+		\caption{IoU for all models}
 		\label{tab:iou}
 		\resizebox{\textwidth}{!}{\begin{tabular}{ccccccccccccc}
 				\hline
@@ -197,7 +199,9 @@
 	\end{table}
 	
 	Every single value of the IoU was estimated for all testing images using FCN-DenseNet with a sigmoid at the output layers.
-	It is expected that as we increase the threshold the IoU will decrease due to some of the detected output values will be excluded, therefore, selecting the proper threshold value is important for maximizing IoU. Fig.~\ref{fig:iou_fcn} shows the maximum and mean IoU for all testing images at every single threshold value, and how IoU is decreasing along with the threshold increment in the range of \(0-1\) with a step value of \(0.01\).
+	It is expected that  as we increase the threshold, the IoU will decrease due to some of the detected output values will be excluded.
+	Therefore, selecting the proper threshold value is important for maximizing IoU. 
+	Fig.~\ref{fig:iou_fcn} shows the maximum and mean IoU for all testing images at every single threshold value, and how the IoU is decreasing along with the threshold increment in the range of (\(0-1\)) with a step value of (\(0.01\)).
 	\begin{figure}[!h] 
 		\centering
 		\includegraphics[width=\textwidth]{fcn_densenet_iou.png}

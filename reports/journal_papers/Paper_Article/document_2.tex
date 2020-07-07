@@ -43,6 +43,7 @@
 \usepackage[colorlinks=true,citecolor=green]{hyperref}
 %% my added packages
 \usepackage{float}
+\usepackage{csquotes}
 \usepackage{verbatim}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -143,22 +144,22 @@ However, damage identification regarding structures with curved and deformable g
 Also, damage influence maps resulted from processing of signals registered by the array of transducers have low resolution, due to the small number of sensing points. 
 Accordingly, this issue of low-resolution damage influence map can be solved by utilising a Scanning Laser Doppler Vibrometry (SLDV), which is a non-contact technique dedicated to full wavefield measurements of vibration and guided wave propagation.
 The measurements are conducted on a dense mesh of measurement points spanned over the area of the investigated structure.
-Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localization~\cite{Michaels2007,Park2014,Tian2015a,Kudela2015}.
+Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localisation~\cite{Michaels2007,Park2014,Tian2015a,Kudela2015}.
 Full wavefield processing techniques even allow for damage size estimation~\cite{Girolamo2018a,Kudela2018} which is difficult to perform in case of transducer arrays, especially for composite structures.
 Therefore, the latter methods are evaluated mostly for damage detection and localisation in metallic structures~\cite{Michaels2008,Huang2018a,Wang2020}.
 
 Certain algorithms such as the time reversal algorithm can benefit from combining piezoceramic transducers (as actuators) with SLDV for sensing~\cite{Girolamo2018a, Miniaci2019}.
     
-Conventional damage detection and localization methods focus on patterns extraction from registered measurements and accordingly make decisions based on these patterns ~\cite{Gul2009}. 
+Conventional damage detection and localisation methods focus on patterns extraction from registered measurements and accordingly make decisions based on these patterns~\cite{Gul2009}. 
 Moreover, conventional methods for pattern recognition requires feature selection and classification (handcrafted features). 
 These conventional methods can perform efficient damage detection, however, these methods depend on selected features from their scope of measurement.
 Accordingly, introducing new patterns will cause them to fail in detecting the damage.
-Moreover, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features~\cite{Gulgec2019}.
+Furthermore, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features~\cite{Gulgec2019}.
 Perhaps the most challenging part for damage detection is determining the unknown relationship between registered measurements and damage patterns~\cite{Gulgec2019}. 
     
 The accelerated progress in the field of artificial intelligence (AI) technologies in recent years, and mainly in deep learning, revealed new dimensions for solving problems and offered the opportunity for being implemented and integrated with the NDT and further with structural health monitoring (SHM) approaches.
 Therefore, issues regarding data preprocessing and feature extraction can be handled when applying deep learning techniques. 
-Nowadays, end-to-end approaches are presented, in which the whole unprocessed data are fed in the model, hence, it will learn by itself to recognise the patterns and detect the damage.
+Nowadays, end-to-end approaches are developed, in which the whole unprocessed data are fed in the model, hence, it will learn by itself to recognise the patterns and detect the damage.
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In the following, methods for damage size estimation based on machine learning and deep learning techniques are presented which are targeted in the field of SHM/NDT.
@@ -190,7 +191,7 @@ Unfortunately, the ConveNet could not recognise delaminations with large sizes.
 Further, De Fenza et al.~\cite{de2015application} proposed a method for damage detection for aluminium and composite materials plates using Lamb waves by a neural network model for automatic feature extraction and probability ellipse based method. 
 The neural network model and probability ellipse were applied on the damage index (DI) computed by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves "DeepSHM". 
+Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves \enquote{DeepSHM}. 
 They pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the CNN for training to acquire the neural weights. 
 They achieved different classification accuracies ranging from \(17\%\) to \(99.9\%\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -202,7 +203,7 @@ Their technique show good results when compared with traditional support vector 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Furthermore, Esfandabadi et al.~\cite{esfandabadideep} applied 20 layers based very-deep super-resolution (VDSR) architecture, (VDSR is a variant of CNN) on a guided ultrasonic wavefield for enhancing the quality of image resolution and quality of the acquired wavefield. 
 VDSR was applied in conjunction with compressive sensing theory with the aim of reducing the acquisition time of the ultrasonic wavefield.
-The model was trained on \(652\) wavefield images (\(326\) with defect) and (\(326\) without defects) generated by piezoelectric transducers and acquired by SLDV. 
+The model was trained on \(652\) wavefield images (\(326\) with defect and \(326\) without defects) generated by piezoelectric transducers and acquired by SLDV. 
 Authors have used various aluminium and CFRP plates to prepare the dataset.
 It was concluded that high-resolution images can be obtained, even when only the 10\% of the original scan points were retained
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -214,7 +215,7 @@ Numerically generated data resembles measurements acquired by SLDV.
 For our knowledge, it is the first time, a large full wavefield dataset of propagating guided waves will be fed as an input to deep neural networks with the aim of delamination size estimation.
 
 In this work, we are presenting a pixel-wise segmentation model which is capable of detecting and localising the delamination, through segmentation of the input image into damaged and undamaged parts.
-For this purpose, we have created a deep learning model based on a fully convolutional neural network (FCN).
+For this purpose, we have created a deep learning model based on a fully convolutional neural network (FCN)~\cite{long2015fully}.
 FCN is considered as a type of CNN, in which the densely connected network is replaced by fully convolutional layers. 
 FCNs are by themselves can be trained end-to-end and pixels-to-pixels, without the need for performing a process of feature extraction. 
 
@@ -251,7 +252,6 @@ to a range of (\(0-1\)) was applied to enhance the optimizer function during the
 	
 Furthermore, data augmentation was achieved by flipping images horizontally, vertically and diagonally. 
 It increased the dataset size four times -- \(1900\) images were produced.
-	
 Such data augmentation can enhance the learning process by enabling the model to learn and recognize new complex patterns.
 	
 The data set was split into two portions:  \(80\%\) for the training set and \(20\%\) for the testing set.

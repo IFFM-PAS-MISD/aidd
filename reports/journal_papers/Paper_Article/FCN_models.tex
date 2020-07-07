@@ -75,11 +75,13 @@
 
 	Our constructed model is composed of \(3\) dense blocks in the downsampling path, one dense block in bottleneck and 3 dense blocks for the upsampling path. 
 	Each dense block in the downsampling and upsampling paths consists of \(2\) layers, the bottleneck dense block consists of \(4\) layers.
-	The model input is a full wavefield image with size of (\(512\times 512\)), at the beginning , we perform a  convolution operation and concatenate the original input with the output then the concatenated output is fed into the first dense block that consist of (\(2\)) layers, each layer is composed of BN followed by Relu then (\(3\times3\)) convolution with same padding is applied followed by a dropout with probability \(p = 0.2\).
-	Then, the output of the first dense layer is concatenated with its input are fed into a transition down layer composed of BN followed by Relu then (\(1\times1\)) convolution followed by a dropout with probability \(p = 0.2\) then (\(2\times2\)) Maxpool with strides of (\(2\times2\))  , this process is repeated till the bottleneck dense block.
-	The bottleneck dense block consist of 4 layers
+	The model input is a full wavefield image with size of (\(512\times 512\)), at the beginning, we perform a  convolution operation and concatenate the original input with the output, then the concatenated output is fed into the first dense block that consist of (\(2\)) layers, each layer is composed of BN followed by Relu then (\(3\times3\)) convolution with same padding is applied followed by a dropout with probability \(p = 0.2\).
+	Then, the output of the first dense layer is concatenated with its input are fed into a transition down layer composed of BN followed by Relu then (\(1\times1\)) convolution followed by a dropout with probability \(p = 0.2\) then (\(2\times2\)) Maxpool with strides of (\(2\times2\)), this process is repeated till the bottleneck dense block.
+	The bottleneck dense block consist of 4 layers.
 	The output of the bottleneck is directed into upsampling path starting with transition up layer.
-	Accordingly, the output of the transition up layer is concatenated with the corresponding dense block output in the downsampling path, the final layer in the network is  (\(1\times1\)) convolution followed by a sigmoid function to calculate the probability of damage for each pixel.
+	Accordingly, the output of the transition up layer is concatenated with the corresponding dense block output in the downsampling path.
+	The final layer in the network is  (\(1\times1\)) convolution followed by either a sigmoid function or a softmax function to calculate the probability of damage for each pixel.
+	Hence, we have two versions of the FCN-DenseNet model with different output layer function.
 	Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
 	\begin{figure} [h!]
 		\begin{center}

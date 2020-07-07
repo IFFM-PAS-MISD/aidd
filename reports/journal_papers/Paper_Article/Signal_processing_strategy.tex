@@ -15,12 +15,10 @@ On the other hand, the threshold needs to be applied when the sigmoid activation
 Also, damage maps resulted from the adaptive wavenumber filtering must be thresholded so that the area and shape of delamination can be estimated.
 
 Finally, intersection over union (IoU) is applied as a measure of delamination size, shape and location so that all presented approaches can be compared quantitatively. 
-
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.8]{FCN_adaptive_filtering_diagram_MSSP.png}
 		\caption{Diagram of signal processing strategy by the proposed Fully Convolutional Network (left branch) in comparison to signal processing utilising adaptive wavenumber filtering method (right branch). }
 		\label{fig:sig_proc_strategy}
 	\end{figure}
-
 The particular blocks presented in the Fig.~\ref{fig:sig_proc_strategy} will be explained in more details in the next sections.
