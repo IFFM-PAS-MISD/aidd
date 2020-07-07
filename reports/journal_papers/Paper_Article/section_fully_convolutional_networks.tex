@@ -2,7 +2,7 @@
 \subsubsection{The basic concept of Fully Convolutional Network}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The main purpose of such approach is to automatically perform feature extraction by training a model using full wavefield images, hence, it will learn by itself to recognise the patterns and detect the delamination and localize it.
-In our work we are using the fully convolutional network (FCN), which aims to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
+In our work we are using the fully convolutional network (FCN)~\cite{long2015fully}, which aims to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
 
 The idea behind FCN is to stack a group of convolutional layers in an encoder-decoder style. 
 The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsample the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
@@ -11,8 +11,8 @@ The encoder is capable for downsampling the input image through convolutions wit
 In order to reduce overfitting in the models, some techniques were applied such as adding dropouts to layers.
 
 For the output layer, we have applied two activation functions in separate experiments, the first one is softmax and the second one is sigmoid. 
-The softmax function calculates the probability of the damage occurrence and the healthy state for every single pixel, hence, the summation of the two probabilities must equal one. Eq.~\ref{softmax} illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged.
-To predict the output label of the detection (\(y_{pred}\)) which represent the probability of damaged and undamaged we applied the \(\argmax\) function to select the maximum probability of the softmax activation function.
+The softmax function calculates the probability of the damage occurrence and the healthy state for every single pixel, hence, the summation of the two probabilities must equal one. Eq.~\ref{softmax} illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
+To predict the output label of the detection (\(y_{pred}\)) which represent the probability of damaged and undamaged, we applied the \(\argmax\) function to select the maximum probability of the softmax activation function.
 	\begin{equation}
 		P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
 		\label{softmax}
