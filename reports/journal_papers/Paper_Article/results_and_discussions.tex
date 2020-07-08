@@ -211,10 +211,12 @@
 	\end{figure}
 	
 	In fig.~\ref{fig:Exp_ERMS_teflon}, we present an experimental scenario, of CFRP with Teflon inserted and a frequency of \(50\)kHz is used to excite the transducer.
-	As shown in fig.~\ref{fig:ERMSF_CFRP_teflon} the adaptive filtering is able to detect the delamination and fig.~\ref{fig:Binary_ERMSF_CFRP} shows the binary thresholded output. 
-	The FCN-DenseNet model detected the delamination with both a sigmoid and softmax functions in fig.~\ref{fig:EXP_predict_sigmoid} and fig.~\ref{fig:EXP_predict_softmax} respectively.
-	Since we  trained our model only on numerically generated data, 
-	we expect to get enhanced results if the model trains on more experimental data, that make it able to generalize hence detect delaminations on new and previously unseen data.
+	As shown in fig.~\ref{fig:ERMSF_CFRP_teflon} the adaptive filtering is able to detect the delamination and fig.~\ref{fig:Binary_ERMSF_CFRP} shows the binary thresholded output and the IoU for this scenario was \(0.401\). 
+	The FCN-DenseNet model detected the delamination with both a sigmoid and softmax functions as shown in fig.~\ref{fig:EXP_predict_sigmoid} and fig.~\ref{fig:EXP_predict_softmax} respectively.
+	The IoU for FCN-DenseNet model was \(0.053\) and \(0.081\) for a sigmoid and softmax respectively.
+	These results of predictions are expected since we trained our model only on numerically generated data.
+	However, the FCN-DenseNet could detect the delamination in the experimentally generated image.
+	Furthermore, we expect to get enhanced results if the model trains on more experimental data, that makes it able to generalize to detect delaminations on new and previously unseen data. 
 	\begin{figure} [!h]
 		\centering
 		\begin{subfigure}[b]{0.47\textwidth}
