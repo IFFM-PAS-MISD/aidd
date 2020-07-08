@@ -1,36 +1,36 @@
-\subsubsection{U-net based model}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Our first FCN model is the U-net based-model, which was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation constructed from two parts encoder and decoder. 
-	This architecture consists of three sections: The downsampling section, The bottleneck, and the upsampling section. 
-	The downsampling section holds several contraction blocks. 
-	Each block takes an input applies two (\(3\times3\)) convolution layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides. 
-	The number of convolutional filters is doubled after each downsampling block so that architecture can learn the complex patterns effectively. 
-	The bottleneck layer meddles between the downsampling section and the upsampling section. 
-	It composed of two (\(3\times3\)) convolution layers followed by (\(2\times2\)) up convolution layer (Transpose convolution).
-	The upsampling section is similar to downsampling section, it also consists of several upsampling blocks. 
-	Each block passes the input to two (\(3\times3\)) convolution layers followed by a (\(2\times2\)) Convolutional transposed layer (upsampling). 
-	Moreover, after each block, the number of feature maps used by convolutional layer get half to keep the model symmetrical. 
-	Further, skip connections were added by appending feature maps of the downsampling block with the corresponding upsampling block to retrieve lost spatial information during the downsampling to due to decreasing the input resolution.
-	By doing so, the model ensures that the feature maps which were learned during the image downsampling will be utilised to reconstruct it. 
-	Furthermore, to enhance the model training performance we applied a technique called batch-normalization (BN)~\cite{Ioffe2015}.
-	The term "batch" was added because, during training, we normalize the output of the previous layer for each batch, applying a transformation that keeps the mean activation value close to \(0\) and the activation standard deviation close to \(1\), which eventually enhances the learning rate.
-	\begin{figure} [h!]
-		\begin{center}
-			\includegraphics[scale= 0.8]{Unet_model.png}
-		\end{center}
-		\caption{U-Net architecture.} 
-		\label{fig:Unet}
-	\end{figure}
-	Fig.~\ref{fig:Unet} presents the model architecture showing the path of the input of a full wavefield image of a size (\(512\times512\)) through the downsampling, bottleneck then the upsampling finally to the output which contains the prediction of delamination size and location. 
-	In the downsampling section,
-	Each layer performs (\(3\times3\)) convolution, followed by Relu activation function followed by BN operation.
-	Further, the Transmission Down layer contains a Maxpool function with (\(2\times2\)) pooling filter and a (\(2\times2\)) strides that picks the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, consequently, reducing computation complexity.
-	The bottleneck section is the deepest section in the model, it contains two convolutional layers, with 256 filters which helps the model to learn and recognize new complex patterns.
-	The Upsampling section is similar to the down sampling section, in which each layer  performs (\(3\times3\)) convolution, followed by Relu activation function followed by BN operation. But, for the Transmission Up layer it perform the opposite of downsampling.
-	The purpose is to retrieve the dimensions before sampling and increase the resolution of the images. 
-	For this model we have applied a (\(3\times3\))Transposed convolution with (\(2\times2\)) strides.
-	Transposed convolution layer differs from the regular upsampling function, by introducing learnable parameters regarding the transposed convolution filters that enhance the learning process of the model, therefore, new patterns are recognized. 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsubsection{U-net based model}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Our first FCN model is the U-net based-model, which was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation constructed from two parts encoder and decoder. 
+%	This architecture consists of three sections: The downsampling section, The bottleneck, and the upsampling section. 
+%	The downsampling section holds several contraction blocks. 
+%	Each block takes an input applies two (\(3\times3\)) convolution layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides. 
+%	The number of convolutional filters is doubled after each downsampling block so that architecture can learn the complex patterns effectively. 
+%	The bottleneck layer meddles between the downsampling section and the upsampling section. 
+%	It composed of two (\(3\times3\)) convolution layers followed by (\(2\times2\)) up convolution layer (Transpose convolution).
+%	The upsampling section is similar to downsampling section, it also consists of several upsampling blocks. 
+%	Each block passes the input to two (\(3\times3\)) convolution layers followed by a (\(2\times2\)) Convolutional transposed layer (upsampling). 
+%	Moreover, after each block, the number of feature maps used by convolutional layer get half to keep the model symmetrical. 
+%	Further, skip connections were added by appending feature maps of the downsampling block with the corresponding upsampling block to retrieve lost spatial information during the downsampling to due to decreasing the input resolution.
+%	By doing so, the model ensures that the feature maps which were learned during the image downsampling will be utilised to reconstruct it. 
+%	Furthermore, to enhance the model training performance we applied a technique called batch-normalization (BN)~\cite{Ioffe2015}.
+%	The term "batch" was added because, during training, we normalize the output of the previous layer for each batch, applying a transformation that keeps the mean activation value close to \(0\) and the activation standard deviation close to \(1\), which eventually enhances the learning rate.
+%	\begin{figure} [h!]
+%		\begin{center}
+%			\includegraphics[scale= 0.8]{Unet_model.png}
+%		\end{center}
+%		\caption{U-Net architecture.} 
+%		\label{fig:Unet}
+%	\end{figure}
+%	Fig.~\ref{fig:Unet} presents the model architecture showing the path of the input of a full wavefield image of a size (\(512\times512\)) through the downsampling, bottleneck then the upsampling finally to the output which contains the prediction of delamination size and location. 
+%	In the downsampling section,
+%	Each layer performs (\(3\times3\)) convolution, followed by Relu activation function followed by BN operation.
+%	Further, the Transmission Down layer contains a Maxpool function with (\(2\times2\)) pooling filter and a (\(2\times2\)) strides that picks the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, consequently, reducing computation complexity.
+%	The bottleneck section is the deepest section in the model, it contains two convolutional layers, with 256 filters which helps the model to learn and recognize new complex patterns.
+%	The Upsampling section is similar to the down sampling section, in which each layer  performs (\(3\times3\)) convolution, followed by Relu activation function followed by BN operation. But, for the Transmission Up layer it perform the opposite of downsampling.
+%	The purpose is to retrieve the dimensions before sampling and increase the resolution of the images. 
+%	For this model we have applied a (\(3\times3\))Transposed convolution with (\(2\times2\)) strides.
+%	Transposed convolution layer differs from the regular upsampling function, by introducing learnable parameters regarding the transposed convolution filters that enhance the learning process of the model, therefore, new patterns are recognized. 
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsubsection{FCN-DenseNet based model}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	FCN-DenseNet was introduced by Simon Jegou et al.~\cite{Jegou} for semantic segmentation, it was originally based on the DenseNet model proposed by Gao Huang et al.~\cite{Huang}. 
@@ -46,7 +46,7 @@
 
 	\begin{figure} [h!]
 		\begin{center}
-			\includegraphics{DenseBlock_layer.png}
+			\includegraphics[scale=1]{DenseBlock_layer.png}
 		\end{center}
 		\caption{Dense Block architecture.} 
 		\label{dense_block}
@@ -75,40 +75,42 @@
 
 	Our constructed model is composed of \(3\) dense blocks in the downsampling path, one dense block in bottleneck and 3 dense blocks for the upsampling path. 
 	Each dense block in the downsampling and upsampling paths consists of \(2\) layers, the bottleneck dense block consists of \(4\) layers.
-	The model input is a full wavefield image with size of (\(512\times 512\)), at the beginning , we perform a  convolution operation and concatenate the original input with the output then the concatenated output is fed into the first dense block that consist of (\(2\)) layers, each layer is composed of BN followed by Relu then (\(3\times3\)) convolution with same padding is applied followed by a dropout with probability \(p = 0.2\).
-	Then, the output of the first dense layer is concatenated with its input are fed into a transition down layer composed of BN followed by Relu then (\(1\times1\)) convolution followed by a dropout with probability \(p = 0.2\) then (\(2\times2\)) Maxpool with strides of (\(2\times2\))  , this process is repeated till the bottleneck dense block.
-	The bottleneck dense block consist of 4 layers
+	The model input is a full wavefield image with size of (\(512\times 512\)), at the beginning, we perform a  convolution operation and concatenate the original input with the output, then the concatenated output is fed into the first dense block that consist of (\(2\)) layers, each layer is composed of BN followed by Relu then (\(3\times3\)) convolution with same padding is applied followed by a dropout with probability \(p = 0.2\).
+	Then, the output of the first dense layer is concatenated with its input are fed into a transition down layer composed of BN followed by Relu then (\(1\times1\)) convolution followed by a dropout with probability \(p = 0.2\) then (\(2\times2\)) Maxpool with strides of (\(2\times2\)), this process is repeated till the bottleneck dense block.
+	The bottleneck dense block consist of 4 layers.
 	The output of the bottleneck is directed into upsampling path starting with transition up layer.
-	Accordingly, the output of the transition up layer is concatenated with the corresponding dense block output in the downsampling path, the final layer in the network is  (\(1\times1\)) convolution followed by a sigmoid function to calculate the probability of damage for each pixel.
+	Accordingly, the output of the transition up layer is concatenated with the corresponding dense block output in the downsampling path.
+	The final layer in the network is  (\(1\times1\)) convolution followed by either a sigmoid function or a softmax function to calculate the probability of damage for each pixel.
+	Hence, we have two versions of the FCN-DenseNet model with different output layer function.
+	Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
 	\begin{figure} [h!]
 		\begin{center}
-			\includegraphics[scale= 0.8]{FCN_dense_net.png}
+			\includegraphics[scale= 1]{FCN_dense_net.png}
 		\end{center}
 		\caption{FCN-DenseNet architecture.} 
 		\label{fcn}
 	\end{figure}
-	Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
 
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsubsection{FCN-VGG16}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	In this model we address the use of VGG16-based encoder~\cite{Simonyan2015} with 13-convolutional layers.
-	VGG16 encoder is composed of convolutional layers, pooling layers and dense layers, and it was used for classification purposes. 
-	In our last model, we employed an encoder decoder scheme for pixel wise image segmentation. 
-	Both encoder and decoder layers were trained from scratch.
-	Figure~\ref{vgg16} presents the architecture of VGG16- encoder decoder model. 
-	The model consists of two paths: downsampling and upsampling.
-	The downsampling path consists of \(5\) convolutional blocks,  with a total \(13\) convolutional layers  with same padding and kernel size (\(3\times3\))and 32 filters for each layer, followed by BN and activation function Relu.
-	Each convolutional layer is responsible for extracting high level features from the input image such as edges.
-	A Maxpool operation with pool size of (\(2\times2\))  and (\(2\times2\)) strides followed by dropout is performed after each convolutional block. 
-	The upsampling path is introduced to recover spatial resolution, it also has \(5\) convolutional blocks with a total \(13\) convolutional layers  with same padding and kernel size (\(3\times3\))and 32 filters for each layer, followed by BN and activation function Relu.
-	For upsampling, bilinear interpolation with (\(2\times2\)) kernel size is applied.
-	Skip connections were added between downsampling blocks and the corresponding upsampling blocks in order to enhance recovering fine-grained details by enabling feature re-usability from earlier layers.
-	\begin{figure} [h!]
-		\begin{center}
-			\includegraphics[scale=0.8]{VGG16_encoder_decoder.png}
-		\end{center}
-		\caption{VGG16 encoder decoder architecture.} 
-		\label{vgg16}
-	\end{figure}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\subsubsection{FCN-VGG16}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	In this model we address the use of VGG16-based encoder~\cite{Simonyan2015} with 13-convolutional layers.
+%	VGG16 encoder is composed of convolutional layers, pooling layers and dense layers, and it was used for classification purposes. 
+%	In our last model, we employed an encoder decoder scheme for pixel wise image segmentation. 
+%	Both encoder and decoder layers were trained from scratch.
+%	Figure~\ref{vgg16} presents the architecture of VGG16- encoder decoder model. 
+%	The model consists of two paths: downsampling and upsampling.
+%	The downsampling path consists of \(5\) convolutional blocks,  with a total \(13\) convolutional layers  with same padding and kernel size (\(3\times3\))and 32 filters for each layer, followed by BN and activation function Relu.
+%	Each convolutional layer is responsible for extracting high level features from the input image such as edges.
+%	A Maxpool operation with pool size of (\(2\times2\))  and (\(2\times2\)) strides followed by dropout is performed after each convolutional block. 
+%	The upsampling path is introduced to recover spatial resolution, it also has \(5\) convolutional blocks with a total \(13\) convolutional layers  with same padding and kernel size (\(3\times3\))and 32 filters for each layer, followed by BN and activation function Relu.
+%	For upsampling, bilinear interpolation with (\(2\times2\)) kernel size is applied.
+%	Skip connections were added between downsampling blocks and the corresponding upsampling blocks in order to enhance recovering fine-grained details by enabling feature re-usability from earlier layers.
+%	\begin{figure} [h!]
+%		\begin{center}
+%			\includegraphics[scale=0.8]{VGG16_encoder_decoder.png}
+%		\end{center}
+%		\caption{VGG16 encoder decoder architecture.} 
+%		\label{vgg16}
+%	\end{figure}
