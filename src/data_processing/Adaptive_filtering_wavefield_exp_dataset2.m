@@ -151,7 +151,7 @@ for k = test_case
                         IoU=intersect_over_union_fun(flipud(Binary),logical(A));
                         area=sum(sum(Binary))/(Nx*Ny)*WL(1)*1e3*WL(2)*1e3; % [mm^2]
                         disp('Intersection over union: ');IoU
-            
+                        % 
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename);
             fprintf('Successfully processed:\n%s\n', name);% successfully processed

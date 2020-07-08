@@ -134,8 +134,8 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Composite materials have a wide range of applications in various industries, due to their characteristics such as high strength, low density, resistance to fatigue, and corrosion.  
-However, damage can occur in composites materials due to impacts resulting from the lack of reinforcement in the out-of-plane direction~\cite{Francesconi2019}.
-In particular, laminated composite materials are more sensitive to delamination damage due to weak transverse tensile and interlaminar shear strengths.
+However, damage can occur in composite materials due to impacts resulting from the lack of reinforcement in the out-of-plane direction~\cite{Francesconi2019}.
+In particular, laminated composite materials are more sensitive to damage in the form of delamination due to weak transverse tensile and interlaminar shear strengths.
 Delamination can alter the compression strength of composite laminate, and gradually affect the composite to encounter failure by buckling. 
 Delaminations can seriously decrease the performance of composites structures, accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
 	
@@ -169,12 +169,12 @@ One of the earliest work for delamination location and size assessment in compos
 They have trained a neural network model with frequencies for the first five modes obtained from modal analysis data. 
 The data was acquired by piezoceramic sensors in both damaged and undamaged composite beams.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Okafor et al~\cite{okafor1996delamination} applied a feed-forward backpropagation neural network to assess the delamination size in a smart composite beam. 
+Okafor et al.~\cite{okafor1996delamination} applied a feed-forward backpropagation neural network to assess the delamination size in a smart composite beam. 
 For training the neural network model, authors used delamination sizes and corresponding the first four modal frequencies. 
 The trained model was tested with new cases of delamination using the first four normalized frequencies of test cases as an input to the network. 
 Their model predicted the delamination size between 0.22~cm and 0.82~cm successfully.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Moreover, Chakraborty et al.~\cite{chakraborty2005artificial} proposed a neural network model for detecting delamination shape, size and location in a fibre reinforced plastic composite laminate.
+Moreover, Chakraborty et al.~\cite{chakraborty2005artificial} proposed a neural network model for detecting delamination shape, size and location in a fibre-reinforced plastic composite laminate.
 Authors used natural frequencies as inputs and the corresponding size, shape and location of delamination as outputs of the model. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Authors in ~\cite{roseiro2005neural}  proposed a damage detection method in laminated composite plates to locate and quantify damage through utilising the electrical potential of piezoelectric sensors and artificial neural networks. 
@@ -185,11 +185,13 @@ But tests were performed only based on the numerical model.
 Sammons et al.~\cite{sammons2016segmenting}, utilised X-ray computed tomography for estimating the delaminations in a carbon fibre reinforced polymer (CFRP). 
 For this purpose, they utilised the convolutional neural network (CNN) for performing image segmentation of the defected input images to estimate the delaminations. 
 Their CNN was capable of identifying and quantifying small delaminations. 
-Unfortunately, the ConveNet could not recognise delaminations with large sizes.
+Unfortunately, the proposed network architecture could not recognise delaminations with large sizes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
-Further, De Fenza et al.~\cite{de2015application} proposed a method for damage detection for aluminium and composite materials plates using Lamb waves by a neural network model for automatic feature extraction and probability ellipse based method. 
-The neural network model and probability ellipse were applied on the damage index (DI) computed by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
+Further, De Fenza et al.~\cite{de2015application} proposed a method for damage detection in plates made of aluminium alloys and composite materials using Lamb waves by a neural network model.
+The model was used for automatic feature extraction in conjunction with probability ellipse based method. 
+The neural network model and probability ellipse method were applied for computing the damage index (DI). 
+It was derived by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves \enquote{DeepSHM}. 
 They pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the CNN for training to acquire the neural weights. 
@@ -217,8 +219,7 @@ For our knowledge, it is the first time, a large full wavefield dataset of propa
 In this work, we are presenting a pixel-wise segmentation model which is capable of detecting and localising the delamination, through segmentation of the input image into damaged and undamaged parts.
 For this purpose, we have created a deep learning model based on a fully convolutional neural network (FCN)~\cite{long2015fully}.
 FCN is considered as a type of CNN, in which the densely connected network is replaced by fully convolutional layers. 
-FCNs are by themselves can be trained end-to-end and pixels-to-pixels, without the need for performing a process of feature extraction. 
-
+FCNs can be trained end-to-end and pixels-to-pixels, without the need for performing a process of feature extraction. 
 Moreover, the pixel-wise segmentation model enables the precise shape and size estimation of defects.
 The capabilities and potentials of the proposed method are compared to the conventional wavefield signal processing method i.e. adaptive wavenumber filtering~\cite{Kudela2015,Radzienski2019}.
 The quantitative comparison was performed by using intersection over the union of detected delamination area with respect to the ground truth. 
@@ -262,11 +263,13 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 \input{FCN_models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{results_and_discussions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{Conclusions}
+\clearpage	
 %\appendix
 \section*{Acknowledgements}
-\section*{ }
+The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
+We would like to acknowledge dr Maciej Radzienski for providing the experimental data of full wavefield measured by SLDV.
 
 \bibliography{MSSP_paper1}
 \bibliographystyle{num_order}
