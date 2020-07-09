@@ -133,16 +133,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Composite materials have a wide range of applications in various industries, due to their characteristics such as high strength, low density, resistance to fatigue, and corrosion.  
+Composite materials have a wide range of applications in various industries, due to their characteristics such as high strength, low density, resistance to fatigue and corrosion.  
 However, damage can occur in composite materials due to impacts resulting from the lack of reinforcement in the out-of-plane direction~\cite{Francesconi2019}.
 In particular, laminated composite materials are more sensitive to damage in the form of delamination due to weak transverse tensile and interlaminar shear strengths.
 Delamination can alter the compression strength of composite laminate, and gradually affect the composite to encounter failure by buckling. 
-Delaminations can seriously decrease the performance of composites structures, accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
+Delaminations can seriously decrease the performance of composite structures, accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
 	
 One of the conventional techniques for damage identification for non-destru\-ctive testing (NDT) involves arrays of transducers that can be mounted or embedded in the structures for registering the response of the guided wave propagation.
-However, damage identification regarding structures with curved and deformable geometry can be inaccurate when using an array of transducers.
-Also, damage influence maps resulted from processing of signals registered by the array of transducers have low resolution, due to the small number of sensing points. 
+%However, damage identification regarding structures with curved and deformable geometry can be inaccurate when using an array of transducers.
+However, damage influence maps resulted from processing of signals registered by the array of transducers have low resolution, due to the small number of sensing points. 
 Accordingly, this issue of low-resolution damage influence map can be solved by utilising a Scanning Laser Doppler Vibrometry (SLDV), which is a non-contact technique dedicated to full wavefield measurements of vibration and guided wave propagation.
+%Moreover, the delamination location plays a key role in its identification i.e. delamination located at the edges or the corners of a structure are considered difficult scenarios due to a reflected signals from these locations have similar characteristics of those reflected from damage.
+%Therefore, utilising SLDV for acquiring signals to produce a higher resolution influence map will be more beneficial than only using a transducers array. 
 The measurements are conducted on a dense mesh of measurement points spanned over the area of the investigated structure.
 Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localisation~\cite{Michaels2007,Park2014,Tian2015a,Kudela2015}.
 Full wavefield processing techniques even allow for damage size estimation~\cite{Girolamo2018a,Kudela2018} which is difficult to perform in case of transducer arrays, especially for composite structures.
@@ -151,7 +153,7 @@ Therefore, the latter methods are evaluated mostly for damage detection and loca
 Certain algorithms such as the time reversal algorithm can benefit from combining piezoceramic transducers (as actuators) with SLDV for sensing~\cite{Girolamo2018a, Miniaci2019}.
     
 Conventional damage detection and localisation methods focus on patterns extraction from registered measurements and accordingly make decisions based on these patterns~\cite{Gul2009}. 
-Moreover, conventional methods for pattern recognition requires feature selection and classification (handcrafted features). 
+Moreover, conventional methods for pattern recognition require feature selection and classification (handcrafted features). 
 These conventional methods can perform efficient damage detection, however, these methods depend on selected features from their scope of measurement.
 Accordingly, introducing new patterns will cause them to fail in detecting the damage.
 Furthermore, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features~\cite{Gulgec2019}.
@@ -159,7 +161,7 @@ Perhaps the most challenging part for damage detection is determining the unknow
     
 The accelerated progress in the field of artificial intelligence (AI) technologies in recent years, and mainly in deep learning, revealed new dimensions for solving problems and offered the opportunity for being implemented and integrated with the NDT and further with structural health monitoring (SHM) approaches.
 Therefore, issues regarding data preprocessing and feature extraction can be handled when applying deep learning techniques. 
-Nowadays, end-to-end approaches are developed, in which the whole unprocessed data are fed in the model, hence, it will learn by itself to recognise the patterns and detect the damage.
+Nowadays, end-to-end approaches are developed, in which the whole unprocessed data are fed into the model, hence, it will learn by itself to recognise the patterns and detect the damage.
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In the following, methods for damage size estimation based on machine learning and deep learning techniques are presented which are targeted in the field of SHM/NDT.
@@ -183,7 +185,7 @@ But tests were performed only based on the numerical model.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Sammons et al.~\cite{sammons2016segmenting}, utilised X-ray computed tomography for estimating the delaminations in a carbon fibre reinforced polymer (CFRP). 
-For this purpose, they utilised the convolutional neural network (CNN) for performing image segmentation of the defected input images to estimate the delaminations. 
+For this purpose, they utilised a convolutional neural network (CNN) for performing image segmentation of the defected input images to estimate the delaminations. 
 Their CNN was capable of identifying and quantifying small delaminations. 
 Unfortunately, the proposed network architecture could not recognise delaminations with large sizes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,7 +193,7 @@ Unfortunately, the proposed network architecture could not recognise delaminatio
 Further, De Fenza et al.~\cite{de2015application} proposed a method for damage detection in plates made of aluminium alloys and composite materials using Lamb waves by a neural network model.
 The model was used for automatic feature extraction in conjunction with probability ellipse based method. 
 The neural network model and probability ellipse method were applied for computing the damage index (DI). 
-It was derived by comparing the differences in the measured  Lamb waves prior and post the damage occurrence. 
+It was derived by comparing the differences in the measured  Lamb waves before and after a damage occurrence. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves \enquote{DeepSHM}. 
 They pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the CNN for training to acquire the neural weights. 
@@ -203,7 +205,7 @@ Using this data to train a deep neural network of 4 hidden layers including 2 co
 Their technique show good results when compared with traditional support vector machine (SVM) methods.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Furthermore, Esfandabadi et al.~\cite{esfandabadideep} applied 20 layers based very-deep super-resolution (VDSR) architecture, (VDSR is a variant of CNN) on a guided ultrasonic wavefield for enhancing the quality of image resolution and quality of the acquired wavefield. 
+Furthermore, Esfandabadi et al.~\cite{esfandabadideep} applied 20 layers based very-deep super-resolution (VDSR) architecture (VDSR is a variant of CNN), on a guided ultrasonic wavefield for enhancing the quality of image resolution and quality of the acquired wavefield. 
 VDSR was applied in conjunction with compressive sensing theory with the aim of reducing the acquisition time of the ultrasonic wavefield.
 The model was trained on \(652\) wavefield images (\(326\) with defect and \(326\) without defects) generated by piezoelectric transducers and acquired by SLDV. 
 Authors have used various aluminium and CFRP plates to prepare the dataset.
@@ -238,7 +240,7 @@ In this section, a deep learning approach for delamination detection in composit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Data preprocessing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-It should be noted that the output from the wave propagation model is in the form of 3D matrix which contains amplitudes of propagating waves at location \((x, y)\) and time \(t\). We can look at it as a set of frames of propagating waves at discrete time moments \(t_k\).
+It should be noted that the output from the wave propagation model is in the form of a 3D matrix which contains amplitudes of propagating waves at location \((x, y)\) and time \(t\). We can look at it as a set of frames of propagating waves at discrete time moments \(t_k\).
 
 The data preprocessing as it is indicated in Fig.~\ref{fig:sig_proc_strategy} include a step of computation of root mean square value:
 \begin{equation}
@@ -253,7 +255,7 @@ to a range of (\(0-1\)) was applied to enhance the optimizer function during the
 	
 Furthermore, data augmentation was achieved by flipping images horizontally, vertically and diagonally. 
 It increased the dataset size four times -- \(1900\) images were produced.
-Such data augmentation can enhance the learning process by enabling the model to learn and recognize new complex patterns.
+Such data augmentation can enhance the learning process by enabling the model to learn and recognise new complex patterns.
 	
 The data set was split into two portions:  \(80\%\) for the training set and \(20\%\) for the testing set.
 Additionally, the validation set was created as a \(20\%\) of the training set.

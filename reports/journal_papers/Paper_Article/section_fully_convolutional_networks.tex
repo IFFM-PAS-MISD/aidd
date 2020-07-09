@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{The basic concept of Fully Convolutional Network}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The main purpose of such approach is to automatically perform feature extraction by training a model using full wavefield images, hence, it will learn by itself to recognise the patterns and detect the delamination and localize it.
+The main purpose of such approach is to automatically perform feature extraction by training a model using full wavefield images, hence, it will learn by itself to recognise the patterns and detect the delamination and localise it.
 In our work we are using the fully convolutional network (FCN)~\cite{long2015fully}, which aims to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
 
 The idea behind FCN is to stack a group of convolutional layers in an encoder-decoder style. 
 The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsample the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
 
 
-In order to reduce overfitting in the model, some techniques were applied such as adding dropouts to layers.
+In order to reduce overfitting in the model, some techniques were applied such as adding dropouts to layers and batch normalization.
 
 For the output layer, we have applied two activation functions in separate experiments, the first one is softmax and the second one is sigmoid. 
 The softmax function calculates the probability of the damage occurrence and the healthy state for every single pixel, hence, the summation of the two probabilities must equal one. Eq.~(\ref{softmax}) illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
@@ -61,4 +61,4 @@ Furthermore, during training the model our focus is to minimize the loss and max
 The optimizer is responsible for updating the model learnable parameters such as filters weights and biases in a way the overall loss is minimized and the accuracy is maximized.
 In the proposed approach, Adam optimizer was applied, which is considered as a combination of RMSprop and Stochastic Gradient Descent (SGD)~\cite{Kingma2015}. 
 
-In the next subsection, we are going to present a FCN model for pixel-wise semantic segmentation in order to detect and localise delaminations.
+In the next subsection, we are going to present an FCN model for pixel-wise semantic segmentation in order to detect and localise delaminations.

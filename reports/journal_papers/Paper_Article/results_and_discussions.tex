@@ -8,7 +8,7 @@ Therefore, there is a need for a threshold function to exclude low probabilities
 For all the following results, the threshold \(tr = 0.5\) was set, therefore any value less than \(0.5\) will be excluded from the damage map.
 For the softmax function at the output layer, it computes two probabilities for each pixel: (damaged and undamaged), then an \(\argmax\) function is applied to select the highest probability between the two probabilities, therefore there is no need for thresholding. 
 The FCN-DenseNet models was trained on augmented dataset up to 100 epochs, and the architecture of the FCN-DenseNet  was implemented using the open-source platform of Keras API~\cite{chollet2015keras} running on top of TensorFlow on a GeForce RTX 2080  GPU from NVIDIA.
-For all scenarios, we selected a red colour to represent the detected delamination (damaged), and the blue colour to represents the healthy state (undamaged).
+For all scenarios, we selected a red colour to represent the detected delamination (damaged), and the blue colour to represent the healthy state (undamaged).
 	
 In the following, we are going to present three scenarios of delaminations of different locations, shapes and angles.
 
@@ -21,7 +21,7 @@ To eliminate low values from the ERMSF, a binary threshold is applied as shown i
 The threshold level was selected to limit the influence of edge noise and at the same time highlight the damage. 
 The binary ERMSF properly indicates the location of delamination but still, there is some noise at the corners.
 It results in the calculated IoU equal (\(0.10\)).
-In Figs.~(\ref{fig:predict_438_sigmoid_tr_0.5}, ~\ref{fig:predict_438_softmax}) we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
+In Figs.~\ref{fig:predict_438_sigmoid_tr_0.5}, ~\ref{fig:predict_438_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
 As shown, the FCN-DenseNet models detect the delamination without any noise at the edges as the FCN-DenseNet learned the delamination patterns from the large numerically generated dataset and can differentiate among different complex patterns such as noise.   
 The IoU = \(0.73\) for sigmoid, and IoU = \(0.65\) for the softmax.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -76,12 +76,12 @@ The IoU = \(0.73\) for sigmoid, and IoU = \(0.65\) for the softmax.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 In the next scenario, we present delamination located in the upper left part of the plate.
-Figs.~(\ref{fig:dispersion30deg_direct}, ~\ref{fig:m1_rand_single_delam_454}) show the RMS of the full wavefield interpolated at the bottom surface of the plate.
+Figs.~\ref{fig:dispersion30deg_direct}, ~\ref{fig:m1_rand_single_delam_454} show the RMS of the full wavefield interpolated at the bottom surface of the plate.
 Fig.~\ref{fig:ERMSF_flat_shell_Vz_454} shows the damage map obtained by using the adaptive wavenumber filtering.
 The adaptive wavenumber filtering method picks some noise at the edges but the shape of delamination is clearly highlighted by high values of damage map.
 Nevertheless, there is still some noise after applying threshold as it is shown in Fig.~\ref{fig:Binary_ERMSF}.
 The IoU for this case is \(0.61\).
-In Fig.~\ref{fig:predict_454_sigmoid_tr_0.5} and fig.~\ref{fig:predict_454_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax, respectively.
+In Figs.~\ref{fig:predict_454_sigmoid_tr_0.5}, ~\ref{fig:predict_454_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax, respectively.
 The sigmoid detect the delamination with IoU = \(0.58\), and for the softmax with IoU = \(0.60\).
 As we can see also for this scenario, the FCN-DenseNet only detects the delamination patterns without unwanted noise.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,7 +191,7 @@ In Fig.~\ref{fig:RMS433} we present the third scenario where the damage map obta
 	\label{fig:RMS433}
 \end{figure} 
 
-Figs.~(\ref{fig:RMS_flat_shell_Vz_433}, ~\ref{fig:m1_rand_single_delam_433}) show the RMS of the full wavefield interpolated at the bottom surface of the plate with delamination located at the upper left corner of the plate and its corresponding ground truth, respectively.
+Figures.~\ref{fig:RMS_flat_shell_Vz_433}, ~\ref{fig:m1_rand_single_delam_433} show the RMS of the full wavefield interpolated at the bottom surface of the plate with delamination located at the upper left corner of the plate and its corresponding ground truth, respectively.
 It is impossible to notice any changes of RMS pattern caused by the delamination (Fig.~\ref{fig:RMS_flat_shell_Vz_433}).
 It should be noted that this image is fed to the FCN-DenseNet model whereas the full wavefield (all frames) are used in the adaptive wavenumber filtering method.
 In extreme cases, like this, conventional signal processing has an advantage over the FCN-DenseNet model.
@@ -202,7 +202,7 @@ For this case IoU= \(0\) for all considered methods.
  
 Delaminations located near edges or corners are difficult to detect due to edge wave reflections which have similar patterns as delamination reflections. 
 The problem arises for both conventional and deep learning techniques. 
-However, to solve this issue for the FCN model, we need to enhance the feature extraction process by obtaining more data to train the model to recognize and learn new patterns.	
+However, to solve this issue for the FCN model, we need to enhance the feature extraction process by obtaining more data to train the model to recognise and learn new patterns.	
 
 In Table~\ref{tab:iou} we present the maximum, minimum and mean value of IoU for the adaptive filtering and FCN-DenseNet for sigmoid (threshold = \(0.5\)) and softmax for all testing images.
 	\begin{table}
