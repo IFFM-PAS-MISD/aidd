@@ -1,5 +1,6 @@
 import os
 import cv2
+from keras.engine import InputLayer
 from keras.models import load_model
 from sklearn.utils import shuffle
 import numpy as np
@@ -13,6 +14,7 @@ import matplotlib
 from matplotlib import cm
 from matplotlib.colors import ListedColormap
 from mpmath import norm
+from keras import backend as K, Input
 
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
@@ -38,10 +40,14 @@ y = y / 255.0
 ################# Split dataset into training and testing sets and again re-shuffle them ###############################
 ########################################################################################################################
 x_train = x[:1520]
-y_train = y[0:1520]
+y_train = y[:1520]
 
+#n = 433 # image number
+#test_x_samples = x[(n-1)*4:n*4]
+#test_y_samples = y[(n-1)*4:n*4]
 test_x_samples = x[1520:1900]
-tests_y_samples = y[1520:1900]
+test_y_samples = y[1520:1900]
+
 ########################################################################################################################
 ######################################## Loading experimental images ###################################################
 ########################################################################################################################
@@ -65,8 +71,12 @@ experimental_label = experimental_label.reshape(23,512,512,1)
 ######################################################### EXP ##########################################################
 #FCN_Dense_net_Precision_BCE_ConvFilter_16_changing_layers_size_ somehow good # when tr =1 shows good exp output
 # New_data_unet_adding_dropout # gave somehow good exp results
-#FCN_DsensNets_Semantic_Segmentation_filter_Using_Conv2DTranspose16_epoch_5_kernal_(3, 3)_drpout_0.2_batch_size_4_loss_updated_changed_DB _layer_Iou_and_loss_changed     # when tr =0.999 shows good exp output
-# SegNet_Upsampling_added_skip_layer_function_10_epoches_7_7_covolution_4_layers # great model # when tr =.45-.6 shows good exp output
+
+#FCN_DsensNets_Semantic_Segmentation_filter_Using_Conv2DTranspose16_epoch_5_kernal_(3, 3)_
+# drpout_0.2_batch_size_4_loss_updated_changed_DB _layer_Iou_and_loss_changed     # when tr =0.999 shows good exp output
+
+# SegNet_Upsampling_added_skip_layer_function_10_epoches_7_7_covolution_4_layers
+# great model # when tr =.45-.6 shows good exp output
 ########################################################################################################################
 ################################################ paths for the model srcs ##############################################
 
@@ -74,18 +84,21 @@ fcn_path = 'E:/backup/models/FCN_DenseNet_models/'
 unet_path = 'E:/backup/models/UNet_models/'
 vgg16_path = 'E:/backup/models/SegNet_models/'
 
-model_name = fcn_path+'FCN_Dense_net_IoU_100_epoches_.h5'
+#model_name = fcn_path+'FCN_Dense_net_IoU_100_epoches_.h5'
+model_name = 'PsPnet_BatchNormalization_Activation.h5'
 model = load_model(model_name, compile=False)
 model.summary()
 
 ########################################################################################################################
 ############################################## reading Cmap for plotting ###############################################
+########################################################################################################################
 
 path_to_csv= "E:/aidd_new/aidd/src/data_processing/PhD/cmap_flipped_jet256.csv"
 cmap = matplotlib.colors.ListedColormap(["blue","green","red"], name=(path_to_csv), N=None)
 m = cm.ScalarMappable(norm=norm, cmap=cmap)
+########################################################################################################################
 ####################################### creates folder to contain folders in NUM folder ################################
-# creates folder to contain folders in NUM folder
+########################################################################################################################
 path_fcn_Unet = 'E:/aidd_new/aidd/reports/figures/UNet/Num/Sigmoid_100_epoches'
 path_fcn_DenseNet = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Sigmoid_100_epoches'
 path_fcn_vgg16 = 'E:/aidd_new/aidd/reports/figures/VGG_encoder_decoder/Num/Sigmoid_100_epoches'
@@ -98,8 +111,8 @@ Path(path_fcn_DenseNet).mkdir(parents=True, exist_ok=True)
 ########################################################################################################################
 
 def thresholding(predicted_img, threshold):
-    predicted_img[predicted_img >= threshold] = 1
-    predicted_img[predicted_img < threshold] = 0
+    predicted_img[predicted_img > threshold] = 1
+    predicted_img[predicted_img <= threshold] = 0
     gc.collect()
     return predicted_img
 
@@ -107,26 +120,38 @@ def thresholding(predicted_img, threshold):
 ######## Calculates the Intersection over Union metric for the predicted and label images using bitwise OR & AND #######
 ########################################################################################################################
 def IoU(predicted_image, truth_img):
-    ######################################
+
     predicted_image = predicted_image.astype('float64')
     InterSectionArray = cv2.bitwise_and(predicted_image, truth_img)
     UnionArray = cv2.bitwise_or(predicted_image, truth_img)
     I1 = np.count_nonzero(InterSectionArray)
     U = np.count_nonzero(UnionArray)
     IoU1 = I1 / U
-    print(IoU1)
-    gc.collect()
+    ##################################################
+    #I =0
+    #P=0
+    #G=0
+    #for i in range(512):
+    #    for j in range(512):
+    #        if predicted_image[i,j]==1:
+    #            P = P+1
+    #        if truth_img[i,j] == 1:
+    #            G = G+1
+    #        if predicted_image[i,j] >0.9 and truth_img[i,j] == 1:
+    #            I = I+1
+    #IoU1 = I/(P+G-I)
+    #print(I,P,G)
     return IoU1
 ########################################################################################################################
 ########################################### Saves the IoU values to a csv file #########################################
-#file_name = 'IoU_FCN_DenseNets.csv'
+file_name = 'IoU_FCN_DenseNets_unthresholded.csv'
 #file_name = 'IoU_UNet.csv'
-file_name = 'IoU_VGG16_encoder_decoder.csv'
+#file_name = 'IoU_VGG16_encoder_decoder.csv'
 
-def append_list_as_row(file_name, list_of_Iou, image_number,threshold_list):
+def append_list_as_row(file_name, list_of_Iou, image_number):#,threshold_list):
     with open(file_name, 'a', newline='') as f:
         writer = csv.writer(f)
-        writer.writerows([threshold_list])
+        #writer.writerows([threshold_list])
         writer.writerows([image_number])
         writer.writerows([list_of_Iou])
         gc.collect()
@@ -162,6 +187,8 @@ def plotting(original,predict,ground,tr,image_number,C):
     plt.close('all')
     gc.collect()
 
+
+
 ########################################################################################################################
 ###########################  Main Loop for calculating different thresholding values and   #############################
 ########################################################################################################################
@@ -181,7 +208,7 @@ def main_loop():
         for i in range(380): # calculating IoU for all figures for a certain threshold
             Predict_Img = thresholding(last_layer_activation[i], threshold=tr)
             Predict_Img = np.asarray(Predict_Img)
-            Truth_Img = np.asarray(tests_y_samples[i])
+            Truth_Img = np.asarray(test_y_samples[i])
             I_o_U = IoU(Predict_Img, Truth_Img)
             threshold_list.append(tr)
             image_number.append(i + 1)
@@ -201,35 +228,60 @@ def main_loop():
 ##################################### paths to folders to save the output NUM images ###################################
 ########################################################################################################################
 path_segnet_figuers_folder_no_threshold = 'E:/aidd_new/aidd/reports/figures/VGG_encoder_decoder/Num/Fig_unthreshold_100_iou_metricc'
-path_fcn_figuers_folder_no_threshold = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Fig_unthreshold__100_iou_metricc'
+path_fcn_figuers_folder_no_threshold = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Num/Fig_unthreshold__100_iou_metricc/unthresholding'
 path_unet_figuers_folder_no_threshold = 'E:/aidd_new/aidd/reports/figures/UNet/Num/Fig_unthreshold_kernel_100_iou_metricc'
 
-Path(path_unet_figuers_folder_no_threshold).mkdir(parents=True, exist_ok=True) # create folder for the original images
+#Path(path_fcn_figuers_folder_no_threshold).mkdir(parents=True, exist_ok=True) # create folder for the original images
+
+image_number = []  # holds the image number in the loop
+IoU_list = []  # hold the IoU values for certain threshold
+pspnetpathtesting = 'E:/aidd_new/aidd/reports/figures/PSPNet/Num/testing/'
+
 ########################################################################################################################
 ############################################ Ploting the prediction for test images ####################################
 ########################################################################################################################
+#n = 454 # image number
+
+file_pspnet_test = 'PSPNET_IoU_testing.csv'
+file_pspnet_exp = 'PSPNET_IoU_exp.csv'
 def Testing():
     prediction = model.predict(test_x_samples, batch_size=1)
     prediction = np.asarray(prediction)
     for i in range(380):
-        damage = np.squeeze(prediction[i], axis=2)
-        damage = thresholding(damage,0.18)
-        original = np.squeeze(test_x_samples[i], axis=2)
-        mask = np.squeeze(tests_y_samples[i], axis=2)
-        fig = plt.figure(figsize=(16, 9))
-        ax1 = fig.add_subplot(1, 3, 1)
-        plt.imshow(damage, cmap=cmap)
-        ax2 = fig.add_subplot(1, 3, 2)
-        plt.imshow(original, cmap='Greys')
-        ax3 = fig.add_subplot(1, 3, 3)
-        plt.imshow(mask, cmap='gist_gray')
-        ax1.title.set_text('Detected Damage')
-        ax2.title.set_text('Original input Image')
-        ax3.title.set_text('Ground Truth / Label')
-        plt.savefig('E:/aidd_new/aidd/reports/figures/PSPNet/Num/unthreshoding/Fig_' + str(i+1))
-        IoU(damage,mask)
-        #plt.show()
-        plt.close('all')
+        if i%4 == 0:
+            damage = np.squeeze(prediction[i], axis=2)
+            damage = thresholding(damage,0.5)
+            original = np.squeeze(test_x_samples[i], axis=2)
+            mask = np.squeeze(test_y_samples[i], axis=2)
+            ###############################################################################################################
+            plt.figure(figsize=(5/2.54,5/2.54),dpi=600)
+            plt.gca().set_axis_off()
+            plt.axis('off')
+            plt.subplots_adjust(left=0.0, bottom=0.0, right=1, top=1.0, wspace=0.0, hspace=0.0)
+            plt.margins(0,0)
+            plt.gca().xaxis.set_major_locator(plt.NullLocator())
+            plt.gca().yaxis.set_major_locator(plt.NullLocator())
+            ###############################################################################################################
+            plt.imshow(damage, cmap=cmap)
+            plt.axis('off')
+            plt.savefig(pspnetpathtesting + 'fig_' + str(i))
+
+
+            plt.imshow(original, cmap='Greys')
+            plt.axis('off')
+            #plt.savefig(path_fcn_figuers_folder_no_threshold+'/FCN_DenseNet_original_454_sigmoid' + str(i+1))
+
+            plt.imshow(mask, cmap='gist_gray')
+            plt.axis('off')
+            #plt.savefig(path_fcn_figuers_folder_no_threshold+'/FCN_DenseNet_GT_454_sigmoid' + str(i+1))
+            plt.close('all')
+            print(i+1,IoU(damage,mask))
+            I_o_U = IoU(damage, mask)
+            image_number.append(i + 1)
+            IoU_list.append(I_o_U)
+            #plt.show()
+    append_list_as_row(file_pspnet_test, IoU_list, image_number)
+
 
 
 ########################################################################################################################
@@ -238,48 +290,57 @@ def Testing():
 path_Vgg16_seg_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figures/VGG_encoder_decoder/Exp/Fig_unthreshold_100_iou_metricc'
 path_unet_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figures/UNet/Exp/Fig_unthreshold_100_iou_metricc'
 path_fcn_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Exp/Fig_unthreshold_100_iou_metricc'
+pspnetpathexp =  'E:/aidd_new/aidd/reports/figures/PSPNet/Exp/experimental/'
 
 Path(path_fcn_figuers_folder_no_threshold_exp).mkdir(parents=True, exist_ok=True) # create folder for the EXP
 file_iou_exp = 'exp_iou.csv'
 ########################################################################################################################
 ############################################ Ploting the prediction for experimental images ############################
 ########################################################################################################################
-def exp():
-    #prediction = model.predict(experimental, batch_size=1)
-    #prediction = np.asarray(prediction)
-    for j in range(0,1000):
-        prediction = model.predict(experimental, batch_size=1)
-        prediction = np.asarray(prediction)
-        image_number = []  # holds the image number in the loop
-        IoU_list = []  # hold the IoU values for certain threshold
-        threshold_list = []  # holds the different thresholds for different rounds
-        tr = (j + 1) / 1000  # threshold
+image_number = []  # holds the image number in the loop
+IoU_list = []  # hold the IoU values for certain threshold
 
-        #for i in range(23):
-        damage = np.squeeze(prediction[6], axis=2)
-        damage = thresholding(damage,tr)
+def exp():
+    prediction = model.predict(experimental, batch_size=1)
+    prediction = np.asarray(prediction)
+    for i in range(23):
+        damage = np.squeeze(prediction[i], axis=2)
+        damage = thresholding(damage,0.99)
         #print(damage)
-        #original = np.squeeze(experimental[i], axis=2)
-        label = np.squeeze(experimental_label[6], axis=2)
-        #plt.imshow(damage, cmap=cmap)
-        #plt.axis('off')
-        #plt.savefig(path_fcn_figuers_folder_no_threshold_exp+'/Predicted_damage_' + str(i + 1) +'_.png')
-        #plt.imshow(original, cmap='Greys')
-        #plt.axis('off')
+        original = np.squeeze(experimental[i], axis=2)
+        label = np.squeeze(experimental_label[i], axis=2)
+        ###############################################################################################################
+        plt.figure(figsize=(5/2.54,5/2.54),dpi=600)
+        plt.gca().set_axis_off()
+        plt.axis('off')
+        plt.subplots_adjust(left=0.0, bottom=0.0, right=1, top=1.0, wspace=0.0, hspace=0.0)
+        plt.margins(0,0)
+        plt.gca().xaxis.set_major_locator(plt.NullLocator())
+        plt.gca().yaxis.set_major_locator(plt.NullLocator())
+        ###############################################################################################################
+        plt.imshow(damage, cmap=cmap)
+
+        plt.savefig(pspnetpathexp+'/Predict_damage_' + str(i + 1) +'_.png',bboox_inches = 'tight',pad_inches = 0)
+        #plt.show()
+        plt.imshow(original, cmap='Greys')
+        plt.axis('off')
         #plt.savefig(path_fcn_figuers_folder_no_threshold_exp+'/Original_damage_' + str(i + 1) +'_.png')
-        #plt.imshow(label, cmap='gist_gray')
-        #plt.axis('off')
+        plt.imshow(label, cmap='gist_gray')
+        plt.axis('off')
         #plt.savefig(path_fcn_figuers_folder_no_threshold_exp+'/Mask_' + str(i + 1) +'_.png')
-        print(tr)
         iou = IoU(damage,label)
+        print(i+1,iou)
         #plt.savefig(path_Vgg16_seg_figuers_folder_no_threshold_exp + '/Fig_epx' + str(i + 1))
+        I_o_U = IoU(damage, label)
+        image_number.append(i + 1)
+        IoU_list.append(I_o_U)
+        # plt.show()
         #plt.show()
         plt.close('all')
         gc.collect()
-        threshold_list.append(tr)
-        image_number.append(6 + 1)
-        IoU_list.append(iou)
-        append_list_as_row(file_iou_exp,IoU_list,image_number,threshold_list)
+    append_list_as_row(file_pspnet_exp, IoU_list, image_number)
+
+
 
 
 
@@ -287,7 +348,7 @@ def exp():
 ########################################################################################################################
 ############################################ Running functions  ########################################################
 ########################################################################################################################
-#Testing()
+Testing()
 #main_loop()
 exp()
 ########################################################################################################################
