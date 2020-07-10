@@ -9,6 +9,8 @@ import gc
 import tensorflow as tf
 from keras import backend as K
 from keras.layers import Reshape
+from keras.callbacks import EarlyStopping
+
 
 gc.collect()
 
@@ -95,7 +97,7 @@ Conv2 = Dropout(0.2)(Conv2)
 ############################################### Global average Pooling #################################################
 ########################################################################################################################
 global_averge = BatchNormalization()(Conv2)
-global_averge = GlobalAveragePooling2D()(Conv2)
+global_averge = GlobalAveragePooling2D()(global_averge)
 global_averge = Reshape((1,1,filters))(global_averge)
 global_averge = Conv2D(filters,(1,1), padding='same')(global_averge) #,  activation='relu'
 global_averge = Activation('relu')(global_averge)
@@ -143,10 +145,24 @@ output = keras.layers.Conv2D(1, (1, 1), activation='sigmoid')(output)
 ########################################################################################################################
 model = Model(inputs=input_x, outputs=output)
 ########################################################################################################################
+
+
+############################################### adding earlystoping ####################################################
+earlystop = EarlyStopping(monitor='val_iou_metric',
+                          min_delta=0.001,
+                          patience=3,
+                          verbose=1,
+                          restore_best_weights=True)
+my_callbacks = [earlystop]
+########################################################################################################################
 model.compile(optimizer='adam', loss=keras.losses.binary_crossentropy, metrics=[iou_metric])
-model.fit(x_train,y_train, batch_size=batch_size, epochs=epochs, validation_split=validation_split, shuffle=True)
+model.fit(x_train,y_train,
+          batch_size=batch_size,
+          epochs=epochs,
+          validation_split=validation_split,
+          shuffle=True,callbacks=my_callbacks)
 score = model.evaluate(test_x_samples, test_y_samples, batch_size=batch_size, verbose=1)
 print(score[0], score[1])
 model.summary()
-model.save('PsPnet_BatchNormalization_Activation.h5')
+model.save('PsPnet_BatchNormalization_add__to_globalaverage_Activation.h5')
 gc.collect()
