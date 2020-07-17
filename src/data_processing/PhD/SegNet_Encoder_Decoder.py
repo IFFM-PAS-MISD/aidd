@@ -1,162 +1,201 @@
 import gc
-
 import keras
 import numpy as np
 import tensorflow as tf
 from keras import backend as K
-from keras.layers import Conv2D, MaxPool2D, Input, Dropout, \
-    Activation
+from keras.layers import Conv2D, MaxPool2D, Input, Dropout, BatchNormalization, Activation
 from keras.models import Model
-from sklearn.utils import shuffle
 
+###########################################   memory growing ###########################################################
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.compat.v1.Session(config=config)
+########################################################################################################################
 # Force the Garbage Collector to release unreferenced memory
 gc.collect()
-# Hyper parameters
-#####################################
-lr = .0001  # RMSprop, adam
-rho = 0.995  # RMSprop
+
+########################################################################################################################
+############################################ Hyper parameters ##########################################################
+########################################################################################################################
 filters = 32
 filter_size = (3, 3)
-batch_size = 4
 dropout = 0.2
-epochs = 10
-validation_split = 0.2
-#####################################
-# Loading the dataset
-#####################################
-x_train = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_training_dataset.npy')
-x_train = x_train / 255.
-x_train = x_train.reshape(1900, 512, 512, 1)
-y_train = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_labels.npy')
-y_train = y_train / 255.
-y_train = y_train.reshape(1900, 512, 512, 1)
-#####################################
-# Randomly shuffle the dataset
-#####################################
-x_train, y_train = shuffle(x_train, y_train)
-#####################################
-x_sample = x_train[:1520]
-y_lable = y_train[:1520]
-# x_sample, y_lable = shuffle(x_sample, y_lable)
-test_x_samples = x_train[1520:1900]
-tests_y_samples = y_train[1520:1900]
-test_x_samples, tests_y_samples = shuffle(test_x_samples, tests_y_samples)
+########################################################################################################################
+############################## Loading dataset into x, y arrays and reshape them #######################################
+########################################################################################################################
+x = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_training_dataset.npy')
+x = x.reshape(1900, 512, 512, 1)
+x = x / 255.0  # normalizing x,y to (0-1) range
+y = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_labels.npy')
+y = y.reshape(1900, 512, 512, 1)
+y = y / 255.0
 
+########################################################################################################################
+###################################### Shuffle the data set at random ##################################################
+########################################################################################################################
+# x, y = shuffle(x, y)
+########################################################################################################################
+################# Split dataset into training and testing sets and again re-shuffle them ###############################
+########################################################################################################################
+x_train = x[:1520]
+y_train = y[:1520]
 
-def layer(input, growth):
-    l = Conv2D(filters=filters * growth, kernel_size=filter_size, padding='same')(input)
-    b = keras.layers.BatchNormalization()(l)
-    x = keras.layers.ReLU()(b)
-    return x
+test_x_samples = x[1520:1900]
+test_y_samples = y[1520:1900]
 
-
-# Segnet Model
-#####################################
+########################################################################################################################
+######################################   VGG16 encoder decoder Model   #################################################
+########################################################################################################################
 inputs = Input(shape=(512, 512, 1))
-#####################################
-# Backbone Down sampling convolution followed by max-pooling
-#####################################
-c11 = layer(inputs, 1)
-c12 = layer(c11, 1)
+########################################################################################################################
+############################## Backbone Down sampling convolution followed by max-pooling ##############################
+########################################################################################################################
+conv_1 = Conv2D(filters, filter_size, padding="same")(inputs)
+conv_1 = BatchNormalization()(conv_1)
+conv_1 = Activation("relu")(conv_1)
 
-#####################################
-d1 = MaxPool2D((2, 2), (2, 2))(c12)
+conv_2 = Conv2D(filters, filter_size, padding="same")(conv_1)
+conv_2 = BatchNormalization()(conv_2)
+conv_2 = Activation("relu")(conv_2)
+########################################################################################################################
+d1 = MaxPool2D((2, 2), (2, 2))(conv_2)
 d1 = Dropout(dropout)(d1)
-#####################################
-c21 = layer(d1, 1)
-c22 = layer(c21, 1)
+########################################################################################################################
+conv_3 = Conv2D(filters, filter_size, padding="same")(d1)
+conv_3 = BatchNormalization()(conv_3)
+conv_3 = Activation("relu")(conv_3)
 
-#####################################
-d2 = MaxPool2D((2, 2), (2, 2))(c22)
+conv_4 = Conv2D(filters, filter_size, padding="same")(conv_3)
+conv_4 = BatchNormalization()(conv_4)
+conv_4 = Activation("relu")(conv_4)
+########################################################################################################################
+d2 = MaxPool2D((2, 2), (2, 2))(conv_4)
 d2 = Dropout(dropout)(d2)
-#####################################
-c31 = layer(d2, 1)
-c32 = layer(c31, 1)
-c33 = layer(c32, 1)
+########################################################################################################################
+conv_5 = Conv2D(filters, filter_size, padding="same")(d2)
+conv_5 = BatchNormalization()(conv_5)
+conv_5 = Activation("relu")(conv_5)
 
-#####################################
-d3 = MaxPool2D((2, 2), (2, 2))(c33)
+conv_6 = Conv2D(filters, filter_size, padding="same")(conv_5)
+conv_6 = BatchNormalization()(conv_6)
+conv_6 = Activation("relu")(conv_6)
+
+conv_7 = Conv2D(filters, filter_size, padding="same")(conv_6)
+conv_7 = BatchNormalization()(conv_7)
+conv_7 = Activation("relu")(conv_7)
+########################################################################################################################
+d3 = MaxPool2D((2, 2), (2, 2))(conv_7)
 d3 = Dropout(dropout)(d3)
-#####################################
-c41 = layer(d3, 2)
-c42 = layer(c41, 2)
-c43 = layer(c42, 2)
+########################################################################################################################
+conv_8 = Conv2D(filters, filter_size, padding="same")(d3)
+conv_8 = BatchNormalization()(conv_8)
+conv_8 = Activation("relu")(conv_8)
 
-#####################################
-d4 = MaxPool2D((2, 2), (2, 2))(c43)
+conv_9 = Conv2D(filters, filter_size, padding="same")(conv_8)
+conv_9 = BatchNormalization()(conv_9)
+conv_9 = Activation("relu")(conv_9)
+
+conv_10 = Conv2D(filters, filter_size, padding="same")(conv_9)
+conv_10 = BatchNormalization()(conv_10)
+conv_10 = Activation("relu")(conv_10)
+########################################################################################################################
+d4 = MaxPool2D((2, 2), (2, 2))(conv_10)
 d4 = Dropout(dropout)(d4)
-#####################################
-c51 = layer(d4, 4)
-c52 = layer(c51, 4)
-c53 = layer(c52, 4)
+########################################################################################################################
+conv_11 = Conv2D(filters, filter_size, padding="same")(d4)
+conv_11 = BatchNormalization()(conv_11)
+conv_11 = Activation("relu")(conv_11)
 
-#####################################
-d5 = MaxPool2D((2, 2), (2, 2))(c53)
+conv_12 = Conv2D(filters, filter_size, padding="same")(conv_11)
+conv_12 = BatchNormalization()(conv_12)
+conv_12 = Activation("relu")(conv_12)
+
+conv_13 = Conv2D(filters, filter_size, padding="same")(conv_12)
+conv_13 = BatchNormalization()(conv_13)
+conv_13 = Activation("relu")(conv_13)
+########################################################################################################################
+d5 = MaxPool2D((2, 2), (2, 2))(conv_13)
 d5 = Dropout(dropout)(d5)
-#####################################
-
-# Up sampling convolution followed by up-sampling
-
-#####################################
-
+########################################################################################################################
+################################## Up sampling convolution followed by up-sampling #####################################
+########################################################################################################################
 u1 = keras.layers.UpSampling2D((2, 2))(d5)  # ,interpolation='bilinear'
-#####################################
+########################################################################################################################
+skip5 = keras.layers.Concatenate()([conv_13, u1])
 
-skip5 = keras.layers.Concatenate()([c53, u1])
-c71 = layer(skip5, 4)
-c72 = layer(c71, 4)
-c73 = layer(c72, 4)
+conv_14 = Conv2D(filters, filter_size, padding="same")(skip5)
+conv_14 = BatchNormalization()(conv_14)
+conv_14 = Activation("relu")(conv_14)
 
-#####################################
-# u2 = Conv2DTranspose(32, (3, 3), strides=(2, 2), padding='same', activation='relu')(BN7)  # UpSampling2D((2, 2))(BN7)
-u2 = keras.layers.UpSampling2D((2, 2))(c73)
-#####################################
+conv_15 = Conv2D(filters, filter_size, padding="same")(conv_14)
+conv_15 = BatchNormalization()(conv_15)
+conv_15 = Activation("relu")(conv_15)
 
-skip4 = keras.layers.Concatenate()([c43, u2])
-c81 = layer(skip4, 2)
-c82 = layer(c81, 2)
-c83 = layer(c82, 2)
+conv_16 = Conv2D(filters, filter_size, padding="same")(conv_15)
+conv_16 = BatchNormalization()(conv_16)
+conv_16 = Activation("relu")(conv_16)
+########################################################################################################################
+u2 = keras.layers.UpSampling2D((2, 2))(conv_16)
+########################################################################################################################
+skip4 = keras.layers.Concatenate()([conv_10, u2])
 
-#####################################
-# u3 = Conv2DTranspose(32, (3, 3), strides=(2, 2), padding='same', activation='relu')(BN8)  # UpSampling2D((2, 2))(BN8)
-u3 = keras.layers.UpSampling2D((2, 2))(c83)
-#####################################
+conv_17 = Conv2D(filters, filter_size, padding="same")(skip4)
+conv_17 = BatchNormalization()(conv_17)
+conv_17 = Activation("relu")(conv_17)
 
-skip3 = keras.layers.Concatenate()([c33, u3])
-c91 = layer(skip3, 1)
-c92 = layer(c91, 1)
-c93 = layer(c92, 1)
+conv_18 = Conv2D(filters, filter_size, padding="same")(conv_17)
+conv_18 = BatchNormalization()(conv_18)
+conv_18 = Activation("relu")(conv_18)
 
-#####################################
-u4 = keras.layers.UpSampling2D((2, 2))(c93)
-#####################################
+conv_19 = Conv2D(filters, filter_size, padding="same")(conv_18)
+conv_19 = BatchNormalization()(conv_19)
+conv_19 = Activation("relu")(conv_19)
+########################################################################################################################
+u3 = keras.layers.UpSampling2D((2, 2))(conv_19)
+########################################################################################################################
+skip3 = keras.layers.Concatenate()([conv_7, u3])
+conv_20 = Conv2D(filters, filter_size, padding="same")(skip3)
+conv_20 = BatchNormalization()(conv_20)
+conv_20 = Activation("relu")(conv_20)
 
-skip2 = keras.layers.Concatenate()([c22, u4])
+conv_21 = Conv2D(filters, filter_size, padding="same")(conv_20)
+conv_21 = BatchNormalization()(conv_21)
+conv_21 = Activation("relu")(conv_21)
 
-c101 = layer(skip2, 1)
-c102 = layer(c101, 1)
-c103 = layer(c102, 1)
+conv_22 = Conv2D(filters, filter_size, padding="same")(conv_21)
+conv_22 = BatchNormalization()(conv_22)
+conv_22 = Activation("relu")(conv_22)
+########################################################################################################################
+u4 = keras.layers.UpSampling2D((2, 2))(conv_22)
+########################################################################################################################
+skip2 = keras.layers.Concatenate()([conv_4, u4])
+conv_23 = Conv2D(filters, filter_size, padding="same")(skip2)
+conv_23 = BatchNormalization()(conv_23)
+conv_23 = Activation("relu")(conv_23)
 
-#####################################
-u5 = keras.layers.UpSampling2D((2, 2))(c103)
-#####################################
+conv_24 = Conv2D(filters, filter_size, padding="same")(conv_23)
+conv_24 = BatchNormalization()(conv_24)
+conv_24 = Activation("relu")(conv_24)
+########################################################################################################################
+u5 = keras.layers.UpSampling2D((2, 2))(conv_24)
+########################################################################################################################
+skip1 = keras.layers.Concatenate()([conv_2, u5])
+conv_25 = Conv2D(filters, filter_size, padding="same")(skip1)
+conv_25 = BatchNormalization()(conv_25)
+conv_25 = Activation("relu")(conv_25)
 
-skip1 = keras.layers.Concatenate()([c12, u5])
-c111 = layer(skip1, 1)
-c112 = layer(c111, 1)
-c113 = layer(c112, 1)
-
-#####################################
-# Output layer
-#####################################
-output = (Conv2D(1, (1, 1), padding='same', activation='sigmoid'))(c113)
-#####################################
+conv_26 = Conv2D(filters, filter_size, padding="same")(conv_25)
+conv_26 = BatchNormalization()(conv_26)
+conv_26 = Activation("relu")(conv_26)
+########################################################################################################################
+################################################## Output layer ########################################################
+########################################################################################################################
+output = (Conv2D(1, (1, 1), padding='same', activation='sigmoid'))(conv_26)
+########################################################################################################################
 model = Model(inputs=inputs, outputs=output)
 
 
-#####################################
-
-
+########################################################################################################################
 # Custom loss function
 def custom_loss(y_true, y_pred, smooth=1):
     y_true_f = K.flatten(y_true)
@@ -165,6 +204,7 @@ def custom_loss(y_true, y_pred, smooth=1):
     return - ((intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) - intersection + smooth))
 
 
+########################################################################################################################
 # Custom metric
 def iou_metric(y_true, y_pred, smooth=1):
     y_true_f = K.flatten(y_true)
@@ -175,6 +215,7 @@ def iou_metric(y_true, y_pred, smooth=1):
     return iou
 
 
+########################################################################################################################
 # Dice loss / F1
 def dice_loss(y_true, y_pred):
     numerator = 2 * tf.reduce_sum(y_true * y_pred, axis=-1)
@@ -182,9 +223,9 @@ def dice_loss(y_true, y_pred):
     return 1 - (numerator + 1) / (denominator + 1)
 
 
-###################
+########################################################################################################################
 # Custom metric
-def iou_metric(y_true, y_pred, smooth=0):
+def iou_metric_abs(y_true, y_pred, smooth=0):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(K.abs(y_true_f * y_pred_f))
@@ -193,21 +234,21 @@ def iou_metric(y_true, y_pred, smooth=0):
     return iou
 
 
-########################
+########################################################################################################################
 def recall(y_true, y_pred):
     y_true = K.ones_like(y_true)
     true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
     all_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
-    recall = true_positives / (all_positives + K.epsilon())
-    return recall
+    recall_acc = true_positives / (all_positives + K.epsilon())
+    return recall_acc
 
 
 def precision(y_true, y_pred):
     y_true = K.ones_like(y_true)
     true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
     predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    precision = true_positives / (predicted_positives + K.epsilon())
-    return precision
+    precision_acc = true_positives / (predicted_positives + K.epsilon())
+    return precision_acc
 
 
 def f1_score(y_true, y_pred):
@@ -216,24 +257,30 @@ def f1_score(y_true, y_pred):
     return 2 * ((precision_m * recall_m) / (precision_m + recall_m + K.epsilon()))
 
 
-########################
+########################################################################################################################
 def custom_acc(y_true, y_pred):
     return 1 - dice_loss(y_true, y_pred)
 
 
-###################
-model.compile(optimizer='adam', loss=keras.losses.binary_crossentropy, metrics=[keras.metrics.binary_accuracy])
-model.fit(x_sample, y_lable, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
-score = model.evaluate(test_x_samples, tests_y_samples, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1] * 100)
-model.summary()
-############################################
+########################################################################################################################
+model.compile(optimizer='adam',
+              loss=keras.losses.binary_crossentropy,
+              metrics=[iou_metric, recall, precision, f1_score])
+
+model.fit(np.asarray(x_train),
+          np.asarray(y_train),
+          batch_size=4,
+          epochs=100,
+          shuffle=True,
+          validation_split=0.2)
+########################################################################################################################
 # Evaluating the model using test set
-#####################################
-score = model.evaluate(test_x_samples, tests_y_samples, verbose=0)
+########################################################################################################################
+score = model.evaluate(test_x_samples, test_y_samples, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
-######################################
-model.save('E:/backup/models/SegNet_models/SegNet_Upsampling_added_skip_layer_function.h5')
+model.summary()
+########################################################################################################################
+model.save(
+    'E:/backup/models/SegNet_models/SegNet_Encoder_decoder_added_skip_100_epoches_3_3_conv_vgg_16_archi_layers.h5')
 gc.collect()
