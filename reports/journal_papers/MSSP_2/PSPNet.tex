@@ -3,36 +3,10 @@
 	Pyramid Scene Parsing Network (PSPNet) proposed by Zhao et al.~\cite{zhao2017pyramid} is a state-of-the-art deep learning model for image segmentation. PSPNet is a multi-scale network that effectively learns the global context representation of a scene. PSPNet employes residual network (ResNet)~\cite{he2016deep}, with a dilated network as a feature extractor for the extraction of various patterns from the input image. ResNet designed by He et al.~\cite{he2016deep} is very popular due to its depth (up to 152 layers) and with the inclusion of residual blocks. The residual blocks are very useful for training a really deep neural network by proposing the skip connections in such a way that layers can mimic their inputs to the succeeding layer. 
 	This approach assures that the subsequent layer has learned something new and different from what the input has already been encoded. Additionally, such connections help to overcome the vanishing gradients problem. These days, ResNet is commonly applied for feature extraction in various deep CNN models. 
 	
-	PSPNet renders an adequate global contextual information for pixel-level scene parsing. The local and global clues together provide a more reliable predictions. Sub-regions context along with global context information is very useful for distinguishing among different kinds of objects. For further reducing context information loss among diverse sub-regions, a hierarchical global prior was proposed. The hierarchical global prior contains information of multiple scales and it varies among different sub-regions. The pyramid pooling module combines features under four distinct pyramid scales, however, the number of these pyramid levels and size of each level can be modified because they are related to the size of the feature map that is fed into the pyramid pooling layer. The coarsest level highlighted as red in Fig. is employing global pooling for producing a single bin output. The feature map is separated into different sub-regions in the subsequent pyramid levels and form pooled representation for different locations.
+	PSPNet renders an adequate global contextual information for pixel-level scene parsing. The local and global clues together provide a more reliable predictions. Sub-regions context along with global context information is very useful for distinguishing among different kinds of objects. For further reducing context information loss among diverse sub-regions, a hierarchical global prior was proposed. The hierarchical global prior contains information of multiple scales and it varies among different sub-regions. The pyramid pooling module combines features under four distinct pyramid scales, however, the number of these pyramid levels and size of each level can be modified because they are related to the size of the feature map that is fed into the pyramid pooling layer. The coarsest level highlighted as red in Fig. is employing global pooling for producing a single bin output. The feature map is separated into different sub-regions in the subsequent pyramid levels which form pooled representation for different locations. The distinctive levels of the pyramid pooling module generate an output of the feature map of different sizes. These feature maps are processed with a 1 x 1 convolutional layer to reduce their dimensions. The output of the pyramid levels is then up-sampled with bilinear interpolation before the concatenation with the initial feature maps to obtain both local and global context information. In the end, a convolutional layer is employed for generating the pixel-wise segmented predictions. 
 	
-	The distinctive levels of the pyramid pooling module generate an output of the feature map of different sizes. These feature maps are processed with a 1 x 1 convolutional layer to reduce their dimensions. The output of the pyramid levels is then up-sampled with bilinear interpolation before the concatenation with the initial feature maps to obtain both local and global context information. In the end, a convolutional layer is employed for generating the pixel-wise segmented predictions. 
+	A basic overflow of the PSPNet architecture is shown in Figure. \begin{comment}As it is shown in the Figure that the initial feature maps are extracted from input images by employing ResNet architecture along with dilation. A pyramid pooling module is applied with different sub-region representations. After that up-sampling and concatenation are performed for forming the final feature representation, which contains both local and global context information. The representation is then fed into a convolution layer for final pixel wise prediction.\end{comment} 
+	In this paper, we implemented PSPNet with ResNet-50 as a backbone for feature map extraction having dilation at the last two layers of RESNet.  A pyramid pooling module is applied with different sub-regions, in this case a four-level pyramid pooling module (red, orange, blue and green) as shown in figure with bin sizes of 1 x 1, 2 x 2, 4 x 4 and 8 x 8 respectively. The Gloabl average pooling is applied at the coarest (red) sub-region and for the rest of sub-regions max pooling is applied, followed by a 1 x 1 convolution layer. After that up-sampling and concatenation are performed for forming the final feature representation, which contains both local and global context information. The representation is then fed into a convolution layer for final pixel wise prediction. 
 	
-\begin{comment}
-	Our pyramid pooling module is a four-level one with bin
-	sizes of 1 x 1, 2 x 2, 3 x 3 and 6 x 6 respectively.
-	Given an input image in Fig. 3(a), we use a pretrained
-	ResNet [13] model with the dilated network strategy [3, 40]
-	to extract the feature map. The final feature map size is 1/8
-	of the input image, as shown in Fig. 3(b). On top of the map, we use the pyramid pooling module shown in (c) to gather context information. Using our 4-level pyramid, the pooling kernels cover the whole, half of, and small portions of the image. They are fused as the global prior. Then we
-	concatenate the prior with the original feature map in the
-	final part of (c). It is followed by a convolution layer to generate the final prediction map in (d). 
-	
-	Figure 3. Overview of our proposed PSPNet. Given an input image (a), we first use CNN to get the feature map of the last convolutional
-	layer (b), then a pyramid parsing module is applied to harvest different sub-region representations, followed by upsampling and concatenation
-	layers to form the final feature representation, which carries both local and global context information in (c). Finally, the representation
-	is fed into a convolution layer to get the final per-pixel prediction (d).
-		
-	Fig. 17. The PSPNet architecture. A CNN produces the feature map
-	and a pyramid pooling module aggregates the different sub-region
-	representations. Up-sampling and concatenation are used to form the
-	final feature representation from which, the final pixel-wise prediction is
-	obtained through convolution. From [57].
-	
-	Fig. 17. PSPNet architecture. Initial feature maps (b) are extracted from input images (a) by using a pretrained ResNet [18] alongside dilated network strategy. Pyramidpooling module (c) covers from the whole, half of to small regions of the image. Finally, initial feature map is concatenated with pooling module output and applying aconvolution layer final predicted maps (d) are generated.
-	
-	Fig. 10 Overview of the pyramid scene parsing networks. Given an input image (a), feature maps from last
-	convolution layer are pulled (b), then a pyramid parsing module is applied to harvest different sub-region
-	representations, followed by upsampling and concatenation layers to form the final feature representation,
-	which carries both local and global context information in c. Finally, the representation is fed into a convolution
-	layer to get the final per-pixel prediction (d) Zhao et al. (2017b)
-\end{comment}
+%	We have implemented two versions of PSPNet models:
+%	1) With softmax activiation function. 2) and with sigmoid activation function, both at the output layer.
