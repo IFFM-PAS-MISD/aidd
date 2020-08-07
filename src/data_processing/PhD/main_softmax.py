@@ -78,22 +78,19 @@ path_to_csv = "E:/aidd_new/aidd/src/data_processing/PhD/cmap_flipped_jet256.csv"
 cmap = matplotlib.colors.ListedColormap(["blue", "green", "red"], name=path_to_csv, N=None)
 m = cm.ScalarMappable(norm=norm, cmap=cmap)
 
+
 ########################################################################################################################
 ################################# Visualizing kernels weights and intermediate outputs #################################
 ########################################################################################################################
-n = 27
-layer_name = model.layers[n].get_config()
-layer_name = layer_name['name']
-print(layer_name)
 
 
-def plot_filters(layer):
+def plot_filters(layer, name_layer):
     if "conv2d_" in layer_name:
         filters = layer.get_weights()[0]
         filters = np.asarray(filters)
-        print(filters.shape)
+        # print(filters.shape)
         filters = np.reshape(filters, (filters.shape[3], filters.shape[0], filters.shape[1], filters.shape[2]))
-        print(filters.shape)
+        # print(filters.shape)
         length = filters.shape[0]
         image = np.zeros((3, 3))
         fig = plt.figure(figsize=(6, 6))
@@ -104,20 +101,19 @@ def plot_filters(layer):
                 # print(filters[j, :, :, depth])
                 image = image + filters[j, :, :, depth]
             ax = fig.add_subplot(gs1[j])
-            ax.imshow(image, cmap='gist_gray')
+            image = image / (depth + 1)
+            ax.imshow(image, cmap='gray')
             ax.set_xticklabels([])
             ax.set_yticklabels([])
             ax.set_aspect('equal')
             plt.xticks(np.array([]))
             plt.yticks(np.array([]))
         # plt.tight_layout()
-        plt.show()
+        # plt.show()
+        plt.savefig(name_layer+str('kernel_weights'))
         plt.close('all')
     else:
         print("NO filters for this layer")
-
-
-plot_filters(model.layers[n])
 
 
 def intermediate_outputs(name, n):
@@ -125,9 +121,9 @@ def intermediate_outputs(name, n):
                                      outputs=model.get_layer(name).output)
     intermediate_output = intermediate_layer_model.predict(test_x_samples[n:n + 1])
 
-    print(intermediate_output.shape)
+    # print(intermediate_output.shape)
     length = intermediate_output.shape[3]
-    print(length)
+    # print(length)
     intermediate_output = np.asarray(intermediate_output)
     ################################################################################################################
     # plt.figure(figsize=(5 / 2.54, 5 / 2.54), dpi=600)
@@ -139,22 +135,29 @@ def intermediate_outputs(name, n):
     # plt.gca().yaxis.set_major_locator(plt.NullLocator())
     ################################################################################################################
     # print(intermediate_output[0, :, :, i])
-    fig = plt.figure(figsize=(6, 6))
+    fig = plt.figure(figsize=(10, 10))
     for j in range(1, (length + 1)):
         ax = fig.add_subplot(math.ceil(np.sqrt(length)), math.ceil(np.sqrt(length)), j)
-        ax.imshow(intermediate_output[0, :, :, (j - 1)], cmap='gist_gray')
+        ax.imshow(intermediate_output[0, :, :, (j - 1)], cmap='gray')
         ax.set_xticklabels([])
         ax.set_yticklabels([])
         ax.set_aspect('equal')
         plt.axis('off')
     plt.tight_layout()
-    plt.show()
+    # plt.show()
+    plt.savefig(name)
     plt.close('all')
 
 
-# n >=381 && n <= 475
-n = 448  # image number (381,475)
-intermediate_outputs(layer_name, ((n - 381) * 4))
+input_image = 448  # image number (381,475)
+os.chdir('E:/aidd_new/aidd/reports/figures/comparative_study/intermediate_outputs')
+
+for layers_count in range(len(model.layers)):
+    layer_name = model.layers[layers_count].get_config()
+    layer_name = layer_name['name']
+    print(layer_name)
+    plot_filters(model.layers[layers_count], layer_name)
+    intermediate_outputs(layer_name, ((input_image - 381) * 4))
 
 ########################################################################################################################
 ########################################################################################################################

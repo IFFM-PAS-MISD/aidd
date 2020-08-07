@@ -3,12 +3,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dataset}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this work, we have generated a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a plate made of carbon fibre-reinforced plastic (CFRP).
-The time-domain spectral element method was used for simulation of Lamb wave interaction with delamination~\cite{Kudela2020}.
-It should be added that despite the utilisation of the parallel code of the spectral element method which was run on the Tesla K20X GPU card, the computation of the dataset took about 3 months.
-For each case, single delamination was modelled by using the method of splitting nodes between appropriate spectral elements. 
-It was assumed that the composite laminate is made of eight layers of a total thickness of 3.9 mm.
-The delamination was modelled between the third and fourth layer (see Fig.~\ref{fig:plate_setup} for details).
+In our previous work, we have explained the procedure of generating a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a plate made of carbon fibre reinforced plastic (CFRP). 
+For further explanation, you can refer to our previous work titled (Full Wavefield Processing by Using FCN for Delamination Detection).
+As mentioned in our previous work, we have applied the time-domain spectral element method in order to simulate Lamb wave interaction with delamination~\cite{Kudela2020}. 
+The dataset computation took about 3 months, in which the parallel code of the spectral element method was implemented to run in Tesla K20X GPU card.
+The method of splitting nodes between appropriate spectral elements was used to model every single delamination in all cases.
+In our work, the composite laminate was assumed to be made of eight layers of a total thickness of 3.9mm.
+As shown in Fig.~\ref{fig:plate_setup} the delamination was modelled between the third and the fourth layer.
+
+
 It should be noted that Fig.~\ref{fig:plate_setup} shows an exaggerated cross-section through the delamination. 
 Zero-volume delamination was assumed in the model. 
 Delamination spatial location was selected randomly so that the interaction of guided waves with delamination is different for each case.
