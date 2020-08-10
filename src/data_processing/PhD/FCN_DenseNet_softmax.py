@@ -4,12 +4,15 @@ import numpy as np
 import tensorflow as tf
 from keras import backend as K
 from keras.activations import relu, sigmoid
+from keras.callbacks import EarlyStopping
 from keras.layers import Conv2D, Input, Activation
 from keras.models import Model
 from keras.utils import to_categorical
-
+from sklearn.model_selection import train_test_split, KFold
+import matplotlib.pyplot as plt
 
 ###########################################   memory growing ###########################################################
+
 config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
 sess = tf.compat.v1.Session(config=config)
@@ -172,7 +175,7 @@ def Transition_Up(TU_input, filters_tu):
 ########################################################################################################################
 ############################# Keras Model (FCN Dense Net for semantic Segmentation #####################################
 ########################################################################################################################
-def DenseNet_Model(x_train_set, y_train_set, DB_Num):
+def DenseNet_Model(DB_Num):
     inputs = Input(shape=(512, 512, 1))
     ####################################################################################################################
     Conv = Conv2D(filters, filterSize, padding='same')(inputs)
@@ -218,26 +221,112 @@ def DenseNet_Model(x_train_set, y_train_set, DB_Num):
                           loss=keras.losses.categorical_crossentropy,
                           metrics=[iou_metric])
     ####################################################################################################################
-    segment_model.fit(x_train_set, y_train_set,
-                      shuffle=True,
-                      batch_size=batch_size,
-                      epochs=epochs,
-                      validation_split=validation_split)
-    ####################################################################################################################
-    score = segment_model.evaluate(test_x_samples,
-                                   test_y_samples,
-                                   batch_size=2,
-                                   verbose=1)
-    ####################################################################################################################
-    print(score[0], score[1])
-    segment_model.summary()
     return segment_model
+########################################################################################################################
 
 
 ########################################################################################################################
-DB_Number = [2, 2, 2, 4, 2, 2, 2]  # adding extra two DBs [0,1,2,3,4,5,6]
-print(len(DB_Number))
-model = DenseNet_Model(x_train, y_train, DB_Number)
-model.save('E:/backup/models/FCN_DenseNet_models/Softmax/FCN_softmax_100_epoches.h5')
+########################################################################################################################
+############################## Loading dataset into x, y arrays and reshape them #######################################
+########################################################################################################################
 
-gc.collect()
+dataset = np.load('delamination_dataset.npy')
+
+print(dataset.dtype)
+
+samples = dataset[:, :, :, 0]
+labels = dataset[:, :, :, 1]
+
+Train_x, Test_x, Train_label, Test_label = train_test_split(samples, labels, test_size=0.2, shuffle=False)
+
+Test_x = np.expand_dims(Test_x, axis=3)
+Test_label = np.expand_dims(Test_label, axis=3)
+
+Test_label = to_categorical(Test_label)
+########################################################################################################################
+DB_Number = [2, 2, 2, 4, 2, 2, 2]  # adding extra two DBs [0,1,2,3,4,5,6]
+########################################################################################################################
+n_split = 5  # Number of Folds
+########################################################################################################################
+#########################################  KFold Cross validation   ####################################################
+########################################################################################################################
+for train_index, test_index in KFold(n_split, shuffle=True, random_state=49).split(Train_x):
+    x_train, x_val = Train_x[train_index], Train_x[test_index]
+    y_train, y_val = Train_label[train_index], Train_label[test_index]
+
+    x_train = np.expand_dims(x_train, axis=3)
+    y_train = np.expand_dims(y_train, axis=3)
+    x_val = np.expand_dims(x_val, axis=3)
+    y_val = np.expand_dims(y_val, axis=3)
+
+    y_train = to_categorical(y_train)
+    y_val = to_categorical(y_val)
+
+    model_kfold = None
+    model_kfold = DenseNet_Model(DB_Number)
+
+    ####################################################################################################################
+    earlystop = EarlyStopping(monitor='val_iou_metric',
+                              # min_delta=1,
+                              patience=10,
+                              verbose=1,
+                              mode="max",
+                              restore_best_weights=True)
+    ####################################################################################################################
+    history = model_kfold.fit(x_train,
+                              y_train,
+                              epochs=100,
+                              batch_size=4,
+                              validation_data=(x_val, y_val), )
+    # callbacks=[earlystop])
+    ####################################################################################################################
+    score = model_kfold.evaluate(Test_x,
+                                 Test_label,
+                                 batch_size=4,
+                                 verbose=1)
+    ####################################################################################################################
+    print('Test loss:', score[0])
+    print('Test accuracy:', score[1])
+    model_kfold.summary()
+    ####################################################################################################################
+    plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
+    font = {'family': 'times new roman',
+            'weight': 'light',
+            'size': 8}
+    plt.rc('font', **font)
+    # plt.gca().set_axis_off()
+    # plt.axis('off')
+    # plt.subplots_adjust(left=0.0, bottom=0.0, right=1, top=1.0, wspace=0.0, hspace=0.0)
+    # plt.margins(0, 0)
+    # plt.gca().xaxis.set_major_locator(plt.NullLocator())
+    # plt.gca().yaxis.set_major_locator(plt.NullLocator())
+    ################################################################################################################
+
+    plt.plot(history.history['loss'], label='training loss')
+    plt.plot(history.history['val_loss'], label='validation loss')
+    plt.legend()
+    plt.savefig(
+        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_loss_per_epochs_softmax')
+    plt.close('all')
+    gc.collect()
+
+    ####################################################################################################################
+    plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
+    font = {'family': 'times new roman',
+            'weight': 'light',
+            'size': 11}
+    plt.rc('font', **font)
+    ####################################################################################################################
+    plt.plot(history.history['iou_metric'], label='Training iou')
+    plt.plot(history.history['val_iou_metric'], label='validation iou')
+    plt.legend()
+    plt.savefig(
+        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_iou_per_epochs_softmax')
+    gc.collect()
+
+    plt.close('all')
+    gc.collect()
+    model_kfold.save('E:/aidd_new/aidd/reports/figures/comparative_study/h5_models/fcn_densenet_kfold_softmax.h5')
+    gc.collect()
+
+# model.save('E:/backup/models/FCN_DenseNet_models/Softmax/FCN_softmax_100_epoches.h5')

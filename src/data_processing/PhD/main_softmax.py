@@ -1,5 +1,7 @@
 import csv
 import gc
+import math
+import os
 from pathlib import Path
 import cv2
 import matplotlib
@@ -7,12 +9,15 @@ import matplotlib.pyplot as plt
 # from sklearn.utils import shuffle
 import numpy as np
 import tensorflow as tf
+from keras import Model
 from keras.models import load_model
-from matplotlib import cm
+from matplotlib import cm, gridspec
 from matplotlib.colors import ListedColormap
 from mpmath import norm
+from sklearn.model_selection import train_test_split
 
 ########################################################################################################################
+
 config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
 sess = tf.compat.v1.Session(config=config)
@@ -22,29 +27,17 @@ gc.collect()
 ########################################################################################################################
 ############################## Loading dataset into x, y arrays and reshape them #######################################
 ########################################################################################################################
-x = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_training_dataset.npy')
-x = x.reshape(1900, 512, 512, 1)
-x = x / 255.0  # normalizing x,y to (0-1) range
-y = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_labels.npy')
-y = y.reshape(1900, 512, 512, 1)
-y = y / 255.0
+dataset = np.load('delamination_dataset.npy')
 
-########################################################################################################################
-###################################### Shuffle the data set at random ##################################################
-########################################################################################################################
-# x, y = shuffle(x, y)
-########################################################################################################################
-################# Split dataset into training and testing sets and again re-shuffle them ###############################
-########################################################################################################################
-x_train = x[:1520]
-y_train = y[:1520]
+print(dataset.dtype)
 
-# n = 433 # image number
-# test_x_samples = x[(n-1)*4:n*4]
-# test_y_samples = y[(n-1)*4:n*4]
-test_x_samples = x[1520:1900]
-test_y_samples = y[1520:1900]
+samples = dataset[:, :, :, 0]
+labels = dataset[:, :, :, 1]
 
+Train_x, test_x_samples, Train_label, test_y_samples = train_test_split(samples, labels, test_size=0.2, shuffle=False)
+
+test_x_samples = np.expand_dims(test_x_samples, axis=3)
+test_y_samples = np.expand_dims(test_y_samples, axis=3)
 ########################################################################################################################
 ######################################## Loading experimental images ###################################################
 ########################################################################################################################
@@ -72,7 +65,9 @@ fcn_path = 'E:/backup/models/FCN_DenseNet_models/Softmax/'
 unet_path = 'E:/backup/models/UNet_models/Softmax/'
 vgg16_path = 'E:/backup/models/SegNet_models/Softmax/'
 # PsPnet_BatchNormalization_add__to_globalaverage_Activation_softmax
-model_name = 'PSPNET_resenet50_1_1_ConvD_softmax.h5'  # fcn_path+'FCN_softmax_100_epoches.h5'
+
+# model_name = 'PSPNET_resenet50_1_1_ConvD_softmax.h5'  # fcn_path+'FCN_softmax_100_epoches.h5'
+model_name = 'E:/aidd_new/aidd/reports/figures/comparative_study/h5_models/Unet_kfold_softmax.h5'
 model = load_model(model_name, compile=False)
 model.summary()
 
@@ -82,6 +77,91 @@ model.summary()
 path_to_csv = "E:/aidd_new/aidd/src/data_processing/PhD/cmap_flipped_jet256.csv"
 cmap = matplotlib.colors.ListedColormap(["blue", "green", "red"], name=path_to_csv, N=None)
 m = cm.ScalarMappable(norm=norm, cmap=cmap)
+
+
+########################################################################################################################
+################################# Visualizing kernels weights and intermediate outputs #################################
+########################################################################################################################
+
+
+def plot_filters(layer, name_layer):
+    if "conv2d_" in layer_name:
+        filters = layer.get_weights()[0]
+        filters = np.asarray(filters)
+        # print(filters.shape)
+        filters = np.reshape(filters, (filters.shape[3], filters.shape[0], filters.shape[1], filters.shape[2]))
+        # print(filters.shape)
+        length = filters.shape[0]
+        image = np.zeros((3, 3))
+        fig = plt.figure(figsize=(6, 6))
+        gs1 = gridspec.GridSpec(math.ceil(np.sqrt(length)), math.ceil(np.sqrt(length)))
+        gs1.update(wspace=0.0, hspace=0.02)
+        for j in range(0, length):
+            for depth in range(0, filters.shape[3]):
+                # print(filters[j, :, :, depth])
+                image = image + filters[j, :, :, depth]
+            ax = fig.add_subplot(gs1[j])
+            image = image / (depth + 1)
+            ax.imshow(image, cmap='gray')
+            ax.set_xticklabels([])
+            ax.set_yticklabels([])
+            ax.set_aspect('equal')
+            plt.xticks(np.array([]))
+            plt.yticks(np.array([]))
+        # plt.tight_layout()
+        # plt.show()
+        plt.savefig(name_layer+str('kernel_weights'))
+        plt.close('all')
+    else:
+        print("NO filters for this layer")
+
+
+def intermediate_outputs(name, n):
+    intermediate_layer_model = Model(inputs=model.input,
+                                     outputs=model.get_layer(name).output)
+    intermediate_output = intermediate_layer_model.predict(test_x_samples[n:n + 1])
+
+    # print(intermediate_output.shape)
+    length = intermediate_output.shape[3]
+    # print(length)
+    intermediate_output = np.asarray(intermediate_output)
+    ################################################################################################################
+    # plt.figure(figsize=(5 / 2.54, 5 / 2.54), dpi=600)
+    # plt.gca().set_axis_off()
+    # plt.axis('off')
+    # plt.subplots_adjust(left=0.0, bottom=0.0, right=1, top=1.0, wspace=0.0, hspace=0.0)
+    # plt.margins(0, 0)
+    # plt.gca().xaxis.set_major_locator(plt.NullLocator())
+    # plt.gca().yaxis.set_major_locator(plt.NullLocator())
+    ################################################################################################################
+    # print(intermediate_output[0, :, :, i])
+    fig = plt.figure(figsize=(10, 10))
+    for j in range(1, (length + 1)):
+        ax = fig.add_subplot(math.ceil(np.sqrt(length)), math.ceil(np.sqrt(length)), j)
+        ax.imshow(intermediate_output[0, :, :, (j - 1)], cmap='gray')
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        ax.set_aspect('equal')
+        plt.axis('off')
+    plt.tight_layout()
+    # plt.show()
+    plt.savefig(name)
+    plt.close('all')
+
+
+input_image = 448  # image number (381,475)
+os.chdir('E:/aidd_new/aidd/reports/figures/comparative_study/intermediate_outputs')
+
+for layers_count in range(len(model.layers)):
+    layer_name = model.layers[layers_count].get_config()
+    layer_name = layer_name['name']
+    print(layer_name)
+    plot_filters(model.layers[layers_count], layer_name)
+    intermediate_outputs(layer_name, ((input_image - 381) * 4))
+
+########################################################################################################################
+########################################################################################################################
+
 
 # Organize figures in folders based on the used threshold
 
@@ -129,6 +209,24 @@ def IoU(predicted_image, truth_img):
 # file_name = 'IoU_VGG16_encoder_decoder_softmax.csv'
 file_name = 'PSPNET_resenet50_1_1_ConvD_softmax.csv'
 
+########################################################################################################################
+os.chdir('E:/aidd_new/aidd/reports/figures/comparative_study')
+print(os.getcwd())
+########################################################################################################################
+unet_num_softmax = 'unet/softmax/num/unet_kfold_num_softmax_iou.csv'
+unet_exp_softmax = 'unet/softmax/exp/unet_kfold_exp_softmax_iou.csv'
+
+vgg16_num_softmax = 'vgg16_encoder_decoder/softmax/num/vgg16_encoder_decoder_kfold_num_softmax_iou.csv'
+vgg16_exp_softmax = 'vgg16_encoder_decoder/softmax/exp/vgg16_encoder_decoder_kfold_exp_softmax_iou.csv'
+
+fcn_densenet_num_softmax = 'fcn_densenet/softmax/num/fcn_densenet_kfold_num_softmax_iou.csv'
+fcn_densenet_exp_softmax = 'fcn_densenet/softmax/exp/fcn_densenet_kfold_exp_softmax_iou.csv'
+
+pspnet_num_softmax = 'pspnet/softmax/num/pspnet_kfold_num_softmax_iou.csv'
+pspnet_exp_softmax = 'pspnet/softmax/exp/pspnet_kfold_exp_softmax_iou.csv'
+
+
+#######################################################################################################################
 
 def append_list_as_row(cvs_file_name, list_of_iou, image_num):
     with open(cvs_file_name, 'a', newline='') as f:
@@ -225,7 +323,7 @@ file_name_test = 'IoU_PSPnet_resnet_softmax_num.csv'
 def Testing():
     prediction = model.predict(test_x_samples, batch_size=1)
     for i in range(380):
-        if i % 4 == 0:
+        if i % 1 == 0:
             damage = (prediction[i])
             damage = np.argmax(damage, axis=2)
 
@@ -242,14 +340,14 @@ def Testing():
             ###############################################################################################################
             plt.imshow(damage, cmap=cmap)
             plt.axis('off')
-            plt.savefig(path_PSPNET_figures_softmax + 'PSPnet_Pred__softmax' + str(i + 1))
+            plt.savefig('pspnet/softmax/num/pspnet_Pred_softmax' + str(i + 1))
 
-            plt.imshow(original, cmap='Greys')
-            plt.axis('off')
+            # plt.imshow(original, cmap='Greys')
+            # plt.axis('off')
             # plt.savefig('E:/aidd_new/aidd/reports/figures/PSPNet/Num/unthreshoding/FCN_DenseNet_original_454_softmax' + str(i+1))
 
-            plt.imshow(mask, cmap='gist_gray')
-            plt.axis('off')
+            # plt.imshow(mask, cmap='gist_gray')
+            # plt.axis('off')
             # plt.savefig('E:/aidd_new/aidd/reports/figures/PSPNet/Num/unthreshoding/FCN_DenseNet_GT_454_softmax' + str(i+1))
             # plt.show()
             plt.close('all')
@@ -257,7 +355,7 @@ def Testing():
             image_number.append(i + 1)
             IoU_list.append(I_o_U)
             print(i + 1)
-    append_list_as_row(file_name_test, IoU_list, image_number)
+    append_list_as_row(pspnet_num_softmax, IoU_list, image_number)
 
 
 ########################################################################################################################
@@ -269,7 +367,9 @@ path_unet_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figures/UN
 path_fcn_figuers_folder_no_threshold_exp = 'E:/aidd_new/aidd/reports/figures/FCN_DenseNet/Exp/Fig_unthreshold_softmax'
 path_pspnet_figures_exp = 'E:/aidd_new/aidd/reports/figures/PSPNet/Exp/softmax/'
 
-Path(path_pspnet_figures_exp).mkdir(parents=True, exist_ok=True)  # create folder for the EXP
+path = 'E:/aidd_new/aidd/reports/figures/MSSP_2'
+
+Path(path).mkdir(parents=True, exist_ok=True)  # create folder for the EXP
 
 image_number_exp = []  # holds the image number in the loop
 IoU_list_exp = []  # hold the IoU values for certain threshold
@@ -284,11 +384,13 @@ def exp():
     prediction = np.asarray(prediction)
 
     for i in range(23):
-        damage = (prediction[i])
-        # damage = thresholding(damage,0.51)
+        damage = prediction[i]
+        print('before argmax', damage.shape)
         damage = np.argmax(damage, axis=2)
+        print('after argmax', damage.shape)
         original = np.squeeze(experimental[i], axis=2)
         label = np.squeeze(experimental_label[i], axis=2)
+        ################################################################################################################
         plt.figure(figsize=(5 / 2.54, 5 / 2.54), dpi=600)
         plt.gca().set_axis_off()
         plt.axis('off')
@@ -296,25 +398,27 @@ def exp():
         plt.margins(0, 0)
         plt.gca().xaxis.set_major_locator(plt.NullLocator())
         plt.gca().yaxis.set_major_locator(plt.NullLocator())
-        plt.imshow(damage, cmap=cmap)
-        plt.axis('off')
-        plt.savefig(path_pspnet_figures_exp + '/PSPnet_Pred_softmax' + str(i + 1))
+        ################################################################################################################
+        # plt.imshow(damage, cmap=cmap)
+        # plt.axis('off')
+        # plt.savefig('pspnet/softmax/exp/pspnet_Pred_softmax' + str(i + 1))
+
         plt.imshow(original, cmap='Greys')
         plt.axis('off')
 
-        plt.imshow(label, cmap=cmap)
-        plt.axis('off')
+        # plt.imshow(label, cmap=cmap)
+        # plt.axis('off')
 
         # print(i+1)
         # IoU(damage,label)
         # plt.savefig(path_unet_figuers_folder_no_threshold_exp+'/Fig_' + str(i+1))
-        # plt.show()
+        plt.show()
         plt.close('all')
         print(i + 1)
         I_o_U = IoU(damage, label)
         image_number_exp.append(i + 1)
         IoU_list_exp.append(I_o_U)
-    append_list_as_row(file_name_exp, IoU_list_exp, image_number_exp)
+    # append_list_as_row(pspnet_exp_softmax, IoU_list_exp, image_number_exp)
     gc.collect()
 
 
@@ -323,6 +427,6 @@ def exp():
 ########################################################################################################################
 # Testing()
 # main_loop()
-exp()
+# exp()
 ########################################################################################################################
 gc.collect()

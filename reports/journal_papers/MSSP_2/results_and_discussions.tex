@@ -46,190 +46,198 @@
 %			\label{fig:RMS438}
 %	\end{figure} 
 	
+Numerical results for RMS\_448
+UNet = \(0.760\), VGG16 encoder-decoder = \(0.841\), FCN-DenseNet =\(0.757\), PSPNet = \(0.747\)
 	
 	\begin{figure} [!h]
 		\centering
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{RMS_bottom_391.png}
+			\includegraphics[scale=1.0]{original_269.png}
 			\caption{RMS bottom}
-			\label{fig:RMS_flat_shell_Vz_391}
+			\label{fig:RMS_flat_shell_Vz_448}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{ground_truth_391.png}
+			\includegraphics[scale=1.0]{GT_269.png}
 			\caption{Ground truth}
-			\label{fig:m1_rand_single_delam_391}
+			\label{fig:m1_rand_single_delam_448}
 		\end{subfigure}
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{unet_pred_sigmoid_391.png}
-			\caption{UNet sigmoid}
-			\label{fig:unet_pred_sigmoid_391}
+			\includegraphics[scale=1.0]{unet_Pred_softmax269.png}
+			\caption{UNet}
+			\label{fig:unet_pred_448}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{vgg16_pred_sigmoid_391.png}
-			\caption{VGG16 encoder-decoder sigmoid}
-			\label{fig:vgg16_pred_sigmoid_391}
+			\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax269.png}
+			\caption{VGG16 encoder-decoder}
+			\label{fig:vgg16_pred_448}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{pspnet_pred_sigmoid_391.png}
-			\caption{PSPNet sigmoid}
-			\label{fig:pspnet_pred_sigmoid_391}
+			\includegraphics[scale=1.0]{pspnet_Pred_softmax269.png}
+			\caption{PSPNet}
+			\label{fig:pspnet_pred_448}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{fcn_densenet_pred_sigmoid_391.png}
-			\caption{FCN-DenseNet sigmoid}
-			\label{fig:fcn_densenet_pred_sigmoid_391}
+			\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax269.png}
+			\caption{FCN-DenseNet}
+			\label{fig:fcn_densenet_pred_448}
 		\end{subfigure}
-		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / sigmoid 391}
-		\label{fig:391_sigmoid}
+		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet /  448}
+		\label{fig:softmax_448}
 	\end{figure} 
 
+Numerical results for RMS\_385
+UNet = \(0.691\), VGG16 encoder-decoder = \(0.770\), FCN-DenseNet =\(0.776\), PSPNet = \(0.867\)
 
 	\begin{figure}[!h]
 		\centering
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{RMS_bottom_391.png}
+			\includegraphics[scale=1.0]{original_17.png}
 			\caption{RMS bottom}
-			\label{fig:RMS_flat_shell_Vz_391}
+			\label{fig:RMS_flat_shell_Vz_385}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{ground_truth_391.png}
+			\includegraphics[scale=1.0]{GT_17.png}
 			\caption{Ground truth}
-			\label{fig:m1_rand_single_delam_391}
+			\label{fig:m1_rand_single_delam_385}
 		\end{subfigure}
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{Unet_Pred__softmax391.png}
-			\caption{UNet softmax}
-			\label{fig:Unet_Pred__softmax391}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{vgg16_pred__softmax391.png}
-			\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax391}			
+			\includegraphics[scale=1.0]{unet_Pred_softmax17.png}
+			\caption{UNet}
+			\label{fig:Unet_Pred__softmax_385}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{pspnet_pred__softmax391.png}
-			\caption{PSPNet softmax}
-			\label{fig:pspnet_pred__softmax391}
+			\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax17.png}
+			\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax_385}			
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.47\textwidth}
+			\centering
+			\includegraphics[scale=1.0]{pspnet_Pred_softmax17.png}
+			\caption{PSPNet}
+			\label{fig:pspnet_pred__softmax_385}
 		\end{subfigure}	
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{fcn_densenet_pred__softmax391.png}
-			\caption{FCN-DenseNet softmax}
-			\label{fig:fcn_densenet_pred__softmax391}
+			\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax17.png}
+			\caption{FCN-DenseNet}
+			\label{fig:fcn_densenet_pred__softmax_385}
 		\end{subfigure}	
-		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / softmax 391}
+		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / 385}
 		\label{fig:391_softmax}
 	\end{figure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+numerical results for RMS\_425
+UNet = \(0.790\), VGG16 encoder-decoder = \(0.815\), FCN-DenseNet =\(0.729\), PSPNet = \(0.848\)
+	
 \begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{RMS_bottom_442.png}
+		\includegraphics[scale=1.0]{original_177.png}
 		\caption{RMS bottom}
 		\label{fig:RMS_flat_shell_Vz_442}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{ground_truth_442.png}
+		\includegraphics[scale=1.0]{GT_177.png}
 		\caption{Ground truth}
 		\label{fig:m1_rand_single_delam_442}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{Unet_Pred__softmax442.png}
+		\includegraphics[scale=1.0]{unet_Pred_softmax177.png}
 		\caption{UNet softmax}
 		\label{fig:Unet_Pred__softmax442}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{vgg16_pred__softmax442.png}
+		\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax177.png}
 		\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax442}			
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{pspnet_pred__softmax442.png}
+		\includegraphics[scale=1.0]{pspnet_Pred_softmax177.png}
 		\caption{PSPNet softmax}
 		\label{fig:pspnet_pred__softmax442}
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{fcn_densenet_pred__softmax442.png}
+		\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax177.png}
 		\caption{FCN-DenseNet softmax}
 		\label{fig:fcn_densenet_pred__softmax442}
 	\end{subfigure}	
-	\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / softmax 442}
+	\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet /  425}
 	\label{fig:442_softmax}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure}[!h]
-		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{RMS_bottom_464.png}
-			\caption{RMS bottom}
-			\label{fig:RMS_flat_shell_Vz_464}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{ground_truth_464.png}
-			\caption{Ground truth}
-			\label{fig:m1_rand_single_delam_464}
-		\end{subfigure}
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{Unet_Pred__softmax464.png}
-			\caption{UNet softmax}
-			\label{fig:Unet_Pred__softmax464}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{vgg16_pred__softmax464.png}
-			\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax464}			
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{pspnet_pred__softmax464.png}
-			\caption{PSPNet softmax}
-			\label{fig:pspnet_pred__softmax464}
-		\end{subfigure}	
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{fcn_densenet_pred__softmax464.png}
-			\caption{FCN-DenseNet softmax}
-			\label{fig:fcn_densenet_pred__softmax464}
-		\end{subfigure}	
-		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / softmax 464}
-		\label{fig:464_softmax}
-	\end{figure}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\begin{figure}[!h]
+%		\centering
+%		\begin{subfigure}[b]{0.47\textwidth}
+%			\centering
+%			\includegraphics[scale=1.0]{RMS_bottom_464.png}
+%			\caption{RMS bottom}
+%			\label{fig:RMS_flat_shell_Vz_464}
+%		\end{subfigure}
+%		\hfill
+%		\begin{subfigure}[b]{0.47\textwidth}
+%			\centering
+%			\includegraphics[scale=1.0]{ground_truth_464.png}
+%			\caption{Ground truth}
+%			\label{fig:m1_rand_single_delam_464}
+%		\end{subfigure}
+%		\begin{subfigure}[b]{0.47\textwidth}
+%			\centering
+%			\includegraphics[scale=1.0]{Unet_Pred__softmax464.png}
+%			\caption{UNet softmax}
+%			\label{fig:Unet_Pred__softmax464}
+%		\end{subfigure}
+%		\hfill
+%		\begin{subfigure}[b]{0.47\textwidth}
+%			\centering
+%			\includegraphics[scale=1.0]{vgg16_pred__softmax464.png}
+%			\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax464}			
+%		\end{subfigure}
+%		\hfill
+%		\begin{subfigure}[b]{0.47\textwidth}
+%			\centering
+%			\includegraphics[scale=1.0]{pspnet_pred__softmax464.png}
+%			\caption{PSPNet softmax}
+%			\label{fig:pspnet_pred__softmax464}
+%		\end{subfigure}	
+%		\hfill
+%		\begin{subfigure}[b]{0.47\textwidth}
+%			\centering
+%			\includegraphics[scale=1.0]{fcn_densenet_pred__softmax464.png}
+%			\caption{FCN-DenseNet softmax}
+%			\label{fig:fcn_densenet_pred__softmax464}
+%		\end{subfigure}	
+%		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / softmax 464}
+%		\label{fig:464_softmax}
+%	\end{figure}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	
 	
@@ -301,24 +309,58 @@
 %		\end{tabular}}
 %	\end{table}
 	
-Every single value of the IoU was estimated for all testing images using FCN-DenseNet with a sigmoid at the output layers.
-It is expected that as we increase the threshold, the IoU will decrease because some of the detected output values will be excluded.
-Therefore, selecting the proper threshold value is important for maximizing IoU. 
-Fig.~\ref{fig:iou_fcn} shows the maximum and mean IoU for all testing images depending on the threshold value. 
-The IoU is decreasing along with the threshold increment in the range of (\(0-1\)).
+%Every single value of the IoU was estimated for all testing images using FCN-DenseNet with a sigmoid at the output layers.
+%It is expected that as we increase the threshold, the IoU will decrease because some of the detected output values will be excluded.
+%Therefore, selecting the proper threshold value is important for maximizing IoU. 
+%Fig.~\ref{fig:iou_fcn} shows the maximum and mean IoU for all testing images depending on the threshold value. 
+%The IoU is decreasing along with the threshold increment in the range of (\(0-1\)).
+%
+%Note that for each pixel we get a value between (\(0 to 1\)).
+%We take 0.5 as the threshold to decide whether to classify a pixel as 0 or 1.
+%However deciding threshold is tricky and can be treated as another hyper parameter.
 
-Note that for each pixel we get a value between (\(0 to 1\)).
-We take 0.5 as the threshold to decide whether to classify a pixel as 0 or 1.
-However deciding threshold is tricky and can be treated as another hyper parameter.
+%	\begin{figure}[!h] 
+%		\centering
+%		\includegraphics[width=\textwidth]{iou_all_models_sigmoid.png}
+%		\centering
+%		\caption{IoU for different models with sigmoid of a range of thresholds \((0.0-1.0)\)} 
+%		\label{fig:iou_fcn}
+%	\end{figure}
+%	
 
-	\begin{figure}[!h] 
-		\centering
-		\includegraphics[width=\textwidth]{iou_all_models_sigmoid.png}
-		\centering
-		\caption{IoU for different models with sigmoid of a range of thresholds \((0.0-1.0)\)} 
-		\label{fig:iou_fcn}
-	\end{figure}
+\begin{table}[]
+	\centering
+	\caption{}
+	\label{tab:table_iou}
+	\begin{tabular}{ccc}
+		\multicolumn{3}{c}{IoU} \\ \hline
+		& mean & max \\ \hline
+		U-Net & 0.67 & 0.93 \\ \hline
+		VGG16 encoder-decoder & 0.66 & 0.90 \\ \hline
+		FCN-DenseNet & 0.52 & 0.82 \\ \hline
+		PSPNet & 0.66 & 0.93 \\ \hline
+	\end{tabular}
 	
+\end{table}
+
+\begin{table}[]
+	\centering
+	\caption{}
+	\label{tab:table_parameters}
+	\resizebox{\textwidth}{!}
+	{
+		\begin{tabular}{cccc}
+			\multicolumn{4}{c}{Model parameters} \\ \hline
+			& Trainable params & Non-trainable params & Total params \\ \hline
+			U-Net & 2,161,378 & 2,944 & 2,164,322 \\ \hline
+			VGG16 encoder-decoder & 5,287,282 & 5,760 & 5,293,042 \\ \hline
+			FCN-DenseNet & 150,516 & 1,346 & 151,862 \\ \hline
+			PSPNet & 912,370 & 3,744 & 916,114 \\ \hline
+		\end{tabular}
+	}
+
+\end{table}
+
 In Fig.~\ref{fig:Exp_ERMS_teflon}, we present an experimental scenario of CFRP with Teflon insert as artificial delamination.
 Similarly to the numerical case, the frequency of \(50\) kHz was used to excite the transducer which was placed at the centre of the plate.
 As shown in Fig.~\ref{fig:ERMSF_CFRP_teflon} the adaptive wavenumber filtering method is able to detect the delamination. 
@@ -333,6 +375,9 @@ The IoU for this scenario was \(0.401\).
 %It means that the model has excellent generalisation capabilities and is able to detect delamination based on previously unseen data.
 %We expect, that the generalisation capabilities and, in turn, delamination identification performance, can be further enhanced by training the model on experimental data.
 %However, the generation of large dataset comprised of experiments with various defects is troublesome.
+
+experimental results 
+UNet = \(0.082\), VGG16 encoder-decoder = \(0.550\), FCN-DenseNet =\(0.250\), PSPNet = \(0.425\)
 
 \begin{figure} [!h]
 	\centering
@@ -352,28 +397,28 @@ The IoU for this scenario was \(0.401\).
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1]{UNet_exp_softmax7.png}
+		\includegraphics[scale=1]{unet_Pred_exp_softmax.png}
 		\caption{UNet} 
 		\label{fig:unet_exp_7_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 	\centering
-	\includegraphics[scale=1]{vgg16_exp_7_.png}
+	\includegraphics[scale=1]{vgg16_encoder_decoder_Pred_exp_softmax.png}
 	\caption{VGG16 encoder-decoder} 
 	\label{fig:vgg16_exp_7_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1]{PSPnet_exp_softmax7.png}
+		\includegraphics[scale=1]{pspnet_Pred_exp_softmax.png}
 		\caption{PSPNet} 
 		\label{fig:pspnet_exp_7_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1]{FCN_Densenet_exp_softmax7.png}
+		\includegraphics[scale=1]{fcn_densenet_Pred__exp_softmax.png}
 		\caption{FCN-DenseNet} 
 		\label{fig:fcn_densenet_exp}
 	\end{subfigure}
