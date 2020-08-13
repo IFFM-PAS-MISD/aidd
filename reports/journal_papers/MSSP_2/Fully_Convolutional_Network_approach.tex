@@ -29,18 +29,22 @@ In this technique, we have split the training set into \(k\) small sets (folds),
 Therefore, we iterate over the training set k rounds.
 During each round, the model uses  \(k-1\) folds for training and the remaining fold is used for validation. 
 In our models, we choose \(k=5\), therefore, we have \(5\) rounds of training. 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Eventually, we compute the cross-validation performance as the arithmetic mean value over the kk performance estimates from the validation sets. The main benefit behind this approach versus a simple train/test split is to reduce the pessimistic bias by using more training data in contrast to setting aside a relatively large portion of the dataset as test data.
+
+For each round, we compute the performance of the model.
+Finally, we compute the cross-validation performance for all rounds as illustrated in eqn.~\ref{eq:cv_performance} as a mean value over the k performance estimations of the validation fold set.
+The main advantage of the K-fold CV method versus a regular train/test split is to reduce the overfitting by utilising data more efficiently as every data sample is used in both training and validation. 
+Therefore, using this way, we improve the model ability to generalise
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{equation}
-Final \ Performance = \frac{1}{5}\sum_{i=1}^{5}Performace
+Final \ Performance = \frac{1}{k}\sum_{i=1}^{k}Performace
+\label{eq:cv_performance}
 \end{equation}
 \begin{figure}
 	\centering
 	\includegraphics[scale=1.0]{cross_validation.png}
-	\caption{Cross validation, with \(k=5\).}
+	\caption{K-fold Cross validation,\(k=5\).}
 	\label{fig:Cross_validation}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
