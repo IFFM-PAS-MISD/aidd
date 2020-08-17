@@ -1,5 +1,5 @@
 \section{Results and Discussions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this section, four deep learning models  of semantic segmentation approach including UNet, VGG16 encoder-decoder, FCN-DenseNet and PSPNet were evaluated on three damage scenarios  which were numerically generated in order to identify the delamination.
 Additionally, an experimental scenario was also used to evaluate the performance of the models to show the deep learning capabilities of generalization.
 For each model, the mean IoU is calculated and presented as a metric of comparison.
@@ -7,6 +7,7 @@ For each model, the mean IoU is calculated and presented as a metric of comparis
 In our work, all semantic segmentation models were implemented and trained with Keras API~\cite{chollet2015keras} (an open-source platform) running on top of TensorFlow on a GeForce RTX 2080 GPU from NVIDIA. 
 Moreover, for training purposes, we have used K-fold CV technique with \(k=5\), which means each model has trained for \(5\) iterations and finally the mean performance is calculated. 
 Further, for each iteration, the models were trained on the augmented dataset up to \(100\) epochs.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The first delamination scenario is shown in Figure~\ref{fig:softmax_448}. 
 The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the left edge of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_448}, ~\ref{fig:m1_rand_single_delam_448} respectively. 
@@ -59,65 +60,68 @@ The lase figure in the first scenario ~\ref{fig:fcn_densenet_pred_448}	show the 
 	\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet /  448}
 	\label{fig:softmax_448}
 \end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The second delamination scenario is shown in Figure~\ref{fig:385_softmax}. 
 The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the upper left corner of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_385}, ~\ref{fig:m1_rand_single_delam_385} respectively. 
-
-Numerical results for RMS\_385
-UNet = \(0.691\), VGG16 encoder-decoder = \(0.770\), FCN-DenseNet =\(0.776\), PSPNet = \(0.867\)
-
-	\begin{figure}[!h]
+In fig.~\ref{fig:Unet_Pred__softmax_385} we presents the predicted output of the UNet model, the IoU = \(0.691\) for this case.
+Figure~\ref{fig:vgg16_pred__softmax_385} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(0.770\). 
+Figure~\ref{fig:pspnet_pred__softmax_385} shows the predicted output of PSPNet model, the IoU =\(0.867\).
+The lase figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_385}	show the predicted output of FCN-DenseNet model, the IoU= \(0.776\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{RMS_385.png}
-			\caption{RMS bottom}
-			\label{fig:RMS_flat_shell_Vz_385}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{GT_385.png}
-			\caption{Ground truth}
-			\label{fig:m1_rand_single_delam_385}
-		\end{subfigure}
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{unet_Pred_softmax_385.png}
-			\caption{UNet}
-			\label{fig:Unet_Pred__softmax_385}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax_385.png}
-			\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax_385}			
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{pspnet_Pred_softmax_385.png}
-			\caption{PSPNet}
-			\label{fig:pspnet_pred__softmax_385}
-		\end{subfigure}	
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax_385.png}
-			\caption{FCN-DenseNet}
-			\label{fig:fcn_densenet_pred__softmax_385}
-		\end{subfigure}	
-		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / 385}
-		\label{fig:385_softmax}
-	\end{figure}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\includegraphics[scale=1.0]{RMS_385.png}
+		\caption{RMS bottom}
+		\label{fig:RMS_flat_shell_Vz_385}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{GT_385.png}
+		\caption{Ground truth}
+		\label{fig:m1_rand_single_delam_385}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{unet_Pred_softmax_385.png}
+		\caption{UNet}
+		\label{fig:Unet_Pred__softmax_385}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax_385.png}
+		\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax_385}			
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{pspnet_Pred_softmax_385.png}
+		\caption{PSPNet}
+		\label{fig:pspnet_pred__softmax_385}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax_385.png}
+		\caption{FCN-DenseNet}
+		\label{fig:fcn_densenet_pred__softmax_385}
+	\end{subfigure}	
+	\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / 385}
+	\label{fig:385_softmax}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The third delamination scenario is shown in Figure~\ref{fig:475_softmax}. 
 The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the upper middle  of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_475}, ~\ref{fig:m1_rand_single_delam_475} respectively. 
-
-numerical results for RMS\_475
-UNet = \(0.79\), VGG16 encoder-decoder = \(0.84\), FCN-DenseNet =\(0.38\), PSPNet = \(0.80\)
-	
+In fig.~\ref{fig:Unet_Pred__softmax_475} we presents the predicted output of the UNet model, the IoU = \(0.79\) for this case.
+Figure~\ref{fig:vgg16_pred__softmax_475} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(0.84\). 
+Figure~\ref{fig:pspnet_pred__softmax_475} shows the predicted output of PSPNet model, the IoU =\(0.80\).
+The lase figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_475}	show the predicted output of FCN-DenseNet model, the IoU= \(0.38\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -162,194 +166,15 @@ UNet = \(0.79\), VGG16 encoder-decoder = \(0.84\), FCN-DenseNet =\(0.38\), PSPNe
 	\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet /  425}
 	\label{fig:475_softmax}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{figure}[!h]
-%		\centering
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{RMS_bottom_464.png}
-%			\caption{RMS bottom}
-%			\label{fig:RMS_flat_shell_Vz_464}
-%		\end{subfigure}
-%		\hfill
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{ground_truth_464.png}
-%			\caption{Ground truth}
-%			\label{fig:m1_rand_single_delam_464}
-%		\end{subfigure}
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{Unet_Pred__softmax464.png}
-%			\caption{UNet softmax}
-%			\label{fig:Unet_Pred__softmax464}
-%		\end{subfigure}
-%		\hfill
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{vgg16_pred__softmax464.png}
-%			\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax464}			
-%		\end{subfigure}
-%		\hfill
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{pspnet_pred__softmax464.png}
-%			\caption{PSPNet softmax}
-%			\label{fig:pspnet_pred__softmax464}
-%		\end{subfigure}	
-%		\hfill
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{fcn_densenet_pred__softmax464.png}
-%			\caption{FCN-DenseNet softmax}
-%			\label{fig:fcn_densenet_pred__softmax464}
-%		\end{subfigure}	
-%		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / softmax 464}
-%		\label{fig:464_softmax}
-%	\end{figure}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	
-	
-%In the next scenario, we present delamination located in the upper left part of the plate.
-%Figs.~\ref{fig:dispersion30deg_direct}, ~\ref{fig:m1_rand_single_delam_454} show the RMS of the full wavefield interpolated at the bottom surface of the plate.
-%Fig.~\ref{fig:ERMSF_flat_shell_Vz_454} shows the damage map obtained by using the adaptive wavenumber filtering.
-%The adaptive wavenumber filtering method picks some noise at the edges but the shape of delamination is clearly highlighted by high values of damage map.
-%Nevertheless, there is still some noise after applying threshold as it is shown in Fig.~\ref{fig:Binary_ERMSF}.
-%The IoU for this case is \(0.61\).
-%In Figs.~\ref{fig:predict_454_sigmoid_tr_0.5}, ~\ref{fig:predict_454_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax, respectively.
-%The sigmoid detect the delamination with IoU = \(0.58\), and for the softmax with IoU = \(0.60\).
-%As we can see also for this scenario, the FCN-DenseNet only detects the delamination patterns without unwanted noise.
-	
-%	Figs.[~\ref{fig:unthresholded438}, ~\ref{fig:unthresholded454}] show the original damage maps without thresholding for the FCN-DenseNet with sigmoid function for the first and second scenarios respectively. 
-%	As shown from the figs, the predicted output has a range or probabilities of damage. 
-%	Accordingly, we apply threshold to exclude these low damage probabilities.
-%	\begin{figure} [!h] 
-%		\centering
-%		\begin{subfigure}[b]{0.47\textwidth}
-%		\centering
-%		\includegraphics[scale=1]{sigmoid_unthresholded438.png}
-%		\caption{}
-%		\label{fig:unthresholded438}
-%		\end{subfigure}
-%	\hfill	
-%	\begin{subfigure}[b]{0.47\textwidth}
-%		\centering 	
-%		\includegraphics[scale=1]{sigmoid_unthresholded454.png}
-%		\caption{}
-%		\label{fig:unthresholded454}
-%	\end{subfigure}
-%	\caption{Unthresholded damage maps for FCN-DenseNet/sigmoid}
-%	\label{fig:unthresholded}
-%	\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%In Fig.~\ref{fig:RMS433} we present the third scenario where the damage map obtained by the adaptive wavenumber filtering method is useful for delamination visualisation but the FCN-DenseNet model failed.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% third figure
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Figures.~\ref{fig:RMS_flat_shell_Vz_433}, ~\ref{fig:m1_rand_single_delam_433} show the RMS of the full wavefield interpolated at the bottom surface of the plate with delamination located at the upper left corner of the plate and its corresponding ground truth, respectively.
-%It is impossible to notice any changes of RMS pattern caused by the delamination (Fig.~\ref{fig:RMS_flat_shell_Vz_433}).
-%It should be noted that this image is fed to the FCN-DenseNet model whereas the full wavefield (all frames) are used in the adaptive wavenumber filtering method.
-%In extreme cases, like this, conventional signal processing has an advantage over the FCN-DenseNet model.
-%As shown in Fig.~\ref{fig:ERMSF_flat_shell_Vz_433} representing the damage map obtained by the adaptive wavenumber filtering technique, the delamination location can be identified by a well-trained expert. 
-%However, the values of the damage map corresponding to the delamination location are on the same level as the noise.
-%Hence, when binary thresholding is applied, only some false damage indications are highlighted near corners of the plate as show in Fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_433}. 
-%For this case IoU= \(0\) for all considered methods.
-% 
-%Delaminations located near edges or corners are difficult to detect due to edge wave reflections which have similar patterns as delamination reflections. 
-%The problem arises for both conventional and deep learning techniques. 
-%However, to solve this issue for the FCN model, we need to enhance the feature extraction process by obtaining more data to train the model to recognise and learn new patterns.	
-%
-%In Table~\ref{tab:iou} we present the maximum, minimum and mean value of IoU for the adaptive filtering and FCN-DenseNet for sigmoid (threshold = \(0.5\)) and softmax for all testing images.
-%	\begin{table}
-%	 \renewcommand{\arraystretch}{1.3}
-%		\centering
-%		\caption{IoU for all models}
-%		\label{tab:iou}
-%		\resizebox{\textwidth}{!}{\begin{tabular}{ccccccccccccc}
-%				\toprule
-%				&  &  &  &  &  & \multicolumn{7}{c}{FCN-Dense Model} \\ \cline{7-13} 
-%				&  & \multicolumn{3}{c}{Adaptive filtering} &  & \multicolumn{3}{c}{sigmoid} &  & \multicolumn{3}{c}{softmax} \\ \cline{3-5} \cline{7-9} \cline{11-13} 
-%				&  & min & max & mean &  & min & max & mean &  & \multicolumn{1}{c}{min} & \multicolumn{1}{c}{max} & \multicolumn{1}{c}{mean} 
-%				%\\ \cline{3-13} 
-%				\\ \cline{3-5} \cline{7-9} \cline{11-13} 
-%				\multicolumn{2}{c}{IoU} &0&0.648&0.373& &0&0.933&0.616&  &0&0.878&0.623\\ 
-%				\bottomrule
-%		\end{tabular}}
-%	\end{table}
-	
-%Every single value of the IoU was estimated for all testing images using FCN-DenseNet with a sigmoid at the output layers.
-%It is expected that as we increase the threshold, the IoU will decrease because some of the detected output values will be excluded.
-%Therefore, selecting the proper threshold value is important for maximizing IoU. 
-%Fig.~\ref{fig:iou_fcn} shows the maximum and mean IoU for all testing images depending on the threshold value. 
-%The IoU is decreasing along with the threshold increment in the range of (\(0-1\)).
-%
-%Note that for each pixel we get a value between (\(0 to 1\)).
-%We take 0.5 as the threshold to decide whether to classify a pixel as 0 or 1.
-%However deciding threshold is tricky and can be treated as another hyper parameter.
-
-%	\begin{figure}[!h] 
-%		\centering
-%		\includegraphics[width=\textwidth]{iou_all_models_sigmoid.png}
-%		\centering
-%		\caption{IoU for different models with sigmoid of a range of thresholds \((0.0-1.0)\)} 
-%		\label{fig:iou_fcn}
-%	\end{figure}
-%	
-
-\begin{table}[]
-	\centering
-	\caption{}
-	\label{tab:table_iou}
-	\begin{tabular}{ccc}
-		\multicolumn{3}{c}{IoU} \\ \hline
-		& mean & max \\ \hline
-		U-Net & 0.67 & 0.93 \\ \hline
-		VGG16 encoder-decoder & 0.66 & 0.90 \\ \hline
-		FCN-DenseNet & 0.52 & 0.82 \\ \hline
-		PSPNet & 0.66 & 0.93 \\ \hline
-	\end{tabular}
-	
-\end{table}
-
-\begin{table}[]
-	\centering
-	\caption{}
-	\label{tab:table_parameters}
-	\resizebox{\textwidth}{!}
-	{
-		\begin{tabular}{cccc}
-			\multicolumn{4}{c}{Model parameters} \\ \hline
-			& Trainable params & Non-trainable params & Total params \\ \hline
-			U-Net & 2,161,378 & 2,944 & 2,164,322 \\ \hline
-			VGG16 encoder-decoder & 5,287,282 & 5,760 & 5,293,042 \\ \hline
-			FCN-DenseNet & 150,516 & 1,346 & 151,862 \\ \hline
-			PSPNet & 912,370 & 3,744 & 916,114 \\ \hline
-		\end{tabular}
-	}
-
-\end{table}
-
-In Fig.~\ref{fig:Exp_ERMS_teflon}, we present an experimental scenario of CFRP with Teflon insert as artificial delamination.
-Similarly to the numerical case, the frequency of \(50\) kHz was used to excite the transducer which was placed at the centre of the plate.
-As shown in Fig.~\ref{fig:ERMSF_CFRP_teflon} the adaptive wavenumber filtering method is able to detect the delamination. 
-Fig.~\ref{fig:Binary_ERMSF_CFRP} shows the binary thresholded output which precisely highlights the location of delamination. 
-Even the shape of the delamination is quite well represented.
-The IoU for this scenario was \(0.401\). 
-
-%The FCN-DenseNet model detected the delamination with both a sigmoid and softmax functions as shown in Fig.~\ref{fig:EXP_predict_sigmoid} and Fig.~\ref{fig:EXP_predict_softmax}, respectively.
-%The IoU for FCN-DenseNet model was \(0.053\) and \(0.081\) for a sigmoid and softmax, respectively.
-%These poor results of predictions are expected since we trained our model only on numerically generated data.
-%However, apart from the noise at the edges and at the transducer location, the FCN-DenseNet could detect the delamination in the experimentally generated image.
-%It means that the model has excellent generalisation capabilities and is able to detect delamination based on previously unseen data.
-%We expect, that the generalisation capabilities and, in turn, delamination identification performance, can be further enhanced by training the model on experimental data.
-%However, the generation of large dataset comprised of experiments with various defects is troublesome.
-
-experimental results 
-UNet = \(0.082\), VGG16 encoder-decoder = \(0.550\), FCN-DenseNet =\(0.250\), PSPNet = \(0.425\)
-
+Figure.~\ref{fig:Exp_ERMS_teflon}, shows an experimental scenario of CFRP with Teflon insert as artificial delamination.
+Similar to the numerically generated cases, we applied a frequency of \(50\) kHz to excite the transducer which we placed at the centre of the plate.
+Figures~(\ref{fig:unet_exp_7_} - \ref{fig:fcn_densenet_exp}) shows the predicted outputs of UNet, VGG16 encoder-decoder, PSPNet and FCN-DenseNet models receptively.
+As shown, the models are capable of detecting and identifying the delamination. 
+The UNet model detect the delamination with IoU = \(0.082\), the VGG16 encoder-decoder IoU  = \(0.550\), the PSPNet IoU =\(0.425\), and the FCN-DenseNet IoU =\(0.250\).
+We can see that the models can identify the delamination despite predicted noise, this indicates that the models are capable to generalise and detect the delamination on previously unseen data. 
+Since our models were only trained on the numerically generated data we expect the models will show great generalisation capability, and their performance can be improved when training on experimental data besides the numerical data. 
 \begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -396,4 +221,45 @@ UNet = \(0.082\), VGG16 encoder-decoder = \(0.550\), FCN-DenseNet =\(0.250\), PS
 		\caption{Experimental results}
 		\label{fig:Exp_ERMS_teflon}
 	\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In table~\ref{tab:table_iou}, we presents the maximum and the mean value of IoU for the UNet, VGG16 encoder-decoder, PSPNet and FCN-DenseNet models.
+As shown from the table, all models have a relatively high IoU, which means their ability to detect and localise the delamination is relatively high compared to the traditional techniques as wavenumber filtering which we have already performed in our previous work in which we compared wavenumber filtering with FCN-DenseNet to detect delamination in composite materials.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{}
+	\label{tab:table_iou}
+	\begin{tabular}{ccc}
+		\multicolumn{3}{c}{IoU} \\ \hline
+		& mean & max \\ \hline
+		U-Net & 0.67 & 0.93 \\ \hline
+		VGG16 encoder-decoder & 0.66 & 0.90 \\ \hline
+		FCN-DenseNet & 0.52 & 0.82 \\ \hline
+		PSPNet & 0.66 & 0.93 \\ \hline
+	\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The total number of parameters in any deep learning model is a sum of the trainable parameters (e.g weights of a convolution filters) and non-trainable parameters (biases and  pooling filters).
+Trainable parameters are continuously updated until we reach the minimum loss value while the non-trainable parameters are not changed during the whole training process.
+The total number of parameters can reflect the model's complexity, hence, it can be noted that as the total parameters increases the requiring time for training increases.
+Table~\ref{tab:table_iou} shows the total number of parameters for all our implemented models.
+%However, the total number of parameters of a model does not reflect its performance, as shown in table~\ref{tab:table_iou} PSPNet model has less parameters than UNet model
+\begin{table}[]
+	\centering
+	\caption{}
+	\label{tab:table_parameters}
+	\resizebox{\textwidth}{!}
+	{
+		\begin{tabular}{cccc}
+			\multicolumn{4}{c}{Model parameters} \\ \hline
+			& Trainable params & Non-trainable params & Total params \\ \hline
+			U-Net & 2,161,378 & 2,944 & 2,164,322 \\ \hline
+			VGG16 encoder-decoder & 5,287,282 & 5,760 & 5,293,042 \\ \hline
+			FCN-DenseNet & 150,516 & 1,346 & 151,862 \\ \hline
+			PSPNet & 912,370 & 3,744 & 916,114 \\ \hline
+		\end{tabular}
+	}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

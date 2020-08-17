@@ -20,23 +20,19 @@ To enhance the performance of the optimizer during the training process, the col
 Furthermore, we have applied data augmentation on the dataset by flipping the images horizontally, vertically and diagonally. 
 As a result, the dataset size increased four times -- \(1900\)  images were produced.
 By doing so, we can enhance the learning process by enabling the model to learn and recognise new and different complex patterns.
-
 We have split the dataset into two portions:  \(80\%\) for the training set and \(20\%\) for the testing set.
 Moreover, a cross-validation (CV) method was applied to the training set to reduce the overfitting issue. 
-
 Fig.~\ref{fig:Cross_validation} illustrates as the CV method in which  we have applied a technique called k-fold CV.
 In this technique, we have split the training set into \(k\) small sets (folds), hence the name k-folds. 
 Therefore, we iterate over the training set k rounds.
 During each round, the model uses  \(k-1\) folds for training and the remaining fold is used for validation. 
 In our models, we choose \(k=5\), therefore, we have \(5\) rounds of training. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 For each round, we compute the performance of the model.
 Finally, we compute the cross-validation performance for all rounds as illustrated in eqn.~\ref{eq:cv_performance} as a mean value over the k performance estimations of the validation fold set.
 The main advantage of the K-fold CV method versus a regular train/test split is to reduce the overfitting by utilising data more efficiently as every data sample is used in both training and validation. 
-Therefore, using this way, we improve the model ability to generalise
+Therefore, using by using this method we aim to improve the model ability to generalise and reduce the overfitting.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{equation}
 Final \ Performance = \frac{1}{k}\sum_{i=1}^{k}Performace
 \label{eq:cv_performance}
