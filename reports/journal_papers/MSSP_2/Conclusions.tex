@@ -1,12 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this paper, we addressed delamination detection in composite materials using a deep learning technique. 
-For this purpose, we have trained an FCN-DenseNet for semantic segmentation on a numerically generated data -- simulated full wavefield of propagating guided waves.
-To see the feasibility of such a study, we have compared the deep learning model with adaptive wavenumber filtering technique.
-The results were promising, and the deep learning model surpasses the conventional technique in detecting the delaminations of different shapes, sizes and angles. 
-Further, the model can be improved by training it on new experimental data.
-It means that new patterns will be learned, hence it will enhance its ability to differentiate among various complex patterns.
-Currently, our work focuses on delamination identification, however, it can be extended to the identification of different types of damage in composite materials.
-
-In future, we are planning to implement several deep learning architectures to perform a comparative study of various deep learning models regarding delamination identification in composite materials.
+In this paper, we extend our previous work on delamination detection in composite materials using deep learning techniques. 
+For this purpose, we have trained four deep learning models: UNet, VGG16 encoder-decoder, PSPNet, and  FCN-DenseNet for semantic segmentation.
+The models were trained on a numerically generated dataset simulating a  full wavefield of propagating guided waves.
+Deep learning models show promising results in identifying various types of delaminations regarding their shapes, sizes and angles. 
+The models show good generalisation behaviour on predicting the delamination in the unseen numerically generated data.
+Moreover, the models are capable of detecting the delamination in the experimental data, and the capability detection can be further improved if the models are trained on experimental data, which allow them to learn new complex patterns.
+In this work, we are focused on delamination identification in composite materials, however, we aim to extend our work on different types of defects in composite materials.
