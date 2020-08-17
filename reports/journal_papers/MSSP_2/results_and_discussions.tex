@@ -1,99 +1,67 @@
 \section{Results and Discussions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%In this section, we are going to show some results for delamination detection in accordance with the adaptive wavenumber filtering and the FCN-DenseNet model. 
-%%	As we mentioned earlier, a sigmoid and a softmax functions are used at the output layer for our model, hence we have two versions of the FCN-DenseNet model with different output layer function.
-%	
-%The sigmoid function at the output layer of the FCN-DenseNet model computes the damage probability for each pixel, hence the damage probability ranges from (\(0 - 1\)).
-%Therefore, there is a need for a threshold function to exclude low probabilities of predicted damage. 
-%For all the following results, the threshold \(tr = 0.5\) was set, therefore any value less than \(0.5\) will be excluded from the damage map.
-%For the softmax function at the output layer, it computes two probabilities for each pixel: (damaged and undamaged), then an \(\argmax\) function is applied to select the highest probability between the two probabilities, therefore there is no need for thresholding. 
-%The FCN-DenseNet models was trained on augmented dataset up to 100 epochs, and the architecture of the FCN-DenseNet  was implemented using the open-source platform of Keras API~\cite{chollet2015keras} running on top of TensorFlow on a GeForce RTX 2080  GPU from NVIDIA.
-%For all scenarios, we selected a red colour to represent the detected delamination (damaged), and the blue colour to represent the healthy state (undamaged).
-%	
-%In the following, we are going to present three scenarios of delaminations of different locations, shapes and angles.
-%
-%Figure~\ref{fig:RMS_flat_shell_Vz_438} shows the RMS of full wavefield interpolated at the bottom surface of the plate with delamination located at the top edge of the plate.
-%Figure~\ref{fig:m1_rand_single_delam_438} shows the ground truth image corresponding to Fig.~\ref{fig:RMS_flat_shell_Vz_438}. 
-%Fig.~\ref{fig:ERMSF_flat_shell_Vz_438} shows the detected delamination using the adaptive wavenumber filtering. 
-%The damage map represents the energy-based root mean square index of frames filtered in the wavenumber domain (ERMSF). 
-%It can be seen in the damage map that the delamination is detected, but still, the method boosts edge reflections which results in some noise at the edges. 
-%To eliminate low values from the ERMSF, a binary threshold is applied as shown in Fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_438}.
-%The threshold level was selected to limit the influence of edge noise and at the same time highlight the damage. 
-%The binary ERMSF properly indicates the location of delamination but still, there is some noise at the corners.
-%It results in the calculated IoU equal (\(0.10\)).
-%In Figs.~\ref{fig:predict_438_sigmoid_tr_0.5}, ~\ref{fig:predict_438_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
-%As shown, the FCN-DenseNet models detect the delamination without any noise at the edges as the FCN-DenseNet learned the delamination patterns from the large numerically generated dataset and can differentiate among different complex patterns such as noise.   
-%The IoU = \(0.73\) for sigmoid, and IoU = \(0.65\) for the softmax.
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%first figure
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{figure} [!h]
-%		\centering
-%		\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{RMS_bottom_391.png}
-%			\caption{RMS bottom}
-%			\label{fig:RMS_flat_shell_Vz_391}
-%		\end{subfigure}
-%		\hfill
-%			\begin{subfigure}[b]{0.47\textwidth}
-%			\centering
-%			\includegraphics[scale=1.0]{ground_truth_391.png}
-%			\caption{Ground truth}
-%			\label{fig:m1_rand_single_delam_391}
-%		\end{subfigure}
-%			\caption{First delamination scenario based on numerical data.}
-%			\label{fig:RMS438}
-%	\end{figure} 
-	
-Numerical results for RMS\_448
-UNet = \(0.760\), VGG16 encoder-decoder = \(0.841\), FCN-DenseNet =\(0.757\), PSPNet = \(0.747\)
-	
-	\begin{figure} [!h]
+In this section, four deep learning models  of semantic segmentation approach including UNet, VGG16 encoder-decoder, FCN-DenseNet and PSPNet were evaluated on three damage scenarios  which were numerically generated in order to identify the delamination.
+Additionally, an experimental scenario was also used to evaluate the performance of the models to show the deep learning capabilities of generalization.
+For each model, the mean IoU is calculated and presented as a metric of comparison.
+
+In our work, all semantic segmentation models were implemented and trained with Keras API~\cite{chollet2015keras} (an open-source platform) running on top of TensorFlow on a GeForce RTX 2080 GPU from NVIDIA. 
+Moreover, for training purposes, we have used K-fold CV technique with \(k=5\), which means each model has trained for \(5\) iterations and finally the mean performance is calculated. 
+Further, for each iteration, the models were trained on the augmented dataset up to \(100\) epochs.
+
+The first delamination scenario is shown in Figure~\ref{fig:softmax_448}. 
+The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the left edge of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_448}, ~\ref{fig:m1_rand_single_delam_448} respectively. 
+In fig.~\ref{fig:unet_pred_448} we presents the predicted output of the UNet model, the IoU = \(0.760\) for this case.
+Figure~\ref{fig:vgg16_pred_448} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(0.841\). 
+Figure~\ref{fig:pspnet_pred_448} shows the predicted output of PSPNet model, the IoU =\(0.747\).
+The lase figure in the first scenario ~\ref{fig:fcn_densenet_pred_448}	show the predicted output of FCN-DenseNet model, the IoU=\(0.757\).
+\begin{figure} [!h]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{original_269.png}
-			\caption{RMS bottom}
-			\label{fig:RMS_flat_shell_Vz_448}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{GT_269.png}
-			\caption{Ground truth}
-			\label{fig:m1_rand_single_delam_448}
-		\end{subfigure}
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{unet_Pred_softmax269.png}
-			\caption{UNet}
-			\label{fig:unet_pred_448}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax269.png}
-			\caption{VGG16 encoder-decoder}
-			\label{fig:vgg16_pred_448}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{pspnet_Pred_softmax269.png}
-			\caption{PSPNet}
-			\label{fig:pspnet_pred_448}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.47\textwidth}
-			\centering
-			\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax269.png}
-			\caption{FCN-DenseNet}
-			\label{fig:fcn_densenet_pred_448}
-		\end{subfigure}
-		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet /  448}
-		\label{fig:softmax_448}
-	\end{figure} 
+		\includegraphics[scale=1.0]{RMS_448.png}
+		\caption{RMS bottom}
+		\label{fig:RMS_flat_shell_Vz_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{GT_448.png}
+		\caption{Ground truth}
+		\label{fig:m1_rand_single_delam_448}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{unet_Pred_softmax_448.png}
+		\caption{UNet}
+		\label{fig:unet_pred_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax_448.png}
+		\caption{VGG16 encoder-decoder}
+		\label{fig:vgg16_pred_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{pspnet_Pred_softmax_448.png}
+		\caption{PSPNet}
+		\label{fig:pspnet_pred_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax_448.png}
+		\caption{FCN-DenseNet}
+		\label{fig:fcn_densenet_pred_448}
+	\end{subfigure}
+	\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet /  448}
+	\label{fig:softmax_448}
+\end{figure} 
+
+The second delamination scenario is shown in Figure~\ref{fig:385_softmax}. 
+The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the upper left corner of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_385}, ~\ref{fig:m1_rand_single_delam_385} respectively. 
 
 Numerical results for RMS\_385
 UNet = \(0.691\), VGG16 encoder-decoder = \(0.770\), FCN-DenseNet =\(0.776\), PSPNet = \(0.867\)
@@ -102,94 +70,97 @@ UNet = \(0.691\), VGG16 encoder-decoder = \(0.770\), FCN-DenseNet =\(0.776\), PS
 		\centering
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{original_17.png}
+			\includegraphics[scale=1.0]{RMS_385.png}
 			\caption{RMS bottom}
 			\label{fig:RMS_flat_shell_Vz_385}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{GT_17.png}
+			\includegraphics[scale=1.0]{GT_385.png}
 			\caption{Ground truth}
 			\label{fig:m1_rand_single_delam_385}
 		\end{subfigure}
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{unet_Pred_softmax17.png}
+			\includegraphics[scale=1.0]{unet_Pred_softmax_385.png}
 			\caption{UNet}
 			\label{fig:Unet_Pred__softmax_385}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax17.png}
+			\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax_385.png}
 			\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax_385}			
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{pspnet_Pred_softmax17.png}
+			\includegraphics[scale=1.0]{pspnet_Pred_softmax_385.png}
 			\caption{PSPNet}
 			\label{fig:pspnet_pred__softmax_385}
 		\end{subfigure}	
 		\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax17.png}
+			\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax_385.png}
 			\caption{FCN-DenseNet}
 			\label{fig:fcn_densenet_pred__softmax_385}
 		\end{subfigure}	
 		\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet / 385}
-		\label{fig:391_softmax}
+		\label{fig:385_softmax}
 	\end{figure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-numerical results for RMS\_425
-UNet = \(0.790\), VGG16 encoder-decoder = \(0.815\), FCN-DenseNet =\(0.729\), PSPNet = \(0.848\)
+The third delamination scenario is shown in Figure~\ref{fig:475_softmax}. 
+The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the upper middle  of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_475}, ~\ref{fig:m1_rand_single_delam_475} respectively. 
+
+numerical results for RMS\_475
+UNet = \(0.79\), VGG16 encoder-decoder = \(0.84\), FCN-DenseNet =\(0.38\), PSPNet = \(0.80\)
 	
 \begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{original_177.png}
+		\includegraphics[scale=1.0]{RMS_475.png}
 		\caption{RMS bottom}
-		\label{fig:RMS_flat_shell_Vz_442}
+		\label{fig:RMS_flat_shell_Vz_475}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{GT_177.png}
+		\includegraphics[scale=1.0]{GT_475.png}
 		\caption{Ground truth}
-		\label{fig:m1_rand_single_delam_442}
+		\label{fig:m1_rand_single_delam_475}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{unet_Pred_softmax177.png}
+		\includegraphics[scale=1.0]{unet_Pred_softmax_475.png}
 		\caption{UNet softmax}
-		\label{fig:Unet_Pred__softmax442}
+		\label{fig:Unet_Pred__softmax_475}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax177.png}
-		\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax442}			
+		\includegraphics[scale=1.0]{vgg16_encoder_decoder_Pred_softmax_475.png}
+		\caption{VGG16 encoder-decoder softmax}			\label{fig:vgg16_pred__softmax_475}			
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{pspnet_Pred_softmax177.png}
+		\includegraphics[scale=1.0]{pspnet_Pred_softmax_475.png}
 		\caption{PSPNet softmax}
-		\label{fig:pspnet_pred__softmax442}
+		\label{fig:pspnet_pred__softmax_475}
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax177.png}
+		\includegraphics[scale=1.0]{fcn_densenet_Pred_softmax_475.png}
 		\caption{FCN-DenseNet softmax}
-		\label{fig:fcn_densenet_pred__softmax442}
+		\label{fig:fcn_densenet_pred__softmax_475}
 	\end{subfigure}	
 	\caption{UNet, Vgg16 encoder-decoder, PSPNet, FC-DenseNet /  425}
-	\label{fig:442_softmax}
+	\label{fig:475_softmax}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
