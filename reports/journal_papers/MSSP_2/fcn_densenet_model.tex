@@ -2,7 +2,7 @@
 \subsubsection{FCN-DenseNet model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 The one hundred layer tiramisu model (FCN-DenseNet) was introduced by Simon Jegou et al.~\cite{Jegou} for semantic segmentation.
-FCN-DenseNet is similar to the U-Net architecture, FC-DenseNet utilises the U-shape of the encoder-decoder scheme with skip connections between the downsampling and the upsampling paths to increase the resolution to the final feature map.
+FCN-DenseNet is similar to the U-Net architecture, FCN-DenseNet utilises the U-shape of the encoder-decoder scheme with skip connections between the downsampling and the upsampling paths to increase the resolution to the final feature map.
 %Skip connections from the downsampling path to the corresponding upsampling path are essential for recovering spatially detailed information by reusing feature maps.
 
 The main component in FCN-DenseNet is the dense block.
@@ -25,7 +25,8 @@ For the transition up layer, it was introduced in FCN-DenseNet to recover the in
 Feature maps emerging from upsampling are concatenated with the ones resulting from the skip connection forming the input to a new dense block.
 During the upsampling, the input to the dense block is not concatenated with its output to overcome the overhead of memory shortage since the upsampling path expands the spatial resolution of the feature maps.
 Table~\ref{layers} presents the architecture of a single layer, the transition down  and transition up layers in details.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[h!]
 	\renewcommand{\arraystretch}{1.3}
 	\centering
@@ -42,7 +43,7 @@ Table~\ref{layers} presents the architecture of a single layer, the transition d
 	\caption{Layer, Transition Down and Transition Up layers.} 
 	\label{layers}
 \end{table}\\
-Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
+
 \begin{figure} [h!]
 	\begin{center}
 		\includegraphics[scale= 1.0]{FCN_dense_net.png}

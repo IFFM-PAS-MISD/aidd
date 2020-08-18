@@ -1,14 +1,15 @@
-\section{Methodology}
+\section{Deep learning approaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, the numerically generated dataset is presented, then data preprocessing techniques is illustrated. Finally, we present the semantic segmentation models in details.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dataset}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In our previous work, we have explained the procedure of generating a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a plate made of carbon fibre reinforced plastic (CFRP). 
-For further explanation, you can refer to our previous work titled (Full Wavefield Processing by Using FCN for Delamination Detection).
+For further explanation, the reader is advised to refer to our previous work titled (Full Wavefield Processing by Using FCN for Delamination Detection).
 As mentioned in our previous work, we have applied the time-domain spectral element method in order to simulate Lamb wave interaction with delamination~\cite{Kudela2020}. 
 The dataset computation took about 3 months, in which the parallel code of the spectral element method was implemented to run in Tesla K20X GPU card.
 The method of splitting nodes between appropriate spectral elements was used to model every single delamination in all cases.
-In our work, the composite laminate was assumed to be made of eight layers of a total thickness of 3.9mm.
+In our work, the composite laminate was assumed to be made of eight layers of a total thickness of \(3.9\) mm.
 As shown in Fig.~\ref{fig:plate_setup} the delamination was modelled between the third and the fourth layer.
 
 
