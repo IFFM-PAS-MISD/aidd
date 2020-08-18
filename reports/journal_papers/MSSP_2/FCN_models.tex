@@ -10,7 +10,7 @@ Each convolutional layer performs (\(3\times3\)) convolution operations, followe
 Furthermore, to enhance the model training performance we applied batch normalization (BN)~\cite{Ioffe2015} after each convolutional layer.
 Moreover, the number of convolutional filters is doubled after each downsampling block therefore the model can learn complex patterns effectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The bottleneck layer is located between the encoder and the decoder as a joining point is the deepest layer in the model.
+The bottleneck layer lies in between the encoder and the decoder as a joining point is the deepest layer in the model.
 The bottleneck contains two convolutional layers, with 256 filters which helps the model to learn and recognize the complex patterns.
 %It composed of two (\(3\times3\)) convolution layers followed by (\(2\times2\)) up convolution layer (Transpose convolution).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
