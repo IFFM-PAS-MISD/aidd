@@ -1,6 +1,6 @@
 \subsubsection{U-Net model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-U-Net is a well-known architecture based on encoder-decoder scheme was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation. 
+U-Net is a well-known architecture based on encoder-decoder scheme which was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation. 
 The principle function of the encoder is to capture the context of an input image, while the decoder is responsible for enabling a precise localisation. 
 %U-net is composed of three parts: The downsampling section, The bottleneck, and the upsampling section. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -10,7 +10,7 @@ Each convolutional layer performs (\(3\times3\)) convolution operations, followe
 Furthermore, to enhance the model training performance we applied batch normalization (BN)~\cite{Ioffe2015} after each convolutional layer.
 Moreover, the number of convolutional filters is doubled after each downsampling block therefore the model can learn complex patterns effectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The bottleneck layer meddles between the encoder and the decoder as a joining point is the deepest layer in the model.
+The bottleneck layer lies in between the encoder and the decoder as a joining point is the deepest layer in the model.
 The bottleneck contains two convolutional layers, with 256 filters which helps the model to learn and recognize the complex patterns.
 %It composed of two (\(3\times3\)) convolution layers followed by (\(2\times2\)) up convolution layer (Transpose convolution).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,16 +30,17 @@ Therefore, the model ensures that the feature maps which were learned during the
 	\label{fig:Unet}
 \end{figure}
 Fig.~\ref{fig:Unet}  illustrates the network architecture. 
-The encoder is on the left side in which the downsampling is performed and the decoder is on the right side where the upsampling is performed in addition to the bottleneck where is join both sides.
+The encoder is on the left side in which the downsampling is performed and the decoder is on the right side where the upsampling is performed in addition to the bottleneck where it joins both sides.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{VGG16 encoder-decoder}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this model, we address the use of VGG16 architecture  ~\cite{simonyan2014very} as a backbone encoder to the U-Net architecture.
 VGG16 is composed of 13 convolutional layers, pooling layers and dense layers, and it is used for classification purposes. 
 We applied VGG16 encoder-decoder for pixel-wise image segmentation.
+
 Figure~\ref{vgg16} presents the architecture of VGG16 encoder-decoder model. 
 The model consists of two parts: downsampling and upsampling.
-The downsampling path consists of \(5\) convolutional blocks,  with a total \(13\) convolutional layers  with \enquote{same} padding with a kernel size (\(3\times3\))and 32 filters for each layer, followed by BN and activation function Relu.
+The downsampling path consists of \(5\) convolutional blocks with a total \(13\) convolutional layers  with \enquote{same} padding with a kernel size (\(3\times3\)) and 32 filters for each layer, followed by BN and activation function Relu.
 Each convolutional layer is responsible for extracting high level features from the input image such as edges.
 A Maxpool operation with pool size of (\(2\times2\))  and (\(2\times2\)) strides followed by dropout is performed after each convolutional block. 
 The upsampling path is introduced to recover spatial resolution, it also has \(5\) convolutional blocks with a total \(13\) convolutional layers  with same padding and kernel size (\(3\times3\))and 32 filters for each layer, followed by BN and activation function Relu.

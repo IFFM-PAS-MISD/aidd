@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Methodology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The main purpose of utilizing deep learning methods is to perform the feature extraction process automatically through feeding the models the full wavefield images.
+The main purpose of utilising deep learning methods is to perform the feature extraction process automatically through feeding the models the full wavefield images.
 Therefore, the models will learn by themself to recognise different and complex patterns, consequently identify the delamination. 
-In this work, we have done a comparative study among several deep learning models based on fully convolutional networks (FCN)~\cite{shelhamer2017fully} that aim to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
+In this work, we have performed a comparative study among several deep learning models based on fully convolutional networks (FCN)~\cite{shelhamer2017fully} that aim to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
 
 FCN is built by stacking convolutional layers in an encoder-decoder scheme, therefore, dense layers are not included in FCN models. 
 The idea behind the encoder is to extract condensed feature maps of the input image through downsampling that is performed by applying several convolutions with strides.
@@ -11,10 +11,10 @@ The decoder part is responsible for upsampling the condensed features maps to th
 
 %In order to reduce overfitting in the models, some techniques were applied such as adding dropouts to layers and batch normalization in addition to early mentioned Kfold CV method.
 
-For all implemented models in this comparative study, we have used a softmax activation function at the output layer.
+For all implemented models in this comparative study, a softmax activation function is used at the output layer.
 The softmax function computes the probability of the damaged and undamaged occurrence for every single pixel.
 Consequently, the sum of the two probabilities must be one. 
-Eq.~(\ref{softmax}) illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
+Eqn.~(\ref{softmax}) illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
 To predict the label of the detected output (\(y_{pred}\)) that represent the damaged and undamaged probabilities, an \(\argmax\) function is applied to select the maximum probability between both of them.
 	\begin{equation}
 		P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
@@ -25,8 +25,8 @@ To predict the label of the detected output (\(y_{pred}\)) that represent the da
 		\label{argmax}
 	\end{equation}
 In deep learning models, choosing a suitable loss function is an important task because it measures how good the model is performing.
-In our implemented models, we have applied the categorical cross-entropy loss function, which is also called \enquote{softmax loss function}.
-Eq.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the softmax value of the target class. 
+In our implemented models, we have applied the categorical cross-entropy (CCE) loss function, which is also called \enquote{softmax loss function}.
+Eqn.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the softmax value of the target class. 
 	\begin{equation}
 	CCE = -\log\left( P(x)_{i} \right)
 	\label{CCE}
@@ -39,7 +39,7 @@ The IoU metric is defined as:
 IoU = \frac{Intersection}{Union} = \frac{\hat{Y} \cap Y}{\hat{Y} \cup Y} 
 \label{IoU}
 \end{equation}
-The IoU can be calculated by multiplying the predicted output with its ground truth value to find the intersection, and it divided over the union which can be calculated by counting all pixel values greater than zero of the predicted output and its ground truth.
+The IoU can be calculated by multiplying the predicted output with its ground truth value to find the intersection, then it is divided over the union which can be calculated by counting all pixel values greater than zero of the predicted output and its ground truth.
 %As we mentioned earlier the ground truth values are either \((0\) or \(1)\) thus only the predicted values larger than \(0\) multiplied by their ground truth label \(1\) will be counted, the rest values will equal to \(0\). 
 %The union can be calculated by summing all values in both the predicted and the ground truth  vectors, then we subtract the intersection from their sum.
 In order to increase the IoU and to reduce the loss during the training, we have applied Adam optimizer which is considered as a combination of RMSprop and stochastic gradient descent (SGD)~\cite{Kingma2015}. 
