@@ -1,4 +1,4 @@
-\subsubsection{U-Net model}
+\subsection{U-Net model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 U-Net is a well-known architecture based on encoder-decoder scheme which was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation. 
 The principle function of the encoder is to capture the context of an input image, while the decoder is responsible for enabling a precise localisation. 
@@ -32,7 +32,7 @@ Therefore, the model ensures that the feature maps which were learned during the
 Fig.~\ref{fig:Unet}  illustrates the network architecture. 
 The encoder is on the left side in which the downsampling is performed and the decoder is on the right side where the upsampling is performed in addition to the bottleneck where it joins both sides.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{VGG16 encoder-decoder}
+\subsection{VGG16 encoder-decoder}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this model, we address the use of VGG16 architecture  ~\cite{simonyan2014very} as a backbone encoder to the U-Net architecture.
 VGG16 is composed of 13 convolutional layers, pooling layers and dense layers, and it is used for classification purposes. 
