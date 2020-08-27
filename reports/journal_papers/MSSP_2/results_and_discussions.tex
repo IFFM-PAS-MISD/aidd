@@ -1,6 +1,6 @@
 \section{Results and Discussions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this section, four deep learning models  of semantic segmentation approach including U-Net, VGG16 encoder-decoder, FCN-DenseNet and PSPNet were evaluated on three damage scenarios  which were numerically generated in order to identify the delamination.
+In this section, four deep learning models  of semantic segmentation approach including U-Net, VGG16 encoder-decoder, FCN-DenseNet and PSPNet were evaluated on exemplary three damage scenarios  which were numerically generated in order to identify the delamination.
 Additionally, an experimental scenario was also used to evaluate the performance of the models to show the deep learning capabilities of generalization.
 For each model, the mean IoU is calculated and presented as a metric of comparison.
 
@@ -9,12 +9,14 @@ Moreover, for training purposes, we have used K-fold CV technique with \(k=5\), 
 Further, for each iteration, the models were trained on the augmented dataset up to \(100\) epochs.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The first delamination scenario is shown in fig.~\ref{fig:softmax_448}. 
-The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the left edge of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_448}, ~\ref{fig:m1_rand_single_delam_448} respectively. 
-In fig.~\ref{fig:unet_pred_448} we presents the predicted output of the U-Net model, the IoU = \(0.760\) for this case.
-Figure~\ref{fig:vgg16_pred_448} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(0.841\). 
-Figure~\ref{fig:pspnet_pred_448} shows the predicted output of PSPNet model, the IoU =\(0.747\).
-The last figure in the first scenario fig.~\ref{fig:fcn_densenet_pred_448}	show the predicted output of FCN-DenseNet model, the IoU=\(0.757\).
+The first delamination scenario is shown in Fig.~\ref{fig:softmax_448}. 
+The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the left edge of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_448}, ~\ref{fig:m1_rand_single_delam_448} respectively. 
+In Fig.~\ref{fig:unet_pred_448} we presents the predicted output of the U-Net model, the IoU = \(76.0\%\) for this case.
+Figure~\ref{fig:vgg16_pred_448} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(84.1\%\). 
+Figure~\ref{fig:pspnet_pred_448} shows the predicted output of PSPNet model, the IoU =\(74.7\%\).
+The last figure in the first scenario Fig.~\ref{fig:fcn_densenet_pred_448}	show the predicted output of FCN-DenseNet model, the IoU=\(75.7\%\). 
+As presented in Figs.~\ref{fig:unet_pred_448}-\ref{fig:fcn_densenet_pred_448} all models are capable of identifying the delamination in the RMS input image with different IoU value for each model. 
+In this scenario, VGG16 encode-decoder model predicted the delamination with the highest IoU value.
 \begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -60,15 +62,16 @@ The last figure in the first scenario fig.~\ref{fig:fcn_densenet_pred_448}	show 
 	\caption{First scenario: U-Net, VGG16 encoder-decoder, PSPNet, FC-DenseNet}
 	\label{fig:softmax_448}
 \end{figure} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The second delamination scenario is shown in Figure~\ref{fig:385_softmax}. 
-The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the upper left corner of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_385}, ~\ref{fig:m1_rand_single_delam_385} respectively. 
-In fig.~\ref{fig:Unet_Pred__softmax_385} we presents the predicted output of the U-Net model, the IoU = \(0.691\) for this case.
-Figure~\ref{fig:vgg16_pred__softmax_385} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(0.770\). 
-Figure~\ref{fig:pspnet_pred__softmax_385} shows the predicted output of PSPNet model, the IoU =\(0.867\).
-The last figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_385}	shows the predicted output of FCN-DenseNet model, the IoU= \(0.776\).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The second delamination scenario is shown in Fig.~\ref{fig:385_softmax}. 
+The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located at the upper left corner of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385}, ~\ref{fig:m1_rand_single_delam_385} respectively. 
+In Fig.~\ref{fig:Unet_Pred__softmax_385} we presents the predicted output of the U-Net model, the IoU = \(69.1\%\) for this case.
+Figure~\ref{fig:vgg16_pred__softmax_385} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(77.0\%\). 
+Figure~\ref{fig:pspnet_pred__softmax_385} shows the predicted output of PSPNet model, the IoU =\(86.7\%\).
+The last figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_385}	shows the predicted output of FCN-DenseNet model, the IoU= \(77.6\%\). 
+Furthermore, in this scenario, PSPNet has the highest IoU value among the models.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -113,15 +116,17 @@ The last figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_385}	
 	\caption{Second scenario: U-Net, VGG16 encoder-decoder, PSPNet, FC-DenseNet}
 	\label{fig:385_softmax}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The third delamination scenario is shown in Figure~\ref{fig:475_softmax}. 
-The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the upper middle  of the plate and its corresponding ground truth image are shown in fig.~\ref{fig:RMS_flat_shell_Vz_475} and ~\ref{fig:m1_rand_single_delam_475} respectively. 
-In fig.~\ref{fig:Unet_Pred__softmax_475} we presents the predicted output of the U-Net model, the IoU = \(0.79\) for this case.
-Figure~\ref{fig:vgg16_pred__softmax_475} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(0.84\). 
-Figure~\ref{fig:pspnet_pred__softmax_475} shows the predicted output of PSPNet model, the IoU =\(0.80\).
-The lase figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_475}	show the predicted output of FCN-DenseNet model, the IoU= \(0.38\).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The RMS of the full wavefield interpolated at the bottom surface of the plate with a delamination located the upper middle  of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_475} and ~\ref{fig:m1_rand_single_delam_475} respectively. 
+In Fig.~\ref{fig:Unet_Pred__softmax_475} we presents the predicted output of the U-Net model, the IoU = \(79.0\%\) for this case.
+Figure~\ref{fig:vgg16_pred__softmax_475} show the predicted output of the VGG16 encoder-decoder model, and the IoU = \(84.0\%\). 
+Figure~\ref{fig:pspnet_pred__softmax_475} shows the predicted output of PSPNet model, the IoU =\(80.0\%\).
+The last figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_475} show the predicted output of FCN-DenseNet model, the IoU= \(38.0\%\).
+As we can see in Figs.~\ref{fig:Unet_Pred__softmax_475}-\ref{fig:fcn_densenet_pred__softmax_475} all models are able to identify the delamination, however, the IoU values varies among the models, we can see that the VGG16 encoder-decoder has the highest IoU value, while FCN-DenseNet has the lowest IoU value.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -166,14 +171,14 @@ The lase figure in the first scenario ~\ref{fig:fcn_densenet_pred__softmax_475}	
 	\caption{Third scenario: U-Net, VGG16 encoder-decoder, PSPNet, FC-DenseNet}
 	\label{fig:475_softmax}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Figure.~\ref{fig:Exp_ERMS_teflon}, shows an experimental scenario of CFRP with Teflon insert as artificial delamination.
+The next scenario represents an experimental scenario of CFRP with Teflon insert as artificial delamination shown in Fig.~\ref{fig:Exp_ERMS_teflon}.
 Similar to the numerically generated cases, we applied a frequency of \(50\) kHz to excite the transducer which we placed at the centre of the plate.
 Figures~(\ref{fig:unet_exp_7_} - \ref{fig:fcn_densenet_exp}) shows the predicted outputs of U-Net, VGG16 encoder-decoder, PSPNet and FCN-DenseNet models receptively.
 As shown, the models are capable of detecting and identifying the delamination. 
-The U-Net model detect the delamination with IoU = \(0.082\), the VGG16 encoder-decoder IoU  = \(0.550\), the PSPNet IoU =\(0.425\), and the FCN-DenseNet IoU =\(0.250\).
-We can see that the models can identify the delamination despite predicted noise, this indicates that the models are capable to generalise and detect the delamination on previously unseen data. 
+The U-Net model detect the delamination with IoU = \(8.2\%\), the VGG16 encoder-decoder IoU  = \(55.0\%\), the PSPNet IoU =\(42.5\%\), and the FCN-DenseNet IoU =\(25.0\%\).
+We can see that the models can identify the delamination despite the noise, this indicates that the models are capable to generalise and detect the delamination on previously unseen data. 
 Since our models were only trained on the numerically generated data we expect the models will show great generalisation capability, and their performance can be improved when training on experimental data besides the numerical data. 
 \begin{figure} [!h]
 	\centering
@@ -221,11 +226,11 @@ Since our models were only trained on the numerically generated data we expect t
 		\caption{Experimental results}
 		\label{fig:Exp_ERMS_teflon}
 	\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In table~\ref{tab:table_iou}, we presents the maximum and the mean value of IoU for the U-Net, VGG16 encoder-decoder, PSPNet and FCN-DenseNet models.
-As shown from the table~\ref{tab:table_iou}, all models have a relatively high IoU, which means their ability to detect and localise the delamination which is relatively high compared to the traditional techniques as wavenumber filtering which we have already performed in our previous work in which we compared wavenumber filtering with FCN-DenseNet to detect delamination in composite materials.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In table~\ref{tab:table_iou}, we presents the maximum and the mean value of IoU for the U-Net, VGG16 encoder-decoder, PSPNet and FCN-DenseNet models calculated for 380 cases.
+As shown from Table~\ref{tab:table_iou}, all models have a relatively high IoU, which means their ability to detect and localise the delamination which is relatively high compared to the traditional signal processing techniques such as the adaptive wavenumber filtering which we have already performed in our previous work entitled (Full Wavefield Processing by Using FCN for Delamination Detection) in which we compared wavenumber filtering with FCN-DenseNet to detect delamination in composite materials and showed that the FCN-DenseNet outperform it.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
 	\caption{}
@@ -233,19 +238,19 @@ As shown from the table~\ref{tab:table_iou}, all models have a relatively high I
 	\begin{tabular}{ccc}
 		\multicolumn{3}{c}{Intersection over Union} \\ \hline
 		& mean & max \\ \hline
-		U-Net & 0.67 & 0.93 \\ \hline
-		VGG16 encoder-decoder & 0.66 & 0.90 \\ \hline
-		FCN-DenseNet & 0.52 & 0.82 \\ \hline
-		PSPNet & 0.66 & 0.93 \\ \hline
+		U-Net & \(66.98\%\) & \(92.61\%\) \\ \hline
+		VGG16 encoder-decoder & \(65.78\%\) & \(89.86\%\) \\ \hline
+		FCN-DenseNet & \(51.73\%\) & \(82.46\%\) \\ \hline
+		PSPNet & \(65.99\%\) & \(93.37\%\) \\ \hline
 	\end{tabular}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The total number of parameters in any deep learning model is a sum of the trainable parameters (e.g weights of a convolution filters) and non-trainable parameters (biases and  pooling filters).
 Trainable parameters are continuously updated until we reach the minimum loss value while the non-trainable parameters are not changed during the whole training process.
-The total number of parameters can reflect the model's complexity, hence, it can be noted that as the total parameters increases the requiring time for training increases.
-Table~\ref{tab:table_parameters} shows the total number of parameters for all our implemented models.
-%However, the total number of parameters of a model does not reflect its performance, as shown in table~\ref{tab:table_iou} PSPNet model has less parameters than UNet model
+The total number of parameters can reflect the complexity of the model.
+It can be noted that as the total parameters increases the requiring time for training increases.
+Table~\ref{tab:table_parameters} shows the total number of parameters for all implemented models.
+We can conclude that the total number of parameters of a model does not directly reflect its performance,hence the performance mainly depends on the architecture of the model. 
 \begin{table}[]
 	\centering
 	\caption{}
@@ -264,5 +269,4 @@ Table~\ref{tab:table_parameters} shows the total number of parameters for all ou
 \end{table}
 
 \label{section:results_and_discussions}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

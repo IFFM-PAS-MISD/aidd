@@ -1,27 +1,29 @@
 \subsection{U-Net model}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 U-Net is a well-known architecture based on encoder-decoder scheme which was introduced by Ronneberger et al.~\cite{Ronneberger2015} for biomedical image segmentation. 
 The principle function of the encoder is to capture the context of an input image, while the decoder is responsible for enabling a precise localisation. 
+The applied U-Net architecture is presented in Fig.~\ref{fig:Unet}.
 %U-net is composed of three parts: The downsampling section, The bottleneck, and the upsampling section. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The encoder part holds several downsampling blocks. 
-Each block takes an input applies two convolutional layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides that picks the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, consequently, reducing computation complexity.
+Each block takes an input, applies two convolutional layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides that picks the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, consequently, reducing computation complexity.
 Each convolutional layer performs (\(3\times3\)) convolution operations, followed by Relu activation function.
 Furthermore, to enhance the model training performance we applied batch normalization (BN)~\cite{Ioffe2015} after each convolutional layer.
 Moreover, the number of convolutional filters is doubled after each downsampling block therefore the model can learn complex patterns effectively. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The bottleneck layer lies in between the encoder and the decoder as a joining point is the deepest layer in the model.
 The bottleneck contains two convolutional layers, with 256 filters which helps the model to learn and recognize the complex patterns.
 %It composed of two (\(3\times3\)) convolution layers followed by (\(2\times2\)) up convolution layer (Transpose convolution).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The decoder consists of several upsampling blocks. 
-Each upsampling block passes the input into two convolution layers as in the downsampling block followed by a transmission up layer consists of a transposed convolutional layer (upsampling). 
+Each upsampling block passes the input into two convolution layers as in the downsampling block followed by a transmission up layer consisting of a transposed convolutional layer (upsampling). 
 The purpose of upsampling is to retrieve the dimensions and increase the resolution.
 Transposed convolutional layer differs from the regular upsampling function, by introducing learnable parameters regarding the transposed convolution filters that enhance the learning process of the model. 
-Moreover, after each upsampling operation, the number of feature maps used by convolutional layer reduced by half to keep the model symmetrical. 
-Further, skip connections were added by appending feature maps of the downsampling block with the corresponding upsampling block to retrieve lost spatial information during the downsampling due to the reduction of the input resolution.
+Moreover, after each upsampling operation, the number of feature maps used by convolutional layer is reduced by half to keep the model symmetrical. 
+Further, skip connections were added by appending feature maps of the downsampling block with the corresponding upsampling block to retrieve lost spatial information during the downsampling.
 Therefore, the model ensures that the feature maps which were learned during the downsampling will be utilized in the reconstruction. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The encoder is on the left side in which the downsampling is performed and the decoder is on the right side where the upsampling is performed in addition to the bottleneck where it joins both sides.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
 		\includegraphics[scale= 0.8]{Unet_model.png}
@@ -29,8 +31,7 @@ Therefore, the model ensures that the feature maps which were learned during the
 	\caption{U-Net architecture.} 
 	\label{fig:Unet}
 \end{figure}
-Fig.~\ref{fig:Unet}  illustrates the network architecture. 
-The encoder is on the left side in which the downsampling is performed and the decoder is on the right side where the upsampling is performed in addition to the bottleneck where it joins both sides.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{VGG16 encoder-decoder}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
