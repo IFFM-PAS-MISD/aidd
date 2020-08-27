@@ -33,7 +33,7 @@ Eqn.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the softmax value o
 	\label{CCE}
 	\end{equation}
 
-Additionally, it is also important to select a proper accuracy metric of the model, therefore, we have applied intersection over union (IoU) also known as \emph{Jaccard Index} as our accuracy metric. 
+Additionally, it is also important to select a proper accuracy metric of the model, therefore, we have applied intersection over union (IoU) as our accuracy metric. 
 IoU is estimated by determining the intersection area between the ground truth and the predicted output as shown in Fig.~\ref{fig:iou}.
 \begin{figure}
 	\centering
@@ -51,7 +51,7 @@ Where \(\hat{Y}\) represents the predicted vector of damaged and undamaged value
 The IoU can be calculated by multiplying the predicted output with its ground truth value to find the intersection, then it is divided over the union which can be calculated by counting all pixel values greater than zero of the predicted output and its ground truth.
 %As we mentioned earlier the ground truth values are either \((0\) or \(1)\) thus only the predicted values larger than \(0\) multiplied by their ground truth label \(1\) will be counted, the rest values will equal to \(0\). 
 %The union can be calculated by summing all values in both the predicted and the ground truth  vectors, then we subtract the intersection from their sum.
-In this work, Adam optimizer was applied as our optimization function in order to increase the IoU and to reduce the loss during the training.
+Furthermore, Adam optimizer was applied as our optimization function in order to increase the IoU and to reduce the loss during the training.
 %The purpose of the optimizer is to change the learnable parameters such as the weights of the filters and biases in a way the loss is reduced and the accuracy metric is increased.
 
 In the next subsections, we present four FCN models for pixel-wise semantic segmentation to detect and localise delaminations.
