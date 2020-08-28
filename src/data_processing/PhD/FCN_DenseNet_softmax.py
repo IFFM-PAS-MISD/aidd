@@ -326,8 +326,8 @@ for train_index, test_index in KFold(n_split, shuffle=True, random_state=49).spl
             'size': 11}
     plt.rc('font', **font)
     ####################################################################################################################
-    plt.plot(history.history['iou_metric'], label='Training iou')
-    plt.plot(history.history['val_iou_metric'], label='validation iou')
+    plt.plot(history.history['iou_coef'], label='Training iou')
+    plt.plot(history.history['val_iou_coef'], label='validation iou')
     plt.legend()
     plt.savefig(
         'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_iou_per_epochs_softmax_iou_coef_jaccard_index')
