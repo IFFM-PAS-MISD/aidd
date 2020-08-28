@@ -5,19 +5,19 @@ Composite materials are very prone to various kinds of defects such as cracks, f
 Among these defects, delamination is one of the most hazardous, which essentially leads to very catastrophic failures if not detected at early stages~\cite{valdes1999delamination}. 
 Therefore, it is essential to effectively identify the delamination in composite structures for safe and reliable implementation in various real-world applications.  
 Accordingly, different types of Structural Health Monitoring (SHM) techniques have been developed for delamination detection in composite structures. 
-Recently, guided Lamb waves based SHM gained high popularity for damage detection in composite structures due to their higher sensitivity to small defects, propagation with low attenuation, and potential to monitor large areas with low-voltage and only a small number of sparsely distributed transducers~\cite{alleyne1992interaction, giurgiutiu2003lamb, ihn2008pitch, mitra2016guided}. 
+Recently, guided Lamb waves based SHM gained high popularity for damage detection in composite structures due to their higher sensitivity to small defects, propagation with low attenuation, and potential to monitor large areas with low-voltage and only a small number of sparsely distributed transducers~\cite{alleyne1992interaction, giurgiutiu2003lamb, Ihn2008, mitra2016guided}. 
 However, utilising a smaller number of transducers are not suitable for acquiring high-quality resolution damage maps. 
-Moreover, the employment of a very dense array of transducers is not feasible in most situations. 
+On the other hand, the employment of a very dense array of transducers is not feasible in most situations. 
 For alleviating such problem Scanning Laser Doppler Vibrometer (SLDV) is employed. 
 SLDV is capable to measure guided Lamb waves in a very dense grid of points over the surface of a large specimen. 
-This collection of signals is known as full wavefield~\cite{radzienski2019damage}. 
-Damage detection techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{girolamo2018impact, kudela2018impact}. From the last few years, full wavefield signals are continually being assessed for the detection and localisation of defects in composite structures~\cite{sohn2011delamination, sohn2011automated, rogge2013characterization, kudela2018impact, radzienski2019damage}.
+This collection of signals is known as full wavefield~\cite{Radzienski2019a}. 
+Damage detection techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{Girolamo2018a, kudela2018impact}. From the last few years, full wavefield signals are continually being assessed for the detection and localisation of defects in composite structures~\cite{Radzienski2019a, kudela2018impact, sohn2011delamination, sohn2011automated, rogge2013characterization}.
 
-Currently, guided-wave based damage detection techniques are employing various physics and classical machine learning-based methods. 
+Currently, guided waves based damage detection techniques are employing various physics and classical machine learning-based methods. 
 These structural damage detection approaches are composed of two processes: feature extraction and feature classification. 
 The feature extraction process usually needs a great deal of human labour and computational effort that prevents these techniques of being applicable in real-time SHM utilisation. 
 Further, such systems also need a notable amount of expertise from the practitioner, which is very difficult to be always available.
-Moreover, in many situations, the extracted handcrafted features by these techniques may fail to precisely characterise the acquired signal that leads to poor classification performance~\cite{zhao2019deep, yuan2020machine}. 
+Moreover, in many situations, the extracted handcrafted features by these techniques may fail to precisely characterise the acquired signal that leads to poor classification performance~\cite{Zhao2019b, Yuan2020}. 
 Additionally, these systems are also not suitable for modelling large-scale data.
 
 Recently, deep learning originated from Artificial Neural Network (ANN) has shown promising results in various domains such as computer vision, object detection, speech recognition, remote sensing, medical sciences and many more~\cite{deng2014deep, mohanty2016using, zhang2020well, pashaei2020review}. 
@@ -34,7 +34,7 @@ Furthermore, semantic image segmentation not only depends on the semantics in th
 Deep learning-based systems intend to derive hierarchical representations from the input data via constructing deep neural networks by multiple layers of non-linear transformations. 
 In deep learning architectures, the output of one layer act as the input to the other subsequent layer. 
 The application of one layer in deep learning acquires a new representation of the input data, then, the stacking of many layers enables the model to learn complex patterns from the simple notions that can be formed from raw input. 
-Therefore, these systems do not need extensive human labour and knowledge for hand-crafted feature design~\cite{zhao2019deep, yuan2020machine}.
+Therefore, these systems do not need extensive human labour and knowledge for hand-crafted feature design~\cite{Zhao2019b, Yuan2020}.
 
 Deep learning techniques have widely been utilised for the inspection and maintenance of civil infrastructures and has shown very promising results ~\cite{cha2017deep, lin2017structural, liu2019computer}. 
 However, deep learning is still less explored for delamination detection in composite materials.   
@@ -61,19 +61,19 @@ They also developed an Intelligent Signal Processing and Pattern Recognition (IS
 The DPD is then employed offline for training the neural network. 
 They validated their approach with identifying actual delamination in different composites and also proved that their system has achieved excellent quantitative diagnosis results for different damage parameters such as the presence, location, orientation and geometry of defects.
 
-Furthermore, researchers in~\cite{hussaintemporal,melville2018structural,keshmiri2019deep}  have applied deep ANN for the detection and localisation of damage in composite materials using Lamb waves:
-Hussain et al.~\cite{hussaintemporal} proposed a Temporal Convolutional Network (TCN) based transfer learning system for delamination prediction in CFRP cross-ply laminates. They employed a CFRP dataset from NASA which is composed of signals from Lamb waves sensors and X-ray images of specimens for capturing the propagation of defects in carbon fiber composite under fatigue loading. 
-The TCN model was trained with various combinations of lengths of the sensors signals and different frequencies at which Lamb wave signals were sensed. 
-They demonstrated that their approach needs very little time for the training and can also predict the delamination on a new composite coupon by utilising only a few samples of the test coupon. 
-Melville et al.~\cite{melville2018structural} applied SVM and deep learning techniques for damage detection on full wavefield signals of ultrasonic guided wave images. The wavefield data was acquired via a laser Doppler vibrometer and piezoelectric actuators on thin metal plates. 
+Furthermore, researchers in~\cite{Melville2018,esfandabadideep}  have applied deep ANN for the detection and localisation of damage in composite materials using Lamb waves:
+%Hussain et al.~\cite{hussaintemporal} proposed a Temporal Convolutional Network (TCN) based transfer learning system for delamination prediction in CFRP cross-ply laminates. They employed a CFRP dataset from NASA which is composed of signals from Lamb waves sensors and X-ray images of specimens for capturing the propagation of defects in carbon fiber composite under fatigue loading. 
+%The TCN model was trained with various combinations of lengths of the sensors signals and different frequencies at which Lamb wave signals were sensed. 
+%They demonstrated that their approach needs very little time for the training and can also predict the delamination on a new composite coupon by utilising only a few samples of the test coupon. 
+Melville et al.~\cite{Melville2018} applied SVM and deep learning techniques for damage detection on full wavefield signals of ultrasonic guided wave images. The wavefield data was acquired via a laser Doppler vibrometer and piezoelectric actuators on thin metal plates. 
 They showed that the deep learning methods achieved quite better damage prediction results as compared to the SVM based methods. 
-Esfandabadi et al.~\cite{keshmiri2019deep} investigated the applications of super-resolution techniques to acquire high-resolution wavefields via the training of neural networks on different aluminum and CFRP plates. 
+Esfandabadi et al.~\cite{esfandabadideep} investigated the applications of super-resolution techniques to acquire high-resolution wavefields via the training of neural networks on different aluminum and CFRP plates. 
 They applied two variants of CNN architecture: Super-Resolution Convolutional Neural Networks (SRCNNs) and Very-Deep Super Resolution (VDSR) with compressive sensing for the recovery of high spatial frequency information from low-resolution wavefield images.           
 
-Reader is advised to refer to our previous work entitled (Full Wavefield Processing by Using FCN for Delamination Detection) (under review) since for our knowledge it was the first work of using full wavefield images in delamination detection in composite materials using deep learning techniques. 
-In this work, we have implemented four different deep learning based semantic segmentation models for delamination detection in composite materials.
-The models were validated on numerical and experimental data in order to show their ability to generalise.
-The models were compared based on their Intersection over Union (IoU) and the total number of parameters.
+The reader is advised to refer to our previous work entitled (Full Wavefield Processing by Using FCN for Delamination Detection) (under review). Since, for our knowledge, it was the first work of using full wavefield images in delamination detection in composite materials using deep learning techniques. 
+In this work, we have implemented four different deep learning-based semantic segmentation models for delamination detection in composite materials.
+The models were validated on numerical and experimental data to show their ability to generalise.
+Further, the models were compared based on Intersection over Union (IoU) and the total number of parameters.
 
 The paper is organised as follows, the acquisition and preprocessing of the required data are presented in section~\ref{section:Data_acquisition_and_preprocessing}.
 In section~\ref{section:semantic_segmentation} the semantic segmentation models used for delamination detection were illustrated in details. 

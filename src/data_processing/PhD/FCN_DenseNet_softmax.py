@@ -226,7 +226,7 @@ def DenseNet_Model(DB_Num):
     ####################################################################################################################
     segment_model.compile(optimizer='adam',
                           loss=keras.losses.categorical_crossentropy,
-                          metrics=[iou_coef])
+                          metrics=[iou_metric])
     ####################################################################################################################
     return segment_model
 
@@ -315,7 +315,7 @@ for train_index, test_index in KFold(n_split, shuffle=True, random_state=49).spl
     plt.plot(history.history['val_loss'], label='validation loss')
     plt.legend()
     plt.savefig(
-        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_loss_per_epochs_softmax_iou_coef_jaccard_index')
+        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_loss_per_epochs_softmax')
     plt.close('all')
     gc.collect()
 
@@ -326,16 +326,16 @@ for train_index, test_index in KFold(n_split, shuffle=True, random_state=49).spl
             'size': 11}
     plt.rc('font', **font)
     ####################################################################################################################
-    plt.plot(history.history['iou_coef'], label='Training iou')
-    plt.plot(history.history['val_iou_coef'], label='validation iou')
+    plt.plot(history.history['iou_metric'], label='Training iou')
+    plt.plot(history.history['val_iou_metric'], label='validation iou')
     plt.legend()
     plt.savefig(
-        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_iou_per_epochs_softmax_iou_coef_jaccard_index')
+        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_iou_per_epochs_softmax')
     gc.collect()
 
     plt.close('all')
     gc.collect()
-    model_kfold.save('E:/aidd_new/aidd/reports/figures/comparative_study/h5_models/fcn_densenet_kfold_softmax_iou_coef_jaccard_index.h5')
+    model_kfold.save('E:/aidd_new/aidd/reports/figures/comparative_study/h5_models/fcn_densenet_kfold_softmax.h5')
     gc.collect()
 
 # model.save('E:/backup/models/FCN_DenseNet_models/Softmax/FCN_softmax_100_epoches.h5')
