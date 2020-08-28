@@ -55,16 +55,13 @@ For each case, the Lamb wave response was then transformed into a scalar novelty
 These novelty indices of 28 sensor paths were then provided as input to the MLP classification and regression architectures. 
 For the classification of damaged and undamaged regions of the panel, the MLP classificier was employed, whereas the MLP regressor was used for evaluating the accurate location of damage on the panel. 
 They achieved quite good results with both the classifier and regressor. 
-The classification accuracy of their MLP based classifier was 88.1\% on the test data while the Mean Square Error (MSE) value of the regerssor was 3.1\% on the unseen data. Su and Ye~\cite{su2004lamb} presented a Lamb wave based delamination identification technique in composite structures with the use of wavelet transform and multi-layer feedforward ANN architecture. 
+Su and Ye~\cite{su2004lamb} presented a Lamb wave based delamination identification technique in composite structures with the use of wavelet transform and multi-layer feedforward ANN architecture. 
 The ANN was employed with the error-backpropagation (BP) algorithm. 
 They also developed an Intelligent Signal Processing and Pattern Recognition (ISPPR) package for the extraction and digitisation of spectrographic characterisitics of simulated Lamb waves in the time-frequency domain, which is known as Digital Damage Fingerprints (DOF) and is used for constructing a Damage Parameters Database (DPD). 
 The DPD is then employed offline for training the neural network. 
 They validated their approach with identifying actual delamination in different composites and also proved that their system has achieved excellent quantitative diagnosis results for different damage parameters such as the presence, location, orientation and geometry of defects.
 
-Furthermore, researchers in~\cite{Melville2018,esfandabadideep}  have applied deep ANN for the detection and localisation of damage in composite materials using Lamb waves:
-%Hussain et al.~\cite{hussaintemporal} proposed a Temporal Convolutional Network (TCN) based transfer learning system for delamination prediction in CFRP cross-ply laminates. They employed a CFRP dataset from NASA which is composed of signals from Lamb waves sensors and X-ray images of specimens for capturing the propagation of defects in carbon fiber composite under fatigue loading. 
-%The TCN model was trained with various combinations of lengths of the sensors signals and different frequencies at which Lamb wave signals were sensed. 
-%They demonstrated that their approach needs very little time for the training and can also predict the delamination on a new composite coupon by utilising only a few samples of the test coupon. 
+Furthermore, researchers in~\cite{Melville2018,esfandabadideep}  have applied deep ANN techniques in their methods:
 Melville et al.~\cite{Melville2018} applied SVM and deep learning techniques for damage detection on full wavefield signals of ultrasonic guided wave images. The wavefield data was acquired via a laser Doppler vibrometer and piezoelectric actuators on thin metal plates. 
 They showed that the deep learning methods achieved quite better damage prediction results as compared to the SVM based methods. 
 Esfandabadi et al.~\cite{esfandabadideep} investigated the applications of super-resolution techniques to acquire high-resolution wavefields via the training of neural networks on different aluminum and CFRP plates. 

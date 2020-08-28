@@ -34,13 +34,7 @@ Eqn.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the softmax value o
 	\end{equation}
 
 Additionally, it is also important to select a proper accuracy metric of the model, therefore, we have applied intersection over union (IoU) as our accuracy metric. 
-IoU is estimated by determining the intersection area between the ground truth and the predicted output as shown in Fig.~\ref{fig:iou}.
-\begin{figure}
-	\centering
-	\includegraphics[scale=1.0]{IoU_figure.png}
-	\caption{Intersection over Union.}
-	\label{fig:iou}
-\end{figure}
+IoU is estimated by determining the intersection area between the ground truth and the predicted output.
 In this work, we have two classes (damaged and undamaged), therefore the IoU is computed by taking the IoU for each class and average them.
 The IoU metric is defined as in Eqn.~\ref{IoU}:
 \begin{equation}
