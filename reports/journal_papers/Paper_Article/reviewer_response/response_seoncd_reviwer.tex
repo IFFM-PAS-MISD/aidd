@@ -1,0 +1,51 @@
+% !TeX encoding = UTF-8
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage[centering,includeheadfoot,margin=2cm]{geometry}
+%\usepackage{xcolor}
+\usepackage{calc,blindtext}
+\usepackage{mathptmx}
+\usepackage[dvipsnames]{xcolor}
+%
+%\usepackage[default,angular]{comicneue}
+%\usepackage[T1]{fontenc}
+
+
+%\usepackage{fontspec}
+%\setmainfont{Calibri}
+
+\setlength{\parindent}{0pt}
+\begin{document}
+	\textbf{Response to reviewers's comments} 
+	\\ \\
+	I appreciate the time and effort that the reviewers have dedicated to providing valuable feedback on the manuscript. I would like to thank the reviewers for constructive comments which helped me to improve the manuscript. I have been able to incorporate changes to reflect most of the suggestions provided by the reviewers. I have highlighted the changes in a separate differential pdf document. The additional text is in the blue. The removed text is in red.
+	\\ \\
+	Here is a point-by-point response to the reviewers' comments and concerns.
+	\\ \\
+	\underline{\textbf{Referee:2}} 	
+	\\
+	\\
+	\textbf{Comment 1:} In the FCN implementation, to my understanding, the Softmax function can be considered as a generalization of the Softmax. Usually, The Softmax function is used for the two-class logistic regression, whereas the Softmax function is used for the logistic regression.
+	Therefore, for binary classification, the Softmax function should give the same results of the Softmax. Probably, the difference in the provided results is just given by the fact that the authors have used two different loss functions.
+	\\ \\
+	\color{blue}\textbf{Response:} The Sigmoid function is used with linear regression problems or two-class classification problems,
+	while Softmax is used with multiclass classification problems. However, the main difference between
+	them is that the sum of all Softmax outputs is supposed to be 1. In Sigmoid, it's not necessary. Sigmoid outputs
+	are in the range of \(0-1\). Therefore, it is possible that in Sigmoid function the sum of all outputs is greater than
+	1. Furthermore, with Softmax function, we applied hard thresholding over the outputs, which means the model
+	with the Softmax function will have slightly different outputs from the model with the Softmax function. Although
+	the simulation environment was the same for both models, and the dataset was divided into the training
+	set and testing set which were the same for both models. However, the training set was randomly shuffled for
+	each model, besides, the validation set was also randomly selected from the training set for both models. Those
+	changes could alter the training parameters causing them to have slight differences in the outputs
+	\\ \\	
+	\color{black}{\textbf{Comment 2:} 2- My main concern is that this paper presents just some effective results in the numerical experiments for the imaging of defects placed far from the corners of the considered plates. Neither the images related to defects on the corners nor those related to the practical experiments performed with SLDV are really impressive, therefore the claimed "excellent generalisation capabilities" are not sufficiently demonstrated, in my opinion.		
+	To conclude, I believe that the limitations of the proposed approach should be better investigated I would suggest to extend the experiments to different setups and, possibly, more complicated geometries (plates with stiffners or variable thicknesses)}
+	\\ \\ 
+	\color{blue}\textbf{Response:}
+% 	\color{white}\colorbox{Cerulean}{\parbox{\textwidth}{}}
+	\\ \\
+
+\end{document}
