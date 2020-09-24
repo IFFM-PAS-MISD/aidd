@@ -21,7 +21,7 @@ To eliminate low values from the ERMSF, a binary threshold is applied as shown i
 The threshold level was selected to limit the influence of edge noise and at the same time highlight the damage. 
 The binary ERMSF properly indicates the location of delamination but still, there is some noise at the corners.
 It results in the calculated IoU equal (\(0.10\)).
-In Figs.~\ref{fig:predict_438_sigmoid_tr_0.5}, ~\ref{fig:predict_438_softmax} we present the FCN-DeneseNet outputs with sigmoid and softmax respectively.
+In Figs.~\ref{fig:predict_438_sigmoid_tr_0.5}, ~\ref{fig:predict_438_softmax} we present the FCN-DenseNet outputs with sigmoid and softmax respectively.
 As shown, the FCN-DenseNet models detect the delamination without any noise at the edges as the FCN-DenseNet learned the delamination patterns from the large numerically generated dataset and can differentiate among different complex patterns such as noise.   
 The IoU = \(0.73\) for sigmoid, and IoU = \(0.65\) for the softmax.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -224,7 +224,7 @@ In Table~\ref{tab:iou} we present the maximum, minimum and mean value of IoU for
 	
 Every single value of the IoU was estimated for all testing images using FCN-DenseNet with a sigmoid at the output layers.
 It is expected that as we increase the threshold, the IoU will decrease because some of the detected output values will be excluded.
-Therefore, selecting the proper threshold value is important for maximizing IoU. 
+Therefore, selecting the proper threshold value is important for maximizing IoU, and this is the reason why inductive bias is important. 
 Fig.~\ref{fig:iou_fcn} shows the maximum and mean IoU for all testing images depending on the threshold value. 
 The IoU is decreasing along with the threshold increment in the range of (\(0-1\)).
 	\begin{figure}[!h] 
