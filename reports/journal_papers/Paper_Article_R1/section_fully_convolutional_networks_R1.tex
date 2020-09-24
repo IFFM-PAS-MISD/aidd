@@ -1,0 +1,64 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{The basic concept of Fully Convolutional Network}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The main purpose of such approach is to automatically perform feature extraction by training a model using full wavefield images, hence, it will learn by itself to recognise the patterns and detect the delamination and localise it.
+In our work we are using the fully convolutional network (FCN)~\cite{long2015fully}, which aims to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
+
+The idea behind FCN is to stack a group of convolutional layers in an encoder-decoder style. 
+The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsample the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
+
+
+In order to reduce overfitting in the model, some techniques were applied such as adding dropouts to layers and batch normalization.
+
+For the output layer, we have applied two activation functions in separate experiments, the first one is softmax and the second one is sigmoid. 
+The softmax function calculates the probability of the damage occurrence and the healthy state for every single pixel, hence, the summation of the two probabilities must equal one. Eq.~(\ref{softmax}) illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
+To predict the output label of the detection (\(y_{pred}\)) which represent the probability of damaged and undamaged, we applied the \(\argmax\) function to select the maximum probability of the softmax activation function.
+	\begin{equation}
+		P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
+		\label{softmax}
+	\end{equation} 
+	\begin{equation}
+		y_{pred} = \argmax_{i}\left( P(x)_{i} \right)
+		\label{argmax}
+	\end{equation}
+
+When using sigmoid in the output layer, it produces a vector of values between (\(0\) and \(1\)) indicating the damage weight for each pixel. 
+Low values indicate low damage probability and high output values indicate high damage probability. Eq.~(\ref{sigmoid}) illustrates the sigmoid function, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from the previous layer) \(\{x_0,x_1,_...,x_n\}\) and bias \(b\) as shown in Eq.~(\ref{z}).	
+	\begin{equation}
+		\sigma(z) = \frac{1}{1+e^{-z}}
+		\label{sigmoid}
+	\end{equation}
+	\begin{equation}
+		z= \sum_{i=0}^{n}  w_i\, x_i +b
+		\label{z}
+	\end{equation}
+Selecting the loss function is a crucial task in deep learning since it measures how good the model predicts.
+We have applied two types of losses based on the used function in the final activation layer: a binary cross-entropy (BCE) loss function applied with a sigmoid activation function in the output layer and a categorical cross-entropy (CCE) loss function with a softmax activation in the output layer that is also called \enquote{softmax loss function}.
+Eq.~(\ref{BCE}) illustrates the BCE, where \(\hat{Y}\) represents the predicted vector values and \(Y\) represents the ground truth vector values, when \(\hat{Y} \approx Y\) then the BCE will be almost \(0\) meaning that the model was able to predict the output, so, the aim is to reduce the loss function to the minimum value.
+	\begin{equation}
+		BCE = (1-Y)\log(1-\hat{Y})+Y\log(\hat{Y})
+		\label{BCE}
+	\end{equation}
+Eq.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the softmax value of the target class. 
+	\begin{equation}
+	CCE = -\log\left( P(x)_{i} \right)
+	\label{CCE}
+	\end{equation}
+
+Moreover, we have applied intersection over union (IoU) as our accuracy metric. 
+IoU is applied to find the intersection area between the ground truth value and the predicted value.  
+The IoU metric is defined as:
+\begin{equation}
+IoU = \frac{Intersection}{Union} = \frac{\hat{Y} \cap Y}{\hat{Y} \cup Y} 
+\label{IoU}
+\end{equation}
+The intersection between the predicted and the ground truth values is simply calculated through multiplying their values then summing the resulted values.
+As we mentioned earlier the ground truth values are either \((0\) or \(1)\) thus only the predicted values larger than \(0\) multiplied by their ground truth label \(1\) will be counted, the rest values will equal to \(0\). 
+The union can be calculated by summing all values in both the predicted and the ground truth  vectors, then we subtract the intersection from their sum.
+Our main goal is to maximize the IoU accuracy metric, since the higher the IoU, the higher the accuracy of the predicted delamination in terms of location, shape and size.
+	
+Furthermore, during training the model our focus is to minimize the loss and maximize the accuracy metric by converting it into an optimization problem. 
+The optimizer is responsible for updating the model learnable parameters such as filters weights and biases in a way the overall loss is minimized and the accuracy is maximized.
+In the proposed approach, Adam optimizer was applied, which is considered as a combination of RMSprop and Stochastic Gradient Descent (SGD)~\cite{Kingma2015}. 
+
+In the next subsection, we are going to present an FCN model for pixel-wise semantic segmentation in order to detect and localise delaminations.
