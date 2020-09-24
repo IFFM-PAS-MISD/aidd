@@ -164,25 +164,6 @@ Therefore, issues regarding data preprocessing and feature extraction can be han
 Nowadays, end-to-end approaches are developed, in which the whole unprocessed data are fed into the model, hence, it will learn by itself to recognise the patterns and detect the damage.
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Deep learning techniques have widely been utilised for the inspection and maintenance of civil infrastructure and have shown very promising results~\cite{cha2017deep, lin2017structural, liu2019computer, beckman2019deep, choi2019sddnet}. 
-It has also been successfully applied for various fault diagnosis based tasks in rotating machinery~\cite{janssens2016convolutional}. 
-For instance, Cha et al.~\cite{cha2017deep} proposed a computer vision-based method using deep Convolutional Neural Network (DCNN) for the detection of concrete cracks. 
-They compared their Convolutional Neural Network (CNN) based approach with traditional edge detection techniques such as Sobel and Canny methods and showed that their proposed model achieved quite better results and is very suitable for finding concrete cracks in realistic situations. 
-Lin et al.~\cite{lin2017structural} developed an automatic damage feature extraction DCNN model and their results showed that DCNN outperformed conventional methods in realistic situations. 
-Choi and Cha~\cite{choi2019sddnet} developed an encoder-decoder based semantic segmentation damage detection network (SDDNet), a real-time segmentation method based on CNN. 
-SDDNet was inspired by a DenseNet and DeepLabV3+~\cite{chen2018encoder}. 
-Liu et al.~\cite{liu2019computer} applied the U-Net network structure based on fully convolutional networks (FCN) for the purpose of identifying the locations of cracks in the raw input images of civil infrastructure under different conditions such as messy background, illumination, width of the cracks, etc. 
-They compared their trained U-Net model with DCNN based method and found that the U-Net based model shown better performance as compared to DCNN in various circumstances.  
-Beckman et al.~\cite{beckman2019deep} proposed a faster region-based CNN (Faster R-CNN)-based concrete spalling damage detection approach with the use of an inexpensive depth sensor for quantifying multiple instances of spalling. The Faster R-CNN enables the detection, localisation, and quantification of the amount of concrete spalled from a concrete element automatically. 
-The Faster R-CNN provides a bounding box for the detection and localisation of defects. 
-Janssens et al. ~\cite{janssens2016convolutional} developed a CNN based feature learning method for autonomously detecting different faults in rotating machinery with the use of vibration data. 
-The input to the CNN modal was a discrete Fourier Transform of the two accelerometers. 
-They compared their CNN based model with the classical feature-engineering based method which employs manually engineered features and a random forest classifier. 
-They showed that their CNN based model outperformed the classical feature-engineering based approach. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Besides the widespread applications of deep learning in civil and rotating machinery domains, deep learning is still less explored for the purpose of delamination detection in composite materials.
 In the following, methods for damage size estimation based on machine learning and deep learning techniques are presented which are targeted in the field of SHM/NDT.
   	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -204,7 +185,7 @@ But tests were performed only based on the numerical model.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Sammons et al.~\cite{sammons2016segmenting}, utilised X-ray computed tomography for estimating the delaminations in a carbon fibre reinforced polymer (CFRP). 
-For this purpose, they utilised a CNN for performing image segmentation of the defected input images to estimate the delaminations. 
+For this purpose, they utilised a convolutional neural network (CNN) for performing image segmentation of the defected input images to estimate the delaminations. 
 Their CNN was capable of identifying and quantifying small delaminations. 
 Unfortunately, the proposed network architecture could not recognise delaminations with large sizes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -243,7 +224,7 @@ FCN is considered as a type of CNN, in which the densely connected network is re
 FCNs can be trained end-to-end and pixels-to-pixels, without the need for performing a process of feature extraction. 
 Moreover, the pixel-wise segmentation model enables the precise shape and size estimation of defects.
 The capabilities and potentials of the proposed method are compared to the conventional wavefield signal processing method i.e. adaptive wavenumber filtering~\cite{Kudela2015,Radzienski2019}.
-The quantitative comparison was performed by using intersection over union (IoU) of detected delamination area with respect to the ground truth. 
+The quantitative comparison was performed by using intersection over the union of detected delamination area with respect to the ground truth. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology}
