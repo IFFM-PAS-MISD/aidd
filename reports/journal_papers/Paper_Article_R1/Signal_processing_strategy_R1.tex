@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Signal processing strategy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Two signal processing strategies are applied: newly proposed image processing based on the FCN and conventional one which is the adaptive wavenumber filtering.
+The former one is represented by the left branch on the scheme shown in~Fig.~\ref{fig:sig_proc_strategy} whereas the latter one is represented by the right branch.
+The starting point for both approaches is the dataset consisted of frames of propagating guided waves.
+However, the FCN takes as an input the RMS which combines all frames into one image. 
+It essentially represents the spatial energy distribution of propagating waves.
+In the adaptive wavenumber filtering method, all frames are utilised (right branch of Fig.~\ref{fig:sig_proc_strategy}).
+The RMS is applied later on to output final damage map in the form of an image.
+
+It should be noted that we tested two types of activation functions as a last layer of the FCN: softmax and sigmoid.
+The former one gives the binary output which segments pixels in two categories: damaged and undamaged.
+On the other hand, the threshold needs to be applied when the sigmoid activation function is used.
+Also, damage maps resulted from the adaptive wavenumber filtering must be thresholded so that the area and shape of delamination can be estimated.
+
+Finally, IoU is applied as a measure of delamination size, shape and location so that all presented approaches can be compared quantitatively. 
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.8]{FCN_adaptive_filtering_diagram_MSSP.png}
+		\caption{Diagram of signal processing strategy by the proposed Fully Convolutional Network (left branch) in comparison to signal processing utilising adaptive wavenumber filtering method (right branch). }
+		\label{fig:sig_proc_strategy}
+	\end{figure}
+The particular blocks presented in the Fig.~\ref{fig:sig_proc_strategy} will be explained in more details in the next sections.

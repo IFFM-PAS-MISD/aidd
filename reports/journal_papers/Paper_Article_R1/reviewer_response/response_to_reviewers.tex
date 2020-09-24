@@ -1,0 +1,237 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage[centering,includeheadfoot,margin=2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{calc,blindtext}
+\usepackage{mathptmx}
+\usepackage{gensymb}
+\usepackage{hyperref}
+
+%\usepackage{fontspec}
+%\setmainfont{Calibri}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+	\textbf{Response to reviewers' comments} 
+	\\ \\
+	I appreciate the time and effort that the reviewers have dedicated to providing valuable feedback on the manuscript. I would like to thank the reviewers for constructive comments which helped me to improve the manuscript. I have been able to incorporate changes to reflect most of the suggestions provided by the reviewers. I have highlighted the changes in a separate differential pdf document. The additional text is in the blue. The removed text is in red.
+	\\ \\
+	Here is a point-by-point response to the reviewers' comments and concerns.
+	\\ \\
+	\underline{\textbf{Referee:1}}
+	\\
+	\\
+	\textbf{Comment 1:} Page 1, line 37- Promising in what way exactly? If it is hard to describe, then just write as one or two objective sentences, e.g.:
+	
+	"The obtained results showed that the algorithm was capable to reconstruct the image up to ........ mm resolution within xx\% deviation in comparison to experimental results. This convinces us that the result is promising for [TASK1,2,3, etc...]."
+	\\ \\
+	\color{blue}{\textbf{Response:} The obtained results with the deep learning approach show its capability to predict the delamination in the numerically generated dataset with high accuracy compared to the conventional damage detection approach. Furthermore, the deep learning model shows the ability to generalize to a further experiential set.}
+	\\ \\
+	\color{black}\textbf{Comment 2:} Page 3, lines 39-57 - It seems that the authors were not aware of many ConvNet works for NDT/SHM image processing by Young-Jin Cha (U Manitoba). 
+	Please include 2 - 3 of their recent works. The majority of these are for civil eng - but this can also be a valid argument why the work by using ConvNet for Lamb wavefield image reconstruction proposed is necessary.
+	
+	There was already some prior works on wavefield reconstruction by
+	\begin{itemize}
+		\item Mesnil \& Ruzzene (2016), J Ultrason: 10.1016/2015.12.014
+		\item Harley \& Chia (2018), IJSHM doi: 1475921717727160
+		\item Xu (2020), MDPI Sensors: 10.3390/s20123502
+	\end{itemize}
+	on wavefield reconstruction, although those works were not deep learning based but should be mentioned at least.
+	
+	Also, some other literatures from other domain for deep learning image reconstruction can be considered:
+	\begin{itemize}
+		\item Tan et al. DOI: 10.1109/JSEN.2018.2876411
+		\item Cheng et al. arXiv:1805.03300v2.
+	\end{itemize}
+
+	\color{blue}{\textbf{Response:} We appreciate your constructive comment.
+		Actually some papers of Young-Jin Cha (U Manitoba) and other on CNN in Civil engineering and rotating machinery domains were included in the updated version.
+		As our paper relates to the use of deep learning-based delamination detection, we do not think that the suggested papers related to wavefield reconstruction are needed to be included in the literature review.  Although, we included one paper on wavefield reconstruction and the main reason for that is the use of Deep CNN based approach. 
+		Regarding, the suggested papers on deep learning image reconstruction, it stated that this work is related to pixel-wise semantic segmentation based delamination detection by employing an FCN model which is different from image reconstruction. 
+		Therefore, we see it is not suitable to include those papers in the literature review of our work. 
+		Moreover, the authors are aware of more work on single-hidden layer Artificial Neural Network (ANN) and unsupervised machine learning-based cracks/impact location and damage/delamination detections in composite/aluminium materials, which are mostly performed on vibrations based damage detection and not utilizing deep learning or CNN. 
+		Therefore, in the literature we only included Deep learning/ Neural Network-based guided wave-based damage/delamination detection, as our main contribution is regarding the use of deep learning on guided full wavefield based delamination detection.
+	\\ \\
+	\color{black}\textbf{Comment 3:} Page 4, line 38- (IoU)
+	\\ \\
+	\color{blue}{\textbf{Response:} It was updated 
+	\\ \\
+	\color{black}\textbf{Comment 4:} Page 4, lines 45-56, page 5, lines 28-34, 36-39 - \\
+	Question:
+	\begin{enumerate}
+			\item 	This computation time of 3 months are for the whole 475 cases? If yes, it is then actually not that bad since parallelization does not work well with sequential methods, i.e. when an output of certain algorithmic computation is dependent from the previous one (i = i+1). And this is coming from custom implementation and not commercial numerical suite such as ANSYS/ABAQUS I guess? 
+			\item Also, what are the differences between the 475 cases? Are these coming from the different location, size, angle etc. of the delamination? If yes, then the whole paragraphs from line 45 page 4 to line 29 page 5 should be reformulated as DOE (Design of Experiment) table, e.g.:
+			\begin{itemize}
+				\item Factor 1: Delamination angle, possible value: \(0\degree\),\(15\degree\), etc.
+				\item Factor 2: Delamination geometrical shape, possible value: elliptical, rectangular, etc.
+				\item Factor 3: Delamination geometrical size: \(L \times W \times H\)
+				\item Factor 4: Delamination position etc.	
+			\end{itemize}
+			Then, classify which are the discrete variables and the continuous variables and state the cardinality (for the discrete vars).
+			\item Not clear how carrier and modulation frequency of 50 kHz/10 kHz is determined? Randomly selected? Prior works? Normally active SHM Lamb wave is between 150 - 350 kHz (equivalent to wavelength of several mm) and in fact this is tied to the size of defect that is to be detected.
+			\\ 
+			
+	\end{enumerate}
+	\color{blue}{\textbf{Response: }}\\
+	\begin{enumerate}
+	\item Yes, the computation time of 3 months was for all 475 cases. It was achieved by custom implementation of the time domain spectral element method.
+	
+	\item As it is explained in the paper, the differences are due to delamination parameters: angle, ellipse major-axis length, ellipse minor-axis length and coordinates of the centre of delamination. All these parameters were selected randomly. In order to illustrate these cases we added figure showing the plate with overlayed 475 delamination cases. The delamination was at the same depth (between third and fourth composite layer) for each case.
+	
+	\item Excitation signal parameters were compromise between mesh density and detectability of smallest delamination size (best on prior works). It should be noted that higher frequency means shorter wavelength and, in turn, denser mesh. It would lead to even longer computation time. This is why we decided to use relatively low carrier frequency of 50 kHz.
+	\end{enumerate}
+		
+	\color{black}{\textbf{Comment 5:}Page 7, line 20-21. After the sigmoid thresholding, isn't the damage maps also pixel categories: damaged / undamaged?}
+	\\ \\
+	\color{blue}{\textbf{Response:} That is true when applying sigmoid activation function on the output layer, it outputs a range of values from \(0\) to \(1\), and since our problem is a classification problem, not a regression problem, thresholding is applied to classify the output value into two categories: damaged and undamaged. 
+	\\ \\
+	\color{black}\textbf{Comment 6:} Page 7, line 24- intersection over union (IoU)
+	\\ \\
+	\color{blue}{\textbf{Response:} It was updated 
+	\\ \\
+	\color{black}{\textbf{Comment 7:} Page7, line 42- While this is true, please be fair by stating that FCN would also need some prior inductive bias from the domain knowledge such as pre-processing parameters, supervision into assigned class, and the most important one: assumption that such pixels can be categorized as damaged and undamaged.
+	Also, other ML-related bias including all hyperparameters such as learning rate, momentum, choice of optimizer, dropout rate, etc. must be determined first. None of complication of these ML-specific parameters would occur in the wavenumber filtering.
+
+	One example application paper on inductive bias:
+	\begin{itemize}
+		\item Ewald et al. (2018): Incorporating Inductive Bias into Deep Learning: A Perspective from Automated Visual Inspection in Aircraft Maintenance.
+	\end{itemize}
+
+	This comes back from the old theory:
+	\begin{itemize}
+	\item Mitchell (1980): The need for biases in learning generalizations.
+	\item Gordon \& Des Jardins (1995): Evaluation and Selection of Biases in Machine Learning.
+	\end{itemize}
+
+	And it has been reinforced several times:
+	\begin{itemize}
+	\item Feinman \& Lake (2018): Learning Inductive Biases with Simple Neural Networks
+	\item Battaglia et al. (2018): Relational inductive biases, deep learning, and graph networks
+	\item Hessel et al. (2019): On Inductive Biases in Deep Reinforcement Learning
+	\item Locatello et al. (2019): Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations
+	\end{itemize}
+%	\\ \\
+	\color{blue}{\textbf{Response:}{ Thank you for pointing that out. We extended the reasoning.}
+	\\ \\ 
+	\color{black}{\textbf{Comment 8:} Page 9, line 19-21-} Not really for "enhancement". Theoretically, any optimizer is capable to handle any value, but the reason to do feature normalization is because without feature rescaling, the range of objective function will be very large and the gradient will hardly converge. I assume either one of this gradient method was used: SGD, Adam, RMSProp or any of their variance (Adamax, Adagrad, Adadelta, ....). The normalization just has to be done because otherwise the training will likely to last forever.
+	
+	What "enhancement of the optimizer" means is probably the hyperparameter tuning such as Learning rate, dropout rate, warm-up policy, etc. but these are only relevant after the (raw) feature scaling.
+	\\ \\
+	\color{blue}{\textbf{Response:}	
+	The reasoning of the term "to enhance the optimizer" is as follows.
+	The objective of the optimizer is to updates the learnable weights in a way that reduces the loss value to the minimum. 
+	Therefore, when applying unnormalized data input, the optimizer may not converge to the minimum loss value, since applying input values that are large whether (positive or negative) will affect the learning process, causing issues like the vanishing or exploding gradient problem. 
+	The exploding happens during the backpropagation process when \(n\) number of derivatives will be multiplied together which are large, accordingly, the gradient will increase exponentially, on the other hand, if the derivatives where small then the gradient will decrease exponentially and this is the vanishing gradient. 
+	In both cases, the learning process (updating the learnable weights) will be either in very large updates as in the exploding gradient or very small updates as in the vanishing gradient.
+	Therefore normalizing input data to be in range \(0-1\) will help (enhance) the optimizer to converge.
+	Since our term is imprecise simplification, we reformulated the sentence into: "Colour scale values of obtained images vary between \(0--255\) hence normalization to a range of \(0--1\) was applied to improve convergence of gradient descent algorithm (Adam optimizer)".
+	\\ \\ 
+	\color{black}{\textbf{Comment 9:} Page 11, lines 11-20-} Having read the next pages, I might have missed how large is the IoU overlap? Is it the same as the convolution stride?
+	
+	Maybe it is better to express the dimension from input layer, final intermediate layer before transition up, and final layer as function map, e.g.:
+	\(f:R^ {(512x512)} -> R^{(...x...)} -> R^{(1)}\) ; I guess the final output is just a scalar value?
+	\\ \\
+	\color{blue}{\textbf{Response:}} Yes, the final predicted output is a scalar value.
+	When calculating IoU, the whole predicted output which is \(512\times512\) and the ground truth (label) which is also \(512\times512\) is computed at once, which means the intersection between both the predicted output and the label is computed and the union between both of them is computed then IoU is calculated by dividing the intersection over the union.
+	\\ \\
+	\color{black}{\textbf{Comment 10:} Page 12, line 27,28-} The activation function is applied before conv\_kernel? This is normally not the way. Normally, kernel first and then activation.
+	\\ \\ 
+	\color{blue}{\textbf{Response:} Yes, the default order is to apply convolution then applying the activation function e.g. ReLU.
+	However, in the FCN-DenseNet model, authors apply first the Batch Normalization followed by the activation function (ReLU) then they applied the convolution. 
+	We implement their architecture accordingly.}
+	\\ \\ 
+	\color{black}{\textbf{Comment 11:} Page 13, line 34-} What is the difference between transition and transmission from Fig. 5?
+	\\ \\ 
+	\color{blue}{\textbf{Response:} The transition and transmission mean the same operation, however, we updated to transition to be consistent with the dialogue.}
+	\\ \\
+	\color{black}{\textbf{Comment 12:} Page 13, lines 45-47-} Any reason for thresholding at 0.5?
+	\\ \\
+	\color{blue}{\textbf{Response:} 
+	Applying Sigmoid activation function at the output layer will output a spectrum of values range between \(0\) and \(1\), which can be considered as a regression problem which is not the case.
+	Our problem is a two-class classification problem, therefore our target is to classify the output values as damaged or undamaged. 
+	Accordingly, the threshold must be set to decide whether the output belongs to the class undamaged represent by \(0\) value or damaged represented by \(1\) value. 
+	In our problem of identifying the delamination, we assume that assigning the predicted output to class \(1\) although it belongs to class \(0\) is as costly as assigning the predicted output to class \(0\) although it belongs to class \(1\). 
+	Therefore, a threshold with value \(0.5\) is used, accordingly, if the output value is greater than \(0.5\) it will be assigned to class \(1\), otherwise, it will be assigned to class \(0\).}
+	\\ \\ 
+	\color{black}{\textbf{Comment 13:} Page 13, line 51-} The augmentation parameters should be stated (e.g. scaling = 0.2, rotation = 0.1, etc) - or do I miss it? Why not present it as a table? Mentioning these values in paragraph tend to be overseen.
+	
+	Mentioning the augmentation parameters is important because the feature representation and its equivariance play a major role on generalization of the model. In general, on would like to have a model that learns the equivariant representation X' and not only the input X.
+	\\ \\
+	\color{blue}{\textbf{Response:} Data augmentation is illustrated in page 9, lines \(22-25\), data augmentation was achieved only by flipping (mirroring) the RMS input images horizontally, vertically, and diagonally, therefore we increased the dataset \(4\) times. No scaling was applied on the dataset.}
+	\\ \\
+	\color{black}{\textbf{Comment 14:}
+	Page 13 lines \(53-54\) -
+	This is strange. In the beginning Tesla K20X was mentioned. Did it run on different computers? In general, the new RTX series have Tensor cores (i.e. for bfloat16 calc) in the addition to CUDA cores - why not accelerate the SEM calculation with RTX? Was the simulation obtained prior to RTX purchase? In that case, please state that. 
+		
+	However, if time allows, just run 1 SEM simulation and observe the acceleration vs performance with bfloat16 on RTX. Otherwise just mention that it could be future research direction on accelerating SEM with Tensor cores and see where the performance being penalized (or not). I personally find it is a shame that not many papers are studying the scalability issue. If the 3 months might become 3 weeks or 3 days with similar performance, it is a significant contribution.
+		
+	Important note: Except you are in some quantum states or going towards singularity (some extraterrestrial / intergalactical science, time dilation etc...), many engineering calculations are sufficient with half-precision! This is almost for all mechanics related topic (Newton-Lagrangian, some of Hamiltonian-Jacobian, but save the quantum part).}
+	\\ \\ 
+	\color{blue}{\textbf{Response:}}{Yes, the elastic wave propagation simulations and FCN training were run on different computers. Unfortunately, elastic wave propagation problems require double precision data storage (we have already tested single-precision approach). Otherwise, round-off errors increases at each time integration step. It manifest in significant change of waveforms and especially wave velocity. This is why we have used Tesla K20X gpu (with double precision support). It should be noted, however, that this gpu is outdated and much better performance can be achieved on newer nvidia Tesla architectures. Moreover, Tesla K20X has only 6 GB memory, therefore it was better to use RTX 2080 for FCN model because it has 8 GB memory.}
+	\\ \\ 
+	\color{black}{\textbf{Comment 15:} Page 14, line 24 -}  Dense
+	\\ \\
+	\color{blue}{\textbf{Response:} It was updated}
+	\\ \\
+	\color{black}{\textbf{Comment 16:}{ Page 14, line 45 -} The failed results were not displayed in Fig. 9. I assume it was all blue? Maybe due to thresholding?
+	\\ \\
+	\color{blue}{\textbf{Response:} The FCN-DenseNet failed to identify the delamination and the whole output was a blue image, therefore we did not show it, but we mention it in the text. Thresholding is applied only with sigmoid activation function, and not with Softmax. However, both models failed to detect the damage.}
+	\\ \\
+	\color{black}{\textbf{Comment 17:} Page 15, line 49 -} To be fair with conventional technique (ERMSF), the MAX(softmax\_value) or sigmoid should be displayed. I think some gradual changes would appear instead of binary outcome. Or are these already gradual blue? The color scaling is not displayed, so I do not know what does it exactly mean. I assume blue = low prob, and red = high prob?
+	\\ \\
+	\color{blue}{\textbf{Response:} 
+	We have mentioned on page 13, lines \(54-57\) that the red colour represents the damaged class, and the blue colour represents the undamaged class.
+	Applying thresholding with Sigmoid activation function will convert the predicted output from a range of probabilities between \(0\) and \(1\) into two output classes: damaged (red colour) and undamaged (blue colour), therefore the predicted outputs are presented with only two colours. 
+	In case thresholding was not applied, there will be a gradual range of colours between blue and red.
+	In the case of softmax activation function, there is no need to apply thresholding since it outputs two probability values, one representing the probability of being damaged and the other one representing the probability of being undamaged, then the \(argmax\) function is applied and selects the highest probability among both of them, therefore, the predicted output will be represented only with two classes: damaged (red colour) and undamaged (blue colour).}
+	\\ \\
+	\color{black}{\textbf{Comment 18:} Page 17, line 49-50 -} {Please state: "This is the reason why inductive bias is important."}
+	\\ \\ 
+	\color{blue}{\textbf{Response:} Thank you for the constructive comment, we added to the context. }
+	\\ \\
+	\color{black}{\textbf{Comment 19:} Page 21, lines \(16-17\) - Conflict of Interest missing. If no COI, then I expect the codes to be released on Git. See my general statement.} 
+	\\ \\
+	\color{blue}{\textbf{Response:} 
+    I fully agree with the reviewer on clear and transparent scientific process and reproducible results. Code and data set availability would definitely facilitate benchmarking of algorithms and lead to faster progress in the field of SHM/NDT.
+	Our code is already available on GitHub: \\ 
+	\url{https://github.com/IFFM-PAS-MISD/aidd/blob/master/src/data_processing/PhD/FCN_DenseNets_%20Semantic%20Segmentation.py}}
+	\\ \url{https://github.com/IFFM-PAS-MISD/aidd/blob/master/src/data_processing/PhD/FCN_DenseNet_softmax_no_cross_validation.py}	
+	Additionally, I prepared Mendeley data set entitled: \emph{RMS of Lamb wavefield interacting with delamination - numerical}, DOI: 10.17632/vp3y7zhxxx.1 necessary to feed the model. It will be linked to the paper.
+	\\ \\ 
+	\color{black}{\textbf{Comment 20:} Page 23, line 35 - What "Others"? You mean et al.?}
+	\\ \\
+	\color{blue}{\textbf{Response:} Yes, it meant others, we checked the reference and updated to et al.}
+	\\ \\
+\color{blue}{\textbf{Response to general statement} As mentioned above, we want to be transparent and deliver reproducible results. Therefore, we are happy to share the code and data set (see links above).}
+\\ \\
+\color{blue}{\textbf{Response to cons} In order to address some points we extended conclusion section, underlining the limitations of the proposed method and lack of available large experimental data sets.
+
+\newpage
+\color{black}	
+\underline{\textbf{Referee:2}} 	
+\\
+\\
+\textbf{Comment 1:} In the FCN implementation, to my understanding, the Softmax function can be considered as a generalization of the sigmoid. Usually, The sigmoid function is used for the two-class logistic regression, whereas the softmax function is used for the multiclass logistic regression.
+Therefore, for binary classification, the softmax function should give the same results of the sigmoid. Probably, the difference in the provided results is just given by the fact that the authors have used two different loss functions.
+\\ \\
+\color{blue}\textbf{Response:} The Sigmoid function is used with linear regression problems or two-class classification problems,
+while Softmax is used with multiclass classification problems. However, the main difference between
+them is that the sum of all Softmax outputs is supposed to be 1. In Sigmoid, it's not necessary. Sigmoid outputs
+are in the range of \(0-1\). Therefore, it is possible that in Sigmoid function the sum of all outputs is greater than
+1. Furthermore, with Softmax function, we applied hard thresholding over the outputs, which means the model
+with the Softmax function will have slightly different outputs from the model with the Sigmoid function. Although
+the simulation environment was the same for both models, and the dataset was divided into the training
+set and testing set which were the same for both models. However, the training set was randomly shuffled for
+each model, besides, the validation set was also randomly selected from the training set for both models. Those
+changes could alter the training parameters causing them to have slight differences in the outputs.
+\\ \\	
+\color{black}{\textbf{Comment 2:} My main concern is that this paper presents just some effective results in the numerical experiments for the imaging of defects placed far from the corners of the considered plates. Neither the images related to defects on the corners nor those related to the practical experiments performed with SLDV are really impressive, therefore the claimed "excellent generalisation capabilities" are not sufficiently demonstrated, in my opinion.}
+\\ \\ 
+\color{blue}\textbf{Response:} Because we selected the most difficult case with the delamination near the corner, the reviewer could get improper impression of the capabilities of the proposed method. Therefore, we extended the result section showing that FCN-DenseNet model is able to properly predict delamination very close to the corner but of slightly larger size. Moreover, we reformulated the sentence to "good generalisation capabilities". 
+
+It should be underlined, that we would willingly evaluate our models on more complex structures, preferably based on experimental wavefields. However, such data sets are not available yet. Preparation of such data sets require many hours of SLDV measurements. We are planning to work in this direction in the future. We also appeal to other scientists in the field of SHM/NDT to share data sets so that stimulate progress in the field. Please, also note that for more complex geometries, like plate with stiffeners, numerical data set must be prepared from scratch, which means another 3-months worth of computation. Considering, that our main aim was checking feasibility of the FCN-DenseNet for delamination identification and that this is the first such approach, we believe that our effort and contribution to the field is substantial.
+ 
+\end{document}
