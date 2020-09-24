@@ -18,7 +18,7 @@
 
 \setlength{\parindent}{0pt}
 \begin{document}
-	\textbf{Response to reviewers's comments} 
+	\textbf{Response to reviewers' comments} 
 	\\ \\
 	I appreciate the time and effort that the reviewers have dedicated to providing valuable feedback on the manuscript. I would like to thank the reviewers for constructive comments which helped me to improve the manuscript. I have been able to incorporate changes to reflect most of the suggestions provided by the reviewers. I have highlighted the changes in a separate differential pdf document. The additional text is in the blue. The removed text is in red.
 	\\ \\
@@ -27,25 +27,27 @@
 	\underline{\textbf{Referee:2}} 	
 	\\
 	\\
-	\textbf{Comment 1:} In the FCN implementation, to my understanding, the Softmax function can be considered as a generalization of the Softmax. Usually, The Softmax function is used for the two-class logistic regression, whereas the Softmax function is used for the logistic regression.
-	Therefore, for binary classification, the Softmax function should give the same results of the Softmax. Probably, the difference in the provided results is just given by the fact that the authors have used two different loss functions.
+	\textbf{Comment 1:} In the FCN implementation, to my understanding, the Softmax function can be considered as a generalization of the sigmoid. Usually, The sigmoid function is used for the two-class logistic regression, whereas the softmax function is used for the multiclass logistic regression.
+	Therefore, for binary classification, the softmax function should give the same results of the sigmoid. Probably, the difference in the provided results is just given by the fact that the authors have used two different loss functions.
 	\\ \\
 	\color{blue}\textbf{Response:} The Sigmoid function is used with linear regression problems or two-class classification problems,
 	while Softmax is used with multiclass classification problems. However, the main difference between
 	them is that the sum of all Softmax outputs is supposed to be 1. In Sigmoid, it's not necessary. Sigmoid outputs
 	are in the range of \(0-1\). Therefore, it is possible that in Sigmoid function the sum of all outputs is greater than
 	1. Furthermore, with Softmax function, we applied hard thresholding over the outputs, which means the model
-	with the Softmax function will have slightly different outputs from the model with the Softmax function. Although
+	with the Softmax function will have slightly different outputs from the model with the Sigmoid function. Although
 	the simulation environment was the same for both models, and the dataset was divided into the training
 	set and testing set which were the same for both models. However, the training set was randomly shuffled for
 	each model, besides, the validation set was also randomly selected from the training set for both models. Those
-	changes could alter the training parameters causing them to have slight differences in the outputs
+	changes could alter the training parameters causing them to have slight differences in the outputs.
 	\\ \\	
-	\color{black}{\textbf{Comment 2:} 2- My main concern is that this paper presents just some effective results in the numerical experiments for the imaging of defects placed far from the corners of the considered plates. Neither the images related to defects on the corners nor those related to the practical experiments performed with SLDV are really impressive, therefore the claimed "excellent generalisation capabilities" are not sufficiently demonstrated, in my opinion.		
-	To conclude, I believe that the limitations of the proposed approach should be better investigated I would suggest to extend the experiments to different setups and, possibly, more complicated geometries (plates with stiffners or variable thicknesses)}
+	\color{black}{\textbf{Comment 2:} My main concern is that this paper presents just some effective results in the numerical experiments for the imaging of defects placed far from the corners of the considered plates. Neither the images related to defects on the corners nor those related to the practical experiments performed with SLDV are really impressive, therefore the claimed "excellent generalisation capabilities" are not sufficiently demonstrated, in my opinion.}
 	\\ \\ 
-	\color{blue}\textbf{Response:}
+	\color{blue}\textbf{Response:} Because we selected the most difficult case with the delamination near the corner, the reviewer could get improper impression of the capabilities of the proposed method. Therefore, we extended the result section showing that FCN-DenseNet model is able to properly predict delamination very close to the corner but of slightly larger size. Moreover, we reformulated the sentence to "good generalisation capabilities". 
+	
+	It should be underlined, that we would willingly evaluate our models on more complex structures, preferably based on experimental wavefields. However, such data sets are not available yet. Preparation of such data sets require many hours of SLDV measurements. We are planning to work in this direction in the future. We also appeal to other scientists in the field of SHM/NDT to share data sets so that stimulate progress in the field. Please, also note that for more complex geometries, like plate with stiffeners, numerical data set must be prepared from scratch, which means another 3-months worth of computation. Considering, that our main aim was checking feasibility of the FCN-DenseNet for delamination identification and that this is the first such approach, we believe that our effort and contribution to the field is substantial.
+	 
 % 	\color{white}\colorbox{Cerulean}{\parbox{\textwidth}{}}
-	\\ \\
+	
 
 \end{document}
