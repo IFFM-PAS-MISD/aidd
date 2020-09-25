@@ -198,13 +198,38 @@ In extreme cases, like this, conventional signal processing has an advantage ove
 As shown in Fig.~\ref{fig:ERMSF_flat_shell_Vz_433} representing the damage map obtained by the adaptive wavenumber filtering technique, the delamination location can be identified by a well-trained expert. 
 However, the values of the damage map corresponding to the delamination location are on the same level as the noise.
 Hence, when binary thresholding is applied, only some false damage indications are highlighted near corners of the plate as show in Fig.~\ref{fig:Binary_ERMSF_flat_shell_Vz_433}. 
-For this case IoU= \(0\) for all considered methods.
+For this case IoU= \(0\) for all considered methods including FCN-DenseNet.
+FCN-DenseNet outputs are not shown because whole images are blue.
  
 Delaminations located near edges or corners are difficult to detect due to edge wave reflections which have similar patterns as delamination reflections. 
-The problem arises for both conventional and deep learning techniques. 
-However, to solve this issue for the FCN model, we need to enhance the feature extraction process by obtaining more data to train the model to recognise and learn new patterns.	
+The problem arises for both conventional and deep learning techniques, especially for delamination of small size. 
+
+It should be noted, however, that if larger delamination appear near the corner, FCN-DenseNet is able to identify it correctly.
+Such situation is presented in Fig.~\ref{fig:corner_delam}.	
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{GT_385.png}
+		\caption{ground truth}
+		\label{fig:GT_385}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{fcn_densenet_Pred_softmax_385.png}
+		\caption{FCN-DenseNet}
+		\label{fig:FCN-DenseNet_385}
+	\end{subfigure}
+	\caption{The delamination scenario with larger delamination near the corner based on numerical data.}
+	\label{fig:corner_delam}
+\end{figure} 
+
+The problem with delaminations at the corners for the FCN model can be alleviated by enhancing feature extraction process by obtaining more data to train the model to recognise and learn new patterns.
 
 In Table~\ref{tab:iou} we present the maximum, minimum and mean value of IoU for the adaptive filtering and FCN-DenseNet for sigmoid (threshold = \(0.5\)) and softmax for all testing images.
+It can be concluded that the FCN-DenseNet model surpasses significantly adaptive wavenumber filtering method. 
 	\begin{table}
 	 \renewcommand{\arraystretch}{1.3}
 		\centering

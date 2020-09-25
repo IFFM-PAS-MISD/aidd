@@ -270,7 +270,7 @@ where the number of sampling points \(N\) was 512.
 In this way, the dataset was collapsed to 475 2D matrices in which amplitudes are stored as double-precision values.
 The next step was the conversion of these matrices to greyscale images (colour image quantisation).
 Colour scale values of obtained images vary between (\(0 - 255\)) hence normalization
-to a range of (\(0-1\)) was applied to enhance the optimizer function during the learning process. 
+to a range of (\(0-1\)) was applied to improve convergence of gradient descent algorithm (Adam optimizer). 
 	
 Furthermore, data augmentation was achieved by flipping images horizontally, vertically and diagonally. 
 It increased the dataset size four times -- \(1900\) images were produced.

@@ -48,12 +48,12 @@
 	\end{itemize}
 
 	\color{blue}{\textbf{Response:} We appreciate your constructive comment.
-		Actually some papers of Young-Jin Cha (U Manitoba) and other on CNN in Civil engineering and rotating machinery domains were included in the updated version.
+		Actually some papers of Young-Jin Cha (U Manitoba) and others on CNN in Civil engineering and rotating machinery domains were included in the updated version.
 		As our paper relates to the use of deep learning-based delamination detection, we do not think that the suggested papers related to wavefield reconstruction are needed to be included in the literature review.  Although, we included one paper on wavefield reconstruction and the main reason for that is the use of Deep CNN based approach. 
 		Regarding, the suggested papers on deep learning image reconstruction, it stated that this work is related to pixel-wise semantic segmentation based delamination detection by employing an FCN model which is different from image reconstruction. 
 		Therefore, we see it is not suitable to include those papers in the literature review of our work. 
 		Moreover, the authors are aware of more work on single-hidden layer Artificial Neural Network (ANN) and unsupervised machine learning-based cracks/impact location and damage/delamination detections in composite/aluminium materials, which are mostly performed on vibrations based damage detection and not utilizing deep learning or CNN. 
-		Therefore, in the literature we only included Deep learning/ Neural Network-based guided wave-based damage/delamination detection, as our main contribution is regarding the use of deep learning on guided full wavefield based delamination detection.
+		Therefore, in the literature we only included Deep learning/ Neural Network-based guided wave-based damage/delamination detection, as our main contribution is regarding the use of deep learning methods on guided full wavefield based delamination detection.
 	\\ \\
 	\color{black}\textbf{Comment 3:} Page 4, line 38- (IoU)
 	\\ \\
@@ -140,7 +140,7 @@
 	\color{black}{\textbf{Comment 10:} Page 12, line 27,28-} The activation function is applied before conv\_kernel? This is normally not the way. Normally, kernel first and then activation.
 	\\ \\ 
 	\color{blue}{\textbf{Response:} Yes, the default order is to apply convolution then applying the activation function e.g. ReLU.
-	However, in the FCN-DenseNet model, authors apply first the Batch Normalization followed by the activation function (ReLU) then they applied the convolution. 
+	However, in the FCN-DenseNet model, authors first apply the Batch Normalization followed by the activation function (ReLU) then they applied the convolution. 
 	We implement their architecture accordingly.}
 	\\ \\ 
 	\color{black}{\textbf{Comment 11:} Page 13, line 34-} What is the difference between transition and transmission from Fig. 5?
@@ -152,7 +152,7 @@
 	\color{blue}{\textbf{Response:} 
 	Applying Sigmoid activation function at the output layer will output a spectrum of values range between \(0\) and \(1\), which can be considered as a regression problem which is not the case.
 	Our problem is a two-class classification problem, therefore our target is to classify the output values as damaged or undamaged. 
-	Accordingly, the threshold must be set to decide whether the output belongs to the class undamaged represent by \(0\) value or damaged represented by \(1\) value. 
+	Accordingly, the threshold must be set to decide whether the output belongs to the class undamaged represented by \(0\) value or damaged represented by \(1\) value. 
 	In our problem of identifying the delamination, we assume that assigning the predicted output to class \(1\) although it belongs to class \(0\) is as costly as assigning the predicted output to class \(0\) although it belongs to class \(1\). 
 	Therefore, a threshold with value \(0.5\) is used, accordingly, if the output value is greater than \(0.5\) it will be assigned to class \(1\), otherwise, it will be assigned to class \(0\).}
 	\\ \\ 
@@ -203,7 +203,7 @@
 	\\ \\ 
 	\color{black}{\textbf{Comment 20:} Page 23, line 35 - What "Others"? You mean et al.?}
 	\\ \\
-	\color{blue}{\textbf{Response:} Yes, it meant others, we checked the reference and updated to et al.}
+	\color{blue}{\textbf{Response:} Yes, others meant et al., we checked the reference and updated to et al.}
 	\\ \\
 \color{blue}{\textbf{Response to general statement} As mentioned above, we want to be transparent and deliver reproducible results. Therefore, we are happy to share the code and data set (see links above).}
 \\ \\
