@@ -1,0 +1,730 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}}
+%\includeonlyframes{frame1,frame2,frame3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{eso-pic} 
+\usepackage{wrapfig}
+
+
+%\usepackage{FiraSans}
+
+%\usepackage{comment}
+%\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows}  
+
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{animate}
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+\captionsetup[figure]{labelformat=empty}%
+\graphicspath{{gif/}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+\usefonttheme[onlymath]{Serif}  % It should be uncommented if Fira fonts in math does not work
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{PhD project presentation}
+\subtitle{Feasibility studies of artificial intelligence driven diagnostics}
+\author{\textbf{Abdalraheem Ijjeh\\Supervisor: Prof. Pawel Kudela}}
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery\\Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright \includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 2 - authors in one line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\title{My fancy title}
+%	\subtitle{Lamb-opt}
+%	\author{\textbf{Paweł Kudela}\textsuperscript{2}, Maciej Radzieński\textsuperscript{2}, Wiesław Ostachowicz\textsuperscript{2}, Zhibo Yang\textsuperscript{1} }
+%	 logo align to Institute 
+%	\institute{\textsuperscript{1}Xi'an Jiaotong University \\ \textsuperscript{2}Institute of Fluid Flow Machinery\\ \hspace*{1pt} Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright \includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 3 - multilogo vertical
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\title{My fancy title}
+%%\subtitle{Lamb-opt}
+%%	\author{\textbf{Paweł Kudela}\inst{1}, Maciej Radzieński\inst{1}, Wiesław Ostachowicz\inst{1}, Zhibo Yang\inst{2} }
+%%	 logo under Institute 
+%%	\institute%
+%%	{ 
+%%		\inst{1}%
+%%		Institute of Fluid Flow Machinery\\ \hspace*{1pt} Polish Academy of Sciences \\ \includegraphics[height=0.85cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps} \\
+%%		\and
+%%		\inst{2}%
+%%	    Xi'an Jiaotong University \\ \includegraphics[height=0.85cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_box.eps}
+%%    }
+% end od option 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% option 4 - 3 Institutes and logos horizontal centered
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{My fancy title}
+%\subtitle{Lamb-opt }
+%\author{\textbf{Paweł Kudela}\textsuperscript{1}, Maciej Radzieński\textsuperscript{1}, Marco Miniaci\textsuperscript{2}, Zhibo Yang\textsuperscript{3} }
+%
+%\institute{ 
+%\begin{columns}[T,onlytextwidth]
+%	\column{0.39\textwidth}
+%	\begin{center}
+%		\textsuperscript{1}Institute of Fluid Flow Machinery\\ \hspace*{3pt}Polish Academy of Sciences
+%	\end{center}
+%	\column{0.3\textwidth}
+%	\begin{center}
+%		\textsuperscript{2}Zurich University
+%	\end{center}
+%	\column{0.3\textwidth}
+%	\begin{center}
+%		\textsuperscript{3}Xi'an Jiaotong University
+%	\end{center}
+%\end{columns}
+%\vspace{6pt}
+%% logos 
+%\begin{columns}[b,onlytextwidth]
+%	\column{0.39\textwidth}
+%		\centering 
+%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}
+%	\column{0.3\textwidth}
+%		\centering 
+%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_box.eps}
+%	\column{0.3\textwidth}
+%		\centering 
+%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_box2.eps}
+%\end{columns}
+%}
+%\makeatletter
+%\setbeamertemplate{title page}{
+%	\begin{minipage}[b][\paperheight]{\textwidth}
+%		\centering  % <-- Center here
+%		\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+%		\vfill%
+%		\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+%		\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+%		\usebeamertemplate*{title separator}
+%		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+%		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+%		\ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+%		\vfill
+%		\vspace*{1mm}
+%	\end{minipage}
+%}
+%
+%\setbeamertemplate{title}{
+%	%  \raggedright%  % <-- Comment here
+%	\linespread{1.0}%
+%	\inserttitle%
+%	\par%
+%	\vspace*{0.5em}
+%}
+%\setbeamertemplate{subtitle}{
+%	%  \raggedright%  % <-- Comment here
+%	\insertsubtitle%
+%	\par%
+%	\vspace*{0.5em}
+%}
+%\makeatother
+% end of option 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 5 - 2 Institutes and logos horizontal centered
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{My fancy title}
+%\subtitle{Lamb-opt }
+%\author{\textbf{Paweł Kudela}\textsuperscript{1}, Maciej Radzieński\textsuperscript{1}, Marco Miniaci\textsuperscript{2}}
+%
+%\institute{ 
+%	\begin{columns}[T,onlytextwidth]
+%		\column{0.5\textwidth}
+%			\centering
+%			\textsuperscript{1}Institute of Fluid Flow Machinery\\ \hspace*{3pt}Polish Academy of Sciences
+%		\column{0.5\textwidth}
+%			\centering
+%			\textsuperscript{2}Zurich University
+%	\end{columns}
+%	\vspace{6pt}
+%	% logos 
+%	\begin{columns}[b,onlytextwidth]
+%		\column{0.5\textwidth}
+%		\centering 
+%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}
+%		\column{0.5\textwidth}
+%		\centering 
+%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_box.eps}
+%	\end{columns}
+%}
+%\makeatletter
+%\setbeamertemplate{title page}{
+%	\begin{minipage}[b][\paperheight]{\textwidth}
+%		\centering  % <-- Center here
+%		\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+%		\vfill%
+%		\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+%		\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+%		\usebeamertemplate*{title separator}
+%		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+%		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+%		\ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+%		\vfill
+%		\vspace*{1mm}
+%	\end{minipage}
+%}
+%
+%\setbeamertemplate{title}{
+%	%  \raggedright%  % <-- Comment here
+%	\linespread{1.0}%
+%	\inserttitle%
+%	\par%
+%	\vspace*{0.5em}
+%}
+%\setbeamertemplate{subtitle}{
+%	%  \raggedright%  % <-- Comment here
+%	\insertsubtitle%
+%	\par%
+%	\vspace*{0.5em}
+%}
+%\makeatother
+% end of option 5
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  End of title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% logo option - alternative manual insertion by modification of coordinates in \put()
+%\titlegraphic{%
+%	%\vspace{\logoadheight}
+%	\begin{picture}(0,0)
+%	\put(305,-185){\makebox(0,0)[rb]{\includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}}
+%	\end{picture}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+\note{
+	Welcome and thank you for joining me here at this remote presentation event. At the beginning I want to introduce my self, my name is Abdalrheem Ijjeh, a PhD student at the Institute of Fluid flow machinery, Polish academy of sciences, supervised by professor Pawel Kudela. Today I am going to briefly present my PhD project entitled by  Feasibility studies of artificial intelligence-driven diagnostics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame1]{Table of contents}
+  	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+\end{frame}
+\note{
+	The presentation will be as follow: 
+	In the first section, I am going to introduce and define composite materials, then I will talk beirfly about defects in composite materials, and the conventional approach of damage detection in composite materials. \\
+	In the second section, I will briefly introduce Artificial intelligence, machine learning and deep learning approaches.\\
+	In the third section, the objectives of the project will be presented. \\
+	Then I will talk about the Dataset generation in the fourth section. \\
+	Finally, in the last section, I am going to talk about deep learning techniques for delamination identification.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Composite materials}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Composite materials}
+	\begin{wrapfigure}{r}{7cm}
+		\begin{figure}[h!]
+			\centering
+			\vspace{-1cm}
+			\hspace{3cm}
+			\includegraphics[scale=0.20]{Composite_3d.png}
+		\end{figure}
+	\end{wrapfigure}
+	Composites materials are formed by combining materials together to form an overall structure with properties that differ from that of the individual components as shown in the below image.
+
+	\tiny {Image source: https://en.wikipedia.org/wiki/Composite\_material}
+
+\end{frame}
+\note{
+	A composite material can be defined as a combination of a matrix and a reinforcement, which when combined gives properties superior to the properties of the individual components. \\
+	The reinforcement fibres (e.g Glass, carbon) can be cut, aligned, placed in different ways to affect the properties of the resulting composite.
+	The matrix, normally a form of resin (e.g polyester, epoxy), keeps the reinforcement in the desired orientation. \\
+	It protects the reinforcement from chemical and environmental attack, and it bonds the reinforcement so that applied loads can be effectively transferred.
+	The Gray layer is a protection for the composite. 
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}{{Composite materials} Cont.}
+		\begin{wrapfigure}{r}{7cm}
+		\begin{figure}[h!]
+			\centering
+			\vspace{-2cm}
+			\includegraphics[scale=1]{composite_materials.png}
+		\end{figure}
+	\end{wrapfigure}
+	\textbf{Examples of Composite Uses:}
+	\begin{itemize}
+		\item Aerospace structures
+		\item Automotive
+		\item Energy %(e.g. wind turbines)
+		\item Infrastructure (e.g. bridges, roads, railways,...)
+		\item Pipes and tanks
+	\end{itemize}
+\end{frame}
+\note{
+	Composite materials have enormous life application:
+	in aerospace applications like components of the aircraft (whether business or military), rockets and missiles etc.\\	
+	In the Automobile industries for example (steel and aluminium body). \\
+	In the energy application, composites are used in wind turbines.\\ 
+	In infrastructures, composites have so many applications for example bridges, roads, railways, in communication antennae, etc.\\
+	Now, why to use composite materials? 
+	As shown in the figure, composites have so many advantages over metals such as their lightweight, flexibility in design, can embed instruments like sensors (FBGs to monitor the structure), their capability to perform better regarding fatigue strength, their lower cost, their capability to resists corrosion caused by environmental causes,  and other advantages.
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Defects in composite materials}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Problems of composite materials}
+	Composite materials can have several kinds of defects such as:
+	\begin{wrapfigure}{r}{0.5\textwidth}
+		\begin{figure}[h!]
+			\centering
+			\vspace{-10pt}
+			\includegraphics[width=0.48\textwidth]{delamination1.png}
+		\end{figure}
+	\end{wrapfigure}
+	\begin{itemize}
+		\item Cracks
+		\item Fibre breakage
+		\item Debonding		
+		\item Delamination 
+	\end{itemize}
+	Among these defects, delamination is one of the most hazardous forms of the defects, which essentially leads to very catastrophic failures if not detected at early stages.
+	
+	\tiny {Image source: https://docplayer.biz.tr/151413952-Tabakali-kompozitlerde-yapraklanma-delamination-bolgesinin-burkulma-mukavemetine-etkileri.html}
+\end{frame}
+\note{
+	Generally, impact damage in composite materials is caused by various impact events that result from the lack of reinforcement in the out-of-plane direction.
+	Causing: 
+	Matrix cracks, 
+	Fibre breakage, 
+	Debonding (occurs when an adhesive stops adhering to an adherend) 
+	And delamination, as shown in the figure, which can alter the compression strength of composite laminate and gradually affect the composite to encounter failure by buckling.
+	Among these defects in composites, delamination is considered one of the most hazardous types of defects. 
+	That is because delamination can seriously decrease the performance of the composite.
+	Therefore, delamination detection in the early stages can help to avoid structural collapses.
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Damage detection in composite materials}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Damage detection in composite materials}
+		\begin{wrapfigure}{r}{0.5\textwidth}
+		\begin{figure}[h!]
+			\centering
+			\vspace{-2.5cm}
+			\hspace{-2.0cm}
+			\includegraphics[width=0.55\textwidth]{GW_LambWaves.png}
+		\end{figure}
+	\end{wrapfigure}
+	Conventional structural damage detection methods involve two processes:
+	\begin{itemize}
+		\item Feature extraction 
+		\item Feature classification	
+	\end{itemize}
+\end{frame}
+\note{
+	In conventional damage detection methods, to detect the damage, first, we must analyse the response of structure obtained by sensors such as (PZTs) that can sense for example the generated guided waves (e.g. Lamb waves). 
+	Then, we need to extract the features of response  (which requires large computational effort). 
+	Then we can attempt to classify these features, which are sensitive to minor damage and that can be distinguished from the response to natural and environmental changes (baseline).
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Damage detection in composite materials Cont.}
+	Drawbacks of Conventional methods:
+	\begin{itemize}
+		\item Requires a great amount of human labor and computational effort.
+		\item Demands a high amount of experience of the practitioner.
+		\item Inefficient with big data which requires a complex computation of damage features.  
+	\end{itemize}
+\end{frame}
+\note{
+	Conventional methods of damage detection focus on patterns
+	extraction from registered measurements and accordingly make decisions based on these patterns. 
+	Moreover, conventional methods for pattern recognition require feature selection and classification (handcrafted features). 
+	These conventional methods can perform efficient damage detection. However, these methods depend on selected features from their scope of measurement. 
+	Accordingly, introducing new patterns will cause them to fail in detecting the damage.
+	Furthermore, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{AI, Machine learning and Deep learning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{AI, Machine learning and Deep learning}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.88\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
+	\end{figure}
+\tiny{Image source: https://top6sites.com/2020/05/15/ai-vs-machine-learning-vs-deep-learning/}
+\end{frame}
+
+\note{
+	\begin{itemize}
+		\item Artificial intelligence (AI) refers to a broader field of computer science. 
+		AI aims to enable machines to think without human intervention
+		\item Machine Learning (ML) is a subset of AI, that uses statistical learning algorithms to build smart systems.
+		\item Deep learning is a subset of ML. 
+		It was inspired by the information processing patterns observed in the human brain (Neural Network). 
+		Just like humans use their brain to identify patterns and classify various types of information. 
+		Deep learning algorithms as Artificial Neural Network (ANN) can be taught to perform the same tasks for machines.
+		\item Deep Learning is the most exciting and powerful branch of Machine Learning. 
+		It's a technique that teaches computers to do what comes naturally to humans: learn by example. 
+		Deep learning is a key technology behind driverless cars, enabling them to recognize a stop sign or to distinguish a pedestrian from a lamppost. It is the key to voice control in consumer devices like phones, tablets, TVs, and hands-free speakers. Deep learning is getting lots of attention lately and for good reason. 
+		It’s achieving results that were not possible before.
+		\end{itemize}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{AI, Machine learning and Deep learning Cont.}
+		\begin{minipage}[c]{0.45\textwidth}
+		AI technologies are in accelerating growth due to:
+		\begin{itemize}
+			\item Exponential development in computer hardware industries
+			% (CPUs, GPUs, FPGAs, TPUs and ASICs)
+			\item Era of Big data, 	
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{0.45\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.75\textwidth]{CPU.jpg}
+			\includegraphics[width=.75\textwidth]{big_data_icon.jpg}	
+		\end{figure}
+	\tiny{Image source: https://depositphotos.com/213472866/stock-illustration-big-data-color-icon-cloud.html}
+	\end{minipage}
+
+\end{frame}
+\note{
+In recent years, the field of AI has been developed in the accelerating rate due to:
+the advanced evolution occurred in technology that produced high computational powers \\
+like Central Processing Units, Graphical Processing Units,
+Field Programmable Gate Arrays, Tensor Processing Units, and Application Specific Integrated Circuit.\\
+The second thing that causes AI to be in accelerating growth is that in recent years the era of big data began, which is extremely essential in the learning process of AI systems.\\
+We can say that deep learning techniques rapidly developed after AlexNet was developed.
+AlexNet is the name of a convolutional neural network which has had a large impact on the field of machine learning, specifically in the application of deep learning to computer vision. 
+It famously won the 2012 ImageNet Large Scale Visual Recognition Challenge-2012 competition which was a breakthrough.	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{AI, Machine learning and Deep learning Cont.}	
+	\begin{minipage}[c]{0.45\textwidth}
+		\begin{itemize}
+			\item 	Neuron is responsible for acting as a gate (previous-to-next) layers with a nonlinear operation.	
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{0.45\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.75\textwidth]{fig_neuron.png}
+			\includegraphics[width=1.0\textwidth]{neuron_perceptron.png}	
+		\end{figure}
+	\end{minipage}
+
+\tiny{source of biological neuron: https://tlr.gitbook.io/data-science/neural-network/perceptron}
+\end{frame}
+\note{
+	The idea behind perceptrons or (artificial neurons) is that it is possible to mimic certain parts of biological neurons, such as dendrites, cell bodies and axons using a simplified mathematical models of what limited knowledge we have on their inner workings: 
+	signals can be received from dendrites, and sent down the axon once enough signals were received. 
+	This outgoing signal can then be used as another input for other neurons, repeating the process. 
+	Some signals are more important than others and can trigger some neurons to fire easier. 
+	Connections can become stronger or weaker, new connections can appear while others can cease to exist. 
+	We can mimic most of this process by coming up with a function that receives a list of weighted input signals and outputs some kind of signal if the sum of these weighted inputs reaches a certain threshold value.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{AI, Machine learning and Deep learning Cont.}
+	\begin{wrapfigure}{r}{0.5\textwidth}
+		\centering
+		\vspace{-40pt}
+		\hspace{15pt}
+		\includegraphics[width=0.45\textwidth]{ANN.png}
+	\end{wrapfigure}
+Artificial neural network (ANN) can be created by cascading n-layers of “neurons”. 
+\begin{itemize}
+	\item	Input layer.
+	\item	Hidden layer(s).
+	\item	Output layer.	
+\end{itemize}
+\end{frame}
+\note{
+Artificial Neural Networks or ANN is an information processing paradigm that is inspired by the way the biological nervous system such as brain process information. 
+It is composed of a large number of highly interconnected processing elements(neurons) working together in harmony to solve a specific problem such as regression, classification, image detection and identification and in time series data.
+A basic ANN is composed of three layers:\\
+the input layer, the hidden layer or layers and finally an output layer.
+Information flows from the input layer, through the hidden layer to the output layer.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{AI, Machine learning and Deep learning Cont.}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=.47]{MLvsDL.png}
+	\end{figure}
+\tiny{Image source: https://lawtomated.com/a-i-technical-machine-vs-deep-learning/ }
+\end{frame}
+\note{
+Feature extraction (aka feature engineering) is the process of putting domain knowledge into the creation of feature extractors to reduce the complexity of the data and make patterns more visible to learning algorithms. \\
+This process is difficult and expensive in terms of time and expertise.
+The shown diagram summaries the core distinction between machine learning and deep learning techniques. \\
+For the classical machine learning techniques, we have to perform feature extraction by ourselves, then we use a suitable method to do the classification. \\
+On the contrary, in deep learning techniques, the process of feature extraction is done automatically without the need for human intervention, since the model will learn by itself to perform this process.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objective of the Project}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Objective of the Project}
+	\begin{itemize}
+		\item To develop an AI driven diagnostic model for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).
+		\item End-to-end approach (Perform feature extraction, selection and classification automatically.)
+	\end{itemize}
+\end{frame}
+\note{
+Our main objectives in this project are to explore the feasibility of using an AI approach in detecting defects such as delaminations in composite laminates such as carbon fibre reinforced polymers (CFRP). \\
+And accordingly to develop an end to end models that can identify delaminations in composite laminates which are capable of performing feature extraction and classification without the need for human intervention.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Objective of the Project Cont.}
+%
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dataset generation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dataset generation}
+		\begin{minipage}[c]{0.45\textwidth}
+		\begin{itemize}
+			\item 475 cases.
+			\item Delamination has a different shape, size and location for each case.
+			\item CFRP is made of 8-layers (delamination was modelled between the 3rd and 4th layer)
+			\item Root mean square (RMS) was applied to the wavefield (To improve the visibility)  
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{0.45\textwidth}
+		%\begin{wrapfigure}{r}%{0.5\textwidth}
+		%\centering
+		%\vspace{-10pt}
+		\hspace{1cm}
+		\includegraphics[scale=1.0]{dataset2_labels_ellipses.png}
+		%\end{wrapfigure}
+	\end{minipage}
+\end{frame}
+
+\note{
+Dataset generation.
+Numerically generating 475 cases of full wavefield of propagating Lamb waves in a plate made of CFRP as shown in the figure. \\
+Essentially, the output resembles measurements acquired by SLDV in the transverse direction (perpendicular to the plate surface). \\
+Each delamination with different shape, size and location was modelled randomly on the plate.\\ 
+To improve the delamination visibility Root mean square RMS was applied.
+The dataset is used to train the deep learning models in order to identify the delaminations..
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Deep learning techniques for delamination identification}
+%\subsection{Convolutional Neural Networks CNN}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{wrapfigure}{r}{0.5\textwidth}		
+%	\centering
+%	\vspace{0pt}
+%	\hspace{15pt}
+%	\includegraphics[width=0.25\textwidth]{hardware.png}
+%\end{wrapfigure}
+%
+%\begin{wrapfigure}{r}{0.5\textwidth}
+%	\centering
+%	\vspace{-40pt}
+%	\hspace{15pt}
+%	\includegraphics[width=0.25\textwidth]{big_data.jpg}	
+%\end{wrapfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Deep learning approach cont.}
+%	\begin{itemize}
+%		\item Deep learning technologies offered the opportunity of being implemented in NDT and further with SHM approaches.
+%		\item Deep learning techniques handled issues regarding data preprocessing and feature extraction
+%		\item End-to-end approaches are developed, in which the whole unprocessed data are fed into the model, hence, it will learn by itself to recognise the patterns and detect the damage
+%	\end{itemize}
+%\end{frame}
+%\note{
+%	We can say that deep learning techniques rapidly developed after AlexNet in 2012 was created, actually it was a breakthrough. \\
+%	Due to the rapid development in deep learning feild, deep learning techniques could be implemented in NDT and further with SHM approches. \\
+%	Moreover, the application of deep learning techniques in NDT and SHM regarding damage detection and identification is still new and not fully integrated or investigated. \\
+%	The beuty about deep learning techniques is it offers an end to end approchs, accordingly, processes of feature extraction or classification are skipped, because it will be performed automaticlly by the model which will learn by itself to perfom these processes.
+%
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Computer Vision}
+	The increasingly advancement in deep learning field has vastly improved computer vision (CV) applications such as: 
+	\begin{itemize}
+		\item Image classification
+		\item Object detection and localisation
+		\item Image segmentation
+	\end{itemize} 
+\end{frame}
+\note{
+Computer Vision, often abbreviated as CV, is defined as a field of study that seeks to develop techniques to help computers “see” and understand the content of digital images such as photographs and videos.\\
+Many popular computer vision applications involve trying to recognize things in photographs; for example, \\
+Image classification concerns what broad categories are there in the image. \\
+Object detection and localisation concerns with whare are the objects in the image.\\
+and Image segmentation which is the process of partitioning an image into multiple segments.  Image segmentation is typically used to locate objects and boundaries (lines, curves, etc.) in images. 
+More precisely, image segmentation is the process of assigning a label to every pixel in an image such that pixels with the same label share certain characteristics.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Convolutional Neural Network CNN}
+	\begin{itemize}
+		\item CNN is a type of feedforward ANNs which additionally performs convolution operations  
+		\item CNNs are designed to handle data as tensors with different dimensions such as: 1D signals, 2D and 3D images and sequence of images (videos)in 4D.
+	\end{itemize}
+\end{frame}
+\note{
+The convolutional neural network, or CNN for short, is a specialized type of neural network model designed for working with two-dimensional image data, although they can be used with one-dimensional and three-dimensional data. \\
+Central to the convolutional neural network is the convolutional layer that gives the network its name. This layer performs an operation called a “convolution“.\\	
+CNNs are primarily used in applications of CV (previously mentioned).\\
+The innovation of convolutional neural networks is the ability to automatically learn a large number of filters in parallel specific to a training dataset under the constraints of a specific predictive modelling problem, such as image classification. The result is highly specific features that can be detected anywhere on input images.	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Convolutional Neural Network CNN cont.}
+	\begin{wrapfigure}{r}{0.62\textwidth}
+		\centering
+		\vspace{-35pt}
+		\hspace{0pt}
+		\includegraphics[width=0.62\textwidth]{Fig_Convnet.png}
+	\end{wrapfigure}
+	Typical architecture of a CNN consists of three main parts:
+	\begin{itemize}
+		\item Convolutional layer
+		\item Downsampling layer
+		\item Dense layer
+	\end{itemize}
+\end{frame}
+\note{
+In the context of a convolutional neural network, convolution is a linear operation that involves the multiplication of a set of weights with the input, much like a traditional neural network. 
+Given that the technique was designed for two-dimensional input, the multiplication is performed between an array of input data and a two-dimensional array of weights, called a filter or a kernel. \\
+The filter is smaller than the input data and the type of multiplication applied between a filter-sized patch of the input and the filter is a dot product. 		
+The output of multiplying the filter with the input array one time is a single value. 
+As the filter is applied multiple times to the input array, the result is a two-dimensional array of output values that represent filtering of the input.
+The two-dimensional output array from this operation is called a “feature map“.	
+Once a feature map is created, we can pass each value in the feature map through a nonlinearity, such as a ReLU, much like we do for the outputs of a fully connected layer.
+After the feature maps are produced, downsampling is applied to reduce the spatial resolution on the exact positioning of features within networks.
+Finally, the feature maps are flattened and input into the dense layer.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Convolutional Neural Network CNN cont.}
+
+	\begin{minipage}[c]{0.45\textwidth}
+		\begin{itemize}
+			\item 	Fully CNN (FCN) is a neural network in which dense layer is replaced with convolutional layers. 
+			\item The idea behind FCN is to stack a group of convolutional layers in an
+			encoder-decoder style.
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.85\textwidth]{encoder_decoder_1.png}
+	\end{minipage}
+\end{frame}
+\note{
+The idea behind FCN is to stack a group of convolutional layers in an
+encoder-decoder style. \\
+The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsample the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Convolutional Neural Network CNN cont.}
+		\centering
+		\includegraphics[width=.95\textwidth]{encoder_decoder.png}
+\end{frame}
+\note{
+Finally, in this slide, we present an abstract level of how FCN models perform Image segmentation to identify the delamination as shown in the figure.
+The input to the model is an RMS Image with delamination located almost at the upper middle of the image. 
+The FCN is responsible for performing image segmentation accordingly, Identifying the delamination as shown on the predicted damage on the right.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[fragile]{Convolution}
+%	\animategraphics[loop,controls,scale=0.25]{2}{ConV-}{0}{8}
+%	\transpush
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[fragile]{Activation functions}
+%	\animategraphics[loop,controls,scale=0.25]{1}{activation_functions/ac-}{0}{98}
+%	\transpush
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[fragile]{TanH}
+%	\animategraphics[loop,controls,scale=0.25]{5}{sigmoid/sig-}{0}{467}
+%	\transpush
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[fragile]{Maxpool}
+%	\animategraphics[loop,controls,scale=0.25]{2}{maxpool-}{0}{13}
+%	\transpush
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[fragile]{Transposed Convolution}
+%	\animategraphics[loop,controls,scale=0.25]{1}{abdalraheem-}{0}{15}
+%	\transpush
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\begin{frame}[fragile]{Transposed convolution}
+%%	\animategraphics[loop,controls,scale=0.25]{1}{TransposedConv-}{0}{67}
+%%	\transpush
+%%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[fragile]{LSTM}
+%	\animategraphics[loop,controls,scale=0.25]{1}{LSTM/lstm-}{0}{12}
+%	\transpush
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[fragile]{Intermediate outputs}
+%	\animategraphics[loop,controls,width=\linewidth]{10}{450/input }{1}{220}
+%	\transblindsvertical<2,3>
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}[t,label=A]{Acknowledgements}
+%		\begin{alertblock}{Project title: Elastic constants identification of composite laminates by using Lamb wave dispersion curves and optimization methods}
+%The research was funded by the Polish National Science Center under grant agreement 
+%no 2018/29/B/ST8/00045. 
+%\end{alertblock}
+%\end{frame}	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setbeamercolor{palette primary}{fg=blue, bg=white}
+\begin{frame}[standout]
+  Thank you for your listening!\\ \vspace{12pt}
+  Questions?\\ \vspace{12pt}
+  \url{aijjeh@imp.gda.pl}
+\end{frame}
+}
+\note{Than you for listening, and I am  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
