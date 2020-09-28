@@ -50,6 +50,7 @@
 \usepackage{booktabs} % for nice tables
 \usepackage{csvsimple} % for csv read
 \usepackage{graphicx}
+\usepackage{url}
 %\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
 %\usepackage{breqn}
 \usepackage{multirow}
@@ -148,7 +149,7 @@ Accordingly, this issue of low-resolution damage influence map can be solved by 
 The measurements are conducted on a dense mesh of measurement points spanned over the area of the investigated structure.
 Consequently, SLDV produces a full wavefield of measurements with high resolution of damage influence maps which can significantly improve the process of damage detection and localisation~\cite{Michaels2007,Park2014,Tian2015a,Kudela2015}.
 Full wavefield processing techniques even allow for damage size estimation~\cite{Girolamo2018a,Kudela2018} which is difficult to perform in case of transducer arrays, especially for composite structures.
-Therefore, the latter methods are evaluated mostly for damage detection and localisation in metallic structures~\cite{Michaels2008,Huang2018a,Wang2020}.
+Therefore, the latter methods are evaluated mostly for damage detection and localisation in metallic structures~\cite{Michaels2008a,Huang2018a,Wang2020}.
 
 Certain algorithms such as the time reversal algorithm can benefit from combining piezoceramic transducers (as actuators) with SLDV for sensing~\cite{Girolamo2018a, Miniaci2019}.
     
@@ -164,11 +165,11 @@ Therefore, issues regarding data preprocessing and feature extraction can be han
 Nowadays, end-to-end approaches are developed, in which the whole unprocessed data are fed into the model, hence, it will learn by itself to recognise the patterns and detect the damage.
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Deep learning techniques have widely been utilised for the inspection and maintenance of civil infrastructure and have shown very promising results~\cite{cha2017deep, lin2017structural, liu2019computer, beckman2019deep, choi2019sddnet}. 
+Deep learning techniques have widely been utilised for the inspection and maintenance of civil infrastructure and have shown very promising results~\cite{cha2017b, Lin2017a, liu2019computer, beckman2019deep, choi2019sddnet}. 
 It has also been successfully applied for various fault diagnosis based tasks in rotating machinery~\cite{janssens2016convolutional}. 
-For instance, Cha et al.~\cite{cha2017deep} proposed a computer vision-based method using deep Convolutional Neural Network (DCNN) for the detection of concrete cracks. 
+For instance, Cha et al.~\cite{cha2017b} proposed a computer vision-based method using deep Convolutional Neural Network (DCNN) for the detection of concrete cracks. 
 They compared their Convolutional Neural Network (CNN) based approach with traditional edge detection techniques such as Sobel and Canny methods and showed that their proposed model achieved quite better results and is very suitable for finding concrete cracks in realistic situations. 
-Lin et al.~\cite{lin2017structural} developed an automatic damage feature extraction DCNN model and their results showed that DCNN outperformed conventional methods in realistic situations. 
+Lin et al.~\cite{Lin2017a} developed an automatic damage feature extraction DCNN model and their results showed that DCNN outperformed conventional methods in realistic situations. 
 Choi and Cha~\cite{choi2019sddnet} developed an encoder-decoder based semantic segmentation damage detection network (SDDNet), a real-time segmentation method based on CNN. 
 SDDNet was inspired by a DenseNet and DeepLabV3+~\cite{chen2018encoder}. 
 Liu et al.~\cite{liu2019computer} applied the U-Net network structure based on fully convolutional networks (FCN) for the purpose of identifying the locations of cracks in the raw input images of civil infrastructure under different conditions such as messy background, illumination, width of the cracks, etc. 
@@ -214,7 +215,7 @@ The model was used for automatic feature extraction in conjunction with probabil
 The neural network model and probability ellipse method were applied for computing the damage index (DI). 
 It was derived by comparing the differences in the measured  Lamb waves before and after a damage occurrence. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Ewald et al.~\cite{ewald2019deepshm} proposed a deep learning technique for SHM on guided Lamb waves \enquote{DeepSHM}. 
+Ewald et al.~\cite{Ewald2019} proposed a deep learning technique for SHM on guided Lamb waves \enquote{DeepSHM}. 
 They pre-processed the sensor signal response through applying wavelet transform to obtain the wavelet coefficient matrix (WCM), which is fed into the CNN for training to acquire the neural weights. 
 They achieved different classification accuracies ranging from \(17\%\) to \(99.9\%\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -242,7 +243,7 @@ For this purpose, we have created a deep learning model based on a fully convolu
 FCN is considered as a type of CNN, in which the densely connected network is replaced by fully convolutional layers. 
 FCNs can be trained end-to-end and pixels-to-pixels, without the need for performing a process of feature extraction. 
 Moreover, the pixel-wise segmentation model enables the precise shape and size estimation of defects.
-The capabilities and potentials of the proposed method are compared to the conventional wavefield signal processing method i.e. adaptive wavenumber filtering~\cite{Kudela2015,Radzienski2019}.
+The capabilities and potentials of the proposed method are compared to the conventional wavefield signal processing method i.e. adaptive wavenumber filtering~\cite{Kudela2015,Radzienski2019a}.
 The quantitative comparison was performed by using intersection over union (IoU) of detected delamination area with respect to the ground truth. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -292,8 +293,9 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
 We would like to acknowledge dr Maciej Radzienski for providing the experimental data of full wavefield measured by SLDV.
 
-\bibliography{MSSP_paper1}
+\bibliography{MSSP_paper1_R1}
 \bibliographystyle{num_order}
+%\bibliographystyle{plain}
 \end{document}
 
 
