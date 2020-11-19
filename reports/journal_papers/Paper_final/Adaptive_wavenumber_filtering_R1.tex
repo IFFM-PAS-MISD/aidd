@@ -1,0 +1,17 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\subsection{Adaptive wavenumber filtering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Adaptive wavenumber filtering is a well-established method for processing of images of propagating elastic waves.
+The method has proved to be useful for crack size estimation~\cite{Kudela2015}, impact induced damage assessment~\cite{Kudela2018},  delamination and disbonding detection and localisation~\cite{Radzienski2019a}.  
+It is used here as a reference point for comparison purposes against proposed strategies based on FCN.
+
+The method involves steps such as 2D Fourier Transform, wavenumber filtering, inverse Fourier Transform and RMS.
+It can be used as an automated tool for producing damage maps which are easy in interpretation.
+However, it still requires setting a threshold for the filter mask and quantisation threshold useful for damage size estimation.
+These thresholds can be estimated empirically and even certain rigid range of thresholds will lead to satisfactory results.
+Nevertheless, it is not a fully automatic process.
+FCN based approach seems to have an advantage in this regard.
+On the other hand, FCN would also need some prior inductive bias from the domain knowledge such as pre-processing parameters, supervision into assigned class, and the most important one: assumption that pixels of processed images can be categorized as damaged and undamaged.
+Moreover, the training of FCN requires tuning of many hyperparameters such as  learning rate, momentum, choice of optimizer, dropout rate, batch size, etc. 
+But this process must be completed only once.
