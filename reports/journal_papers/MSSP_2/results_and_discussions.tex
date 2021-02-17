@@ -82,7 +82,7 @@ Figures~\ref{fig:unet_pred_448} -~\ref{fig:gcn_pred_448} show the predicted outp
 		\caption{FCN-DenseNet}
 		\label{fig:gcn_pred_448}
 	\end{subfigure}
-	
+
 	\caption{First scenario}
 	\label{fig:softmax_448}
 \end{figure} 
@@ -339,15 +339,15 @@ Figures\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accura
 	\centering
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{subfigure}[b]{0.47\textwidth}
-		\centering		\includegraphics[width=\textwidth]{Unet_kfold_iou_per_epochs_softmax.png}	\caption{}
-		\label{fig:unet_accuracy_metric}
+	 \centering		\includegraphics[width=\textwidth]{Unet_kfold_iou_per_epochs_softmax.png}	\caption{}
+	 \label{fig:unet_accuracy_metric}
 	\end{subfigure}
 	\hfill	
 	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{Unet_kfold_loss_per_epochs_softmax.png}
-		\caption{}
-		\label{fig:unet_loss_metric}
+	 \centering
+	 \includegraphics[width=\textwidth]{Unet_kfold_loss_per_epochs_softmax.png}
+	 \caption{}
+	 \label{fig:unet_loss_metric}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\hfill
@@ -424,14 +424,14 @@ Table~\ref{tab:table_parameters} shows the total number of parameters for all im
 	\centering
 	\caption{Model parameters}
 	\label{tab:table_parameters}
-	\begin{tabular}{cc}\hline
-		Model &  Total parameters (\(\approx\)) \\ \hline
-		Res-UNet & \(52\times 10^6\) \\ 
-		VGG16 encoder-decoder & \(37.3\times 10^6\)  \\
-		FCN-DenseNet & \(2.5\times 10^6\) \\ 
-		PSPNet & \(6.6\times 10^6\) \\ 
-		GCN & \(36\times 10^6\) \\ \hline
-	\end{tabular}
+		\begin{tabular}{cc}\hline
+			Model &  Total parameters (\(\approx\)) \\ \hline
+			Res-UNet & \(52\times 10^6\) \\ 
+			VGG16 encoder-decoder & \(37.3\times 10^6\)  \\
+			FCN-DenseNet & \(2.5\times 10^6\) \\ 
+			PSPNet & \(6.6\times 10^6\) \\ 
+			GCN & \(36\times 10^6\) \\ \hline
+		\end{tabular}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

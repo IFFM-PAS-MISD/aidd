@@ -66,7 +66,7 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
-\graphicspath{{Figures/}{//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper2/Figures/}}
+\graphicspath{{Figures/}{////home/aijjeh/Desktop/MSSP_2/Figures/}}
 %\graphicspath{ {Graphics/Figures/} }
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
@@ -105,7 +105,6 @@
 		\address[IFFM]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
 		
 		\author{Abdalraheem A. Ijjeh\fnref{IFFM}}
-		\author{Saeed Ullah \fnref{IFFM}}
 		\author{Pawel Kudela\corref{cor1}\fnref{IFFM}}
 		\ead{pk@imp.gda.pl}
 		%\ead{pfiborek@imp.gda.pl}
@@ -131,41 +130,30 @@
 	%% main text
 \input{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Related_works}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{dataset}
+\input{Methodology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\input{Signal_processing_strategy}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\input{Adaptive_wavenumber_filtering}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{Fully_Convolutional_Network_approach}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{section_fully_convolutional_networks}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{semantic_segmentation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{FCN_models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{PSPNet}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{GCN}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{results_and_discussions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{Conclusions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\clearpage	
 %\appendix
-\section*{Acknowledgements}
+\section*{Acknowledgments}
 The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
 We would like to acknowledge dr Maciej Radzienski for providing the experimental data of full wavefield measured by SLDV.
 
-\bibliography{MSSP_paper2}
+\bibliography{MSSP_paper2.bib}
 \bibliographystyle{unsrt}
 \end{document}
 
