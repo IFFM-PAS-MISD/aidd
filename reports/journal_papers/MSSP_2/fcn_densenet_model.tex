@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{FCN-DenseNet model}
+\subsubsection{FCN-DenseNet model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-The one hundred layer tiramisu model (FCN-DenseNet) was introduced by Simon Jegou et al.~\cite{Jegou} for semantic segmentation.
-FCN-DenseNet is similar to the U-Net architecture, FCN-DenseNet utilises the U-shape of the encoder-decoder scheme with skip connections between the downsampling and the upsampling paths to increase the resolution to the final feature map.
-%Skip connections from the downsampling path to the corresponding upsampling path are essential for recovering spatially detailed information by reusing feature maps.
-
+FCN-DenseNet which was introduced in~\cite{Jegou} was applied in our previous work~\cite{Ijjeh2021} for image segmentation.
+The results were promising, since it outperformed the conventional damage detection technique i.e (adaptive wavenumber filtering method). 
+FCN-DenseNet has a U-shape of the encoder-decoder scheme with skip connections between the downsampling and the upsampling paths to increase the resolution to the final feature map.
 The main component in FCN-DenseNet is the dense block.
-The purpose of the dense block is to concatenate layer input (feature maps) with its output (feature maps) to emphasize spatial details information.
-The dense block is constructed from \(n\) varying number of layers, each layer is composed of a series of operations.
-Figure~\ref{dense_block} illustrates the architecture of the dense block which was used in the current study.
+The dense block is constructed from \(n\) varying number of layers, each layer is performs of a series of operations as shown in table~\ref{layers}.
+The purpose of the dense block is to concatenate the input(x) (feature maps) of a layer  with its output (feature maps) to emphasize spatial details information.
+In this work, we have updated the FCN-DenseNet model by increasing the number of dense blocks and the learnable parameters (filters).
+The architecture of the dense block is presented in Fig.~\ref{dense_block}. 
 \begin{figure} [h!]
 	\begin{center}
 		\includegraphics[scale=1.0,angle=-90]{DenseBlock_layer.png}
@@ -16,39 +16,38 @@ Figure~\ref{dense_block} illustrates the architecture of the dense block which w
 	\caption{Dense block architecture.} 
 	\label{dense_block}
 \end{figure}
-%It has an input (\(x\)) (input image or output of transition layer) with \(k\) feature maps which is concatenated with the output of first layer and this process is recursively performed for all layers in the dense block ending up with output (\(y\)) with a (\(n\times k\)) feature maps. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Transition down layer was introduced to reduce the spatial dimensionality of the feature maps by performing a (\(1\times 1\)) convolution followed by (\(2\times2\)) Maxpool operation. 
+To reduce the spatial dimensionality of the produced feature maps, a transition down layer was added to perform a (\(1\times 1\)) convolution followed by (\(2\times2\)) Maxpooling operation. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The transition up layer was introduced in the model to recover the spatial resolution of the input. 
-Hence, a transpose convolution operation is applied to upsample the input (feature maps from the previous layer).
+Consequently, to recover the spatial resolution, a transition-up layer was added. 
+It applies a transpose convolution operation to upsample feature maps from the previous layer.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Feature maps emerging from upsampling are concatenated with the ones resulting from the skip connection forming the input to a new dense block.
-During the upsampling, the input to the dense block is not concatenated with its output to overcome the overhead of memory shortage since the upsampling path expands the spatial resolution of the feature maps (hint:- We can refer to previous paper and say that the same architecture was applied here. Than we can skip Fig.~\ref{fcn}).
-%Table~\ref{layers} presents the architecture of a single layer, the transition down  and transition up layers in details.
+During the upsampling, the input to the dense block is not concatenated with its output to overcome the overhead of memory shortage since the upsampling path expands the spatial resolution of the feature maps. 
+%(hint:- We can refer to previous paper and say that the same architecture was applied here. Than we can skip Fig.~\ref{fcn}).
+%\begin{figure} [h!]
+%	\begin{center}
+%		\includegraphics[scale=1.0]{FCN_dense_net.png}
+%	\end{center}
+%	\caption{FCN-DenseNet architecture.} 
+%	\label{fcn}
+%\end{figure}
+Table~\ref{layers} presents the architecture of a single layer, the transition down  and transition up layers in details.
 %Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{table}[h!]
-%	\renewcommand{\arraystretch}{1.3}
-%	\centering
-%	\scriptsize
-%	\begin{tabular}{|c|l|c|l|c|}
-%		\cline{1-1} \cline{3-3} \cline{5-5}
-%		\textbf{Layer} &  & \textbf{Transition Down} &  & \textbf{Transition Up} \\ \cline{1-1} \cline{3-3} \cline{5-5} 
-%		Batch Normalization &  & Batch Normalization &  & \multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}(\(3\times3\)) Transposed Convolution, \\ strides = (\(2\times2\))\end{tabular}} \\ \cline{1-1} \cline{3-3}
-%		Relu &  & Relu &  &  \\ \cline{1-1} \cline{3-3}
-%		(\(3\times3\)) Convolution &  & (\(1\times1\)) Convolution &  &  \\ \cline{1-1} \cline{3-3}
-%		\multirow{2}{*}{Dropout \(p = 0.2\)} &  & Dropout \(p = 0.2\) &  &  \\ \cline{3-3}
-%		&  & (\(2\times2\)) Maxpooling &  &  \\ \cline{1-1} \cline{3-3} \cline{5-5} 
-%	\end{tabular}
-%	\caption{Layer, Transition Down and Transition Up layers.} 
-%	\label{layers}
-%\end{table}\\
-%
-\begin{figure} [h!]
-	\begin{center}
-		\includegraphics[scale= 1.0]{FCN_dense_net.png}
-	\end{center}
-	\caption{FCN-DenseNet architecture.} 
-	\label{fcn}
-\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h!]
+	\renewcommand{\arraystretch}{1.3}
+	\centering
+	\scriptsize
+	\begin{tabular}{|c|l|c|l|c|}
+		\cline{1-1} \cline{3-3} \cline{5-5}
+		\textbf{Layer} &  & \textbf{Transition Down} &  & \textbf{Transition Up} \\ \cline{1-1} \cline{3-3} \cline{5-5} 
+		Batch Normalization &  & Batch Normalization &  & \multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}(\(3\times3\)) Transposed Convolution, \\ strides = (\(2\times2\))\end{tabular}} \\ \cline{1-1} \cline{3-3}
+		Relu &  & Relu &  &  \\ \cline{1-1} \cline{3-3}
+		(\(3\times3\)) Convolution &  & (\(1\times1\)) Convolution &  &  \\ \cline{1-1} \cline{3-3}
+		\multirow{2}{*}{Dropout \(p = 0.2\)} &  & Dropout \(p = 0.2\) &  &  \\ \cline{3-3}
+		&  & (\(2\times2\)) Maxpooling &  &  \\ \cline{1-1} \cline{3-3} \cline{5-5} 
+	\end{tabular}
+	\caption{Layer, Transition Down and Transition Up layers.} 
+	\label{layers}
+\end{table}\\

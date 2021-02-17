@@ -1,20 +1,22 @@
-\subsection{Pyramid Scene Parsing Network}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Pyramid Scene Parsing Network (PSPNet) proposed by Zhao et al.~\cite{zhao2017pyramid} is a state-of-the-art deep learning model for image segmentation. PSPNet is a multi-scale network that effectively learns the global context representation of a scene. PSPNet employs residual network (ResNet)~\cite{he2016deep}, with a dilated network as a feature extractor for the extraction of various patterns from the input image. ResNet designed by He et al.~\cite{he2016deep} is very popular due to its depth (up to 152 layers) and with the inclusion of residual blocks. The residual blocks are very useful for training a really deep neural network by proposing the skip connections in such a way that layers can mimic their inputs to the succeeding layer. 
-	This approach assures that the subsequent layer has learned something new and different from what the input has already been encoded. Additionally, such connections help to overcome the vanishing gradients problem. These days, ResNet is commonly applied for feature extraction in various deep CNN models. 
-	
-	PSPNet renders an adequate global contextual information for pixel-level scene parsing. The local and global clues together provide a more reliable predictions. Sub-regions context along with global context information is very useful for distinguishing among different kinds of objects. For further reducing context information loss among diverse sub-regions, a hierarchical global prior was proposed. The hierarchical global prior contains information of multiple scales and it varies among different sub-regions. The pyramid pooling module combines features under four distinct pyramid scales, however, the number of these pyramid levels and size of each level can be modified because they are related to the size of the feature map that is fed into the pyramid pooling layer. The coarsest level, highlighted as red in fig.~\ref{fig:PSPNet} is employing global pooling for producing a single bin output. The feature map is separated into different sub-regions in the subsequent pyramid levels which form pooled representation for different locations. The distinctive levels of the pyramid pooling module generate an output of the feature map of different sizes. These feature maps are processed with a 1 x 1 convolutional layer to reduce their dimensions. The output of the pyramid levels is then up-sampled with bilinear interpolation before the concatenation with the initial feature maps to obtain both local and global context information. In the end, a convolutional layer is employed for generating the pixel-wise segmented predictions. A basic overflow of the PSPNet architecture is illustrated in Fig.~\ref{fig:PSPNet}. 
-	
-	\begin{figure} [h!]
-		\begin{center}
-			\includegraphics[width=\textwidth]{pspsnet.png}
-		\end{center}
-		\caption{PSPNet architecture.} 
-		\label{fig:PSPNet}
-	\end{figure}
-	
-	\begin{comment}As it is shown in the Figure that the initial feature maps are extracted from input images by employing ResNet architecture along with dilation. A pyramid pooling module is applied with different sub-region representations. After that up-sampling and concatenation are performed for forming the final feature representation, which contains both local and global context information. The representation is then fed into a convolution layer for final pixel wise prediction.\end{comment} 
-	In this paper, we implemented PSPNet with ResNet-50 as a backbone for feature map extraction having dilation at the last two layers of ResNet.  A pyramid pooling module is applied with different sub-regions, in this case, a four-level pyramid pooling module (red, orange, blue and green) as shown in fig.~\ref{fig:PSPNet} with bin sizes of 1 x 1, 2 x 2, 4 x 4 and 8 x 8 respectively. The Global average pooling is applied at the coarsest (red) sub-region and for the rest of sub-regions max pooling is applied, followed by a 1 x 1 convolution layer. After that up-sampling and concatenation are performed for forming the final feature representation, which contains both local and global context information. The representation is then fed into a convolution layer for final pixel-wise prediction. 
-	
-\begin{comment}We have implemented two versions of PSPNet models:
-1) With softmax activiation function. 2) and with sigmoid activation function, both at the output layer.\end{comment}
+\subsubsection{Pyramid Scene Parsing Network}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Pyramid Scene Parsing Network (PSPNet) was proposed by Zhao et al.~\cite{zhao2017pyramid} is one of the most advanced semantic segmentation techniques. 
+The principle idea of PSPNet is to provide adequate global contextual information for pixel-level scene parsing through concatenating the local and global features together. 
+Hence, a spatial pyramid pooling module was introduced to perform four different pooling levels with four different pooling sizes and strides.
+In which, the pyramid pooling module will be able to capture contextual features from different scales.
+
+In this work, we implemented PSPNet with ResNet-50~\cite{He2016} as a backbone for feature map extraction with dilation at the last two layers of ResNet. 
+Figure~\ref{fig:PSPNet} illustrates the implemented PSPNet architecture.
+The pyramid pooling module was applied on four levels.
+Global average pooling was used to produce the coarsest level of a single bin output shown in the red box. 
+The other three sub-region levels have different pooling sizes of \((2\times 2), (4\times 4)\) and \((8\times8)\).
+A \(1 \times 1\) convolutional layer was applied to the produced feature maps to reduce their dimensions, followed by a BN and Relu.
+Then, the feature maps produced from the different levels were upsampled with bilinear interpolation.
+Moreover, the upsampled features are concatenated with the output of the ResNet-50 model to obtain both local and global context information. 
+Next, 2 convolutional layers were used for generating the pixel-wise segmented predictions. 
+\begin{figure} [h!]
+	\centering
+	\includegraphics[scale=1.0]{pspsnet.png}
+	\caption{PSPNet architecture.} 
+	\label{fig:PSPNet}
+\end{figure} 
