@@ -1,0 +1,69 @@
+\section{Methodology}
+\label{methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dataset}
+In this work, our previously generated dataset~\cite{Ijjeh2021} was used for training various deep learning models.
+Further, the generated dataset resembles measurements acquired by SLDV in the transverse direction (perpendicular to the plate surface).
+The dataset contains 475 simulated cases of full wavefield of propagating Lamb waves in a plate made of carbon fibre-reinforced polymer (CFRP).
+Further, the simulated cases represent the interaction of Lamb waves with different delamination scenarios.
+In which, each simulated case in the dataset computed from the wave propagation model is a 3D matrix, which holds the amplitudes of the propagating waves at location \((x,y)\) and time \((t)\).
+Hence, these matrices can be seen as animated frames at discrete time \(t_k\) of propagating waves.
+Moreover, it should be mentioned that the simulated delaminations were located closer to the top surface of the plate.
+Accordingly, it is easier to detect delamination by using the simulated full wavefield on the top surface of the plate instead of the bottom surface.
+However, to train our various models we applied the difficult case in which the full wavefield was registered at the bottom surface of the plate.
+To enhance the visualisation, the root mean square depicted in Eq.~\ref{ref:rms} was applied for the full wavefield frames.
+\begin{equation}
+	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N} s(x,y,t_k)^2}
+	\label{ref:rms}
+\end{equation}
+where \(N\) refers to the number of sampling points 512,  and \((x,y)\) refers to the location.
+Figures~\ref{fig:rmstop} and \ref{fig:rmsbottom} show the result of applying RMS to the full wavefield from the top and bottom surface of the plate respectively.
+The dataset consisting of RMS images which were used in this research paper is available online~\cite{Kudela2020d}.
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=.29]{RMS_flat_shell_Vz_27_500x500top.png}
+		\caption{top}
+		\label{fig:rmstop}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=.29]{RMS_flat_shell_Vz_27_500x500bottom.png}
+		\caption{bottom}
+		\label{fig:rmsbottom}
+	\end{subfigure}
+	\caption{RMS of the full wavefield from the top surface of the plate (a) and the bottom surface of the plate (b).}
+\label{fig:rms}
+\end{figure} 
+\subsection{Data preprocessing}
+To enhance the performance of the optimizer during the training process, the colour scale values were normalized to a range of (\(0-1\)) instead of the initial scale which was in a range of (\(0 - 255\)).	
+Furthermore, we have applied data augmentation on the dataset by flipping the images horizontally, vertically and diagonally. 
+As a result, the dataset size increased four times -- \(1900\)  images were produced.
+We have split the dataset into two portions:  \(80\%\) for the training set and \(20\%\) for the testing set.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Moreover, a cross-validation (CV) method was applied to the training set to reduce the overfitting which happens when the model is able to fit on the training data, while it poorly fit on the new unseen data.
+In other words, the model only learns the patterns of the training data therefore the model will not generalise well. 
+%Figure.~\ref{fig:Cross_validation} illustrates the K-fold CV technique.
+%In this technique, we have split the training set into \(K\) small sets (folds), hence the name K-folds. 
+%Therefore, we iterate over the training set K iterations.
+%During each iteration, the model uses  \(K-1\) folds for training and the remaining fold is used for validation. 
+%In our models, we have chosen \(K=5\), therefore, we have \(5\) iterations of training. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%For each iteration, we compute the performance of the model.
+%Finally, we compute the cross-validation performance for all iterations as illustrated in Eqn.~(\ref{eq:cv_performance}) as a mean value over the K performance estimations of the validation fold set.
+The main advantage of the K-fold CV method versus a regular train/test split is to reduce the overfitting by utilising data more efficiently as every data sample is used in both training and validation. 
+Therefore, by using this technique, we aim to improve the ability of the model to generalise and reduce the overfitting.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{equation}
+%Final \ Performance = \frac{1}{K}\sum_{i=1}^{K}Performace
+%\label{eq:cv_performance}
+%\end{equation}
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=1.0]{cross_validation.png}
+%	\caption{K-fold Cross validation, K=\(5\).}
+%	\label{fig:Cross_validation}
+%\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

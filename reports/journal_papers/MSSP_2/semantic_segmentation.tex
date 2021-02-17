@@ -1,0 +1,50 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Semantic segmentation models}
+\label{section:semantic_segmentation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The purpose of utilising deep learning methods is to perform the feature extraction process automatically through feeding the models  of the RMS of the full wavefield images from the bottom surface of the plate as in Fig.~\ref{fig:rmsbottom}.
+
+Therefore, the models will learn to recognise different complex patterns by themselves, consequently identify the delamination. 
+In this work, we have performed a comparative study among four deep learning models based on Fully Convolutional Networks (FCN)~\cite{shelhamer2017fully} that aim to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
+
+FCN is built by stacking convolutional layers in an encoder-decoder scheme, therefore, dense layers are not included in FCN models. 
+The idea behind the encoder is to extract condensed feature maps of the input image through downsampling that is performed by applying several convolutions with strides.
+The decoder part is responsible for upsampling the condensed features maps to the same size of the original input image by using techniques like transposed convolution with strides and upsampling with interpolation.
+
+For all implemented models in this comparative study, a softmax activation function is used at the output layer.
+The softmax function computes the probability of the damaged and undamaged occurrence for every single pixel.
+Consequently, the sum of the two probabilities must be one. 
+Eqn.~(\ref{softmax}) illustrates the softmax, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
+To predict the label of the detected output (\(y_{pred}\)) that represent the damaged and undamaged probabilities, an \(\argmax\) function is applied to select the maximum probability between both of them.
+	\begin{equation}
+		P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
+		\label{softmax}
+	\end{equation} 
+	\begin{equation}
+		y_{pred} = \argmax_{i}\left( P(x)_{i} \right)
+		\label{argmax}
+	\end{equation}
+In deep learning models, choosing a suitable loss function is an important task because it measures how good the model is performing.
+In our implemented models, we have applied the categorical cross-entropy (CCE) loss function, which is also called \enquote{softmax loss function}.
+Eqn.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the softmax value of the target class. 
+	\begin{equation}
+	CCE = -\log\left( P(x)_{i} \right)
+	\label{CCE}
+	\end{equation}
+
+Additionally, it is also important to select a proper accuracy metric of the model, therefore, we have applied intersection over union (IoU) as our accuracy metric. 
+IoU is estimated by determining the intersection area between the ground truth and the predicted output.
+In this work, we have two classes (damaged and undamaged), therefore the IoU is computed by taking the IoU for each class and average them.
+The IoU metric is defined as in Eqn.~\ref{IoU}:
+\begin{equation}
+IoU = \frac{Intersection}{Union} = \frac{\hat{Y} \cap Y}{\hat{Y} \cup Y} 
+\label{IoU}
+\end{equation}
+Where \(\hat{Y}\) represents the predicted vector of damaged and undamaged values, and \(Y\) represents the vector of ground truth values.
+The IoU can be calculated by multiplying the predicted output with its ground truth value to find the intersection, then it is divided over the union which can be calculated by counting all pixel values greater than zero of the predicted output and its ground truth.
+%As we mentioned earlier the ground truth values are either \((0\) or \(1)\) thus only the predicted values larger than \(0\) multiplied by their ground truth label \(1\) will be counted, the rest values will equal to \(0\). 
+%The union can be calculated by summing all values in both the predicted and the ground truth  vectors, then we subtract the intersection from their sum.
+Furthermore, Adam optimizer was applied as our optimization function in order to increase the IoU and to reduce the loss during the training.
+%The purpose of the optimizer is to change the learnable parameters such as the weights of the filters and biases in a way the loss is reduced and the accuracy metric is increased.
+
+In the next subsections, we present four FCN models for pixel-wise semantic segmentation to detect and localise delaminations.
