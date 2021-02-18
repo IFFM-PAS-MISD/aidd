@@ -1,29 +1,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Composite materials are prone to various kinds of defects such as cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}. 
-Among these defects, delamination is one of the most hazardous, which essentially leads to very catastrophic failures if not detected at early stages~\cite{valdes1999delamination}. 
-Therefore, it is essential to effectively identify the delamination in composite structures for safe and reliable implementation in various real-world applications.  
-Accordingly, different types of Structural Health Monitoring (SHM) techniques have been developed for delamination detection in composite structures. 
-Recently, guided Lamb waves based SHM gained high popularity for damage detection in composite structures due to their higher sensitivity to small defects, propagation with low attenuation, and potential to monitor large areas with low-voltage and only a small number of sparsely distributed transducers~\cite{alleyne1992interaction, giurgiutiu2003lamb, Ihn2008, mitra2016guided}. 
-However, utilising a smaller number of transducers are not suitable for acquiring high-quality resolution damage maps. 
-On the other hand, the employment of a very dense array of transducers is not feasible in most situations. 
-For alleviating such problem Scanning Laser Doppler Vibrometery (SLDV) is employed. 
-SLDV is capable to measure guided Lamb waves in a very dense grid of points over the surface of a large specimen. 
-This collection of signals is known as full wavefield~\cite{Radzienski2019a}. 
+In recent years, the benefits of composite materials are being utilised in most industries such as aerospace, automobile, construction, marine, and others due to their lightweight, excellent fatigue and corrosion resistance.
+However, composite materials could experience different types of damage such as cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}. 
+Among these defects, delamination (separation of layers from each other in a laminate composite) is one of the most hazardous since it mostly occur below top surfaces and are barely visible~\cite{Cai2012}.
+Delamination in composite materials can occur and develop from various sources such as  manufacturing defects, notches, and impact events which can by resulting from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}.
+Consequently, delamination can reduce the strength of the engineering structure and the performance as a result. 
+Therefore, real-time delamination detection is essential to prevent such consequences.  
+Accordingly, several physics-based technologies for damage detection and localisation have been developed in the fields of Structural Health Monitoring (SHM) and Non-Destructive Testing (NDT) to monitor the integrity of the engineering structures.
+A well known physical approach in the field of SHM for damage identification is the elastic guided Lamb waves that propagates within thin-plates and shells bounded by stress free surfaces~\cite{mitra2016guided}.
+The main features of Lamb waves are their high sensitivity to interferences caused by damages or boundaries and their low amplitude loss~\cite{Keulen2014}.
+Array of PZT transducers can be used to excite the investigated structure to generate Lamb waves then registering the reflected waves from damage. 
+Then, a damage influence maps is produced which could be in low-resolution depending on the number of sensing points.
+Therefore, a Scanning Laser Doppler Vibrometery (SLDV) is utilised to measure guided Lamb waves in a very dense grid of points over the examined structure.
+The acquired measurements are a full wavefield propagation that have high resolution damage influence maps.
 Damage detection techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{Girolamo2018a, kudela2018impact}. 
-From the last few years, full wavefield signals are continually being assessed for the detection and localisation of defects in composite structures~\cite{Radzienski2019a, kudela2018impact, sohn2011delamination, sohn2011automated, rogge2013characterization}.
-Currently, guided waves based damage detection techniques are employing various physics and classical machine learning-based methods. 
-These structural damage detection approaches are composed of two processes: feature extraction and feature classification. 
-The feature extraction process usually needs a great deal of human labour and computational effort that prevents these techniques of being applicable in real-time SHM utilisation. 
-Further, such systems also need a notable amount of expertise from the practitioner, which is very difficult to be always available.
-Moreover, in many situations, the extracted handcrafted features by these techniques may fail to precisely characterise the acquired signal that leads to poor classification performance~\cite{Zhao2019b, Yuan2020}. 
-Additionally, these systems are also not suitable for modelling large-scale data.
-          
-The reader is advised to refer to our previous work in~\cite{Ijjeh2021}. Since, for our knowledge, it was the first work of using full wavefield images in delamination detection in composite materials using deep learning techniques. 
-In this work, we have implemented four different deep learning-based semantic segmentation models for delamination detection in composite materials.
-The models were validated on numerical and experimental data to show their ability to generalise.
-Further, the models were compared based on Intersection over Union (IoU) and the total number of parameters.
+
+SHM approaches for damage identification that involves conventional machine learning techniques are based on features engineering (hand-crafted) and classification.
+However, such techniques have shortcomings when dealing with big data as it requires a complex computation of feature engineering~\cite{Gulgec2019} which additionally demands high expertise and skills to extract the damage-sensitive features for specific SHM applications.
+Moreover, it is not certain that such features are reusable for
+other structures due to the nonlinear behaviour.
+Recently, a data-driven method for SHM applications based on deep learning techniques became noticeable since it provided end-to-end approaches.
+Further, in deep learning techniques, the process of feature engineering and classification are performed automatically.
+Another essential advantage of employing deep learning techniques is "transfer learning" which implies the possibility of reusing a pre-trained model designed for some task in another task.
+
+This work is based on our previous work~\cite{Ijjeh2021} in which we developed a deep learning model trained on a numerically generated dataset which resembles measurements acquired by SLDV and compared with a conventional damage technique i.e. adaptive wavenumber filtering~\cite{Kudela2015, Radzienski2019a}.
+In this work, we present a comparison study of five deep learning models for semantic image segmentation utilised for delamination detection and localisation in Composite Fibre Reinforced Polymer (CFRP).
+The models were validated on numerical and experimental data to show their ability to generalise.          
+
 
 The paper is organised as follows, in the second section~\ref{related_works} the related works are presented.
 In the third section~\ref{methodology} the dataset and the semantic segmentation models used for delamination detection are illustrated. 
