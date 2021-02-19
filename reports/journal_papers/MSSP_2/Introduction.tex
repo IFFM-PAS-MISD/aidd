@@ -12,7 +12,7 @@ A well known physical approach in the field of SHM for damage identification is 
 The main features of Lamb waves are their high sensitivity to interferences caused by damages or boundaries and their low amplitude loss~\cite{Keulen2014}.
 Array of PZT transducers can be used to excite the investigated structure to generate Lamb waves then registering the reflected waves from damage. 
 Then, a damage influence maps is produced which could be in low-resolution depending on the number of sensing points.
-Therefore, a Scanning Laser Doppler Vibrometery (SLDV) is utilised to measure guided Lamb waves in a very dense grid of points over the examined structure.
+Therefore, a Scanning Laser Doppler Vibrometer (SLDV) is utilised to measure guided Lamb waves in a very dense grid of points over the examined structure.
 The acquired measurements are a full wavefield propagation that have high resolution damage influence maps.
 Damage detection techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{Girolamo2018a, kudela2018impact}. 
 
@@ -20,16 +20,18 @@ SHM approaches for damage identification that involves conventional machine lear
 However, such techniques have shortcomings when dealing with big data as it requires a complex computation of feature engineering~\cite{Gulgec2019} which additionally demands high expertise and skills to extract the damage-sensitive features for specific SHM applications.
 Moreover, it is not certain that such features are reusable for
 other structures due to the nonlinear behaviour.
-Recently, a data-driven method for SHM applications based on deep learning techniques became noticeable since it provided end-to-end approaches.
-Further, in deep learning techniques, the process of feature engineering and classification are performed automatically.
-Another essential advantage of employing deep learning techniques is "transfer learning" which implies the possibility of reusing a pre-trained model designed for some task in another task.
+Recently, a data-driven method for SHM applications based on   techniques became noticeable since it provided end-to-end approaches.
+Further, in Deep learning (DL) techniques, the process of feature engineering and classification are performed automatically.
+DL techniques can translate high-level and abstract features into a hierarchical order of simple and low-level learned features~\cite{Goodfellow-et-al-2016}.
+Accordingly, this allows a DL technique to handle complex problems by splitting them into a large number of simple problems.
+Another essential advantage of employing DL techniques is "transfer learning" which implies the possibility of reusing a pre-trained model designed for some task in another task.
 
-This work is based on our previous work~\cite{Ijjeh2021} in which we developed a deep learning model trained on a numerically generated dataset which resembles measurements acquired by SLDV and compared with a conventional damage technique i.e. adaptive wavenumber filtering~\cite{Kudela2015, Radzienski2019a}.
-In this work, we present a comparison study of five deep learning models for semantic image segmentation utilised for delamination detection and localisation in Composite Fibre Reinforced Polymer (CFRP).
+This work is based on our previous work~\cite{Ijjeh2021} in which we developed a DL model trained on a numerically generated dataset which resembles measurements acquired by SLDV and compared with a conventional damage technique i.e. adaptive wavenumber filtering~\cite{Kudela2015, Radzienski2019a}.
+In this work, we present a comparison study of five DL models for semantic image segmentation utilised for delamination detection and localisation in Composite Fibre Reinforced Polymer (CFRP).
 The models were validated on numerical and experimental data to show their ability to generalise.          
 
-
-The paper is organised as follows, in the second section~\ref{related_works} the related works are presented.
-In the third section~\ref{methodology} the dataset and the semantic segmentation models used for delamination detection are illustrated. 
-Next, a detailed comparison of these models was made in section~\ref{section:results_and_discussions}.
-Finally, the conclusion and future work is presented in section~\ref{conclusion}.
+The paper is organised in five sections, including the present one.
+Section~\ref{related_works} presents the related works.
+In section~\ref{methodology} the dataset and the semantic segmentation models used for delamination detection are illustrated. 
+Next, a detailed comparison of the semantic segmentation models is presented in section~\ref{section:results_and_discussions}.
+Finally, section~\ref{conclusion} presents the conclusion and future work.

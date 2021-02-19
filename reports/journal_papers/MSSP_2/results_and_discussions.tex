@@ -1,9 +1,9 @@
 \section{Results and discussions}
 \label{section:results_and_discussions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this section, five deep learning models  of semantic segmentation approach including  Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN were evaluated on exemplary three damage scenarios of an RMS of the full wavefield interpolated at the bottom surface of the plate (numerically generated) in order to identify the delamination.
-Additionally, an experimental scenario was also used to evaluate the performance of the models to show the deep learning capabilities of generalization.
-For each model, the mean and the max IoU are calculated and presented as a metric of comparison.
+In this section, five DL models  of semantic segmentation approach including  Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN were evaluated on exemplary three damage scenarios of an RMS of the full wavefield interpolated at the bottom surface of the plate (numerically generated) in order to identify the delamination.
+Additionally, an experimental scenario was also used to evaluate the performance of the models to show the DL capabilities of generalization.
+For each model, the mean and the max \(IoU\) are calculated and presented as a metric of comparison.
 Moreover, the Accuracy of classification, Precision, Recall, and F1-score depicted in Eqs~\ref{accuracy},~\ref{pricisoin},~\ref{recall}, and ~\ref{f1_score} respectively, were calculated for each model.
 \begin{equation}
 	\rm Accuracy\ = \frac{TP+TN}{(Total\ number\ of\ tested\ samples)}
@@ -198,10 +198,10 @@ Figures~\ref{fig:Unet_Pred__softmax_475} -~\ref{fig:gcn_pred_475} show the predi
 	\label{fig:475_softmax}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The IoU values for all models regarding the predicted delamination are presented in table.~\ref{tab:table_numerical_scenarios}.
+The \(IoU\) values for all models regarding the predicted delamination are presented in table.~\ref{tab:table_numerical_scenarios}.
 \begin{table}[]
 	\centering
-	\caption{IoU of Numerical scenarios}
+	\caption{\(IoU\) of Numerical scenarios}
 	\label{tab:table_numerical_scenarios}
 	\resizebox{\textwidth}{!}
 	{
@@ -221,7 +221,7 @@ In the next scenario, an experimental case of CFRP with Teflon insert as artific
 Same as the generated cases, we applied a frequency of \(50\) kHz to excite a transducer that we placed at the centre of the plate.
 Figures~(\ref{fig:unet_exp_7_} - \ref{fig:gcn_exp}) shows delamination prediction maps for Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models receptively.
 As shown, the models are capable of detecting and identifying the delamination. 
-The Res-UNet model detect the delamination with IoU = \(57.73\%\), the VGG16 encoder-decoder IoU  = \(62.40\%\), the PSPNet IoU = \(48.80\%\), the FCN-DenseNet IoU = \(53.65\%\) and the GCN IoU = \(72.33\%\).
+The Res-UNet model detect the delamination with \(IoU\) = \(57.73\%\), the VGG16 encoder-decoder \(IoU\)  = \(62.40\%\), the PSPNet \(IoU\) = \(48.80\%\), the FCN-DenseNet \(IoU\) = \(53.65\%\) and the GCN \(IoU\) = \(72.33\%\).
 We can see that the models can identify the delamination with almost free noise, this indicates that the models are capable to generalise and detect the delamination on previously unseen data. 
 Considering the presented models were only trained on the numerically generated dataset, we expect that the models will show great generalisation capability.
 Further, the performance of the models can be improved when training on experimental data besides the numerical data since new features will be learned. 
@@ -281,8 +281,8 @@ Further, the performance of the models can be improved when training on experime
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Table~\ref{tab:table_iou} presents the mean and maximum values of IoU calculated for the previously unseen test set (380 cases) for all models.
-It can be noticed from table~\ref{tab:table_iou}  that all models have a relatively high IoU, indicating their ability to detect and localise the delamination which is relatively high compared to the traditional signal processing techniques such as the adaptive wavenumber filtering which have already been performed in our previous work~\cite{Ijjeh2021}.
+Table~\ref{tab:table_iou} presents the mean and maximum values of \(IoU\) calculated for the previously unseen test set (380 cases) for all models.
+It can be noticed from table~\ref{tab:table_iou}  that all models have a relatively high \(IoU\), indicating their ability to detect and localise the delamination which is relatively high compared to the traditional signal processing techniques such as the adaptive wavenumber filtering which have already been performed in our previous work~\cite{Ijjeh2021}.
 \begin{table}[]
 	\centering
 	\caption{Intersection over Union}
@@ -414,11 +414,12 @@ Figures\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accura
 	\label{fig:accuracy_metric}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Moreover, the total number of parameters in any deep learning model is a sum of the trainable parameters (e.g weights of convolution filters) and non-trainable parameters (biases and pooling filters).
+Moreover, the total number of parameters in any DL model is a sum of the trainable parameters (e.g weights of convolution filters) and non-trainable parameters (biases and pooling filters).
 Trainable parameters are continuously updated until we reach the minimum loss value while the non-trainable parameters are not changed during the whole training process.
-The total number of parameters can reflect the computation complexity of the model.
-It can be noted that as the total parameters increase the requiring time for training increases.
 Table~\ref{tab:table_parameters} shows the total number of parameters for all implemented models.
+Further, the total number of parameters can reflect the computation complexity of the model.
+It can be noted that as the total parameters increase the requiring time for training increases.
+
 %We can conclude that the total number of parameters of a model does not directly reflect its performance, hence the performance mainly depends on the architecture of the model. 
 \begin{table}[]
 	\centering
