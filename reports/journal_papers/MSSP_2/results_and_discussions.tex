@@ -334,7 +334,7 @@ As shown in Table~\ref{tab:evaluation_metric}, all models have high classificati
 	}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Figures~\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accuracy and the loss graphs of the training and validation phases during epochs for Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN models respectively.
+Figures~\ref{fig:res_unet_iou_loss}-\ref{fig:GCN_iou_loss} show the accuracy and the loss graphs of the training and validation phases during epochs for Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN models, respectively.
 \begin{figure} [!h]
 	\centering
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -427,6 +427,7 @@ Figures~\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accur
 	\caption{GCN model}
 	\label{fig:GCN_iou_loss}	
 \end{figure}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Moreover, the total number of parameters in any DL model is a sum of the trainable parameters (e.g weights of convolution filters) and non-trainable parameters (biases and pooling filters).
 Trainable parameters are continuously updated until we reach the minimum loss value while the non-trainable parameters are not changed during the whole training process.
