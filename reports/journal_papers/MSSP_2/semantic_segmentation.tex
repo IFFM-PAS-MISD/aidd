@@ -2,29 +2,29 @@
 \subsection{Semantic segmentation models}
 \label{section:semantic_segmentation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In the last few years, DL techniques were rapidly developed in different life applications such as computer vision (CV) is one of the prominent fields.  
-Furthermore, image segmentation is a well-known technique employed for CV, aims to label each pixel in the input image to its matching class, and it be applied in many real-life practical applications as self-driving cars, medical imaging, traffic control systems, video surveillance, and many others.
-In this work, we present a comparative study for five DL models based on Fully Convolutional Networks (FCN)~\cite{Long} to detect and localise delamination in composite plates.
+In the last few years, DL techniques were rapidly developed in different life applications such as computer vision.  
+Image segmentation is a well-known technique employed for computer vision, aims to label each pixel in the input image to its matching class, it is applied in many real-life practical applications such as self-driving cars, medical imaging, traffic control systems, video surveillance, and many others.
+In this work, we present a comparative study of five DL models based on Fully Convolutional Networks (FCN)~\cite{Long} to detect and localise delamination in composite plates.
 Further, these models aim to perform image semantic segmentation by assigning every pixel of the input image as damaged or not-damaged. 
 FCN is created by stacking convolutional layers in an encoder-decoder scheme and skipping dense layers. 
 The encoder part is responsible for extracting condensed feature maps from the input image at different scale levels by applying cascaded convolutions with strides followed by pooling operation.
 The decoder part is responsible for upsampling the condensed feature maps to the same size as the original input image using transposed convolution with strides or upsampling with interpolation.
 
-In this work, the Softmax activation function was applied at the output layer for all implemented models in this comparative study.
-The Softmax calculates the probability for each predicted output of being damaged or undamaged for every single pixel, which implies that the sum of the two probabilities must be one. 
-Eqn.~(\ref{Softmax}) depicts the Softmax activation function, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
+In this work, the softmax activation function was applied at the output layer for all implemented models in this comparative study.
+The softmax calculates the probability for each predicted output of being damaged or undamaged for every single pixel, which implies that the sum of the two probabilities must be one. 
+Eq.~(\ref{softmax}) depicts the softmax activation function, where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) over all possible target classes \(x_{j}\), C in our case are two classes  (damaged and undamaged).
 To predict the label of the output (\(y_{pred}\)) an \(\argmax\) function is applied to select the maximum probability between both of them.
 	\begin{equation}
 		P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
-		\label{Softmax}
+		\label{softmax}
 	\end{equation} 
 	\begin{equation}
 		y_{pred} = \argmax_{i}\left( P(x)_{i} \right)
 		\label{argmax}
 	\end{equation}
 Selecting a suitable loss function is an important issue that is because it measures how well the model learns and performs.
-Therefore, in all models, we have applied the categorical cross-entropy (CCE) loss function, which is also called \enquote{Softmax loss function}.
-Eqn.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the Softmax value of the target class. 
+Therefore, in all models, we have applied the categorical cross-entropy (CCE) loss function, which is also called \enquote{softmax loss function}.
+Eq.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the softmax value of the target class. 
 	\begin{equation}
 	CCE = -\log\left( P(x)_{i} \right)
 	\label{CCE}
@@ -32,13 +32,13 @@ Eqn.~(\ref{CCE}) illustrates the CCE, where \( P(x)_{i}\) is the Softmax value o
 
 Additionally, it is also important to select a proper accuracy metric of the model, therefore, we have applied intersection over union (\(IoU\)) as our accuracy metric. 
 \(IoU\) is estimated by determining the intersection area between the ground truth and the predicted output.
-In this work, we have two classes (damaged and undamaged), therefore the \(IoU\) is computed by taking the \(IoU\) for each class and average them.
-The \(IoU\) metric is defined as in Eqn.~\ref{IoU}:
+In this work, we have two classes (damaged and undamaged), but the \(IoU\) is computed by taking the \(IoU\) for damaged class only.
+The \(IoU\) metric is defined as in Eq.~(\ref{IoU}):
 \begin{equation}
 IoU = \frac{Intersection}{Union} = \frac{\hat{Y} \cap Y}{\hat{Y} \cup Y} 
 \label{IoU}
 \end{equation}
-Where \(\hat{Y}\) represents the predicted vector of damaged and undamaged values, and \(Y\) represents the vector of ground truth values.
+where \(\hat{Y}\) represents the predicted vector of damaged and undamaged values, and \(Y\) represents the vector of ground truth values.
 The \(IoU\) can be calculated by multiplying the predicted output with its ground truth value to find the intersection, then it is divided over the union which can be calculated by counting all pixel values greater than zero of the predicted output and its ground truth.
 Furthermore, Adam optimizer was applied as our optimization function in order to increase the \(IoU\) and to reduce the loss during the training.
 In the next subsections, we present four FCN models for pixel-wise semantic segmentation to detect and localise delaminations.

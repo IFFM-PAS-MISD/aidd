@@ -4,7 +4,7 @@
 In this section, five DL models  of semantic segmentation approach including  Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN were evaluated on exemplary three damage scenarios of an RMS of the full wavefield interpolated at the bottom surface of the plate (numerically generated) in order to identify the delamination.
 Additionally, an experimental scenario was also used to evaluate the performance of the models to show the DL capabilities of generalization.
 For each model, the mean and the max \(IoU\) are calculated and presented as a metric of comparison.
-Moreover, the Accuracy of classification, Precision, Recall, and F1-score depicted in Eqs~\ref{accuracy},~\ref{pricisoin},~\ref{recall}, and ~\ref{f1_score} respectively, were calculated for each model.
+Moreover, the Accuracy of classification, Precision, Recall, and F1-score depicted in Eqs~(\ref{accuracy}-\ref{f1_score}) respectively, were calculated for each model.
 \begin{equation}
 	\rm Accuracy\ = \frac{TP+TN}{(Total\ number\ of\ tested\ samples)}
 	\label{accuracy}
@@ -25,13 +25,13 @@ Moreover, the Accuracy of classification, Precision, Recall, and F1-score depict
 where the Positive/Negative refers to the predicted output as (damage or non-damage) respectively, True Positive (TP) and True Negative (TN)  represent the correct classification, and the False Positive (FP) and False Negative (FN) represent the incorrect classification.
 
 In our work, all semantic segmentation models were implemented and trained with Keras API~\cite{chollet2015keras} (an open-source platform) running on top of TensorFlow on an NVIDIA Tesla V100 GPU. 
-Moreover, for training purposes, we have used K-fold CV technique with \(k=5\), accordingly, each model has been trained for \(5\) iterations, then the mean accuracy of all folds is calculated. 
+Moreover, for training purposes, we have used K-fold CV technique with \(k=5\). Accordingly, each model has been trained for \(5\) iterations, then the mean accuracy of all folds is calculated. 
 Further, for each iteration, the models were trained on the augmented dataset up to \(20\) epochs.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The first delamination scenario is shown in Fig.~\ref{fig:softmax_448}. 
-The delamination is located at the left edge of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_448}, ~\ref{fig:m1_rand_single_delam_448} respectively. 
-Figures~\ref{fig:unet_pred_448} -~\ref{fig:gcn_pred_448} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models respectively. 
+The first exemplary delamination scenario is shown in Fig.~\ref{fig:softmax_448}. 
+The delamination is located at the left edge of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_448} and ~\ref{fig:m1_rand_single_delam_448} respectively. 
+Figures~\ref{fig:unet_pred_448} -~\ref{fig:gcn_pred_448} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
@@ -79,16 +79,17 @@ Figures~\ref{fig:unet_pred_448} -~\ref{fig:gcn_pred_448} show the predicted outp
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{GCN_num_269.png}
-		\caption{FCN-DenseNet}
+		\caption{GCN}
 		\label{fig:gcn_pred_448}
 	\end{subfigure}
 
-	\caption{First scenario}
+	\caption{First damage scenario}
 	\label{fig:softmax_448}
 \end{figure} 
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In the second delamination scenario as shown in Fig.~\ref{fig:385_softmax}, the delamination is located at the upper left corner of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385}, ~\ref{fig:m1_rand_single_delam_385} respectively. 
-Figures~\ref{fig:Unet_Pred__softmax_385} -~\ref{fig:gcn_pred_385} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models respectively. 
+In the second delamination scenario as shown in Fig.~\ref{fig:385_softmax}, the delamination is located at the upper left corner of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385} and ~\ref{fig:m1_rand_single_delam_385} respectively. 
+Figures~\ref{fig:Unet_Pred__softmax_385} -~\ref{fig:gcn_pred_385} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
@@ -135,15 +136,16 @@ Figures~\ref{fig:Unet_Pred__softmax_385} -~\ref{fig:gcn_pred_385} show the predi
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{GCN_num_17.png}
-		\caption{FCN-DenseNet}
+		\caption{GCN}
 		\label{fig:gcn_pred_385}
 	\end{subfigure}
-	\caption{Second scenario}
+	\caption{Second damage scenario}
 	\label{fig:385_softmax}
 \end{figure}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The third delamination scenario is shown in Figure~\ref{fig:475_softmax}. 
-The delamination is located at the upper middle of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_475} and ~\ref{fig:m1_rand_single_delam_475} respectively. 
+The delamination is located at the upper middle of the plate and its corresponding ground truth image are shown in Fig.~\ref{fig:RMS_flat_shell_Vz_475} and ~\ref{fig:m1_rand_single_delam_475}, respectively. 
 Figures~\ref{fig:Unet_Pred__softmax_475} -~\ref{fig:gcn_pred_475} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models respectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
@@ -191,14 +193,18 @@ Figures~\ref{fig:Unet_Pred__softmax_475} -~\ref{fig:gcn_pred_475} show the predi
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{GCN_num_377.png}
-		\caption{FCN-DenseNet}
+		\caption{GCN}
 		\label{fig:gcn_pred_475}
 	\end{subfigure}	
-	\caption{Third scenario}
+	\caption{Third damage scenario}
 	\label{fig:475_softmax}
 \end{figure}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The \(IoU\) values for all models regarding the predicted delamination are presented in table.~\ref{tab:table_numerical_scenarios}.
+The \(IoU\) values for all models regarding the predicted delamination are presented in Table.~\ref{tab:table_numerical_scenarios}.
+For the first and third scenarios, the GCN model has the highest \(IoU\) compared to the other models, for the second scenario the VGG16 encoder-decoder model has the highest \(IoU\) compared to the other models.
+Further, for all models, the predicted outputs have no noise regarding delamination identification.
+
 \begin{table}[]
 	\centering
 	\caption{\(IoU\) of Numerical scenarios}
@@ -217,30 +223,24 @@ The \(IoU\) values for all models regarding the predicted delamination are prese
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In the next scenario, an experimental case of CFRP with Teflon insert as artificial delamination shown in Fig.~\ref{fig:Exp_ERMS_teflon} is investigated.  
-Same as the generated cases, we applied a frequency of \(50\) kHz to excite a transducer that we placed at the centre of the plate.
+In the next scenario, an experimental case of CFRP with Teflon insert as artificial delamination is investigated (see Fig.~\ref{fig:Exp_ERMS_teflon}).  
+Similarly to the synthetic data set, we applied a frequency of \(50\) kHz to excite a signal in a transducer placed at the centre of the plate. 
+Further, Fig.~\ref{fig:Delamination} is an energy compensated RMS that takes into account wave attenuation. 
 Figures~(\ref{fig:unet_exp_7_} - \ref{fig:gcn_exp}) shows delamination prediction maps for Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models receptively.
 As shown, the models are capable of detecting and identifying the delamination. 
 The Res-UNet model detect the delamination with \(IoU\) = \(57.73\%\), the VGG16 encoder-decoder \(IoU\)  = \(62.40\%\), the PSPNet \(IoU\) = \(48.80\%\), the FCN-DenseNet \(IoU\) = \(53.65\%\) and the GCN \(IoU\) = \(72.33\%\).
 We can see that the models can identify the delamination with almost free noise, this indicates that the models are capable to generalise and detect the delamination on previously unseen data. 
-Considering the presented models were only trained on the numerically generated dataset, we expect that the models will show great generalisation capability.
+Considering that the presented models were trained only on the numerically generated dataset, the models show great generalisation capability.
 Further, the performance of the models can be improved when training on experimental data besides the numerical data since new features will be learned. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[scale=1]{ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
-		\caption{ERMS CFRP Teflon inserted}
-		\label{fig:Delamination}
-	\end{subfigure}			
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering 	
-		\includegraphics[scale=1]{label_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
-		\caption{Ground truth} 
-		\label{fig:damage_label}
-	\end{subfigure}
+%		\centering
+		\includegraphics[scale=1]{ERMS_with_label.png}
+		\caption{ERMS CFRP Teflon inserted \& Label}
+		\label{fig:Delamination}	
+	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
@@ -279,10 +279,10 @@ Further, the performance of the models can be improved when training on experime
 	\caption{Experimental results}
 	\label{fig:Exp_ERMS_teflon}
 \end{figure}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Table~\ref{tab:table_iou} presents the mean and maximum values of \(IoU\) calculated for the previously unseen test set (380 cases) for all models.
-It can be noticed from table~\ref{tab:table_iou}  that all models have a relatively high \(IoU\), indicating their ability to detect and localise the delamination which is relatively high compared to the traditional signal processing techniques such as the adaptive wavenumber filtering which have already been performed in our previous work~\cite{Ijjeh2021}.
+It can be noticed from Table~\ref{tab:table_iou}  that all models have a relatively high \(IoU\), indicating their ability to detect and localise the delamination which is relatively high compared to the traditional signal processing techniques such as the adaptive wavenumber filtering which have already been performed in our previous work~\cite{Ijjeh2021}.
 \begin{table}[]
 	\centering
 	\caption{Intersection over Union}
@@ -315,8 +315,8 @@ Further, in Table~\ref{tab:table_performance} the TP, TN, FP, and FN are present
 	}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Moreover, table~\ref{tab:evaluation_metric} presents the classification accuracy, precision, recall and the F1-score values for all presented models as an additional evaluation metrics.
-As shown in the table~\ref{tab:evaluation_metric}, all models have high classification accuracy, which indicate that all the presented models are capable of predicting the presence of the delamination in all the numerically generated cases. 
+Moreover, Table~\ref{tab:evaluation_metric} presents the classification accuracy, precision, recall and the F1-score values for all presented models as an additional evaluation metrics.
+As shown in Table~\ref{tab:evaluation_metric}, all models have high classification accuracy, which indicate that all the presented models are capable of predicting the presence of the delamination in all the numerically generated cases. 
 \begin{table}[]
 	\centering
 	\caption{Evaluation metric}
@@ -334,7 +334,7 @@ As shown in the table~\ref{tab:evaluation_metric}, all models have high classifi
 	}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Figures\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accuracy and the loss graphs of the training and validation phases during epochs for Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN models respectively.
+Figures~\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accuracy and the loss graphs of the training and validation phases during epochs for Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN models respectively.
 \begin{figure} [!h]
 	\centering
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -349,8 +349,12 @@ Figures\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accura
 	 \caption{}
 	 \label{fig:unet_loss_metric}
 	\end{subfigure}
+	\caption{Res-UNet model}
+	\label{fig:res_unet_iou_loss}
+\end{figure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\hfill
+\begin{figure}[!h]
+	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{FCN_VGG16_iou_per_epochs_softmax.png}
@@ -364,24 +368,31 @@ Figures\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accura
 		\caption{}
 		\label{fig:vgg16_loss_metric}
 	\end{subfigure}
+	\caption{VGG16 encoder-decoder model}
+	\label{fig:Vgg16_iou_loss}
+\end{figure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\hfill
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{FCN_DenseNet_iou_per_epochs_softmax.png}
-		\caption{}
-		\label{fig:fcn_densenet_accuracy_metric}
+\begin{figure}[!h]
+	\begin{subfigure}[b]{0.47\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{FCN_DenseNet_iou_per_epochs_softmax.png}
+	\caption{}
+	\label{fig:fcn_densenet_accuracy_metric}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{FCN_DenseNet_loss_per_epochs_softmax.png}
-		\caption{}
-		\label{fig:fcn_densenet_loss_metric}
-	\end{subfigure}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\hfill
-	\begin{subfigure}[b]{0.49\textwidth}
+	\begin{subfigure}[b]{0.47\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{FCN_DenseNet_loss_per_epochs_softmax.png}
+	\caption{}
+	\label{fig:fcn_densenet_loss_metric}
+	\end{subfigure}	
+\caption{FCN-DenseNet model}
+\label{fig:FCN_DenseNet_iou_loss}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{PSPNet_kfold_iou_per_epochs_softmax.png}
 		\caption{}
@@ -391,11 +402,15 @@ Figures\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accura
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{PSPNet_kfold_loss_per_epochs_softmax.png}
-		\caption{}
-		\label{fig:psp_loss_metric}
+	\caption{}
+	\label{fig:psp_loss_metric}
 	\end{subfigure}
+	\caption{PSPNet model}
+	\label{fig:PSPNet_iou_loss}
+\end{figure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\hfill
+\begin{figure} [!h]
+	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{GCN_kfold_iou_per_epochs_softmax.png}
@@ -405,22 +420,19 @@ Figures\ref{fig:unet_accuracy_metric}-~\ref{fig:gcn_loss_metric} show the accura
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{GCN_kfold_loss_per_epochs_softmax.png}
+		\includegraphics[width=\textwidth]{GCN_kfold_loss_per_epochs_softmax.png}			
 		\caption{}
 		\label{fig:gcn_loss_metric}
 	\end{subfigure}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\caption{Accuracy and loss for training and validation}
-	\label{fig:accuracy_metric}
-\end{figure} 
+	\caption{GCN model}
+	\label{fig:GCN_iou_loss}	
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Moreover, the total number of parameters in any DL model is a sum of the trainable parameters (e.g weights of convolution filters) and non-trainable parameters (biases and pooling filters).
 Trainable parameters are continuously updated until we reach the minimum loss value while the non-trainable parameters are not changed during the whole training process.
 Table~\ref{tab:table_parameters} shows the total number of parameters for all implemented models.
 Further, the total number of parameters can reflect the computation complexity of the model.
-It can be noted that as the total parameters increase the requiring time for training increases.
-
-%We can conclude that the total number of parameters of a model does not directly reflect its performance, hence the performance mainly depends on the architecture of the model. 
+It can be noted that as the number of total parameters increase the requiring time for training increases.
 \begin{table}[]
 	\centering
 	\caption{Model parameters}
@@ -435,4 +447,3 @@ It can be noted that as the total parameters increase the requiring time for tra
 		\end{tabular}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

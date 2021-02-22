@@ -30,18 +30,15 @@ In this work, we implemented the model with \(k=7\).
 	\caption{Global Convolution Network whole architecture.} 
 	\label{fig:gcn}
 \end{figure}
-As shown in the figure, a residual network was utilised as a backbone for 
+As shown in the Fig.~\ref{fig:gcn}, a residual network was utilised as a backbone for 
 feature maps extraction, the residual block is shown in 
-Fig.~\ref{fig:res_gcn_br} (a).
+Fig.~\ref{fig:res_gcn_br}a.
 After each residual block, a GCN block is inserted shown in 
-Fig.~\ref{fig:res_gcn_br} (b), which employs a combination of \((1\times 
+Fig.~\ref{fig:res_gcn_br}b, which employs a combination of \((1\times 
 k)\)+\((k\times 1)\) and \((k\times 1)\)+\((1\times k)\) convolutions which 
 enables a dense connections within a large \((k\times k)\) region in the 
 feature map.
-Followed by a boundary refinement (BR) block shown in Fig.~\ref{fig:res_gcn_br} 
-(b), which can be considered as ad additional residual block to refine the 
-predictions near the object boundaries ended up generating a lower 
-resolution score map, 
+Followed by a boundary refinement (BR) block shown in Fig.~\ref{fig:res_gcn_br}b, which can be considered as an additional residual block to refine the predictions near the object boundaries ended up generating a lower resolution score map. 
 Furthermore, the upsampling operation is done recursively, it upsamples the low 
 resolution score maps then concatenate it with a higher one to produce a new 
 score maps.

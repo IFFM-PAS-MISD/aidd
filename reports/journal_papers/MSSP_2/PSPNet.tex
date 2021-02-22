@@ -1,9 +1,10 @@
 \subsubsection{Pyramid Scene Parsing Network}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Pyramid Scene Parsing Network (PSPNet) was proposed by Zhao et al.~\cite{zhao2017pyramid} is one of the most advanced semantic segmentation techniques. 
+Pyramid Scene Parsing Network (PSPNet) was proposed by Zhao et al.~\cite{zhao2017pyramid} .
+It is one of the most advanced semantic segmentation techniques. 
 The principle idea of PSPNet is to provide adequate global contextual information for pixel-level scene parsing through concatenating the local and global features together. 
 Hence, a spatial pyramid pooling module was introduced to perform four different pooling levels with four different pooling sizes and strides.
-In which, the pyramid pooling module will be able to capture contextual features from different scales.
+In this way, the pyramid pooling module is able to capture contextual features from different scales.
 
 In this work, we implemented PSPNet with ResNet-50~\cite{He2016} as a backbone for feature map extraction with dilation at the last two layers of ResNet. 
 Figure~\ref{fig:PSPNet} illustrates the implemented PSPNet architecture.

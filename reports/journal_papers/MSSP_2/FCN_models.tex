@@ -1,19 +1,19 @@
 \subsubsection{Residual UNet model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Residual UNet (Res-UNet) model is based on the residual learning~\cite{He2016} and the UNet technique~\cite{Ronneberger2015}. 
-which is a well-known architecture performs a biomedical segmentation based on encoder-decoder. 
+It is a well-known architecture that performs a biomedical segmentation based on encoder-decoder. 
 The Res-UNet has a U-shape convolutional network that is based on encoder-decoder style. 
 The encoder (contracting) path is responsible for capturing the detailed context of an input image, while the decoder (expansive) path is responsible for enabling a precise localisation. 
 Hence, to maintain the spatial and contextual information from the previous layers from being lost residual connections were added at two levels:
 \begin{itemize}
-	\item At each step of the encoder and decoder paths
-	\item Between the encoder parts and their corresponding in the decoder parts (skip connections) which ensures that the feature maps which were learned during the downsampling will be utilized in the reconstruction. 
+	\item at each step of the encoder and decoder paths
+	\item between the encoder parts and their corresponding decoder parts (skip connections) which ensures that the feature maps which were learned during the downsampling will be utilized in the reconstruction. 
 \end{itemize}
 The applied Res-UNet architecture is presented in Fig.~\ref{fig:Unet}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The encoder part holds several downsampling (Max-pool) blocks. 
 Each block applies two convolutional layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides that picks the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, consequently, reducing computation complexity.
-Each convolutional layer performs (\(3\times3\)) convolution operations, followed batch normalization (BN) then a Relu is applied.
+Each convolutional layer performs (\(3\times3\)) convolution operations, followed by batch normalization (BN) then a Relu is applied.
 Moreover, the number of convolutional filters is doubled after each downsampling block therefore the model can learn complex patterns effectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The bottleneck layer lies in between the encoder and the decoder as a joining point is the deepest layer in the model.

@@ -2,33 +2,38 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In recent years, the benefits of composite materials are being utilised in most industries such as aerospace, automobile, construction, marine, and others due to their lightweight, excellent fatigue and corrosion resistance.
-However, composite materials could experience different types of damage such as cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}. 
+However, composite materials could experience different types of damage such as matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}. 
 Among these defects, delamination (separation of layers from each other in a laminate composite) is one of the most hazardous since it mostly occur below top surfaces and are barely visible~\cite{Cai2012}.
-Delamination in composite materials can occur and develop from various sources such as  manufacturing defects, notches, and impact events which can by resulting from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}.
-Consequently, delamination can reduce the strength of the engineering structure and the performance as a result. 
-Therefore, real-time delamination detection is essential to prevent such consequences.  
-Accordingly, several physics-based technologies for damage detection and localisation have been developed in the fields of Structural Health Monitoring (SHM) and Non-Destructive Testing (NDT) to monitor the integrity of the engineering structures.
-A well known physical approach in the field of SHM for damage identification is the elastic guided Lamb waves that propagates within thin-plates and shells bounded by stress free surfaces~\cite{mitra2016guided}.
-The main features of Lamb waves are their high sensitivity to interferences caused by damages or boundaries and their low amplitude loss~\cite{Keulen2014}.
-Array of PZT transducers can be used to excite the investigated structure to generate Lamb waves then registering the reflected waves from damage. 
-Then, a damage influence maps is produced which could be in low-resolution depending on the number of sensing points.
-Therefore, a Scanning Laser Doppler Vibrometer (SLDV) is utilised to measure guided Lamb waves in a very dense grid of points over the examined structure.
-The acquired measurements are a full wavefield propagation that have high resolution damage influence maps.
-Damage detection techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{Girolamo2018a, kudela2018impact}. 
+Delamination in composite materials can occur and develop from various sources such as  manufacturing defects, notches, and impact events.
+The delamination development results from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}.
+Consequently, delamination can reduce the strength of the engineering structure and its performance. 
+Therefore, real-time delamination detection is essential to prevent such consequences. 
+ 
+Accordingly, several physics-based methods for damage detection and localisation have been developed in the fields of Structural Health Monitoring (SHM) and Non-Destructive Testing (NDT) to monitor the integrity of the engineering structures.
+A well known physics-based approach in the field of SHM for damage identification utilises guided waves, in particular Lamb waves.
+Lamb waves are elastic waves that propagate within thin-plates and shells bounded by stress free surfaces~\cite{mitra2016guided}.
+The main features of Lamb waves are their high sensitivity to discontinuities (cracks, delaminations) and relatively low amplitude loss especially in metallic structures~\cite{Keulen2014}.
+Array of PZT transducers can be used to excite the investigated structure to generate Lamb waves then the reflected waves from damage can be registered. 
+Then, a damage influence map is produced.
+The accuracy of damage influence map indicating damage location depends on the number of sensing points. 
+Thus, the resolution of damage localisation can be low.
+Therefore, a Scanning Laser Doppler Vibrometer (SLDV) is utilised to measure Lamb waves in a very dense grid of points over the examined structure.
+The acquired measurements are a full wavefield propagation that lead to high resolution damage influence maps.
+Damage identification techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{Girolamo2018a, kudela2018impact}. 
 
-SHM approaches for damage identification that involves conventional machine learning techniques are based on features engineering (hand-crafted) and classification.
-However, such techniques have shortcomings when dealing with big data as it requires a complex computation of feature engineering~\cite{Gulgec2019} which additionally demands high expertise and skills to extract the damage-sensitive features for specific SHM applications.
-Moreover, it is not certain that such features are reusable for
-other structures due to the nonlinear behaviour.
-Recently, a data-driven method for SHM applications based on   techniques became noticeable since it provided end-to-end approaches.
-Further, in Deep learning (DL) techniques, the process of feature engineering and classification are performed automatically.
+SHM approaches for damage identification that involves conventional machine learning techniques are based on hand-crafted features and classification.
+However, such techniques have shortcomings when dealing with big data as it requires a complex computation of feature engineering~\cite{Gulgec2019} which additionally requires high expertise and skills to extract the damage-sensitive features for specific SHM applications.
+Moreover, it is not certain that such hand crafted features are reusable for
+other structures due to the linear-non-linear nature of the damage~\cite{Adams2002}.
+Recently, a data-driven method for SHM applications became noticeable in the form of deep learning (DL) end-to-end approaches as the process of feature engineering and classification is performed automatically.
 DL techniques can translate high-level and abstract features into a hierarchical order of simple and low-level learned features~\cite{Goodfellow-et-al-2016}.
 Accordingly, this allows a DL technique to handle complex problems by splitting them into a large number of simple problems.
-Another essential advantage of employing DL techniques is "transfer learning" which implies the possibility of reusing a pre-trained model designed for some task in another task.
+Another essential advantage of employing DL techniques is so called "transfer learning" which implies the possibility of reusing a pre-trained model designed for some task in another task.
 
 This work is based on our previous work~\cite{Ijjeh2021} in which we developed a DL model trained on a numerically generated dataset which resembles measurements acquired by SLDV and compared with a conventional damage technique i.e. adaptive wavenumber filtering~\cite{Kudela2015, Radzienski2019a}.
-In this work, we present a comparison study of five DL models for semantic image segmentation utilised for delamination detection and localisation in Composite Fibre Reinforced Polymer (CFRP).
-The models were validated on numerical and experimental data to show their ability to generalise.          
+In this work, we present a comparative study of five DL models for semantic image segmentation utilised for delamination detection, localisation, and size estimation in Composite Fibre Reinforced Polymer (CFRP).
+The models were validated on numerical and experimental data to show their ability to generalise.
+Moreover, the accuracy of the current models surpasses the accuracy of previous models.         
 
 The paper is organised in five sections, including the present one.
 Section~\ref{related_works} presents the related works.
