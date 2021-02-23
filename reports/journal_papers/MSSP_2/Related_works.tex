@@ -3,34 +3,34 @@
 \label{related_works}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DL approaches in various SHM fields are increasingly getting more attention in recent years due to rapid advancement in the technology of computer hardware and software, big data, and cloud-based computations~\cite{Azimi}.
-Several DL-based techniques were applied in SHM related to civil structures such as damage detection and localisation~\cite{Cha2018, Kong2018}, corrosion detection~\cite{Atha2018}, concrete crack detection~\cite{Dung2019}.
+Several DL-based techniques were applied for SHM of civil engineering structures including damage detection and localisation~\cite{Cha2018, Kong2018}, corrosion detection~\cite{Atha2018}, concrete crack detection~\cite{Dung2019}.
 Azimi et al~\cite{Azimi} presented a comprehensive review of DL applications for vibration-based SHM.
 On the other hand, DL applications for guided wave-based SHM have less attention in the literature comparing to vibration-based SHM.
 
 In the following, several DL techniques for guided wave-based damage detection and localisation are presented.
-Chetwynd et al.~\cite{Chetwynd2008} proposed a multi-layer perceptron MLP network for damage detection in curved composite panels with added stiffeners to represent damage.
-Further, a PZT transducer array was utilised for generating and registering Lamb waves propagation through the panel.
+Chetwynd et al.~\cite{Chetwynd2008} proposed a multi-layer perceptron MLP network for damage detection in curved composite panels.
+The damage was simulated by force applicator with circular tip loaded by a mass.
+Further, a PZT transducer array was utilised for generating and registering Lamb waves propagating through the panel.
 Additionally, a novelty index for each Lamb wave response was obtained,
 which was compared to some threshold value. 
-Accordingly if the index exceeds the threshold it indicates that there is damage in the structure. 
+Accordingly, if the index exceeds the threshold it indicates that there is a damage in the structure. 
 The proposed MLP network was fed by the obtained novelty indexes, to perform two operations: classification and regression. 
 The classification network was designed to define three convex regions of the panel then to determine whether the panel is damaged or not. 
 On the other hand, the regression network is capable of estimating the exact location of the damage.
  
 Furthermore, authors in~\cite{DeFenza2015} introduced an artificial neural network (ANN) model for damage detection in plates made of aluminum alloys and composite.
-Moreover, the authors utilised the acquired data measurements of Lamb waves propagation to calculate damage indexes.
-Damage indexes were fed into the model that performs automatic feature extraction in conjunction with the probability ellipse-based method. 
-The ANN model and probability ellipse (PE) method were applied to identify damage location.
-The results from the ANN model and the PE presents how it is useful to apply damage indexes as a baseline for such methods to evaluate damage in aluminum and composite structures. 
+The training of the ANN was conducted on synthetic data calculated by using finite element method.
+Moreover, the authors utilised the acquired measurements of propagating Lamb waves to calculate damage indexes.
 
 Melville et al.~\cite{Melville2018} proposed a CNN model that utilises full wavefield measurements of thin aluminum plates for damage state prediction.
-The model achieved higher accuracy regarding damage \(99.98\%\) when compared to SVM that achieved \(62\%\).
+The model achieved higher accuracy regarding damage \(99.98\%\) when compared to support vector machine (SVM) that achieved \(62\%\).
 Ewald et al.~\cite{Ewald2019} proposed a CNN model called (DeepSHM) for signal classification using Lamb waves.
 The model provides an end-to-end approach for SHM by utilising response signals captured by sensors.
 Moreover, the authors applied wavelet transform to preprocess response signals to compute the wavelet coefficient matrix (WCM) which were fed into the CNN model.
 Liu et al.~\cite{Liu2020} proposed a CNN model for damage detection in thin aluminum plates.
 Analytical formulas were derived for generating Lamb waves that were used for training and validation purposes.
-Moreover, the authors verified their model by testing experimental data with a notch crack to represent the damage.
+Moreover, the authors verified their model by testing it on experimental data with a notch crack to represent the damage.
 Furthermore, Esfandabadi et al.~\cite{esfandabadideep} investigated the applications of compressive sensing method in conjunction with super-resolution techniques to acquire high-resolution wavefields via the training of neural networks on different aluminum and CFRP plates. 
 They applied two variants of CNN architecture: Super-Resolution Convolutional Neural Networks (SRCNNs) and Very-Deep Super Resolution (VDSR) with compressive sensing for the recovery of high spatial frequency information from low-resolution wavefield images. 
-However, enhancing the resolution will affect the damaged area which will alter the damage features.
+However, enhancing the resolution affects negatively the damaged area which will alter the damage features.
+Furthermore, we aim to explore the feasibility of applying different deep learning methods of image segmentation that utilise the full wavefield Lamb wave propagation in CFRP in order to perform damage identification.

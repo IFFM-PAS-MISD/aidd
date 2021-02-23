@@ -39,15 +39,22 @@ Table~\ref{layers} presents the architecture of a single layer, the transition d
 	\renewcommand{\arraystretch}{1.3}
 	\centering
 	\scriptsize
-	\begin{tabular}{|c|l|c|l|c|}
-		\cline{1-1} \cline{3-3} \cline{5-5}
-		\textbf{Layer} &  & \textbf{Transition Down} &  & \textbf{Transition Up} \\ \cline{1-1} \cline{3-3} \cline{5-5} 
-		Batch Normalization &  & Batch Normalization &  & \multirow{5}{*}{\begin{tabular}[c]{@{}c@{}}(\(3\times3\)) Transposed Convolution, \\ strides = (\(2\times2\))\end{tabular}} \\ \cline{1-1} \cline{3-3}
-		Relu &  & Relu &  &  \\ \cline{1-1} \cline{3-3}
-		(\(3\times3\)) Convolution &  & (\(1\times1\)) Convolution &  &  \\ \cline{1-1} \cline{3-3}
-		\multirow{2}{*}{Dropout \(p = 0.2\)} &  & Dropout \(p = 0.2\) &  &  \\ \cline{3-3}
-		&  & (\(2\times2\)) Maxpooling &  &  \\ \cline{1-1} \cline{3-3} \cline{5-5} 
+	\resizebox{\textwidth}{!}
+	{
+	\begin{tabular}{ccccc}
+		\hline
+		Layer &  &  Transition Down &  &  Transition Up \\ 
+		\hline
+		Batch Normalization &  & Batch Normalization &  &  \(3\times 3\) Transposed Convolution  \\ 
+		Relu &  & Relu &  & strides = (\(2\times2\))  \\ 
+		(\(3\times3\)) Convolution &  & (\(1\times1\)) Convolution &  &  \\ 
+%		&  &   \\ 
+		Dropout \(p=0.2\) &  &Dropout \(p=0.2\)  &  &  \\ 
+		 &  & (\(2\times2\)) Maxpooling &  &  \\ 
+	    \hline
 	\end{tabular}
+	}
 	\caption{Layer, Transition Down and Transition Up layers.} 
 	\label{layers}
+	
 \end{table}\\

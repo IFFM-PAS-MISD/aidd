@@ -6,7 +6,7 @@ The Res-UNet has a U-shape convolutional network that is based on encoder-decode
 The encoder (contracting) path is responsible for capturing the detailed context of an input image, while the decoder (expansive) path is responsible for enabling a precise localisation. 
 Hence, to maintain the spatial and contextual information from the previous layers from being lost residual connections were added at two levels:
 \begin{itemize}
-	\item at each step of the encoder and decoder paths
+	\item at each step of the encoder and decoder paths,
 	\item between the encoder parts and their corresponding decoder parts (skip connections) which ensures that the feature maps which were learned during the downsampling will be utilized in the reconstruction. 
 \end{itemize}
 The applied Res-UNet architecture is presented in Fig.~\ref{fig:Unet}.
@@ -16,7 +16,7 @@ Each block applies two convolutional layers followed by a (\(2\times2\)) max poo
 Each convolutional layer performs (\(3\times3\)) convolution operations, followed by batch normalization (BN) then a Relu is applied.
 Moreover, the number of convolutional filters is doubled after each downsampling block therefore the model can learn complex patterns effectively. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The bottleneck layer lies in between the encoder and the decoder as a joining point is the deepest layer in the model.
+The bottleneck layer lies in between the encoder and the decoder as a joining point in the deepest layer in the model.
 The bottleneck contains two convolutional layers, with \(1024\) filters which helps the model to learn and recognize the complex patterns.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The decoder consists of several upsampling blocks. 
