@@ -1,0 +1,111 @@
+\section{Deep learning approach}
+Conventional ML techniques are incapable of processing large registered data in their raw form.
+In conventional ML, the process of features engineering requires high expertise and skills to extract damage-sensitive features for specific SHM applications.
+Accordingly, there is no guarantee that such features can be reused for other structures due to the nonlinear behaviour. 
+
+It can be said that the huge development that occurred in the computational powers (e.g. central processing units (CPU), graphical processing units (GPU), etc.), in addition to the availability of big data, and the development of new learning algorithms~\cite{Yuan2020},  allowed DL techniques to develop rapidly.
+Consequently, DL-based SHM methods have been utilized to overcome issues related to ML-based SHM.  
+DL approach makes it possible to use registered data in their raw form without any need to perform feature engineering, hence, such an approach has an end-to-end structure that will automatically learn and discover the hidden features in high dimensional input data~\cite{LeCun, Networks}. 
+Figure ~\ref{fig:DL_ML} illustrates the main differences between the conventional ML-based SHM and DL-based SHM approaches.
+
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[width=1.0\linewidth]{figures/DL_vs_ML.png}
+	\end{center}
+	\caption{(a) Conventional ML based SHM vs. (b) DL based SHM.}
+	\label{fig:DL_ML}
+\end{figure} 
+
+In this section, Convolutional neural networks (CNN) and Recurrent neural networks (RNN) will be illustrated.
+
+\subsection{Convolutional neural networks}
+ConvNet or CNN is a feed-forward artificial neural network (ANN) inspired by visual cortex in the human brain.
+Mainly, CNN architectures are utilised for computer vision applications in which images are processed for classification and segmentation purposes.
+The main components of any ANN are neurons or perceptrons.
+Figure~\ref{fig:neuron} depicts the general neuron architecture, further, a neuron is capable of performing some sort of non-linear computation through an activation function that acts as a gate to forward the processed signal to the next layer.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=1]{figures/fig_neron.png}
+	\end{center}
+	\captionof{figure}{Neuron architechture.}
+	\label{fig:neuron}
+\end{figure}
+An example of an activation function is Relu (that changes all negative values of the feature map to zero and keeps all positive values unchanged).
+Furthermore, a neuron has several connections of weighted inputs and outputs that are updated through a learning process referred as back-propagation. 
+Back-propagation is a procedure in which the weights are updated in a way the model learns how to predict the desired output.
+For this purpose, a cost function (objective function) is utilised to estimate the difference between the predicted output and the targeted output.
+Accordingly, the back-propagation (e.g Gradient descent, Adam and RMSprop) procedure is applied to minimize the cost function.
+
+A typical structure of a CNN is presented in Fig. ~\ref{CNN}. 
+It consists of three parts: convolutional layer, downsampling layer and dense layer.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=1.0\linewidth]{figures/cnn.png}
+	\end{center}
+	\captionof{figure}{CNN architecture.}
+	\label{CNN}
+\end{figure}
+Convolutional layers are used to extract features from the input image.
+Further, a convolution (dot product) is carried out through sliding a window (filter or kernel) of size \((w_f,h_f,d_f)\) all over the input image of a size \((w,h,d)\)  to produce feature maps that are locally correlated.
+Usually, a convolutional operation is followed by a non-linear activation function such as Relu that changes all negative values of the feature map to zero.
+The next layer is the downsampling (pooling) that joins the related features into one feature for reducing the computation complexity~\cite{Lecun2015}. 
+Dense layers can be fully or partially connected followed by the output layer which produces the predicted outputs. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Recurrent neural networks}
+A recurrent neural network (RNN) is a DL model that handles time-series data (sequential data).
+Moreover, the RNN technique can remember its data input, because of its internal memory which makes it a powerful and promising technique in the field of DL.
+Since there are temporal problems such as natural language processing, language translation, image captioning and so on, they require to be handled sequentially.
+In the traditional deep neural networks (feed-forward) it is assumed that there is no correlation between the inputs and the outputs, while this assumption is not true for the RNN technique, that means the output of the RNN depends on the prior input sequence.
+The future events can also be used in predicting the output of a given sequence.
+Figure~\ref{rnn_vs_nn} depicts the difference between RNN and feed-forward deep neural networks.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=1.0\linewidth]{figures/rnn_vs_nn.png}
+	\end{center}
+	\captionof{figure}{(a) RRN vs (b) feed-forward neural network.}
+	\label{rnn_vs_nn}
+\end{figure}
+As shown in the figure, for the RNN, the output of a certain layer is looped back to its input which helps in making the prediction.
+However, in the feed-forward networks, the inputs and outputs are independent, and there is no connection between them.
+Figure~\ref{unrolled_rnn} shows the visualisation of an unrolled RNN, where \(x_{t}\) corresponds to the sequential timestamped input \(t\), \(h_{t}\) corresponds to internal state  and \(Y_{t}\) corresponds to the predicted timestamped outputs\(t\).
+Additionally, the figure shows that an unrolled RNN can be seen as a cascaded sequence of feed-forward networks.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=1.0\linewidth]{figures/unrolled_rnn.png}
+	\end{center}
+	\captionof{figure}{Unrolled RNN.}
+	\label{unrolled_rnn}
+\end{figure}
+In the feed-forward neural networks, as mentioned earlier, the learnable parameters (adjustable weights) are available only for the forward path of data propagation that are updated through back-propagation algorithm.
+However, for RNN, since there are two paths of data propagation (forward and backward) there are learnable weights for both directions.
+In RNN technique, weights are updated using back-propagation through time (BBTT)~\cite{Werbos1990}.
+Essentially, BBTT performs back-propagation algorithm on unrolled RNN and since BBTT depends on the number of timestamps this could be computationally expensive when there are a high number of timestamps.
+
+A gradient measures the change in all weights regarding the change in error (the difference between the actual predicted output and the ground truth).
+As a result, when implementing RNNs, two issues may arise during updating the learnable weights using BBTT:
+\begin{enumerate}
+	\item \textbf{Exploding gradients}: that can occur when the assigned values to the weights become so large that leads to overflow and results in not a number (NaN) values~\cite{Brownlee2017a}.
+	\item \textbf{Vanishing gradients}: that can occur when the assigned values to the weights become too small which affects the learning process to be very slow or to stop~\cite{Brownlee2017a}.
+\end{enumerate}
+To solve such issues, a long short-term memory (LSTM)  was introduced~\cite{Hochreiter1997} which is an memory extension for regular RNN.
+LSTM addresses the problem of long-term dependencies.
+
+LSTM is composed of four units: an input gate, a cell state, a forget gate, and a output gate.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=1.0\linewidth]{figures/lstm.png}
+	\end{center}
+	\captionof{figure}{LSTM.}
+	\label{lstm}
+\end{figure}
+The purpose of the forget gate is to figure out which information needs to be considered and which needs to be neglected.
+The current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a sigmoid function which will produce values between \(0\) and \(1\) then the outputs of the sigmoid are multiplied with the previous cell state.
+The input gate takes the current input \(x_t\) and the previous hidden state \(h_{t-1}\) and apply a sigmoid function over them in order to transform them to values in a range between \(0\) (not important) and \(1\) (important), then the same current input and the hidden state are passed through a \(tanh\) function which will regulate the network by transferring the values into a range between \(-1\) and \(1\).
+Then, the outputs from the sigmoid and \(tanh\) functions are multiplied point-by-point in order to eliminate \(0\) values.
+At this point, the network has sufficient information obtained from the input and forget gates.
+Therefore, the current cell state \(c_t\) can be calculated through multiplying the previous cell state \(c_{t-1}\) with the output of the forget gate (all 0 values will be dropped) and the result is added to the calculated input values.
+Afterward, the output gate computes the next hidden state \(h_t\) that holds information belongs to the current inputs.
+Initially, the current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a third sigmoid function which will produce values between 
+\(0\) and \(1\), and the current cell state \(c_t\) is passed though a \(tanh\) function.
+Then the calculated values from the third sigmoid function and the \(tanh\) function are multiplied point-by-point.
+Finally, the computed hidden state \(h_t\) is used for the prediction and it is transferred to the next timestamp.

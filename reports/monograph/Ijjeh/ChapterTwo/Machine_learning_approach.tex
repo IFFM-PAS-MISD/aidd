@@ -1,0 +1,188 @@
+\section{Machine learning approach}
+ML techniques in SHM were heavily utilised by researchers for damage detection~\cite{Doebling1998, alvandi2006assessment, fan2011vibration, raghavan2008effects, su2009identification, Mitra2016}.
+Moreover, machine learning techniques attempt to map the patterns of the input data acquired by sensors to output targets for a damage estimation at different levels ~\cite{rytter1993vibrational}.
+Accordingly, ML techniques demands high domain knowledge of the examiner to perform hand-crafted damage-sensitive feature extraction on the raw data acquired by sensors before being fed into a suitable ML model.
+Generally, the process of damage-sensitive features extraction (hand-crafted) in the field of SHM emerged due to the enormous development in the physics-based SHM techniques such as modal strain energy MSE~\cite{Kim}, modal curvature MC~\cite{Wahab}, modal assurance criterion (MAC), and Coordinate MAC~\cite{Allemang2003}, modal flexibility (MF)~\cite{Jaishi}, damage locating vector (DLV)~\cite{Bernal2002}, wavelet transform~\cite{Staszewski,Kima} and probabilistic reconstruction algorithm (PRA)~\cite{Hay2006} among others.
+
+In this section, we are going to describe several feature extraction techniques and classification models used with machine learning utilised for structural damage detection.
+These algorithms are suitable for scenarios where the sensitive damage features obtained from the structural responses are affected by the changes that occur due to the operational and environmental variability and the changes made by the damage.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Feature extraction techniques}
+\subsubsection{Principal component analysis}
+PCA is a popular method used for damage identification in SHM.
+Further, PCA shows a solid and efficient performance in feature extraction, and structural damage detection~\cite{liu2014research, wang2014principal, nguyen2010fault}. 
+Besides, PCA proves to be an effective tool to improve the training efficiency and enhance the classification accuracy for other ML algorithms, such as unsupervised learning methods~\cite{liu2019rapid, datteo2017statistical, torres2014data}. 
+
+PCA is dimensionality reduction technique utilised to reduce the dimensionality of large data (input space) into a lower dimension (feature space) through transforming a large set of variables into a smaller one with minimal loss information~\cite{Jolliffe2002}.
+Moreover, PCA can be utilised for damage detection by eliminating noise and obtaining sensitive features of damage as eigenvectors.
+The PCA technique is illustrated below.
+In the beginning, a matrix \(U(t)\) is constructed as shown in Eqn. \ref{U(t)}, which contains all registered data with time histories.
+\begin{equation}
+	U(t)=
+	\begin{bmatrix}
+		u_1{(t1)}       & u_2{(t1)} & \dots & u_M{(t1)} \\
+		u_1{(t2)}       & u_2{(t2)} & \dots & u_M{(t2)} \\
+		\vdots 			& \vdots 	& \ddots & \vdots \\
+		u_1{(t_N)}      & u_2{(t_N)} & \dots & u_M{(t_N)}
+	\end{bmatrix}
+	\label{U(t)}
+\end{equation}
+Where \(t\) corresponds to the time, \(u_i\ (i = 1, 2, ..., M)\) represents to the response from the \(i-th\) sensor installed in the monitored structure, \(M\) represents the total number of sensors, \(t_j\ (j = 1, 2, ..., N)\) represents the \(j-th\) time step of the data registering and \(N\) is the total time observations during monitoring.
+Additionally, each column represents data registration of one sensor.
+The next step is to normalise the time series of each sensor data registrations by subtracting the mean value shown in Eqn.~\ref{mean value}
+\begin{equation}
+	\bar{u_i} = \frac{1}{N}\sum_{j=1}^{N}u_i(t_j)
+	\label{mean value}
+\end{equation}
+Equation~\ref{normalised matrix} represents the normalised matrix.
+\begin{equation}
+	U'(t)=
+	\begin{bmatrix}
+		u_1{(t1)}-\bar{u_1}       & u_2{(t1)}-\bar{u_2} & \dots  & u_M{(t1)}-\bar{u_M} \\
+		u_1{(t2)}-\bar{u_1}       & u_2{(t2)}-\bar{u_2} & \dots  & u_M{(t2)}-\bar{u_M} \\
+		\vdots 					  & \vdots 	  			& \ddots & \vdots \\
+		u_1{(t_N)}-\bar{u_1}      & u_2{(t_N)}-\bar{u_2}& \dots  & u_M{(t_N)}-\bar{u_M}
+	\end{bmatrix}
+	\label{normalised matrix}
+\end{equation}
+After computing the normalised matrix, the covariance matrix is computed as shown in Eqn.~\ref{covariance}
+\begin{equation}
+	C = \frac{1}{M}U'^TU'
+	\label{covariance}
+\end{equation}
+Next, the eigenvalue and the corresponding eigenvector of the covariance matrix are computed through solving the following equation~\ref{eigvalue}.
+\begin{equation}
+	(C-\lambda_iI)\psi_i =0
+	\label{eigvalue}
+\end{equation}
+Where \(I\) represents the \(M\times M\) identity matrix, \(\psi_i = [\psi_{i,1},\psi_{i,2}, \hdots, \psi_{i,j}]^T\) in which \(\psi_{i,j}(j=1, 2, \hdots, M)\) is the element related to the \(j-th\) sensor.
+Usually, eigenvalues are sorted into decreasing order, particularly \(\lambda_1>\lambda_2>\hdots>\lambda_M\). 
+Then, the first eigenvector \(\psi_1\) corresponding to \(\lambda_1\) holds the greatest variance and consequently holds the most important information for the original matrix U. 
+The first few principal components hold most of the variance, whereas the remaining less important components involve the measurement of noise.
+Accordingly, the first few eigenvectors are utilised as sensitive features for damage detection and localisation.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Mahalanobis squared distance}
+MSD is an effective multivariate distance measuring technique in which it measures the distance between a point and a distribution.
+Therefore, MSD is utilised with multivariate statistics outlier detection~\cite{Worden2000}.
+Assuming \(X\) to be a training set with data acquired when the undamaged structure is under environmental and/or operational variations (EOVs) with multivariate mean vector \(\mu\) and covariance matrix \(\Sigma\)~\cite{Farrar2013}.
+Accordingly, the damage index \((DI_i)\) between feature vectors from training set \(X\) and any new feature vector from the test matrix \(Z\) is calculated using Eqn.~\ref{msd}.
+\begin{equation}
+	DI_i = (z_i-\mu)\Sigma^{-1}(z_i-\mu)^T
+	\label{msd}
+\end{equation}
+where \(z_i\) is a tested feature vector.
+The performance of this technique mainly relies on acquiring all likely EOVs in the training set~
+\cite{Farrar2013}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Gaussian mixture models}
+GMM is a clustering method commonly used with unsupervised learning, in which it aims to find main clusters of points in a dataset that share some common characteristics or features.
+Additionally, GMM has also been referred to as Expectation-Maximization (EM) clustering that is based on the optimization strategy.
+%%%%%%%%%%
+The damage detection is performed based on multiple MSD-based algorithms, in which the covariance matrices and mean vectors are functions of the main components.
+%%%%%%%%%%
+A GMM is defined as a superposition of K Gaussian distributions as shown in Eqn. \ref{gmm}.
+
+\begin{equation}
+	p(x) = \sum_{k=1}^K P(k) \mathcal{N}(x|\mu_k,\Sigma_k) 
+	\label{gmm}
+\end{equation}
+where \(x\) represents the training samples in the dataset, and \(P(k)\) corresponds to the mixture proportion (contribution weight) of the \(k-\)th distribution, in which the mixture proportion must satisfy \(0\leq P(x)\leq 1\).
+The sum of all mixture proportion satisfies the following Eqn.~\ref{mixture}
+\begin{equation}
+	\sum_{k=1}^{K}P(x) =1 
+	\label{mixture}
+\end{equation}  
+\(\mathcal{N}(x|\mu_k,\Sigma_k)\) refers to the conditional probability of the instance \(x\) for the \(k-\)th Gaussian distribution \(\mathcal{N}(\mu_k,\Sigma_k)\) presented in Eqn.~\ref{conditional}, where \(\mu_k\) and \(\Sigma_k\) are the mean and the covariance of that Gaussian distribution respectively.
+\begin{equation}
+	\mathcal{N}(x|\mu_k,\Sigma_k) = \frac{\exp(-\frac{1}{2}(x-\mu_k)^T\Sigma_k^{-1}(x-\mu_k))}{(2\pi)^{\frac{d}{2}\sqrt{\det(\Sigma_k)}}}
+	\label{conditional}		
+\end{equation}
+The complete GMM is parameterized by the mean vectors, covariance matrices and the mixture weights from all component densities \(\{\mu_k,\Sigma_k, P(x)\}_{k=1,\hdots,K}\).
+
+The parameters can be carried out from the training data using the classical maximum likelihood estimator (CMLE) based on the EM algorithm~\cite{Dempster1977}.
+Damage can be detected through estimating \(k\) \(DIs\) for each data sample \(x\) as shown in Eqn. \ref{DIs}
+\begin{equation}
+	DI_q(x) = (x-\mu_k)\Sigma_k^{-1}(x-\mu_k)^T
+	\label{DIs}
+\end{equation}
+where \(\mu_k\) and \(\Sigma_k\) refers to all observations from the \(k\) data component.
+For each observation the DI is given by the smallest DI estimated on each component as in Eqn. \ref{DI}
+\begin{equation}
+	DI(x) = \min[DI_k(x)]
+	\label{DI}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Classification models}
+\subsubsection{Support vector machine}
+Support vector machine (SVM) is a supervised ML model that is utilised as a classification and regression tool.  
+The idea behind SVM is to find an optimal hyperplane (e.g separate line) in N-dimensional space (N is the number of features) that separates the classes, furthermore, the aim of the hyperplane is to maximize the margin between the points on either side hence so called \enquote{decision line/boundary}.
+Furthermore, when we try to separate two classes of data points, we could have many possible hyperplanes, however, our goal is to find the hyperplane that has the maximum margin (maximum distance between data points of both classes). 
+Figure~\ref{fig:SVM} shows SVM hyperplanes in 2D feature space and 3D feature space.
+\begin{figure}[!h]
+	\begin{subfigure}[b]{0.49\textwidth}		
+		\centering
+		\includegraphics[width=.8\linewidth]{figures/2d_svm.png}
+		\caption{Hyperplane 2D feature space } 
+		\label{fig:2dsvm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{figures/3d_svm.png}
+		\caption{Hyperplane 3D feature space} 
+		\label{fig:3dsvm}
+	\end{subfigure}	
+	\caption{SVM for 2D and 3D feature space.}
+	\label{fig:SVM}
+\end{figure}
+
+\subsubsection{K-Nearest Neighbor}
+K-Nearest Neighbor (KNN) is a supervised ML technique utilized to perform classification tasks.
+KNN does not have a specialized training phase.
+It saves all the training data and uses the entire training set for classifying a new data point, which adds time complexity at the testing time.
+Moreover, KNN is a non-parametric learning algorithm, which means it does not have any assumptions regarding the input data, which is useful considering the real-world data does not obey the typical theoretical assumptions such as linear separability, uniform distribution among others.
+
+In the KNN technique, at the first, the distance between the new data point and the whole other data points is calculated.
+Furthermore, any distance method can be applied e.g. Euclidean, Manhattan, etc.
+Accordingly, it picks the K-nearest points, where K is an integer number (number of neighbors) that can be chosen in such a way the model will be able to predict new unseen data accurately. 
+Then, it assigns the new data point to the class to which the majority of the K data points belong.
+In Fig.~\ref{fig:datapoints} shows initial data points (training set) before classification, and Fig.~\ref{fig:KNN_K_5} shows the result of applying KNN techniques on the data points (3 classes) assuming \(K=6\).
+\begin{figure}[!h]
+	\begin{subfigure}[b]{0.49\textwidth}		
+		\centering
+		\includegraphics[width=1\linewidth]{figures/KNN_datapoints.png}
+		\caption{Data points } 
+		\label{fig:datapoints}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{figures/KNN_K_6.png}
+		\caption{3-Classes with \(K=6\)} 
+		\label{fig:KNN_K_5}
+	\end{subfigure}	
+	\caption{KNN algorithm: data classification with \(K=6\) .}
+	\label{fig:KNN}
+\end{figure}
+
+\subsubsection{Decision tree}
+Decision trees are supervised ML that is used in applications for classification and regression. 
+Additionally, decision trees are considered the bases for many other ML techniques such as random forests, bagging and boosted decision trees.
+The idea of a decision tree is to represent the whole data as a tree where each internal node represents a test on an attribute (a decision rule) and each branch represents an outcome of the test, and finally each leaf node (terminal node) holds the label of the class.
+
+Decision tree can be divided into two categories:
+\begin{enumerate}
+	\item Categorical variable decision trees: which includes categorical target variables that are divided into categories. A category means that the decision falls into one of the categories and there is no in-between such as (Yes/No category).
+	\item Continuous variable decision trees: which has a continuous target variable that can be predicted based on available information (e.g. crack length).
+\end{enumerate}
+Figure~\ref{fig:Decision_tree} presents a typical decision tree.
+Any decision tree has a root node where data input is carried through.
+Furthermore, the root node is split into sets of decision rules that result either in a leaf node which is a non-splitting node, or into another decision rule, creating what so-called a branch or sub-tree.
+In case there are decision rules that can be eliminated from the tree, a process called \enquote{pruning} is applied to minimize the complexity of the algorithm.
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[width=1.0\linewidth]{figures/decision_tree.png}
+	\end{center}
+	\caption{Decision tree.}
+	\label{fig:Decision_tree}
+\end{figure} 

@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[b5paper, 11pt, openany, titlepage]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage[pdftex]{graphicx,color}
+%\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{geometry}
+\newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pdflscape}
+\usepackage{adjustbox} 
+\usepackage{etoolbox}
+\usepackage{chapterbib}
+% fix long section titles in toc
+\usepackage{booktabs}
+\usepackage{suffix}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{xspace} 
+\usepackage{textcomp} 
+\usepackage{csquotes}
+\usepackage{subcaption}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{Data-driven based approach for damage detection}
+\author{Abdalraheem A. Ijjeh}
+\maketitle
+\tableofcontents
+\chapter[Data-driven techniques for damage detection]{Data-driven based approach for damage detection}
+%\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+Engineering structures such as buildings, roads, tunnels, power generation systems, rotating machinery, and aircraft are considered very important in our modern life.
+However, such structures are prone to various types of damage, therefore it is essential to maintain them and keep them safe during their operational lifetime.
+Health monitoring presents an essential tool in management activities as it allows identifying early and progressive structural damage~\cite{farrar2007introduction}. 
+Obtained data from monitoring structures are large and need to be transformed into valuable information to assist the development and design of maintenance activities, improve safety, reduce uncertainties and extend our knowledge regarding the monitored structure.
+Structural health monitoring (SHM) is one of the most robust
+tools for managing infrastructure.
+Traditionally, the procedure of performing an autonomous damage identification for engineering structures whether civil, mechanical or aerospace is referred to as SHM~\cite{farrar2001vibration}.
+SHM aims to describe a real-time evaluation of a structure during its life-cycle~\cite{Balageas2010}. 
+Moreover, SHM assists in detecting and characterizing damage in a structure as a whole or its parts. 
+Damage detection in a structure is crucial since it may reduce safety and performance during its operational lifetime~\cite{Yuan2016}.
+Furthermore, the SHM approach involves monitoring a structure continuously through an array of sensors that periodically measure the response of the structure then extracting the sensitive damage features from these measurements to perform statistical analysis on these features to examine the condition of the structure.
+Generally, there are two approaches to SHM: physics-based and
+data-based.
+In the physics-based approach, the inverse problem method is applied in which numerical models such as finite element models are implemented. 
+Furthermore, damage identification results by comparing the registered readings from the structure and the estimated data from the models.
+On the other hand,  the data-based approach is related to the artificial intelligence domain (machine learning and deep learning), in which artificial models are developed to learn the behavior of the structure based on earlier registered data that leads to performing pattern recognition for the damage identification.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The data-based approach can be applied in both supervised and unsupervised learning~\cite{worden2007application}.
+Supervised learning can be utilised in the field of SHM where data of the damaged and undamaged conditions are available in which the detection models can train~\cite{figueiredo2018machine}.
+On the other hand, unsupervised learning is applied when data of undamaged cases are only available, therefore the detection models train only on such data~\cite{figueiredo2018machine}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this chapter, several machine learning (ML) and deep learning (DL) techniques for damage detection are presented.
+Furthermore, ML techniques such as principal component analysis (PCA), Gaussian mixture models (GMMS), Mahalanobis squared distance (MSD) and Bioinspired algorithms will be illustrated.
+For the DL approach, techniques such as artificial neural networks ANN, Convolutional neural networks (ConvNet/CNN), and recurrent neural networks (RNN) will be illustrated.
+Furthermore, data acquired based on the guided waves approach and vibration-based approach will be presented. 
+%%%%%%%%%%%%%%%% Section 2 %%%%%%%%%%%%%%%%%%%%%%%
+\input{Machine_learning_approach}
+%%%%%%%%%%%%%%%% Section 3 %%%%%%%%%%%%%%%%%%%%%%%
+\input{Deep_learning_approach}
+%%%%%%%%%%%%%%%% Section 4 %%%%%%%%%%%%%%%%%%%%%%%
+\input{Wave_propagation_based_methods}
+%%%%%%%%%%%%%%%% Section 5 %%%%%%%%%%%%%%%%%%%%%%%
+\input{vibratraion_based_approach.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+In this chapter, the author discussed problems with conventional damage detection techniques for SHM and the importance of the artificial intelligence approach.
+Furthermore, in the second section of the chapter, the author introduced the ML approach in the SHM field.
+Moreover, several techniques for feature extraction such as PCA, MSD, and GMMs were investigated. 
+Further, several classification models such as SVM, KNN, and decision trees were introduced.
+In the third section, the author presents the deep learning approach, in which techniques such as CNN  and RNN were thoroughly investigated.
+Finally, the author presents several deep learning techniques for damage detection used regarding the SHM field based on guided waves and vibration approaches.
+\section*{Acknowledgments}
+This work was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
+Also, I would like to thank my supervisor Professor Pawel Kudela for his consistent support and guidance during the running of this project.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{biblography.bib} 
+\bibliographystyle{unsrt} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
