@@ -1,0 +1,267 @@
+\documentclass[10pt, twocolumn]{article} % twocolumn
+\usepackage{wrapfig, booktabs}
+\usepackage{authblk}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\pagenumbering{gobble}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{booktabs,chemformula}
+\usepackage{graphicx,color}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\graphicspath{{graphics/}}
+\setlength{\columnsep}{1cm}
+
+
+\newenvironment{Figure}
+%\newenvironment{Table}
+
+
+
+\title{\textbf{Feasibility Study of Full Wavefield Processing by
+	Using CNN for Delamination Detection}}
+
+\author[$1$]{Abdalraheem A. Ijjeh}
+\author[$1$]{Pawel Kudela}
+
+\affil[$1$]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
+\date{\vspace{-5ex}}
+
+\makeatletter
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+
+\makeatother
+
+\begin{document}
+	\maketitle
+
+	\begin{flushleft}
+		\justify
+		\textbf{ABSTRACT:} In this work, a Convolutional Neural Network model for delamination detection and localisation in composite materials is developed.
+		Accordingly, a large dataset of full wavefield of Lamb waves was simulated which resembles measurements by scanning laser Doppler vibrometer
+		The developed model presents an end-to-end approach, in which the whole unprocessed data are fed into the model, accordingly, it will learn by itself to recognise the patterns and detect and localise the delamination by surrounding the delamination with a bounding box.	  
+	\end{flushleft}
+	
+	\begin{flushleft}
+		\justify
+		\textbf{KEY WORDS:}	Lamb waves, structural health monitoring, convolutional neural networks, delamination identification, deep learning.  
+	\end{flushleft}
+%	\begin{multicols}{2}
+	\section{Introduction}
+	Composite materials are widely used in various industries, due to their characteristics such as high strength, low density, resistance to fatigue, and corrosion. 
+	However, composites materials are sensitive to impacts resulting from the lack of reinforcement in the out-of-plane direction~\cite{Francesconi2019}.
+	Under a high energy impact, little penetration rises in composite materials. 
+	On the other hand, for low to medium energy impact, damage will be initiated by matrix cracks which will cause a delamination process in the structure.
+	Delamination can alter the compression strength of composite laminate, and it will gradually affect the composite to encounter failure by buckling. 
+	The tension encountered by the composite structure creates cracks and produces delamination between the laminates which leads to more damage. 
+	These defects can seriously decrease the performance of composites, therefore, they should be detected in time to avoid catastrophic structural collapses. Damage detection and localisation techniques have been widely applied in the field of Structural Health Monitoring (SHM) to monitor the integrity of structures to prolong their life time and to minimize or delay their failure by estimating the size and the location of the damage at the early stages.
+	Traditional SHM techniques for damage detection are based on hand-crafted feature extraction, which implies that the damage detection process involves a comparison between the sensed data from the structure and the current status of the structure to determine any changes occurred.
+	Accordingly,these processes require a huge amount of data preprocessing and feature extraction to be applied to the captured data.
+	In recent years, the accelerated progress in the field of artificial intelligence (AI) technologies, mainly in the deep learning field, offered the opportunity for being implemented and integrated with the SHM approaches.Consequently, issues of data preprocessing and feature extraction are solved when applying deep learning techniques. 
+	Alternatively, end-to-end models are presented, in which the whole unprocessed data are fed in the model,hence, it will learn by itself to recognise the patterns and detect the damage.
+		
+	Several techniques have been developed in the field of SHM for damage detection and identification based on deep learning techniques.
+	Authors in~\cite{islam1994damage} have developed a model of a neural network for detecting delamination location and size estimation in composite materials. 
+	The model has been trained with the frequencies of the first five obtained modes from the data of the modal analysis. Piezoceramic sensors were used to obtain the data of the structure for both states of damaged and undamaged beams.
+	Moreover, authors in ~\cite{okafor1996delamination} have trained a back-propagation neural network to estimate delamination size in a smart composite beam. 
+	Accordingly, delamination sizes for the first four modal frequencies were utilised to train their model which was able to predict delamination of size ranges between \(0.22\) cm and \(0.82\) cm.
+	Furthermore, Authors in ~\cite{Sammons2016} proposed a model utilising X-ray computed tomography for delamination identification in CFRP.  
+	Their model was developed using a convolutional neural network (CNN) which is capable of performing image segmentation to identify the delamination.
+	However, their model encounters difficulty with identifying delamination of large sizes.
+	Authors in ~\cite{Melville2018} have developed a CNN model for damage detection in metal plates.
+	The model was trained on full wavefield data acquired by SLDV. 
+	Compared to results of applying traditional support vector machine (SVM) technique their CNN model shows better results.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+	In this work, delamination detection in composite materials such as carbon fibre reinforced polymers (CFRP) is developed using deep learning techniques. One of the key points of our work is the computation of a large dataset of full wavefield of propagating elastic waves to simulate the experimentally generated data which resembles measurements acquired by scanning laser Doppler vibrometer (SLDV).
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Methodology}
+		\subsection{Convolutional Neural Network CNN}
+		Convolutional Neural Network (CNN) is mainly used in the field of computer vision in which it process images for the purpose of image classification and segmentation.
+		CNNs became popular after the breakthrough of AlexNet model~\cite{NIPS2012_4824} won the competition of ImageNet Large Scale Visual Recognition 2012 (ILSVR2012), which shows great results on images classification when applied on a large dataset of 1000000 images and 1000 different classes.
+		
+		CNN consists of a number of units called artificial neurons (perceptrons) structured in a cascaded layers.
+		In Fig.~\ref{fig:neuron} A perceptron is presented in which it mimics a human brain neuron, that it is capable of performing some sort of non-linear computation through an activation function  such as (Relu) which acts as a gate to forward the processed signal to the next layer of perceptrons.
+		Furthermore, it has several connections of weighted inputs and outputs that are updated through a learning process. 
+		Relu is illustrated in equation~\ref{Eq:relu}, where (\(z\)) is the summation of the trainable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in equation~\ref{z}.
+		
+		\begin{equation}
+			Relu(z) = 
+			\begin{cases}
+				0,  \text{  if}\ z<0\\
+				z,  \text{  otherwise}
+			\end{cases}
+			\label{Eq:relu}
+		\end{equation}
+	
+		\begin{equation}
+				z= \sum_{i=0}^{n}  w_i\times x_i +b
+				\label{z}
+		\end{equation}
+		
+		\begin{Figure}
+			\begin{center}
+				\includegraphics[scale=1]{fig_neron.png}
+			\end{center}
+			\captionof{figure}{Structure of artifcial neuron.}
+			\label{fig:neuron}
+		\end{Figure}
+
+		The learning process occurs through back-propagation procedure in which the weights are updated in a way the model learns how to predict the desired output.
+		For this purpose, a cost function (objective function) is utilised to estimate the difference between the predicted output and the targeted output.
+		Accordingly, the back-propagation (e.g Gradient Decent, Adam and RMSprob) procedure is applied to minimize the cost function.
+		
+		The typical structure of CNN is presented in Fig.\ref{CNN}. It consists of three parts: convolutional layer, downsampling layer and dense layer.
+		\begin{Figure}
+			\begin{center}
+				\includegraphics[scale=0.7]{Fig_Convnet.png}
+			\end{center}
+			\captionof{figure}{Convolutional Neural Network architecture.}
+			\label{CNN}
+		\end{Figure}
+		The convolutional layer is utilised to extract features from the input image.
+		By performing convolution operation (dot product) through a sliding window (filter or kernel) of size \((w_f,h_f,d_f)\) all over the input image of a size \((w,h,d)\) feature maps which are locally correlated are produced.
+		Furthermore, the size of the feature maps are reduced due to the convolution, however, the same size of the input can be kept by applying some padding over the previous input. 
+		Usually, a convolutional layer is followed by a non-linear activation function such as Relu that change all negative values of the feature map to zero.
+		Next layer is the downsampling (pooling) which joins the related features into one feature. 
+		Usually, Maxpooling is applied that operates by sliding a pool filter (e.g \((2\times 2)\)) over a feature map and picks the maximum value in a local pool filter, resulting in a reduction in the dimension of the feature maps~\cite{Lecun2015} which reduces the computation complexity.
+		Dense layers (hidden layers) can be fully or partially connected neural network followed by the output layer which produces the predicted outputs.
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\section{CNN model and results}
+		The main core of this work was the generation of a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a plate made of CFRP.
+		For this purpose, a time domain spectral element method was used to simulate the interaction of Lamb waves through the delamination~\cite{Kudela2020}.
+		The generated dataset resembles measurements acquired by SLDV in the transverse direction. 
+		For each case (\(512\)) animations of a full wavefield of propagating Lamb waves were generated, however, to enhance the visibility of the delamination the root mean square (RMS) was applied.
+		In this work, for the purpose of training our CNN model we have applied the scenario in which the wavefield was registered at the top of the surface of the plate.
+		The final output of this operation is presented in Fig~\ref{fig:RMS}.	
+		
+		\begin{Figure}
+			\begin{center}
+				\includegraphics[width=5cm, height=5cm]{RMS_flat_shell_velocities_in_plane_412_500x500top.png}
+			\end{center}
+			\captionof{figure}{RMS image: from the top of the plate.}
+			\label{fig:RMS}
+		\end{Figure}
+	
+		In this work, a CNN model with fully connected dense layers was developed for delamination detection in CFRP.
+		The model was trained on the on RMS images from the generated dataset of the propagating Lamb waves (from the top of the surface of the plate) to predict the delamination location using bounding boxes.
+		The dataset contains 475 RMS images of size \((500\times 500)\) pixels and each image contains a randomly simulated delamination with a different size, location and shape(ellipse, circle), and the angle between the delamination major and minor axes was also randomly selected.
+		Moreover, the developed model is based on a supervised learning therefore, with each generated case of delamination a ground truth (label) is given. 
+		The dataset was divided into two portions: \(80\%\)	training set and \(20\%\) testing set. 
+		Additionally, the validation set was created as a \(20\%\) of the training set.
+		
+		In order to reduce the computation complexity for the model, a preprocessing for the RMS input images is applied.
+		Accordingly, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels, then it was split into four quarters of \((224\times 224)\) pixels, moreover, each quarter was split into \((7\times 7)\) blocks, and each block has a size of \((32\times 32)\) pixels. 
+		Figure~\ref{49blocks} shows .
+		Moreover, to examine the effect of increasing the resolution of the RMS image on delamination identification another  preparation was made by resizing  the RMS input image to \((512\times 512)\) pixels, then it was split into four quarters of \((256\times 256)\) pixels, moreover, each quarter was split into \(8\times 8\) blocks, and each block has a size of \((32\times 32)\) pixels.
+		\begin{Figure}
+			\begin{center}
+				\includegraphics[width=5cm, height=5cm]{7_7_blocks_412.png}
+			\end{center}
+			\captionof{figure}{Left upper quarter of RMS image splitted into (\(7\times 7\)) blocks.}
+			\label{49blocks}
+		\end{Figure}
+	
+		\begin{Figure}
+			\begin{center}
+				\includegraphics[width=5cm, height=5cm]{8_8_blocks_412.png}
+			\end{center}
+			\captionof{figure}{Left upper quarter of RMS image splitted into (\(8\times 8\)) blocks.}
+			\label{64blocks}
+		\end{Figure}
+	
+		Fig.~\ref{CNN_model} presents the CNN model architecture.
+		It in which it takes an input block (processed RMS image) of size \((32\times 32)\) pixels.
+		The model starts with a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)), moreover, the same padding was applied and the activation function is (Relu), followed by a pooling layer.
+		The pooling layer has a pool filter of size (\(2\times 2\)) with a stride of (\(2\)).
+		These operation of convolution and pooling is repeated two times.
+		Next, the output of the second pooling layer is flattened and is ready to be fed to the dense layers in which the model has two fully connected layers.
+		The first dense layer has (\(4096\)) neurons and the second dense layer has (\(1024\)) neurons.
+		Additionally, Relu is applied for both dense layers.
+		Moreover, a dropout of probability (\(p = 0.5\)) was added to the model to reduce the overfitting issue.
+		The final layer in the model is the output layer, in which the model outputs two predictions (damaged and undamaged). 
+		Accordingly, the whole block is considered damaged if there is at least one pixel of delamination, otherwise, it is considered undamaged.
+		The predicted delamination is surrounded by a bounding box as the final output.
+		\begin{Figure}
+			\begin{center}
+				\includegraphics[width=5cm, height=5cm]{CNN_model.png}
+			\end{center}
+			\captionof{figure}{CNN model architecture.}
+			\label{CNN_model}
+		\end{Figure}
+		Furthermore, two accuracy metrics were applied.
+		The first metric measures the accuracy of capability of the model to detect the delamination, the second metric measures the Intersection over Union (IoU) between the bounding box which surrounds the predicted delamination and the ground truth delamination.
+		Moreover, selecting a proper loss function during training the model is important since the loss function reflects how good the model learns to predict.
+		In this model, we have applied a mean square error (mse) loss function which calculates the sum of the squared distances between the predicted output values and the ground truth values.
+		Moreover, our focus during training the model was on minimizing the loss function and maximizing the accuracy metric.
+	 	Accordingly, an optimizer function is required to perform such operation.
+	 	In the developed model Adam optimizer was used which is a combination of RMSprop and SGD ~\cite{Kingma2015}.
+
+		Figures.~\ref{7_7_output412} and \ref{8_8_output412} show the results of delamination prediction (surrounded by a bounding box) for the input of (\(7\times 7\)) blocks presented in Fig.~\ref{49blocks} and (\(8\times 8\)) blocks presented in Fig.~\ref{64blocks} respectively.
+		The IoU for the (\(7\times 7\)) input blocks for this case is \(14.45\%\) and for the (\(8\times 8\)) input blocks is \(20.12\%\).
+	 	\begin{Figure}
+	 		\begin{center}
+	 			\includegraphics[width=5cm, height=5cm]{7_7_predicted_output_412.png}
+	 		\end{center}
+	 		\captionof{figure}{Predicted delamination using (\(7\times 7\)) input block.}
+	 		\label{7_7_output412}
+	 	\end{Figure}
+
+	 	\begin{Figure}
+			\begin{center}
+				\includegraphics[width=5cm, height=5cm]{8_8_predicted_output_412.png}
+			\end{center}
+			\captionof{figure}{Predicted delamination using (\(8\times 8\)) input block.}
+			\label{8_8_output412}
+		\end{Figure}
+		Table~\ref{table:ta} presents the values of the accuracy metrics implemented in the model for the (\(7\times 7\)) and (\(8\times 8\)) input blocks, we can notice that increasing the resolution of the input image enhances th IoU metric. 
+
+		\begin{table}[t]
+			\centering
+			\caption{Accuracy values for input blocks.}
+			\begin{tabular}{cccll}
+				\cline{1-3}
+				& \((7\times 7)\) blocks & \((8\times 8)\) blocks &  &  
+				\\ 
+				\cline{1-3}
+				Mean IoU & \(10.4\%\) & \(12.9\%\) & & 
+				\\ 
+				\cline{1-3}
+				Accuracy of prediction & \(96.90\%\) & \(95.87\%\) & &  
+				\\ 
+				\cline{1-3}
+				\multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} &  & 
+			
+			\end{tabular}	
+			\label{table:ta}
+		\end{table}	
+
+
+%	
+	\section*{Conclusion}
+	In this work, we developed a CNN model that is capable of detecting and localising the delamination in composite materials.
+	The results were promising since the model is able to detect delamination of various shapes, sizes and angles.
+	Furthermore, increasing the RMS image resolution enhanced the IoU accuracy metric.
+	This work can be extended to the identification of various damage types in composite materials.
+
+	\section*{ACKNOWLEDGMENTS}
+	The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
+	
+	\bibliography{conference.bib}	
+	\bibliographystyle{unsrt}
+%	\end{multicols}
+	
+
+
+\end{document}
