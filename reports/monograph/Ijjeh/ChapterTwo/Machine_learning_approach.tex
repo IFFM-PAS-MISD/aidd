@@ -2,7 +2,7 @@
 ML techniques in SHM were heavily utilised by researchers for damage detection~\cite{Doebling1998, alvandi2006assessment, fan2011vibration, raghavan2008effects, su2009identification, Mitra2016}.
 Moreover, machine learning techniques attempt to map the patterns of the input data acquired by sensors to output targets for a damage estimation at different levels ~\cite{rytter1993vibrational}.
 Accordingly, ML techniques demands high domain knowledge of the examiner to perform hand-crafted damage-sensitive feature extraction on the raw data acquired by sensors before being fed into a suitable ML model.
-Generally, the process of damage-sensitive features extraction (hand-crafted) in the field of SHM emerged due to the enormous development in the physics-based SHM techniques such as modal strain energy MSE~\cite{Kim}, modal curvature MC~\cite{Wahab}, modal assurance criterion (MAC), and Coordinate MAC~\cite{Allemang2003}, modal flexibility (MF)~\cite{Jaishi}, damage locating vector (DLV)~\cite{Bernal2002}, wavelet transform~\cite{Staszewski,Kima} and probabilistic reconstruction algorithm (PRA)~\cite{Hay2006} among others.
+Generally, the process of damage-sensitive features extraction (hand-crafted) in the field of SHM emerged due to the enormous development in the physics-based SHM techniques such as modal strain energy (MSE)~\cite{Kim}, modal curvature (MC)~\cite{Wahab}, modal assurance criterion (MAC), and Coordinate (MAC)~\cite{Allemang2003}, modal flexibility (MF)~\cite{Jaishi}, damage locating vector (DLV)~\cite{Bernal2002}, wavelet transform~\cite{Staszewski,Kima} and probabilistic reconstruction algorithm (PRA)~\cite{Hay2006} among others.
 
 In this section, we are going to describe several feature extraction techniques and classification models used with machine learning utilised for structural damage detection.
 These algorithms are suitable for scenarios where the sensitive damage features obtained from the structural responses are affected by the changes that occur due to the operational and environmental variability and the changes made by the damage.
@@ -24,14 +24,14 @@ In the beginning, a matrix \(U(t)\) is constructed as shown in Eqn. \ref{U(t)}, 
 		u_1{(t2)}       & u_2{(t2)} & \dots & u_M{(t2)} \\
 		\vdots 			& \vdots 	& \ddots & \vdots \\
 		u_1{(t_N)}      & u_2{(t_N)} & \dots & u_M{(t_N)}
-	\end{bmatrix}
+	\end{bmatrix}\ ,
 	\label{U(t)}
 \end{equation}
-Where \(t\) corresponds to the time, \(u_i\ (i = 1, 2, ..., M)\) represents to the response from the \(i-th\) sensor installed in the monitored structure, \(M\) represents the total number of sensors, \(t_j\ (j = 1, 2, ..., N)\) represents the \(j-th\) time step of the data registering and \(N\) is the total time observations during monitoring.
+where \(t\) corresponds to the time, \(u_i\ (i = 1, 2, ..., M)\) represents to the response from the \(i-th\) sensor installed in the monitored structure, \(M\) represents the total number of sensors, \(t_j\ (j = 1, 2, ..., N)\) represents the \(j-th\) time step of the data registering and \(N\) is the total time observations during monitoring.
 Additionally, each column represents data registration of one sensor.
-The next step is to normalise the time series of each sensor data registrations by subtracting the mean value shown in Eqn.~\ref{mean value}
+The next step is to normalise the time series of each sensor data registrations by subtracting the mean value shown in Eqn.~\ref{mean value}:
 \begin{equation}
-	\bar{u_i} = \frac{1}{N}\sum_{j=1}^{N}u_i(t_j)
+	\bar{u_i} = \frac{1}{N}\sum_{j=1}^{N}u_i(t_j)\ ,
 	\label{mean value}
 \end{equation}
 Equation~\ref{normalised matrix} represents the normalised matrix.
@@ -45,17 +45,17 @@ Equation~\ref{normalised matrix} represents the normalised matrix.
 	\end{bmatrix}
 	\label{normalised matrix}
 \end{equation}
-After computing the normalised matrix, the covariance matrix is computed as shown in Eqn.~\ref{covariance}
+After computing the normalised matrix, the covariance matrix is computed as shown in Eqn.~\ref{covariance}:
 \begin{equation}
-	C = \frac{1}{M}U'^TU'
+	C = \frac{1}{M}U'^TU' \ ,
 	\label{covariance}
 \end{equation}
-Next, the eigenvalue and the corresponding eigenvector of the covariance matrix are computed through solving the following equation~\ref{eigvalue}.
+Next, the eigenvalue and the corresponding eigenvector of the covariance matrix are computed through solving the following equation~\ref{eigvalue}:
 \begin{equation}
-	(C-\lambda_iI)\psi_i =0
+	(C-\lambda_iI)\psi_i =0 \ ,
 	\label{eigvalue}
 \end{equation}
-Where \(I\) represents the \(M\times M\) identity matrix, \(\psi_i = [\psi_{i,1},\psi_{i,2}, \hdots, \psi_{i,j}]^T\) in which \(\psi_{i,j}(j=1, 2, \hdots, M)\) is the element related to the \(j-th\) sensor.
+where \(I\) represents the \(M\times M\) identity matrix, \(\psi_i = [\psi_{i,1},\psi_{i,2}, \hdots, \psi_{i,j}]^T\) in which \(\psi_{i,j}(j=1, 2, \hdots, M)\) is the element related to the \(j-th\) sensor.
 Usually, eigenvalues are sorted into decreasing order, particularly \(\lambda_1>\lambda_2>\hdots>\lambda_M\). 
 Then, the first eigenvector \(\psi_1\) corresponding to \(\lambda_1\) holds the greatest variance and consequently holds the most important information for the original matrix U. 
 The first few principal components hold most of the variance, whereas the remaining less important components involve the measurement of noise.

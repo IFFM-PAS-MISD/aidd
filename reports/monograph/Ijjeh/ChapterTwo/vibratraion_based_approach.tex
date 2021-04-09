@@ -26,14 +26,14 @@ Authors in this approach have trained several CNNs separately regarding each dam
 By investigating scenarios of undamaged, single damage and multiple damage cases, they obtained \(0.54\%\) average error for specifically identified cases.
 
 Authors in~\cite{Lin2017} introduced a new approach to structural damage detection using CNN.
-Moreover, the authors have simulated a numerical model of simply supported Euler Bernoulli beam.
+Moreover, the authors have developed a numerical model of simply supported Euler Bernoulli beam.
 The detection model was designed to learn features and to identify damaged locations, moreover, it led to excellent results regarding the accuracy of damaged locations on the noise-free and noisy dataset.
 Wang and Cha in~\cite{Cha2018} proposed an unsupervised CNN model, that is able to extract the feature representations from the unlabelled data.
 The authors in their model used raw acceleration signals (sensitive to the damage presence) that were acquired from an intact lab-scale steel bridge.
 Then, the acquired response vector was normalised followed by applying the continuous wavelet transform (CWT) and fast Fourier transform (FFT).
-The output is then fed into a CNN auto-encoder,
+The output was then fed into a CNN auto-encoder,
 Accordingly, the extracted damage features were fed into one-class (OC) SVMs as novelty detectors corresponding to the sensors.
-Consequently, the approximation of damage location (loose-bolt) is estimated based on the locations of the sensors with the highest novelty rates.
+Consequently, the approximation of damage location (loose-bolt) was estimated based on the locations of the sensors with the highest novelty rates.
 
 Motivated by human vision and thinking, authors in~\cite{Cha2018} presented a computer vision and deep-learning framework for anomaly detection.
 The proposed approach consists of two steps.
@@ -51,7 +51,7 @@ Finally, the comparison shows that this approach outperformed the previous one a
 Authors in~\cite{Wu2019} presented a study of the deep CNN method in estimating the dynamic response of a linear single-degree-of-freedom (SDOF) system, a nonlinear SDOF, and a multidegree of freedom (MDOF) streel frame.
 In some cases, the convolutional kernel can approximate the numerical integration operator, and the convolutional layer can be interpreted as a dominant frequency extraction operator.
 Moreover, different cases of noise-contaminated signals were investigated. 
-Additionally, the multilayer perceptron (MLP) method was used as a reference to the proposed CNN approach.
+Additionally, MLP method was used as a reference to the proposed CNN approach.
 A comparison between the results obtained by the MLP and CNN shows that the CNN approach is more accurate and robust against noisy input data.
 
 Authors in ~\cite{Oh2019}  presented a study of the CNN technique for SHM application for response estimation of tall buildings under wind excitation.
@@ -59,16 +59,16 @@ The proposed CNN model was trained on measured structural response data which ta
 In order to measure the performance of the proposed technique, it was verified with unseen data never used at the training phase and it was able to accurately estimate the maximum and minimum strains.
 Authors in~\cite{Li2020} proposed a CNN model for damage detection of a bridge structure.
 Moreover, the authors compared the performance of the CNN model with other techniques such as random forest, SVM, KNN, and decision tree, and the results showed that the accuracy was enhanced by at least \(15\%\).
-Since the acceleration response signal is highly prone to noise~\cite{Azimi2020}, researchers begin utilising other data sensor types or use alternative features.  
 
+Since the acceleration response signal is highly prone to noise~\cite{Azimi2020}, researchers begin utilising other types of sensor data or use alternative features.  
 Li et al. in ~\cite{Li2020a} investigated damage in bridge structure accordingly, proposed a supervised learning technique based on the CNN model.
 Dataset was acquired by deflection of a scaled-down model bridge by a fibre-optic gyroscope.
 Then, the dataset was fed into a 1D-CNN model to classify three states of damage and an intact class (benchmark/damage-free).
 To investigate the performance of the proposed model, a cross-validation technique was applied. 
 It showed that the accuracy of the CNN model increased by at least \(15.3\%\) over other conventional methods such as SVM, KNN, decision trees, and random forests.
 Authors in \cite{Lopez-Pacheco2020} introduced a novel frequency-domain convolutional neural network (FDCNN) for damage detection based on Bouc-Wen hysteric model~\cite{Ismail2009}.  
-In the FDCNN method, only acceleration measurements for damage diagnosis, that are sensitive to environmental noise.
-Moreover, FDCNN reduces the computational time during the learning process, which adds to increase robustness against noise.
+In the FDCNN method utilises only acceleration measurements for damage diagnosis, that are sensitive to environmental noise.
+Moreover, FDCNN reduces the computational time during the learning process, which increase noise robustness.
 The FDCNN introduced the spectral pooling operator responsible for attenuating the noise in measurements.
 The proposed method was validated through comparing it with different CNN model. 
 The performance of the proposed method was higher regarding damage identification in building structures.

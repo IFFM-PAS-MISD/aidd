@@ -16,7 +16,7 @@ Figure ~\ref{fig:DL_ML} illustrates the main differences between the conventiona
 	\label{fig:DL_ML}
 \end{figure} 
 
-In this section, Convolutional neural networks (CNN) and Recurrent neural networks (RNN) will be illustrated.
+In current section, Convolutional neural networks (CNN) and Recurrent neural networks (RNN) will be illustrated.
 
 \subsection{Convolutional neural networks}
 ConvNet or CNN is a feed-forward artificial neural network (ANN) inspired by visual cortex in the human brain.
@@ -48,7 +48,7 @@ It consists of three parts: convolutional layer, downsampling layer and dense la
 Convolutional layers are used to extract features from the input image.
 Further, a convolution (dot product) is carried out through sliding a window (filter or kernel) of size \((w_f,h_f,d_f)\) all over the input image of a size \((w,h,d)\)  to produce feature maps that are locally correlated.
 Usually, a convolutional operation is followed by a non-linear activation function such as Relu that changes all negative values of the feature map to zero.
-The next layer is the downsampling (pooling) that joins the related features into one feature for reducing the computation complexity~\cite{Lecun2015}. 
+The next layer is the downsampling (pooling) that joins the related features into one feature for reducing the computation complexity~\cite{LeCun}. 
 Dense layers can be fully or partially connected followed by the output layer which produces the predicted outputs. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Recurrent neural networks}
@@ -65,9 +65,9 @@ Figure~\ref{rnn_vs_nn} depicts the difference between RNN and feed-forward deep 
 	\captionof{figure}{(a) RRN vs (b) feed-forward neural network.}
 	\label{rnn_vs_nn}
 \end{figure}
-As shown in the figure, for the RNN, the output of a certain layer is looped back to its input which helps in making the prediction.
+As shown in the Fig.~\ref{rnn_vs_nn} (a), for the RNN, the output of a certain layer is looped back to its input which helps in making the prediction.
 However, in the feed-forward networks, the inputs and outputs are independent, and there is no connection between them.
-Figure~\ref{unrolled_rnn} shows the visualisation of an unrolled RNN, where \(x_{t}\) corresponds to the sequential timestamped input \(t\), \(h_{t}\) corresponds to internal state  and \(Y_{t}\) corresponds to the predicted timestamped outputs\(t\).
+Figure~\ref{unrolled_rnn} shows the visualisation of an unrolled RNN, where \(x_{t}\) corresponds to the sequential timestamped input at time \(t\), \(h_{t}\) corresponds to internal state  and \(Y_{t}\) corresponds to the predicted timestamped output at time \(t\).
 Additionally, the figure shows that an unrolled RNN can be seen as a cascaded sequence of feed-forward networks.
 \begin{figure}
 	\begin{center}
