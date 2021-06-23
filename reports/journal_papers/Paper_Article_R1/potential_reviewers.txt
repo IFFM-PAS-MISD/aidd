@@ -1,3 +1,3 @@
 Vincentius Ewald; V.Ewald@tudelft.nl;Aerospace NDT Laboratory, Delft Univ. of Technology; Expert in the field of deep learning in application for shm
-Luca de Mrchi, l.demarchi@unibo.it, University of Bologna; Expert in the field of deep learning and signal processing of full wavefield of guided waves
+Luca de Marchi, l.demarchi@unibo.it, University of Bologna; Expert in the field of deep learning and signal processing of full wavefield of guided waves
 Hoon Sohn; hoonsohn@kaist.ac.kr; KAIST; Expert in the field of SHM/NDT
