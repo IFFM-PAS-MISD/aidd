@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[b5paper, 11pt, openany, titlepage]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage[pdftex]{graphicx,color}
+%\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{geometry}
+\newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pdflscape}
+\usepackage{adjustbox} 
+\usepackage{etoolbox}
+\usepackage{chapterbib}
+% fix long section titles in toc
+\usepackage{booktabs}
+\usepackage{suffix}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{xspace} 
+\usepackage{textcomp} 
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{Machine learning based techniques for damage detection}
+\author{Abdalraheem A. Ijjeh}
+\maketitle
+\tableofcontents
+\chapter[ML techniques for damage detection]{Machine learning based techniques for damage detection}
+%\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+Engineering structures such as buildings, roads, tunnels, power generation systems,rotating machinery and aircraft are considered very important in our modern life.
+However, such structures are prone to various types of damage, therefore it is essential to maintain them and keep them safe during there operational life time.
+Health monitoring presents an essential tool in management activities as it allows identifying early and progressive structural damage~\cite{farrar2007introduction}. 
+Obtained data from monitoring structures are large and need to be transformed into valuable information to assist the development and design of maintenance activities, improve the safety, reduce uncertainties and extend our the knowledge regarding the monitored structure.
+Structural health monitoring (SHM) is one of the most robust
+tools for managing infrastructure.
+Traditionally, the procedure of performing an autonomous damage identification for engineering structures whether civil, mechanical or aerospace is referred to as SHM~\cite{farrar2001vibration}.
+SHM aims to describe a real-time evaluation of a structure during its life-cycle~\cite{Balageas2010}. 
+Moreover, SHM assists in detecting and characterising damage in a structure as a whole or its parts. 
+Damage detection in a structure is crucial since it may reduce safety during its operational lifetime~\cite{Yuan2016}.
+SHM approach involves monitoring a structure continuously through an array of sensors that periodically measure the response of the structure then extracting the sensitive damage features from these measurements
+to perform statistical analysis on these features to examine the condition of the structure.
+Generally, there are two approaches to SHM: physics-based and
+data-based.
+In the physics-based approach, the inverse problem method is applied in which numerical models such as finite element models are implemented. 
+Furthermore, damage identification results by comparing the registered readings from the structure and the estimated data from the models.
+On the other hand,  the data-based approach is related to machine learning domain, in which machine learning techniques are developed to learn the behavior of the structure based on earlier registered data that leads to perform pattern recognition for the damage identification.
+%%%%%%%%%%%%%%%%%%%%%%%need to be updated%%%%%%%%%
+The data-based approach can be applied in both supervised and unsupervised learning~\cite{worden2007application}.
+Supervised learning can be utilised in the field of SHM where data of the damaged and undamaged conditions are available in which the detection models can train~\cite{figueiredo2018machine}.
+On the other hand, Unsupervised learning is applied when data of undamaged cased are only available, therefore the detection models train only on such data~\cite{figueiredo2018machine}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Machine learning approach}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wave propagation based methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{}
+\section{Vibration based methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure} [h!]
+	\begin{center}
+		%\includegraphics[width=14cm]{Graphics/bc.jpg}
+	\end{center}
+	\caption{Figure caption.} 
+	\label{fig:bc}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h]
+\centering
+	\caption{Table caption}
+	\begin{tabular}{cccc}
+		\hline
+	\textbf{a}	& \textbf{x} & \textbf{y} & \textbf{z} \\
+		\hline
+		-50 & -0.289 & -0.289 & -0.598\\ 
+		-40 & -0.248 & -0.248 & -0.512\\ 
+		\hline 
+	\end{tabular} 
+	\label{tab:xyz}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The scheme of experimental setup is shown in Fig.~\ref{fig:bc}.  
+The values are collected in Tab.~\ref{tab:xyz}.
+The details are described in a book~\cite{udd2011fiber}. 
+
+Similar case was analysed by Hill et al.~\cite{hill1978photosensitivity}
+
+Additional information:
+\begin{itemize}
+\item fonts Times New Roman, 11pt
+\item keep figures separately in greyscale with resolution 600 dpi (publisher requirement)
+\item 20-30 pages
+\item Bibliography references in the order of citations within the text
+\end{itemize}
+
+
+\bibliography{biblography} 
+\bibliographystyle{unsrt} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

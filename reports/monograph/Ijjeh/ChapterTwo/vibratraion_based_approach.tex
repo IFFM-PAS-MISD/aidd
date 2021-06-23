@@ -1,0 +1,80 @@
+\section{Vibration based SHM though DL}
+The vibration-based approach for damage assessment using ML techniques has been investigated thoroughly  for several SHM applications.
+Furthermore, introducing DL techniques for data-driven SHM applications has presented new scopes for investigating large scale structures and enhanced the process of data acquisition and processing of large datasets acquired by sensors of different types~\cite{Carden2004,Sohn1996}.
+Generally, the conventional approach for damage localisation requires prior knowledge of the approximate damage locations~\cite{Xu2018,Dorafshan2016}. 
+Therefore, the identification process regarding candidates for the damaged locations is complex and can consume plenty of time.
+Damage locations identification under the vibrational approach is based on the fact that the damage cause changes in the vibration characteristics such as modal shapes, frequencies, and damping~\cite{Doebling},
+which can be utilised in the identification of damaged locations from the registered data response of a structure.
+A vibration-based approach can be categorised into two classes:
+model-based (parametric) and non-model-based or (non-parametric).
+Parametric methods require computational models and associated assumptions about the investigated structure.
+In general parametric methods can achieve good accuracy, however, there is no guarantee regarding the availability of accurate information about the structural system in the real-world~\cite{Azimi2020}. 
+As a result, the non-parametric methods arise due to the challenges in developing robust computational models. 
+With non-parametric methods, there are no prior assumptions about the structural system.
+%ML techniques contributed to both of these categories. 
+%They are usually used to extract the modal parameters in the scope of non-model-based methods [43,44]. 
+%The traditional ML methods involve two phases in non-model-based methods. 
+%The first phase is feature extraction, in which sensor data (e.g., acceleration) are used to extract effective features, thereby eliminating the cumbersome manual feature extraction process. 
+%The second phase is a classification procedure that identifies the location
+%and/or level of damage [45].  
+%Support Vector Machines (SVM), Probabilistic ANNs (PNN) [46–48], Fuzzy ANNs (FNN) [49], and Extreme Learning Machine Networks (e.g., online sequential) [50] are some of the popular methods that are used for vibration-based SHM.
+
+In the following, several vibration-based for SHM using DL techniques are presented.
+Authors in~\cite{Abdeljaber2017} introduced a damage identification approach based on output-only response data.
+In which, various damage cases (loose bolt) were investigated, accordingly training data were generated based on the acceleration response.
+Authors in this approach have trained several CNNs separately regarding each damage case, and accordingly, the probability of damage (PoD) was determined.
+By investigating scenarios of undamaged, single damage and multiple damage cases, they obtained \(0.54\%\) average error for specifically identified cases.
+
+Authors in~\cite{Lin2017} introduced a new approach to structural damage detection using CNN.
+Moreover, the authors have developed a numerical model of simply supported Euler Bernoulli beam.
+The detection model was designed to learn features and to identify damaged locations, moreover, it led to excellent results regarding the accuracy of damaged locations on the noise-free and noisy dataset.
+Wang and Cha in~\cite{Cha2018} proposed an unsupervised CNN model, that is able to extract the feature representations from the unlabelled data.
+The authors in their model used raw acceleration signals (sensitive to the damage presence) that were acquired from an intact lab-scale steel bridge.
+Then, the acquired response vector was normalised followed by applying the continuous wavelet transform (CWT) and fast Fourier transform (FFT).
+The output was then fed into a CNN auto-encoder,
+Accordingly, the extracted damage features were fed into one-class (OC) SVMs as novelty detectors corresponding to the sensors.
+Consequently, the approximation of damage location (loose-bolt) was estimated based on the locations of the sensors with the highest novelty rates.
+
+Motivated by human vision and thinking, authors in~\cite{Cha2018} presented a computer vision and deep-learning framework for anomaly detection.
+The proposed approach consists of two steps.
+In the first step, data conversion by data visualisation is carried out, in which it mimics human vision and thinking.
+In data visualisation,  the registered data response of acceleration is transformed into images plotted in gray-scale. 
+In the second step, the training dataset is labeled manually, then fed into deep convolutional neural networks (DCNNs).
+The proposed technique was tested on one-year data and achieved a global accuracy of \(87,0\%\) and it could be used for real-time SHM.
+Moreover, Tang et al. in~\cite{Tang2019} presented a DL technique for data anomaly detection which can be considered as an improved technique to the previous work in~\cite{Cha2018}.
+Initially, the raw time series measured data are split into segments, and data in the time and frequency domain are visualised. 
+Images related to each section are stacked as a single dual-channel (red and green).
+Then, the training dataset is fed into a CNN that learns how to perform data anomaly classification.
+The main difference between the previous approach and this approach was in using imbalanced data in which the number of samples of different classes was unequal, however, in this approach the used data were balanced.
+Finally, the comparison shows that this approach outperformed the previous one and achieved higher accuracy for all data anomaly patterns.
+
+Authors in~\cite{Wu2019} presented a study of the deep CNN method in estimating the dynamic response of a linear single-degree-of-freedom (SDOF) system, a nonlinear SDOF, and a multidegree of freedom (MDOF) streel frame.
+In some cases, the convolutional kernel can approximate the numerical integration operator, and the convolutional layer can be interpreted as a dominant frequency extraction operator.
+Moreover, different cases of noise-contaminated signals were investigated. 
+Additionally, MLP method was used as a reference to the proposed CNN approach.
+A comparison between the results obtained by the MLP and CNN shows that the CNN approach is more accurate and robust against noisy input data.
+
+Authors in ~\cite{Oh2019}  presented a study of the CNN technique for SHM application for response estimation of tall buildings under wind excitation.
+The proposed CNN model was trained on measured structural response data which take wind data measured as inputs in order to predict strains in future wind loads.
+In order to measure the performance of the proposed technique, it was verified with unseen data never used at the training phase and it was able to accurately estimate the maximum and minimum strains.
+Authors in~\cite{Li2020} proposed a CNN model for damage detection of a bridge structure.
+Moreover, the authors compared the performance of the CNN model with other techniques such as random forest, SVM, KNN, and decision tree, and the results showed that the accuracy was enhanced by at least \(15\%\).
+
+Since the acceleration response signal is highly prone to noise~\cite{Azimi2020}, researchers begin utilising other types of sensor data or use alternative features.  
+Li et al. in ~\cite{Li2020a} investigated damage in bridge structure accordingly, proposed a supervised learning technique based on the CNN model.
+Dataset was acquired by deflection of a scaled-down model bridge by a fibre-optic gyroscope.
+Then, the dataset was fed into a 1D-CNN model to classify three states of damage and an intact class (benchmark/damage-free).
+To investigate the performance of the proposed model, a cross-validation technique was applied. 
+It showed that the accuracy of the CNN model increased by at least \(15.3\%\) over other conventional methods such as SVM, KNN, decision trees, and random forests.
+Authors in \cite{Lopez-Pacheco2020} introduced a novel frequency-domain convolutional neural network (FDCNN) for damage detection based on Bouc-Wen hysteric model~\cite{Ismail2009}.  
+In the FDCNN method utilises only acceleration measurements for damage diagnosis, that are sensitive to environmental noise.
+Moreover, FDCNN reduces the computational time during the learning process, which increase noise robustness.
+The FDCNN introduced the spectral pooling operator responsible for attenuating the noise in measurements.
+The proposed method was validated through comparing it with different CNN model. 
+The performance of the proposed method was higher regarding damage identification in building structures.
+
+Finally, with smart monitoring as a target, authors in~\cite{Hung2020}  proposed a hybrid deep learning model for damage detection for SHM.
+The proposed model can deal with different damage levels and accurately detect damage by combining 1D-CNN and Long-Short Term Memory (LSTM) into a single end-to-end model fed by the raw time-series, and as a result, avoiding signal preprocessing step.
+Moreover, the proposed model verified that with low noise levels,  accurate damage detection can be achieved.
+
+

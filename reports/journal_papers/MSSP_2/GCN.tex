@@ -1,0 +1,56 @@
+\subsubsection{Global Convolutional Network}
+Global Convolutional Network (GCN) proposed by Peng et al. 
+~\cite{Peng2017} addressed the importance to have large kernels for both 
+localisation and classification for semantic segmentation to enlarge 
+respective fields.
+However, a contradiction arises when performing classification and localisation 
+tasks. 
+For instance, classification tasks require the models to be invariant for 
+different transformations such as rotation and translation.
+On the other hand, localisation tasks require the models to be sensitive for 
+any transformation, to accurately assign each pixel for its semantic category.
+Accordingly, to solve this contradiction, two design principles were suggested: 
+\begin{enumerate}
+	\item For the classification task, in order to improve the capability of 
+	the model to handle different transformations, a large kernel size must be 
+	used to enable dense connections between feature maps and per-pixel 
+	classifiers.
+	\item For localisation task, the model must be fully convolutional. 
+	Additionally, fully connected or global pooling layers are not applied as 
+	these layers will discard the localisation information. 
+\end{enumerate}
+
+Figure~\ref{fig:gcn} presents the proposed GCN module for semantic segmentation 
+utilised for delamination identification.
+In this work, we implemented the model with \(k=7\).
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{GCN.png}
+	\end{center}
+	\caption{Global Convolution Network whole architecture.} 
+	\label{fig:gcn}
+\end{figure}
+As shown in the Fig.~\ref{fig:gcn}, a residual network was utilised as a backbone for 
+feature maps extraction, the residual block is shown in 
+Fig.~\ref{fig:res_gcn_br}a.
+After each residual block, a GCN block is inserted shown in 
+Fig.~\ref{fig:res_gcn_br}b, which employs a combination of \((1\times 
+k)\)+\((k\times 1)\) and \((k\times 1)\)+\((1\times k)\) convolutions which 
+enables a dense connections within a large \((k\times k)\) region in the 
+feature map.
+Followed by a boundary refinement (BR) block shown in Fig.~\ref{fig:res_gcn_br}b, which can be considered as an additional residual block to refine the predictions near the object boundaries ended up generating a lower resolution score map. 
+Furthermore, the upsampling operation is done recursively, it upsamples the low 
+resolution score maps then concatenate it with a higher one to produce a new 
+score maps.
+The deconvolution operation is repeated until the original image size is 
+obtained.
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{res_gcn_br.png}
+	\end{center}
+	\caption{(a) Residual block, (b) Global Convolution Network block, (c) 
+		Boundary Refinement} 
+	\label{fig:res_gcn_br}
+\end{figure}
+
+

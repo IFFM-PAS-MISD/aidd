@@ -1,125 +1,35 @@
 import gc
+import os
+
 import keras
 import keras.backend as K
 import numpy as np
 import tensorflow as tf
 from keras.callbacks import EarlyStopping
-from keras.layers import Conv2D, MaxPool2D, Input, Conv2DTranspose
+from keras.layers import Conv2D, MaxPool2D, Input, Conv2DTranspose, Activation
 from keras.models import Model
 from keras.utils import to_categorical
-from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.model_selection import train_test_split, KFold
+
 import matplotlib.pyplot as plt
 
-###########################################   memory growing ###########################################################
-config = tf.compat.v1.ConfigProto()
-config.gpu_options.allow_growth = True
-sess = tf.compat.v1.Session(config=config)
-########################################################################################################################
-# Force the Garbage Collector to release unreferenced memory
+#   memory growing
+
 gc.collect()
-########################################################################################################################
-############################################ Hyper parameters ##########################################################
-########################################################################################################################
-filters = 16
+
+config = tf.compat.v1.ConfigProto(device_count={'GPU': 2, 'CPU': 32})
+sess = tf.compat.v1.Session(config=config)
+tf.compat.v1.keras.backend.set_session(sess)
+
+# Hyper parameters
+
 epsilon = 0.1
-dropout_rate = 0.5
-epochs = 100
+dropout_rate = 0.2
+epochs = 20
 
 
 ########################################################################################################################
-############################## Loading dataset into x, y arrays and reshape them #######################################
-########################################################################################################################
-# x = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_training_dataset.npy')
-# x = x.reshape(1900, 512, 512, 1)
-# x = x / 255.0  # normalizing x,y to (0-1) range
-# y = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_labels.npy')
-# y = y.reshape(1900, 512, 512, 1)
-# y = y / 255.0
 
-########################################################################################################################
-###################################### Shuffle the data set at random ##################################################
-########################################################################################################################
-# x, y = shuffle(x, y)
-########################################################################################################################
-################# Split dataset into training and testing sets and again re-shuffle them ###############################
-########################################################################################################################
-# x_train = x[:1520]
-# y_train = y[:1520]
-#
-# test_x_samples = x[1520:1900]
-# test_y_samples = y[1520:1900]
-#
-# y_train = to_categorical(y_train)
-# tests_y_samples = to_categorical(test_y_samples)
-
-
-########################################################################################################################
-# def dice_coef(y_true, y_pred, smooth=1):
-#     intersection = K.sum(K.abs(y_true * y_pred), axis=-1)
-#     return (2. * intersection + smooth) / (K.sum(K.square(y_true), -1) + K.sum(K.square(y_pred), -1) + smooth)
-#
-#
-# ########################################################################################################################
-# def dice_coef_loss(y_true, y_pred):
-#     return 1 - dice_coef(y_true, y_pred)
-#
-#
-# ########################################################################################################################
-# # Dice loss / F1
-# def dice_loss(y_true, y_pred):
-#     numerator = 2 * tf.reduce_sum(y_true * y_pred, axis=-1)
-#     denominator = tf.reduce_sum(y_true + y_pred, axis=-1)
-#
-#     return 1 - (numerator + 1) / (denominator + 1)
-#
-#
-# ########################################################################################################################
-# def dice_loss_1(y_true, y_pred):  # did not give good results
-#     numerator = 2 * tf.reduce_sum(y_true * y_pred, axis=(1, 2, 3))
-#     denominator = tf.reduce_sum(y_true + y_pred, axis=(1, 2, 3))
-#     return 1 - numerator / denominator
-#
-#
-#
-# ########################################################################################################################
-# # Custom metric IoU
-# def iou_loss_core(y_true, y_pred, smooth=1):
-#     y_true_f = K.flatten(y_true)
-#     y_pred_f = K.flatten(y_pred)
-#     intersection = K.sum(K.abs(y_true_f * y_pred_f))  # , axis=-1
-#     union = K.sum(y_true_f) + K.sum(y_pred_f) - intersection / 2
-#     iou = (intersection + smooth) / (union + smooth)
-#     return iou
-#
-#
-# ########################################################################################################################
-# def recall(y_true, y_pred):
-#     y_true = K.ones_like(y_true)
-#     true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-#     all_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
-#     recall_acc = true_positives / (all_positives + K.epsilon())
-#     return recall_acc
-#
-#
-# ########################################################################################################################
-# def precision(y_true, y_pred):
-#     y_true = K.ones_like(y_true)
-#     true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-#
-#     predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
-#     precision_acc = true_positives / (predicted_positives + K.epsilon())
-#     return precision_acc
-#
-#
-# ########################################################################################################################
-# def f1_score(y_true, y_pred):
-#     precision_m = precision(y_true, y_pred)
-#     recall_m = recall(y_true, y_pred)
-#     return 2 * ((precision_m * recall_m) / (precision_m + recall_m + K.epsilon()))
-#
-
-########################################################################################################################
-########################################################################################################################
 def iou_metric(y_true, y_pred, smooth=1):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
@@ -135,84 +45,172 @@ def batch_normalizer(bn_input):
 
 
 ########################################################################################################################
-############################################## The Model UNet ##########################################################
+# The Model UNet
 ########################################################################################################################
-def Unet_softmax():
+def Unet_model():
     inputs = Input(shape=(512, 512, 1))
+
     # Backbone Down sampling convolution followed by max-pooling
     ####################################################################################################################
-    c11 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(inputs)
-    BN = batch_normalizer(c11)
-    c12 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN1 = batch_normalizer(c12)
-    d1 = MaxPool2D((2, 2), (2, 2))(BN1)
+
+    c11 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same')(inputs)
+    BN = keras.layers.BatchNormalization()(c11)
+    active_l = Activation('relu')(BN)
+
+    c12 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c12)
+    active_l = Activation('relu')(BN)
+
+    c13 = Conv2D(64, (1, 1), padding='same')(inputs)
+
+    concat = keras.layers.Concatenate()([active_l, c13])
+    active_l_1 = Activation('relu')(concat)
+
+    d1 = MaxPool2D((2, 2), (2, 2))(active_l_1)
     d1 = keras.layers.Dropout(dropout_rate)(d1)
     ####################################################################################################################
-    c21 = Conv2D(filters=32, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(d1)
-    BN = batch_normalizer(c21)
-    c22 = Conv2D(filters=32, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN2 = batch_normalizer(c22)
-    d2 = MaxPool2D((2, 2), (2, 2))(BN2)
+
+    c21 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same')(d1)
+    BN = keras.layers.BatchNormalization()(c21)
+    active_l = Activation('relu')(BN)
+
+    c22 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c22)
+    active_l = Activation('relu')(BN)
+
+    c23 = Conv2D(128, (1, 1), padding='same')(d1)
+
+    concat = keras.layers.Concatenate()([active_l, c23])
+    active_l_2 = Activation('relu')(concat)
+
+    d2 = MaxPool2D((2, 2), (2, 2))(active_l_2)
     d2 = keras.layers.Dropout(dropout_rate)(d2)
     ####################################################################################################################
-    c31 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(d2)
-    BN = batch_normalizer(c31)
-    c32 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN3 = batch_normalizer(c32)
-    d3 = MaxPool2D((2, 2), (2, 2))(BN3)
+    c31 = Conv2D(filters=256, kernel_size=(3, 3), strides=1, padding='same')(d2)
+    BN = keras.layers.BatchNormalization()(c31)
+    active_l = Activation('relu')(BN)
+
+    c32 = Conv2D(filters=256, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c32)
+    active_l = Activation('relu')(BN)
+
+    c33 = Conv2D(256, (1, 1), padding='same')(d2)
+
+    concat = keras.layers.Concatenate()([active_l, c33])
+    active_l_3 = Activation('relu')(concat)
+
+    d3 = MaxPool2D((2, 2), (2, 2))(active_l_3)
     d3 = keras.layers.Dropout(dropout_rate)(d3)
     ####################################################################################################################
-    c41 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(d3)
-    BN = batch_normalizer(c41)
-    c42 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN4 = batch_normalizer(c42)
-    d4 = MaxPool2D((2, 2), (2, 2))(BN4)
+    c41 = Conv2D(filters=512, kernel_size=(3, 3), strides=1, padding='same')(d3)
+    BN = keras.layers.BatchNormalization()(c41)
+    active_l = Activation('relu')(BN)
+
+    c42 = Conv2D(filters=512, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c42)
+    active_l = Activation('relu')(BN)
+
+    c43 = Conv2D(512, (1, 1), padding='same')(d3)
+
+    concat = keras.layers.Concatenate()([active_l, c43])
+    active_l_4 = Activation('relu')(concat)
+
+    d4 = MaxPool2D((2, 2), (2, 2))(active_l_4)
     d4 = keras.layers.Dropout(dropout_rate)(d4)
     ####################################################################################################################
     # bottleneck layer
     ####################################################################################################################
-    c51 = Conv2D(filters=256, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(d4)
-    BN = batch_normalizer(c51)
-    c52 = Conv2D(filters=256, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN = batch_normalizer(c52)
+    c51 = Conv2D(filters=1024, kernel_size=(3, 3), strides=1, padding='same')(d4)
+    BN = keras.layers.BatchNormalization()(c51)
+    active_l = Activation('relu')(BN)
+
+    c52 = Conv2D(filters=1024, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c52)
+    active_l = Activation('relu')(BN)
+
+    c53 = Conv2D(1024, (1, 1), padding='same')(d4)
+
+    concat = keras.layers.Concatenate()([active_l, c53])
+    active_l_5 = Activation('relu')(concat)
     ####################################################################################################################
     # Up sampling convolution followed by ConvTranspose
     ####################################################################################################################
-    u1 = Conv2DTranspose(filters * 8, (3, 3), strides=(2, 2), padding='same')(BN)
-    skip4 = keras.layers.Concatenate()([BN4, u1])
+    u1 = Conv2DTranspose(512, (3, 3), strides=(2, 2), padding='same')(active_l_5)
+
+    skip4 = keras.layers.Concatenate()([active_l_4, u1])
     skip4 = keras.layers.Dropout(dropout_rate)(skip4)  # adding dropout layer
-    c61 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip4)
-    BN = batch_normalizer(c61)
-    c62 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN = batch_normalizer(c62)
+
+    c61 = Conv2D(filters=512, kernel_size=(3, 3), strides=1, padding='same')(skip4)
+    BN = keras.layers.BatchNormalization()(c61)
+    active_l = Activation('relu')(BN)
+
+    c62 = Conv2D(filters=512, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c62)
+    active_l = Activation('relu')(BN)
+
+    c63 = Conv2D(512, (1, 1), padding='same')(u1)
+
+    concat = keras.layers.Concatenate()([active_l, c63])
+    active_l = Activation('relu')(concat)
     ####################################################################################################################
-    u2 = Conv2DTranspose(filters * 4, (3, 3), strides=(2, 2), padding='same', activation='relu')(BN)
-    skip3 = keras.layers.Concatenate()([BN3, u2])
+    u2 = Conv2DTranspose(256, (3, 3), strides=(2, 2), padding='same')(active_l)
+
+    skip3 = keras.layers.Concatenate()([active_l_3, u2])
     skip3 = keras.layers.Dropout(dropout_rate)(skip3)
-    c71 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip3)
-    BN = batch_normalizer(c71)
-    c72 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN = batch_normalizer(c72)
+
+    c71 = Conv2D(filters=256, kernel_size=(3, 3), strides=1, padding='same')(skip3)
+    BN = keras.layers.BatchNormalization()(c71)
+    active_l = Activation('relu')(BN)
+
+    c72 = Conv2D(filters=256, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c72)
+    active_l = Activation('relu')(BN)
+
+    c73 = Conv2D(256, (1, 1), padding='same')(u2)
+
+    concat = keras.layers.Concatenate()([active_l, c73])
+    active_l = Activation('relu')(concat)
     ####################################################################################################################
-    u3 = Conv2DTranspose(filters * 2, (3, 3), strides=(2, 2), padding='same')(BN)
-    skip2 = keras.layers.Concatenate()([BN2, u3])
+    u3 = Conv2DTranspose(128, (3, 3), strides=(2, 2), padding='same')(active_l)
+
+    skip2 = keras.layers.Concatenate()([active_l_2, u3])
     skip2 = keras.layers.Dropout(dropout_rate)(skip2)
-    c81 = Conv2D(filters=32, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip2)
-    BN = batch_normalizer(c81)
-    c82 = Conv2D(filters=32, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN = batch_normalizer(c82)
+
+    c81 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same')(skip2)
+    BN = keras.layers.BatchNormalization()(c81)
+    active_l = Activation('relu')(BN)
+
+    c82 = Conv2D(filters=128, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c82)
+    active_l = Activation('relu')(BN)
+
+    c83 = Conv2D(128, (1, 1), padding='same')(u3)
+
+    concat = keras.layers.Concatenate()([active_l, c83])
+    active_l = Activation('relu')(concat)
     ####################################################################################################################
-    u4 = Conv2DTranspose(filters, (3, 3), strides=(2, 2), padding='same', activation='relu')(BN)
-    skip1 = keras.layers.Concatenate()([BN1, u4])
+    u4 = Conv2DTranspose(64, (3, 3), strides=(2, 2), padding='same')(active_l)
+
+    skip1 = keras.layers.Concatenate()([active_l_1, u4])
     skip1 = keras.layers.Dropout(dropout_rate)(skip1)
-    c91 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(skip1)
-    BN = batch_normalizer(c91)
-    c92 = Conv2D(filters=16, kernel_size=(3, 3), strides=1, padding='same', activation='relu')(BN)
-    BN = batch_normalizer(c92)
+
+    c91 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same')(skip1)
+    BN = keras.layers.BatchNormalization()(c91)
+    active_l = Activation('relu')(BN)
+
+    c92 = Conv2D(filters=64, kernel_size=(3, 3), strides=1, padding='same')(active_l)
+    BN = keras.layers.BatchNormalization()(c92)
+    active_l = Activation('relu')(BN)
+
+    c93 = Conv2D(64, (1, 1), padding='same')(u4)
+
+    concat = keras.layers.Concatenate()([active_l, c93])
+    active_l = Activation('relu')(concat)
+
     ####################################################################################################################
     # Output layer
     ####################################################################################################################
-    output = Conv2D(2, (1, 1), activation='softmax')(BN)
+    output = Conv2D(2, (1, 1), activation='softmax')(active_l)
     ####################################################################################################################
     model = Model(inputs=inputs, outputs=output)
     ####################################################################################################################
@@ -223,7 +221,7 @@ def Unet_softmax():
 
 
 ########################################################################################################################
-############################## Loading dataset into x, y arrays and reshape them #######################################
+# Loading dataset into x, y arrays and reshape them
 ########################################################################################################################
 
 dataset = np.load('delamination_dataset.npy')
@@ -236,16 +234,24 @@ labels = dataset[:, :, :, 1]
 Train_x, Test_x, Train_label, Test_label = train_test_split(samples, labels, test_size=0.2, shuffle=False)
 
 Test_x = np.expand_dims(Test_x, axis=3)
+
 Test_label = np.expand_dims(Test_label, axis=3)
 
-Test_label = to_categorical(Test_label)
+Test_label = to_categorical(Test_label, 2)
 
 ########################################################################################################################
 ########################################################################################################################
-n_split = 4  # Number of Folds
+n_split = 5  # Number of Folds
+counter = 1
+
+average_training_loss = []
+average_val_loss = []
+
+average_training_accuracy = []
+average_val_accuracy = []
 
 ########################################################################################################################
-#########################################  KFold Cross validation   ####################################################
+#  KFold Cross validation
 ########################################################################################################################
 
 for train_index, test_index in KFold(n_split, shuffle=True, random_state=52).split(Train_x):
@@ -253,15 +259,17 @@ for train_index, test_index in KFold(n_split, shuffle=True, random_state=52).spl
     y_train, y_val = Train_label[train_index], Train_label[test_index]
 
     x_train = np.expand_dims(x_train, axis=3)
+
     y_train = np.expand_dims(y_train, axis=3)
+
     x_val = np.expand_dims(x_val, axis=3)
+
     y_val = np.expand_dims(y_val, axis=3)
 
-    y_train = to_categorical(y_train)
-    y_val = to_categorical(y_val)
+    y_train = to_categorical(y_train, 2)
+    y_val = to_categorical(y_val, 2)
 
-    model_kfold = None
-    model_kfold = Unet_softmax()
+    model_kfold = Unet_model()
 
     earlystop = EarlyStopping(monitor='val_iou_metric',
                               # min_delta=1,
@@ -272,61 +280,79 @@ for train_index, test_index in KFold(n_split, shuffle=True, random_state=52).spl
     ####################################################################################################################
     history = model_kfold.fit(x_train,
                               y_train,
-                              epochs=100,
-                              batch_size=4,
-                              validation_data=(x_val, y_val),
-                              callbacks=[earlystop])
+                              epochs=epochs,
+                              batch_size=8,
+                              validation_data=(x_val, y_val))
+    # callbacks=[earlystop])
+
     ####################################################################################################################
     score = model_kfold.evaluate(Test_x,
                                  Test_label,
-                                 batch_size=4,
+                                 batch_size=8,
                                  verbose=1)
     ####################################################################################################################
+
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
+
     model_kfold.summary()
-    ####################################################################################################################
-    print('Average test loss:', np.average(history.history['loss']))
-    print('Average val loss:', np.average(history.history['val_loss']))
-    ####################################################################################################################
-    plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
-    font = {'family': 'times new roman',
-            'weight': 'light',
-            'size': 8}
-    plt.rc('font', **font)
-    # plt.gca().set_axis_off()
-    # plt.axis('off')
-    # plt.subplots_adjust(left=0.0, bottom=0.0, right=1, top=1.0, wspace=0.0, hspace=0.0)
-    # plt.margins(0, 0)
-    # plt.gca().xaxis.set_major_locator(plt.NullLocator())
-    # plt.gca().yaxis.set_major_locator(plt.NullLocator())
-    ################################################################################################################
 
-    plt.plot(history.history['loss'], label='training loss')
-    plt.plot(history.history['val_loss'], label='validation loss')
-    plt.legend()
-    plt.savefig(
-        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/Unet_kfold_loss_per_epochs_softmax')
-    plt.close('all')
+    average_training_loss = + np.asarray(history.history['loss'])
+    average_val_loss = + np.asarray(history.history['val_loss'])
+
+    print('Average test loss:', average_training_loss)
+    print('Average val loss:', average_val_loss)
+
+    average_training_accuracy = + np.asarray(history.history['iou_metric'])
+    average_val_accuracy = + np.asarray(history.history['val_iou_metric'])
+
+    print('Average test iou:', average_training_accuracy)
+    print('Average val iou:', average_val_accuracy)
+
+    os.chdir('/home/aijjeh/aijjeh_rexio_share/reports/figures/comparative_study/h5_models/residual_unet_models/')
+
+    # model_kfold.save('updated_Unet_kfold_softmax_trial_%d.h5' % counter)
+
+    counter = counter + 1
     gc.collect()
 
-    ####################################################################################################################
-    plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
-    font = {'family': 'times new roman',
-            'weight': 'light',
-            'size': 11}
-    plt.rc('font', **font)
-    ####################################################################################################################
-    plt.plot(history.history['iou_metric'], label='training iou')
-    plt.plot(history.history['val_iou_metric'], label='validation iou')
-    plt.legend()
-    plt.savefig(
-        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/Unet_kfold_iou_per_epochs_softmax')
-    gc.collect()
+####################################################################################################################
+# plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
+font = {'family': 'times new roman',
+        'weight': 'light',
+        'size': 6}
+plt.rc('font', **font)
+####################################################################################################################
+os.chdir('/home/aijjeh/aijjeh_rexio_share/reports/figures/comparative_study/losses_metrics_figures/')
 
-    plt.close('all')
-    gc.collect()
-    model_kfold.save('E:/aidd_new/aidd/reports/figures/comparative_study/h5_models/Unet_kfold_softmax.h5')
-    gc.collect()
+average_training_loss.reshape(-1, epochs)
+average_val_loss.reshape(-1, epochs)
+average_training_accuracy.reshape(-1, epochs)
+average_val_accuracy.reshape(-1, epochs)
+
+plt.plot(average_training_loss, label='training loss')
+plt.plot(average_val_loss, label='validation loss')
+
+plt.title('Residual UNet model', font)
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend()
+plt.savefig('Unet_kfold_loss_per_epochs_softmax')
+plt.close('all')
+gc.collect()
+
+####################################################################################################################
+# plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
+####################################################################################################################
+plt.plot(average_training_accuracy, label='training iou')
+plt.plot(average_val_accuracy, label='validation iou')
+
+plt.title('Residual UNet model', font)
+plt.ylabel('accuracy score')
+plt.xlabel('epoch')
+plt.legend()
+plt.savefig('Unet_kfold_iou_per_epochs_softmax')
+plt.close('all')
+gc.collect()
 
 # model.save('E:/backup/models/UNet_models/Softmax/Unet_100_epoches_softmax.h5')
