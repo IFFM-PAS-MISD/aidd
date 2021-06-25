@@ -153,24 +153,25 @@ Optimization problems can be classified based onthe type of constraints, nature
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Problem types}
+\begin{frame}{Classification of optimisation problems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{enumerate}
-	\item Unconstrained
-	\begin{itemize}
-		\item No constraints exist
-	\end{itemize}
-	\item Constrained
-	\begin{itemize}
-		\item Subjected to one or more constraints 
-	\end{itemize}
-\end{enumerate}	
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Classification-schematic-of-optimization-techniques-for-engineering-systems.png}
+	\end{figure}
+	\column{0.5\textwidth}
+	\begin{biblio}{}
+		\biblioref{Wang S., Ma S.}{2008}{Supervisory and Optimal Control of Building HVAC Systems: A Review}{HVAC\&R RESEARCH 14(1):3-32}
+	\end{biblio}
+\end{columns}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{Restricted}
+\note{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Classification  based on the nature of the equationsinvolved}
+\begin{frame}{Classification based on the nature of the equationsinvolved}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{itemize}
 	\item Linear
@@ -182,7 +183,126 @@ Optimization problems can be classified based onthe type of constraints, nature
 %%%%%%%%%%%%%%%%%%%%
 \note{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Classification  based on the number of objective functions}
+\begin{frame}{Local vs global optimisation (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Local optimisation}
+	Local optimisation or local search refers to searching for the local optima.
+\end{alertblock}
+	
+\emph{"...we seek a point that is only locally optimal, which means that it minimizes the objective function among feasible points that are near it..."}
+\begin{biblio}{}
+	\biblioref{Boyd S., Vandenberghe L.}{2004}{Convex Optimization}{Cambridge University Press}
+\end{biblio}
+\vspace{8mm}
+Examples of local search algorithms:
+\begin{itemize}
+	\item Nelder-Mead Algorithm
+	\item BFGS Algorithm
+	\item Hill-Climbing Algorithm
+\end{itemize}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{An objective function may have many local optima, or it may have a single local optima, in which case the local optima is also the global optima.
+	
+A local optimisation algorithm will locate the global optimum:
+\begin{itemize}
+\item If the local optima is the global optima, or
+\item If the region being searched contains the global optima.
+\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Local vs global optimisation (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Global optimisation}
+	A global optimum is the extrema (minimum or maximum) of the objective function for the entire input search space.
+\end{alertblock}
+\emph{"Global optimization, where the algorithm searches for the global optimum by employing mechanisms to search larger parts of the search space."}
+\begin{biblio}{}
+	\biblioref{Engelbrecht A.P.}{2007}{Computational Intelligence: An Introduction}{Wiley}
+\end{biblio}
+
+\emph{"Global optimization is used for problems with a small number of variables, where computing time is not critical, and the value of finding the true global solution is very high."}
+\begin{biblio}{}
+	\biblioref{Boyd S., Vandenberghe L.}{2004}{Convex Optimization}{Cambridge University Press}
+\end{biblio}
+	
+Examples of global search algorithms:
+	\begin{itemize}
+		\item Genetic Algorithm
+		\item Simulated Annealing
+		\item Particle Swarm Optimization
+	\end{itemize}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\footnotesize{An objective function may have one or more than one global optima, and if more than one, it is referred to as a multimodal optimization problem and each optimum will have a different input and the same objective function evaluation.
+	
+An objective function always has a global optima (otherwise we would not be interested in optimizing it), although it may also have local optima that have an objective function evaluation that is not as good as the global optima.
+
+The global optima may be the same as the local optima, in which case it would be more appropriate to refer to the optimization problem as a local optimization, instead of global optimization.
+
+The presence of the local optima is a major component of what defines the difficulty of a global optimization problem as it may be relatively easy to locate a local optima and relatively difficult to locate the global optima.
+
+A global optimization algorithm, also called a global search algorithm, is intended to locate a global optima. It is suited to traversing the entire input search space and getting close to (or finding exactly) the extrema of the function. 
+
+Global search algorithms may involve managing a single or a population of candidate solutions from which new candidate solutions are iteratively generated and evaluated to see if they result is an improvement and taken as the new working state.}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Local vs global optimisation (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+When use local methods? 
+\begin{alertblock}{Local search}
+	\begin{itemize}
+		\item When you are in the region of the global optima.
+		\item For narrow problems where the global solution is required.
+	\end{itemize}
+\end{alertblock}
+
+When use global methods?
+\begin{alertblock}{Global search}
+	\begin{itemize}
+		\item When you know that there are local optima.
+		\item For broad problems where the global optima might be intractable.
+	\end{itemize}
+\end{alertblock}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize{Local and global search optimization algorithms solve different problems or answer different questions.
+
+A local optimization algorithm should be used when you know that you are in the region of the global optima or that your objective function contains a single optima, e.g. unimodal.
+
+A global optimization algorithm should be used when you know very little about the structure of the objective function response surface, or when you know that the function contains local optima.
+
+Local search algorithms often give computational complexity estimates related to locating the global optima, as long as the assumptions made by the algorithm hold.
+
+Global search algorithms often give very few if any estimates about locating the global optima. As such, global search is often used on problems that are sufficiently difficult that “good” or “good enough” solutions are preferred over no solutions at all. 
+This might mean relatively good local optima instead of the true global optima if locating the global optima is intractable.
+
+It is often appropriate to re-run or re-start the algorithm multiple times and record the optima found by each run to give some confidence that relatively good solutions have been located.
+
+We often know very little about the response surface for an objective function, e.g. whether a local or global search algorithm is most appropriate. Therefore, it may be desirable to establish a baseline in performance with a local search algorithm and then explore a global search algorithm to see if it can perform better. If it cannot, it may suggest that the problem is indeed unimodal or appropriate for a local search algorithm.
+
+Local optimization is a simpler problem to solve than global optimization. As such, the vast majority of the research on mathematical optimization has been focused on local search techniques.}
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification based on constraints}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{enumerate}
+		\item Unconstrained
+		\begin{itemize}
+			\item No constraints exist
+		\end{itemize}
+		\item Constrained
+		\begin{itemize}
+			\item Subjected to one or more constraints 
+		\end{itemize}
+	\end{enumerate}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Restricted}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification based on the number of objective functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{itemize}
 	\item Single-objective programming problem
@@ -199,7 +319,7 @@ Optimization problems can be classified based onthe type of constraints, nature
 %%%%%%%%%%%%%%%%%%%%
 \note{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Classification  based on the }
+\begin{frame}{Classification based on the determinism}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{itemize}
 	\item Deterministic global optimisation
@@ -207,21 +327,31 @@ Optimization problems can be classified based onthe type of constraints, nature
 	Deterministic global optimization is a branch of numerical optimisation which focuses on finding the global solutions of an optimisation problem whilst providing theoretical guarantees that the reported solution is indeed the global one, within some predefined tolerance. 
 	
 	The term "deterministic global optimisation" typically refers to \textbf{complete} or \textbf{rigorous} optimisation methods
-	\item Non-deterministic
-	In computer programming, a nondeterministic algorithm is an algorithm that, even for the same input, can exhibit different behaviors on different runs, as opposed to a deterministic algorithm.
+	
+	\item Non-deterministic (heuristic)
+	
+	In computer programming, a nondeterministic algorithm is an algorithm that, even for the same input, can exhibit different behaviours on different runs, as opposed to a deterministic algorithm.
 	(Evolutionary algorithms - genetic algorithm, particle swarm optimisation)
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{Multi-objective programming problem (Pareto front)}
+\note{\emph{Deterministic approaches take advantage of the analytical properties of the problem to generate a sequence of points that converge to a global optimal solution. 
+Heuristic approaches have been found to be more flexible and efficient than deterministic approaches; 
+however, the quality of the obtained solution cannot be guaranteed. 
+Moreover, the probability of finding the global solution decreases when the problem size increases. 
+Deterministic approaches (e.g., linear programming, non-linear programming, and mixed-integer non-linear programming, etc.) can provide general tools for solving optimization problems to obtain a global or an approximately global optimum.}
+
+Ming-Hua Lin, Jung-Fa Tsai and Chian-Son Yu, A Review of Deterministic Optimization Methods in Engineering and Management, Mathematical Problems in Engineering, 2012, Article ID 756023
+
+Heuristic: self-discovery, trial and error, rule of thumb (based on practical experience rather than theory) or an educated guess.	
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Linear search methods}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{}
-Deterministic global optimization is a branch of numerical optimization which focuses on finding the global solutions of an optimization problem whilst providing theoretical guarantees that the reported solution is indeed the global one, within some predefined tolerance
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Steepest descent}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -257,6 +387,8 @@ Deterministic global optimization is a branch of numerical optimization which fo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{biblio}{Recommended books}
 		\biblioref{Adby P.R., Dempster M.A.H.}{1974}{Introduction to Optimization Methods}{Chapman and Hall}
+		\biblioref{Boyd S., Vandenberghe L.}{2004}{Convex Optimization}{Cambridge University Press}
+		\biblioref{Engelbrecht A.P.}{2007}{Computational Intelligence: An Introduction}{Wiley}
 	\end{biblio}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,939 +406,4 @@ Deterministic global optimization is a branch of numerical optimization which fo
 % END OF SLIDES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Fourier's idea}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation*}
-\frac{4}{\pi}\left( \frac{\cos \pi x}{1} - \frac{\cos (3 \pi x) }{3} + \frac{\cos (5 \pi x)}{5} - \frac{\cos (7 \pi x)}{7} +  \ldots \right) = \left\{ \begin{array}{rll} 1& \mathrm{if} & x<0.5\\ 0 & \mathrm{if}& x=0.5\\ -1& \mathrm{if} & x>0.5 \end{array} \right.
-\end{equation*}
-\begin{columns}[T]
-	\column{0.5\textwidth}
-	\centering
-		% 3 frames per second
-		%\animategraphics[controls,loop,autoplay]{3}{Fourier_series_}{1}{25}
-		\animategraphics[loop,autoplay]{3}{Fourier_series_}{1}{25}
-		%	\animategraphics[controls,loop,autoplay,width=\linewidth]{3}{Fourier_series_}{1}{25}
-	\column{0.5\textwidth}
-	\centering
-			\includegraphics{step_function}
-	\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Fourier was obsessed with the physics of heat and developed the Fourier series and transform to model heat-flow problems.
-He had an idea that any periodic function can be rewritten as a weighted sum of sines and cosines of different frequencies.
-On the right hand side is a step function.
-The step function can be approximated by Fourier series. 
-However, we are restricted by boundary conditions.
-In this case only cosine components are necessary.
-For other boundary conditions, we may need to use sine components as well.
-The more the Fourier series elements we take, the more accurate representation of the step function is achieved.
-Therefore, the equation above holds true if the infinite sum is applied.
-It should be noted that we had to add a point at discontinuity in the middle of the step function jump.
-In summary, the infinite sum of wavy continous functions can equal a discontinous flat function like this.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Heat flow}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{equation*}
-T(x,t)=	\frac{4}{\pi}\left( \frac{\cos \pi x}{1} \, \myexp^{-\alpha 1^2 t} - \frac{\cos (3 \pi x) }{3} \, \myexp^{-\alpha 3^2 t} + \frac{\cos (5 \pi x)}{5} \, \myexp^{-\alpha 5^2 t}  -   \ldots \right)
-	\end{equation*}
-	\begin{columns}[T]
-		\column{0.5\textwidth}
-		\centering
-		% 2 frames per second
-		\animategraphics[controls,loop]{2}{Fourier_series_rod_temperatures_}{1}{27}
-		\column{0.5\textwidth}
-		Fourier series converges to the exact solution when the number of added terms goes to \(\infty\) and if the function satisfies so-called Dirichlet boundary conditions (values that a solution needs to take along the boundary of the domain).
-	\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Let's assume that you brought two rods with uniform temperatures and you want to know what happens immediately after they come into contact.
-To make the numbers simple let's assume that the temperature of left rod is 1 degree and the right rod is negative 1 degree and the total length of combine rods is 1.
-It means that our initial temperature distribution is the step function.
-So, when we take the heat equation solution associated with these cosine waves and add infinitely many of them we do get exact solution describing how the step function will evolve over time.
-Here, I have taken 250 sums in Fourier series.
-It can be noted that in engineering applications, the Fourier series is generally presumed to converge everywhere except at discontinuities.
-The key challenge is to find coefficients which stays besides sine and cosine terms.	
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Fourier series definition}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Fourier series can be written in a general form:
-\begin{equation*}
-s_N(x)=	\frac{a_0}{2} + \underbrace{ \sum \limits_{n=1}^N a_n \cos \left(\frac{2 \pi n x}{P} \right)}_{\mathrm{even \, component}} +  \underbrace{\sum \limits_{n=1}^N b_n \sin \left( \frac{2 \pi n x}{P} \right)}_{\mathrm{odd \, component}}
-\end{equation*}
-where \(P\) is the interval length (period of the Fourier series) and \(N\) is theoretically \(\infty\).\\
-Fourier coefficients are:
-	\begin{equation*}
-		a_0= \frac{1}{P}	\int_P s(x) \ud x \quad  a_n= \frac{2}{P}	\int_P s(x)\, \cos \left(2 \pi x \frac{n}{P}\right) \ud x \quad 	b_n= \frac{2}{P}	\int_P s(x)\, \sin\left(2 \pi x \frac{n}{P}\right) \ud x 
-	\end{equation*}
-\end{frame}	
-%%%%%%%%%%%%%%%%%%%%
-\note{The formal definition of Fourier series expansion is a sum of infinite number of even and odd components. 
-Even components are cosine terms multiplied by \(a_n\) and odd components are sine terms multiplied by \(b_n\).
-There is also additional \(a_0\) coefficient in front.
-P is the interval length (period of the Fourier series).
-\(a_0\) , \(a_n\) and \(b_n\) are Fourier coefficients which can be calculated by using these formulas.
-The derivation of Fourier coefficients can be found in any textbooks so I will skip it here.	
-But as you can see, it is quite easy to find Fourier coefficients of the function \(s(x)\) and approximate this fuction by Fourier series.	
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Continuous Fourier Transform}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame3]{Continuous Fourier Transform - definition}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{equation*}
-	F(\omega) = \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
-	\end{equation*}
-	where \(i=\sqrt{-1}\) denotes imaginary component\\
-Other notations
-	\begin{equation*}
-	\hat{f}(\omega) = \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
-	\end{equation*}
-	\begin{equation*}
-	\mathscr{F}\{E(t)\}= 	\left(\mathscr{F} E \right)(\omega)=\mathcal{F} \left[E(t) \right](\omega) =\tilde{E}(\omega) =  \int \limits_{-\infty}^{\infty} E(t)\, \myexp^{-i \omega t} \ud t 
-	\end{equation*}
-The Fourier transform can be denoted by:\\
- \(\mathcal{F}\) which can be produced in LaTeX by: \verb+\mathcal{F}+\\
-\(\mathscr{F}\) which can be produced in LaTeX by: \verb+\mathscr{F}+\\
 
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{\(F\) with the argument \(\omega\) is called the Fourier transform of function \(f\) with the argument \(t\).
-\(i\) is the square root of negative one which denotes imaginary components.
-In this definition function under integral is denoted by lower case letter wheres the transform is denoted by upper case letter.
-You can also find  in the literature other notations.
-For example if you want to use the same lower case letter, for distinction of the transform, hat over the letter is placed.
-In case of capital letter under integral, Fourier transform can be denoted by fancy symbol F.
-It can be produced in LaTeX like this. 
-It is an operator applied to function \(E(t)\); also the resulting domain \(\omega\) can be specified.
-Eventually, tilde over upper case letter can be used.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame4]{Forward and inverse Fourier transform}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{columns}[T]
-	\column{0.5\textwidth}	
-	\centering
-	Forward\\
-	\begin{equation*}
-	\hat{f}(\omega) = \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
-	\end{equation*}
-	\begin{equation*}
-	\mathcal{F} \left[f(t) \right](\omega)=\int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
-	\end{equation*}
-	\begin{equation*}
-	f(t) \rightarrow \mathcal{F} \left[f(t) \right] \quad  \textrm{or:} \quad f(t)  \rightarrow F(\omega)
-	\end{equation*}
-	\begin{equation*}
-	f(t) \xrightarrow{\mathcal{F}} \hat{f}(\omega)
-	\end{equation*}
-	Mapping between the time domain \(t\) \\and the frequency domain \(\omega\)
-	\column{0.5\textwidth}
-	\centering
-	Inverse\\
-	\begin{equation*}
-	f(t) = \frac{1}{2 \pi} \int \limits_{-\infty}^{\infty} \hat{f}(\omega)\, \myexp^{i \omega t} \ud t 
-	\end{equation*}
-    \begin{equation*}	
-    \mathcal{F}^{-1} \left[F(\omega) \right](t)=\frac{1}{2 \pi}  \int \limits_{-\infty}^{\infty} F(\omega)\, \myexp^{i \omega t} \ud t 
-	\end{equation*}
-	\begin{equation*}
-	F(\omega) \rightarrow \mathcal{F}^{-1} \left[F(\omega) \right] \quad   \textrm{or:} \quad 	F(\omega) \rightarrow f(t)
-	\end{equation*}
-	\begin{equation*}
-	\hat{f}(\omega) \xrightarrow{\mathcal{F}^{-1}}  f(t)
-	\end{equation*}
-	Mapping between the frequency domain  \(\omega\) \\and the time domain \(t\)
-	
-\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Fourier transform is an equation. 
-It is a result of a transformation or mapping between one domain and another domain.
-In the presented example, the Forward Fourier transform is a mapping between the time domain \(t\) and the frequency domain \(\omega\).
-The Inverse Fourier transform is a mapping  between the frequency domain  \(\omega\) and the time domain \(t\).
-All of these notations can be used interchangeably.
-I like the last one with the Fourier transform symbol over an arrow.
-
-If you look carefully at these equations you will see some differences.
-In the forward Forward Fourier transform the exponent term is negative, whereas in the Inverse Fourier transform the exponent term is positive.
-Furthermore, in the inverse Fourier transform we have additional scaling factor: one over two pi.
-It is important to note that in both cases the integral interval is \((-\infty, \infty)\).
-It should be also added that \(f\) and \(\hat{f}\) are in general complex functions.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame5]{Intuition behind Fourier transform}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{columns}[T]
-	\begin{column}{0.5\textwidth}
-	\begin{animateinline}[loop, poster = 45, controls]{30}
-		%
-		\whiledo{\theangle<359}{
-			%
-			\begin{tikzpicture}
-			% Axis
-			\draw[thick,->,logoblue] (-3,0)--(3,0) node[below] {$\Re$}; % x axis
-			\draw[thick,->,logoblue] (0,-3)--(0,3) node[left] {$\Im$}; % y axis
-			\draw[logoblue,thick] (0,0) circle (2.5cm);
-			\node[logoblue,below] at (2.6,0) {1};
-			\node[logoblue,above] at (0.12,2.5) {1};
-			%
-			%\draw[ultra thick,cyan] (0,0) -- (0,0 |- \theangle:2.5cm); % UpOn x axis
-			\draw[ultra thick,orange] (0,0) -- (\theangle:2.5cm |- 0,0); % UpOn y axis
-			%
-			\draw[ultra thick,cyan] (\theangle:2.5cm) -- (\theangle:2.5cm |- 0,0); % vertical line
-			\draw[densely dotted,cyan] (\theangle:2.5cm) -- (0,0 |- \theangle:2.5cm); % horizontal line
-			\draw[ultra thick,red,->,rotate=\theangle] (0,0) -- (2.5,0); 
-			\draw[->,semithick,green] (0:0.9cm) arc[radius=0.9, start angle=0, end angle=\theangle]; % phase angle
-			\node[green,right] at (0.2,0.2) {$\phi$}; % psi symbol
-			\node[red,orange,right] at (0,-3.5) 
-			{%\footnotesize$\cos(\theangle^{\mathrm{o}}) = \pgfmathcos{\theangle}\pgfmathresult$
-			};
-			\node[red,cyan,right] at (0,-3.1) 
-			{%\footnotesize$\sin(\theangle^{\mathrm{o}}) = \pgfmathsin{\theangle}\pgfmathresult$
-			};
-			\end{tikzpicture}
-			%
-			\stepcounter{angle}
-			\ifthenelse{\theangle<359}{
-				\newframe
-			}{
-			\end{animateinline}
-		}
-	}
-\end{column}
-	\begin{column}{0.5\textwidth}
-	\begin{equation*}
-	F(\omega) = \int \limits_{-\infty}^{\infty} f(t)\, \myexp^{-i \omega t} \ud t 
-	\end{equation*}
-	Euler's formula \(\myexp^{-i \omega t} = \cos (\omega t) - i \sin(\omega t)\)
-	\begin{equation*}
-	F(\omega) = \int \limits_{-\infty}^{\infty} f(t) \left[\cos (\omega t) - i \sin(\omega t) \right] \ud t 
-	\end{equation*}
-	\begin{equation*}
-	F(\omega) = \color{orange} \int \limits_{-\infty}^{\infty} f(t) \cos (\omega t)  \ud t \, - \, \color{cyan}  i   \int \limits_{-\infty}^{\infty}  f(t) \sin(\omega t)  \ud t 
-	\end{equation*}
-	\begin{equation*}
-		\color{red} A = \sqrt{\Re^2 + \Im^2}
-		\label{eq:Fourier_magnitude}
-	\end{equation*}
-	\begin{equation*}
-	\color{green}  \phi = \tan^{-1} \frac{\Im}{\Re}
-	\label{eq:Fourier_phase}
-	\end{equation*}
-	\end{column}
-\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{In order to have better intuition of the Fourier transform, let's substitute Euler's formula to the Fourier transform definition.
-Now, we can split integral into two parts: real and imaginary.
-Under integral we have a function \(f(t)\) which we want to transform which is multiplied by some analysing function. 
-The analysing function is cosine in case of real part and sine in case of imaginary part.
-The interpretation of the integral over function is the area. 
-Therefore, we can calculate area of the real part and imaginary part separately and place them on complex plain.
-The magnitude of the Fourier transform, denoted in the figure by red arrow, can be calculated by using the formula given in red colour.
-The phase of the Fourier transform fi \(\phi\) is an angle denoted in the figure by a green arrow and can be calculated by using the formula given in green colour.
-Of course, real part and imaginary part can also be negative.
-Therefore, the magnitude arrow can be on any qurter of complex plane as it is shown on the animation.
-Hence, to identify appropriate quarter, the information about phase can be used.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Fourier series vs Fourier transform (1)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Fourier coefficients are:
-\begin{equation*}
-a_n= \frac{2}{P}	\int_{\textcolor{green}{P}} s(t)\, \cos \left(2 \pi t \frac{\textcolor{red}{n}}{\textcolor{red}{P}}\right) \ud t \quad 	b_n= \frac{2}{P}	\int_{\textcolor{green}{P}} s(t)\, \sin\left(2 \pi t \frac{\textcolor{red}{n}}{\textcolor{red}{P}}\right) \ud t 
-\end{equation*}
-Forward Fourier transform:
-\begin{equation*}
-S(\omega) =  \int \limits_{-\infty}^{\infty} s(t) \cos (\omega t)  \ud t \, - \,  i   \int \limits_{-\infty}^{\infty}  s(t) \sin(\omega t)  \ud t 
-\end{equation*}
-\(\omega = 2 \pi f\)
-\begin{equation*}
-S(\textcolor{red}{f}) =  \int \limits_{\textcolor{green}{-\infty}}^{\textcolor{green}{\infty}} s(t) \cos (2 \pi t \textcolor{red}{f})  \ud t \, - \,  i   \int \limits_{\textcolor{green}{-\infty}}^{\textcolor{green}{\infty}}  s(t) \sin(2 \pi t \textcolor{red}{f})  \ud t 
-\end{equation*}
-\(P\rightarrow \infty\) \url{https://dspillustrations.com/pages/posts/misc/the-complex-fourier-series-and-its-relation-to-the-fourier-transform.html}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-Let's recall the definition of Fourier coefficients. 
-I have replaced \(x\) argument from the previous definition by \(t\).
-Let's recall the forward Fourier transform and substitute the definition of angular frequency.
-Now similarities between Fourier series coefficients and Fourier transform are obvious.
-The difference is that instead of \(n/P\) we have frequency \(f\) and instead of integration interval \(P\) we have \((-\infty, \infty)\).
-
-The Fourier transform can be viewed as the limit of the Fourier series of a function when the period approaches to infinity, so the limits of integration change from one period to \((-\infty, \infty)\).
-
-You can find more details about it under this link. 
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Fourier series vs Fourier transform (2)}
-\begin{columns}[T]
-	\begin{column}{0.5\textwidth}	
-		\textbf{Fourier series}
-		\begin{itemize}
-		\item Periodic function \(\Rightarrow\) converts into a \emph{discrete} sine and cosine function
-		\item Non-periodic function \(\Rightarrow\) not applicable
-		\end{itemize}
-	\end{column}
-	\begin{column}{0.5\textwidth}	
-		\textbf{Fourier transform}
-		\begin{itemize}
-			\item Periodic function \(\Rightarrow\) transforms its Fourier series into the frequency domain
-			\item Non-periodic function \(\Rightarrow\) transforms it into continuous frequency domain
-			\end{itemize}
-	\end{column}
-\end{columns}
-\vspace{10mm}
-\begin{block}{Periodic function}
-A periodic function is a function that repeats its values in regular intervals or periods.
-\end{block}
-\end{frame}	
-%%%%%%%%%%%%%%%%%%%%
-\note{These findings can be summarized as follows.
-Fourier series is used to convert periodic function into discrete function as a sum of sines and cosines. 	
-The word \emph{discrete} is debatable from mathematical point of view because of function jumps at discontinouities.
-I would say that from a point of view of an engineer, the resulting function is continous because it is a sum of continous functions.
-Fourier series cannot be applied to non-periodic functions.
- 
-Fourier transform is used to transform periodic and non-periodic signals from the time domain to the continuous frequency domain. 
-It can also transform Fourier series into the frequency domain, as Fourier series is nothing but a simplified form of the time domain periodic function.
-So, the Fourier transform is more general.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discrete Fourier Transform}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Discrete Fourier Transform}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{center}
-Given \(N\) values \(u_0,\cdots, u_{N-1}\), the following holds:
-\end{center}
-\begin{columns}[T]
-	\begin{column}{0.5\textwidth}	
-		\textbf{Discrete Fourier transform (DFT)}
-		\begin{equation*}
-		\hat{u} _k = \sum \limits_{j=0}^{N-1} u_j \myexp^{-i 2 \pi j k/N}
-		\end{equation*}
-	\end{column}
-	\begin{column}{0.5\textwidth}	
-		\textbf{Inverse discrete Fourier transform (IDFT)}
-		\begin{equation*}
-		u _j = \frac{1}{N}\sum \limits_{k=0}^{N-1} \hat{u}_k \myexp^{i 2 \pi j k/N}
-		\end{equation*}
-	\end{column}
-\end{columns}
-\begin{block}{Fast Fourier transform}
-A fast Fourier transform (FFT) is an algorithm that computes the discrete Fourier transform (DFT) of a sequence, or its inverse (IDFT).
-The algorithm manages to reduce the complexity of computing the DFT from \(O\left(N^{2}\right)\),  to \( O\left(N\log N\right)\), where \(N\) is the data size.
-\end{block}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{So far I talk about continuous Fourier transform.
-However, most often you will use discrete Fourier transform or rather its numerical implementation.
-Given \(N\) values \(u_0,\cdots, u_{N-1}\), the following holds:
-The first equation gives the discreter Fourier transform of the sequence \(\{u_j\}\);
-the second gives the inverse discrete Fourier transform of the sequence \(\{\hat{u}_k\}\). \(u_j\) and \( \hat{u}_k \) are in general complex.
-Note that although the formulae in these equations define the direct and inverse DFTs, they are almost never used to calculate them.
-The reason is that they are computationally inefficient for large \(N\).
-Instead, an elegant algorithm called Fast Fourier Transform (FFT in short) is used.
-This is really just a clever way of re-arranging the multiplications and sums using the properties of the exponential function, to reduce the total number of arithmetic operations.
-The algorithm manages to reduce the complexity of computing the DFT from \(O\left(N^{2}\right)\),  to \( O\left(N\log N\right)\), where \(N\) is the data size.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Discrete Fourier Transform in MATLAB}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{columns}[T]
-	\begin{column}{0.5\textwidth}	
-		\textbf{Discrete Fourier transform (DFT)}
-		\begin{equation*}
-		U (k) = \sum \limits_{j=1}^{N} u(j) \,\myexp^{-i 2 \pi (j-1) (k-1)/N}, \quad k=1\ldots N
-		\end{equation*}
-		
-		\begin{verbatim}
-		U = fft(u)
-		\end{verbatim}
-	\end{column}
-	\begin{column}{0.5\textwidth}	
-		\textbf{Inverse discrete Fourier transform (IDFT)}
-		\begin{equation*}
-		u(j) = \frac{1}{N}\sum \limits_{k=1}^{N} U(k)\, \myexp^{i 2 \pi (j-1) (k-1)/N}, \quad j=1\ldots N
-		\end{equation*}
-		
-		\begin{verbatim}
-		u = ifft(U)
-		\end{verbatim}
-	\end{column}
-\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Vectors and matrices in some programming languages (including MATLAB) start at index 1 instead of 0.
-Therefore, the following formulae were implemented in MATLAB by using the FFT.
-Note that lower case letter and upper case letter u are used in appropriate places.
-Also indices \(j\) and \(k\) are placed in round brackets which is compliant with MATLAB notations.
-The index \(k\) denotes sample number and the index \(j\) denotes harmonic number.
-fft and ifft commands are used in MATLAB for disrete Fourier transform and inverse discrete Fourier transform, respectively.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Interpretation of variables}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-displacements - sequence \( u(j) = u_1, u_2, \ldots, u_{N}\)\\
-corresponding spatial coordinates:
-\begin{equation*}
-x(j) = x_{start} +(j-1)  \Delta x, \quad j=1 \ldots N
-\end{equation*}
-The sequence  \( u(j) \) is a \alert{sampling} of the physical quantity in \(N\) points with \alert{sampling interval} \(\Delta x\).\\
-What is the interpretation of the Fourier transform \(U(k)\)?\\
-These are complex values that specify the amplitude and phase of the set of \(N\) Fourier components, that jointly exactly represent the original sequence.
-The frequencies of the Fourier components are \alert{equidistant}:
-\begin{equation*}
-f_k = (k-1) \Delta f, \quad k = 1 \ldots N, \quad \Delta f = \frac{1}{N \Delta x}
-\end{equation*}
-Units \(x\) [m] \(\rightarrow\) \(f\) [1/m]\\
- \hspace{10mm}\(x\) [s] \(\rightarrow\) \(f\) [Hz]
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{In physcal applications, the values in the sequence usually represents some measureble quantity (displacements, temperature, electrical voltage, intensity of light) in a number of equidistant points along some spatial or time coordinates.
-There is then always a corresponding sequence of spatial or time coordinates.
-The sequence  \( \{u_j\} \) is a \emph{sampling} of the physical quantity in \(N\) points with \emph{sampling interval} \(\Delta x\).
-If we take Fourier transform of this sequence we will get complex values that specify the amplitude and phase of the set of \(N\) Fourier components, that jointly exactly represent the original sequence.
-The frequencies of the Fourier components are \alert{equidistant}.
-If \(x\) units are in meters, than \(f\) units are in one over meter;
-If \(x\) units are in secunds, than \(f\) units are in hertz.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Examples}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\only<1>{
-	\hspace{10mm} \(u(t) = 0.5 \cos (2 \pi 10 t + \pi/6)\)
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}	
-			\begin{center}
-			\includegraphics{FFT_example_cos_time.png}	
-			\includegraphics{FFT_example_cos_real.png}
-			\end{center}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-			\includegraphics{FFT_example_cos_frequency.png}	
-			\includegraphics{FFT_example_cos_imag.png}
-		\end{center}
-		\end{column}
-\end{columns}
-}
-\only<2>{
-	\hspace{10mm} \(u(t) = 0.5 \sin (2 \pi 5 t + \pi/6)\)
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}	
-			\begin{center}
-				\includegraphics{FFT_example_sin_time.png}	
-				\includegraphics{FFT_example_sin_real.png}
-			\end{center}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\includegraphics{FFT_example_sin_frequency.png}	
-				\includegraphics{FFT_example_sin_imag.png}
-			\end{center}
-		\end{column}
-	\end{columns}
-}
-\only<3>{
-	\hspace{10mm} \(u(t) = 0.5 \cos (2 \pi 10 t + \pi/6) + 0.3 \sin (2 \pi 5 t + \pi/6) \)
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}	
-			\begin{center}
-				\includegraphics{FFT_example_sin_cos_time.png}	
-				\includegraphics{FFT_example_sin_cos_real.png}
-			\end{center}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\includegraphics{FFT_example_sin_cos_frequency.png}	
-				\includegraphics{FFT_example_sin_cos_imag.png}
-			\end{center}
-		\end{column}
-	\end{columns}
-}
-\only<4>{
-	\hspace{10mm} \(u(t) =  \left\{ \begin{array}{ll} 1& -T/2 \geq t \leq T/2 \\ 0 & \mathrm{otherwise} \end{array} \right.  ,\quad T = 10\)
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}	
-			\begin{center}
-				\includegraphics{FFT_example_rectangular_pulse_wide_time.png}	
-				\includegraphics{FFT_example_rectangular_pulse_wide_real.png}
-			\end{center}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\includegraphics{FFT_example_rectangular_pulse_wide_frequency.png}	
-				\includegraphics{FFT_example_rectangular_pulse_wide_imag.png}
-			\end{center}
-		\end{column}
-	\end{columns}
-}
-\only<5>{
-	\hspace{10mm} \(u(t) =  \left\{ \begin{array}{ll} 1& -T/2 \geq t \leq T/2 \\ 0 & \mathrm{otherwise} \end{array} \right.  ,\quad T = 1\)
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}	
-			\begin{center}
-				\includegraphics{FFT_example_rectangular_pulse_narrow_time.png}	
-				\includegraphics{FFT_example_rectangular_pulse_narrow_real.png}
-			\end{center}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\includegraphics{FFT_example_rectangular_pulse_narrow_frequency.png}	
-				\includegraphics{FFT_example_rectangular_pulse_narrow_imag.png}
-			\end{center}
-		\end{column}
-	\end{columns}
-}
-\only<6>{
-	%\vspace{-5mm}
-	{\Large \(u(t) =\myexp^{\frac{-2 \log(2) (t-t0)^2}{\sigma^2}} \cos\left(2 \pi f_c (t - t_0)\right), \quad f_c = 375\, \mathrm{THz},\, \sigma =  8\, \mathrm{fs}\)}
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}	
-			\begin{center}
-				\includegraphics{FFT_example_gauss_time.png}	
-				\includegraphics{FFT_example_gauss_real.png}
-			\end{center}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\includegraphics{FFT_example_gauss_frequency.png}	
-				\includegraphics{FFT_example_gauss_imag.png}
-			\end{center}
-		\end{column}
-	\end{columns}
-}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Real values of continuous Fourier transform of rectangular pulse happens to be a sinc function. 
-However, discrete Fourier transform was applied here so the result only resembles sinc function.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame10]{Sampling}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\only<1>{\includegraphics{Aliasing_1.png}}
-				\only<2>{\includegraphics{Aliasing_2.png}}
-				\only<3>{\includegraphics{Aliasing_3.png}}	
-			\end{center}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-				\only<1->{\alert{Sampling} is a process of converting a signal (continuous function) into a sequence of values (discrete function).\\}				
-				\only<2->{
-					\begin{equation*}
-						f_s=1 \rightarrow \Delta t = \frac{1}{f_s} = 1
-					\end{equation*}
-				\(f_s\) \alert{sampling frequency} (sampling rate) is the number of data samples acquired per second\\
-				\(\Delta t\) is the \alert{sampling interval}\\
-			    }    
-				\only<3>{Insufficient sampling rate (number of discrete points) causes that it is impossible to restore original continuous signal.
-				Instead we can obtain its \alert{alias}.}
-		\end{column}
-	\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-\alert{Sampling} is a process of converting a signal (continuous function) into a sequence of values (discrete function).
-Let's select sampling frequency \(f_s=1\). 
-The sampling interval \(\Delta t\) is the inverse of sampling frequency which in our example is also one.
-The results of sampling are given by black dots.
-It can be seen that such a number of points is insufficient to restore original continous signal.
-Instead we can obtain its alias, namely other function which at this sampling rate is indistinguishable. 
-It is clearly visible that the red function has different frequency than the blue function.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Aliasing (1)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{alertblock}{Aliasing}
-		It is irreversible signal distortion in the sampling process resulting from failure to meet the assumptions about the sampling theorem. 
-		Distortion is manifested by the presence of erroneous frequency components (aliases) in the resulting signal.
-	\end{alertblock}
-	Aliasing results from the ambiguous representation of the periodic signal by a series of its instantaneous values (samples) taken at equal intervals.
-	
-	If the continuous signal contains components up to the frequency \(f_{max}\), it is necessary to choose the \alert{sampling interval}:
-	\begin{equation*}
-	\boxed{\Delta t < \frac{1}{2 f_{max}}}
-	\end{equation*}
-	in order to avoid aliasing. In other words, the \alert{minimum sampling frequency is \(2 f_{max}\)}.\\
-	This is known as the \alert{Nyquist–Shannon sampling theorem}.\\
-	For example, our hearing ability is up to about 22 kHz.
-	Therefore, the sampling frequency for music recording should be at least 44 kHz.
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-	The DFT can be regarded as an approximation of the continuous Fourier transform, which it approaches when N goes to infinity and/or sampling interval goes to zero. 
-	In practice, \(N\) and sampling interval are always finite, which causes some undesirable effects. 
-	Two important effects of the sampling are: aliasing and finite frequency resolution.
-	
-	Aliasing is an effect that causes different signals to become indistinguishable (or aliases of one another) when sampled.
-	It also often refers to the distortion or artifact that results when a signal reconstructed from samples is different from the original continuous signal.
-	Aliasing can occur in signals sampled in time, for instance digital audio, and is referred to as temporal aliasing. 
-	It can also occur in spatially sampled signals (e.g. moiré patterns in digital images); this type of aliasing is called spatial aliasing.
-	In order to avoid aliasing, the sampling frequency should be at least twice the maximum frequency component of analysed signal.
-	This is known as the \alert{Nyquist–Shannon sampling theorem}.
-	For example, our hearing ability is up to about 22 kHz.
-	Therefore, the sampling frequency for music recording should be at least 44 kHz.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Aliasing (2)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{columns}[T]
-	\begin{column}{0.5\textwidth}
-			\begin{center}
-				\only<1-2>{\includegraphics{Aliasing_3.png}	}
-				\only<3>{\includegraphics{Aliasing_4.png}}
-				\only<4>{\includegraphics{Aliasing_5.png}}
-		\end{center}
-	\end{column}
-	\begin{column}{0.5\textwidth}
-   			\begin{flalign*}
-	   			\only<1->
-	   			{
-	         		& f_s = 1 \\
-	   		 		&\color{red}{s_1=\sin(2 \pi \,1/8 \,f_s t)}\\
-	   		 		&\color{logoblue}{s_2=\sin\left(2 \pi (1/8-1) f_s t\right)}\\
-	   		 	}
-   		 		\only<2->
-   		 		{
-   		 			&\color{logoblue}{s_2=\sin(2 \pi \underbrace{(1/8-1) f_s}_{f_{max}=7/8 f_s} t)} \\
-   		 		}	
-   	 			\only<3->
-   	 			{
-   	 				&\color{magenta}{\hat{f_s} = 2 f_{max} = 14/8 f_s = 1.75 f_s}\\
-   	 				&\color{magenta}{1.75\times 8\, \mathrm{intervals} = 14\, \mathrm{intervals} \rightarrow 15\, \mathrm{points}}\\
-   	 			}
-    			\only<4>
-    			{
-    				&\color{green}{\hat{f_s} \approx 2.86 f_{max} = 2.5 f_s}\\
-    				&\color{green}{2.5 \times 8\, \mathrm{intervals} = 20\, \mathrm{intervals} \rightarrow 21\, \mathrm{points}}
-    			}
-  			 \end{flalign*}
-	\end{column}
-\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-Let's go back to our example of aliasing.
-At the sampling interval denoted by black dots	these two sine functions are aliases of each other.
-We are not able to disgtinguish them.
-Let's try to find out how many point we actually needs to properly sample the blue signal given by the blue formula.
-Because it is a sine function we can identify easily the maximum frequency component \(f_{max}\).
-Now, we now from the Nyquist–Shannon sampling theorem that we should use sampling frequency which is at least twice of that.
-As a result, we have obtained fifteen magenta points which is still not enough to capture wave crests.
-We need sligthly more points.
-As you can see green points are enough to represent the original signal.
-In practice, we often use oversampling with a factor of 10 or even more.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Heat transfer problem}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Heat transfer problem - FFT for PDEs}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{columns}[T]
-\begin{column}{0.5\textwidth}
-	\only<1->{
-One dimensional heat conduction equation:
-\begin{equation*}
-u_t = \alpha^2 u_{xx} \quad  \mathrm{or} \quad \frac{\partial u}{\partial t} = \alpha^2 \frac{\partial^2 u}{\partial^2x}
-\end{equation*}
-\(u\) - temperature\\
-\(t\) - time\\
-\(x\) - space\\
-\(\alpha\) - diffusivity of the medium\\
-\vspace{5mm}}
-\only<5>{Initial condition \(u(x,0)\)\\}
-\only<6>{Initial condition \(u(x,0) \xrightarrow {\mathcal{F}} \hat{u}(\kappa,0)\)\\}
-\only<5->{
-\begin{tikzpicture}
-\draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$x$}; % x axis
-\draw[thick,logoblue] (2.5,0)--(2.5,2)--(5,2)--(5,0);
-\node[logoblue,below] at (2.5,0) {$\frac{L}{2}-\frac{L}{10}$};
-\node[logoblue,below] at (5,0) {$\frac{L}{2}+\frac{L}{10}$};
-\node[logoblue,right] at (5,2) {1};
-\filldraw[black] (2.5,0) circle (2pt);
-\filldraw[black] (5,0) circle (2pt);
-\end{tikzpicture}}
-\end{column}
-\begin{column}{0.5\textwidth}
-\only<2->{
-\begin{equation*}
-u(x,t) \xrightarrow{\mathcal{F}} \hat{u}(\kappa,t)
-\end{equation*}
-\begin{equation*}
-u_x \xrightarrow{\mathcal{F}} i \kappa \hat{u} (\kappa, t)
-\end{equation*}
-\begin{equation*}
-u_{xx} \xrightarrow{\mathcal{F}}  - \kappa^2 \hat{u}(\kappa , t)
-\end{equation*}
-\begin{equation*}
-u_{t} \xrightarrow{\mathcal{F}} \hat{u}_t = \frac{\partial \hat{u}(\kappa,t)}{\partial t}
-\end{equation*}}
-\only<3->{
-\vspace{-3mm}
-\begin{equation*}
-u_t = \alpha^2 u_{xx} \xrightarrow{\mathcal{F}} \alert{\hat{u}_{t} = -\alpha^2 \kappa^2 \hat{u}}
-\end{equation*}}
-\centering
-\only<4->{
-\(n\) decoupled ODEs\\
-one for each \(\kappa_j\)
-\begin{equation*}
-  \left[ \begin{array}{l} \hat{u}_{t1} \\ \hat{u}_{t2}\\ \vdots \\ \hat{u}_{tn} \end{array} \right] = -\alpha^2 \left[ \begin{array}{l} \kappa_1^2 \hat{u}_1 \\ \kappa_2^2 \hat{u}_2\\ \vdots \\ \kappa_n^2 \hat{u}_n \end{array} \right]
-\end{equation*}}
-\end{column}
-\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{{\scriptsize Heat conduction equation has a form of a partial differential equation which can be written as derivative of temperature field over time is equal to alpha square times second derivative of temperature field over x.
-So, u is the temperature, t is the time, x is space and alpha is the diffusivity of the medium.
-It turns out that, the Fourier transform can be used to approximate partial differentials.
-You already know how to apply one-dimensional Fourier transform to signals.
-Now, we will be using Fourier transform for mapping spatial domain x into wavenumber domain denoted here by kappa.
-We do not apply Fourier transform to the time domain.
-Fourier transform has very nice property which allows to use it for approximation of partial derivatives.
-So it is easy to compute derivatives in space in this case just by Fourier transforming and multiplying by i kappa or minus kappa square for the first and second derivative, respectively.
-In case of the left hand side of the partial differential equation, we transform u from spatial domain to frequency domain but the differentiation in respect to time is applied afterwards.
-Essentially, we applied the Fourier transform to the whole partial differential equation.
-As you can see now we have only differentiation in respect to time so this is the system of ordinary differential equations (ODE) which is easy to solve.
-Actually, it is n decoupled ODEs, one for each kappa j. This system of ODEs can be written in a matrix form.
-Here, kappa 1 to n are just a numbers.
-}
-%Inspired by Steve Brunton: https://www.youtube.com/watch?v=BkA7ncY0b7I
-%S. L. Brunton and J. N. Kutz, Data Driven Science \& Engineering: Machine Learning, Dynamical Systems, and Control, Cambridge Textbook, 2019
-}
-\newpage
-\note{In order to have well-posed problem we need to add initial conditions at the time equal zero.
-Let's assume that our initial conditions can be represented by the top-hat function.
-In order to better visualize it, you can think of three rods: the rod in the middle is hot and the rods at the left hand side and right hand side are cold. 
-We would like to know how the tempereture evolve with time immediately after the rods  come into contact.
-Because we are solving this problem in wavenumber domain, we also have to transform function of intial condition from the space domain to the time domain.
-Once, the system of ODEs is solved in the wavenumber domain, we will apply inverse Fourier transform in order to obtain spatial temperature distribution.
-OK, Let's try to code it in Matlab.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Signal filtering}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Digital filters}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Digital filter purposes:
-\begin{enumerate}
-	\item separation of signals that have been combined
-	\item restoration of signals that have been distorted in some way. 
-\end{enumerate}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Digital filters are used for two general purposes: (1) separation of signals that have been combined, and (2) restoration of signals that have been distorted in some way. 
-Signal separation is needed when a signal has been contaminated with interference, noise, or other signals. 
-For example, imagine a device for measuring the electrical activity of a baby's heart while still in the womb. 
-The raw signal will likely be corrupted by the breathing and heartbeat of the mother. 
-A filter might be used to separate these signals so that they can be individually analyzed. 	
-Signal restoration is used when a signal has been distorted in some way. 
-For example, an audio recording made with poor equipment may be filtered to better represent the sound as it actually occurred.
- Another example is the deblurring of an image acquired with an improperly focused lens, or a shaky camera.	
-	
-Analog (electronic) filters can be used for the same tasks; 
-however, digital filters can achieve far superior results. 
-
-Digital filters are a very important part of digital signal processing (DSP). 
-In fact, their extraordinary performance is one of the key reasons that digital signal processing has become so popular. 
-
-I will introduce you the most popular digital filters.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Signal filtering(1)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{alertblock}{Low-pass filter}
-A low-pass filter (LPF) is a filter that passes signals with a frequency lower than a selected cut-off frequency and attenuates signals with frequencies higher than the cut-off frequency.
-\end{alertblock}
-\begin{tikzpicture}
-\draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$f$ [Hz]}; % x axis
-\draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
-\draw[thick,red] (0,3.5)--(3,3.5)--(4.5,0)--(6,0); % low-pass filter
-\draw[thin,dashed,green] (3,3.5)--(3,0); % cut off frequency
-\node[logoblue,below] at (3,0) {$f_c$};
-\node[logoblue,above] at (2,0.14) {Passband};
-\node[logoblue,above] at (5.5,0.1) {Stopband};
-\end{tikzpicture}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{A low-pass filter (LPF) is a filter that passes signals with a frequency lower than a selected cut-off frequency and attenuates signals with frequencies higher than the cut-off frequency.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Signal filtering(2)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{alertblock}{High-pass filter}
-A high-pass filter (HPF) is a filter that passes signals with a frequency higher than a certain cut-off frequency and attenuates signals with frequencies lower than the cut-off frequency.
-\end{alertblock}
-\begin{tikzpicture}
-\draw[thick,->,logoblue] (0,0)--(7,0) node[right] {$f$ [Hz]}; % x axis
-\draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
-\draw[thick,red] (0,0)--(2.5,0)--(3,3.5)--(6,3.5); % high-pass filter
-\draw[thin,dashed,green] (3,3.5)--(3,0); % cut off frequency
-\node[logoblue,below] at (3,0) {$f_c$};
-\node[logoblue,above] at (1.5,0.1) {Stopband};
-\node[logoblue,above] at (4,0.14) {Passband};
-\end{tikzpicture}	
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Most discussions on filter design only give examples of low-pass filters. 
-It is because low-pass filter can be converted to high-pass filter.
-There are two methods for the low-pass to high-pass conversion: spectral inversion and spectral reversal. Both are equally useful.
-
-A high-pass filter (HPF) is a filter that passes signals with a frequency higher than a certain cut-off frequency and attenuates signals with frequencies lower than the cut-off frequency.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Signal filtering(3)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{alertblock}{Band-pass filter}
-A band-pass filter (BPF) is a filter that passes frequencies within a certain range and rejects (attenuates) frequencies outside that range.\\
-These filters can be created by combining a low-pass filter with a high-pass filter.
-\end{alertblock}	
-	\begin{tikzpicture}
-	\draw[thick,->,logoblue] (0,0)--(9,0) node[right] {$f$ [Hz]}; % x axis
-	\draw[thick,->,logoblue] (0,0)--(0,4.5) ; % y axis
-	\draw[thick,red] (0,0)--(1.5,0)--(2,3.5)--(4,3.5)--(4.5,0)--(7,0); % band-pass filter
-	\draw[thin,dashed,green] (2,3.5)--(2,0); % cut off frequency f_L
-	\node[logoblue,below] at (2,0) {$f_L$};
-	\draw[thin,dashed,green] (4,3.5)--(4,0); % cut off frequency f_H
-	\node[logoblue,below] at (4,0) {$f_H$};
-	\node[logoblue,above] at (0.8,0.1) {Stopband};
-	\node[logoblue,above] at (3,0.14) {Passband};
-	\node[logoblue,above] at (5.8,0.1) {Stopband};
-	\end{tikzpicture}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Band-pass filter can be obtained by convolving low-pass and high-pass filters.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Signal filtering(4)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The filtering strategy which we will be using is as follows:
-\begin{equation*}
-\alert{s(t) \xrightarrow{\mathcal{F}} \hat{s}(\omega) \rightarrow \hat{s}(\omega) \cdot \hat{M}(\omega)  \xrightarrow{\mathcal{F}^{-1}}  s(t)}
-\end{equation*}
-\(\cdot\) is element-wise multiplication; (.* in Matlab)	
-
-\(\hat{M}\) a kernel, convolution matrix, or mask
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-\section{Image processing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Image processing (1)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Purposes: image enhancement, object detection, segmentation.
-\begin{block}{Image enhancement}
-	Image enhancement is the process of adjusting digital images so that the results are more suitable for display or further processing.
-\end{block}
-	\begin{itemize}
-		\item Noise removal
-		\item Deblurring 
-		\item Filtering
-	\end{itemize}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{Image processing can have various purposes such as image enhancement, object detection, image segmentation, etc.
-We often want to enhance an image in certain way.
-Image enhancement is the process of adjusting digital images so that the results are more suitable for display or further processing.
-It can be use for example for noise removal, debluring or filtering.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Image processing (2)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{columns}[T]
-	\begin{column}{0.4\textwidth}
-		\begin{figure}
-			\animategraphics[controls,autoplay,loop,width=0.8\textwidth]{3}{Lena}{1}{46}
-			%\includegraphics[width=0.8\textwidth]{Lena1.png}
-			\caption{Lenna}
-		\end{figure}
-	\end{column}
-	\begin{column}{0.6\textwidth}
-	1D FFT
-	\begin{equation*}
-		f(t) \xrightarrow{\mathcal{F}} \hat{f}(\omega)
-	\end{equation*}
-	2D FFT
-	\begin{equation*}
-		f(x,y) \xrightarrow{\mathcal{F}} \hat{f}(k_x,k_y)
-	\end{equation*}
-	\(k_x,\, k_y\) - wavenumbers in \(x\) and \(y\) direction, respectively.\\
-	Image processing strategy:
-	\begin{equation*}
-	\alert{I(x,y) \xrightarrow{\mathcal{F}} \hat{I}(k_x,k_y) \rightarrow \hat{I}(k_x,k_y) \cdot \hat{M}(k_x,k_y)  \xrightarrow{\mathcal{F}^{-1}}  I(x,y)}
-	\end{equation*}
-	\(\cdot\) is element-wise multiplication; (.* in Matlab)
-	\end{column}
-	\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{The Lenna picture is one of the most widely used standard test image in the field of compression algorithms.
-It is a picture of the Swedish model Lena Forsen which comes from Playboy magazine from 1972.
-We will use it as well for some image processing examples by using 2D FFT as it is shown in the animation.
-{\scriptsize There is a story behind this image.
-Alexander Sawchuk, assistant professor at the University of Southern California Signal and Image Processing Institute along with graduate student was searching the lab for a good image to scan for a conference paper. 
-They wanted to have something more distinctive from boring test photos. 
-They were looking for a photo with a human face with a good dynamic range.
-Then, somebody just came in with a recent issue of Playboy. 
-Engineers took part of that photo and scanned it which resulted in the 512 by 512 pixel image.
-This scan became one of the most used images in computer history.
-But let's go back to the main topic.}
-}
-\newpage
-\note{As you remember, 1D FFT in case of signals is a mapping between the time domain and frequency domain.
-2D FFT on the other hand is a mapping between 2D spatial domain (x,y) and 2D wavenumber domain.
-The strategy is the same as in case of signal filtering.
-First, we transfom image to the wavenumber domain. Image here is denoted by the captial I. Then we apply a filter mask m hat, and finally going back to the spatial domain by using the inverse Fourier transform.
-It should be noted that element-wise multiplication is performed in the wavenumber domain.
-Such operation is performed in Matlab by using dot asterix symbol.
-Let's move to Matlab so you can code such animations yourself.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Assignment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Assignment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{enumerate}	
-	\item Write a code in Matlab or other preferred language like Python or Julia which plots a function:
-	\begin{equation*}
-	s(t) = 0.5 \left[1 - \cos(2 \pi f_m t) \right] \sin(2 \pi f_c t)
-	\end{equation*}
-	and its Fourier transform. 
-	Please comment on obtained figures for frequency pairs:
-	\begin{itemize}
-		\item \(f_c = 100\) kHz,  \(f_m = 20\) kHz
-		\item \(f_c = 100\) kHz,  \(f_m = 5\) kHz.
-	\end{itemize}
-  \item Let's suppose, that we are using a software that provides a results in a form of a function sampled at Gauss-Lobatto-Legendre points which are non-equidistant.
-  Our task is to perform the Fourier transform of that data. 
-  What will be the strategy of performing the Fourier transform on sampling points which are non-equidistant? \\
-  \vspace{5mm}
-  \begin{tikzpicture}
-  \draw[thick,->,logoblue] (-1,0)--(1.4,0) node[right] {$x$}; % x axis
-  \filldraw[black] (-1,0) circle (2pt);
-  \filldraw[black] (-0.765,0) circle (2pt);
-  \filldraw[black] ( -0.2852,0) circle (2pt);
-  \filldraw[black] ( 0.2852,0) circle (2pt);
-   \filldraw[black] (0.765,0) circle (2pt);
-   \filldraw[black] (1,0) circle (2pt);
-  \end{tikzpicture}
-  
-\end{enumerate}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{I have prepared two tasks for you. 
-In the first task, I want you to write a code in Matlab  or other preferred language like Python or Julia.
-But I think that it will be easiest to use Matlab scripts which are attached to this lecture as a starting point.
-The code should plot a function defined here. It should perform Fourier transform of this function and plot its magnitude.
-As you can see there are two sets of frequency parameters for definition of this function.
-I want you to write a few sentences describing what you see in the time domain and frequency domain for each frequency pair.
-
-In the second task, I want you to write an answer to the following problem.
-Let's suppose, that we are using a software that provides a results in a form of a function sampled at Gauss-Lobatto-Legendre points which are non-equidistant (like here).
-Our task is to perform the Fourier transform of that data. 
-So we have an arbitrary function sampled at these points.
-What will be the strategy of performing the Fourier transform on sampling points which are non-equidistant?
-}
