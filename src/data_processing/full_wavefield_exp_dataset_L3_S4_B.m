@@ -5,7 +5,7 @@ load project_paths projectroot src_path;
 % allow overwriting existing results if true
 overwrite=false;
 %overwrite=true;
-test_case=[2:8]; % select file numbers for processing
+test_case=[3:8]; % select file numbers for processing
 %% Processing parameters
 Nx = 500;   % number of points after interpolation in X direction
 Ny = 500;   % number of points after interpolation in Y direction
@@ -17,7 +17,7 @@ thrs = 20;  % if energy drops below x% stop processing ERMS
 %%
 % create path to the experimental raw data folder
 %raw_data_path = fullfile( projectroot, 'data','raw','exp', filesep );
-specimen_folder = 'L3_S2_B';
+specimen_folder = 'L3_S4_B';
 %raw_data_path = ['/pkudela_odroid_laser/aidd/data/raw/exp/',specimen_folder,'/'];
 raw_data_path = ['\\odroid-laser\laser\aidd\data\raw\exp\',specimen_folder,'\'];
 % create path to the experimental interim data folder
@@ -29,14 +29,15 @@ if ~exist([interim_data_path,specimen_folder], 'dir')
     mkdir([interim_data_path,specimen_folder]);
 end
 % full field measurements
-list = {'333x333p_16_5kHz_5HC_18Vpp_x10_pzt', ...          % 1  Length = ?;Width = ?;           
-        '333x333p_50kHz_5HC_15Vpp_x10_pzt', ... % 2
-        '333x333p_100kHz_5HC_10Vpp_x10_pzt', ... % 3
-        '333x333p_100kHz_10HC_10Vpp_x10_pzt', ... % 4
-        '333x333p_100kHz_20HC_10Vpp_x10_pzt', ... % 5
-        '333x333p_150kHz_10HC_10Vpp_x20_pzt', ... % 6
-        '333x333p_200kHz_10HC_10Vpp_x20_pzt', ... % 7
-        '497x497p_100kHz_10HC_10Vpp_x25_pzt'};% 8
+list = {'333x333p_16_5kHz_5HC_18Vpp_x10_pzt', ...    % 1             
+        '333x333p_16_5kHz_10HC_18Vpp_x10_pzt', ... % 2
+        '333x333p_50kHz_5HC_18Vpp_x10_pzt', ... % 3
+        '333x333p_50kHz_10HC_18Vpp_x10_pzt', ... % 4
+        '333x333p_75kHz_10HC_18Vpp_x10_pzt', ... % 5
+        '333x333p_75kHz_10HC_18Vpp_x10_pzt_no_filter',...%6
+        '333x333p_100kHz_5HC_14Vpp_x10_pzt',...%7
+        '333x333p_100kHz_10HC_14Vpp_x20_pzt',...%8
+        };
                  
 
 disp('Interpolation and full wavefield to image calculation');
