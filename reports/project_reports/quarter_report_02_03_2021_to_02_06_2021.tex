@@ -1,0 +1,33 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage{fullpage}
+\usepackage{hyperref}
+
+\renewcommand{\baselinestretch}{2}
+\author{Abdalraheem Abdullah Yousef Ijjeh \\
+	Supervised by: \\
+	Professor Pawel Kudela}
+\title{\Huge Quarterly report \\
+	\huge For the period \\ 2021-03-02 to 2021-06-02
+	\\ \Large In accordance with Project\\
+	Feasibility studies of artificial intelligence-driven diagnostics\\ Institute of Fluid-Flow Machinery, Polish Academy of Sciences
+	\\ Gdańsk, Poland}
+
+
+\begin{document}
+	\maketitle
+	% \tableofcontents
+	\newpage
+	\section{Project work flow}
+	\begin{itemize}
+		\item Several datasets for RNN models were prepared (of full wavefield frames).
+		\item Different RNN/LSTM and CNN models (using full wavefield frames) were implemented and tested to estimate the size and location of delamination.
+		\item Second chapter (monograph) entitled: "Data-driven based approach for damage
+		detection" was submitted and accepted by the TSD of the Polish Academy of Sciences.	
+		\item Currently, I am working on implementing models that artificially generate Full wavefield frames of Lamb waves resembling its propagation in CFRP and its interaction with delamination and the boundaries of the specimen.
+		Accordingly, we will be able to create a large dataset of propagating Lamb waves interacting with delaminations of various locations, sizes, and angles in a short time compared with the current numerical method.
+		Furthermore, this artificially created dataset can be used in training other deep learning models.
+		Moreover, the idea can be generalized to further types of damage, or in general to study different phenomena.
+	\end{itemize}
+%	\bibliography{quarter_report.bib}
+%	\bibliographystyle{unsrt}
+\end{document}
