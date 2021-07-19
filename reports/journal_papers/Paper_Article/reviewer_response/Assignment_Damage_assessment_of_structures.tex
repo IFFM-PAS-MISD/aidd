@@ -1,0 +1,47 @@
+% !TeX encoding = UTF-8
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage[centering,includeheadfoot,margin=2cm]{geometry}
+%\usepackage{xcolor}
+\usepackage{calc,blindtext}
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{animate}
+\graphicspath{{figures/}}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\title{Damage assessment of structures: Assignment}
+\author{Abdalraheem A. Ijjeh}
+
+\setlength{\parindent}{0pt}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item  What physical parameter is measured by accelerometer? What is the principle of working of accelerometer? \\
+		The accelerometer is used to sense the vibration of a structure or the acceleration of motion of a structure. 
+		It is built with a seismic mass that is attached using spring to a Piezoelectric transducer.
+		When the seismic mass is vibrated due to the vibration reflected from the structure the Piezoelectric senses the vibration of the mass and generates an electric charge proportional to the force applied on it. The figure below illustrates the principle function of the accelerometer. 
+		\begin{center}
+			\animategraphics[autoplay,loop,scale = 0.5]{2}{frame}{1}{2} 
+			 \tiny{\url{https://en.wikipedia.org/wiki/Piezoelectric_accelerometer#/media/File:PiezoAccelTheory.gif}}
+		\end{center}
+		
+		\item  What kind of transducers are most popular in damage assessment and why?
+		\begin{itemize}
+			\item Accelerometers.
+			\item Strain gauges.
+			\item Fibre optic strain sensors (e.g. fibre Bragg gratting FBG).
+			\item Electromagnetic transducers (EMAT).
+			\item Piezoelectric transducers, which are considered as the most important and popular transducers (e.g. piezoceramic), because such transducer can be used as an actuator and a sensor in addition to their light,small and cheap characteristics, moreover, their capability to be bonded or embedded in composite structures.
+		\end{itemize}
+
+		
+		\item  Please describe differences between terms: transducer, actuator and sensor. \\
+	A transducer is a device that converts one form of energy into another (e.g. Piezoelectric transducer) which measures changes in acceleration, velocity, displacement, strain, force, temperature or pressure and change them into electricity (direct effect for sensing), or converting the electrical charges into deformation of the structure (converse effect for actuation).
+	Sensors are responsible for registering and converting the mechanical signal into electrical charges (sensors can not measure damage).
+	whereas the actuator is responsible for the conversion of electrical charges to mechanical signal.
+	\end{enumerate}
+ 
+\end{document}

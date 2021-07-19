@@ -1,0 +1,409 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
+%\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+%\setbeameroption{show notes on second screen=bottom} % does not work for animations
+
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}}
+%\includeonlyframes{frame1,frame2,frame3}
+%\includeonlyframes{frame10}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+%\usepackage{amscls} % amsthm.sty
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+%\usepackage{FiraSans}
+\usepackage{mathrsfs} % for Fourier and Laplace symbols % installed manually jknappen in miktex console
+\usepackage{verbatim}
+%\usepackage{eulervm} % alternative math fonts
+%\usepackage{comment}
+\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows}  
+% the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
+% install manually media9 from miktex console (it contains pdfbase.sty), ocgx2 (ocgbase.sty)
+\usepackage{animate}
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+\captionsetup[figure]{labelformat=empty}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+%\usefonttheme[onlymath]{Serif} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+%\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%  metropolis compatible (FiraSans auto replacement)
+\newcommand{\matr}[1]{\boldsymbol{#1}}
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+%\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% metropolis compatible (FiraSans auto replacement)
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\myexp}{\mathrm{e}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\renewcommand{\Re}{\operatorname{\mathbb{R}e}}
+\renewcommand{\Im}{\operatorname{\mathbb{I}m}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Introduction to optimisation methods in engineering}
+\subtitle{Lecture Series}
+\author{\textbf{Paweł Kudela} }
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery\\Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright %\includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+\includegraphics[width=4cm]{/pkudela_odroid_sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%
+\note{Welcome to the lecture series in the frame of the doctoral school.
+My name is Pawel Kudela. 
+Today I will give you a gentle introduction to the topic of optimisation methods in engineering.
+As an engineer sooner than later you will encounter a problem which requires to apply optimisation methods.
+Therefore it is important to know numerical tools and select appropriate one to your specific problem.  
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame1]{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  %\tableofcontents[hideallsubsections]
+  \tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Basic concepts, definitions, classification}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame2]{What is optimisation?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Optimisation problem}
+	\begin{enumerate}
+		\item Maximizing or minimizing some function relative to some set,often representing a range of choices available in a certain situation. 
+		The functionallows comparison of the different choices for determining which might be \emph{best}.
+		\item Mathematical optimization or mathematical programming is the selection of a \emph{best} element, with regard to some criterion, from some set of available alternatives.
+		\item Process of finding the \emph{best} solution.
+	\end{enumerate}
+	
+\end{alertblock}
+
+Common applications: Minimal cost, maximal profit, minimal error, optimal design,optimal management, variational principles.
+
+
+\emph{In an industrial process, for example, the criterion foroptimum operation is often in the form of minimum cost,where the product cost can depend on a large number ofinterrelated controlled parameters in the manufacturingprocess.}
+\begin{biblio}{}
+	\biblioref{Adby P.R., Dempster M.A.H.}{1974}{Introduction to Optimization Methods}{Chapman and Hall}
+\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Problem specification}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+	\item Definition of the objective function
+	\item Selection of optimisation variables
+	\item Identification of constraints
+\end{itemize}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification of optimisation problems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Optimization problems can be classified based onthe type of constraints, nature of design variables,physical structure of the problem, nature of theequations involved, deterministic nature of thevariables, permissible value of the design variables,separability of the functions and number of objectivefunctions.	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification of optimisation problems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{Classification-schematic-of-optimization-techniques-for-engineering-systems.png}
+	\end{figure}
+	\column{0.5\textwidth}
+	\begin{biblio}{}
+		\biblioref{Wang S., Ma S.}{2008}{Supervisory and Optimal Control of Building HVAC Systems: A Review}{HVAC\&R RESEARCH 14(1):3-32}
+	\end{biblio}
+\end{columns}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification based on the nature of the equationsinvolved}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+	\item Linear
+	\item Non-linear
+	\item Geometric
+	\item Quadratic
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Local vs global optimisation (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Local optimisation}
+	Local optimisation or local search refers to searching for the local optima.
+\end{alertblock}
+	
+\emph{"...we seek a point that is only locally optimal, which means that it minimizes the objective function among feasible points that are near it..."}
+\begin{biblio}{}
+	\biblioref{Boyd S., Vandenberghe L.}{2004}{Convex Optimization}{Cambridge University Press}
+\end{biblio}
+\vspace{8mm}
+Examples of local search algorithms:
+\begin{itemize}
+	\item Nelder-Mead Algorithm
+	\item BFGS Algorithm
+	\item Hill-Climbing Algorithm
+\end{itemize}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{An objective function may have many local optima, or it may have a single local optima, in which case the local optima is also the global optima.
+	
+A local optimisation algorithm will locate the global optimum:
+\begin{itemize}
+\item If the local optima is the global optima, or
+\item If the region being searched contains the global optima.
+\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Local vs global optimisation (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Global optimisation}
+	A global optimum is the extrema (minimum or maximum) of the objective function for the entire input search space.
+\end{alertblock}
+\emph{"Global optimization, where the algorithm searches for the global optimum by employing mechanisms to search larger parts of the search space."}
+\begin{biblio}{}
+	\biblioref{Engelbrecht A.P.}{2007}{Computational Intelligence: An Introduction}{Wiley}
+\end{biblio}
+
+\emph{"Global optimization is used for problems with a small number of variables, where computing time is not critical, and the value of finding the true global solution is very high."}
+\begin{biblio}{}
+	\biblioref{Boyd S., Vandenberghe L.}{2004}{Convex Optimization}{Cambridge University Press}
+\end{biblio}
+	
+Examples of global search algorithms:
+	\begin{itemize}
+		\item Genetic Algorithm
+		\item Simulated Annealing
+		\item Particle Swarm Optimization
+	\end{itemize}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\footnotesize{An objective function may have one or more than one global optima, and if more than one, it is referred to as a multimodal optimization problem and each optimum will have a different input and the same objective function evaluation.
+	
+An objective function always has a global optima (otherwise we would not be interested in optimizing it), although it may also have local optima that have an objective function evaluation that is not as good as the global optima.
+
+The global optima may be the same as the local optima, in which case it would be more appropriate to refer to the optimization problem as a local optimization, instead of global optimization.
+
+The presence of the local optima is a major component of what defines the difficulty of a global optimization problem as it may be relatively easy to locate a local optima and relatively difficult to locate the global optima.
+
+A global optimization algorithm, also called a global search algorithm, is intended to locate a global optima. It is suited to traversing the entire input search space and getting close to (or finding exactly) the extrema of the function. 
+
+Global search algorithms may involve managing a single or a population of candidate solutions from which new candidate solutions are iteratively generated and evaluated to see if they result is an improvement and taken as the new working state.}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Local vs global optimisation (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+When use local methods? 
+\begin{alertblock}{Local search}
+	\begin{itemize}
+		\item When you are in the region of the global optima.
+		\item For narrow problems where the global solution is required.
+	\end{itemize}
+\end{alertblock}
+
+When use global methods?
+\begin{alertblock}{Global search}
+	\begin{itemize}
+		\item When you know that there are local optima.
+		\item For broad problems where the global optima might be intractable.
+	\end{itemize}
+\end{alertblock}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize{Local and global search optimization algorithms solve different problems or answer different questions.
+
+A local optimization algorithm should be used when you know that you are in the region of the global optima or that your objective function contains a single optima, e.g. unimodal.
+
+A global optimization algorithm should be used when you know very little about the structure of the objective function response surface, or when you know that the function contains local optima.
+
+Local search algorithms often give computational complexity estimates related to locating the global optima, as long as the assumptions made by the algorithm hold.
+
+Global search algorithms often give very few if any estimates about locating the global optima. As such, global search is often used on problems that are sufficiently difficult that “good” or “good enough” solutions are preferred over no solutions at all. 
+This might mean relatively good local optima instead of the true global optima if locating the global optima is intractable.
+
+It is often appropriate to re-run or re-start the algorithm multiple times and record the optima found by each run to give some confidence that relatively good solutions have been located.
+
+We often know very little about the response surface for an objective function, e.g. whether a local or global search algorithm is most appropriate. Therefore, it may be desirable to establish a baseline in performance with a local search algorithm and then explore a global search algorithm to see if it can perform better. If it cannot, it may suggest that the problem is indeed unimodal or appropriate for a local search algorithm.
+
+Local optimization is a simpler problem to solve than global optimization. As such, the vast majority of the research on mathematical optimization has been focused on local search techniques.}
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification based on constraints}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{enumerate}
+		\item Unconstrained
+		\begin{itemize}
+			\item No constraints exist
+		\end{itemize}
+		\item Constrained
+		\begin{itemize}
+			\item Subjected to one or more constraints 
+		\end{itemize}
+	\end{enumerate}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Restricted}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification based on the number of objective functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+	\item Single-objective programming problem
+	\item Multi-objective programming problem
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Multi-objective programming problem (Pareto front)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Linear search methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Classification based on the determinism}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+	\item Deterministic global optimisation
+		
+	Deterministic global optimization is a branch of numerical optimisation which focuses on finding the global solutions of an optimisation problem whilst providing theoretical guarantees that the reported solution is indeed the global one, within some predefined tolerance. 
+	
+	The term "deterministic global optimisation" typically refers to \textbf{complete} or \textbf{rigorous} optimisation methods
+	
+	\item Non-deterministic (heuristic)
+	
+	In computer programming, a nondeterministic algorithm is an algorithm that, even for the same input, can exhibit different behaviours on different runs, as opposed to a deterministic algorithm.
+	(Evolutionary algorithms - genetic algorithm, particle swarm optimisation)
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\emph{Deterministic approaches take advantage of the analytical properties of the problem to generate a sequence of points that converge to a global optimal solution. 
+Heuristic approaches have been found to be more flexible and efficient than deterministic approaches; 
+however, the quality of the obtained solution cannot be guaranteed. 
+Moreover, the probability of finding the global solution decreases when the problem size increases. 
+Deterministic approaches (e.g., linear programming, non-linear programming, and mixed-integer non-linear programming, etc.) can provide general tools for solving optimization problems to obtain a global or an approximately global optimum.}
+
+Ming-Hua Lin, Jung-Fa Tsai and Chian-Son Yu, A Review of Deterministic Optimization Methods in Engineering and Management, Mathematical Problems in Engineering, 2012, Article ID 756023
+
+Heuristic: self-discovery, trial and error, rule of thumb (based on practical experience rather than theory) or an educated guess.	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Linear search methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Steepest descent}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Least squares}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Newton-Raphson method}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Levenberg-Marquardt Modification}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{References}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{biblio}{Recommended books}
+		\biblioref{Adby P.R., Dempster M.A.H.}{1974}{Introduction to Optimization Methods}{Chapman and Hall}
+		\biblioref{Boyd S., Vandenberghe L.}{2004}{Convex Optimization}{Cambridge University Press}
+		\biblioref{Engelbrecht A.P.}{2007}{Computational Intelligence: An Introduction}{Wiley}
+	\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setbeamercolor{palette primary}{fg=black, bg=white}
+	\begin{frame}[standout]
+		Thank you for your attention!\\ \vspace{12pt}
+		Questions?\\ \vspace{12pt}
+		\url{pk@imp.gda.pl}
+	\end{frame}
+}
+\note{Thank you for your attention!
+	See you next time!}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

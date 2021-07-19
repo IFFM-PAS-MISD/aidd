@@ -1,0 +1,45 @@
+\section{Guided waves Based SHM through DL}
+The guided waves approach is widely utilised in SHM/NDT, due to the fact it is able to detect very small damage sizes ~\cite{Guemes2020}. 
+Damage detection and identification approaches using guided waves are based on the measurements of the PZT sensors whether bonded or embedded into the investigated structure. 
+In which, PZT sensor(s) responsible for the excitation of the structure by a short ultrasonic pulse (usually, the used frequency is in the range of a hundreds of kHz) that propagates through an investigated structure such as plates or pipes as an elastic wave.
+The registered signals (baseline) are stored and compared with other registered signals acquired through the lifetime of the investigated structure.
+Damage detection using the baseline subtraction approach for guided waves is based on subtracting damage-free registered measurements from the newly registered measurements to obtain the new changes that occurred to the structure.
+These changes are considered as damage information.
+The baseline approach is effective in controlled environments where the variations of the operational/environments (i.e. considerations of multiple sensing modalities, uncertainty in material properties, bounding conditions, etc ) are negligible ~\cite{Yuan2020}.  
+Such variations can alter registered data leading to false alarms.
+The effect of such variations can be reduced through physics-based modeling, which can simulate an undamaged scenario (baseline) for the wave propagation through the investigated structure.
+Then, the simulated baseline can be used in the subtraction for damage detection.
+However, for real-world structures, it is difficult to tune the model parameter to match the experimental registered data.
+Accordingly, data-driven techniques based on ML and DL approaches can be the solution and deliver a robust models for many real-life variations.
+
+In the following, several guided wave for SHM/NDT based on data-driven techniques for damage detection and localisation are presented.
+Authors in~\cite{Melville1949} proposed a CNN model for the prediction of damage state in thin metal plates to overcome the issue of inaccurate representation of guided wave propagation when applying conventional approaches. 
+The model utilizes the full wavefield scans of thin plates (aluminum).
+Moreover, the acquired raw data used for training the model was divided into undamaged and damaged states equally.
+The model achieved higher accuracy regarding damage  \(99.98\%\) when compared to SVM that achieved \(62\%\).
+Authors in~\cite{Sammons2016} proposed a CNN model based on X-ray computed tomography for delamination estimation in a composite structure.
+Furthermore, image segmentation was applied to the input images to identify the damage.
+However, the model was only able to identify small delaminations.
+Moreover, Chetwynd et al. ~\cite{Chetwynd2008} presented a multi-layer perceptron (MLP) network for damage detection in curved composite panels, in which, stiffeners were added to represent the damage.
+The Authors in this work investigated the propagation of Lamb waves through the panel in which they were generated and registered by a PZT array.
+Furthermore, for each Lamb wave response, a novelty index was obtained.
+The index value is compared to some threshold value, in which if the index value exceeds the threshold it implies that there is damage in the structure.
+Accordingly, the MLP network was fed by obtained novelty indexes, and performed two operations: classification and regression.
+The classification network was designed to define three convex regions of the panel then to determine whether the panel is damaged or not.
+On the other hand, the regression network is capable of estimating the exact location of the damage.
+Furthermore, authors in~\cite{DeFenza2015} proposed an artificial neural network (ANN) model for damage detection in plates made of aluminum alloys and composite utilising Lamb waves.
+Response data of wave propagation were used to calculate damage indexes which were fed into the model as an input.
+Accordingly, the model performs automatic feature extraction in conjunction with the probability ellipse-based method. 
+The ANN model and probability ellipse (PE) method were applied to identify damage location.
+The results from the ANN model and the PE presents how it is useful to apply damage indexes as a baseline for such methods in order to evaluate damage in aluminum and composite structures. 
+Ewald et al.~\cite{Ewald2019} present a CNN model called (DeepSHM) for signal classification using Lamb waves.
+Furthermore, the model provides an end-to-end approach for SHM by utilising response signals captured by sensors.
+Moreover, response signals were preprocessed by wavelet transform to get the wavelet coefficient matrix (WCM).
+Further, the CNN model was trained with the WCM to obtain neural weights.
+Authors in~\cite{Ijjeh2021} presented a fully convolutional network (FCN)  for damage identification in composite plates base on a supervised learning approach.
+Furthermore, the authors utilised a full wavefield of Lamb waves propagation, which was numerically generated resembling measurements acquired by scanning laser Dopler vibrometer (SLDV).
+The model performs a pixel-wise segmentation that is able to identify the delamination which results in damaged and undamaged classes.
+Moreover, the model results were validated through a comparison with a conventional wavefield signal processing method i.e. adaptive wavenumber filtering~\cite{Radzienski2019,Kudela2018}.
+The proposed model achieved an accuracy of \(93.3\%\) in damage detection on numerical data compared to  \(64.8\%\) with the conventional method.
+Furthermore, the proposed model was verified on experimental data and it proved its ability for generalisation.
+

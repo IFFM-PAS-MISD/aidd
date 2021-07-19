@@ -1,4 +1,5 @@
 import gc
+import os
 import keras
 import numpy as np
 import tensorflow as tf
@@ -11,55 +12,30 @@ from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split, KFold
 import matplotlib.pyplot as plt
 
-###########################################   memory growing ###########################################################
+#   memory growing
 
-config = tf.compat.v1.ConfigProto()
-config.gpu_options.allow_growth = True
+gc.collect()
+
+config = tf.compat.v1.ConfigProto(device_count={'GPU': 2, 'CPU': 32})
 sess = tf.compat.v1.Session(config=config)
-########################################################################################################################
+tf.compat.v1.keras.backend.set_session(sess)
 
 ########################################################################################################################
-################################################## Hyper parameters ####################################################
+# Hyper parameters
 ########################################################################################################################
-lr = .0001
+
+r = .0001
 rho = 0.995
 filters = 16
 filterSize = (3, 3)
 activation = relu, sigmoid
-batch_size = 4
+batch_size = 8
 dropout = 0.2
-epochs = 100
+epochs = 20
 validation_split = 0.2
-Convfilter = 16
-
-########################################################################################################################
-############################## Loading dataset into x, y arrays and reshape them #######################################
-########################################################################################################################
-x = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_training_dataset.npy')
-x = x.reshape(1900, 512, 512, 1)
-x = x / 255.0  # normalizing x,y to (0-1) range
-y = np.load('E:/backup/datasets/Segmentation datasets/augemented/June_labels.npy')
-y = y.reshape(1900, 512, 512, 1)
-y = y / 255.0
-
-########################################################################################################################
-###################################### Shuffle the data set at random ##################################################
-########################################################################################################################
-# x, y = shuffle(x, y)
-########################################################################################################################
-################# Split dataset into training and testing sets and again re-shuffle them ###############################
-########################################################################################################################
-x_train = x[:1520]
-y_train = y[:1520]
-
-test_x_samples = x[1520:1900]
-test_y_samples = y[1520:1900]
-
-y_train = to_categorical(y_train)
-test_y_samples = to_categorical(test_y_samples)
+Convfilter = 32
 
 
-########################################################################################################################
 # Custom loss functions
 def custom_loss(y_true, y_pred, smooth=0):  # Dice score function
     y_true_f = K.flatten(y_true)
@@ -135,19 +111,24 @@ def iou_coef(y_true, y_pred, smooth=1):
     return iou
 
 
-####################################################### layers #########################################################
 ########################################################################################################################
+# layers
+########################################################################################################################
+
 def layer(Layer_input, downfilter, i):
     BN = keras.layers.BatchNormalization()(Layer_input)  # Batch Normalization
     activation_func = Activation('relu')(BN)  # adding activation layer Relu then directs it to the Conv2D
-    CN = keras.layers.Conv2D(filters=downfilter * (i + 1), kernel_size=filterSize, padding='same')(activation_func)
+    CN = keras.layers.Conv2D(filters=downfilter * (i + 1),
+                             kernel_size=filterSize,
+                             padding='same')(activation_func)
     out = keras.layers.Dropout(dropout)(CN)  # Dropout
     return out
 
 
 ########################################################################################################################
-################################################## Dense Block #########################################################
+# Dense Block
 ########################################################################################################################
+
 def dense_block(DB_input, layers):
     global Concat
     for i in range(layers):
@@ -159,19 +140,21 @@ def dense_block(DB_input, layers):
 
 
 ########################################################################################################################
-######################################### Transition Down (Max-pooling) ################################################
+# Transition Down (Max-pooling)
 ########################################################################################################################
 def Transition_Down(TD_input, downfilter):
     BN = keras.layers.BatchNormalization()(TD_input)
-    active = Activation('relu')(BN)
-    CN = keras.layers.Conv2D(filters=downfilter, kernel_size=(1, 1), padding='same')(active)  # , activation='relu'
+    Activation_layer = Activation('relu')(BN)
+    CN = keras.layers.Conv2D(filters=downfilter,
+                             kernel_size=(1, 1),
+                             padding='same')(Activation_layer)
     Drop = keras.layers.Dropout(dropout)(CN)
     down = keras.layers.MaxPooling2D((2, 2), strides=(2, 2))(Drop)
     return down
 
 
 ########################################################################################################################
-########################################### Transition Up (Up sampling) ################################################
+# Transition Up (Up sampling)
 ########################################################################################################################
 def Transition_Up(TU_input, filters_tu):
     Up = keras.layers.Conv2DTranspose(filters=filters_tu, kernel_size=(3, 3), strides=(2, 2), padding='same')(
@@ -180,13 +163,13 @@ def Transition_Up(TU_input, filters_tu):
 
 
 ########################################################################################################################
-############################# Keras Model (FCN Dense Net for semantic Segmentation #####################################
+# Keras Model (FCN Dense Net for semantic Segmentation
 ########################################################################################################################
 def DenseNet_Model(DB_Num):
     inputs = Input(shape=(512, 512, 1))
     ####################################################################################################################
-    Conv = Conv2D(filters, filterSize, padding='same')(inputs)
-    # Conv = keras.layers.Concatenate()([Conv, inputs])
+    Conv = Conv2D(filters, (7, 7), padding='same')(inputs)
+    Conv = keras.layers.Concatenate()([Conv, inputs])
     ####################################################################################################################
     DB1 = dense_block(inputs, DB_Num[0])
     Concat1 = keras.layers.Concatenate(axis=-1)([Conv, DB1])
@@ -232,11 +215,7 @@ def DenseNet_Model(DB_Num):
 
 
 ########################################################################################################################
-
-
-########################################################################################################################
-########################################################################################################################
-############################## Loading dataset into x, y arrays and reshape them #######################################
+# Loading dataset into x, y arrays and reshape them
 ########################################################################################################################
 
 dataset = np.load('delamination_dataset.npy')
@@ -249,29 +228,45 @@ labels = dataset[:, :, :, 1]
 Train_x, Test_x, Train_label, Test_label = train_test_split(samples, labels, test_size=0.2, shuffle=False)
 
 Test_x = np.expand_dims(Test_x, axis=3)
+
 Test_label = np.expand_dims(Test_label, axis=3)
 
-Test_label = to_categorical(Test_label)
+Test_label = to_categorical(Test_label, 2)
+
 ########################################################################################################################
-DB_Number = [2, 2, 2, 4, 2, 2, 2]  # adding extra two DBs [0,1,2,3,4,5,6]
+
+DB_Number = [2, 3, 5, 7, 5, 3, 2]  # adding extra two DBs [0,1,2,3,4,5,6]
+
 ########################################################################################################################
+
 n_split = 5  # Number of Folds
+counter = 1
+
+average_training_loss = []
+average_val_loss = []
+
+average_training_accuracy = []
+average_val_accuracy = []
+
 ########################################################################################################################
-#########################################  KFold Cross validation   ####################################################
+#  KFold Cross validation
 ########################################################################################################################
-for train_index, test_index in KFold(n_split, shuffle=True, random_state=49).split(Train_x):
+
+for train_index, test_index in KFold(n_split, shuffle=True).split(Train_x):
     x_train, x_val = Train_x[train_index], Train_x[test_index]
     y_train, y_val = Train_label[train_index], Train_label[test_index]
 
     x_train = np.expand_dims(x_train, axis=3)
+
     y_train = np.expand_dims(y_train, axis=3)
+
     x_val = np.expand_dims(x_val, axis=3)
+
     y_val = np.expand_dims(y_val, axis=3)
 
-    y_train = to_categorical(y_train)
-    y_val = to_categorical(y_val)
+    y_train = to_categorical(y_train, 2)
+    y_val = to_categorical(y_val, 2)
 
-    model_kfold = None
     model_kfold = DenseNet_Model(DB_Number)
 
     ####################################################################################################################
@@ -284,9 +279,9 @@ for train_index, test_index in KFold(n_split, shuffle=True, random_state=49).spl
     ####################################################################################################################
     history = model_kfold.fit(x_train,
                               y_train,
-                              epochs=100,
-                              batch_size=4,
-                              validation_data=(x_val, y_val), )
+                              epochs=epochs,
+                              batch_size=batch_size,
+                              validation_data=(x_val, y_val))
     # callbacks=[earlystop])
     ####################################################################################################################
     score = model_kfold.evaluate(Test_x,
@@ -297,45 +292,60 @@ for train_index, test_index in KFold(n_split, shuffle=True, random_state=49).spl
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
     model_kfold.summary()
-    ####################################################################################################################
-    plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
-    font = {'family': 'times new roman',
-            'weight': 'light',
-            'size': 8}
-    plt.rc('font', **font)
-    # plt.gca().set_axis_off()
-    # plt.axis('off')
-    # plt.subplots_adjust(left=0.0, bottom=0.0, right=1, top=1.0, wspace=0.0, hspace=0.0)
-    # plt.margins(0, 0)
-    # plt.gca().xaxis.set_major_locator(plt.NullLocator())
-    # plt.gca().yaxis.set_major_locator(plt.NullLocator())
-    ################################################################################################################
 
-    plt.plot(history.history['loss'], label='training loss')
-    plt.plot(history.history['val_loss'], label='validation loss')
-    plt.legend()
-    plt.savefig(
-        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_loss_per_epochs_softmax')
-    plt.close('all')
-    gc.collect()
+    average_training_loss = + np.asarray(history.history['loss'])
+    average_val_loss = + np.asarray(history.history['val_loss'])
 
-    ####################################################################################################################
-    plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
-    font = {'family': 'times new roman',
-            'weight': 'light',
-            'size': 11}
-    plt.rc('font', **font)
-    ####################################################################################################################
-    plt.plot(history.history['iou_metric'], label='Training iou')
-    plt.plot(history.history['val_iou_metric'], label='validation iou')
-    plt.legend()
-    plt.savefig(
-        'E:/aidd_new/aidd/reports/figures/comparative_study/losses_metrics_figures/fcn_densenet_kfold_iou_per_epochs_softmax')
-    gc.collect()
+    print('Average test loss:', average_training_loss)
+    print('Average val loss:', average_val_loss)
 
-    plt.close('all')
-    gc.collect()
-    model_kfold.save('E:/aidd_new/aidd/reports/figures/comparative_study/h5_models/fcn_densenet_kfold_softmax.h5')
-    gc.collect()
+    average_training_accuracy = + np.asarray(history.history['iou_metric'])
+    average_val_accuracy = + np.asarray(history.history['val_iou_metric'])
 
+    print('Average test iou:', average_training_accuracy)
+    print('Average val iou:', average_val_accuracy)
+
+    os.chdir('/home/aijjeh/aijjeh_rexio_share/reports/figures/comparative_study/h5_models/FCN_denseNet_models/')
+
+    # model_kfold.save('updated_fcn_densenet_kfold_trial_%d.h5' % counter)
+    counter = counter + 1
+####################################################################################################################
+# plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
+font = {'family': 'times new roman',
+        'weight': 'light',
+        'size': 6}
+plt.rc('font', **font)
+################################################################################################################
+
+os.chdir('/home/aijjeh/aijjeh_rexio_share/reports/figures/comparative_study/losses_metrics_figures/')
+
+average_training_loss.reshape(-1, epochs)
+average_val_loss.reshape(-1, epochs)
+average_training_accuracy.reshape(-1, epochs)
+average_val_accuracy.reshape(-1, epochs)
+
+plt.plot(average_training_loss, label='training loss')
+plt.plot(average_val_loss, label='validation loss')
+
+plt.title('FCN-DenseNet model', font)
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend()
+plt.savefig('FCN_DenseNet_loss_per_epochs_softmax')
+plt.close('all')
+gc.collect()
+
+####################################################################################################################
+# plt.figure(figsize=(10 / 2.54, 5 / 2.54), dpi=600)
+####################################################################################################################
+plt.plot(average_training_accuracy, label='training iou')
+plt.plot(average_val_accuracy, label='validation iou')
+
+plt.title('FCN-DenseNet model', font)
+plt.ylabel('accuracy score')
+plt.xlabel('epoch')
+plt.legend()
+plt.savefig('FCN_DenseNet_iou_per_epochs_softmax')
+plt.close('all')
+gc.collect()
 # model.save('E:/backup/models/FCN_DenseNet_models/Softmax/FCN_softmax_100_epoches.h5')

@@ -2,11 +2,13 @@
 \section{Conclusions}
 \label{conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this paper, we extend our previous work on delamination detection in composite materials using deep learning techniques. 
-For this purpose, we have trained four deep learning models: UNet, VGG16 encoder-decoder, PSPNet, and  FCN-DenseNet for semantic segmentation.
-The models were trained on a numerically generated dataset simulating a  full wavefield of propagating guided waves.
-Deep learning models show promising results in identifying various types of delaminations regarding their shapes, sizes and angles. 
-The models show good generalisation behaviour on predicting the delamination in the unseen numerically generated data.
-Moreover, the models are capable of detecting the delamination in the experimental data.
-The performance can be further improved if the models are trained on experimental data, which allow them to learn new complex patterns.
-In this work, we are focused on delamination identification in composite materials, however, we aim to extend our work on different types of defects in composite materials.
+In this paper, we extend our previous work~\cite{Ijjeh2021} regarding delamination identification in composite materials using DL techniques. 
+Accordingly, we have trained five different DL models: Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN for image semantic segmentation.
+The models were trained on a numerically generated dataset simulating a full wavefield of propagating guided waves.
+DL models show promising results in identifying various types of delaminations regarding their locations, shapes, sizes, and angles. 
+Moreover, the models show good generalisation behaviour on predicting the delamination in the unseen numerically generated data.
+Additionally, the models show their ability to generalise by detecting the delamination in the experimentally acquired data.
+The performance of the models can be further improved if the they are trained on experimental data which allows them to learn new complex patterns.
+However, the presented studies are limited to only one type of signal at a carrier frequency of 50 kHz. 
+We are planning to create a new dataset for the case of a higher excitation frequency. 
+Further, expand the number of experimental scenarios in the future.
