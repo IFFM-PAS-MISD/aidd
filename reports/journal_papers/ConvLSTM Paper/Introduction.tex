@@ -23,7 +23,7 @@ This collection of signals is known as full wavefield~\cite{radzienski2019damage
 From the last few years, full wavefield signals are continually being assessed for the detection and localisation of defects in composite
 structures~\cite{radzienski2019damage, girolamo2018impact, kudela2018impact, sohn2011delamination, sohn2011automated, rogge2013characterization}.
 Damage detection techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{girolamo2018impact, kudela2018impact}.
-These wavefields hold precious information regarding the interaction of guided Lamb waves with potential defects.  
+These wavefields provide valuable information regarding the interaction of guided Lamb waves with potential defects.  
 However, these full wavefields are very complex. 
 Analysing such wavefields are very difficult for conventional physics or classical machine learning-based models. 
 
@@ -35,6 +35,23 @@ Image segmentation is a fundamental component in numerous visual recognition
 systems. In the last few years, image segmentation has widely been
 employed in autonomous driving~\cite{zhang2013understanding, cordts2016cityscapes, ros2016synthia, li2018real}, medical applications~\cite{taghanaki2021deep}, agriculture sciences~\cite{milioto2018real}, augmented reality~\cite{miksik2015semantic} and many more. 
 The purpose of image segmentation is to partition images or video frames into multiple objects or segments~\cite{szeliski2010computer}.
+It can be expressed as a pixel-level classification problem with semantic labels, which is known as semantic segmentation, or partitioning the images into individual objects which are called instance segmentation~\cite{szeliski2010computer, minaee2021image}. 
+Semantic segmentation functions on pixel-wise labeling with a set of object categories of an image. 
+Therefore, it is generally a more difficult task than image classification which only predicts a single label for the entire image~\cite{szeliski2010computer, minaee2021image}.
+Furthermore, semantic image segmentation not only depends on the semantics in
+the question but also on the problem that needs to be addressed~\cite{ghosh2019understanding}.
+
+Deep learning-based systems intend to derive hierarchical representations
+from the input data via constructing deep neural networks by multiple layers
+of non-linear transformations.
+In deep learning architectures, the output of one layer acts as the input to the other subsequent layer.
+The application of one layer in deep learning acquires a new representation of the input data and then, the stacking composition of many layers enables the model to learn complex patterns from the simple notions that can be formed from raw input.
+Therefore, these systems do not need extensive human labour and knowledge for hand-crafted feature design~\cite{zhao2019deep, yuan2020machine}.
+
+Deep learning techniques have extensively been utilised for the inspection and
+maintenance of civil infrastructures~\cite{cha2017deep, lin2017structural, liu2019computer} and rotating machinery~\cite{janssens2016convolutional, jia2016deep} domains and has shown very promising results.
+Further, different researchers have used basic ANN and deep learning architectures for damage detection in composite structures by employing vibration, thermography and frequency-based approaches~\cite{islam1994damage, okafor1996delamination, chakraborty2005artificial, khan2019structural, luo2019temporal, bang2020defect}. 
+However, only few researchers have applied ANN and deep learning approaches for damage detection in composite structures by utilising guided Lamb waves~\cite{su2004lamb, chetwynd2008damage, de2015application, tabian2019convolutional, feng2019locating}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
