@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Nowadays, composite materials are extensively used for achieving the desired performance in a wide range of industries such as wind turbine, aerospace, marine, automotive, and many more.
-This vast usage of composite materials is due to their numerous advantages such as high strength, lightweight, low cost, non-conductivity, higher stiffness-to-mass ratio compared to metals and effective corrosion resistance~\cite{baker2004composite, giurgiutiu2015structural, stoik2010nondestructive, poudel2015comparison}. 
+This vast usage of composite materials is due to their numerous advantages such as high strength, lightweight, low cost, non-conductivity, higher stiffness-to-mass ratio compared to metals, and effective corrosion resistance~\cite{baker2004composite, giurgiutiu2015structural, stoik2010nondestructive, poudel2015comparison}. 
 However, these materials are very prone to various kinds of defects such as cracks, fiber breakage, debonding, and delamination~\cite{poudel2015comparison, heslehurst2014defects, talreja2012damage}.
 Among these defects, delamination is one of the most hazardous forms of defects in composite materials. 
 Delamination depreciates the life of these structures which essentially leads to very catastrophic failures if not detected at an early stage~\cite{talreja2012damage, wisnom2012role}.
@@ -11,13 +11,13 @@ in composite structures for the purpose of safe and reliable implementation in
 various real-world applications.
 
 The detection of delamination in composite materials is very challenging for traditional visual inspection techniques because it mostly occurs between plies of composite laminate and is invisible from external surfaces~\cite{guinard20023d, staszewski2009health, tuo2019damage}.
-Therefore, different types of Nondestructive Testing (NDT) and Structural Health Monitoring (SHM) techniques have been proposed for damage detection in composite structures.
-Among these various damage detection techniques, ultrasonic guided Lamb waves are widely known as one of the most promising technique for the quantitative identification of delamination in composite structures.
-This widespread applications of these waves is due to to their higher sensitivity to small defects, propagation with low attenuation, and potential to monitor large areas with low-voltage and only a small number of sparsely distributed transducers~\cite{alleyne1992interaction, mitra2016guided, giurgiutiu2003lamb, ihn2008pitch}.
+Therefore, different types of nondestructive testing (NDT) and structural health monitoring (SHM) techniques have been proposed for damage detection in composite structures.
+Among these various damage detection techniques, ultrasonic-guided Lamb waves are widely known as one of the most promising techniques for the quantitative identification of delamination in composite structures.
+The widespread applications of these waves are due to their higher sensitivity to small defects, propagation with low attenuation, and potential to monitor large areas with low-voltage and only a small number of sparsely distributed transducers~\cite{alleyne1992interaction, mitra2016guided, giurgiutiu2003lamb, ihn2008pitch}.
 
-However, utilising a smaller number of transducers are not suitable for acquiring high-quality resolution damage maps.
-On the other hand, the employment of a very dense array of transducers is also not feasible in most of the situations. 
-For alleviating such problems, Scanning Laser Doppler Vibrometer (SLDV) is employed. 
+However, utilising a smaller number of transducers is not suitable for acquiring high-quality resolution damage maps.
+On the other hand, the employment of a very dense array of transducers is also not feasible in most situations. 
+For alleviating such problems, scanning laser Doppler vibrometer (SLDV) is employed. 
 SLDV is capable to measure guided Lamb waves in a highly dense grid of points over the surface of a large specimen.
 This collection of signals is known as full wavefield~\cite{radzienski2019damage}. 
 From the last few years, full wavefield signals are continually being assessed for the detection and localisation of defects in composite
@@ -26,10 +26,10 @@ Damage detection techniques employing full wavefield signals are capable of effe
 These wavefields provide valuable information regarding the interaction of guided Lamb waves with potential defects.  
 However, these full wavefields are very complex. 
 Analysing such wavefields are very difficult for conventional physics or classical machine learning-based models. 
-
+ 
 Conversely, deep learning which is originated from Artificial Neural Network (ANN), are capable of handling such complex and nonlinear data and has shown very promising results in various domains such as computer vision, object detection, speech recognition, remote sensing, medical sciences
 and many more~\cite{deng2014deep, mohanty2016using, zhang2020well, pashaei2020review}.
-In recent years, deep learning has shown significant improvements in image segmentation due to the advancement in deep Convolutional Neural Networks (CNN).
+In recent years, deep learning has shown significant improvements in image segmentation due to the advancement in deep convolutional neural networks (CNN).
 
 Image segmentation is a fundamental component in numerous visual recognition
 systems. In the last few years, image segmentation has widely been
@@ -50,16 +50,50 @@ Therefore, these systems do not need extensive human labour and knowledge for ha
 
 Deep learning techniques have extensively been utilised for the inspection and
 maintenance of civil infrastructures~\cite{cha2017deep, lin2017structural, liu2019computer} and rotating machinery~\cite{janssens2016convolutional, jia2016deep} and has shown very promising results.
-Further, different researchers have used basic ANN and deep learning architectures for damage detection in composite structures by employing vibration, thermography and frequency-based approaches~\cite{islam1994damage, okafor1996delamination, chakraborty2005artificial, khan2019structural, luo2019temporal, bang2020defect}. 
-However, only few researchers have applied ANN and deep learning-based approaches for damage detection in composite structures by utilising guided Lamb waves~\cite{su2004lamb, chetwynd2008damage, de2015application, tabian2019convolutional, feng2019locating, mardanshahi2020detection}.
+Further, different researchers have used basic ANN and deep learning architectures for damage detection in composite structures by employing vibration, thermography, and frequency-based approaches~\cite{islam1994damage, okafor1996delamination, chakraborty2005artificial, khan2019structural, luo2019temporal, bang2020defect}. 
+However, only a few researchers have applied ANN and deep learning-based approaches for damage detection in composite structures by utilising guided Lamb waves~\cite{su2004lamb, chetwynd2008damage, de2015application, feng2019locating, mardanshahi2020detection, qian2020application, tabian2019convolutional, rautela2021ultrasonic}.
 
+Su and Ye~\cite{su2004lamb} developed a Lamb wave-based delamination identification technique in composite structures with the use of wavelet transform, multi-layer feedforward ANN architecture, and intelligent signal processing and pattern recognition (ISPPR).
+They used ISPPR for the extraction and digitision of spectrographic characteristics of simulated Lamb waves in the time-frequency domain, which is known as digital damage fingerprints (DOF).
+The DOF was used for constructing a damage parameters database (DPD). 
+The DPD is then employed offline for training the neural network.  
+They reported that they achieved excellent quantitative diagnosis results for different damage parameters such as the presence, location, orientation, and geometry of defects.
+
+Chetwynd et al.~\cite{chetwynd2008damage} applied two multilayer perceptron (MLP) neural networks for the classification and regression tasks of
+damage identification in a stiffened curved carbon fiber reinforced polymer (CFRP) investigated using Lamb waves.
+For the classification of damaged and undamaged regions of the panel, the MLP classifier was applied, whereas the MLP regressor was used for evaluating the accurate location of the damage on the panel. 
+They achieved quite good results with both the MLP classifier and regressor.
+De Fenza et al.~\cite{de2015application} employed ANN and probability ellipse techniques for the identification of defects in aluminum and composite plates with the use of Lamb waves.
+Both of their ANN and probability ellipse techniques were based on the damage index assessed by examining the variations in the Lamb waves acquired before and after the damage in each analysed path.
+The results from both methods proved that guided Lamb waves have prominent advantages in localisation and the detection of different kinds of defects in plate-like structures. 
+
+Feng et al.~\cite{feng2019locating} presented two time of flight (ToF) based algorithms of scattered guided Lamb waves in CFRP composite plates.
+Their first algorithm is a probabilistic approach that constructs a probability
+matrix. 
+The probability matrix is used for the localisation of delamination while
+their second algorithm is based on ANN which is then applied for enhancing
+the accuracy of defect localisation.
+Mardanshahi et al.~\cite{mardanshahi2020detection} applied support vector machines (SVM), linear vector quantization (LVQ), and MLP neural networks for the classification of crack density in composite structures by using guided Lamb wave-based data.
+They concluded that the SVM outperformed the other basic neural networks in
+their research work.
+Qian et al.~\cite{qian2020application} developed a Lamb wave-based quantitative damage detection technique for CFRP composite structures with the use of ANN.  
+They used two damage indices (amplitude and phase) as input to their ANN model, and the output of the ANN model was represented as the length and width of the damaged area.  
+Their approach showed a robust behaviour in the prediction of damage sizes and is also able to provide potential applications on quantitative damage evaluation in composite structures.  
 
 Tabian et al.~\cite{tabian2019convolutional} developed a CNN-based approach for the detection and characterization of impacts in complex composite structures.
 They first transferred the acquired guided wave-based data to 2D images and then they applied two different CNNs on those 2D images.
 One CNN in their approach was applied for impact localisation and a separate CNN was implemented for impact categorization (energy level).
-Mardanshahi et al.~\cite{mardanshahi2020detection} applied support vector machines (SVM), linear vector quantization (LVQ), and multilayer perceptron (MLP) neural networks for the classification of crack density in composite structures by using guided Lamb wave-based data.
-They reported that the SVM outperformed the other basic neural networks in
-their research work.
+Rautela et al.~\cite{rautela2021ultrasonic} developed a model-assisted deep learning approach for the detection and localization of structural defects
+with the use of ultrasonic guided waves in aerospace grade isotropic and composite structures. 
+They applied their combined damage detection and localization approach on two different datasets: time-history dataset and time-frequency dataset. 
+Detection of defects is performed on both the datasets with the use of CNNs and localization of defects is performed with the use of regression-based CNN and long short-term memory (LSTM) models. 
+They showed that the deep learning-based predictions surpassed the conventional machine learning approaches.
+
+Furthermore, Melville et al.~\cite{melville2018structural} applied a classical machine learning algorithm, SVM, and deep learning techniques for damage detection on full wavefield signals of ultrasonic guided wave images.
+They acquired the full wavefield data through piezoelectric actuators and a laser Doppler vibrometer on thin metal plates. 
+They showed that the deep learning methods achieved quite better damage prediction results as compared to the SVM-based methods. 
+
+In our previous research work~\cite{ijjeh2021full}, we 
 
 
 
