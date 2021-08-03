@@ -11,8 +11,8 @@ in composite structures for the purpose of safe and reliable implementation in
 various real-world applications.
 
 The detection of delamination in composite materials is very challenging for traditional visual inspection techniques because it mostly occurs between plies of composite laminate and is invisible from external surfaces~\cite{guinard20023d, staszewski2009health, tuo2019damage}.
-Therefore, different types of nondestructive testing (NDT) and structural health monitoring (SHM) techniques have been proposed for damage detection in composite structures.
-Among these various damage detection techniques, ultrasonic-guided Lamb waves are widely known as one of the most promising techniques for the quantitative identification of delamination in composite structures.
+Therefore, different types of nondestructive testing (NDT) and structural health monitoring (SHM) techniques have been proposed for delamination detection in composite structures.
+Among these various damage detection techniques, ultrasonic guided Lamb waves are widely known as one of the most promising techniques for the quantitative identification of defects in composite structures.
 The widespread applications of these waves are due to their higher sensitivity to small defects, propagation with low attenuation, and potential to monitor large areas with low-voltage and only a small number of sparsely distributed transducers~\cite{alleyne1992interaction, mitra2016guided, giurgiutiu2003lamb, ihn2008pitch}.
 
 However, utilising a smaller number of transducers is not suitable for acquiring high-quality resolution damage maps.
@@ -27,9 +27,9 @@ These wavefields provide valuable information regarding the interaction of guide
 However, these full wavefields are very complex. 
 Analysing such wavefields are very difficult for conventional physics or classical machine learning-based models. 
  
-Conversely, deep learning which is originated from Artificial Neural Network (ANN), are capable of handling such complex and nonlinear data and has shown very promising results in various domains such as computer vision, object detection, speech recognition, remote sensing, medical sciences
+Conversely, deep learning which is originated from artificial neural network (ANN), are capable of handling such complex and nonlinear data and has shown very promising results in various domains such as computer vision, object detection, speech recognition, remote sensing, medical sciences
 and many more~\cite{deng2014deep, mohanty2016using, zhang2020well, pashaei2020review}.
-In recent years, deep learning has shown significant improvements in image segmentation due to the advancement in deep convolutional neural networks (CNN).
+In recent years, deep learning has shown significant improvements in image segmentation due to the advancement in deep convolutional neural networks (CNNs).
 
 Image segmentation is a fundamental component in numerous visual recognition
 systems. In the last few years, image segmentation has widely been
@@ -54,8 +54,8 @@ Further, different researchers have used basic ANN and deep learning architectur
 However, only a few researchers have applied ANN and deep learning-based approaches for damage detection in composite structures by utilising guided Lamb waves~\cite{su2004lamb, chetwynd2008damage, de2015application, feng2019locating, mardanshahi2020detection, qian2020application, tabian2019convolutional, rautela2021ultrasonic}.
 
 Su and Ye~\cite{su2004lamb} developed a Lamb wave-based delamination identification technique in composite structures with the use of wavelet transform, multi-layer feedforward ANN architecture, and intelligent signal processing and pattern recognition (ISPPR).
-They used ISPPR for the extraction and digitision of spectrographic characteristics of simulated Lamb waves in the time-frequency domain, which is known as digital damage fingerprints (DOF).
-The DOF was used for constructing a damage parameters database (DPD). 
+They used ISPPR for the extraction and digitision of spectrographic characteristics of simulated Lamb waves in the time-frequency domain, which is known as digital damage fingerprints (DDF).
+The DDF was used for constructing a damage parameters database (DPD). 
 The DPD is then employed offline for training the neural network.  
 They reported that they achieved excellent quantitative diagnosis results for different damage parameters such as the presence, location, orientation, and geometry of defects.
 
@@ -65,7 +65,7 @@ For the classification of damaged and undamaged regions of the panel, the MLP cl
 They achieved quite good results with both the MLP classifier and regressor.
 De Fenza et al.~\cite{de2015application} employed ANN and probability ellipse techniques for the identification of defects in aluminum and composite plates with the use of Lamb waves.
 Both of their ANN and probability ellipse techniques were based on the damage index assessed by examining the variations in the Lamb waves acquired before and after the damage in each analysed path.
-The results from both methods proved that guided Lamb waves have prominent advantages in localisation and the detection of different kinds of defects in plate-like structures. 
+The results from both methods proved that guided Lamb waves have prominent advantages in the localisation and detection of different kinds of defects in plate-like structures. 
 
 Feng et al.~\cite{feng2019locating} presented two time of flight (ToF) based algorithms of scattered guided Lamb waves in CFRP composite plates.
 Their first algorithm is a probabilistic approach that constructs a probability
@@ -86,16 +86,20 @@ One CNN in their approach was applied for impact localisation and a separate CNN
 Rautela et al.~\cite{rautela2021ultrasonic} developed a model-assisted deep learning approach for the detection and localization of structural defects
 with the use of ultrasonic guided waves in aerospace grade isotropic and composite structures. 
 They applied their combined damage detection and localization approach on two different datasets: time-history dataset and time-frequency dataset. 
-Detection of defects is performed on both the datasets with the use of CNNs and localization of defects is performed with the use of regression-based CNN and long short-term memory (LSTM) models. 
+Detection of defects is performed on both datasets with the use of CNNs and localization of defects is performed with the use of regression-based CNNs and long short-term memory (LSTM) models. 
 They showed that the deep learning-based predictions surpassed the conventional machine learning approaches.
 
 Furthermore, Melville et al.~\cite{melville2018structural} applied a classical machine learning algorithm, SVM, and deep learning techniques for damage detection on full wavefield signals of ultrasonic guided wave images.
 They acquired the full wavefield data through piezoelectric actuators and a laser Doppler vibrometer on thin metal plates. 
 They showed that the deep learning methods achieved quite better damage prediction results as compared to the SVM-based methods. 
 
-In our previous research work~\cite{ijjeh2021full}, we 
+In our previous research work~\cite{ijjeh2021full}, we have developed a deep learning-based semantic segmentation model with a fully convolutional neural network (FCN) to identify delamination in CFRP, in which the root mean square (RMS) technique was applied on the full wavefield frames. 
+The full wavefield frames were numerically generated to resemble measurements acquired by SLDV.  
+Consequently, the model was trained on a One-to-One prediction scheme.
 
-
-
+In this work, we took a further step in which the full wavefield frames of Lamb waves propagation were utilised in an end-to-end deep learning model to identify delamination in CFRP.
+Accordingly,  a Many-to-One prediction scheme was adopted by employing convolutional-based recurrent neural networks (RNNs).
+In which a sequence of full wavefield frames is fed into the proposed deep learning model in order to identify the delamination.
+The proposed model showed excellent results in identifying the delamination in the numerically generated dataset and it also showed its capability to generalise delamination identification in the real world scenario.   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
