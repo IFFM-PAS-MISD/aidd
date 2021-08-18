@@ -1,39 +1,36 @@
 \section{RNNs, LSTM and ConvLSTM:}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Feed-forward neural networks such as traditional ANNs and CNNs cannot learn temporal features from the data and hence are not appropriate for working with sequential data.
-For handling such problems, RNNs are being used which are specifically developed for working with sequential data of varying lengths~\cite{aggarwal2018neural, lecun2015deep, bengio2017deep}. 
+For handling such problems, RNNs are being used which are specifically developed for working with sequential data~\cite{aggarwal2018neural, lecun2015deep, bengio2017deep}. 
 RNNs contain loops among the different nodes in their architecture which allows them to retain information in the model for longer periods.
 This memory-keeping ability makes RNNs very accurate in predicting what is coming next.
 In RNNs, every prediction is being made by considering the input and the memory from the information of the previous predictions.
 Therefore, RNNs have two inputs, the past information, and the present value.
 
-For training an RNN, first, a linear function is applied to the input data.
-Then the linearity of this output is broken with the use of a nonlinear activation function, mostly tanh activation function is employed.
-The weights and biases are the parameters of the RNNs which are updated during the training process.
-As the RNNs deal with sequential data therefore during training the backpropagation also needs to work along with time steps as there is an additional time dimension as well in such data.
-Therefore, RNNs employ a special type of backpropagation technique for training,
-known as backpropagation through time (BPTT). 
-The loss here is defined as the sum of loss at each time step. 
-In BPTT, the usual chain rule along with the sum of the gradients at
+For training an RNN, first, a function is applied to the input data, along with the weights and biases for calculating the hidden state.
+Then a nonlinear activation function, mostly tanh activation function is employed to learn the output probabilities from the hidden states~\cite{aggarwal2018neural}.
+As the RNNs deal with sequential data therefore during training the backpropagation~\cite{rumelhart1986learning} also needs to work along with time steps as there is an additional time dimension as well in such data.
+To alleviate this problem, RNNs employ backpropagation through time (BPTT). 
+The loss here is defined as the sum of losses at each time step. 
+In BPTT, a chain rule along with the sum of the gradients at
 each time step over time is applied~\cite{aggarwal2018neural}.
 
-Basic RNNs retain short-term memory only.
-However, this storage of only short-term memory becomes troublesome in the case of dealing with long sequences of data, where the network has problems by carrying the information from the very early steps to the final steps.
-Therefore, the traditional RNNs suffer from gradient vanishing and exploding problems due to the inability of retaining information for the long term. 
-These two problems make the fine-tuning of the model parameters and training of RNNs very hard.
+In basic RNNs, short-term memories are only preserved, therefore it becomes unfeasible in the case of dealing with long sequences of data hence it may suffer from issues like vanishing or exploding gradients~\cite{bengio1994learning}.
+Therefore, the fine-tuning of the model parameters and training of RNNs becomes very hard.
 
-For overcoming such problems, Hochreiter and Schmidhuber developed the Long-Short Term Memory networks (LSTMs~\cite{hochreiter1997long}).
-LSTMs are a special type of RNNs that are specifically developed for keeping information over long periods and for solving the vanishing gradient and exploding problems.
+To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Term Memory networks (LSTMs~\cite{hochreiter1997long}).
+LSTMs are a special type of RNNs that are specifically developed to keep information for long term dependencies and to solve the vanishing gradient and exploding problems.
 LSTMs are not restricted to inputs or outputs of fixed-length, and this ability makes LSTMs powerful for solving very complex sequential problems. 
 Basic LSTM architecture has a memory cell structure, which consists of three gates (forget, input, and output). 
-These gates are helpful in regulating the information that is added to or removed from the cell state. These additional gates make the LSTM able to handle long-term dependencies. The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory. 
+These gates are helpful in regulating the flow of information that is added to or removed from the cell state. 
+The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory. 
 
 The first step in training an LSTM is to decide what information needs to be thrown away from the cell state.
 This decision is made by a sigmoid function at the forget gate.
-It looks at the information from the previous hidden state ($h_t-1$) and the current input ($X_t$) value, and it outputs a number between 0 and 1 for each number in the cell state ($S_t-1$), where 0 represents to remove or forget and 1 represent to completely keep the information.
+It looks at the information from the previous hidden state ($h_t-1$) and the current input ($X_t$) value, and it outputs a number between 0 and 1 for each number in the cell state ($C_t-1$), where 0 represents to remove or forget and 1 represent to completely keep the information.
 
-When, $W$ is used for the weights and $b$ is denoted as the bias term. 
-Then the mathematical calculation at forget gate ($f_t$) will be as below:
+Where $W$ is used for the weights and $b$ is denoted as the bias term. 
+Then the mathematical calculation at the forget gate ($f_t$) will be as below:
 
 \begin{equation}
 f_{t}=sigmoid\left(W_{f} \cdot\left[h_{t-1}, X_{t}\right]+b_{f}\right)
@@ -41,21 +38,21 @@ f_{t}=sigmoid\left(W_{f} \cdot\left[h_{t-1}, X_{t}\right]+b_{f}\right)
 \end{equation}
 
 The next step the model will perform is to decide which new information are needed to be stored in the cell state.
-This step is composed of two parts, first, a sigmoid function at the input gate ($i_t$) decides which value needs to be updated, then a tanh function creates a vector of new item values ($\tilde{S}_{t}$), which are needed to be added to the state, mathematically:
+This step is composed of two parts, first, a sigmoid function at the input gate ($i_t$) decides which value needs to be updated, then a tanh function creates a vector of new item values ($\tilde{C}_{t}$), which are needed to be added to the state, mathematically:
 
 \begin{equation}
 \begin{aligned}
 i_{t} &=sigmoid\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) \\
-\tilde{S}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{s}\right)
+\tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right)
 \end{aligned} \label{eq:eq2}
 \end{equation}
 
-Now the old cell state ($S_t-1$) is updated to the new cell state ($S_t$).
-Then the old state is multiplied by $f_t$ for forgetting the information which is decided to forget in Eq~\ref{eq:eq1} and after that $i_{t}$ $*$ $\tilde{S}_{t}$ is added to the output from the multiplication.
+Now the old cell state ($C_t-1$) is updated to the new cell state ($c_t$).
+Then the old state is multiplied by $f_t$ for forgetting the information which is decided to forget in Eq~\ref{eq:eq1} and after that $i_{t}$ $*$ $\tilde{C}_{t}$ is added to the output from the multiplication.
 The resultant value shows the updated cell state, mathematically it can be shown as: 
 
 \begin{equation}
-S_{t}=f_{t} * S_{t-1}+i_{t} * \tilde{S}_{t}
+C_{t}=f_{t} * C_{t-1}+i_{t} * \tilde{C}_{t}
 \label{eq:eq3}
 \end{equation}
  
@@ -68,34 +65,33 @@ This updated cell state and the new hidden state are then carried over to the ne
 \begin{equation}
 \begin{aligned}
 o_{t} &=sigmoid\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right) \\
-h_{t} &=o_{t} * \tanh \left(S_{t}\right)
+h_{t} &=o_{t} * \tanh \left(C_{t}\right)
 \end{aligned}
 \label{eq:eq4}
 \end{equation} 
 
-Recently, LSTMs have widely been used for large-scale learning of language translation models, speech recognition systems, chatbots, forecasting stock markets, text data analysis, and many more. 
+Recently, LSTMs have widely been used for large-scale learning of language translation models, speech recognition systems, chatbots, forecasting stock markets, text data analysis, and many more~\cite{graves2014towards, cho2014properties}. 
 
-Although LSTM is able to solve sequence modeling tasks very well, however, the spatial information in images is ignored when processed with a general LSTM.
-Therefore, general LSTMs are not able to model objects associated between consecutive frames. 
+Although LSTM is able to solve sequence modeling tasks very well, however, the spatial information in images is ignored when processed with a traditional LSTM.
+Therefore, traditional LSTMs are not able to identify objects from consecutive input data. 
 For handling such problems convolutional LSTM (ConvLSTM) is used, which was used for the first time by Shi et al.~\cite{xingjian2015convolutional} in 2015. 
-ConvLSTM is a variation of LSTM cell and it performs convolution within the LSTM cell instead of matrix multiplication.
+ConvLSTM is a variation of LSTM cell as it performs a convolution operation within the LSTM cell.
 ConvLSTM leverages convolution operation from the feed-forward CNNs, and this convolution is used for the state to state and input to state transitions.
-By employing convolution operations within the LSTM cell, ConvLSTM is able to capture the spatial information of attributes in an image and also can better mine the correlation between sequences of images. 
+ConvLSTM is able to capture the spatial information of features in an image and also can better extract the correlation between sequences of images. 
 
-When the inputs $X_1, ...., X_t$, hidden states $H_1, ..., H_t$, cell outputs $S_1, ..., S_t$ and input, forget and output gates are represented as $i_t$, $f_t$, $o_t$ respectively, then all the operation of a ConvLSTM cell can be described as:
+When the inputs $X_1, ...., X_t$, hidden states $H_1, ..., H_t$, cell states $C_1, ..., C_t$ and input, forget and output gates are represented as $i_t$, $f_t$, $o_t$ respectively, then all the operation of a ConvLSTM cell can be described as:
 
 \begin{equation}
 \begin{aligned}
-i_{t} &=sigmoid\left(W_{x i} * \mathcal{X}_{t}+W_{h i} * \mathcal{H}_{t-1}+W_{s i} \odot \mathcal{S}_{t-1}+b_{i}\right) \\
-f_{t} &=sigmoid\left(W_{x f} * \mathcal{X}_{t}+W_{h f} * \mathcal{H}_{t-1}+W_{s f} \odot \mathcal{S}_{t-1}+b_{f}\right) \\
-\mathcal{S}_{t} &=f_{t} \odot \mathcal{S}_{t-1}+i_{t} \odot \tanh \left(W_{x s} * \mathcal{X}_{t}+W_{h s} * \mathcal{H}_{t-1}+b_{s}\right) \\
-o_{t} &=sigmoid\left(W_{x o} * \mathcal{X}_{t}+W_{h o} * \mathcal{H}_{t-1}+W_{s o} \odot \mathcal{S}_{t}+b_{o}\right) \\
-\mathcal{H}_{t} &=o_{t} \odot \tanh \left(\mathcal{S}_{t}\right)
+i_{t} &=sigmoid\left(W_{x i} * \mathcal{X}_{t}+W_{h i} * \mathcal{H}_{t-1}+W_{c i} \odot \mathcal{C}_{t-1}+b_{i}\right) \\
+f_{t} &=sigmoid\left(W_{x f} * \mathcal{X}_{t}+W_{h f} * \mathcal{H}_{t-1}+W_{c f} \odot \mathcal{C}_{t-1}+b_{f}\right) \\
+\mathcal{C}_{t} &=f_{t} \odot \mathcal{C}_{t-1}+i_{t} \odot \tanh \left(W_{x c} * \mathcal{X}_{t}+W_{h c} * \mathcal{H}_{t-1}+b_{c}\right) \\
+o_{t} &=sigmoid\left(W_{x o} * \mathcal{X}_{t}+W_{h o} * \mathcal{H}_{t-1}+W_{c o} \odot \mathcal{C}_{t}+b_{o}\right) \\
+\mathcal{H}_{t} &=o_{t} \odot \tanh \left(\mathcal{C}_{t}\right)
 \end{aligned}
 \label{eq:eq5}
 \end{equation}
-
-Where, $*$ indicates the convolution operation and $\odot$ represents the element-wise multiplication.
+where $*$ indicates the convolution operation, and $\odot$ represents the Hadamard product.
 
 Recently, ConvLSTM has become very popular and is increasingly being used in more and more image processing applications.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
