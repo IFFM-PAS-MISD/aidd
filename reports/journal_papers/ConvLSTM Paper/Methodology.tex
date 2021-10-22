@@ -1,0 +1,30 @@
+\section{Methodology}
+\subsection{Dataset}
+In this work, wave frames accompanied our previously numerically generated dataset in~\cite{Ijjeh2021} was utilised to train the proposed deep learning models.  
+Essentially, the dataset resembles the velocity measurements acquired by SLDV in the transverse direction.
+The dataset contains 475 simulated cases representing delaminations with different locations, shapes, and sizes. 
+Initially, the guided waves were excited at the centre of the plate by applying equivalent piezoelectric forces.
+Further, the carrier frequency is assumed \(50\) kHz, and the modulation frequency is \(10\) kHz.
+Moreover, every single simulated case contains \(512\) frames depicting the full wavefield propagation of Lamb waves at the bottom surface of a CFRP plate representing its interaction and reflection from the delamination and boundaries.
+Figure~\ref{fig:Full_wave} shows a sample number of frames at different time-steps of the propagated Lamb waves before and after the interaction with the delamination.
+The frame \(f_{0}\) depicts the initial interactions with the delamination which was calculated using the delamination location and the velocity of \(A0\) Lamb wave mode.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{full_wavefield_updated.png}
+	\caption{Sample frames of full wave propagation.}
+	\label{fig:Full_wave}
+\end{figure}
+
+As mentioned earlier, the dataset contains \(475\) different cases, with a \(512\) frames per each case producing a total number of 243,\,200~frames, with a frame size of \((500\times500)\)~pixels.
+Thus, utilising all frames in each case has high computational and memory costs.
+
+Furthermore, the dataset was divided into two sets training and testing of a ratio \(80\%\) and \(20\% \) respectively.
+Moreover, a certain portion of the training set was preserved as a validation set to validate the model during the training process.
+Additionally, the dataset was normalised to a range of \((0, 1)\).
+To train our proposed models, two training sets were prepared and tailored to two models described in section~\ref{proposed_approach}.
+We selected \(64\) and \(24\) consecutive frames in each delamination case regarding the first and the second training sets, respectively.
+Frames displaying the propagation of guided waves before interacting with the delamination have no features to be extracted.  
+Hence, only a certain number of frames was selected from the initial occurrence of the interactions with the delamination (see Fig.~\ref{fig:Full_wave} for details).
+
+Additionally, for the second training set, we have resized the frames to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
+Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding the first and second training sets, respectively.

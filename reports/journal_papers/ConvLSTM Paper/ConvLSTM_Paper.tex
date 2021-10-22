@@ -21,6 +21,7 @@
 
 \documentclass[preprint,9pt]{elsarticle}
 
+
 %% Use the option review to obtain double line spacing
 %documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
@@ -50,9 +51,16 @@
 \usepackage{booktabs} % for nice tables
 \usepackage{csvsimple} % for csv read
 \usepackage{graphicx}
+\usepackage{natbib}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+
 %\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
 %\usepackage{breqn}
 \usepackage{multirow}
+%\usepackage{cite}
+%\usepackage[style=numeric-comp]{biblatex}
+
 % matrix command 
 \newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
 % vector command 
@@ -97,18 +105,53 @@
 		%% \cortext[cor1]{}
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
+		\title{Deep learning approach for delamination identification using animation of Lamb waves}
+
+		%% use optional labels to link authors explicitly to addresses:
+		%% \author[label1,label2]{}
+		\address[IFFM]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
+		\author{Saeed Ullah\fnref{IFFM}}
+		\author{Abdalraheem A. Ijjeh\fnref{IFFM}}
+		\author{Pawel Kudela\corref{cor1}\fnref{IFFM}}
+		\ead{pk@imp.gda.pl}
+		%\ead{pfiborek@imp.gda.pl}
+		%\author{Tomasz Wandowski \fnref{IFFM}}	
+		\cortext[cor1]{Corresponding author}
+
+\begin{abstract}
+	\input{Abstract}
+\end{abstract}
+
+\begin{keyword}
+	%% keywords here, in the form: keyword \sep keyword
+	Lamb waves \sep structural health monitoring \sep semantic segmentation\sep delamination identification \sep deep learning \sep  autoencoder \sep ConvLSTM 
+	%% PACS codes here, in the form: \PACS code \sep code
 	
+	%% MSC codes here, in the form: \MSC code \sep code
+	%% or \MSC[2008] code \sep code (2000 is the default)
+	
+\end{keyword}
 	\end{frontmatter}
-	%% main text
-\input{Introduction}
-\input{RNNS_LSTM_and_ConvLSTM}
-\input{Model_Comparison}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Introduction}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Methodology}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{RNNS_LSTM_and_ConvLSTM}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Proposed_approach}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Results_and_discussions}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\clearpage
+	\input{Conclusions}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \clearpage	
 %\appendix
-\section*{Acknowledgment}
+\section*{Acknowledgments}
 The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
+We would like to acknowledge dr Maciej Radzienski for providing the experimental data of full wavefield measured by SLDV.
 
 \bibliography{biblography}
 \bibliographystyle{unsrt}

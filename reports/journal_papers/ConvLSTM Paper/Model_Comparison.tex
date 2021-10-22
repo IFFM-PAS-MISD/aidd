@@ -19,10 +19,11 @@ The threshold value for the sigmoid function was chosen as 0.5, the reason for c
 It should also be noted that the softmax function along with categorical cross-entropy was also tried at the output layer instead of the sigmoid. 
 However, the results were almost the same as that of the sigmoid.
 Therefore, the use of softmax and the results obtained through the softmax activation function are not discussed in this research work.
+Figure~\ref{fig:model_one} shows the complete architecture of the applied ConvLSTM model.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
-		\includegraphics[width=10cm, height=13cm]{Graphics/Fully_ConvLSTM_2D.png}
+		\includegraphics[width=12cm,height=2.5cm]{Graphics/model-architecture.png}
 	\end{center}
 	\caption{Graphical representation of the applied ConvLSTM model.} 
 	\label{fig:model_one}
@@ -34,8 +35,7 @@ A regularization technique, Early stopping was employed for stopping the trainin
 The model was saved at Epoch = 196, at which the mean IoU values were noted as 0.91, 0.89 on train and validation datasets respectively.
 The model was trained with the use of Adadelta~\cite{zeiler2012adadelta} optimization technique by employing back-propagation through time (BPTT)~\cite{goodfellow2016deep}. 
 The learning rate was set to 1.0, and batch size was used as 2.
-Two GPU's each of 32 GB were utilized for training this model, and the model took about 13 hours to train. 
-Figure~\ref{fig:model_one} shows the complete architecture of the applied ConvLSTM model.
+Two GPU's each of 32 GB were utilized for training this model, and the model took about 13 hours to train.
 
 
 The model was evaluated on the test data (95 observations) and achieved a mean IoU value of 0.90 on the test data.

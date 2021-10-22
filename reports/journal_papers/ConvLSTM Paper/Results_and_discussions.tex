@@ -1,0 +1,522 @@
+\section{Results and discussions}
+In this section,  we present the evaluation of the proposed models based on numerical data of \(95\) different cases representing the frames of the full wavefield propagation. 
+The developed models and their capabilities of predicting delamination location, shape and size were tested on numerical and experimental data.  
+Three representative cases were selected from numerical dataset to show the performance of developed models. 
+Further, the generalisation capabilities were evaluated on experimental datasets.  
+Single and multiple delamination scenarios were considered.
+The \(IoU\) metric was utilised to examine the performance of the models.
+Further, the proposed deep learning models were implemented
+on Keras API~\cite{chollet2015keras} running on top of TensorFlow on a Tesla V100 GPU  from NVIDIA. 
+\subsection{Numerical cases}
+In the first numerical case, the delamination is located at the upper left corner as shown in Fig.~\ref{fig:num_GT_391} representing its ground truth (GT).
+This case is considered difficult due to edge wave reflections which have similar patterns as delamination reflection.
+The predicted outputs are shown in Fig.~\ref{fig:Convlstm_num_391}, and~\ref{fig:AE_num_391} with respect to model-\RNum{1}, and \RNum{2}, respectively.
+For the second numerical case, the delamination is located at the upper centre of the plate as shown in Fig.~\ref{fig:num_GT_462} representing the GT.
+This case is also considered difficult due to the waves reflected from the edge which have similar patterns as those reflected from the delamination.
+Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show prediction with respect to model-\RNum{1}, and \RNum{2}, respectively.
+In the third case, the delamination is located upper left corner but little farther from the edges as shown in Fig.~\ref{fig:num_GT_453} representing the GT. 
+Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted outputs with respect to model-\RNum{1}, and \RNum{2}, respectively.
+
+As can be seen in all predicted outputs, our models are able to identify the delamination with high accuracy and without any noise.
+Furthermore, the achieved mean \(IoU\) with respect to all numerical data of \(95\) cases was \((0.90)\) for model-\RNum{1}, and \((0.87)\) for model-\RNum{2}. 
+%\begin{table}[!h]
+%	\centering
+%	\caption{\(IoU\) of the numerical cases}
+%	\label{tab:numerical_cases_iou}
+%	\begin{tabular}{cccc}
+%		\hline
+%		& 1st case & 2nd case & 3rd case \\ \hline
+%		Model-\RNum{1} & \(0.86\) & \(0.89\) & \(0.98\)  \\
+%		Model-\RNum{2} & \(0.87\) & \(0.93\) & \(0.99\)  \\ \hline
+%	\end{tabular}
+%\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Numerical cases
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	\centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{numerical_GT_391.png}
+		\caption{GT image of 1st case}
+		\label{fig:num_GT_391}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{model_1_predicted_output_391.png} 
+		\caption{\(IoU\) value = 0.86}
+		\label{fig:Convlstm_num_391}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{model_2_predicted_391.png}
+		\caption{\(IoU\) value =  0.87}
+		\label{fig:AE_num_391}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{numerical_GT_462.png}
+		\caption{GT image of 2nd case}
+		\label{fig:num_GT_462}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{model_1_predicted_output_462.png}
+		\caption{\(IoU\) value = 0.89}
+		\label{fig:Convlstm_num_462}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{model_2_predicted_462.png}
+		\caption{\(IoU\) value = 0.93}
+		\label{fig:AE_num_462}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{numerical_GT_453.png}
+		\caption{GT image of 3rd case}
+		\label{fig:num_GT_453}
+	\end{subfigure}
+	\hfill	
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{model_1_predicted_output_453.png}
+		\caption{\(IoU\) value = 0.98 }
+		\label{fig:Convlstm_num_453}
+	\end{subfigure}
+	\hfill	
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{model_2_predicted_453.png}
+		\caption{\(IoU\) value = 0.99}
+		\label{fig:AE_num_453}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{Delamination cases on numerical data (Figures: (a), (e), and (h) correspond to model-\RNum{1}. 
+		Figures: (c), (f) and (i) correspond to model-\RNum{2}).}
+	\label{fig:num_case}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Experimental cases}
+In this work, we investigated our models on several experimentally acquired data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Similarly to the synthetic dataset, we applied a frequency of \(50\)~kHz to excite a signal in a transducer placed at the centre of the plate. 
+\(A0\) mode wavelength for this particular CFRP material at such frequency is about \(20\)~mm. 
+The measurements were performed by using Polytec PSV-\(400\) SLDV on the bottom surface of the plate of dimensions \(500\times500\)~mm. 
+The sampling frequency was \(512\)~kHz. 
+The measurements were conducted on a regular grid of \(333\times333\) points. 
+Next, median filter using window size of three was applied to each frame. Additionally, all frames were upscaled to \(500\times500\) points and \(512\times512\) for model-\RNum{1} and model-\RNum{2}, respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+During the testing stage of the synthetic dataset,  we fed the models with a consecutive number of identified frames (window of frames) containing the interactions of the Lamb waves with the delamination to identify it.
+However, for the experimentally acquired data, the window of frames depicting the interaction of Lamb waves with the delaminations is unknown.
+Therefore, to overcome this issue, we introduced a sliding window of frames. 
+The window sizes are \(64\) and \(24\) for model-\RNum{1} and \RNum{2}, respectively.
+Accordingly, we slide the window over all input frames (depicting the experimental data).
+The shift of the window is one frame at a time. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Single delamination}
+The first experimental case is for a CFRP specimen with single delamination created artificially by Teflon insert. 
+A plain weave fabric reinforcement was used.
+The Teflon of a square shape was inserted during specimen manufacturing so its shape and location is known.
+Figure~\ref{fig:exp_CFRP_teflon_3o_GT} shows the GT image which corresponds to the artificial delamination location, shape and size.
+The number of the full wavefield frames is \(256\) frames in this case.
+Figure~\ref{fig:model_1_CFRP_teflon_3o} shows the delamination prediction for model-\RNum{1} in which the sliding window size is \(64\) frames, and the highest \(IoU\) is \((0.53)\) achieved for group of frames \((35-99)\).
+Figure~\ref{fig:model_2_CFRP_teflon_3o} shows the predicted output of model-\RNum{2} which has as sliding window of \(24\) frames, and the highest \(IoU\) is \((0.47)\) was achieved for group of frames \((72-96)\).
+Moreover, since the window of model-\RNum{1} is larger than the window of model-\RNum{2}, it is expected that model-\RNum{1} starts to identify the delamination before model-\RNum{2}.
+
+It should be noted that for the same damage scenario, the \(IoU\) value for the models developed previously in~\cite{Ijjeh2021} was very low \((0.081)\).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Single delaminatio of Teflon inserted
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\centering
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ground_truth_0.png}
+		\caption{GT of Teflon insert}
+		\label{fig:exp_CFRP_teflon_3o_GT}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Saeed_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_predicted_output_35.png}
+		\caption{\(IoU\) = 0.53 } 
+		\label{fig:model_1_CFRP_teflon_3o}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_predicted_output_72.png}
+		\caption{\(IoU\) = 0.47}
+		\label{fig:model_2_CFRP_teflon_3o}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{Experimental case: single delamination of Teflon insert.}
+	\label{fig:exp_Teflon_insert}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In both models, the predictions were the highest for group of frames corresponding to the first interaction of the guided waves with the delamination.
+Accordingly, such frames contain the most valuable feature patterns regarding delamination. 
+Furthermore, this behaviour can be depicted in Fig.~\ref{fig:CFRP_Teflon_3o_IoU_centre_window}, which shows the \(IoU\) values with respect to the predicted outputs as we slide the window over all input frames from the starting frame till end.
+Since there are \(256\) frames of full wavefield in this damage case, there are \(192\) of windows for model-\RNum{1}, and \(232\) of windows for model-\RNum{2}.
+Furthermore, in Fig.~\ref{fig:CFRP_Teflon_3o_IoU_} we selected three places of the sliding window. 
+The first place depicted in a dark blue star shown in Fig.~\ref{fig:CFRP_teflon_3o_shapes_} represents group of frames \((72-96)\) which correspond to initial interaction of guided waves with the delamination.
+The second place depicted in pink pentagon shape shown in Fig.~\ref{fig:CFRP_teflon_3o_shapes_} represents group of frames \((129-153)\) which correspond to the guided waves reflected from the edges, in which we can notice the drop in the \(IoU\) values as these frames have less damage features.
+The third place depicted in green circle shown in Fig.~\ref{fig:CFRP_teflon_3o_shapes_} represents group of frames \((206-230)\) corresponding to the interaction of the guided waves reflected from the edges with the delamination.
+As we can see, the value of \(IoU\) increases again as the valuable features patterns regarding delamination start to appear again.
+The predicted outputs of model-\RNum{1} and model-\RNum{2} regarding the dark blue star, pink pentagon, and the green circle are shown in Fig.~\ref{fig:CFRP_Teflon_3o_predictions}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% IoU ouput values with a sliding window
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{CFRP_Teflon_3o_IoU_centre_window.png}
+		\caption{}
+		\label{fig:CFRP_Teflon_3o_IoU_}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{CFRP_teflon_3o_shapes_blue_pink_circle.png}
+		\caption{} 
+		\label{fig:CFRP_teflon_3o_shapes_}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{IoU corresponding to a sliding window of frames (Teflon insert-single delamination).}
+	\label{fig:CFRP_Teflon_3o_IoU_centre_window}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Predicted outuputs at diffirent window places
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=1]{CFRP_teflon_3o_Centre_predictions.png}
+	\caption{Predictions of models \RNum{1} and \RNum{2} at different window places (Teflon insert-single delamination).}
+	\label{fig:CFRP_Teflon_3o_predictions}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Additionally, for the experimental cases, we applied the root mean square (RMS) for all output predictions regarding all slided windows in order to show the damage map.
+Figures~\ref{fig:RMS_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_CFRP_Teflon_3o_ijjeh} show the RMS images for the experimental case of single delamination predicted by model-\RNum{1} and model-\RNum{2}, respectively.
+Additionally, to separate undamaged and damaged classes from the RMS images, we applied a binary threshold with a value \((threshold=0.5)\) as shown in Figs.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh} for model-\RNum{1} and model-\RNum{2}, respectively. 
+The threshold level was selected to limit the influence of noise, and at the same time, highlight the damage.
+The calculated \(IoU\) values for the case of single delamination are \((0.46)\) and \((0.42)\) for model-\RNum{1} and model-\RNum{2}, respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RMS predictions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{RMS_CFRP_Teflon_3o_5HC_Saeed.png}
+		\caption{RMS image of model-\RNum{1} predicted output}
+		\label{fig:RMS_CFRP_Teflon_3o_saeed}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{RMS_CFRP_Teflon_3o_5HC_ijjeh.png}
+		\caption{RMS image of model-\RNum{2} predicted output} 
+		\label{fig:RMS_CFRP_Teflon_3o_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{RMS images of predicted outputs -Teflon insert (single delamination).}
+	\label{fig:RMS_CFRP_Teflon_3o_images}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RMS THRESHOLDED IMAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_saeed_cmap_viridis_greyscale_THRESHOLDED.png}
+		\caption{Model-\RNum{1}, \(IoU\) = \(0.46\)}
+		\label{fig:RMS_threshold_CFRP_Teflon_3o_saeed}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_ijjeh_cmap_viridis_greyscale_THRESHOLDED.png}
+		\caption{Model-\RNum{2}, \(IoU\) = \(0.42\)} 
+		\label{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{Thresholded RMS images of predicted outputs -Teflon insert (single delamination).}
+	\label{fig:RMS_threshold_CFRP_Teflon_3o_images}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Multiple delaminations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the second experimental case, we investigated three specimens of carbon/epoxy laminate reinforced by 16 layers of plain weave fabric as shown in Fig.~\ref{fig:plate_delam_arrangment}. 
+The prepregs GG 205 P (fibres Toray FT 300–3K 200 tex) by G. Angeloni and epoxy resin IMP503Z‐HT by Impregnatex Compositi were used for the fabrication of the specimen in the autoclave. 
+The average thickness was \(3.9 \pm 0.1\) mm.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In Specimen~\RNum{2}, three large artificial delaminations (Teflon insert) of elliptic shape were inserted in the upper thickness quarter of the plate between the \(4^{th}\) and the \(5^{th}\) layer.
+The delaminations were located at the same distance equal to \(150\) mm from the centre of the plate.
+For Specimen~\RNum{3} delaminations were inserted in the middle thickness of the plate between \(8^{th}\) layer and \(9^{th}\) layer.
+For Specimen~\RNum{4}, three small delaminations were inserted in the middle of thickness of the plate, and thee large delaminations were inserted at the lower quarter of the thickness of the plate between the \(12^{th}\) layer and \(13^{th}\) layer.
+The details of Specimen~\RNum{2}, \RNum{3} and \RNum{4} are presented in Fig.~\ref{fig:plate_delam_arrangment}.
+
+Furthermore, the SLDV measurements were conducted from the bottom surface of the plate, accordingly, Specimen \RNum{2} is the most difficult case as the delaminations are barely visible.
+For Specimens~(\RNum{2}, \RNum{3}, and \RNum{4})  we have generated \(512\) consecutive frames representing the full wavefield measurements in the plate.
+The measurement parameters were the same as in the experiment with single delamination.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{plate_delam_arrangement_exp_MSSP2.png}
+	\caption{Experimental case of delamination arrangement.}
+	\label{fig:plate_delam_arrangment}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Since SLDV measurements were conducted from the bottom surface of the plate, the GT images and the output predictions of the proposed models are flipped horizontally (mirrored).
+Figure~\ref{fig:gt_specimen_2} shows the GT image of Specimen~\RNum{2}.
+The predicted output of model-\RNum{1} is shown in Fig.~\ref{fig:L3_S2_B_saeed} in which the highest calculated \(IoU\) value is \(0.15\) achieved for group of frames \((167-231)\).
+Figure~\ref{fig:L3_S2_B_ijjeh} shows the predicted output of model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.35\) achieved for group of frames \((68-92)\).
+
+Figure~\ref{fig:gt_specimen_3} shows the GT image of Specimen~\RNum{3}.
+The predicted output of model-\RNum{1} is shown in Fig.~\ref{fig:L3_S3_B_saeed} in which the highest calculated \(IoU\) value is \(0.18\) achieved for group of frames \((279-343)\).
+Figure~\ref{fig:L3_S3_B_ijjeh} shows the predicted output of model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.32\) achieved for group of frames \((60-84)\).
+
+Figure~\ref{fig:gt_specimen_4} shows the GT image of Specimen~\RNum{4}.
+The predicted output of model-\RNum{1} is shown in Fig.~\ref{fig:L3_S4_B_saeed} in which the highest calculated \(IoU\) value is \(0.18\) achieved for group of frames \((235-299)\).
+Figure~\ref{fig:L3_S4_B_ijjeh} shows the predicted output of model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.27\) achieved for group of frames \((68-92)\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Specimen~\RNum{2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S4_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ground_truth_0.png}
+		\caption{GT of Specimen~\RNum{2}}
+		\label{fig:gt_specimen_2}
+	\end{subfigure}
+	\hfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S2_B_333x333p_50kHz_5HC_15Vpp_x10_pzt_predicted_output_167.png}
+		\caption{\(IoU\) = \(0.15\)} 
+		\label{fig:L3_S2_B_saeed}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S2_B_333x333p_50kHz_5HC_15Vpp_x10_pzt_predicted_output_68.png}
+		\caption{\(IoU\) = \(0.35\)} 
+		\label{fig:L3_S2_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Specimen~\RNum{3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S4_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ground_truth_0.png}
+		\caption{GT of Specimen~\RNum{3}}
+		\label{fig:gt_specimen_3}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_predicted_output_279.png}
+		\caption{\(IoU\) = \(0.18\)} 
+		\label{fig:L3_S3_B_saeed}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_predicted_output_60.png}
+		\caption{\(IoU\) = \(0.32\)} 
+		\label{fig:L3_S3_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Specimen~\RNum{4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S4_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ground_truth_0.png}
+		\caption{GT of Specimen~\RNum{4}}
+		\label{fig:gt_specimen_4}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S4_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_predicted_output_235.png}
+		\caption{\(IoU\) = \(0.18\)}  
+		\label{fig:L3_S4_B_saeed}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{L3_S2_B_333x333p_50kHz_5HC_15Vpp_x10_pzt_predicted_output_68.png}
+		\caption{\(IoU\) = \(0.27\)} 
+		\label{fig:L3_S4_B_ijjeh}
+	\end{subfigure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\caption{Experimental cases of Specimen (\RNum{2}-\RNum{4}).}
+\label{fig:exp_case}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+It is worth to mention, that we tested FCN-DenseNet which we developed previously~\cite{Ijjeh2021} for data related to specimens II-IV. 
+However, poor results were obtained. 
+This is attributed to the fact that RMS images are fed to FCN-DenseNet which carry limited amount of damage related information. 
+On the other hand, currently proposed methods utilise full wavefield frames which carry more damage-reach features. 
+
+Moreover, in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window}, we presented the calculated \(IoU\) values corresponding to predicted outputs of model-\RNum{1} and \RNum{2} regarding Specimen~\RNum{4} as we slide the window of size~\(64\) and \(24\) frames, respectively, over the \(512\) full wavefield frames.
+Both models start to identify the delaminations after the propagated guided waves interact with the delamination.
+
+The red square depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} corresponds to \(IoU\) value calculated for group of frames before the interactions with delaminations (see first, middle and last frame in the group).
+This behaviour is expected since the models were trained on those frames depicting the beginning of the interactions, as a result, the valuable features patterns start to appear.
+
+The light blue star depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} refers to a window of frames regarding the initial interactions of propagated guided with the delaminations and before reflecting from the edges.
+As a result, valuable features patterns regarding the damage start to appear.
+
+The pink pentagon shape depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} refers to a window of frames that pass the initial interaction with the delaminations, additionally, it shows the reflections of the guided waves from the edges just before interacting with the delaminations again.
+As can be seen, the calculated \(IoU\) values drop drastically as expected as there are no valuable damage features to be extracted. 
+
+The blue rectangle depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} represents a window of \((64)\) frames regarding model-\RNum{1}.
+It depicts the interactions of the reflected guided waves from the edges and their interaction with the delaminations, hence, model-\RNum{1} are able to identify the delaminations as it has a larger window.
+
+The green circle depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} represents a window of \((24)\) frames regarding model-\RNum{2}.
+Although this window shows complex patterns of waves reflections, the model can extract the valuable damage features and identify the delaminations accordingly.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window.png}
+		\caption{}
+		\label{fig:L3_S4_B_333x333p_50kHz_5HC_IoU}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{L3_S4_B_333x333p_50kHz_5HC_shapes_.png}
+		\caption{} 
+		\label{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{IoU corresponding to a sliding window of frames (Specimen~\RNum{4}).}
+	\label{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:L3_S4_B_5HC_predictions} shows the predicted outputs of model-\RNum{1} and model-\RNum{2} corresponding to the group of frames with respect to the red square, light blue star, pink pentagon, blue rectangle, and the green circle. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=1]{L3_S4_B_predictions_different_windows.png}
+	\caption{Predictions of models \RNum{1} and \RNum{2} at different window places (Specimen~\RNum{4}).}
+	\label{fig:L3_S4_B_5HC_predictions}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The RMS images depicting the damage maps of Specimen~\RNum{4} are presented in Figs.~\ref{fig:RMS_L3_S4_B_saeed} and~\ref{fig:RMS_L3_S4_B_ijjeh} regarding model-\RNum{1} and model-\RNum{2}, respectively.
+Figure~\ref{fig:RMS_threshold_L3_S4_B_saeed} shows the thresholded RMS image for model-\RNum{1}, and the calculated value of \(IoU\) is \((0.07)\).
+Figure~\ref{fig:RMS_threshold_L3_S4_B_ijjeh}  shows the thresholded RMS image for model-\RNum{2}, and the calculated \(IoU\) is \((0.23)\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RMS predictions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.49\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{RMS_L3_S4_B_saeed.png}
+		\caption{RMS image of model-\RNum{1} predicted output}
+		\label{fig:RMS_L3_S4_B_saeed}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.49\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{RMS_L3_S4_B_ijjeh.png}
+		\caption{RMS image of model-\RNum{2} predicted output} 
+		\label{fig:RMS_L3_S4_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{RMS images of predicted outputs - Specimen~\RNum{4}.}
+	\label{fig:RMS_L3_S4_B__images}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RMS THERSHOLDED predictions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.49\textwidth}
+		\centering
+		\includegraphics[scale=1]{RMS_L3_S4_B_333x333p_50kHz_5HC_saeed_cmap_viridis_greyscale_THRESHOLDED.png}
+		\caption{Model-\RNum{1}, \(IoU\) = \(0.07\)}
+		\label{fig:RMS_threshold_L3_S4_B_saeed}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.49\textwidth}
+		\centering
+		\includegraphics[scale=1]{RMS_L3_S4_B_333x333p_50kHz_5HC_ijjeh_cmap_viridis_greyscale_THRESHOLDED.png}
+		\caption{Model-\RNum{2}, \(IoU\) = \(0.23\)} 
+		\label{fig:RMS_threshold_L3_S4_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{Thresholded RMS images of predicted outputs - Specimen~\RNum{4}.}
+	\label{fig:RMS_threshold_L3_S4_B__images}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
