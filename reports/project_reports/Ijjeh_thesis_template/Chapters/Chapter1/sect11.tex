@@ -1,0 +1,47 @@
+\section{Problem Definition}
+\label{sec11}
+Carbon fibre reinforced plastics (CFRP) composite materials have a wide range of applications in different industries due to their characteristics such as high strength, low density, resistance to fatigue and corrosion.
+However, composite structures are exposed to different types of operating conditions during their service life such as temperature variations and cyclic loading which ultimately result in initiating damage. 
+However, composite structures are subject to several operating conditions (such as temperature variations and cyclic loading) during their service life, which eventually can initiate fatigue damage in the composite structures.
+Furthermore, damage mechanisms in composite structures is more complex than that in conventional structures due to the multi-layer property and general anisotropy~\cite{Wu2021}. 
+
+One of the main damage types that developed in composite structures is the inter-laminar delamination.
+Delamination is developed from matrix micro-cracks in a nonlinear manner with the application of cyclic loading~\cite{Reifsnider1983, Wu2021}, which can alter the compression strength of composite laminates and gradually affect the composite structure to encounter failure by buckling, thus, it can seriously decrease the performance of composite structures.
+Consequently, delamination identification in its early stages can significantly help to avoid catastrophic structural collapses.
+
+Various approaches of non-destructive evaluation (NDE) and structural health monitoring (SHM) have been utilised for damage detection in composite structures. 
+Further, such approaches can be divided into two categories: model-based approaches and data-driven approaches.
+
+The model-based approaches for SHM aim to reflect the process of damage development in composite materials by implementing a physics-based numerical model and introduces necessary variables to adjust the model to fit the actual application scenario ~\cite{Wu2021}. 
+However, model-based approaches have practical shortcomings that restrict their suitability to simple structures under well-controlled environments.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Need to be written in my own words
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%A lot of research has been conducted in materials properties identification mainly using vibration-based methods and Ultrasonic Guided Wave (UGW) based methods [1]. 
+%The vibration-based technique is global in nature and is sensitive to boundary conditions which make it difficult for its application in in-situ health monitoring [2]. 
+%Meanwhile the UGW’s are highly sensitive to lamina properties that has enabled researchers to use them in various non-destructive evaluations (NDE) and structural health monitoring (SHM) tasks [3][4][5]. 
+%
+%However, guided waves are multi-modal waves and using them for material properties identification often includes a great deal of signal processing expertise.
+%
+%However,extracting robust damage indicators from the measured UGW signals is extremely challenging because of its complex UGW propagation characteristics (e.g., dispersion, multi-mode, and mode conversion), which is further exacerbated in composite structures.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+On the other hand, the data-driven approaches for SHM utilise registered data from the structure under different structural states and perform an analysis using data analysis methods.
+Data-driven approaches that utilise artificial intelligence methods such as deep learning are getting more popular due to the recent advancements in sensing technology.
+Hence, the deep learning-based approach revealed new dimensions for resolving problems and offered the opportunity for being implemented and integrated with the NDE and further with SHM approaches. Consequently, applying deep learning techniques can handle issues regarding data preprocessing and feature extraction.
+Nowadays, end-to-end approaches are developed, in which the whole unprocessed data are fed into the model.
+Hence, the model will learn by itself to recognise the patterns and detect the damage.
+%Accordingly, deep learning (DL) techniques employed for damage detection and localisation are able to handle large data registered in a complex real-world structures.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- Need to be written in my own words
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%Recently, data-driven approaches using machine learning (ML) algorithms and statistical models have been developed for SHM due to their robust information fusion and pattern analysis capabilities [19–22]. 
+%These capabilities can be leveraged for analyzing and extracting damage sensitive features for effective damage detection and classification [23–30]. 
+
+%Larrosa et al., [26] proposed a damage diagnosis framework using ultrasonic Lamb waves and Gaussian discriminant analysis (GDA) to classify fatigue damage modes that developed in a CFRP plate structure with increasing fatigue cycles. Damage sensitive features, such as time-of-flight (ToF), amplitude, energy, and PSD, were extracted from the first arrival wave packet, and the patterns in the features were analyzed using a trained GDA model to classify matrix cracking and delamination. 
+%The results were validated using X-ray images, showing accurate damage classification capabilities. 
+%Fendzi et al., [27] developed a Lamb wave-based SHM framework integrated with a Bayesian approach to localize damage in CFRP composite structures. 
+%The Bayesian inference was used to quantify experimental uncertainties in the angle dependent group velocity estimation while demonstrating good damage localization capabilities in both CFRP composite plate and
+%sandwich panel. 
+%
+%Even though there are many data-driven SHM methodologies available in the literature, the diagnostic capabilities of these techniques may be limited due to the extensive process of manual or signal processing-based damage feature extraction that may not be applicable.

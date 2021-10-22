@@ -1,0 +1,87 @@
+%% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
+\section[Damage identification]{Damage detection and localisation using guided waves}
+\label{sec13}
+
+A damage can be defined as changes occurred in a system, either deliberately or accidentally, that adversely alter the current or future performance of the system~\cite{Farrar2012}. 
+Generally, Guided-Wave based SHM systems can be built upon processing of signals registered by different types of sensors such as PZTs, optical fibre sensors (e.g. FBG), in addition to Scanning Laser Doppler Vibrometry (SLDV) which currently is considered as Non-Destructive Test (NDT) tool.
+\paragraph{Piezoelectric transducers} are utilised in SHM systems for exciting the structure and sensing the reflected signals. 
+Based on the arrangement of PZTs, two main approaches are available: \emph{pulse-echo} and \emph{pitch-catch} as presented in Fig. \ref{fig:Pulse_echo_Pitch_catch}.
+In \emph{pulse-echo}, it is possible to have a group of PZTs located closely, which can excited to generate Lamb waves. 
+The reflected waves from the damage are registered at the same or another PZT, this method relies on the reflection from the damage. 
+While in the \emph{pitch-catch} approach, generated Lamb waves by PZT(s) are transferred through the damage and registered at PZT(s).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+	\begin{center}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_1/Pulse_echo_Pitch_catch.png}
+	\end{center}
+	\caption{(a) Pulse echo	(b) Pitch catch} 
+	\label{fig:Pulse_echo_Pitch_catch}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+PZT transducers configurations for damage detection and localisation for SHM generally are classified into two main arrangements which are \emph{concentrated} and \emph{distributed} arrangement. 
+Hence, a lot of work was performed in the literature utilising PZT configurations for generating and sensing  Lamb waves.
+
+The following research articles are examples in which the authors used the \emph{concentrated} transducers arrangement.
+\textcite{Giurgiutiu2006} implemented PZT wafer active sensor (PWAS) in phased array to investigate Lamb waves in plates.
+The results which he obtained were encouraging regarding the location of the damage and its size.
+Additionally,~\textcite{Wilcox2003}, investigated omni-directional wave transducer arrays for the rapid inspection of large areas of plate structures. 
+In this work, two arrangements of PZTs were examined. 
+The first one consists of a densely circular area with PZTs in which it presented an excellent concentrated peak at the location of the reflector, though it requires plenty of transducers. 
+The other arrangement consists of a single circular ring of PZTs which is quite efficient in any circumstance that involves various reflectors.
+Moreover,~\textcite{Malinowski2009} performed a numerical analysis on an array of PZTs of a star shape for various damage scenarios. Their method confirmed a good damage localisation.
+
+Furthermore, the \emph{distributed} arrangement was implemented in many research articles. 
+In this arrangement, PZT transducers are spread on the entire area which is inspected.
+\textcite{Schubert2008} tested different types of the above-mentioned arrangements. 
+Moreover,~\textcite{Qiang2009} used a rectangular network of transducers
+on a composite material, whereas a triangular network of transducers was examined in~\cite{Wandowski2009} for an isotropic specimen.
+
+It can be concluded from previous works that using these approaches for damage detection and localization is only suitable for simple structures. 
+Furthermore, the estimation of damage size is very challenging.
+It is because of limited information extracted from the registered signals at discrete PZT locations. 
+These challenges arise due to various limitations e.g. the added mass and attached cables to the structure alter the propagating waves. 
+Additionally, it is difficult to distinguish the registered signals among different objects e.g. bolts and rivets, the edges, and the actual damage. Another challenge is induced by the temperature which affects the propagating waves. 
+Therefore, it becomes important to compensate for this issue~\cite{Marzani1999}.
+Moreover, Processing a large set of data which leads to damage influence maps of resolution impossible to obtain by using PZT arrays.
+Consequently, to overcome these limitations, a full wavefield measurement approach was introduced. 
+As a result of utilising a full wavefield, a damage influence map is produced, which makes it possible to estimate the size of the damage~\cite{Ostachowicz2014}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Fibre Bragg Gratings (FBG)} are a sort of regular quasi-distributed fibre optic sensors (FOSs) in real-time monitoring~\cite{Cai2012}.  
+FBG sensors are commonly adopted for their individual advantages such as lightweight, small size, high stability, corrosion and electromagnetic interference resistance. 
+Furthermore, FBG sensors are resistant to fluctuations in power supply and are easily embedded in different materials such as composite materials~\cite{Jang2012}. 
+Applying multiplexing techniques such as wavelength division multiplexing or time-division multiplexing, a quasi-distributed sensor network can synchronously identify multi-point monitoring of the strain and temperature inside the material, accordingly, enhancing the sensitivity and performance of composite SHM~\cite{Jang2012}.
+
+FBGs have been utilised for composite materials since 1970s~\cite{othonos1999fiber}, furthermore, FBGs have been fully developed in SHM. 
+Due to its unique advantages and diversity, FBGs have been broadly used in advanced spacecraft, aircraft, navigation and medical applications. 
+Nowadays, FBGs are used to perform real-time monitoring performance of several defects of composite materials~\cite{rezayat2016reconstruction}.
+FBG sensor arrays approach is applied to monitor structural damage in large-scale structures~\cite{Wee2017}.
+
+One of the basic approaches for monitoring the damage is by exciting Lamb waves that propagate through the structure, which are then detected by the FBG sensor array. 
+Due to their multiplexing abilities, the FBG sensor arrays can monitor areas with a large surface. 
+Nonetheless, the main disadvantages of FBG sensor arrays are their high price and their low sensitivity to the surface waves as compared to PZTs and their high price. 
+Various approaches exist to enhance this sensitivity, from modifying the spectral output of the FBG sensors to adjusting the sensor coating, to making resonance conditions on the FBG sensor~\cite{Wee2017}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Scanning Laser Doppler Vibrometer (SLDV)} was developed and presented in experimental research in the earlies of 1980s. 
+SLDV employs Doppler frequency shift principle to measure the velocity of a moving object in which the amount of the shifted frequency depends on the velocity of the moving object~\cite{Stanbridge1999}. 
+SLDV links computer-controlled XY scanning mirror with a camera inside the optical head, which densely scans the vibrating surface of the structure and get a large number of high-resolution measurements~\cite{Helfrick2011}. 
+Essentially, the grid of points resembles a dense array of PZTs. 
+Application of such a dense array of PZTs would be otherwise impractical.  
+Hence, SLDV is employed for full wavefield measurements instead of PZT arrays. 
+Consequently, vibrations of a structure can be measured accurately and the propagation of guided waves also can be registered accurately~\cite{Ostachowicz2014}.
+However, in many situations, it is necessary to obtain information about the vibrations of the measured object in three dimensions. 
+In such situations, a 3D vibrometer is used which holds three 1D scanning vibrometer heads in addition to the data acquisition system and a control system.
+A 3D vibrometer measures a location with three independent beams that hit the target from three different directions, which yields a measurement of the complete in-plane and out-of-plane velocity of the target.
+SLDV has been broadly used for sensing of Lamb wave. 
+There are several works in the literature that are concentrated on imaging method for damage detection by using the signals sensed at a grid of points and recorded by SLDV.
+For instance, authors in~\cite{Yu2013} applied a frequency wavenumber domain analysis utilising a 2D Fourier transform to detect a crack in an aluminium plate. 
+The method of wavenumber frequency filtering of SLDV data was applied for damage imaging in~\cite{Ruzzene2007}. 
+Authors in~\cite{Kudela2015} introduced a new method of imaging crack growth in a structure.
+In the proposed method, they employed a full wavefield data captured by SLDV.
+Also, authors in~\cite{Harb2015} utilized SLDV based measurement for inferring  the dispersion curves for \(A0\) Lamb wave mode. 
+Moreover, SLDV has been used to scan and capture Lamb waves in honeycomb core sandwich structure to detect damage influence in~\cite{Lamboul2013}.
+
+Despite all the advantages of utilising SLDV, there are some disadvantages. 
+The first drawback concerns the surface of the specimen which must be smooth and characterised by a proper reflectivity, otherwise, the captured signal to noise ratio will be decreased~\cite{Ostachowicz2014}. 
+Furthermore, experimenting using  SLDV requires much time since the SLDV performs measurements at a single point in space at a time.
+Due to registering a full wavefield of Lamb waves, the process of measurements must be repeated by keeping the same excitation and pause until the wave completely attenuates~\cite{Ostachowicz2014}.

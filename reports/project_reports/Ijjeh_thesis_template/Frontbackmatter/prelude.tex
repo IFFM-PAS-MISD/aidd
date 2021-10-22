@@ -1,0 +1,61 @@
+% prelude.tex (specification of which features in `mathphdthesis.sty' you
+% are using, your personal information, and your title & abstract)
+
+% Specify features of `mathphdthesis.sty' you want to use:
+\titlepgtrue 												% Main title page (required)
+\signaturepagetrue 											% Page for declaration of originality (required)
+\copyrighttrue 												% Copyright page (required)
+\abswithesistrue 											% Abstract to be bound with thesis (optional)
+\acktrue 													% Acknowledgments page (optional)
+\tablecontentstrue 											% Table of contents page (required)
+\tablespagetrue 											% Table of contents page for tables (required only if you have tables)
+\figurespagetrue 											% Table of contents page for figures (required only if you have figures)
+
+% Title, author, supervisors, university, date of submission
+\title{Feasibility study of artificial intelligence approach for delamination identification in composite laminates}							% Thesis title
+\author{Abdalraheem A. Ijjeh} 	% First name and surname of candidate (e.g. John Doe)
+\prevdegrees{M.Sc. Eng.}              			% Specify your previous degrees (e.g. B.E. (Hons))
+\institute{Mechanics of Intelligent Structures Department}								% Institute of department (e.g. National Centre for Maritime Engineering and Hydrodynamics)
+
+\submittedfor{A dissertation submitted to the Scientific Board of the Szewalski Institute of Fluid-Flow Machinery, Polish Academy of Sciences in partial fulfillment of the requirements for the Degree of Doctor of Philosophy}			% Degree thesis is submitted for (e.g. Submitted in fulfillment of the requirements for the Degree of Doctor of Philosophy)
+\advisor{ Pawe\l{} Kudela, D.Sc. Ph.D. Eng.} % Supervisors: (e.g. Prof. Lawrence K. Forbes)
+\dept{The Szewalski Institute of Fluid-Flow Machinery, Polish Academy of Sciences}
+\date						% Month & year of your thesis submission (e.g. January, 2016)
+
+% Abstract to be bound with thesis
+\newcommand{\abstextwithesis}
+{
+%Basic abstract goes here. Can use paragraphs and normal \LaTeX commands.
+...
+}
+
+% Acknowledgments page
+\newcommand{\acknowledgement}
+{
+}
+
+% Engineering guote page
+\newcommand{\engineeringquote}
+{
+\null\vskip1.8in
+\begin{quote}
+\begin{flushright}
+\end{flushright}
+\end{quote}
+}
+
+% Bibliography Title
+\renewcommand{\bibname}{References/Bibliography}
+% Bibliography spacing
+\setlength\bibitemsep{1.5\itemsep}
+
+% Settings for array package
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% Take care of things in `mathphdthesis.sty' behind the scenes.
+% Basically just does a check of all the fields that have been activated
+% above and fills out the appropriate pages and adds them to the thesis.
+\beforepreface
+\afterpreface

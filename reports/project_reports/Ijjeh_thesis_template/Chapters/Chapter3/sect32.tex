@@ -1,0 +1,298 @@
+\section{Deep Learning approach}
+\label{sec32}
+
+Deep Learning (DL) is a subfield of Machine Learning.
+DL emerged as a solution to the feature engineering extraction issue which requires high expertise and skills to extract damage-sensitive features for specific SHM applications.
+DL is a representation learning that automatically distinguishes  the proper data representations required for models like classification and detection.
+
+It can be said that DL techniques developed rapidly in recent years due to the huge development that occurred in the computational powers (e.g. central processing units (CPU), graphical processing units (GPU), etc.), in addition to the availability of big data, and the development of new learning algorithms~\cite{Yuan2020}.
+Consequently, DL-based SHM methods have been utilized to overcome issues related to ML-based SHM.
+  
+Originally, DL was inspired by the human brain method of learning. 
+In which it has a huge number of neurons that are densely connected to form a hierarchical structure that is capable of receiving data at the visual cortex which can identify distinct shapes of edges of an object.
+Then, these learned patterns  are shifted down to the brain area which is capable to detect more complex patterns. 
+
+DL is a hierarchical learning~\cite{Ongsulee2018}, in which
+data representations is acquired from the raw input data using non-linear function~\cite{Lecun2015}. 
+At shallow levels, the acquired representation data has simple learnable extracted features, those extracted features keep shifting into more complex learnable features as moving into deeper levels.
+
+\subsection{Multilayer Perceptrons}
+
+The simplest DL networks are called multilayer perceptron (MLP) that are constructed from a group of multiple layers of perceptrons (artificial neurons), hence, the term "deep" came from the multiple layers.
+A perceptron has several inputs and outputs that are weighted connections with a nonlinear activation function.
+By performing this operation a non-linearity is injected to the network, which is important for the learning process.
+Therefore, if the non-linearity was not considered, no matter how many layers there are  in the network, it would act like a single-layer neuron. 
+Simply, because by just linearly adding these layers it will produce another linear output, consequently, the neuron can not update its weights therefore, no learning happens. Artificial neuron structure is presented in Fig.~\ref{fig:artificial Neuron}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\begin{center}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_1/artificial_neuron.png}
+	\end{center}
+	\caption{Structure of Perceptron} 
+	\label{fig:artificial Neuron}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	Relu(z) = 
+	\begin{cases}
+		0,  \text{  if}\ z<0\\
+		z,  \text{  otherwise}
+	\end{cases}
+	\label{Eq:relu}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	\sigma(z) = \frac{1}{1+e^{-z}}
+	\label{sigmoid}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	\tanh(z)=  \frac{e^z-e^{-z}}{e^z+e^{-z}}
+	\label{tanh}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	z= \sum_{i=0}^{n}  w_i\times x_i +b
+	\label{z}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Supervised learning is the traditional approach for learning in which a neural network builds its knowledge from the given labelled dataset, where the ground truth output is known previously~\cite{Lecun2015}.
+
+\subsubsection{Optimization and Deep Learning}
+MLP models learn to find the desired output by updating the network parameters such as weights and biases.
+Accordingly, a model does a comparison between the calculated output (predicted) and the ground truth output (target).
+For this purpose, an objective function (cost function) is applied to estimate the loss (error) between the predicted output and the target.
+Accordingly, this process needs to be optimized to minimize the estimated value of the loss.
+A well-know optimization algorithm utilised in DL is the gradient descent (GD)~\cite{Lecun2015}.
+Fig.~\ref{fig:GD} illustrates the concept of GD in one dimension, in which weights \(\{w_0,w_1,...,w_n\}\) are initially assigned randomly.
+GD aims to reduce the cost function \(J(w)\) at each step to reach the \(J_{min}(w)\) (global minimum) by calculating the gradient which represent the slope of the cost function.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+	\begin{center}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_3/Gradient_decent.png}
+	\end{center}
+	\caption{The process of Gradient Descent} 
+	\label{fig:GD}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Accordingly, the weights are modified as shown in Eqn.~\ref{weight_updates} where the partial derivative \(\frac{\partial J(w)}{\partial w_i}\) is the gradient, and \(\alpha \) is the learning rate which is the amount that the weights are updated during the learning process~\cite{Russell2010}.
+Therefore, learning rate monitors the rate at which the neural network learns.
+Hence, small learning rates require more training time because of the small changes made to the weights when updated, whereas large learning rates result in accelerated changes, consequently, require less training time.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	w_{i+1}= w_{i} -\alpha \frac{\partial J(w)}{\partial w_i} 
+	\label{weight_updates}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The backpropagation algorithm is the most widely used learning algorithm for neural networks, in which it back propagates the calculated gradients across all the perceptrons.
+Accordingly, all weights and biases are updated, which leads to minimizing the loss value.
+\subsubsection{Optimization Challenges in Deep Learning}
+The optimization algorithm in DL aims to reach the global minimum value of the cost function \(J(w)\).
+However, some challenges during the training process may occur.
+The most tricky challenges are the local minima, saddle points, vanishing gradients, and exploding gradients.
+
+The local minima occurs during training when the optimization algorithm ends up with a value of the cost function \(J(w)\) that is the smaller than values of \(J(w)\) at any other points in the local neighbourhood of \(w\).
+Figure~\ref{fig:local_minima} shows that during the optimization process it is possible to end up in a local minima.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+	\begin{center}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_3/local_minima.png}
+	\end{center}
+	\caption{Local minima} 
+	\label{fig:local_minima}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Moreover, a saddle point is any location where all gradients of a cost function vanish but which is neither a global nor a local minima as shown if Fig.\ref{fig:saddle_point}.
+
+The vanishing gradients is the most encountered problem during optimization process as the gradients become too small causing the learning process stuck for a long time  before it makes any progress or to stop at all~\cite{Brownlee2017a}.
+Whereas, the exploding gradients problem occurs when the gradients become so large that leads to numerical overflow and results in \say{NaN} values~\cite{Brownlee2017a}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+	\begin{center}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_3/saddle_point.png}
+	\end{center}
+	\caption{Saddle point} 
+	\label{fig:saddle_point}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Convolutional Neural Network} 
+Convolutional Neural Networks (CNNs) are a special type of artificial neural network (ANN) that were initially developed in 1980s by ~\textcite{Fukushima1980} who was inspired by the discoveries of Hubel and Wiesel regarding the cat's visual cortex. 
+CNNs are one of the most utilised architectures in DL for image processing as they can recognise complex patterns of images by performing convolution operations.
+
+In mathematics, a convolution is an operation performed between any two functions, as for example \(f, g:\mathbb{R}^{d} \to \mathbb{R}\) to produce at third function \((f\ast g)\) depicted in Eqn.~\ref{eqn:convolution}.
+In which, we measure the overlap between \(f\) and \(g\), as one function is flipped and shifted by \(x\).
+\begin{equation}
+	(f\ast g)(x) = \int_{}^{} f(z).g(x-z)dz
+	\label{eqn:convolution}
+\end{equation}
+In the case of discrete objects defined on the set \(\mathbb{Z}\) of integers, the integral operation turns into a summation,  as depicted in Eqn.~\ref{eqn:discrete_conv}
+\begin{equation}		
+	(f\ast g)(x) = \sum_{a}^{} f(a)g(i-a)
+	\label{eqn:discrete_conv}
+\end{equation}
+For inputs with two dimensions, we have a corresponding sum with indices \((a,b)\) for \(f\) and \((i-a, j-b)\) for \(y\) respectively as depicted in Eqn.~\ref{eqn:2d_conv} and that describes a cross correlation operation.
+\begin{equation}
+	(f\ast g)(i,j) = \sum_{a}^{}\sum_{b}^{}f(a,b)g(i-a,j-b)
+	\label{eqn:2d_conv}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%% from here
+Convolution operation for image processing is essentially a cross-correlation operation also known as a sliding dot product or sliding inner-product. 
+%%%%%%%%%%%%%%%%%%%% 
+CNNs was designed to process data as tensors with different dimensions. 
+For a 1D data tensor, it can represent various data forms, such as signals and sequences, in addition to languages.
+For a 2D data tensor, it can represent an image in grey scale (one channel),
+moreover, by combining three 2D tensors a coloured 3D image is produced due to different intensities of the pixels in the (RGB) channels.
+A 4D tensors represents volumetric data, such as a sequence of 3D images  or a video.
+
+%Commonly, a CNN consists of three main parts: convolutional layers, downsampling layers, and dense layers.
+A convolutional layer, has a number \( n\) of convolution kernels (filters), in  which,  each kernel has a set of weights, of a size \((w_k,h_k,d_k)\).
+The kernel slides over an input image of a size \((w,h,d)\) performing a convolution operation (dot product), where \(w\) and \(h\) represent the image width and height, respectively, while \(d\) represents the depth (number of channels).
+The output of the convolution operation are feature maps, moreover, each feature map is locally connected to the previous layer. 
+Figure~\ref{fig:convolution_3d} illustrates the convolution operation for a 3D input and the calculated output (feature map) with a new shape of \((h_{n}\times w_{n} \times d_{n})\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\begin{center}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_3/convolution_operation_3D.png}
+	\end{center}
+	\caption{Convolution operation with a sliding kernel.} 
+	\label{fig:convolution_3d}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Typically, the feature map size is diminished due to the convolution operation, however, the feature map can keep the same size of the input by applying some padding over the input. 
+Equations~\ref{new_hight} and~\ref{new_width} illustrates the calculations of new height and width of the output, where \(h_{n}\) and \(w_{n}\) are the new height and width dimensions of the feature map respectively after applying the convolution. 
+The padding \(p\) which is added to the input image of a feature map to guarantee that both the input and the output have the same dimensions, \(h_{k}\) and \(w_{k}\) are the height and the width of the convolutional kernel, respectively.
+The stride \(s\) defines how much the convolutional kernel slides each step during convolution.
+The number channels at the output feature map \((d_{n})\) equals to the applied number of convolutional kernels \((n)\). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	h_{n} = \frac{h+2\times p-h_{k}}{s}+1  
+	\label{new_hight}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	w_{n} = \frac{w+2\times p-w_{k}}{s}+1
+	\label{new_width}
+\end{equation}
+Typically,  while training a CNN model, the kernel weights are initialised randomly.
+Accordingly, during the backpropagation process, all learnable parameters (kernels weights and biases) are updated.
+Consequently, kernels learn to detect different of types of edges (vertical, horizontal, and diagonal edges), color intensities, etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Commonly, a convolutional operation is followed by a non-linear activation function such as (relu, sigmoid, tanh), followed by a downsampling operation (pooling). 
+The idea behind pooling operation is to aggregate related features into one by reducing the spatial dimensions of the feature maps(e.g., width, height, and depth)~\cite{Lecun2015}, which reduces the computation complexity.
+Figure~\ref{fig:downsampling} presents common downsampling operations, which are Max and average pooling, further, the pool size is \(2 \times 2\) with strides of \(2\).
+The Maxpool picks the maximum value in the local pool filter in a feature map, whereas the average pool picks the average value in the local pool filter in a feature map.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\begin{center}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_3/downsampling.png}
+	\end{center}
+	\caption{Types of downsampling operations} 
+	\label{fig:downsampling}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A convolution operation, followed by a non-linear activation function, and pooling is referred to as a convolutional block.
+Moreover, a convolutional block can be stacked and repeated several times. 
+Finally, to pass the output from the convolutional block to the dense layer, a flattened layer is utilised to produce a 1D tensor.
+Figure~\ref{fig:CNN} presents the default architecture of a CNN.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\begin{center}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_3/cnn.png}
+	\end{center}
+	\caption{Convolutional Neural Network architecture} 
+	\label{fig:CNN}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+CNNs became popular after the competition of the Large Scale Visual Recognition Challenge 2012 (ILSVRC2012). 
+When \textcite{Krizhevsky2012} introduced AlexNet~\cite{Krizhevsky2012}, which is a deep CNN applied on a large dataset of \(1,000,000\) images and \(1,000\) different classes.
+AlexNet results were magnificent. 
+The success has stimulated the progress of the development in GPUs technology and the use of the non-linear activation function Relu~\cite{Lecun2015}.
+In next years, several spectacular CNNs architectures were presented (e.g VGG-16, ResNet, Inception-v4 and others).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Recurrent neural networks}
+\label{sec222}
+Recurrent neural network (RNN) is a DL model that handles time-series data (sequential data).
+Moreover, the RNN technique can remember its data input, because of its internal memory which makes it a powerful and promising technique in the field of DL.
+Since there are temporal problems such as natural language processing, language translation, image captioning and so on, they require to be handled sequentially.
+In the traditional deep neural networks (feed-forward) it is assumed that there is no correlation between the inputs and the outputs, while this assumption is not true for the RNN technique, that means the output of the RNN depends on the prior input sequence.
+The future events can also be used in predicting the output of a given sequence.
+Figure~\ref{fig:rnn_vs_FFNN} depicts the difference between RNN and feed-forward deep neural networks.
+As shown in the Fig.~\ref{fig:rrn}, for the RNN, the output of a certain layer is looped back to its input which helps in making the prediction.
+However, in feed-forward networks shown in Fig.~\ref{fig:FFNN} the inputs and outputs are independent, as there is only one direction for the data to move.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{0.49\textwidth}		
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_3/recurrent_NN.png}
+		\caption{} 
+		\label{fig:rrn}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_3/feedforward_NN.png}
+		\caption{} 
+		\label{fig:FFNN}
+	\end{subfigure}	
+	\caption{(a) RNN v.s. (b) Feed-forward neural network}
+	\label{fig:rnn_vs_FFNN}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{unrolled_rnn} shows the visualisation of an unrolled RNN, where \(x_{t}\) corresponds to the sequential timestamped input at time \(t\), \(h_{t}\) corresponds to internal state  and \(Y_{t}\) corresponds to the predicted timestamped output at time \(t\).
+Additionally, the figure shows that an unrolled RNN can be seen as a cascaded sequence of feed-forward networks.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=1]{Figures/Chapter_2/unrolled_rnn.png}
+	\end{center}
+	\captionof{figure}{Unrolled RNN.}
+	\label{unrolled_rnn}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the feed-forward neural networks, as mentioned earlier, the learnable parameters (adjustable weights) are available only for the forward path of data propagation that are updated through back-propagation algorithm.
+However, for RNN, since there are two paths of data propagation (forward and backward) there are learnable weights for both directions.
+In RNN technique, weights are updated using back-propagation through time (BBTT)~\cite{Werbos1990}.
+Essentially, BBTT performs back-propagation algorithm on unrolled RNN and since BBTT depends on the number of timestamps this could be computationally expensive when there are a high number of timestamps.
+
+A gradient measures the change in all weights regarding the change in error (the difference between the actual predicted output and the ground truth).
+As a result, when implementing RNNs, two issues may arise during updating the learnable weights using BBTT which are vanishing and exploding gradients.
+To solve such issues, a long short-term memory (LSTM) was introduced~\cite{Hochreiter1997} which is an memory extension for regular RNN.
+LSTM addresses the problem of long-term dependencies.
+
+LSTM is composed of four units: an input gate, a cell state, a forget gate, and a output gate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=1]{Figures/Chapter_2/lstm.png}
+	\end{center}
+	\captionof{figure}{LSTM architecture.}
+	\label{lstm}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The purpose of the forget gate is to figure out which information needs to be considered and which needs to be neglected.
+The current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a sigmoid function which will produce values between \(0\) and \(1\) then the outputs of the sigmoid are multiplied with the previous cell state.
+The input gate takes the current input \(x_t\) and the previous hidden state \(h_{t-1}\) and apply a sigmoid function over them in order to transform them to values in a range between \(0\) (not important) and \(1\) (important), then the same current input and the hidden state are passed through a \(tanh\) function which will regulate the network by transferring the values into a range between \(-1\) and \(1\).
+Then, the outputs from the sigmoid and \(tanh\) functions are multiplied point-by-point in order to eliminate \(0\) values.
+At this point, the network has sufficient information obtained from the input and forget gates.
+Therefore, the current cell state \(c_t\) can be calculated through multiplying the previous cell state \(c_{t-1}\) with the output of the forget gate (all 0 values will be dropped) and the result is added to the calculated input values.
+Afterward, the output gate computes the next hidden state \(h_t\) that holds information belongs to the current inputs.
+Initially, the current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a third sigmoid function which will produce values between 
+\(0\) and \(1\), and the current cell state \(c_t\) is passed though a \(tanh\) function.
+Then the calculated values from the third sigmoid function and the \(tanh\) function are multiplied point-by-point.
+Finally, the computed hidden state \(h_t\) is used for the prediction and it is transferred to the next timestamp.

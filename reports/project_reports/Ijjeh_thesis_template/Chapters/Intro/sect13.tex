@@ -1,0 +1,93 @@
+%% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
+\section{Example: Tables}
+\label{sec13}
+
+%% SECTION CONTENT ////////////////////////////////////////////////////////////////////////////////////
+
+This section shows a few table examples. Labels can be used to reference tables.
+\begin{itemize}
+	\item Example (Table \ref{table_1})
+	\item Example (Table \ref{table_2})
+	\item Example (Table \ref{table_3})	
+\end{itemize}
+
+\begin{table}[hbtp]
+	\centering
+	\caption{Example table for principal ship particulars.}
+	\label{table_1}		
+	\begin{tabular}{r|c|c|c}
+		\toprule
+		\multicolumn{4}{c}{\textbf{General particulars}} \\
+		\midrule 
+		\textbf{Parameter} & \textbf{Acronym} & \textbf{Unit} & \textbf{Value} \\ 
+		\midrule 
+		Length overall 		& L\textsubscript{OA}   		& m     & 97.2 \\
+		Length waterline 	& L\textsubscript{WL}   		& m     & 92.0 \\
+		Beam overall 		& B\textsubscript{OA}   		& m     & 26.6 \\
+		Beam of demihull 	& B\textsubscript{OA, demihull} & m     & 4.5 \\
+		Demihull distance 	& C\textsubscript{L, demihull} 	& m     & 22.1 \\
+		Loaded draft 		& T\textsubscript{Loaded} 		& m     & 3.43 \\
+		\midrule 	    
+		\multicolumn{4}{c}{\textbf{Speed}} \\
+		\midrule 
+		\textbf{Parameter} & \textbf{Acronym} & \textbf{Unit} & \textbf{Value} \\
+		\midrule 	
+		Speed at 600t deadweight 	& V\textsubscript{600t}	 & knots 	& 38 \\
+		Speed at 300t deadweight	& V\textsubscript{300t}  & knots   	& 42 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] %hbtp
+	\centering
+	\caption{Example table for summarized data.}
+	\label{table_2}		
+	\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+		\toprule 
+		$\boldsymbol{L_{OA}}$ & $\boldsymbol{L_{WL}}$ & $\boldsymbol{B_{OA}}$ & $\boldsymbol{B_{DH}}$ & $\boldsymbol{T}$ & $\boldsymbol{\lambda}$ & $\boldsymbol{B_{DH>200mm}}$  & $\boldsymbol{F_{r@28knots}}$ & $\boldsymbol{\frac{A_{C}}{A_{M}}}$ & $\boldsymbol{\frac{h}{T}}$ & $\boldsymbol{\frac{W}{B}}$ \\
+		\cmidrule(lr{.75em}){1-11}  
+		m & m & m & m & m & - & - & - & - & - & - \\
+		\midrule 
+		3.0 & 2.84 & 0.82 & 0.14 & 0.11 & 32.4 & No  & $<$ 0.8 & 362 & 14 & 26 \\
+		3.3 & 3.12 & 0.90 & 0.15 & 0.12 & 29.5 & No  & $<$ 0.8 & 299 & 13 & 23 \\
+		3.6 & 3.41 & 0.98 & 0.17 & 0.13 & 27.0 & No  & $<$ 0.8 & 252 & 12 & 21 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] %hbtp
+	\centering
+	\caption{Example table showing merged cells.}
+	\label{table_3}		
+	\begin{tabular}{c|c|c|c|c|c|c}
+		\toprule
+		\textbf{F\textsubscript{r}} & $\boldsymbol{\theta_{S}B_{S}}$ & $\boldsymbol{\theta_{V}B_{V}}$ & $\boldsymbol{\theta_{Mx}B_{Mx}}$ & $\boldsymbol{\theta_{\rho}(B_{\rho}+\theta_{\rho tw}B_{tw})}$ & \textbf{B\textsubscript{CT}} & \textbf{P\textsubscript{CT}} \\
+		\cmidrule(lr{.75em}){1-7}
+		- & - & - & - & - & - & - \\
+		\midrule
+		\multicolumn{7}{c}{\textbf{Condition 1}} \\
+		\midrule
+		0.23  & -3.40E-05 & -3.26E-06 & 1.23E-04 & -6.28E-06 & 1.28E-04 & 1.30E-05 \\
+		0.26  & -3.67E-05 & -3.09E-06 & 9.49E-05 & -6.77E-06 & 1.02E-04 & 4.45E-05 \\
+		0.28  & -3.65E-05 & -2.86E-06 & 8.22E-05 & -6.74E-06 & 9.03E-05 & 1.30E-05 \\
+		0.29  & -3.68E-05 & -2.80E-06 & 7.72E-05 & -6.80E-06 & 8.58E-05 & 2.83E-05 \\
+		0.31  & -3.75E-05 & -2.66E-06 & 6.75E-05 & -6.92E-06 & 7.76E-05 & 4.50E-05 \\
+		\midrule
+		\multicolumn{7}{c}{\textbf{Condition 2}} \\
+		\midrule
+		0.23  & -3.23E-05 & -3.10E-06 & 1.25E-04 & -5.97E-06 & 1.29E-04 & 2.52E-05 \\
+		0.29  & -3.38E-05 & -2.57E-06 & 7.82E-05 & -6.24E-06 & 8.54E-05 & 7.14E-06 \\
+		0.35  & -3.10E-05 & -1.95E-06 & 5.35E-05 & -5.73E-06 & 6.21E-05 & 1.66E-05 \\
+		0.41  & -3.30E-05 & -1.76E-06 & 3.89E-05 & -6.08E-06 & 5.13E-05 & 3.71E-05 \\
+		0.47  & -3.33E-05 & -1.56E-06 & 2.96E-05 & -6.15E-06 & 4.50E-05 & 1.05E-05 \\
+		\midrule
+		\multicolumn{7}{c}{\textbf{Condition 3}} \\
+		\midrule
+		0.23  & -3.50E-05 & -3.36E-06 & 1.22E-04 & -6.46E-06 & 1.27E-04 & 1.25E-05 \\
+		0.29  & -3.83E-05 & -2.90E-06 & 7.60E-05 & -7.06E-06 & 8.54E-05 & 1.45E-05 \\
+		0.35  & -3.68E-05 & -2.31E-06 & 5.19E-05 & -6.79E-06 & 6.40E-05 & 8.99E-06 \\
+		0.42  & -3.70E-05 & -1.98E-06 & 3.78E-05 & -6.82E-06 & 5.33E-05 & 2.65E-05 \\
+		0.48  & -3.53E-05 & -1.65E-06 & 2.87E-05 & -6.52E-06 & 4.60E-05 & 5.67E-06 \\
+		\bottomrule
+	\end{tabular}
+\end{table}

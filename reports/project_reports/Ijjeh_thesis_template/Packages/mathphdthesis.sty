@@ -1,0 +1,447 @@
+% Style file to assist in generating a University
+% of Tasmania PhD thesis in Mathematics. Contains all the required formatting
+% options and header/footer information that is set out in the
+% Research Higher Degrees Resource Handbook (2003 version)
+% This file should be easily modifiable to comply with
+% minor formatting changes (such as the left margin width etc.)
+
+% First set the required page format...margins, text widths etc.
+% Note 1in=2.54cm and LaTeX has a fixed border of 1in on top and left
+% margins so we need to take this into account when calculating sizes.
+% Set the top margin to be 1inch from the paper edge.
+\setlength{\topmargin}{0.0cm}
+% Set the header-body separation level
+\setlength{\headsep}{1cm} %1.0cm
+% Set the footskip to be 2cms
+\setlength{\footskip}{1cm}
+% Set the header height to be 1cm
+\setlength{\headheight}{0cm}
+% Set the bottom margin to be 1 inch from the paper edge by
+% way of the \paperheight and \textheight commands
+% First set up a new length called \textheit
+\newlength{\textheit}
+% Set the value of \textheit to the total paper height for
+% the paper size declared in the \documentclass command
+\setlength{\textheit}{\paperheight}
+% Subtract off 1 inch from top and bottom of the paper
+\addtolength{\textheit}{-1.5in}
+% Subtract off the \topmargin height
+\addtolength{\textheit}{-\topmargin}
+% Subtract off the \headheight height
+\addtolength{\textheit}{-\headheight}
+% Subtract off the \headsep height
+\addtolength{\textheit}{-\headsep}
+% Subtract off the \footskip height
+\addtolength{\textheit}{-\footskip}
+% Finally, set the text height to that calculated above
+\setlength{\textheight}{\textheit}
+% Set the text to flush to the bottom of each page
+%\flushbottom
+\usepackage{amssymb}
+
+% Set the odd and even left margins to be 4.5cm from paper edge.
+% Note that 4.50cm-2.54cm=1.96cm
+\setlength{\oddsidemargin}{1.46cm} %1.96cm
+\setlength{\evensidemargin}{1.46cm} %1.96cm
+% Set the right margin to be 1 inch from the paper edge by
+% way of the \paperwidth and \textwidth commands
+% First set up a new length called \textwid
+\newlength{\textwid}
+% Set the value of \textwid to the total paper width for
+% the paper size declared in the \documentclass command
+\setlength{\textwid}{\paperwidth}
+% Subtract off 1 inch from each side of the paper
+\addtolength{\textwid}{-2.0in}
+% Subtract off the \oddsidemargin width
+\addtolength{\textwid}{-\oddsidemargin}
+% Finally, set the text width to that calculated above
+\setlength{\textwidth}{\textwid}
+% Set the paragraph spacing
+\setlength{\parskip}{6pt}
+% Set the paragraph indentation level
+\setlength{\parindent}{0pt}
+
+
+% Load the graphicx package (see http://ctan.org/pkg/graphicx)
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{dirtytalk}
+% Nomenclature package
+% Source: http://tex.stackexchange.com/questions/112884/how-to-achieve-nomenclature-entries-like-symbol-description-dimension-and-uni
+\usepackage[intoc]{nomencl}
+% Title of Abbreviations/Nomenclature
+\renewcommand{\nomname}{Abbreviations/Nomenclature}
+\usepackage{etoolbox,ragged2e,siunitx,mathtools}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
+\newcommand{\DimensUnits}[2]{\hfill\makebox[8em]{#1\hfill}%
+\makebox[4em]{#2\hfill}\ignorespaces}
+\newcommand{\DefinitionCol}[1]{\hfill\parbox[t]{12em}{#1}\ignorespaces}
+
+\newcommand{\nomsubtitle}[1]{\item[\large\bfseries #1]}
+
+\renewcommand\nomgroup[1]{\def\nomtemp{\csname nomstart#1\endcsname}\nomtemp}
+
+\newcommand{\nomstartR}{\nomsubtitle{Roman Symbols}%
+  \item[\bfseries Symbol]%
+  \textbf{Description}\DimensUnits{\textbf{Definition}}{\textbf{Units}}}
+\newcommand{\nomstartG}{\nomsubtitle{Greek Symbols}%
+  \item[\bfseries Symbol]%
+  \textbf{Description}\DimensUnits{\textbf{Definition}}{\textbf{Units}}}
+\newcommand{\nomstartD}{\nomsubtitle{Dimensionless Numbers}%
+  \item[\bfseries Symbol]\textbf{Description}\DefinitionCol{\textbf{Definition}}}
+
+\renewcommand*{\nompreamble}{\markboth{\nomname}{\nomname}}
+
+\newcommand{\nomdescr}[1]{\parbox[t]{8cm}{\RaggedRight #1}}
+\newcommand{\nomwithdim}[5]{\nomenclature[#1]{#2}%
+{\nomdescr{#3}\DimensUnits{#4}{#5}}}
+\newcommand{\nomtypeR}[5][]{\nomwithdim{R#1}{#2}{#3}{#4}{#5}}
+\newcommand{\nomtypeG}[5][]{\nomwithdim{G#1}{#2}{#3}{#4}{#5}}
+\newcommand{\nomtypeD}[4][]{\nomenclature[D#1]{#2}{\nomdescr{#3}\DefinitionCol{#4}}}
+
+\makenomenclature
+
+% Change chapter name for nomenclature and adjust style
+\renewcommand{\nomname}{NOMENCLATURE}
+\makeatletter
+\def\thenomenclature{%
+% ENABLE THIS ONLY WHEN CHAPTER TITLE OF NOMENCLATURE REQUIRES NUMBERING!!!!!
+%  \@ifundefined{chapter}%
+%  {
+%    \section{\nomname}
+%    \if@intoc\addcontentsline{toc}{section}{\nomname}\fi%
+%  }%
+%  {
+%    \chapter{\nomname}
+%    %\if@intoc\addcontentsline{toc}{chapter}{\nomname}\fi%
+%  }%
+
+  \nompreamble
+  \list{}{%
+    \labelwidth\nom@tempdim
+    \leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \itemsep\nomitemsep
+    \let\makelabel\nomlabel}}
+\makeatother
+
+% Booktabs package for tables
+\usepackage{booktabs}
+
+% Caption package
+\usepackage{caption} 
+\captionsetup[table]{font=small,skip=5pt}
+\captionsetup[figure]{font=small} %,skip=5pt
+
+% Array package
+\usepackage{array}
+
+% Load the makeidx package for easy index generation (see http://en.wikibooks.org/wiki/LaTeX/Indexing)
+\usepackage{makeidx}
+
+% Load lorem ipsum package (see http://www.ctan.org/pkg/lipsum)
+\usepackage{lipsum}
+
+% Color package (see http://en.wikibooks.org/wiki/LaTeX/Colors)
+\usepackage{color}
+
+% Patch for LaTeX, that is supports \textsubscript (see http://ctan.org/pkg/fixltx2e)
+\usepackage{fixltx2e}
+
+% NATBIB (OLDER REFERENCE PACKAGE)
+%\usepackage{natbib,har2nat}
+%\usepackage[round, sort]{natbib}
+
+% BIBLATEX (PREFERRED REFERENCE PACKAGE)
+% URL#1: http://tex.stackexchange.com/questions/13509/biblatex-for-idiots
+% URL#2: https://www.sharelatex.com/blog/2013/07/31/getting-started-with-biblatex.html
+%\usepackage[style=authoryear,backend=biber]{biblatex}
+\usepackage[citestyle=numeric,style=numeric-comp,minbibnames=10,maxbibnames=10,defernumbers=true,maxcitenames=1,firstinits=true,backend=bibtex,sorting=none]{biblatex}
+% Sort always by last name then first name
+% URL: http://tex.stackexchange.com/questions/12806/guidelines-for-customizing-biblatex-styles/13076#13076
+%\DeclareNameAlias{sortname}{last-first}
+\bibliography{References/thesis}
+
+% Color package (see http://ctan.org/pkg/xcolor)
+\usepackage[table]{xcolor}
+
+% EPS to PDF conversion (see http://ctan.org/pkg/epstopdf)
+\usepackage{epstopdf}
+
+% Links in text
+\usepackage{filecontents,hyperref}
+\hypersetup{colorlinks=false}
+
+% Float package
+\usepackage{float}
+
+% Load the tocbibin package for putting in table of
+% contents entries for the bibliograpy and index (see http://ctan.org/pkg/tocbibind).
+\usepackage{tocbibind}
+% Set the table of contents name
+\settocname{TABLE OF CONTENTS}
+% Set the list of figures name
+\setlofname{LIST OF FIGURES}
+% Set the list if tables name
+\setlotname{LIST OF TABLES}
+% Set the bibliograpy name
+\settocbibname{REFERENCES} %BIBLIOGRAPHY
+% Set the index name
+\setindexname{INDEX}
+
+
+% Great for writing: Shows in a sidemark where \label or other commands are applied (see http://ctan.org/pkg/showlabels).
+% NOTE: Remove for FINAL PDF!!!!!!
+\usepackage{showlabels,rotating}
+\renewcommand{\showlabelsetlabel}[1]
+	{\begin{turn}{60}\showlabelfont #1\end{turn}}
+\renewcommand{\showlabelfont}{\small\slshape\color{green}}
+%\usepackage[marginal]{showlabels}
+%\usepackage{showlabels,rotating}
+%\renewcommand{\showlabelsetlabel}[1]
+%{\begin{turn}{90}\showlabelfont #1\end{turn}}
+
+
+% Load the sectsty package for generating stylised
+% chapter and section headings (see http://ctan.org/pkg/sectsty).
+\usepackage{sectsty}
+% Set the Chapter font specifications
+%\chapterfont{\nohang\rmfamily\centering}
+% Set the Section font specifications
+\sectionfont{\nohang\rmfamily\centering}
+% Set the Subsection font specifications
+%\subsectionfont{\nohang\rmfamily\raggedright}
+% Set the Subsubsection font specifications
+%\subsubsectionfont{\nohang\rmfamily\raggedright}
+
+\usepackage{amsmath}
+
+% Load the fancy headers package for manipulating
+% the material that appears in the headers and footers (see http://ctan.org/pkg/fancyhdr).
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% Set up the default behavior for headers and footers
+%\fancyhead[L]{} \fancyhead[C]{\rightmark} \fancyhead[R]{\thepage}
+%\fancyhead[L]{} \fancyhead[C]{\slshape\nouppercase{\leftmark}} \fancyhead[R]{\thepage}
+\fancyhead[L]{} \fancyhead[C]{} \fancyhead[R]{\slshape\nouppercase{\leftmark}}
+\fancyfoot[L]{} \fancyfoot[C]{\thepage} \fancyfoot[R]{}
+% Set the header and footer rule width to 0.0pt
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%\setlength{\footskip}{30pt} %MH
+
+% Now take care of all the user specific entries like
+% the title, author, abstract, table of contents etc.
+
+% Use this so LaTeX can differentiate user defined commands
+% from internal ones. Modifies how LaTeX interprets the @ symbol...
+\makeatletter
+
+% Set some basic lengths
+\newlength{\li} \setlength{\li}{12pt}
+\newlength{\signed} \settowidth{\signed}{signedd}
+% Line spacing
+\newcommand{\singlespace}{\baselineskip 1.5\li}
+\newcommand{\doublespace}{\baselineskip 2.0\li}
+
+% Defines new 'if' variables for boolean checks
+\newif\iftitlepg \titlepgtrue
+\newif\ifsignaturepage \signaturepagetrue
+\newif\ifcopyright \copyrighttrue
+\newif\ifabswithesis \abswithesistrue
+\newif\ifack \acktrue
+\newif\ifnomencl \nomencltrue
+\newif\iftablecontents \tablecontentstrue
+\newif\iftablespage \tablespagefalse
+\newif\iffigurespage \figurespagetrue 
+
+
+% Redefine the chapter commands for nicer formatting
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \centering \reset@font
+    \ifnum \c@secnumdepth >\m@ne
+         \normalfont \LARGE \rmfamily \scshape \@chapapp{} \thechapter  % Chapter followed by number
+         \par
+         \vskip 20\p@
+       \fi
+    \normalfont \Huge \rmfamily  #1\par          % chapter title
+    \nobreak
+    \vskip 40\p@
+  }}
+
+\renewcommand{\@makeschapterhead}[1]{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \centering
+    \reset@font
+    \normalfont \Huge \rmfamily  #1\par
+    \nobreak
+    \vskip 40\p@
+  }}
+
+
+% Helpful command for making prefaces and the like
+\def\prefacesection#1{%
+    {\null\vskip .50in 
+    \begin{center}
+        {\normalfont \Huge \rmfamily {#1 \vskip 2\li}}
+    \end{center}}}
+
+% Gets the information about the author, title etc from the file
+% 'prelude.tex' and populates the relevant fields.
+\def\dept#1{\gdef\@dept{#1}}
+\def\advisor{\gdef\@advisor}
+\def\prevdegrees{\gdef\@prevdegrees}
+\def\institute{\gdef\@institute}
+\def\submittedfor{\gdef\@submittedfor}
+\def\submitdate#1{\gdef\@submitdate{#1}}
+\def\copyrightyear#1{\gdef\@copyrightyear{#1}} 
+\def\@title{}
+\def\@author{}
+\def\@dept{}
+\def\@submitdate{\ifcase\the\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi
+  \space \number\the\year}
+\ifnum\month=12
+    \@tempcnta=\year \advance\@tempcnta by 1
+    \edef\@copyrightyear{\number\the\@tempcnta}
+\else
+    \def\@copyrightyear{\number\the\year}
+\fi
+
+% Command to make the title page
+\def\titlepg{%
+    \newpage
+    \pagenumbering{roman}
+    \begin{center}
+    	\rm \it{} \large\@author , \@prevdegrees\\
+    \end{center}
+    \null\vskip0.1in
+	\begin{figure}[hbtp]
+	    \begin{center}
+			% UTas and AMC logo
+			\includegraphics[height=0.175\textwidth-\fboxrule-\fboxrule]{Figures/imp_logo}
+			%\hspace*{6mm}
+	    \end{center}
+	\end{figure}
+    \thispagestyle{empty}%
+    \singlespace
+        \null\vskip0.2in	
+    \begin{center}
+        {\Large\bf\uppercase\expandafter{\@title}}
+    \end{center}
+    \null\vskip0.1in
+    \begin{center}
+           {\rm 
+            %\vskip \li 
+            \@submittedfor\\}
+    \end{center}
+    \null\vskip0.5in    
+    \begin{center}
+    	{\rm
+		    Supervisor:\\
+		    \@advisor\\
+	    }
+    \end{center}    
+    \null\vskip3.0in
+    \begin{center}
+          {\rm 
+	          %\large National Centre for Maritime Engineering and Hydrodynamics\\
+	          %{\@dept}\\
+	          {\@submitdate} \\
+	          \null\vskip0.25in
+	          \begin{figure*}[hbtp]
+	          \begin{center}
+	          %\scalebox{.30}{\includegraphics{Utas_vert_BW}}
+	          \end{center}
+          \end{figure*}}
+    \end{center}
+    \vfill}
+
+% Command to make the declaration of originality
+\def\signaturepage{%
+    \newpage
+    \null\vfill
+    \thispagestyle{empty}%
+    \begin{quote}
+        {\normalsize I declare that this thesis contains no material which has been accepted for a degree or diploma by the University or any other institution, except by way of background information and duly acknowledged in the thesis, and that, 
+        to the best of my knowledge and belief, this thesis contains no material previously published 
+        or written by another person, except where due acknowledgement is made in the text of the thesis.}
+    \end{quote}
+    \null\vskip0.5in
+    \begin{quote}
+    {Signed:  \hrulefill \hfill \hfill
+        \newline\hspace*{\signed} \raisebox{4.0mm}{\@author}
+        \newline
+        Date:  \hrulefill \hfill \hfill \hfill}
+    \end{quote}
+    \vskip 1.0in
+    \vfill}
+
+% Command to make the copyright page
+\def\copyrightpage{%
+    \newpage
+    \null\vfill
+    \thispagestyle{empty}%
+    \begin{quote}
+        {\normalsize This thesis may be made available for loan and limited copying in 
+        accordance with the {\sl Copyright Act 1968}}
+    \end{quote}
+    \null\vskip0.5in
+    \begin{quote}
+    {Signed:  \hrulefill \hfill \hfill
+        \newline\hspace*{\signed} \raisebox{4.0mm}{\@author}
+        \newline
+        Date:  \hrulefill \hfill \hfill \hfill}
+    \end{quote}
+    \vskip 1.0in
+    \vfill}
+
+% Command to make the abstract page
+\def\abswithesis{
+    \newpage
+    % Set up the default behavior for headers and footers
+    \thispagestyle{empty}
+    \prefacesection{ABSTRACT}
+    \abstextwithesis
+}
+
+% Command to make the acknowledgements page
+\def\ackpage{
+    \newpage
+    % Set up the default behavior for headers and footers
+    \thispagestyle{empty}
+    \prefacesection{ACKNOWLEDGMENTS}
+    \acknowledgement
+}
+
+% Command to make the engineering quote page
+\def\engquote{
+    \newpage
+    % Set up the default behavior for headers and footers
+    \thispagestyle{empty}
+    \engineeringquote
+}
+
+% Sets up all the stuff before the table of contents.
+\def\beforepreface{
+\iftitlepg\titlepg\fi
+\ifack\engquote\fi
+\ifabswithesis\abswithesis\fi
+\ifack\ackpage\fi
+}
+
+% Takes care of the table of contents, figures etc 
+\def\afterpreface{
+\pagestyle{fancy}
+\setcounter{page}{0}
+\iftablecontents\tableofcontents\fi
+\iftablespage\listoftables\fi
+\iffigurespage\listoffigures\fi
+}
+
+% Reset the behaviour of the @ symbol
+\makeatother

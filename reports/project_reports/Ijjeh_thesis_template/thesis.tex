@@ -1,0 +1,59 @@
+%% -----------------------------------------------------------------
+%%  Original Template
+%% -----------------------------------------------------------------
+%%
+%%  
+\documentclass[11pt,a4paper, final]{report}
+
+\makeindex
+
+\PassOptionsToPackage{nottoc}{tocbibind}
+
+% Include the style file which contains all the required formatting
+% information that is set out in the Research Higher Degrees Resource
+% Handbook (2003 version). NOTE: This file uses the following packages
+% 'graphicx' for graphics manipulation
+% 'fancyhdr' for nice headers and footers.
+% 'makeidx' for generating the index
+% 'tocbibind' for adding table of contents entries for bibliography, index etc.
+% 'sectsty' for generating stylised chapter and section headings.
+% 'lipsum' for generating dummy text.
+% 'natbib' and 'har2nat' for bib citations.
+% 'xcolor' color package.
+% 'epstopdf' EPS to PDF conversion.
+\usepackage{Packages/mathphdthesis}
+
+
+
+\includeonly{
+Frontbackmatter/prelude 	% Contains all the relevant candidate information (name, degrees, abstract etc)
+,Frontbackmatter/newcom 	% Place all you new commands in here
+,Nomenclature/nomenclature  % The nomenclature chapter
+,Chapters/Chapter1/chap1
+,Chapters/Chapter2/chap2
+,Chapters/Chapter3/chap3
+,Chapters/Chapter4/chap4
+,Chapters/Chapter5/chap5
+,Chapters/Chapter6/chap6
+,Appendices/app0   			% Needed to switch to appendix mode
+,index  					% Places the index in the thesis
+}
+
+% Begin the thesis
+\begin{document}
+	% Include all the pieces of your thesis in here
+	\include{Frontbackmatter/prelude}
+	\include{Frontbackmatter/newcom}
+	\include{Nomenclature/nomenclature}
+	\include{Chapters/Chapter1/chap1}
+	\include{Chapters/Chapter2/chap2}
+	\include{Chapters/Chapter3/chap3}
+	\include{Chapters/Chapter4/chap4}
+	\include{Chapters/Chapter5/chap5}
+	\include{Chapters/Chapter6/chap6}
+	\include{Appendices/app0}
+	\include{index}
+	% Bibliography
+	\addcontentsline{toc}{chapter}{References/Bibliography}
+	\printbibliography
+\end{document}

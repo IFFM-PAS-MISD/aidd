@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg7584"
+   inkscape:version="1.1 (1:1.1+202105261517+ce6663b3b7)"
+   sodipodi:docname="downsampling.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7586"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     showborder="false"
+     inkscape:zoom="0.45543807"
+     inkscape:cx="247.01492"
+     inkscape:cy="503.91044"
+     inkscape:window-width="1848"
+     inkscape:window-height="1016"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6257-36">
+    <inkscape:grid
+       type="xygrid"
+       id="grid7645" />
+  </sodipodi:namedview>
+  <defs
+     id="defs7581">
+    <marker
+       style="overflow:visible;"
+       id="Arrow2Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(1.1) rotate(180) translate(1,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path1153" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g148555"
+       transform="matrix(1.3519516,0,0,1.3519516,73.599104,109.9856)"
+       inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/convolution_operation_3D.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <g
+         id="g6257-36"
+         transform="matrix(1.1081988,0,0,1.1081988,38.968078,-5.58018)">
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-7"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872894"
+           y="-62.192703" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-53"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227062"
+           y="-62.192703" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-5"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.58123"
+           y="-62.192703" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-6"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935398"
+           y="-62.192703" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-2-70"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872894"
+           y="-59.546867" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-7-9"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227062"
+           y="-59.546867" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-0-36"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.58123"
+           y="-59.546867" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-9-0"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935394"
+           y="-59.546867" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-26-6"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872902"
+           y="-56.901035" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-1-1"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227062"
+           y="-56.901035" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-8-8"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.58123"
+           y="-56.901035" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-7-7"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935398"
+           y="-56.901035" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-2-7-2"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872902"
+           y="-54.255199" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-7-5-0"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227062"
+           y="-54.255199" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-0-9-2"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.58123"
+           y="-54.255199" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-9-2-3"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935398"
+           y="-54.255199" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-36-8"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872894"
+           y="-51.609367" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-12-9"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227062"
+           y="-51.609367" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-93-7"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.58123"
+           y="-51.609367" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-19-3"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935394"
+           y="-51.609367" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-2-5-19"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872894"
+           y="-48.963531" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-7-0-4"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227058"
+           y="-48.963531" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-0-3-78"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.581226"
+           y="-48.963531" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-9-6-4"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935394"
+           y="-48.963531" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-26-2-06"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872894"
+           y="-46.317699" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-1-0-3"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227062"
+           y="-46.317699" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-8-6-2"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.58123"
+           y="-46.317699" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-7-1-0"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935394"
+           y="-46.317699" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-2-7-6-47"
+           width="2.6458342"
+           height="2.6458342"
+           x="-64.872894"
+           y="-43.671864" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-7-5-5-6"
+           width="2.6458342"
+           height="2.6458342"
+           x="-62.227062"
+           y="-43.671864" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-0-9-6-5"
+           width="2.6458342"
+           height="2.6458342"
+           x="-59.581226"
+           y="-43.671864" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-9-2-9-6"
+           width="2.6458342"
+           height="2.6458342"
+           x="-56.935394"
+           y="-43.671864" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-6-4-6"
+           width="2.6458342"
+           height="2.6458342"
+           x="-66.626373"
+           y="-37.481594" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-2-7-12"
+           width="2.6458342"
+           height="2.6458342"
+           x="-63.980537"
+           y="-37.481594" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-9-8-9"
+           width="2.6458342"
+           height="2.6458342"
+           x="-61.334705"
+           y="-37.481594" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-1-4-3"
+           width="2.6458342"
+           height="2.6458342"
+           x="-58.688873"
+           y="-37.481594" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-6-3-1-5"
+           width="2.6458342"
+           height="2.6458342"
+           x="-66.626373"
+           y="-34.835758" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-2-6-0-0"
+           width="2.6458342"
+           height="2.6458342"
+           x="-63.980537"
+           y="-34.835758" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-9-0-6-36"
+           width="2.6458342"
+           height="2.6458342"
+           x="-61.334705"
+           y="-34.835758" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-1-6-3-1"
+           width="2.6458342"
+           height="2.6458342"
+           x="-58.688873"
+           y="-34.835758" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-6-9-5-6"
+           width="2.6458342"
+           height="2.6458342"
+           x="-66.626373"
+           y="-32.189926" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-2-2-5-1"
+           width="2.6458342"
+           height="2.6458342"
+           x="-63.980537"
+           y="-32.189926" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-9-02-4-5"
+           width="2.6458342"
+           height="2.6458342"
+           x="-61.334705"
+           y="-32.189926" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-1-3-7-5"
+           width="2.6458342"
+           height="2.6458342"
+           x="-58.688873"
+           y="-32.189926" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-6-3-2-3-9"
+           width="2.6458342"
+           height="2.6458342"
+           x="-66.626373"
+           y="-29.544094" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-2-6-8-7-37"
+           width="2.6458342"
+           height="2.6458342"
+           x="-63.980537"
+           y="-29.544094" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-3-9-0-9-4-4"
+           width="2.6458342"
+           height="2.6458342"
+           x="-61.334705"
+           y="-29.544094" />
+        <rect
+           style="fill:#30ffff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+           id="rect4071-5-5-1-6-7-5-5"
+           width="2.6458342"
+           height="2.6458342"
+           x="-58.688873"
+           y="-29.544094" />
+        <g
+           id="g1013"
+           inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600">
+          <rect
+             style="fill:#ff0018;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+             id="rect4071-5-5-1-6-62"
+             width="4.7023168"
+             height="4.7023168"
+             x="9.9046497"
+             y="-17.140953"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#00a1ff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-26-2"
+             width="4.7023168"
+             height="4.7023168"
+             x="0.50001943"
+             y="-17.140961"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#ff0018;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-5-4"
+             width="4.7023168"
+             height="4.7023168"
+             x="5.2023292"
+             y="-21.843273"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#ff0018;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+             id="rect4071-5-5-1-2"
+             width="4.7023168"
+             height="4.7023168"
+             x="9.9046497"
+             y="-21.843273"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#ff0018;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-26-8-4"
+             width="4.7023168"
+             height="4.7023168"
+             x="5.2023292"
+             y="-17.140961"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#5fff20;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-2-79-3"
+             width="4.7023168"
+             height="4.7023168"
+             x="5.2023253"
+             y="-12.438638"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#00a1ff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-29"
+             width="4.7023168"
+             height="4.7023168"
+             x="0.50001943"
+             y="-21.843273"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="5.8329921"
+             y="-18.387074"
+             id="text18646-8"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-6"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="5.8329921"
+               y="-18.387074">11</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="10.847536"
+             y="-18.396072"
+             id="text18646-88"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-4"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="10.847536"
+               y="-18.396072">-7</tspan></text>
+          <rect
+             style="fill:#00a1ff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-3-1"
+             width="4.7023168"
+             height="4.7023168"
+             x="-4.2022991"
+             y="-21.843273"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="1.0939029"
+             y="-18.395248"
+             id="text18646-0"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-7"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="1.0939029"
+               y="-18.395248">10</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="11.386978"
+             y="-13.710096"
+             id="text18646-3"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="11.386978"
+               y="-13.710096">8</tspan></text>
+          <rect
+             style="fill:#5fff20;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+             id="rect4071-5-5-1-3-9"
+             width="4.7023168"
+             height="4.7023168"
+             x="9.9046459"
+             y="-12.438638"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#ffff31;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+             id="rect4071-6-3-2-75"
+             width="4.7023168"
+             height="4.7023168"
+             x="-4.2022991"
+             y="-7.7363167"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#ffff31;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+             id="rect4071-5-2-6-8-9"
+             width="4.7023168"
+             height="4.7023168"
+             x="0.50001943"
+             y="-7.7363167"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#5fff20;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+             id="rect4071-3-9-0-9-2"
+             width="4.7023168"
+             height="4.7023168"
+             x="5.2023311"
+             y="-7.7363167"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#5fff20;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+             id="rect4071-5-5-1-6-7-2"
+             width="4.7023168"
+             height="4.7023168"
+             x="9.9046459"
+             y="-7.7363167"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="6.1231456"
+             y="-8.9857111"
+             id="text18646-4"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-9"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="6.1231456"
+               y="-8.9857111">-4</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="6.6846614"
+             y="-4.3054619"
+             id="text18646-2"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-0"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="6.6846614"
+               y="-4.3054619">2</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="11.386976"
+             y="-9.0077791"
+             id="text18646-6"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-8"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="11.386976"
+               y="-9.0077791">9</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="10.899841"
+             y="-4.2801189"
+             id="text18646-9"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-2"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="10.899841"
+               y="-4.2801189">-1</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51086px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="-2.7199702"
+             y="-18.412415"
+             id="text18646-1"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-5"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="-2.7199702"
+               y="-18.412415">4</tspan></text>
+          <rect
+             style="fill:#00a1ff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-3-5-5"
+             width="4.7023168"
+             height="4.7023168"
+             x="-4.2022991"
+             y="-17.140961"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#ffff31;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-2-4"
+             width="4.7023168"
+             height="4.7023168"
+             x="0.50001562"
+             y="-12.438638"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <rect
+             style="fill:#ffff31;fill-opacity:0.415686;stroke:#000000;stroke-width:0.0491535;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+             id="rect4071-5-2-3-6-7"
+             width="4.7023168"
+             height="4.7023168"
+             x="-4.2022991"
+             y="-12.438638"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300" />
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="6.6846595"
+             y="-13.7101"
+             id="text18646"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="6.6846595"
+               y="-13.7101">0</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="1.4600695"
+             y="-13.7101"
+             id="text18646-5"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-04"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="1.4600695"
+               y="-13.7101"
+               dy="0">-5</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="-2.7199702"
+             y="-13.7101"
+             id="text18646-61"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-06"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="-2.7199702"
+               y="-13.7101">3</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="1.9823455"
+             y="-9.0077791"
+             id="text18646-27"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-22"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="1.9823455"
+               y="-9.0077791">2</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="-2.7199702"
+             y="-9.0077791"
+             id="text18646-66"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-49"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="-2.7199702"
+               y="-9.0077791">8</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="-2.7199702"
+             y="-4.3054619"
+             id="text18646-87"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-17"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="-2.7199702"
+               y="-4.3054619">5</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+             x="1.9823493"
+             y="-4.3054619"
+             id="text18646-94"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png.png"
+             inkscape:export-xdpi="300"
+             inkscape:export-ydpi="300"><tspan
+               sodipodi:role="line"
+               id="tspan18644-90"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="1.9823493"
+               y="-4.3054619">6</tspan></text>
+        </g>
+        <g
+           id="g27296"
+           transform="translate(0.70244682)"
+           inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600">
+          <g
+             id="g90807"
+             transform="matrix(1.7772531,0,0,1.7772531,45.821852,91.06694)"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+             inkscape:export-xdpi="600"
+             inkscape:export-ydpi="600">
+            <rect
+               style="fill:#5eff1f;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+               id="rect4071-5-5-1-6-62-9"
+               width="2.6458342"
+               height="2.6458342"
+               x="-18.060385"
+               y="-44.004536" />
+            <rect
+               style="fill:#00a1ff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+               id="rect4071-5-2-5-4-1"
+               width="2.6458342"
+               height="2.6458342"
+               x="-20.706219"
+               y="-46.650372" />
+            <rect
+               style="fill:#ff0018;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+               id="rect4071-5-5-1-2-7"
+               width="2.6458342"
+               height="2.6458342"
+               x="-18.060385"
+               y="-46.650372" />
+            <rect
+               style="fill:#ffff30;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+               id="rect4071-5-2-26-8-4-7"
+               width="2.6458342"
+               height="2.6458342"
+               x="-20.706219"
+               y="-44.004539" />
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-20.261461"
+               y="-44.869751"
+               id="text18646-8-1"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-6-1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-20.261461"
+                 y="-44.869751">9.5</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-17.093422"
+               y="-44.862507"
+               id="text18646-88-5"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-4-9"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-17.093422"
+                 y="-44.862507">4</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-17.654947"
+               y="-42.225292"
+               id="text18646-3-7"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-1-7"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-17.654947"
+                 y="-42.225292">1.5</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-20.632936"
+               y="-42.223919"
+               id="text18646-67"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-3"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-20.632936"
+                 y="-42.223919">5.25</tspan></text>
+          </g>
+          <g
+             id="g90835"
+             transform="matrix(1.7772531,0,0,1.7772531,47.462406,71.613305)"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+             inkscape:export-xdpi="600"
+             inkscape:export-ydpi="600">
+            <rect
+               style="fill:#5eff1f;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+               id="rect4071-5-5-1-6-62-9-0"
+               width="2.6458342"
+               height="2.6458342"
+               x="-30.422184"
+               y="-33.058636" />
+            <rect
+               style="fill:#00a1ff;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+               id="rect4071-5-2-5-4-1-8"
+               width="2.6458342"
+               height="2.6458342"
+               x="-33.06802"
+               y="-35.704472" />
+            <rect
+               style="fill:#ff0018;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+               id="rect4071-5-5-1-2-7-8"
+               width="2.6458342"
+               height="2.6458342"
+               x="-30.422184"
+               y="-35.704472" />
+            <rect
+               style="fill:#ffff30;fill-opacity:0.415686;stroke:#000000;stroke-width:0.027657;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+               id="rect4071-5-2-26-8-4-7-5"
+               width="2.6458342"
+               height="2.6458342"
+               x="-33.06802"
+               y="-33.05864" />
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-32.713169"
+               y="-33.759785"
+               id="text18646-8-1-0"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-6-1-9"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-32.713169"
+                 y="-33.759785">10</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-29.891651"
+               y="-33.764847"
+               id="text18646-88-5-6"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-4-9-3"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-29.891651"
+                 y="-33.764847">11</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-29.588127"
+               y="-31.128212"
+               id="text18646-3-7-8"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-1-7-5"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-29.588127"
+                 y="-31.128212">9</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;line-height:1.25;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+               x="-32.233963"
+               y="-31.128216"
+               id="text18646-67-6"><tspan
+                 sodipodi:role="line"
+                 id="tspan18644-3-1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41278px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+                 x="-32.233963"
+                 y="-31.128216">8</tspan></text>
+          </g>
+          <text
+             xml:space="preserve"
+             style="font-size:2.51087px;line-height:1.25;font-family:sans-serif;stroke-width:0.313858"
+             x="-11.463584"
+             y="7.1725454"
+             id="text55942"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+             inkscape:export-xdpi="600"
+             inkscape:export-ydpi="600"><tspan
+               sodipodi:role="line"
+               id="tspan55940"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="-11.463584"
+               y="7.1725454">Max pool</tspan></text>
+          <text
+             xml:space="preserve"
+             style="font-size:2.51087px;line-height:1.25;font-family:sans-serif;stroke-width:0.313858"
+             x="7.0324111"
+             y="7.1688671"
+             id="text71176"
+             inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+             inkscape:export-xdpi="600"
+             inkscape:export-ydpi="600"><tspan
+               sodipodi:role="line"
+               id="tspan71174"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.313858"
+               x="7.0324111"
+               y="7.1688671">Average pool</tspan></text>
+        </g>
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.156716px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 20.500477,4.0119476 H -10.095809"
+           id="path1048"
+           inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.176597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+           d="M 1.6672799,-1.5027499 V 3.2653729"
+           id="path1050"
+           inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600" />
+        <text
+           xml:space="preserve"
+           style="font-size:2.51087px;line-height:1.25;font-family:sans-serif;stroke-width:0.176597"
+           x="3.1484675"
+           y="2.56617"
+           id="text4037"
+           inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600"><tspan
+             sodipodi:role="line"
+             id="tspan4035"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+             x="3.1484675"
+             y="2.56617">(2x2) pool size </tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:2.51087px;line-height:1.25;font-family:sans-serif;stroke-width:0.176597"
+           x="3.1484675"
+           y="-0.11812197"
+           id="text7515"
+           inkscape:export-filename="/home/aijjeh/Desktop/aidd/aidd/reports/project_reports/Ijjeh_thesis_template/Figures/Chapter_3/downsampling.png"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600"><tspan
+             sodipodi:role="line"
+             id="tspan7513"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.51087px;font-family:'Times new roman';-inkscape-font-specification:'Times new roman, ';stroke-width:0.176597"
+             x="3.1484675"
+             y="-0.11812197">2 strides</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
