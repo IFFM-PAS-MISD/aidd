@@ -1,9 +1,9 @@
 \subsubsection{Residual UNet model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Residual UNet (Res-UNet) model is based on the residual learning~\cite{He2016} and the UNet technique~\cite{Ronneberger2015}. 
-It is a well-known architecture that performs a biomedical segmentation based on encoder-decoder. 
+It is a well-known architecture that performs a biomedical segmentation. 
 The Res-UNet has a U-shape convolutional network that is based on encoder-decoder style. 
-The encoder (contracting) path is responsible for capturing the detailed context of an input image, while the decoder (expansive) path is responsible for enabling a precise localisation. 
+The encoder (contracting) path is responsible for capturing the detailed context of an input image, while the decoder (expansive) path is responsible for enabling precise localisation. 
 Hence, to maintain the spatial and contextual information from the previous layers from being lost residual connections were added at two levels:
 \begin{itemize}
 	\item at each step of the encoder and decoder paths,
@@ -23,7 +23,7 @@ The decoder consists of several upsampling blocks.
 Each upsampling block passes the input into two convolution layers as in the downsampling block followed by a transmission up layer consisting of a transposed convolutional layer (upsampling). 
 The purpose of upsampling is to retrieve the dimensions and increase the resolution.
 Transposed convolutional layer differs from the regular upsampling function, by introducing learnable parameters regarding the transposed convolution filters that enhance the learning process of the model. 
-Moreover, after each upsampling operation, the number of feature maps used by convolutional layer is reduced by half to keep the model symmetrical. 
+Moreover, after each upsampling operation, the number of feature maps used by the convolutional layer is reduced by half to keep the model symmetrical. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -41,7 +41,7 @@ We removed the dense layers from the model, and we applied VGG16 of 13 convoluti
 Figure~\ref{vgg16} presents the architecture of VGG16 encoder-decoder model. 
 The model has a U-shape of two parts: encoder and decoder.
 The encoder consists of \(5\) convolutional blocks with a total \(13\)  (\(3\times3\)) convolutional layers followed by BN and activation function Relu.
-A Max pool operation with pool size of (\(2\times2\)) followed by dropout is performed after each convolutional block.  
+A Max pool operation with a pool size of (\(2\times2\)) followed by dropout is performed after each convolutional block.  
 The upsampling path is introduced to recover spatial resolution, it also has \(5\) convolutional blocks with a total \(13\) \((3\times 3)\) convolutional layers.
 For upsampling, bilinear interpolation with (\(2\times2\)) kernel size is applied.
 Skip connections were added between downsampling blocks and the corresponding upsampling blocks in order to enhance recovering fine-grained details by enabling feature re-usability from earlier layers.

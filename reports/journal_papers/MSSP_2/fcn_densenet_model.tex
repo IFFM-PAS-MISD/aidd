@@ -2,11 +2,11 @@
 \subsubsection{FCN-DenseNet model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 FCN-DenseNet which was introduced in~\cite{Jegou} was applied in our previous work~\cite{Ijjeh2021} for image segmentation.
-The results were promising, since it outperformed the conventional damage detection technique i.e (adaptive wavenumber filtering method). 
+The results were promising since it outperformed the conventional damage detection technique i.e (adaptive wavenumber filtering method). 
 FCN-DenseNet has a U-shape of the encoder-decoder scheme with skip connections between the downsampling and the upsampling paths to increase the resolution to the final feature map.
 The main component in FCN-DenseNet is the dense block.
 The dense block is constructed from \(n\) varying number of layers, each layer consists of a series of operations as shown in Table~\ref{layers}.
-The purpose of the dense block is to concatenate the input (\(x\)) (feature maps) of a layer  with its output (feature maps) to emphasize spatial details information.
+The purpose of the dense block is to concatenate the input (\(x\)) (feature maps) of a layer with its output (feature maps) to emphasize spatial details information.
 In this work, we have updated the FCN-DenseNet model by increasing the number of dense blocks and the learnable parameters (filters).
 The architecture of the dense block is presented in Fig.~\ref{dense_block}. 
 \begin{figure} [h!]

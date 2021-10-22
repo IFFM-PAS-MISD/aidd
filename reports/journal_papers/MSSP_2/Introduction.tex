@@ -5,7 +5,7 @@ In recent years, the benefits of composite materials are being utilised in most 
 However, composite materials could experience different types of damage such as matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}. 
 Among these defects, delamination (separation of layers from each other in a laminate composite) is one of the most hazardous since it mostly occur below top surfaces and are barely visible~\cite{Cai2012}.
 Delamination in composite materials can occur and develop from various sources such as  manufacturing defects, notches, and impact events.
-The delamination development results from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}.
+%The delamination development results from the lack of reinforcement in the out-of-plane direction~\cite{Cai2012}.
 Consequently, delamination can reduce the strength of the engineering structure and its performance. 
 Therefore, real-time delamination detection is essential to prevent such consequences. 
  
@@ -21,23 +21,62 @@ Therefore, a Scanning Laser Doppler Vibrometer (SLDV) is utilised to measure Lam
 The acquired measurements are a full wavefield propagation that lead to high resolution damage influence maps.
 Damage identification techniques employing full wavefield signals are capable of effectively estimating the size and location of damage~\cite{Girolamo2018a, kudela2018impact}. 
 
-SHM approaches for damage identification that involves conventional machine learning techniques are based on hand-crafted features and classification.
-However, such techniques have shortcomings when dealing with big data as it requires a complex computation of feature engineering~\cite{Gulgec2019} which additionally requires high expertise and skills to extract the damage-sensitive features for specific SHM applications.
-Moreover, it is not certain that such hand crafted features are reusable for
-other structures due to various degree of non-linearity introduced to the system by the damage~\cite{Adams2002}.
-Recently, a data-driven method for SHM applications became noticeable in the form of deep learning (DL) end-to-end approaches as the process of feature engineering and classification is performed automatically.
+SHM approaches for damage detection based on the conventional machine learning techniques includes but are not limited to, support vector machine (SVM) \cite{noori2010application, Khoa2014, Ghiasi2016}, K-Nearest Neighbor (KNN)~\cite{Vitola2017}, decision tree~\cite{Mariniello2020}, particle swarm optimization (PSO)~\cite{Khatir2018, NouriShirazi2014}, and principle component analysis (PCA)~\cite{wang2014principal, nguyen2010fault, liu2014research}.
+These techniques have shown their ability to detect damage in the investigated structures.
+However, such techniques have shortcomings when dealing with big data as they require a complex computation of feature engineering~\cite{Gulgec2019} that additionally requires high expertise and skills to extract the damage-sensitive features for specific SHM applications.
+%Moreover, conventional damage detection methods based on guided waves are application specific which implies that the extracted features from the structure depends on the damage type (i.e. crack, delamination, etc.) du it is not certain that such hand crafted features are reusable for
+%other structures due to various degree of non-linearity introduced to the system by the damage~\cite{Adams2002}.
+Accordingly, in recent years a data-driven method for SHM applications became noticeable in the form of deep learning (DL) end-to-end approaches as the process of feature engineering and classification is performed automatically.
 DL techniques can translate high-level and abstract features into a hierarchical order of simple and low-level learned features~\cite{Goodfellow-et-al-2016}.
-Accordingly, this allows a DL technique to handle complex problems by splitting them into a large number of simple problems.
-Another essential advantage of employing DL techniques is so called transfer learning which implies the possibility of reusing a pre-trained model designed for some task in another task.
+Consequently, this enables DL techniques to work with complex problems by splitting them into a large number of simple blocks. 
+Another essential advantage of employing DL techniques is so-called transfer learning which implies the possibility of reusing a pre-trained model designed for some task in another task.
 
-This work is based on our previous work~\cite{Ijjeh2021} in which we developed a DL model trained on a numerically generated dataset which resembles measurements acquired by SLDV.
+DL approaches in various SHM fields are increasingly getting more attention in recent years due to rapid advancement in the technology of computer hardware and software, big data, and cloud-based computations~\cite{Azimi}.
+Several DL-based techniques were applied for SHM of civil engineering structures for damage detection and localisation~\cite{Cha2018, Kong2018}, corrosion detection~\cite{Atha2018}, concrete crack detection~\cite{Dung2019}.
+Azimi et al.~\cite{Azimi} presented a comprehensive review of DL applications for vibration-based SHM.
+On the other hand, DL applications for guided wave-based SHM have less attention in the literature comparing to vibration-based SHM.
+
+In the following, several DL techniques for guided wave-based damage detection and localisation are presented.
+Chetwynd et al.~\cite{Chetwynd2008} proposed a multi-layer perceptron MLP network for damage detection in curved composite panels.
+The damage was simulated by a force applicator with a circular tip loaded by a mass.
+Further, a PZT transducer array was utilised for generating and registering Lamb waves propagating through the panel.
+Additionally, a novelty index for each Lamb wave response was obtained,
+which was compared to some threshold values. 
+Accordingly, if the index exceeds the threshold it indicates that there is damage in the structure. 
+The MLP network was fed by the obtained novelty indexes to perform two operations: classification and regression. 
+The classification network was designed to define three convex regions of the panel then to determine whether the panel is damaged or not. 
+On the other hand, the regression network is capable of estimating the exact location of the damage.
+
+Furthermore, authors in~\cite{DeFenza2015} introduced an artificial neural network (ANN) model for damage detection in plates made of aluminum alloys and composite.
+The training of the ANN was conducted on synthetic data calculated by using the finite element method.
+Moreover, the authors utilised the acquired measurements of propagating Lamb waves to calculate damage indexes.
+Melville et al.~\cite{Melville2018} proposed a CNN model that utilises full wavefield measurements of thin aluminum plates for damage state prediction.
+The model achieved higher accuracy regarding damage \(99.98\%\) when compared to SVM that achieved \(62\%\).
+Ewald et al.~\cite{Ewald2019} proposed a CNN model called (DeepSHM) for signal classification using Lamb waves.
+The model provides an end-to-end approach for SHM by utilising response signals captured by sensors.
+Moreover, the authors applied wavelet transform to preprocess response signals to compute the wavelet coefficient matrix (WCM) which were fed into the CNN model.
+Liu and Zhang~\cite{Liu2020a} proposed a CNN model for damage detection in thin aluminum plates.
+Analytical formulas were derived for generating Lamb waves that were used for training and validation purposes.
+Moreover, the authors verified their model by testing it on experimental data with a notch crack to represent the damage.
+Furthermore, Esfandabadi et al.~\cite{esfandabadideep} investigated the applications of compressive sensing method in conjunction with super-resolution techniques to acquire high-resolution wavefields via the training of neural networks on different aluminum and Composite Fibre Reinforced Polymer (CFRP) plates. 
+The authors applied two variants of CNN architecture:  the Super-Resolution Convolutional Neural Networks (SRCNNs) and the Very-Deep Super Resolution (VDSR) with compressive sensing to recover high spatial frequency information from the low-resolution wavefield images.
+However, enhancing the resolution affects negatively the damaged area which will alter the damage features.
+
+This work is an extension to our previous work~\cite{Ijjeh2021} in which we developed a DL model trained on a numerically generated dataset that resembles measurements with high resolutions acquired by SLDV.
 The developed DL method was compared with a conventional damage technique i.e. adaptive wavenumber filtering~\cite{Kudela2015, Radzienski2019a}.
-In this work, we present a comparative study of five DL models for semantic image segmentation utilised for delamination detection, localisation, and size estimation in Composite Fibre Reinforced Polymer (CFRP).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Current SHM techniques are able to localize impact event~\cite{Ciampa2012} or localise damage~\cite{Nokhbatolfoghahai2020} with good accuracy. 
+But characterisation of damage size and shape is difficult to perform with sparse array of sensors. 
+To alleviate this problem, locally applied full wavefield ultrasonic methods can be applied for estimation of damage severity and further for damage prognosis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It motivates us to utilise the full wavefield of Lamb waves propagation through several deep learning techniques of image segmentation to perform a precise delamination identification and size estimation.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, we present a comparative study of five DL models for semantic image segmentation utilised for delamination detection, localisation, and size estimation in CFRP.
 The models were validated on numerical and experimental data to show their ability to generalise.
-Moreover, the accuracy of the current models surpasses the accuracy of previous models.         
+Moreover, the accuracy of the current models surpasses the accuracy of previous model in~\cite{Ijjeh2021}.         
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The paper is organised in five sections, including the present one.
-Section~\ref{related_works} presents the related works.
-In section~\ref{methodology} the dataset and the semantic segmentation models used for delamination detection are illustrated. 
+The paper is organised into four sections, including the present one.
+Section~\ref{methodology} presents the dataset and the semantic segmentation models used for delamination detection. 
 Next, a detailed comparison of the semantic segmentation models is presented in section~\ref{section:results_and_discussions}.
-Finally, section~\ref{conclusion} presents the conclusion and future work.
+Finally, section~\ref{conclusion} presents conclusions and future works.
