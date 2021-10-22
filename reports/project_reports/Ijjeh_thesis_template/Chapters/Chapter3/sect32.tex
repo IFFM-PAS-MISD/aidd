@@ -225,11 +225,12 @@ In next years, several spectacular CNNs architectures were presented (e.g VGG-16
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Recurrent neural networks}
 \label{sec222}
-Recurrent neural network (RNN) is a DL model that handles time-series data (sequential data).
-Moreover, the RNN technique can remember its data input, because of its internal memory which makes it a powerful and promising technique in the field of DL.
+Recurrent neural network (RNN) is a class of ANN that was introduced to work with time-series data (sequential data).
+RNN technique can remember its data input, because of its internal memory which makes it a powerful and promising technique in the field of DL.
 Since there are temporal problems such as natural language processing, language translation, image captioning and so on, they require to be handled sequentially.
-In the traditional deep neural networks (feed-forward) it is assumed that there is no correlation between the inputs and the outputs, while this assumption is not true for the RNN technique, that means the output of the RNN depends on the prior input sequence.
-The future events can also be used in predicting the output of a given sequence.
+In the traditional deep neural networks (feed-forward) the information only moves in one direction from input layer through hidden layers to the output layers.
+However, this is not the case for the RNN technique, which implies the current output of an RNN depends on prior input sequence.
+Accordingly, future events are also utilised for predicting the output of a given sequence.
 Figure~\ref{fig:rnn_vs_FFNN} depicts the difference between RNN and feed-forward deep neural networks.
 As shown in the Fig.~\ref{fig:rrn}, for the RNN, the output of a certain layer is looped back to its input which helps in making the prediction.
 However, in feed-forward networks shown in Fig.~\ref{fig:FFNN} the inputs and outputs are independent, as there is only one direction for the data to move.
@@ -254,45 +255,113 @@ However, in feed-forward networks shown in Fig.~\ref{fig:FFNN} the inputs and ou
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Figure~\ref{unrolled_rnn} shows the visualisation of an unrolled RNN, where \(x_{t}\) corresponds to the sequential timestamped input at time \(t\), \(h_{t}\) corresponds to internal state  and \(Y_{t}\) corresponds to the predicted timestamped output at time \(t\).
-Additionally, the figure shows that an unrolled RNN can be seen as a cascaded sequence of feed-forward networks.
+Figure~\ref{unrolled_rnn} presents a visualisation of an unrolled RNN, where \(x_{t}\) corresponds to the sequential timestamped input at time \(t\), \(h_{t}\) corresponds to internal state  and \(Y_{t}\) corresponds to the predicted timestamped output at time \(t\).
+An unrolled RNN can be seen as a cascaded sequence of feed-forward networks.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 	\begin{center}
-	\includegraphics[scale=1]{Figures/Chapter_2/unrolled_rnn.png}
+	\includegraphics[scale=1]{Figures/Chapter_3/unrolled_rnn.png}
 	\end{center}
 	\captionof{figure}{Unrolled RNN.}
 	\label{unrolled_rnn}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In the feed-forward neural networks, as mentioned earlier, the learnable parameters (adjustable weights) are available only for the forward path of data propagation that are updated through back-propagation algorithm.
-However, for RNN, since there are two paths of data propagation (forward and backward) there are learnable weights for both directions.
-In RNN technique, weights are updated using back-propagation through time (BBTT)~\cite{Werbos1990}.
-Essentially, BBTT performs back-propagation algorithm on unrolled RNN and since BBTT depends on the number of timestamps this could be computationally expensive when there are a high number of timestamps.
 
-A gradient measures the change in all weights regarding the change in error (the difference between the actual predicted output and the ground truth).
-As a result, when implementing RNNs, two issues may arise during updating the learnable weights using BBTT which are vanishing and exploding gradients.
-To solve such issues, a long short-term memory (LSTM) was introduced~\cite{Hochreiter1997} which is an memory extension for regular RNN.
-LSTM addresses the problem of long-term dependencies.
-
-LSTM is composed of four units: an input gate, a cell state, a forget gate, and a output gate.
+In feed-forward neural networks, as mentioned earlier, the learnable parameters (adjustable weights) are available only for the forward path of data propagation that are updated through back-propagation algorithm.
+In RNNs, there are two paths of data propagation (forward and backward), hence, there are learnable weights for both directions.
+In RNN, weights are updated using back-propagation through time (BBTT)~\cite{Werbos1990}.
+BBTT depends on the number of timestamps, so it is computationally expensive when there are a high number of timestamps as BBTT performs a back-propagation algorithm on unrolled RNN.
+Consequently, when implementing RNNs, issues may arise during updating the learnable weights using BBTT which are vanishing and exploding gradients.
+To overcome such issues, ~\textcite{Hochreiter1997} introduced a long short-term memory (LSTM), which is a memory extension for a regular RNN to address the problem of long-term dependencies.
+Further, LSTMs handle inputs or outputs of any length that makes LSTMs powerful for solving very complex sequential problems.
+LSTM is composed of four units: an input gate, a cell state, a forget gate, and a output gate as presented in Fig.~\ref{fig:lstm}.
+These gates help regulating the flow of information that is added to or removed from the cell state. 
+The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=1]{Figures/Chapter_2/lstm.png}
+		\includegraphics[scale=1]{Figures/Chapter_3/lstm.png}
 	\end{center}
 	\captionof{figure}{LSTM architecture.}
-	\label{lstm}
+	\label{fig:lstm}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The purpose of the forget gate is to figure out which information needs to be considered and which needs to be neglected.
-The current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a sigmoid function which will produce values between \(0\) and \(1\) then the outputs of the sigmoid are multiplied with the previous cell state.
-The input gate takes the current input \(x_t\) and the previous hidden state \(h_{t-1}\) and apply a sigmoid function over them in order to transform them to values in a range between \(0\) (not important) and \(1\) (important), then the same current input and the hidden state are passed through a \(tanh\) function which will regulate the network by transferring the values into a range between \(-1\) and \(1\).
-Then, the outputs from the sigmoid and \(tanh\) functions are multiplied point-by-point in order to eliminate \(0\) values.
-At this point, the network has sufficient information obtained from the input and forget gates.
-Therefore, the current cell state \(c_t\) can be calculated through multiplying the previous cell state \(c_{t-1}\) with the output of the forget gate (all 0 values will be dropped) and the result is added to the calculated input values.
-Afterward, the output gate computes the next hidden state \(h_t\) that holds information belongs to the current inputs.
-Initially, the current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a third sigmoid function which will produce values between 
-\(0\) and \(1\), and the current cell state \(c_t\) is passed though a \(tanh\) function.
-Then the calculated values from the third sigmoid function and the \(tanh\) function are multiplied point-by-point.
-Finally, the computed hidden state \(h_t\) is used for the prediction and it is transferred to the next timestamp.
+
+The forget gate is utilised to determine which information to consider and which to neglect.
+The current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a sigmoid function which will produce values between \(0\) and \(1\).
+Then the outputs of the sigmoid are multiplied with the previous cell state \(c_{t-1}\) to discard outputs equal to zero.
+Equation~\ref{eqn:forget_gate} depicts the calculation at the forget gate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	\centering
+	f_t = \sigma(W_f.[h_{t-1}, X_{t}]+ b_f)
+	\label{eqn:forget_gate}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+where \(W\) represents the learnable weights, and \(b\) represents the bias term.
+
+The input gate \(i_{t}\) takes the current input \(X_t\) with the previous hidden state \(h_{t-1}\) then apply the sigmoid function to get values in a range between 0 (not important) and 1 (important), then the
+same current input \(X_t\), and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at \(\tilde{C}_{t}\) that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
+Then, the outputs from the sigmoid and \(\tanh\) functions are multiplied point-by-point to eliminate \(0\) values.  
+Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
+\begin{equation}
+	\begin{aligned}
+		i_{t} &=\sigma\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) 
+		\\
+		\tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right) 
+	\end{aligned} \label{eq:eq2}
+\end{equation}
+At this point, the network has sufficient information obtained from the input and forget gates. 
+Hence, the current cell state \(C_t\) can be calculated by multiplying the previous cell state \(C_{t-1}\) with the output of the forget gate, then the result is added to the calculated input values as depicted in Eq.~(\ref{eq:eq3}): 
+\begin{equation}
+	C_{t}=f_{t} * C_{t-1}+i_{t} * \tilde{C}_{t}
+	\label{eq:eq3}
+\end{equation}
+The output gate \(o_{t}\) computes the next hidden state \(h_{t}\) which
+holds information related to the current inputs. 
+Accordingly, the current input \(X_{t}\) and the previous hidden state \(h_{t-1}\) are passed through a third sigmoid function to produce values between \(0\) and \(1\).
+The current cell state \(C_{t}\) is passed through a \(\tanh\) function and multiplied point-by-point with \(o_{t}\) to produce the new hidden state \(h_{t}\) which is transferred to the next timestamp.
+Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	\begin{aligned}
+		o_{t} &=\sigma\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right) \\
+		h_{t} &=o_{t} * \tanh \left(C_{t}\right)
+	\end{aligned}
+	\label{eq:eq4}
+\end{equation} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Recently, LSTMs have been widely used for large-scale learning of language translation models, speech recognition systems, chatbots, forecasting stock markets, text data analysis, and many more~\cite{graves2014towards, cho2014properties}. 
+However, LSTMs are inefficient regarding capturing spatial information by themselves when the time series inputs are consecutive images.
+Accordingly, ConvLSTM layer which is a combination of CNN and LSTM unit was introduced by Shi et al.~\cite{xingjian2015convolutional} to solve such a problem.
+For ConvLSTM, the convolution operations are applied both at the input-to-state transition and at the state-to-state transitions.  
+ConvLSTM shown in Fig.~\ref{fig:ConvLSTM} is a variation of the LSTM cell as it performs a convolution operation within the LSTM cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=1]{Figures/Chapter_3/convlstm_image.png}
+	\end{center}
+	\captionof{figure}{ConvLSTM architecture.}
+	\label{fig:ConvLSTM}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ConvLSTM is a combination of a convolution operation and an LSTM cell.
+Thus, ConvLSTM can capture the time-correlated and spatial features in a series of consecutive images. 
+Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \(X_1, \dots, X_t\), hidden states \(h_1, \dots, h_t\), cell states \(C_1, \dots, C_t\) and input, forget and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
+\begin{equation}
+	\begin{aligned}
+		i_{t} &=\sigma\left(W_{x i} * X_{t}+W_{h i} * h_{t-1}+W_{c i} \odot C_{t-1}+b_{i}\right) 
+		\\
+		f_{t} &=\sigma\left(W_{x f} * X_{t}+W_{h f} * h_{t-1}+W_{c f} \odot C_{t-1}+b_{f}\right) \\
+		C_{t} &=f_{t} \odot C_{t-1}+i_{t} \odot \tanh \left(W_{x c} * X_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
+		\\
+		o_{t} &=\sigma\left(W_{x o} * X_{t}+W_{h o} * h_{t-1}+W_{c o} \odot C_{t}+b_{o}\right) \\
+		h_{t} &=o_{t} \odot \tanh \left(C_{t}\right)
+	\end{aligned}
+	\label{eq:eq5}
+\end{equation}
+where \(*\) indicates the convolution operation, and \(\odot\) represents the 
+Hadamard product. 
+Recently, ConvLSTM has become very popular and is increasingly being used in 
+more and more image processing applications.

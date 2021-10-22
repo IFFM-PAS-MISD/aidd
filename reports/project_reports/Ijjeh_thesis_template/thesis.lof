@@ -18,15 +18,16 @@
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Saddle point\relax }}{30}{figure.caption.40}%
 \contentsline {figure}{\numberline {3.12}{\ignorespaces Convolution operation with a sliding kernel.\relax }}{31}{figure.caption.41}%
 \contentsline {figure}{\numberline {3.13}{\ignorespaces Types of downsampling operations\relax }}{32}{figure.caption.42}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Convolutional Neural Network architecture\relax }}{33}{figure.caption.43}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Convolutional Neural Network architecture\relax }}{32}{figure.caption.43}%
 \contentsline {figure}{\numberline {3.15}{\ignorespaces (a) RNN v.s. (b) Feed-forward neural network\relax }}{33}{figure.caption.44}%
 \contentsline {figure}{\numberline {3.16}{\ignorespaces Unrolled RNN.\relax }}{34}{figure.caption.45}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces LSTM architecture.\relax }}{35}{figure.caption.46}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces (a) Conventional ML based SHM vs. (b) DL based SHM.\relax }}{36}{figure.caption.47}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces LSTM architecture.\relax }}{34}{figure.caption.46}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces ConvLSTM architecture.\relax }}{36}{figure.caption.47}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces (a) Conventional ML based SHM vs. (b) DL based SHM.\relax }}{37}{figure.caption.48}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Setup for computing Lamb wave interactions with delamination.\relax }}{42}{figure.caption.48}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces The plate with 475 cases of random delaminations.\relax }}{42}{figure.caption.49}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Full wavefield at the top surface (a)--(c) and the bottom surface (d)--(f), respectively, at selected time instances showing the interaction of guided waves with delamination.\relax }}{44}{figure.caption.50}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces RMS of the full wavefield from the top surface of the plate (a) and the bottom surface of the plate (b).\relax }}{44}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Setup for computing Lamb wave interactions with delamination.\relax }}{43}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The plate with 475 cases of random delaminations.\relax }}{43}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Full wavefield at the top surface (a)--(c) and the bottom surface (d)--(f), respectively, at selected time instances showing the interaction of guided waves with delamination.\relax }}{45}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces RMS of the full wavefield from the top surface of the plate (a) and the bottom surface of the plate (b).\relax }}{45}{figure.caption.52}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
