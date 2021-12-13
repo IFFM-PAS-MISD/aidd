@@ -47,11 +47,11 @@ Psi = dct(eye(n,n)); % build Psi
 Theta = Psi(perm, :); % random rows of Psi
 
 % Standard Lasso problem
-tau=100;
-[s_L1,r,g,info] = spg_lasso(Theta,y',tau);
+% tau=100;
+% [s_L1,r,g,info] = spg_lasso(Theta,y',tau);
 % the basis pursuit problem
-%  sigma = 1.;
-%  [s_L1,r,g,info] = spg_bpdn(Theta,y',sigma);
+  sigma = 1.;
+  [s_L1,r,g,info] = spg_bpdn(Theta,y',sigma);
 
 % The standard basis-pursuit denoise problem
 %[s_L1,r,g,info] = spg_bp(Theta,y');

@@ -14,7 +14,7 @@ for k=1:M
 t = linspace(0, 1, n);
 x = (cos(2 * 97 * pi * t) + cos(2 * 777 * pi * t));%+0.2*rand(n,1)')-0.1;
 xt = fft(x); % Fourier trasnformed signal
-%xd = dct(x); % Discrete cosine transformed signal
+xd = dct(x); % Discrete cosine transformed signal
 PSD = xt.*conj(xt)/n; % Power spectral density
 
 %% Randomly sample signal
