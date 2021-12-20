@@ -4,21 +4,26 @@
  
 clear;clc; close all
 %----------------load testing data---------
-n1=256;
-Orig_Image = im2double(imread('/home/pkudela/work/projects/nawa-bekker/ma-shm/data/processed/num/wavefield_dataset2_bottom_out/41_output/111_flat_shell_Vz_41_500x500bottom.png'));
+n1=65;
+%n1=512;% out of memory
 
+load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/65x65p_50kHz_5HC_14Vpp_x10.mat');
+%load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/389286p_na_512x512p.mat');
+frame=80;
+Orig_Image = squeeze(Data(:,:,frame))/max(max(squeeze(Data(:,:,frame))))/2;% 
+%Orig_Image = squeeze(Data3D(:,:,frame))/max(max(squeeze(Data3D(:,:,frame))))/2;% 
 %imshow(Orig_Image)
-Orig_Image = imresize(Orig_Image,[n1 n1]);
+
 x = reshape(Orig_Image,n1*n1,1);% reshape into 1D
 mx = mean(x);
-x = x - mx;
-Orig_Image = Orig_Image - mx;
+ x = x - mx;
+ Orig_Image = Orig_Image - mx;
 figure; 
 imagesc(Orig_Image);colormap jet; axis equal; axis off;
 %% CS meaurement and recovery
 % ------------CS measurement-------------
 n = numel(x);
-m = 8000;% Measurement number
+m = 3400;% Measurement number
 perm = round(rand(m,1)*n);
 perm(perm==0)=1;
 y1 = x(perm); % compressed measurement
@@ -43,13 +48,13 @@ imagesc(recon_image);colormap jet;axis equal;axis off;
 
 figure;
 ax1 = subplot(1,3,1);
-imshow(Orig_Image+mx);
+imshow(Orig_Image+mx+0.5);
 title(['Orig ',num2str(n1),'x',num2str(n1)]);
 ax2 = subplot(1,3,2);
-imshow(random_image+mx);
+imshow(random_image+mx+0.5);
 title(['Rand ',num2str(m)]);
 ax3 = subplot(1,3,3);
-imshow(recon_image+mx);
+imshow(recon_image+mx+0.5);
 title('Reconstr Fourier');
 
-%print(['CS_2D_Fourier'],'-dpng', '-r600'); 
+%print(['CS_2D_Fourier_exp2'],'-dpng', '-r600'); 

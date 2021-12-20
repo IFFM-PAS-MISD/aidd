@@ -66,7 +66,7 @@ for k = test_case
 %                  end
 %              end
 %             %% make interpolation of full wavefield     
-            for frame = 1:nft/2
+            for frame = 1:nft
                 %Data_frame_interp = squeeze(interp2(X,Y,Data(:,:,frame),XI,YI,'spline'));
                 % convert to image    
                 frame_filename=[interim_data_path,processed_filename,filesep,'frame_',num2str(frame),'_',processed_filename];
