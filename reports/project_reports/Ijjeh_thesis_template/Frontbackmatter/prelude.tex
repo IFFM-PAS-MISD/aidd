@@ -7,6 +7,7 @@
 \copyrighttrue 												% Copyright page (required)
 \abswithesistrue 											% Abstract to be bound with thesis (optional)
 \acktrue 													% Acknowledgments page (optional)
+\publicationtrue										    	% Publications  page (optional)
 \tablecontentstrue 											% Table of contents page (required)
 \tablespagetrue 											% Table of contents page for tables (required only if you have tables)
 \figurespagetrue 											% Table of contents page for figures (required only if you have figures)
@@ -22,17 +23,35 @@
 \dept{The Szewalski Institute of Fluid-Flow Machinery, Polish Academy of Sciences}
 \date						% Month & year of your thesis submission (e.g. January, 2016)
 
-% Abstract to be bound with thesis
-\newcommand{\abstextwithesis}
-{
-%Basic abstract goes here. Can use paragraphs and normal \LaTeX commands.
-...
-}
 
 % Acknowledgments page
 \newcommand{\acknowledgement}
 {
+	I would like to acknowledge
 }
+
+% Abstract to be bound with thesis
+\newcommand{\abstextwithesis}
+{
+	%Basic abstract goes here. Can use paragraphs and normal \LaTeX commands.
+	...
+}
+
+% Puplications page
+\newcommand{\publications}
+{
+	\textbf{Journal papers}
+	\begin{itemize}
+		\item Ijjeh, Abdalraheem A., Saeed Ullah, and Pawel Kudela. \say{Full wavefield processing by using FCN for delamination detection.} Mechanical Systems and Signal Processing 153 (2021): 107537.
+		\item Ijjeh, Abdalraheem A., and Pawel Kudela. \say{Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study.} Mechanical Systems and Signal Processing 168 (2022): 108671.
+		\item  Ullah, Saeed, Abdalraheem A. Ijjeh, and Pawel Kudela. \say{Deep learning approach for delamination identification using animation of Lamb waves.} Mechanical Systems and Signal Processing
+	\end{itemize}
+	\textbf{Conference papers}
+	\begin{itemize}
+		\item Ijjeh, Abdalraheem A., and Pawel Kudela. \say{Feasibility Study of Full Wavefield Processing by Using CNN for Delamination Detection.} Proceedings of the International Conference on Structural Health Monitoring of Intelligent Infrastructure, Porto, Portugal, 30 June - 2 July 2021, ISSN 2564-3738, pages \(709-713\). 
+	\end{itemize}
+}
+
 
 % Engineering guote page
 \newcommand{\engineeringquote}
