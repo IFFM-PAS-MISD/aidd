@@ -252,6 +252,7 @@
 \newif\ifcopyright \copyrighttrue
 \newif\ifabswithesis \abswithesistrue
 \newif\ifack \acktrue
+\newif\ifpublication \publicationtrue
 \newif\ifnomencl \nomencltrue
 \newif\iftablecontents \tablecontentstrue
 \newif\iftablespage \tablespagefalse
@@ -418,6 +419,15 @@
     \acknowledgement
 }
 
+% Command to make the Puplication page
+\def\publication{
+	\newpage
+	% Set up the default behavior for headers and footers
+	\thispagestyle{empty}
+	\prefacesection{PUBLICATIONS}
+	\publications
+}
+
 % Command to make the engineering quote page
 \def\engquote{
     \newpage
@@ -430,8 +440,9 @@
 \def\beforepreface{
 \iftitlepg\titlepg\fi
 \ifack\engquote\fi
-\ifabswithesis\abswithesis\fi
 \ifack\ackpage\fi
+\ifabswithesis\abswithesis\fi
+\ifack\publication\fi
 }
 
 % Takes care of the table of contents, figures etc 
