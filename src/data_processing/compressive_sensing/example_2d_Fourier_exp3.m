@@ -4,16 +4,19 @@
  
 clear;clc; close all
 %----------------load testing data---------
-n1=65;
-%n1=512;% out of memory
-
-load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/65x65p_50kHz_5HC_14Vpp_x10.mat');
-%load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/389286p_na_512x512p.mat');
+% n1=65;
+% n1=512;% out of memory
+%n1=256;
+n1=128;
+%load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/65x65p_50kHz_5HC_14Vpp_x10.mat');
+load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/389286p_na_512x512p.mat');
 frame=80;
 Orig_Image = squeeze(Data(:,:,frame))/max(max(squeeze(Data(:,:,frame))))/2;% 
 %Orig_Image = squeeze(Data3D(:,:,frame))/max(max(squeeze(Data3D(:,:,frame))))/2;% 
 %imshow(Orig_Image)
-
+clear Data;
+%Orig_Image = Orig_Image(1:2:end,1:2:end);
+Orig_Image = Orig_Image(1:4:end,1:4:end);
 x = reshape(Orig_Image,n1*n1,1);% reshape into 1D
 mx = mean(x);
  x = x - mx;
@@ -23,7 +26,8 @@ imagesc(Orig_Image);colormap jet; axis equal; axis off;
 %% CS meaurement and recovery
 % ------------CS measurement-------------
 n = numel(x);
-m = 2025;%3400;% Measurement number
+m = 4096;%2025;%3400;% Measurement number
+%m=16000;
 %perm = round(rand(m,1)*n); perm(perm==0)=1;
 perm = randperm(n,m)';
 y1 = x(perm); % compressed measurement
@@ -32,13 +36,14 @@ x_mask(perm)=1;
 x2=x.*x_mask;
 random_image=reshape(x2,n1,n1); % random measurements
 figure;
-imagesc( reshape(x2,n1,n1) ); colormap jet;axis equal;axis off;
+%imagesc( reshape(x2,n1,n1) ); colormap jet;axis equal;axis off;
+imagesc( reshape(x_mask,n1,n1) ); axis equal;axis off; colormap gray;
 %-------------- reconstruct with orthogonal matching pursuit -----------
 Th=1e-4;% residual threshold 
+
 Psi = dftmtx(n);% Fourier sparse basis
 Theta = Psi(perm, :); % random rows of Psi
-
-opts = spgSetParms('optTol',1e-4);
+opts = spgSetParms('optTol',1e-5);
 [xSparse,r,g,info] = spg_bpdn(Theta,y1,Th,opts);% reconstruction the sparse signal
 Psi_inv = conj(Psi);
 xRec = real(Psi_inv*xSparse); % calculate the original signal

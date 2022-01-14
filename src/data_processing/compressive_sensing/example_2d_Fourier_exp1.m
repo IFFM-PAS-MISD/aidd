@@ -73,7 +73,7 @@ Psi_inv = conj(Psi);
 xRec = real(Psi_inv*xSparse); % calculate the original signal
 recon_image =  reshape(flipud(xRec), n1,n1); % reconstructed image
 figure
-imagesc(recon_image);colormap jet;axis equal;axis off;
+imagesc(recon_image);colormap jet;axis equal;
 title('reconstructed');
 % y2=reshape(xRec(perm),65,65);
 % figure
