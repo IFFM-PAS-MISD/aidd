@@ -6,7 +6,6 @@ clear;clc; close all
 %----------------load testing data---------
 n1=256;
 Orig_Image = im2double(imread('/home/pkudela/work/projects/nawa-bekker/ma-shm/data/processed/num/wavefield_dataset2_bottom_out/41_output/111_flat_shell_Vz_41_500x500bottom.png'));
-
 %imshow(Orig_Image)
 Orig_Image = imresize(Orig_Image,[n1 n1]);
 x = reshape(Orig_Image,n1*n1,1);% reshape into 1D

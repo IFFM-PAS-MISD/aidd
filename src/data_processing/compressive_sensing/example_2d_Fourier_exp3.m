@@ -10,7 +10,7 @@ clear;clc; close all
 n1=128;
 %load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/65x65p_50kHz_5HC_14Vpp_x10.mat');
 load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/389286p_na_512x512p.mat');
-frame=80;
+frame=110;
 Orig_Image = squeeze(Data(:,:,frame))/max(max(squeeze(Data(:,:,frame))))/2;% 
 %Orig_Image = squeeze(Data3D(:,:,frame))/max(max(squeeze(Data3D(:,:,frame))))/2;% 
 %imshow(Orig_Image)
@@ -39,11 +39,15 @@ figure;
 %imagesc( reshape(x2,n1,n1) ); colormap jet;axis equal;axis off;
 imagesc( reshape(x_mask,n1,n1) ); axis equal;axis off; colormap gray;
 %-------------- reconstruct with orthogonal matching pursuit -----------
-Th=1e-4;% residual threshold 
-
+Th=1e-3;% residual threshold (sigma in spgl1 description)
+% constant related to the noise level in the measurements
+%sigma = sqrt(sum(x.^2))/N;
+sigma = var(x) * 0.5;
+Th = sigma;
 Psi = dftmtx(n);% Fourier sparse basis
 Theta = Psi(perm, :); % random rows of Psi
-opts = spgSetParms('optTol',1e-5);
+opts = spgSetParms('optTol',1e-4);
+% basis-pursuit denoise
 [xSparse,r,g,info] = spg_bpdn(Theta,y1,Th,opts);% reconstruction the sparse signal
 Psi_inv = conj(Psi);
 xRec = real(Psi_inv*xSparse); % calculate the original signal
