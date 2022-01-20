@@ -5,7 +5,7 @@ For structural health monitoring usually array of transducers is used for point-
 In active guided wave based SHM these are usually piezoelectric transducers which can work as actuators and sensors.
 It should be noted that round-robin actuator-sensor measurements can be conducted very fast, therefore nearly online monitoring of a structure is possible.
 
-Recently, a lot of research on application of scanning laser Doppler vibrometer (SLDV) for NDT is reported \textcolor{RubineRed}{[citation needed!]}.
+Recently, a lot of research on application of scanning laser Doppler vibrometer (SLDV) for NDT is reported~\cite{Flynn2013,Kudela2015,Kudela2018d,Segers2021,Segers2022}. 
 In this method either piezoelectric transducer or pulse laser are used for guided wave excitation while the measurements by SLDV are taken at one point on the surface of inspected structure.
 The process is repeated for other points automatically in scanning fashion until full wavefield of Lamb waves is acquired.
 
@@ -16,8 +16,10 @@ It makes SLDV approach unsuitable for SHM in which continuous monitoring is requ
 But it is very capable for offline NDT application.
 
 One can imagine that in future matrix of laser heads instead of single laser head used nowadays will be developed to reduce SLDV measurement time.
-Alternatively, compressive sensing and/or deep learning super-resolution can be applied.
+Alternatively, compressive sensing (CS) and/or deep learning super-resolution (DLSR) can be applied.
 It means that SLDV measurements can be taken on low resolution grid of points and than full wavield can be reconstructed at high resolution.
+
+
 
 {\color{RubineRed}
 
@@ -29,5 +31,12 @@ compressive sensing plus super-resolution enhancement (Esfandabadi, de Marchi)
 
 super-resolution literature, mostly images and video games, none for waves
 
-end-to-end approach of DLSS - our original contribution
 }
+
+We propose a framework for full wavefield reconstruction of propagating Lamb waves from spatially sparse SLDV measurements of resolution below the Nyquist wavelength $\lambda_N$. 
+The Nyquist wavelength is the shortest spatial wavelength that can be accurately recovered from wavefield by sequential observations with spacing $\Delta x$ which is defined as $\lambda_N = 2 \Delta x$. 
+
+For the first time, an end-to-end approach is used in which deep learning neural network is trained on synthetic dataset and tested on experimental data acquired by using SLDV.
+It means that the approach is solely based on DLSR.
+It is different than methods presented in the literature which utilize CS theory~\cite{Harley2013,KeshmiriEsfandabadi2018} or CS theory in conjunction with super-resolution convolutional neural networks for wavefield image enhancement~\cite{KeshmiriEsfandabadi2020}.
+The efficacy of the developed framework is presented and compared with conventional CS approach.  
