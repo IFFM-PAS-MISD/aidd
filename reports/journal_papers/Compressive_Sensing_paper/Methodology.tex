@@ -1,6 +1,37 @@
 \section{Methodology}
+\subsection{Dataset Acquisition}
+In this work, we have utilised our synthetic  dataset~\cite{kudela_pawel_2021_5414555} for training the deep learning models for super-resolution image reconstruction.  
+Initially, the dataset resembles the particle velocity measurements at the bottom surface of a plate acquired by the SLDV in the transverse direction as a response to the piezoelectric excitation at the centre of the plate.
+The plate has a size of \( (500\times500)\) mm\(^2\) and is made of eight layers of a total thickness of \(3.9\) mm.
+The input signal was a five-cycle Hann window modulated sinusoidal tone burst. The carrier frequency was assumed as \(50\) kHz.
+
+The dataset contains \(475\) cases of full wavefield representing the propagation of Lamb waves and their interactions with random delaminations of different locations, shapes, sizes, and orientations in a CFRP plate.
+Figure~\ref{fig:All_cases} shows the plate with overlayed 475 delaminations.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{figure1.png}
+	\end{center}
+	\caption{The plate with 475 cases of random delaminations.} 
+	\label{fig:All_cases}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Each simulated case in the dataset is a 3D matrix, which holds the amplitudes of the propagating waves at location \((x,y)\) and time \((t)\). 
+Accordingly, these matrices can be seen as animated frames at discrete time of propagating waves as shown in fig.~\ref{fig:wavefield_propagation}. 
+Further, for each simulated case we have generated a \((512)\) frames.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{wavefield_propagation.png}
+	\end{center}
+	\caption{Full wavefield frames of Lamb waves propagation.} 
+	\label{fig:wavefield_propagation}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Dataset preprocessing}
-Synthetic dataset~\cite{kudela_pawel_2021_5414555}\\
+
 1. Calculating the Nyquist rate 2d frame. \\
 2. Calculating the compression ratio which will be used when generating the low resolution training set based on the previous step. \\
 3. Creating two meshes (random and uniform) for generating low resolution frames for training deep learning models.\\
