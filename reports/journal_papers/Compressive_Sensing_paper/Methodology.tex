@@ -3,7 +3,7 @@
 In this work, we have utilised our synthetic  dataset~\cite{kudela_pawel_2021_5414555} for training the deep learning models for super-resolution image reconstruction.  
 Initially, the dataset resembles the particle velocity measurements at the bottom surface of a plate acquired by the SLDV in the transverse direction as a response to the piezoelectric excitation at the centre of the plate.
 The plate has a size of \( (500\times500)\) mm\(^2\) and is made of eight layers of a total thickness of \(3.9\) mm.
-The input signal was a five-cycle Hann window modulated sinusoidal tone burst. The carrier frequency was assumed as \(50\) kHz.
+The input signal was a five-cycle Hann window modulated sinusoidal tone burst. The carrier frequency was \(50\) kHz.
 
 The dataset contains \(475\) cases of full wavefield representing the propagation of Lamb waves and their interactions with random delaminations of different locations, shapes, sizes, and orientations in a CFRP plate.
 Figure~\ref{fig:All_cases} shows the plate with overlayed 475 delaminations.
@@ -17,11 +17,11 @@ Figure~\ref{fig:All_cases} shows the plate with overlayed 475 delaminations.
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Each simulated case in the dataset is a 3D matrix, which holds the amplitudes of the propagating waves at location \((x,y)\) and time \((t)\). 
-Accordingly, these matrices can be seen as animated frames at discrete time of propagating waves as shown in fig.~\ref{fig:wavefield_propagation}. 
+Each simulated case in the dataset is a 3D matrix, which holds out-of-plane displacement or velocity of propagating waves in time \((t)\) at location \((x,y)\). 
+Accordingly, these matrices can be seen as sequence of frames at the discrete time of propagating waves as shown in fig.~\ref{fig:wavefield_propagation}. 
 Further, for each simulated case we have generated a \((512)\) frames.
-Accordingly, the dataset has a shape of \((475\times500\times500\times512)\) in which \(475\) represents the total number of simulated case, \((500\times500)\) represents height and width of the frame, and the \(512\) is the total number of frames per each case.
-Hence, the dataset resembles a high resolution frames of propagating waves.
+Accordingly, the dataset has a shape of \((475\times500\times500\times512)\) in which \(475\) represents the total number of simulated cases, \((500\times500)\) represents height and width of the frame, and \(512\) is the total number of frames per each case.
+Hence, the dataset resembles high-resolution frames of propagating waves.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -35,8 +35,8 @@ Hence, the dataset resembles a high resolution frames of propagating waves.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dataset preprocessing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In order to train deep learning models to perform super-resolution image reconstruction, we have to reproduce a low resolution training set from the original high resolution dataset. 
-Initially, we have resized the frames in original high resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low to high resolutions.
+In order to train deep learning models to perform super-resolution image reconstruction, we have to reproduce a low-resolution training set from the original high-resolution dataset. 
+Initially, we have resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low- to high-resolutions.
 
 In this work, we have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
 Hence, we have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(21.5\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
@@ -50,7 +50,7 @@ Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frame
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	CR = \frac{(Low\ resolution\ dimension)^2}{(Nyquist\ sampling\ rate)^2} = \frac{(32\times32)}{(69\times69)}=21.5\%
+	CR = \frac{(Low-resolution\ dimension)^2}{(Nyquist\ sampling\ rate)^2} = \frac{(32\times32)}{(69\times69)}=21.5\%
 	\label{CR}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,7 +97,7 @@ Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frame
 		\caption{LR frame}
 		\label{fig:LR_3}	
 	\end{subfigure}
-	\caption{High resolution and Low resolution frames.}
+	\caption{High-resolution and Low-resolution frames at different time steps.}
 	\label{fig:SR_LR}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
