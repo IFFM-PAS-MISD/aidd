@@ -20,6 +20,8 @@ Figure~\ref{fig:All_cases} shows the plate with overlayed 475 delaminations.
 Each simulated case in the dataset is a 3D matrix, which holds the amplitudes of the propagating waves at location \((x,y)\) and time \((t)\). 
 Accordingly, these matrices can be seen as animated frames at discrete time of propagating waves as shown in fig.~\ref{fig:wavefield_propagation}. 
 Further, for each simulated case we have generated a \((512)\) frames.
+Accordingly, the dataset has a shape of \((475\times500\times500\times512)\) in which \(475\) represents the total number of simulated case, \((500\times500)\) represents height and width of the frame, and the \(512\) is the total number of frames per each case.
+Hence, the dataset resembles a high resolution frames of propagating waves.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -30,8 +32,68 @@ Further, for each simulated case we have generated a \((512)\) frames.
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dataset preprocessing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In order to train deep learning models to perform super-resolution image reconstruction, we have to reproduce a low resolution training set from the original high resolution dataset. 
+Initially, we have resized the frames in original high resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low to high resolutions.
 
-1. Calculating the Nyquist rate 2d frame. \\
-2. Calculating the compression ratio which will be used when generating the low resolution training set based on the previous step. \\
-3. Creating two meshes (random and uniform) for generating low resolution frames for training deep learning models.\\
+In this work, we have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
+Hence, we have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(21.5\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
+ 
+Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	CR = \frac{(Low\ resolution\ dimension)^2}{(Nyquist\ sampling\ rate)^2} = \frac{(32\times32)}{(69\times69)}=21.5\%
+	\label{CR}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	\centering
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{SR_case_1_frame_1.png}
+		\caption{SR Frame}
+		\label{fig:SR_1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{LR_case_1_frame_1.png}
+		\caption{LR frame}
+		\label{fig:LR_1}	
+	\end{subfigure}
+	\hfill
+		\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{SR_case_1_frame_63.png}
+		\caption{SR frame}
+		\label{fig:SR_2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{LR_case_1_frame_63.png}
+		\caption{LR frame}
+		\label{fig:LR_2}	
+	\end{subfigure}
+	\hfill
+		\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{SR_case_1_frame_128.png}
+		\caption{SR frame}
+		\label{fig:SR_3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{LR_case_1_frame_128.png}
+		\caption{LR frame}
+		\label{fig:LR_3}	
+	\end{subfigure}
+	\caption{High resolution and Low resolution frames.}
+	\label{fig:SR_LR}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
