@@ -45,6 +45,11 @@ This is wrong! Bi-cubic interpolation shouldn't be used. You should rather take 
 In Matlab:
 A=rand([512,512]);
 B=A(1:16:end.1:16:end);	
+\\
+
+To generate a low-resolution frame, we picked points from the high-resolution frame at an equal distance of 16 pixels (a uniform mesh).
+Then, a cubic interpolation was applied to generate a low-resolution frame size of \((32\times32)\). \\
+
 }
 Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
 
