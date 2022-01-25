@@ -40,7 +40,12 @@ Initially, we have resized the frames in original high resolution dataset to \((
 
 In this work, we have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
 Hence, we have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(21.5\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
- 
+{\color{RubineRed} 
+This is wrong! Bi-cubic interpolation shouldn't be used. You should rather take every 16th pixel.
+In Matlab:
+A=rand([512,512]);
+B=A(1:16:end.1:16:end);	
+}
 Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
