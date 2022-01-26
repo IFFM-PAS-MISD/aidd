@@ -1,2 +1,39 @@
 \subsubsection{Residual Dense Network}
-Residual dense network (RND) introduced by Zhang et al.~\cite{Zhang2018} utilised for SISR was proposed to solve the issue of the unexploited hierarchical features from the original low-resolution (LR) images.
+Residual dense network (RDN) introduced by Zhang et al.~\cite{Zhang2018} is utilised to perform SISR.
+Further, RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
+Hence, RND addressed this issue by fully exploiting all hierarchical features from all convolutional layers by introducing a residual dense block (RDB).
+Mainly, an RDB can extract the abundant local features through dense connected convolutional layers (local residual learning).
+Further, RDB enables direct links from the previous RDB to all layers of the current RDB, resulting in a contiguous memory (CM) mechanism.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure~\ref{fig:RDB} shows the architecture of a RDB consists of four layers(\(L_1, L_2,L_3,L_4\)).
+
+The local feature fusion among each RDB is utilised for learning more useful features from the previous and current local features, therefore, stabilising the training process as the network depth increases.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{RDB.png}
+	\end{center}
+	\caption{Residual Dense Block architecture.} 
+	\label{fig:RDB}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The implemented RDN model is shown in fig.~\ref{fig:RDN} which is consists of four parts:
+The first part is the Shallow Feature Extraction Net (SFENet) which consists of two cascaded convolutional layers utilised for extracting shallow features from the original LR input.
+The second part is the Residual Dense Blocks (RDBs) in which two RDBs we utilised.
+The third part is the Dense Feature Fusion (DFF) whic is used to fuse features that include global feature fusion and global residual learning, therefore, DFF fully utilise all features from all preceding layers,
+The Global feature fusion is used to learn global hierarchical features in a holistic way.
+And finally, the fourth part is the Up-Sampling Net (UPNet) in which we applied the pixel shuffle technique~\cite{Shi2016}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{RDN.png}
+	\end{center}
+	\caption{Implemented Residual Dense Network architecture.} 
+	\label{fig:RDN}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
