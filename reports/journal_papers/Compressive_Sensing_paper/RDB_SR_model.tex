@@ -1,13 +1,9 @@
 \subsubsection{Residual Dense Network}
-Residual dense network (RDN) introduced by Zhang et al.~\cite{Zhang2018} is utilised to perform SISR.
-Further, RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
-Hence, RND addressed this issue by fully exploiting all hierarchical features from all convolutional layers by introducing a residual dense block (RDB).
-Mainly, an RDB can extract the abundant local features through dense connected convolutional layers (local residual learning).
-Further, RDB enables direct links from the previous RDB to all layers of the current RDB, resulting in a contiguous memory (CM) mechanism.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Figure~\ref{fig:RDB} shows the architecture of a RDB consists of four layers(\(L_1, L_2,L_3,L_4\)).
+Residual dense network (RDN) introduced by Zhang et al.~\cite{Zhang2018} to perform SISR.
+RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
+Accordingly, to resolve this issue RND introduced a residual dense block (RDB) which is capable to fully exploiting all hierarchical features obtained from all convolutional layers.
 
-The local feature fusion among each RDB is utilised for learning more useful features from the previous and current local features, therefore, stabilising the training process as the network depth increases.
+Figure~\ref{fig:RDB} shows the architecture of a RDB which consists of four  layers (\(L_1,\ L_2,\ L_3,\ L_4\)).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -17,14 +13,22 @@ The local feature fusion among each RDB is utilised for learning more useful fea
 	\label{fig:RDB}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Therefore, a RDB can extract the abundant local features through dense connected convolutional layers leading to a local residual learning.
+The local feature fusion within each RDB is utilised to learn more useful features from the previous and current local features, therefore, stabilising the training process as the network depth increases.
+Consequently, RDB enables direct links from the previous RDB to all layers of the current RDB, resulting in a contiguous memory (CM) mechanism.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The implemented RDN model is shown in fig.~\ref{fig:RDN} which is consists of four parts:
-The first part is the Shallow Feature Extraction Net (SFENet) which consists of two cascaded convolutional layers utilised for extracting shallow features from the original LR input.
-The second part is the Residual Dense Blocks (RDBs) in which two RDBs we utilised.
-The third part is the Dense Feature Fusion (DFF) whic is used to fuse features that include global feature fusion and global residual learning, therefore, DFF fully utilise all features from all preceding layers,
-The Global feature fusion is used to learn global hierarchical features in a holistic way.
-And finally, the fourth part is the Up-Sampling Net (UPNet) in which we applied the pixel shuffle technique~\cite{Shi2016}.
+In this work, the first implemented deep learning model was inspired by the RDN~\cite{Zhang2018} model is presented in fig.~\ref{fig:RDN}.
+The first segment in the model is the Shallow Feature Extraction Net (SFENet) which consists of two cascaded convolutional layers responsible for extracting shallow features from the original LR input.
+Then, the extracted features from SFENet are transferred to the segment of RDBs in which two RDBs were utilised.
+
+The third segment is the Dense Feature Fusion (DFF) which is responsible for fusing features that include global feature fusion and global residual learning.
+The purpose of global feature fusion is to learn global hierarchical features holistically.
+Hence, DFF fully utilise all features from all preceding segments.
+
+The last segment in the model is the Up-Sampling Net (UPNet), in which we applied the pixel shuffle technique~\cite{Shi2016}.
+Further, pixel shuffle performs sub-pixel convolution operation that is responsible to reshape its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \(C.r^2\) is total number of channels, and \(r\) is the up-scaling factor.
+Accordingly, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
