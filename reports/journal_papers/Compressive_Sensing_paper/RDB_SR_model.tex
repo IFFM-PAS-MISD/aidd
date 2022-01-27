@@ -36,13 +36,12 @@ The purpose of global feature fusion is to learn global hierarchical features ho
 Hence, DFF fully utilise all features from all preceding segments.
 
 The last segment in the model is the Up-Sampling Net (UPNet), in which we applied the pixel shuffle technique~\cite{Shi2016}.
-Further, pixel shuffle performs sub-pixel convolution operation that is responsible to reshape its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \((C.r^2)\) is total number of channels, and \(r\) is the up-scaling factor.
-Accordingly, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
-Figure~\ref{fig:sub_pixel_layer} illustrates the process of the sub-pixel convolution layer.
-It works through combining each pixel on multiple-channel feature maps into one \(r\times r\) square area in the output image. 
+Further, the pixel shuffle performs sub-pixel convolution operation that is responsible to reshape its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \((C.r^2)\) is total number of channels, and \(r\) is the up-scaling factor.
+Accordingly, the number of channels at the last layer (output from DFF segment) must equal \(C.r^2\) for the total number of pixels in order to match the HR image to be obtained.
+Hence, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
+Figure~\ref{fig:sub_pixel_layer} illustrates the process of the sub-pixel convolution layer as it is made up of two steps: a general convolutional operation and pixel rearrangement. 
+Further, it works through combining each pixel on multiple-channel feature maps into one \((r\times r)\) square area in the output image. 
 Therefore, each pixel on feature maps is equivalent to the sub-pixel on the generated output image.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
