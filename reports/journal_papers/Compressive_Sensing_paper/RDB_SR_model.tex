@@ -18,18 +18,7 @@ The local feature fusion within each RDB is utilised to learn more useful featur
 Consequently, RDB enables direct links from the previous RDB to all layers of the current RDB, resulting in a contiguous memory (CM) mechanism.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this work, the first implemented deep learning model was inspired by the RDN~\cite{Zhang2018} model is presented in fig.~\ref{fig:RDN}.
-The first segment in the model is the Shallow Feature Extraction Net (SFENet) which consists of two cascaded convolutional layers responsible for extracting shallow features from the original LR input.
-Then, the extracted features from SFENet are transferred to the segment of RDBs in which two RDBs were utilised.
-
-The third segment is the Dense Feature Fusion (DFF) which is responsible for fusing features that include global feature fusion and global residual learning.
-The purpose of global feature fusion is to learn global hierarchical features holistically.
-Hence, DFF fully utilise all features from all preceding segments.
-
-The last segment in the model is the Up-Sampling Net (UPNet), in which we applied the pixel shuffle technique~\cite{Shi2016}.
-Further, pixel shuffle performs sub-pixel convolution operation that is responsible to reshape its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \(C.r^2\) is total number of channels, and \(r\) is the up-scaling factor.
-Accordingly, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
-
+In this work, the first implemented deep learning model was inspired by the RDN~\cite{Zhang2018} model is presented in Fig.~\ref{fig:RDN}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -39,5 +28,27 @@ Accordingly, the up-scaling factor \(r\) equals to \(16\), as our aim is to obta
 	\label{fig:RDN}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The first segment in the model is the Shallow Feature Extraction Net (SFENet) which consists of two cascaded convolutional layers responsible for extracting shallow features from the original LR input.
+Then, the extracted features from SFENet are transferred to the segment of RDBs in which two RDBs were utilised.
 
+The third segment is the Dense Feature Fusion (DFF) which is responsible for fusing features that include global feature fusion and global residual learning.
+The purpose of global feature fusion is to learn global hierarchical features holistically.
+Hence, DFF fully utilise all features from all preceding segments.
+
+The last segment in the model is the Up-Sampling Net (UPNet), in which we applied the pixel shuffle technique~\cite{Shi2016}.
+Further, pixel shuffle performs sub-pixel convolution operation that is responsible to reshape its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \((C.r^2)\) is total number of channels, and \(r\) is the up-scaling factor.
+Accordingly, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
+Figure~\ref{fig:sub_pixel_layer} illustrates the process of the sub-pixel convolution layer.
+It works through combining each pixel on multiple-channel feature maps into one \(r\times r\) square area in the output image. 
+Therefore, each pixel on feature maps is equivalent to the sub-pixel on the generated output image.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{sub_pixel_convolution.png}
+	\end{center}
+	\caption{Sub-pixel convolution layer.} 
+	\label{fig:sub_pixel_layer}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
