@@ -42,6 +42,7 @@ Hence, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR 
 Figure~\ref{fig:sub_pixel_layer} illustrates the process of the sub-pixel convolution layer as it is made up of two steps: a general convolutional operation and pixel rearrangement. 
 Further, it works through combining each pixel on multiple-channel feature maps into one \((r\times r)\) square area in the output image. 
 Therefore, each pixel on feature maps is equivalent to the sub-pixel on the generated output image.
+The final convolutional layer has \(1\) filter of size \((1\times 1)\), which will produce \(1\) output channel as the out HR gray images. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
