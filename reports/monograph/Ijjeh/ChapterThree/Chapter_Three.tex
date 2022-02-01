@@ -11,8 +11,6 @@
 \usepackage{geometry}
 \newgeometry{tmargin=3.6cm, bmargin=3.6cm, lmargin=3.2cm, rmargin=3.2cm}
 \usepackage{multirow}
-\usepackage{amsmath}
-\usepackage{amssymb}
 \usepackage{pdflscape}
 \usepackage{adjustbox} 
 \usepackage{etoolbox}
@@ -21,23 +19,43 @@
 \usepackage{booktabs}
 \usepackage{suffix}
 \usepackage{textcomp}
-
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
 \usepackage{xspace} 
 \usepackage{textcomp} 
+\usepackage{csquotes}
+\usepackage{subcaption}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+
+%% my added packages
+
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+\usepackage{multirow}
 
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\tablename}{Tab.}
 
+\graphicspath{{Figures/}{/home/aijjeh/Desktop/PhD_work/Publications/MSSP_2_article/MSSP2_final_version_22_11_2021/Figures/}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Deep Learning based Damage Imaging techniques}
+\author{Abdalraheem A. Ijjeh}
+\maketitle
+\tableofcontents
+\listoffigures
+\listoftables
 
-\chapter[Short title]{Deep learning Approach for delamination identification in composite materials}
-
-\textbf{Abdalraheem A. Ijjeh}
-
+\chapter[DL based Damage Imaging techniques]{Deep Learning based Damage Imaging techniques}
 \newpage
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -47,11 +65,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{Summary}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\bibliography{biblography} 
+\section*{Acknowledgments}
+This work was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
+Also, I would like to deeply thank my supervisor Professor Pawel Kudela for his consistent support and guidance through the whole running period of this project.
+\bibliography{biblography.bib} 
 \bibliographystyle{unsrt} 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
