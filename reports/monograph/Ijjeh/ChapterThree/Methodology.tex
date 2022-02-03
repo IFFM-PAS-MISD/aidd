@@ -260,28 +260,26 @@ Table~\ref{layers} presents the architecture of a single layer, the transition d
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Pyramid Scene Parsing Network}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Pyramid Scene Parsing Network (PSPNet) was proposed by Zhao et al.~\cite{zhao2017pyramid} .
-It is one of the most advanced semantic segmentation techniques. 
-The principle idea of PSPNet is to provide adequate global contextual information for pixel-level scene parsing through concatenating the local and global features together. 
-Hence, a spatial pyramid pooling module was introduced to perform four different pooling levels with four different pooling sizes and strides.
-In this way, the pyramid pooling module is able to capture contextual features from different scales.
+The main idea of PSPNet~\cite{zhao2017pyramid} is to combine local and global features to give appropriate global contextual information for pixel-level scene parsing.
+As a result, a spatial pyramid pooling module was developed to execute four different layers of pooling with four different pooling sizes and strides.
+The pyramid pooling module is able to capture contextual features from many scales in this way.
 
-In this work, we implemented PSPNet with ResNet-50~\cite{He2016} as a backbone for feature map extraction with dilation at the last two layers of ResNet. 
-Figure~\ref{fig:PSPNet} illustrates the implemented PSPNet architecture.
-The pyramid pooling module was applied on four levels.
-Global average pooling was used to produce the coarsest level of a single bin output shown in the red box. 
-The other three sub-region levels have different pooling sizes of \((2\times 2), (4\times 4)\) and \((8\times8)\).
-A \(1 \times 1\) convolutional layer was applied to the produced feature maps to reduce their dimensions, followed by a BN and Relu.
-Then, the feature maps produced from the different levels were upsampled with bilinear interpolation.
-Moreover, the upsampled features are concatenated with the output of the ResNet-50 model to obtain both local and global context information. 
-Next, 2 convolutional layers were used for generating the pixel-wise segmented predictions. 
+To enhance the PSPNet model a ResNet-50 model~\cite{He2016} was added. 
+It works as a backbone for feature map extraction with dilation at the last two layers of ResNet. 
+The implemented PSPNet architecture is shown in Fig.~\ref{fig:PSPNet}.
+Hence, a pyramid pooling module was utilised at \(4\) pooling levels.
+The coarsest level of a single bin output depicted in the red box was generated using global average pooling.
+(\(2\times2\)), (\(4\times 4\)), and (\(8\times8\)) are the pooling sizes for the other three sub-region levels, respectively.
+To minimize the dimensionality of the generated feature maps, a \((1\times 1)\) convolutional layer was applied, followed by a BN and Relu.
+Subsequently, bilinear interpolation was used to upsample the feature maps created at each level.
+Furthermore, the upsampled features are combined with the output of ResNet-50 to produce both local and global context information.
+The pixel-wise segmentation predictions were then generated using two cascaded convolutional layers. 
 \begin{figure} [h!]
 	\centering
 	\includegraphics[scale=1.0]{figure7.png}
 	\caption{PSPNet architecture.} 
 	\label{fig:PSPNet}
 \end{figure} 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Global Convolutional Network}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
