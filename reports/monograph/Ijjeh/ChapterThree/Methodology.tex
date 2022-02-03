@@ -158,7 +158,7 @@ As a result, residual connections were established at two levels in order to pre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Several downsampling (Max-pool) blocks are used in the encoder section.
 Each block applies two convolutional layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides that selects the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, as a result, a reduction in computation complexity.
-Each convolutional layer does \((3x3)\) convolution operations, then batch normalization (BN), and finally a Relu.
+Each convolutional layer does \((3\times3)\) convolution operations, then batch normalization (BN), and finally a Relu.
 Furthermore, after each downsampling block, the number of convolutional filters is increased, allowing the model to learn complex patterns successfully.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -166,11 +166,10 @@ The bottleneck layer is a joining point in the model's deepest layer, located be
 Two convolutional layers with \((1024)\) filters make up the bottleneck, which aids the model in learning and recognizing complex features.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The decoder consists of several upsampling blocks. 
-Each upsampling block passes the input into two convolution layers as in the downsampling block followed by a transmission up layer consisting of a transposed convolutional layer (upsampling). 
-The purpose of upsampling is to retrieve the dimensions and increase the resolution.
-Transposed convolutional layer differs from the regular upsampling function, by introducing learnable parameters regarding the transposed convolution filters that enhance the learning process of the model. 
-Moreover, after each upsampling operation, the number of feature maps used by the convolutional layer is reduced by half to keep the model symmetrical. 
+The decoder is composed of a number upsampling blocks that function together to recover original input dimensions and improve resolution.
+As in the downsampling block, each upsampling block transmits the input through two convolution layers, followed by a transmission up layer consisting of a transposed convolutional layer (upsampling).
+The transposed convolutional layer varies from the standard upsampling function in that it introduces learnable parameters for the transposed convolution filters, which improve the model's learning process.
+Furthermore, the number of filters used by the convolutional layer is reduced by half after each upsampling operation to keep the model symmetrical.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -182,16 +181,16 @@ Moreover, after each upsampling operation, the number of feature maps used by th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{VGG16 encoder-decoder}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this model, we address the use of VGG16~\cite{Simonyan2015} architecture as a backbone encoder to the UNet~\cite{Ronneberger2015} technique.
-VGG16 is composed of 13 convolutional layers, pooling layers and \(3\) dense layers, and it is used for classification purposes.
-We removed the dense layers from the model, and we applied VGG16 of 13 convolutional layers as encoder-decoder for pixel-wise image segmentation.
-Figure~\ref{vgg16} presents the architecture of VGG16 encoder-decoder model. 
-The model has a U-shape of two parts: encoder and decoder.
-The encoder consists of \(5\) convolutional blocks with a total \(13\)  (\(3\times3\)) convolutional layers followed by BN and activation function Relu.
-A Max pool operation with a pool size of (\(2\times2\)) followed by dropout is performed after each convolutional block.  
-The upsampling path is introduced to recover spatial resolution, it also has \(5\) convolutional blocks with a total \(13\) \((3\times 3)\) convolutional layers.
-For upsampling, bilinear interpolation with (\(2\times2\)) kernel size is applied.
-Skip connections were added between downsampling blocks and the corresponding upsampling blocks in order to enhance recovering fine-grained details by enabling feature re-usability from earlier layers.
+The application of the VGG16~\cite{Simonyan2015} architecture as a backbone encoder to the UNet~\cite{Ronneberger2015} approach is addressed in this model.
+VGG16 is a classification algorithm that consists of 13 convolutional layers, pooling layers, and (3) dense layers.
+The dense layers were removed form the original VGG16 model, and a 13 convolutional layers were applied resulting in an encoder-decoder scheme for pixel-wise image segmentation.
+The architecture of the VGG16 encoder-decoder model is shown in Fig.~\ref{vgg16}.
+The model is U shaped like, and consists of two parts: encoder and decoder.
+The encoder is made up of (five) convolutional blocks with a total of (13) \((3\times3)\) convolutional layers, followed by BN and Relu as the activation function.
+After each convolutional block, a Max pool operation with a pool size of \((2\times2)\) is conducted, followed by dropout. 
+The upsampling process is used to retrieve spatial resolution, and it contains \(5\) convolutional blocks of total \(13\) convolutional layers.
+Bilinear interpolation with \((2\times2)\) kernel size is used for upsampling.
+In order to improve recovering fine-grained information, skip connections were added between downsampling blocks and the matching upsampling blocks, allowing feature re-usability from earlier layers.
 \begin{figure} [h!]
 	\begin{center}
 		\includegraphics[scale=1.0]{figure5.png}
@@ -203,13 +202,11 @@ Skip connections were added between downsampling blocks and the corresponding up
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{FCN-DenseNet model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-FCN-DenseNet which was introduced in~\cite{Jegou} was applied in our previous work~\cite{Ijjeh2021} for image segmentation.
-The results were promising, since it outperformed the conventional damage detection technique i.e (adaptive wavenumber filtering method). 
-FCN-DenseNet has a U-shape of the encoder-decoder scheme with skip connections between the downsampling and the upsampling paths to increase the resolution to the final feature map.
-The main component in FCN-DenseNet is the dense block.
-The dense block is constructed from \(n\) varying number of layers, each layer consists of a series of operations as shown in Table~\ref{layers}.
+FCN-DenseNet is a pixel-wise image segmentation algorithm that was first introduced in~\cite{Jegou}.
+To boost the resolution of the final feature map, FCN-DenseNet uses a U-shaped encoder-decoder architecture with skip connections between downsampling and upsampling channels.
+Hence, FCN-DenseNet introduced a dense block representing its main component.
+The dense block is made up of \(n\) layers, each of which is made up of a set of operations, as given in Table~\ref{layers}.
 The purpose of the dense block is to concatenate the input (\(x\)) (feature maps) of a layer  with its output (feature maps) to emphasize spatial details information.
-In this work, we have updated the FCN-DenseNet model by increasing the number of dense blocks and the learnable parameters (filters).
 The architecture of the dense block is presented in Fig.~\ref{dense_block}. 
 \begin{figure} [h!]
 	\begin{center}
@@ -219,23 +216,24 @@ The architecture of the dense block is presented in Fig.~\ref{dense_block}.
 	\label{dense_block}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-To reduce the spatial dimensionality of the produced feature maps, a transition down layer was added to perform a (\(1\times 1\)) convolution followed by (\(2\times2\)) Maxpooling operation. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Consequently, to recover the spatial resolution, a transition-up layer was added. 
-It applies a transpose convolution operation to upsample feature maps from the previous layer.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Feature maps emerging from upsampling are concatenated with the ones resulting from the skip connection forming the input to a new dense block.
-During the upsampling, the input to the dense block is not concatenated with its output to overcome the overhead of memory shortage since the upsampling path expands the spatial resolution of the feature maps. 
-%(hint:- We can refer to previous paper and say that the same architecture was applied here. Than we can skip Fig.~\ref{fcn}).
-%\begin{figure} [h!]
-%	\begin{center}
-%		\includegraphics[scale=1.0]{FCN_dense_net.png}
-%	\end{center}
-%	\caption{FCN-DenseNet architecture.} 
-%	\label{fcn}
-%\end{figure}
+
+A transition down layer was added to execute a \((1\times 1)\) convolution followed by a \((2\times 2)\) Maxpooling operation to minimize the spatial dimensionality of the resulting feature maps.
+As a result, a transition-up layer was added to recover the spatial resolution.
+FCN-DenseNet essentially upsamples feature maps from the previous layer using a transpose convolution technique.
+Upsampled feature maps are concatenated with those produced by the skip connection to provide the input to a new dense block.
+
+As the upsampling approach expands the spatial resolution of the feature maps, the input to the dense block is not concatenated with its output during upsampling to avoid the overhead of memory shortage.
+The FCN-DenseNet architecture for image segmentation utilized for delamination detection is shown in Fig.~\ref{fcn}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{FCN_dense_net.png}
+	\end{center}
+	\caption{FCN-DenseNet architecture.} 
+	\label{fcn}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Table~\ref{layers} presents the architecture of a single layer, the transition down  and transition up layers in details.
-%Figure~\ref{fcn} illustrates the FCN-DenseNet architecture for image segmentation used for delamination detection.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[h!]
 	\renewcommand{\arraystretch}{1.3}
@@ -257,11 +255,8 @@ Table~\ref{layers} presents the architecture of a single layer, the transition d
 		\end{tabular}
 	}
 	\caption{Layer, Transition Down and Transition Up layers.} 
-	\label{layers}
-	
+	\label{layers}	
 \end{table}\\
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Pyramid Scene Parsing Network}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
