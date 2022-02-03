@@ -69,7 +69,7 @@ In other words, the model only learns the patterns of the training data therefor
 Figure.~\ref{fig:Cross_validation} illustrates the K-fold CV technique.
 In this technique, we have split the training set into \(K\) small sets (folds), hence the name K-folds. 
 Therefore, we iterate over the training set K iterations.
-During each iteration, the model uses  \(K-1\) folds for training and the remaining fold is used for validation. 
+During each iteration, the model uses \(K-1\) folds for training and the remaining fold is used for validation. 
 In our models, we have chosen \(K=5\), therefore, we have \(5\) iterations of training. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 For each iteration, we compute the performance of the model.
@@ -115,7 +115,7 @@ Choosing the right loss function is crucial since it determines how effectively 
 As a result, the categorical cross-entropy (CCE) loss function~\cite{Bonaccorso2020}, commonly known as the \enquote{softmax loss function}, was utilised.
 The difference between the actual damage (ground truth) and the expected damage is estimated using CCE as the objective function.
 Furthermore, because there are only two classes to predict, a Sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the anticipated outputs.
-The CCE is illustrated by Eq.~(\ref{CCE}), where  \( P(x)_{i}\) refers to the softmax value of the target class.
+The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the softmax value of the target class.
 \begin{equation}	
 	CCE = -\log\left( P(x)_{i} \right)
 	\label{CCE}
@@ -206,7 +206,7 @@ FCN-DenseNet is a pixel-wise image segmentation algorithm that was first introdu
 To boost the resolution of the final feature map, FCN-DenseNet uses a U-shaped encoder-decoder architecture with skip connections between downsampling and upsampling channels.
 Hence, FCN-DenseNet introduced a dense block representing its main component.
 The dense block is made up of \(n\) layers, each of which is made up of a set of operations, as given in Table~\ref{layers}.
-The purpose of the dense block is to concatenate the input (\(x\)) (feature maps) of a layer  with its output (feature maps) to emphasize spatial details information.
+The purpose of the dense block is to concatenate the input (\(x\)) (feature maps) of a layer with its output (feature maps) to emphasize spatial details information.
 The architecture of the dense block is presented in Fig.~\ref{dense_block}. 
 \begin{figure} [h!]
 	\begin{center}
@@ -233,7 +233,7 @@ The FCN-DenseNet architecture for image segmentation utilized for delamination d
 	\label{fcn}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Table~\ref{layers} presents the architecture of a single layer, the transition down  and transition up layers in details.
+Table~\ref{layers} presents the architecture of a single layer, the transition down and transition up layers in details.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[h!]
 	\renewcommand{\arraystretch}{1.3}
@@ -243,14 +243,14 @@ Table~\ref{layers} presents the architecture of a single layer, the transition d
 	{
 		\begin{tabular}{ccccc}
 			\hline
-			Layer &  &  Transition Down &  &  Transition Up \\ 
+			Layer & & Transition Down & & Transition Up \\ 
 			\hline
-			Batch Normalization &  & Batch Normalization &  &  \(3\times 3\) Transposed Convolution  \\ 
-			Relu &  & Relu &  & strides = (\(2\times2\))  \\ 
-			(\(3\times3\)) Convolution &  & (\(1\times1\)) Convolution &  &  \\ 
-			%		&  &   \\ 
-			Dropout \(p=0.2\) &  &Dropout \(p=0.2\)  &  &  \\ 
-			&  & (\(2\times2\)) Maxpooling &  &  \\ 
+			Batch Normalization & & Batch Normalization & & \(3\times 3\) Transposed Convolution \\ 
+			Relu & & Relu & & strides = (\(2\times2\)) \\ 
+			(\(3\times3\)) Convolution & & (\(1\times1\)) Convolution & & \\ 
+			%		& &  \\ 
+			Dropout \(p=0.2\) & &Dropout \(p=0.2\) & & \\ 
+			& & (\(2\times2\)) Maxpooling & & \\ 
 			\hline
 		\end{tabular}
 	}
@@ -283,29 +283,19 @@ The pixel-wise segmentation predictions were then generated using two cascaded c
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Global Convolutional Network}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Global Convolutional Network (GCN) proposed by Peng et al. 
-~\cite{Peng2017} addressed the importance to have large kernels for both 
-localisation and classification for semantic segmentation to enlarge 
-respective fields.
-However, a contradiction arises when performing classification and localisation 
-tasks. 
-For instance, classification tasks require the models to be invariant for 
-different transformations such as rotation and translation.
-On the other hand, localisation tasks require the models to be sensitive for 
-any transformation, to accurately assign each pixel for its semantic category.
-Accordingly, to solve this contradiction, two design principles were suggested: 
-\begin{enumerate}
-	\item For the classification task, in order to improve the capability of 
-	the model to handle different transformations, a large kernel size must be 
-	used to enable dense connections between feature maps and per-pixel 
-	classifiers.
-	\item For localisation task, the model must be fully convolutional. 
-	Additionally, fully connected or global pooling layers are not applied as 
-	these layers will discard the localisation information. 
-\end{enumerate}
+Peng et al.~\cite{Peng2017} introduced the Global Convolutional Network (GCN) to address the importance of having large kernels for both localization and classification operations for semantic segmentation in order to increase the size of respective fields.
+However, when performing classification and localization tasks, a contradiction emerges due to the fact that classification tasks necessitate invariant models for various transformations such as rotation and translation while localisation tasks necessitate models that are sensitive to any modification and appropriately assign each pixel to its semantic category.
+To alleviate such contradiction, two design principles were proposed:
+For the classification task, in order to improve the capability of 
+the model to handle different transformations, a large kernel size must be 
+used to enable dense connections between feature maps and per-pixel 
+classifiers.
+For localisation task, the model must be fully convolutional. 
+Additionally, fully connected or global pooling layers are not applied as 
+these layers will discard the localisation information. 
 
-Figure~\ref{fig:gcn} presents the proposed GCN module for semantic segmentation 
-utilised for delamination identification.
+The implemented GCN technique for semantic segmentation is shown in Fig.~\ref{fig:gcn}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
 		\includegraphics[scale=1.0]{figure8.png}
@@ -313,16 +303,11 @@ utilised for delamination identification.
 	\caption{Global Convolution Network whole architecture.} 
 	\label{fig:gcn}
 \end{figure}
-As shown in the Fig.~\ref{fig:gcn}, a residual network was utilised as a backbone for 
-feature maps extraction, the residual block is shown in 
-Fig.~\ref{fig:res_gcn_br}a.
-After each residual block, a GCN block is inserted  
-(Fig.~\ref{fig:res_gcn_br}b), which employs a combination of \((1\times 
-k)\)+\((k\times 1)\) and \((k\times 1)\)+\((1\times k)\) convolutions which 
-enables a dense connections within a large \((k\times k)\) region in the 
-feature map.
-In this work, we implemented the model with \(k=7\).
-This is followed by a boundary refinement (BR) block shown in Fig.~\ref{fig:res_gcn_br}c, which can be considered as an additional residual block to refine the predictions near the object boundaries ended up generating a lower resolution score map. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A residual network was used as a backbone for improving the feature extraction process, as demonstrated in Fig.~\ref{fig:gcn}, further, the residual block is presented in Fig.~\ref{fig:res_gcn_br}a.
+A GCN block presented in Fig.~\ref{fig:res_gcn_br}b is placed after each residual block, which employs a mix of \((1\times k)\)+\((k\times 1)\) and \((k\times 1)\)+\((1\times k)\) convolutions to establish dense connections within \((k\times k)\) region in the feature map.
+The boundary refinement (BR) block, depicted in Fig.~\ref{fig:res_gcn_br}c, is then used to improve the predictions along the object borders, resulting in a lower resolution score map.
 Furthermore, the upsampling operation is done recursively, it upsamples the low 
 resolution score maps then concatenate it with a higher one to produce a new 
 score maps.
