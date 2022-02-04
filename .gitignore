@@ -134,6 +134,11 @@ target/
 *.tif
 *.tiff
 
+# animations/large files
+*.avi
+*.mpg
+*.mpeg
+
 # IPython NB Checkpoints
 .ipynb_checkpoints/
 
