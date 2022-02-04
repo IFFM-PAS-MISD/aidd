@@ -3,14 +3,14 @@
 %% initialization
  
 clear;clc; close all
-mask_type = 1;
+mask_type = 2;
 % mask_type = 1; % random mask
 % mask_type = 2; % jitter mask
 %----------------load testing data---------
 % n1=65;
 % n1=512;% out of memory
 %n1=256;
-n1=128;
+n1=128; % number of points in the targeted grid (n1xn1)
 %load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/65x65p_50kHz_5HC_14Vpp_x10.mat');
 load('/pkudela_odroid_laser/aidd/data/raw/exp/L3_S4_B/Compressed/389286p_na_512x512p.mat');
 frame=110;
@@ -23,7 +23,8 @@ clear Data;
 N=512;
 [X,Y]=meshgrid(linspace(0, WL(1), n1),linspace(0, WL(2), n1));
 [X1,Y1]=meshgrid(linspace(0, WL(1), N),linspace(0, WL(2), N));
-Orig_Image_n1 = griddata(X1,Y1,Orig_Image,X,Y,'cubic');
+Orig_Image_n1 = griddata(X1(2:end-1,2:end-1),Y1(2:end-1,2:end-1),Orig_Image(2:end-1,2:end-1),X,Y,'cubic');
+Orig_Image_n1(isnan(Orig_Image_n1))=0;
 % subsampling
 %Orig_Image = Orig_Image(1:2:end,1:2:end);
 %Orig_Image_n1 = Orig_Image(2:4:end,2:4:end);
@@ -45,45 +46,15 @@ title(['Downsampled to ',num2str(n1),'x',num2str(n1)]);
 % ------------CS measurement-------------
 n = numel(x);
 m = 4096;%2025;%3400;% Measurement number
-
+m = 6000;
 % random mask
 perm = randperm(n,m)';
 x_mask=zeros(n,1);
 x_mask(perm)=1;
 x_=x.*x_mask;
 random_image=reshape(x_,n1,n1); % random measurements
-% jittered mask
-% Delta = WL(1)/(n1-1);
-% gamma=2;
-% a = -Delta/sqrt(gamma);
-% b = Delta/sqrt(gamma);
-% eps1= a + (b-a).*rand(m,1);
-% eps2= a + (b-a).*rand(m,1);
-% x1=zeros(n1*gamma,n1*gamma);
-% x2=zeros(n1*gamma,n1*gamma);
-% c=0;
-% for j=1:n1*gamma
-%     js=j-1;
-%     for i=1:n1*gamma
-%         c=c+1;
-%         is = i-1;
-%          x1(i,j)= is*Delta/sqrt(gamma)+eps1(m);
-%          x2(i,j)= js*Delta/sqrt(gamma)+eps2(m);
-%     end
-% end
 % my jitter mask for 128x128 grid
-ind_jitter=zeros(m,1);
-c=0;
-for j=1:2:n1
-    for i=1:2:n1
-        c=c+1;
-        ind_x = i + randi([0 1],1);
-        ind_y = j + randi([0 1],1);
-        ind_jitter(c) = ind_x+(ind_y-1)*n1;
-    end
-end
-x_jitter_mask=zeros(n,1);
-x_jitter_mask(ind_jitter)=1;
+[ind_jitter,x_jitter_mask]=my_jitter_mask(m,n1);
 
 figure(2);
 %imagesc( reshape(x2,n1,n1) ); colormap jet;axis equal;axis off;
@@ -104,7 +75,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %-------------- reconstruct with orthogonal matching pursuit -----------
-Th=1e-3;% residual threshold (sigma in spgl1 description)
+Th=1e-4;% residual threshold (sigma in spgl1 description)
 % constant related to the noise level in the measurements
 %sigma = sqrt(sum(x.^2))/N;
 sigma = var(x) * 0.5;
@@ -210,17 +181,30 @@ drawnow;
 [X,Y]=meshgrid(linspace(0, WL(1), n1),linspace(0, WL(2), n1));
 [X1,Y1]=meshgrid(linspace(0, WL(1), N),linspace(0, WL(2), N));
 X_=reshape(X,[n1*n1,1]);
-X_=X_(perm);
 Y_=reshape(Y,[n1*n1,1]);
-Y_=Y_(perm);
+
+switch mask_type
+    case 1
+        X_=X_(perm); % compressed measurement (random mask)
+        Y_=Y_(perm);
+    case 2
+        X_=X_(ind_jitter); 
+        Y_=Y_(ind_jitter);
+end
 bicubic_upscaled_image = griddata(X_,Y_,y1,X1,Y1,'cubic');
+F = scatteredInterpolant(X_,Y_,y1,'linear');
+linear_upscaled_image = F(X1,Y1);
+figure(12);
+imshow(linear_upscaled_image+mx+0.5);
+title(['linear only ',num2str(N),'x',num2str(N) ]);
+drawnow;
 %bicubic_upscaled_image = griddata(X_,Y_,y1,X,Y,'cubic');
 %bicubic_upscaled_image = interp2(X_,Y_,y1,X1,Y1,'cubic',0);
 
-figure(12);
-imshow(bicubic_upscaled_image+mx+0.5);
-title(['bicubic only ',num2str(N),'x',num2str(N) ]);
-drawnow;
+% figure(12);
+% imshow(bicubic_upscaled_image+mx+0.5);
+% title(['bicubic only ',num2str(N),'x',num2str(N) ]);
+% drawnow;
 pause(2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % inpaint method
