@@ -1,0 +1,475 @@
+\section{Results and discussions}
+\label{section:results_and_discussions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, five DL models of semantic segmentation approach were evaluated on exemplary three damage scenarios of an RMS of the numerically calculated full wavefield interpolated at the bottom surface of the plate in order to identify the delamination, including Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet, and GCN.
+In addition, an experimental scenario was used to measure the performance of the models and further to demonstrate the generalization capabilities.
+The mean and maximum (IoU) for each model is calculated and displayed as a comparative metric.
+Furthermore, for each model, the accuracy of classification, precision, recall, and F1 score were determined using Eqs.~(\ref{accuracy}-\ref{f1_score}).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	\rm Accuracy\ = \frac{TP+TN}{(Total\ number\ of\ tested\ samples)}
+	\label{accuracy}
+\end{equation}
+
+\begin{equation}
+	\rm Pricision\ =\frac{TP}{TP+FP}
+	\label{pricisoin}
+\end{equation}
+\begin{equation}
+	\rm Recall\ = \frac{TP}{TP+ FN}
+	\label{recall}
+\end{equation}
+\begin{equation}
+	\rm F1\ score =\frac{2 \times (Pricision\times Recall)}{(Pricision + Recall)} 
+	\label{f1_score}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+where the Positive/Negative refers to the predicted output as (damage or non-damage) respectively, True Positive (TP) and True Negative (TN) represent the correct classification, and the False Positive (FP) and False Negative (FN) represent the incorrect classification.
+
+For training purposes, a K-fold cross-validation technique was implemented with five folds. 
+As a result, each model has cycled over \((5)\) iterations of training.
+Furthermore, for each iteration, the number of epochs equals \((20)\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Numerical scenarios}
+Three numerical data scenarios for delamination at various locations, shape, orientations and angles are discussed in the following.
+Figure~\ref{fig:softmax_448} depicts the first studied delamination scenario.
+As illustrated in Fig.~\ref{fig:RMS_flat_shell_Vz_448}, the delamination lies near the left boundary of the plate and is circled by an oval line to represent its shape, orientation and location.
+The predictions of Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN models are shown in Figs.~\ref{fig:unet_pred_448}-~\ref{fig:gcn_pred_448} .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The location of the delamination is correctly indicated in all models.
+Furthermore, delamination-related pixels are grouped into a single region with no extra noise.
+Other models, such as the VGG16 encoder-decoder and GCN, are more visually similar to the actual shape of the delamination.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure10a.png}
+		\caption{RMS bottom with label}
+		\label{fig:RMS_flat_shell_Vz_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure10b.png}
+		\caption{Res-UNet}
+		\label{fig:unet_pred_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure10c.png}
+		\caption{VGG16 encoder-decoder}
+		\label{fig:vgg16_pred_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure10d.png}
+		\caption{PSPNet}
+		\label{fig:pspnet_pred_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure10e.png}
+		\caption{FCN-DenseNet}
+		\label{fig:fcn_densenet_pred_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure10f.png}
+		\caption{GCN}
+		\label{fig:gcn_pred_448}
+	\end{subfigure}
+	\caption{First delamination scenario based on numerical data}
+	\label{fig:softmax_448}
+\end{figure} 
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The delamination is positioned at the top left corner of the plate in the second delamination scenario, as shown in Fig.~\ref{fig:385_softmax}, and it is surrounded by an oval line to depict its shape and location, as shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As the reflections from plate edges overshadow reflections from the delamination, this is the most difficult damage scenario.
+As a result, RMS pattern changes are barely distinguishable.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figures~\ref{fig:Unet_Pred__softmax_385} -~\ref{fig:gcn_pred_385} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Considering the challenging damage scenario, all models perform reasonably well.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure11a.png}
+		\caption{RMS bottom with label}
+		\label{fig:RMS_flat_shell_Vz_385}
+	\end{subfigure}
+	\hfill
+	%	\begin{subfigure}[b]{0.47\textwidth}
+	%		\centering
+	%		\includegraphics[scale=1.0]{m1_rand_single_delam_385.png}
+	%		\caption{Ground truth}
+	%		\label{fig:m1_rand_single_delam_385}
+	%	\end{subfigure}
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure11b.png}
+		\caption{Res-UNet}
+		\label{fig:Unet_Pred__softmax_385}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure11c.png}
+		\caption{VGG16 encoder-decoder}			\label{fig:vgg16_pred__softmax_385}			
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure11d.png}
+		\caption{PSPNet}
+		\label{fig:pspnet_pred__softmax_385}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure11e.png}
+		\caption{FCN-DenseNet}
+		\label{fig:fcn_densenet_pred__softmax_385}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure11f.png}
+		\caption{GCN}
+		\label{fig:gcn_pred_385}
+	\end{subfigure}
+	\caption{Second delamination scenario based on numerical data}
+	\label{fig:385_softmax}
+\end{figure}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:475_softmax} depicts the third delamination scenario.
+As illustrated in Fig.~\ref{fig:RMS_flat_shell_Vz_475}, the delamination lies in the upper middle of the plate and is surrounded by an ellipse to represent its shape, location and orientation.
+Figures~\ref{fig:Unet_Pred__softmax_475} -~\ref{fig:gcn_pred_475} show the prediction outputs of Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN models, respectively. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Res-UNet and FCN-DenseNet are the best in preserving the elliptical shape of delamination in this case.
+GCN, on the other hand, gets the highest IoU value (see Table~\ref{tab:table_numerical_scenarios}).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure12a.png}
+		\caption{RMS bottom with label}
+		\label{fig:RMS_flat_shell_Vz_475}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure12b.png}
+		\caption{Res-UNet}
+		\label{fig:Unet_Pred__softmax_475}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure12c.png}
+		\caption{VGG16 encoder-decoder}			\label{fig:vgg16_pred__softmax_475}			
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure12d.png}
+		\caption{PSPNet}
+		\label{fig:pspnet_pred__softmax_475}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure12e.png}
+		\caption{FCN-DenseNet}
+		\label{fig:fcn_densenet_pred__softmax_475}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{figure12f.png}
+		\caption{GCN}
+		\label{fig:gcn_pred_475}
+	\end{subfigure}	
+	\caption{Third delamination scenario based on numerical data}
+	\label{fig:475_softmax}
+\end{figure}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Table~\ref{tab:table_numerical_scenarios} shows the (IoU) values for all models with respect to predicted damage.
+The GCN model has the highest (IoU) compared to the other models in the first and third scenarios, and the VGG16 encoder-decoder model has the highest (IoU) compared to the other models in the second scenario.
+Additionally, there is no noise in the predicted outputs for delamination identification in all the models.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{\(IoU\) of Numerical scenarios}
+	\label{tab:table_numerical_scenarios}
+	\resizebox{\textwidth}{!}
+	{
+		\begin{tabular}{cccc}\hline
+			Model & 1st scenario & 2nd scenario & 3rd scenario \\ \hline
+			Res-UNet & \(0.498\) & \(0.782\) & \(0.816\) \\ 
+			VGG16 encoder-decoder & \(0.512\) & \(0.787\) & \(0.662\) \\
+			FCN-DenseNet & \(0.734\) & \(0.612\) & \(0.866\) \\ 
+			PSPNet & \(0.389\) & \(0.496\) & \(0.646\) \\ 
+			GCN & \(0.791\) & \(0.696\) & \(0.875\) \\ \hline
+		\end{tabular}
+	}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The mean and maximum values of (IoU) obtained for the previously unseen numerical test set (380 cases) for all models are presented in table~\ref{tab:table_iou}.
+Additionally, the table~\ref{tab:table_iou} demonstrates that all models have a high (IoU), showing their capability to identify damage.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{Analysis of numerical data}
+	\label{tab:table_iou}
+	\begin{tabular}{ccc}\hline
+		Model & mean \(IoU\) & max \(IoU\) \\ \hline
+		Res-UNet & \(0.664\) & \(0.888\) \\ 
+		VGG16 encoder-decoder & \(0.572\) & \(0.841\) \\ 
+		FCN-DenseNet & \(0.680\) & \(0.920\) \\ 
+		PSPNet & \(0.549\) & \(0.914\) \\ 
+		GCN & \(0.763\) & \(0.931\) \\ \hline
+	\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Table~\ref{tab:table_performance} presents the TP, TN, FP, and FN for all models with respect to the test set. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{Model classification performance}
+	\label{tab:table_performance}
+	\begin{tabular}{ccccc} \hline
+		Model& TP & TN & FP & FN \\ \hline
+		Res-UNet & 376 & 376 & 4 & 0 \\ 
+		VGG16 encoder-decoder & 373 & 373 & 7 & 0 \\ 
+		FCN-DenseNet & 378 & 378 & 2 & 0 \\ 
+		PSPNet & 368 & 368 & 12 & 0 \\ 
+		GCN & 380 & 380 & 0 & 0 \\ \hline
+	\end{tabular}	
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As additional evaluation metrics, table~\ref{tab:evaluation_metric} displays the classification accuracy, precision, recall, and F1-score values for all models.
+All models show high classification accuracy, as shown in table, indicating that all of the offered models are capable of predicting the existence of delamination in all numerically generated cases.
+Furthermore, it can be concluded that the GCN model outperformed the other implemented models.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{Evaluation metric}
+	\label{tab:evaluation_metric}
+	\resizebox{\textwidth}{!}
+	{
+		\begin{tabular}{ccccc} \hline
+			Model& Accuracy & Precision & Recall & F1-Score \\ \hline
+			Res-UNet & \(0.994\) & \(0.989\) & \(1.00\) & \(0.994\) \\ 
+			VGG16 encoder-decoder & \(0.991\) & \(0.981\) & \(1.00\) & \(0.991\)\\ 
+			FCN-DenseNet & \(0.997\) & \(0.994\) & \(1.00\) & \(0.994\) \\ 
+			PSPNet & \(0.984\) & \(0.968\) & \(1.00\) & \(0.984\) \\ 
+			GCN & \(1.00\) & \(1.00\) & \(1.00\) & \(1.00\) \\ \hline
+		\end{tabular}
+	}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Figures~\ref{fig:res_unet_iou_loss}-\ref{fig:GCN_iou_loss} show the accuracy and the loss graphs of the training and validation phases during epochs for Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN models, respectively.
+%\begin{figure} [!h]
+%	\centering
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\begin{subfigure}[b]{0.47\textwidth}
+%	 \centering		\includegraphics[width=\textwidth]{Unet_kfold_iou_per_epochs_softmax.png}	\caption{}
+%	 \label{fig:unet_accuracy_metric}
+%	\end{subfigure}
+%	\hfill	
+%	\begin{subfigure}[b]{0.47\textwidth}
+%	 \centering
+%	 \includegraphics[width=\textwidth]{Unet_kfold_loss_per_epochs_softmax.png}
+%	 \caption{}
+%	 \label{fig:unet_loss_metric}
+%	\end{subfigure}
+%	\caption{Accuracy and loss of the Res-UNet model}
+%	\label{fig:res_unet_iou_loss}
+%\end{figure}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{FCN_VGG16_iou_per_epochs_softmax.png}
+%		\caption{}
+%		\label{fig:vgg16_accuracy_metric}
+%	\end{subfigure}		
+%	\hfill
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{FCN_VGG16_loss_per_epochs_softmax.png}
+%		\caption{}
+%		\label{fig:vgg16_loss_metric}
+%	\end{subfigure}
+%	\caption{Accuracy and loss of the VGG16 encoder-decoder model}
+%	\label{fig:Vgg16_iou_loss}
+%\end{figure}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure}[!h]
+%	\begin{subfigure}[b]{0.47\textwidth}
+%	\centering
+%	\includegraphics[width=\textwidth]{FCN_DenseNet_iou_per_epochs_softmax.png}
+%	\caption{}
+%	\label{fig:fcn_densenet_accuracy_metric}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}[b]{0.47\textwidth}
+%	\centering
+%	\includegraphics[width=\textwidth]{FCN_DenseNet_loss_per_epochs_softmax.png}
+%	\caption{}
+%	\label{fig:fcn_densenet_loss_metric}
+%	\end{subfigure}	
+%\caption{Accuracy and loss of the FCN-DenseNet model}
+%\label{fig:FCN_DenseNet_iou_loss}
+%\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure} [!h]
+%	\centering
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{PSPNet_kfold_iou_per_epochs_softmax.png}
+%		\caption{}
+%		\label{fig:psp_accuracy_metric}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{PSPNet_kfold_loss_per_epochs_softmax.png}
+%	\caption{}
+%	\label{fig:psp_loss_metric}
+%	\end{subfigure}
+%	\caption{Accuracy and loss of the PSPNet model}
+%	\label{fig:PSPNet_iou_loss}
+%\end{figure}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure} [!h]
+%	\centering
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{GCN_kfold_iou_per_epochs_softmax.png}
+%		\caption{}
+%		\label{fig:gcn_accuracy_metric}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{GCN_kfold_loss_per_epochs_softmax.png}			
+%		\caption{}
+%		\label{fig:gcn_loss_metric}
+%	\end{subfigure}
+%	\caption{Accuracy and loss of the GCN model}
+%	\label{fig:GCN_iou_loss}	
+%\end{figure}
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Furthermore, the total number of parameters in each DL model is the sum of trainable (convolution filter weights) and non-trainable parameters (biases and pooling filters).
+The trainable parameters are updated continuously until the minimal loss value is reached, whereas the non-trainable parameters remain unchanged during the training process.
+The total number of parameters for all implemented models is shown in table~\ref{tab:table_parameters}.
+In addition, the total number of parameters can show the computational complexity of the model.
+It should be noted that as the number of total parameters increases, the required time for training increases.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{Model parameters}
+	\label{tab:table_parameters}
+	\begin{tabular}{cc}\hline
+		Model & Total parameters (\(\approx\)) \\ \hline
+		Res-UNet & \(52\times 10^6\) \\ 
+		VGG16 encoder-decoder & \(37.3\times 10^6\) \\
+		FCN-DenseNet & \(2.5\times 10^6\) \\ 
+		PSPNet & \(6.6\times 10^6\) \\ 
+		GCN & \(36\times 10^6\) \\ \hline
+	\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experimental scenario}
+An experimental case of CFRP with Teflon insert as artificial delamination is examined in this scenario which is shown in Fig.~\ref{fig:Exp_ERMS_teflon}. 
+A frequency of \(50\) kHz was used to stimulate a signal in a transducer placed in the center of the plate, similar to the synthetic data set.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+At this frequency, the A0 mode wavelength for this particular CFRP material is around \(20\) mm.
+The measurements were conducted with a Polytec PSV-400 SLDV on the bottom surface of plate, that sized \(500 \times 500\) mm.
+The sampling frequency was 512 kHz and the measuring grid spacing was 1 mm.
+An energy compensated RMS was used to further process the obtained full wavefield, considering wave attenuation.
+Figure~\ref{fig:Delamination} shows the results of such a procedure.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A square frame surrounds the delamination, indicating its shape and location.
+Delamination prediction maps for Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN models are shown in Figs.~(\ref{fig:unet_exp_7_} - \ref{fig:gcn_exp}), respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The performance of the models was assessed using the IoU measure, which considers not only the location of the damage but also its shape and size.
+The Res-UNet \(IoU = 0.577\), the VGG16 encoder-decoder \(IoU = 0.624\), the PSPNet (IoU = 0.488), the FCN-DenseNet \(IoU = 0.537\), and the GCN \(IoU = 0.723\) were the results achieved.
+The best accuracy was achieved using GCN, same as it was with the numerical test data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As illustrated, the models are capable of detecting and localizing the delamination with high precision accuracy.
+It cat be noticed that the models can recognize delamination with nearly no noise, indicating that the models can generalize and detect delamination on previously unseen data.
+Given that the provided models were only trained on a numerically generated data, they had a high degree of generalisation capability.
+It is expected that when the models are trained on experimental and numerical data, additional features are learned, and their performance can be improved even further.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{figure13a.png}
+		\caption{ERMS} % CFRP Teflon inserted \& Label
+		\label{fig:Delamination}	
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{figure13b.png}
+		\caption{Res-UNet} 
+		\label{fig:unet_exp_7_}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{figure13c.png}
+		\caption{VGG16 encoder-decoder} 
+		\label{fig:vgg16_exp_7_}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{figure13d.png}
+		\caption{PSPNet} 
+		\label{fig:pspnet_exp_7_}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{figure13e.png}
+		\caption{FCN-DenseNet} 
+		\label{fig:fcn_densenet_exp}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[scale=1]{figure13f.png}
+		\caption{GCN} 
+		\label{fig:gcn_exp}
+	\end{subfigure}
+	\caption{Experimental results}
+	\label{fig:Exp_ERMS_teflon}
+\end{figure}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
