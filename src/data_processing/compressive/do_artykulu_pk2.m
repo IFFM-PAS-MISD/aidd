@@ -3,10 +3,10 @@ clear; clc; close all
 load 389286p.mat
 %Data=Data/max(max(abs(Data)));
 %% parameters
-x_points = 128;
-y_points = 128;
+x_points = 200;
+y_points = 200;
 p_frame = 110;
-No_of_measurement_points = 4000;%[1000:1000:7000];
+No_of_measurement_points = [1000:1000:7000];
 %No_of_measurement_points = [1000:1000:6000];
 %No_of_measurement_points = [1000:1000:4000];
 cmap = 'default';
@@ -55,20 +55,55 @@ for points = No_of_measurement_points
     %-------------- reconstruct with orthogonal matching pursuit -----------
 
     Th=1e-4;% residual threshold 
-    Psi = dftmtx(n);% Fourier sparse basis
+    %Psi2 = dftmtx(n);% Fourier sparse basis
+    Psi = zeros(n,n);
+    tx_min = min(rand_XY(:,1));
+    tx_max = max(rand_XY(:,1));
+    Lx= tx_max - tx_min; 
+    ty_min = min(rand_XY(:,2));
+    ty_max = max(rand_XY(:,2));
+    Ly = ty_max-ty_min;
+    dx = (tx_max-tx_min)/(x_points-1);
+    dy = (ty_max-ty_min)/(y_points-1);
+    tx = tx_min:dx:tx_max;
+    ty = ty_min:dy:ty_max;
+    [qx,qy] = meshgrid(tx,ty);
+    kx = linspace(-210,210,x_points);
+    ky = linspace(-210,210,y_points);
+    [Kx,Ky] = meshgrid(kx,ky);
+    [Xi,Yi] = meshgrid(linspace(-0.25,0.25,x_points),linspace(-0.25,0.25,y_points));
+    Qx1d = reshape(Xi,[n,1]);
+    Qy1d = reshape(Yi,[n,1]);
+    Kx1d = reshape(Kx,[n,1]);
+    Ky1d = reshape(Ky,[n,1]);
+    disp('calculation of Fourier basis');
+%     for i1 = 1:n
+%         for j1 = 1:n
+%             Psi(i1,j1) = exp(-1i*( (Kx1d(j1)*Qx1d(i1))/Lx +  (Ky1d(j1)*Qy1d(i1))/Ly) );           
+%         end
+%     end
+    Psi = exp(-1i*( (Kx1d*Qx1d')/Lx +  (Ky1d*Qy1d')/Ly) );
+    x = reshape(reg_Frame,[n,1]);
+    X = (Psi)*x; % FFT of x
+    %X2 = Psi2*x; % FFT of x
+%     figure;
+%     surf(fftshift(abs(reshape(X,[x_points,y_points])))); shading interp; view(2); axis square;
+%     
+%     figure;
+%     surf(abs(reshape(X,[x_points,y_points]))); shading interp; view(2);axis square;
+%     drawnow;
+    
+%      XF= fftshift(fft2(reg_Frame));
+%      figure;
+%      surf(abs(reshape(XF,[x_points,y_points]))); shading interp; view(2);axis square;
+     
     %Psi = dctmtx(n);% DCT sparse basis
     Theta = Psi(perm, :); % random rows of Psi
     sigma = var(reshape(reg_Frame,x_points*y_points,1)-mean(reshape(reg_Frame,x_points*y_points,1)))*0.5;
     Th = sigma;
-    opts = spgSetParms('optTol',1e-5);
+    opts = spgSetParms('optTol',1e-4,'iterations',1000);
     [xSparse,r,g,info] = spg_bpdn(Theta,rand_Frame,Th,opts);% reconstruction the sparse signal
-    %tau = 0.032;
-    %[xSparse,r,g,info] = spg_lasso(Theta,rand_Frame,tau,opts);% Standard Lasso problem
-    % The standard basis-pursuit denoise problem
-    %[xSparse,r,g,info] = spg_bp(Theta,rand_Frame,opts);
-%     k=2000; % nonzeros
-%     x0 = zeros(x_points*y_points,1); x0(perm(1:k)) = sign(randn(k,1));
-%     [xSparse, r, g, info] = spgl1(Theta,rand_Frame, 0, sigma, x0, opts);
+
 
     xRec = real(Psi' * xSparse); % calculate the original signal
     recon_image =  reshape(flipud(xRec), x_points,y_points); % reconstructed image\\
@@ -87,15 +122,7 @@ for points = No_of_measurement_points
     int_method = 'natural' ; %linear, nearest
     ext_method = 'linear'; %none, nearest
     F = scatteredInterpolant(rand_XY(:,1),rand_XY(:,2),rand_Frame,int_method,ext_method);
-    tx_min = min(rand_XY(:,1));
-    tx_max = max(rand_XY(:,1));
-    ty_min = min(rand_XY(:,2));
-    ty_max = max(rand_XY(:,2));
-    dx = (tx_max-tx_min)/(x_points-1);
-    dy = (ty_max-ty_min)/(y_points-1);
-    tx = tx_min:dx:tx_max;
-    ty = ty_min:dy:ty_max;
-    [qx,qy] = meshgrid(tx,ty);
+   
     qz = F(qx,qy);
     %qz = griddata(rand_XY(:,1),rand_XY(:,2),rand_Frame,qx,qy,'cubic'); %
     % problem with extrapolation
@@ -154,7 +181,7 @@ for points = No_of_measurement_points
     title(['Reconstr. at delamination, ',num2str(points),' points']);
     drawnow;
     
-    %print(['delam_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points),'_klatka_',num2str(p_frame),'_',cmap,'.png'],'-dpng','-r300');
+    print(['delam_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points),'_klatka_',num2str(p_frame),'_',cmap,'.png'],'-dpng','-r300');
     
     %close all;
     %clear XYZ Data filename dx dy tx ty qz F recon_image Theta y1 Th opts xRec xSparse r g info Psi Psi_inv
@@ -201,7 +228,7 @@ for points = No_of_measurement_points
     
     sigma
 end
-%{
+%%{
 save(['metrics_',num2str(x_points), 'x', num2str(y_points),'_klatka_',num2str(p_frame)],'PSNR_metric','SSIM_metric','PEARSON_metric','MSE_metric','PSNR_metric_delam','SSIM_metric_delam','PEARSON_metric_delam','MSE_metric_delam','parameter_points');
 figure;
 plot(parameter_points,SSIM_metric,'b-o');
@@ -271,7 +298,7 @@ xlim([800 7200]);
 xlabel('No of points');
 set(gcf,'color','white');
 print(['metrics_delam_',num2str(x_points), 'x', num2str(y_points),'_klatka_',num2str(p_frame)],'-dpng','-r300');
-%}
+%%}
 %% FUNCTIONS
 function perm = pointindexsearch(x_points,y_points,PQ)
 % nearest point search
