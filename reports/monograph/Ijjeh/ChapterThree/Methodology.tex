@@ -150,6 +150,7 @@ The Residual UNet (Res-UNet) model was inspired based on residual learning~\cite
 The Res-UNet architecture is depicted in Fig.~\ref{fig:Unet}.
 The encoder (compressive) path aims to capture the detailed features of an input image, whereas the decoder (decompressive) path aims to perform exact localization.
 As a result, residual connections were established at two levels in order to prevent the spatial and contextual information from the preceding layers from being lost:
+
 \begin{itemize}
 	\item at each step of the encoder and decoder paths,
 	\item between the encoder parts and their corresponding decoder parts (skip connections) which ensures that the feature maps which were learned during the downsampling will be utilized in the reconstruction. 
@@ -289,7 +290,7 @@ To alleviate such contradiction, two design principles were proposed:
 \((1)\) For the classification task, in order to improve the capability of 
 the model to handle different transformations, a large kernel size must be 
 used to enable dense connections between feature maps and per-pixel 
-classifiers; \((2)\)for localisation task, the model must be fully convolutional. 
+classifiers; \((2)\) for localisation task, the model must be fully convolutional. 
 Additionally, fully connected or global pooling layers are not applied as 
 these layers will discard the localisation information. 
 
