@@ -1,6 +1,6 @@
 \section{Introduction}
 Composite materials have gained popularity in recent years in a variety of industries, including aerospace, automobiles, construction, marine, and others, due to their light-weight, excellent fatigue, and corrosion resistance.
-Composite materials, on the other hand, may suffer from matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}.
+However, composite materials may suffer from matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}.
 Delamination (separation of layers in a laminate composite) is one of the most dangerous of these flaws since it occurs largely below top surfaces and is scarcely noticeable~\cite{Cai2012a}.
 
 Delamination in composite materials can be caused by a variety of factors, including manufacturing flaws, notches, and impact events.
@@ -10,20 +10,20 @@ In order to monitor the integrity of engineering structures, numerous physics-ba
 
 Guided waves, namely Lamb waves, are used in a well-known physics-based technique in the field of SHM for damage diagnosis.
 Lamb waves are elastic waves that propagate through thin plates and shells that are bounded by stress-free surfaces~\cite{mitra2016guided}.
-Lamb waves are notable for their strong sensitivity to discontinuities (cracks, delaminations) and low amplitude loss, particularly in metallic constructions~\cite{Keulen2014}.
+Lamb waves are notable for their strong sensitivity to discontinuities (cracks, delaminations) and low amplitude loss, particularly in metallic elements of structures~\cite{Keulen2014}.
 
 An array of PZT transducers can be used to excite the examined structure and generate Lamb waves, which can subsequently be registered as reflected waves from damage.
 After that, a damage influence map is generated.
-The number of sensing points determines the accuracy of the damage effect map in displaying damage location.
+The number of sensing points determines the accuracy of the damage influence map in displaying damage location.
 As a result, damage localization resolution may be limited.
-As a result, a Scanning Laser Doppler Vibrometer (SLDV) is used to measure Lamb waves in a dense grid of spots over the structure under investigation.
+Alternatively, a Scanning Laser Doppler Vibrometer (SLDV) is used to measure Lamb waves in a dense grid of spots over the structure under investigation.
 The collected data represents a complete wavefield propagation, resulting in high-resolution damage influence maps.
 Damage detection systems that use whole wavefield signals can accurately estimate the extent and location of damage~\cite{Girolamo2018a, kudela2018impact}.
 \\
 Support vector machine (SVM) \cite{noori2010application, Khoa2014, Ghiasi2016}, K-Nearest Neighbor (KNN) \cite{Vitola2017}, decision tree~\cite{Mariniello2020}, particle swarm optimization (PSO)~\cite{Khatir2018, NouriShirazi2014}, principle component analysis (PCA)~\cite{wang2014principal, nguyen2010fault, liu2014research} are considered a conventional machine learning methods that are utilised for damage detection with SHM.
 Such methods among others have proven to be capable of detecting damage in the structures under investigation.
 However, when dealing with large amounts of data, such methods have drawbacks since they demand a sophisticated feature engineering calculation~\cite{Gulgec2019}, which also necessitates a high level of expertise and abilities to extract damage-sensitive features for specific SHM applications.
-As a result, in recent years, a data-driven solution for SHM applications has emerged in the form of deep learning (DL) end-to-end approaches, which automate the feature engineering and classification processes.
+As a result, in recent years, a data-driven solutions for SHM applications have emerged in the form of deep learning (DL) end-to-end approaches, which automate the feature engineering and classification processes.
 
 High- and abstract-level features can be translated into a hierarchical order of simple- and low-level obtained features using deep learning techniques~\cite{goodfellow2016deep}.
 As a result, DL approaches may handle big issues by breaking them down into a huge number of basic blocks.
@@ -33,10 +33,10 @@ Due to rapid advancements in computer hardware and software, big data, and cloud
 For SHM of civil engineering structures, several DL-based approaches were used for damage detection and localization~\cite{Cha2018, Kong2018}, corrosion detection~\cite{Atha2018}, and concrete crack detection~\cite{Dung2019}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-de Assis et al.~\cite{DeAssis2021} presented a comparative study based on modal responses for crack identification in laminated composites.
+De Assis et al.~\cite{DeAssis2021} presented a comparative study based on modal responses for crack identification in laminated composites.
 Furthermore, the authors of this paper solved an inverse crack identification problem using the metaheuristic sunflower optimization (SFO) algorithm, artificial neural networks (ANNs), and the response surface approach.
 The results showed that the SFO and ANN approaches may both be utilized to estimate a crack's location, size, and orientation.
-Furthermore, Oliver et al.~\cite{Oliver2021} developed ANNs for delamination detection in composite laminated plates that were merely trained on frequency fluctuation values as inputs.
+Furthermore, Oliver et al.~\cite{Oliver2021} developed ANNs for delamination detection in composite laminates that were merely trained on frequency fluctuation values as inputs.
 The proposed model had a damage quantification success rate up to \(95\% \).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -45,7 +45,7 @@ In comparison to vibration-based SHM, DL applications for guided wave-based SHM 
 Several DL approaches for guided wave-based damage identification and localization are discussed in the following sections.
 For damage detection in curved composite panels, Chetwynd et al.~\cite{Chetwynd2008damage} suggested a multi-layer perceptron MLP network.
 A force applicator with a circular tip loaded by a mass was used to imitate the damage.
-Lamb waves propagating through the panel were also generated and registered using a PZT transducer array.
+Lamb waves propagating through the panel were also generated and registered using an array of PZT transducers.
 In addition, for each Lamb wave response, a novelty index was calculated and compared to specific threshold values.
 As a result, if the index exceeds the threshold, it shows that the structure is damaged.
 The generated novelty indices were fed into the MLP network, which performed two operations: classification and regression.
