@@ -4,7 +4,7 @@
 In this section, five DL models of semantic segmentation approach were evaluated on exemplary three damage scenarios of an RMS of the numerically calculated full wavefield interpolated at the bottom surface of the plate in order to identify the delamination, including Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet, and GCN.
 In addition, an experimental scenario was used to measure the performance of the models and further to demonstrate the generalization capabilities.
 The mean and maximum (IoU) for each model is calculated and displayed as a comparative metric.
-Furthermore, for each model, the accuracy of classification, precision, recall, and F1 score were determined using Eqs.~(\ref{accuracy}-\ref{f1_score}).
+Furthermore, for each model, the accuracy of classification, precision, recall, and F1 score were determined using Eqs.~(\ref{accuracy} -~\ref{f1_score}):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	\rm Accuracy\ = \frac{TP+TN}{(Total\ number\ of\ tested\ samples)}
@@ -26,7 +26,7 @@ Furthermore, for each model, the accuracy of classification, precision, recall, 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 where the Positive/Negative refers to the predicted output as (damage or non-damage) respectively, True Positive (TP) and True Negative (TN) represent the correct classification, and the False Positive (FP) and False Negative (FN) represent the incorrect classification.
 
-For training purposes, a K-fold cross-validation technique was implemented with five folds. 
+For training purposes, a K-fold cross-validation technique was implemented with five folds.
 As a result, each model has cycled over \((5)\) iterations of training.
 Furthermore, for each iteration, the number of epochs equals \((20)\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,7 +34,7 @@ Furthermore, for each iteration, the number of epochs equals \((20)\).
 Three numerical data scenarios for delamination at various locations, shape, orientations and angles are discussed in the following.
 Figure~\ref{fig:softmax_448} depicts the first studied delamination scenario.
 As illustrated in Fig.~\ref{fig:RMS_flat_shell_Vz_448}, the delamination lies near the left boundary of the plate and is outlined by line to represent its shape, orientation and location.
-The predictions of Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN models are shown in Figs.~\ref{fig:unet_pred_448}-~\ref{fig:gcn_pred_448}.
+The predictions of Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN models are shown in Figs.~\ref{fig:unet_pred_448} -~\ref{fig:gcn_pred_448}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The location of the delamination is correctly indicated in all models.
 Furthermore, delamination-related pixels are grouped into a single region with no extra noise.
@@ -94,7 +94,7 @@ The delamination is positioned at the top left corner of the plate in the second
 As the reflections from plate edges overshadow reflections from the delamination, this is the most difficult damage scenario.
 As a result, RMS pattern changes are barely distinguishable.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Figures~\ref{fig:Unet_Pred__softmax_385} -~\ref{fig:gcn_pred_385} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively. 
+Figures~\ref{fig:Unet_Pred__softmax_385} -~\ref{fig:gcn_pred_385} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Considering the challenging damage scenario, all models perform reasonably well.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -154,7 +154,7 @@ Considering the challenging damage scenario, all models perform reasonably well.
 
 Figure~\ref{fig:475_softmax} depicts the third delamination scenario.
 As illustrated in Fig.~\ref{fig:RMS_flat_shell_Vz_475}, the delamination lies in the upper middle of the plate and is surrounded by an ellipse to represent its shape, location and orientation.
-Figures~\ref{fig:Unet_Pred__softmax_475} -~\ref{fig:gcn_pred_475} show the prediction outputs of Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN models, respectively. 
+Figures~\ref{fig:Unet_Pred__softmax_475} -~\ref{fig:gcn_pred_475} show the prediction outputs of Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet, and GCN models, respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Res-UNet and FCN-DenseNet are the best in preserving the elliptical shape of delamination in this case.
 GCN, on the other hand, gets the highest IoU value (see Table~\ref{tab:table_numerical_scenarios}).
@@ -230,7 +230,7 @@ Additionally, there is no noise in the predicted outputs for delamination identi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The mean and maximum values of (IoU) obtained for the previously unseen numerical test set (380 cases) for all models are presented in Table~\ref{tab:table_iou}.
-Additionally, table~\ref{tab:table_iou} demonstrates that all models have a high (IoU), showing their capability to identify damage.
+Additionally, Table~\ref{tab:table_iou} demonstrates that all models have a high (IoU), showing their capability to identify damage.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
@@ -247,7 +247,7 @@ Additionally, table~\ref{tab:table_iou} demonstrates that all models have a high
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Table~\ref{tab:table_performance} presents the TP, TN, FP, and FN for all models with respect to the test set. 
+Table~\ref{tab:table_performance} presents the TP, TN, FP, and FN for all models with respect to the test set.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
@@ -402,7 +402,7 @@ It should be noted that as the number of total parameters increases, the require
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental scenario}
-An experimental case of CFRP with Teflon insert as artificial delamination is examined in this scenario which is shown in Fig.~\ref{fig:Exp_ERMS_teflon}. 
+An experimental case of CFRP with Teflon insert as artificial delamination is examined in this scenario which is shown in Fig.~\ref{fig:Exp_ERMS_teflon}.
 A frequency of \(50\) kHz was used to stimulate a signal in a transducer placed in the center of the plate, similar to the synthetic data set.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 At this frequency, the A0 mode wavelength for this particular CFRP material is around \(20\) mm.
