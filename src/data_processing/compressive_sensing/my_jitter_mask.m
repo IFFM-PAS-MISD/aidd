@@ -48,10 +48,10 @@ for j=1:n1/sqrt(m):n1+n1/sqrt(m)
         eps2= a + (b-a)*rand(1);
         ind_x = round(i + eps1);
         ind_y = round(j + eps2);
-        if(ind_x == 0)
+        if(ind_x <= 0)
             ind_x = 1;
         end
-        if(ind_y == 0)
+        if(ind_y <= 0)
             ind_y = 1;
         end
         if(ind_x > n1 )
@@ -70,8 +70,14 @@ l1=length(unique(ind_jitter));
 if(l1<m)
     l2=m-l1;
     P = randperm(length(I1),l2);
+    ind_jitter=[ind_jitter;I1(P)];
+else
+    % or remove randomly points
+    l2=l1-m;
+    P = sort(randperm(l1,l2),'descend');
+    ind_jitter(P) =[];
 end
-ind_jitter=[ind_jitter;I1(P)];
+
 x_jitter_mask(ind_jitter)=1;
 %---------------------- END OF CODE---------------------- 
 
