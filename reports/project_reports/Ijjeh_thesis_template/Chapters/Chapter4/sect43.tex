@@ -1,3 +1,107 @@
 %% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
 \section{Delamination detection using Full connected CNN with bounding boxes}
-\label{sec43}
+\label{sec42}
+
+In this section, our initial attempts were on utilising a CNN model regarding delamination detection in CFRP materials is presented.
+The model was trained on the on RMS images from the synthetically generated dataset of the propagating Lamb waves (from the top of the surface of the plate) to predict the delamination location using bounding boxes as shown in Fig~\ref{fig:RMS_14}, while, Fig.~\ref{fig:label_14} shows its corresponding ground truth.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=5cm]{Figures/Chapter_4/RMS_flat_shell_Vz_389_500x500top.png}
+		\caption{}
+		\label{fig:RMS_14}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=5cm]{Figures/Chapter_4/m1_rand_single_delam_389.png}
+		\caption{}
+		\label{fig:label_14}
+	\end{subfigure}
+	\caption{(a) RMS image: from the top of the plate, (b) Label}
+	\label{fig:RMS_GT}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Accordingly, a CNN model with fully connected dense layers was developed for delamination detection in CFRP.
+Moreover, the developed model is based on a supervised learning therefore, with each generated case of delamination a ground truth (label) is given, hence, the model performs a classification task. 
+
+In order to reduce the computation complexity for the model, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels,  then, was split it into \((14\times 14)\) blocks, and each block has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49blocks}.
+Consequently, the preprocessed dataset has a size of \((93100\times 32\times 32 \times 1)\), where (\(93100\)) is the total number of blocks for all \(475\) cases.
+
+To examine the effect of increasing the resolution of the RMS image on delamination identification another  preparation was made by resizing the RMS input image to \((512\times 512)\) pixels, then it was split into \(16\times 16\) blocks, and each block has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_64blocks}.
+The second preprocess dataset has a size of \((121600 \times 32 \times 32 \times 1)\), where (\(121600\)) is the total number of blocks for all \(475\) cases.
+
+Further, for each block in the RMS input image there is a corresponding block in the ground truth image of size \((32\times 32)\) as presented in Figs.~\ref{fig:GT_49blocks} and~\ref{fig:GT_64blocks}, respectively.
+
+For training purposes, the dataset was divided into two portions: \(80\%\)	training set and \(20\%\) testing set. 
+Additionally, the validation set was created as a \(20\%\) of the training set.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=5cm]{Figures/Chapter_4/7_7_blocks_389.png}
+		\caption{RMS image splitted into (\(14\times 14\)) blocks.}
+		\label{fig:RMS_49blocks}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=5cm]{Figures/Chapter_4/8_8_blocks_389.png}
+		\caption{RMS image splitted into (\(16\times 16\)) blocks.}
+		\label{fig:RMS_64blocks}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+	\centering
+	\includegraphics[width=5cm]{Figures/Chapter_4/GT_7_7_389.png}
+	\caption{Label image splitted into (\(14\times 14\)) blocks.}
+	\label{fig:GT_49blocks}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=5cm]{Figures/Chapter_4/GT_7_7_389.png}
+		\caption{Label image splitted into (\(16\times 16\)) blocks.}
+		\label{fig:GT_64blocks}
+	\end{subfigure}
+	\caption{}
+	\label{fig:grid_mesh}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{CNN_model} presents the implemented CNN model architecture for classification purposes.
+The model takes an input block of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
+Moreover, in the convolution operation we applied the same padding, and the activation function was Relu.
+Then, a pooling layer is applied which has a pool filter of size (\(2\times 2\)) with a stride of (\(2\)).
+These operation of convolution and pooling is repeated two times.
+The output of the second pooling layer is flattened and fed into the dense layers in which the model has two fully connected layers.
+The first dense layer has (\(4096\)) neurons and the second dense layer has (\(1024\)) neurons.
+Additionally, Relu activation function was applied for both dense layers.
+Moreover, a dropout of probability (\(p = 0.5\)) was added to the model to reduce the overfitting issue.
+The final layer in the model is the output layer, in which the model outputs two predictions (damaged and undamaged), hence, a softmax activation function was applied. 
+Consequently, the whole block of size \((32\times 32)\) is classified as damaged if there is at least one pixel of delamination, otherwise, it is considered undamaged.
+Finally, the predicted output (delamination) is surrounded by a bounding box as the final output.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=1]{Figures/Chapter_4/CNN_model.png}
+	\caption{CNN classifier architecture.}
+	\label{CNN_model}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Furthermore, to evaluate the predicted outputs we have utilised two accuracy metrics:
+\begin{itemize}
+	\item The classification accuracy to measure the capability of the model to detect the delamination.
+	\item The intersection over union (IoU) to measure the intersection between the bounding box area which surrounds the predicted delamination and the ground truth delamination.
+\end{itemize}
+
+Moreover, selecting a proper loss function during training the model is important since the loss function reflects how good the model learns to predict.
+In this model, we have applied a mean square error \((mse)\) loss function which calculates the sum of the squared distances between the predicted output values and the ground truth values.
+Moreover, our focus during training the model was on minimizing the loss function and maximizing the accuracy metric.
+Accordingly, an optimizer function is required to perform such operation.
+In the developed model Adam optimizer was utilised~\cite{Kingma2015}. 
