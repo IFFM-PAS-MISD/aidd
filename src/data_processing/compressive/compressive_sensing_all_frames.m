@@ -27,7 +27,8 @@ Lx=0.5; % plate length
 Ly=0.5; % plate width
 n = x_points*y_points;
 
-No_of_measurement_points = [1024,3000,4000];
+%No_of_measurement_points = [1024,3000,4000];
+No_of_measurement_points = [3000];
 cmap = 'default';
 %cmap = 'jet';
 mask_type = 1;
@@ -81,7 +82,7 @@ MSE_metric_delam = zeros(512,1);
 parameter_frames = zeros(512,1);
 c = 0;
 %% CS meaurement and recovery
-for  p_frame = 1:512 % loop over frames
+for  p_frame = 110%1:512 % loop over frames
     
     c=c+1; 
 
@@ -90,7 +91,8 @@ for  p_frame = 1:512 % loop over frames
     reg_Frame = regInterp(Data,XYZ,x_points,y_points,p_frame); 
     ref_Frame = regInterp(Data,XYZ,512,512,p_frame);
     xmax = max(max(ref_Frame));
-
+    s_zoom_max = max(max(ref_Frame(zoom_y,zoom_x)));
+    
     % frame composed of random or jittered points for scatter plot
     OneDData = reshape(reg_Frame,[],1); 
     rand_Frame = OneDData(perm,:);
@@ -196,8 +198,7 @@ for  p_frame = 1:512 % loop over frames
     % single plot - reference
     figure;
     imagesc(intsct);colormap(cmap);
-    %caxis([-xmax xmax]);
-    
+    %caxis([-xmax xmax]); 
     run fig_param;
     caxis([caxis_cut*Smin,caxis_cut*Smax]);
     print([figure_output_path,'ref_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points),'_klatka_',num2str(p_frame),'_',cmap,'_',mask_name,'.png'],'-dpng','-r600');
@@ -230,16 +231,14 @@ for  p_frame = 1:512 % loop over frames
         figure;
         imagesc(ref_Frame(zoom_y,zoom_x));colormap(cmap);
         run fig_param;
-        caxis([caxis_cut*Smin,caxis_cut*Smax]);
-        %caxis([-xmax xmax]);
+        caxis([-s_zoom_max s_zoom_max]);
         drawnow;
         print([figure_output_path,'ref_delam_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points),'_klatka_',num2str(p_frame),'_',cmap,'_',mask_name,'.png'],'-dpng','-r600');
         % reconstructed
         figure;
         imagesc(int_recon_image(zoom_y,zoom_x));colormap(cmap);
         run fig_param;
-        caxis([caxis_cut*Smin,caxis_cut*Smax]);
-        %caxis([-xmax xmax]);
+        caxis([-s_zoom_max s_zoom_max]);
         drawnow;
         print([figure_output_path,'recon_delam_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points),'_klatka_',num2str(p_frame),'_',cmap,'_',mask_name,'.png'],'-dpng','-r600');
         
@@ -360,7 +359,6 @@ title(['CS: ', num2str(points),' points (delam)'],'Fontsize',title_font_size,'Fo
 xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
 run fig_param2;
 print([figure_output_path,'frame_metrics_delam_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points),'_',mask_name],'-dpng','-r600');
-%%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % mask
@@ -393,6 +391,7 @@ switch mask_type
 end
 run fig_param3;
 print([figure_output_path,'mask_',mask_name,'_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points)],'-dpng','-r600'); 
+%%}
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FUNCTIONS
