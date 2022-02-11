@@ -1,107 +1,261 @@
-%% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
-\section{Delamination detection using Full connected CNN with bounding boxes}
-\label{sec42}
+%% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
+\section{Delamination identification using FCN}
+\label{sec43}
+DL approaches have advanced quickly in recent years in many different real-world applications.
+An important and challenging application among others in DL is computer vision, in which we train a machine to automatically extract useful information from digital images, videos, and other visual inputs.
+Hence, an image segmentation technique that is well-known in computer vision applications is broadly utilised for such a purpose.
+Consequently, this technique aims to assign a class to each pixel in the input image.
+Thus, it can be utilised in several real-world applications like self-driving automobiles, medical imaging, traffic management systems, video surveillance, and more.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section, our initial attempts were on utilising a CNN model regarding delamination detection in CFRP materials is presented.
-The model was trained on the on RMS images from the synthetically generated dataset of the propagating Lamb waves (from the top of the surface of the plate) to predict the delamination location using bounding boxes as shown in Fig~\ref{fig:RMS_14}, while, Fig.~\ref{fig:label_14} shows its corresponding ground truth.
+In this section, we present five DL models based on Fully Convolutional Networks (FCN)~\cite{Shelhamer2017a} that aim to automatically perform feature extraction by training the models using full wavefield images. 
+Hence, the models will learn by themselves to recognise the different patterns further, detect the delamination and localise it.
+Consequently, the implemented models will perform a pixel-wise segmentation by classifying every pixel of the input image as damaged or not.
+
+The key idea of FCN is to replace the dense layers of neurons with convolutional layers, hence, reducing the computation complexity.
+Hence, FCN can be implemented by stacking convolutional layers and skipping dense layers in an encoder-decoder scheme.
+The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations.
+While the decoder is responsible for upsampling the condensed feature maps to the original input shape.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The softmax activation function was used at the output layer for all constructed models.
+For every single pixel, the softmax estimates the probability of each predicted output being damaged or undamaged, implying that the sum of the two probabilities must be one.
+The softmax activation function is depicted by Eq.~(\ref{softmax}), where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) across all potential target classes \(x_{j}\), C in our instance being two classes (damaged and undamaged).
+An argmax function is used to find the maximum probability between each of them in order to predict the label of the output (\(y_{pred}\)).
+\begin{equation}
+	P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
+	\label{softmax}
+\end{equation} 
+\begin{equation}
+	y_{pred} = argmax_{i}\left( P(x)_{i} \right)
+	\label{argmax}
+\end{equation}
+Choosing the right loss function is crucial since it determines how effectively the model learns and performs.
+As a result, the categorical cross-entropy (CCE) loss function~\cite{Bonaccorso2020}, commonly known as the \say{softmax loss function}, was utilised.
+The difference between the actual damage (ground truth) and the expected damage is estimated using CCE as the objective function.
+Furthermore, because there are only two classes to predict, a Sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the anticipated outputs.
+The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the softmax value of the target class.
+\begin{equation}	
+	CCE = -\log\left( P(x)_{i} \right)
+	\label{CCE}
+\end{equation}
+
+Further, it is important to choose an appropriate accuracy metric for the training purposes.
+Hence, intersection over union \((IoU)\) (Jaccard index)~\cite{Bertels2019} was utilised to measure the accuracy of prediction during training process.
+The intersection area between the ground truth and the predicted output is used to estimate \((IoU)\).
+In this work, the (IoU) is calculated solely for the damaged class label.
+Eq.~(\ref{IoU}) defines the (IoU) metric as follows:
+\begin{equation}
+	IoU = \frac{Intersection}{Union} = \frac{\hat{Y} \cap Y}{\hat{Y} \cup Y} 
+	\label{IoU}
+\end{equation}
+where \(\hat{Y}\) refers to the predicted tensor values, while \(Y\) refers to the tensor of ground truth values.
+
+Moreover, the Adam optimizer was used as our optimizer to improve the (IoU) and decrease the loss during training.
+
+The implemented DL models for pixel-wise semantic segmentation for delaminations identification are depicted in Figure~\ref{fig:flowchart}.
+In the following subsections, the data preprocessing and the five DL models will be illustrated.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/RMS_flat_shell_Vz_389_500x500top.png}
-		\caption{}
-		\label{fig:RMS_14}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/m1_rand_single_delam_389.png}
-		\caption{}
-		\label{fig:label_14}
-	\end{subfigure}
-	\caption{(a) RMS image: from the top of the plate, (b) Label}
-	\label{fig:RMS_GT}
-\end{figure} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Accordingly, a CNN model with fully connected dense layers was developed for delamination detection in CFRP.
-Moreover, the developed model is based on a supervised learning therefore, with each generated case of delamination a ground truth (label) is given, hence, the model performs a classification task. 
-
-In order to reduce the computation complexity for the model, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels,  then, was split it into \((14\times 14)\) blocks, and each block has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49blocks}.
-Consequently, the preprocessed dataset has a size of \((93100\times 32\times 32 \times 1)\), where (\(93100\)) is the total number of blocks for all \(475\) cases.
-
-To examine the effect of increasing the resolution of the RMS image on delamination identification another  preparation was made by resizing the RMS input image to \((512\times 512)\) pixels, then it was split into \(16\times 16\) blocks, and each block has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_64blocks}.
-The second preprocess dataset has a size of \((121600 \times 32 \times 32 \times 1)\), where (\(121600\)) is the total number of blocks for all \(475\) cases.
-
-Further, for each block in the RMS input image there is a corresponding block in the ground truth image of size \((32\times 32)\) as presented in Figs.~\ref{fig:GT_49blocks} and~\ref{fig:GT_64blocks}, respectively.
-
-For training purposes, the dataset was divided into two portions: \(80\%\)	training set and \(20\%\) testing set. 
-Additionally, the validation set was created as a \(20\%\) of the training set.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/7_7_blocks_389.png}
-		\caption{RMS image splitted into (\(14\times 14\)) blocks.}
-		\label{fig:RMS_49blocks}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/8_8_blocks_389.png}
-		\caption{RMS image splitted into (\(16\times 16\)) blocks.}
-		\label{fig:RMS_64blocks}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-	\centering
-	\includegraphics[width=5cm]{Figures/Chapter_4/GT_7_7_389.png}
-	\caption{Label image splitted into (\(14\times 14\)) blocks.}
-	\label{fig:GT_49blocks}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/GT_7_7_389.png}
-		\caption{Label image splitted into (\(16\times 16\)) blocks.}
-		\label{fig:GT_64blocks}
-	\end{subfigure}
-	\caption{}
-	\label{fig:grid_mesh}
+	\begin{center}
+		\includegraphics[scale=1.0]{Figures/Chapter_4/figure3.png}
+	\end{center}
+	\caption{Schematic diagram of the approach used for comparison of semantic segmentation methods accuracy.} 
+	\label{fig:flowchart}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Figure~\ref{CNN_model} presents the implemented CNN model architecture for classification purposes.
-The model takes an input block of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
-Moreover, in the convolution operation we applied the same padding, and the activation function was Relu.
-Then, a pooling layer is applied which has a pool filter of size (\(2\times 2\)) with a stride of (\(2\)).
-These operation of convolution and pooling is repeated two times.
-The output of the second pooling layer is flattened and fed into the dense layers in which the model has two fully connected layers.
-The first dense layer has (\(4096\)) neurons and the second dense layer has (\(1024\)) neurons.
-Additionally, Relu activation function was applied for both dense layers.
-Moreover, a dropout of probability (\(p = 0.5\)) was added to the model to reduce the overfitting issue.
-The final layer in the model is the output layer, in which the model outputs two predictions (damaged and undamaged), hence, a softmax activation function was applied. 
-Consequently, the whole block of size \((32\times 32)\) is classified as damaged if there is at least one pixel of delamination, otherwise, it is considered undamaged.
-Finally, the predicted output (delamination) is surrounded by a bounding box as the final output.
+\subsection{Data preprocessing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=1]{Figures/Chapter_4/CNN_model.png}
-	\caption{CNN classifier architecture.}
-	\label{CNN_model}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The implemented FCN models for pixel-wise image segmentation have a one-to-one prediction scheme.
+In other words, the models take one image input and predict one output image.
+Accordingly, to train the FCN models, the calculated RMS images of the full wavefield at the bottom surface of the plate (see Fig.~\ref{fig:rmsbottom}) were utilised.
+The dataset consisting of RMS images which were used in this research paper is available online~\cite{Kudela2020d}.
 
-Furthermore, to evaluate the predicted outputs we have utilised two accuracy metrics:
+To enhance the performance of the optimizer during the training process, the colour scale values were normalised to a range of \((0-1)\) instead of the initial scale which was in a range of \((0-255)\). 
+Furthermore, we have applied data augmentation to the dataset (\(475\) RMS images) by flipping the images horizontally, vertically, and diagonally. 
+As a result, the dataset size increased four times \(1900\) images were produced. 
+We have split the dataset into two portions: \(80\%\) for the training set and \(20\%\) for the testing set. 
+Moreover, a K-folds cross-validation method~\cite{Srinivasan2019} was applied to the training set to reduce the overfitting which happens when the model is able to fit on the training data, while it poorly fit on the new unseen data. 
+In other words, the model only learns the patterns of the training data therefore the model will not generalise well. 
+The main advantage of the K-folds method versus a regular train/test split is to reduce the overfitting by utilising data more efficiently as every data sample is used in both training and validation. 
+Therefore, by using this technique, we aim to improve the ability of the model to generalise and reduce overfitting.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Residual UNet model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The Residual UNet (Res-UNet) model was inspired based on residual learning~\cite{He2016} and UNet approaches~\cite{Ronneberger2015}.
+The Res-UNet architecture is depicted in Fig.~\ref{fig:Unet}.
+The encoder (compressive) path aims to capture the detailed features of an input image, whereas the decoder (decompressive) path aims to perform exact localization.
+As a result, residual connections were established at two levels in order to prevent the spatial and contextual information from the preceding layers from being lost:
+
 \begin{itemize}
-	\item The classification accuracy to measure the capability of the model to detect the delamination.
-	\item The intersection over union (IoU) to measure the intersection between the bounding box area which surrounds the predicted delamination and the ground truth delamination.
+	\item at each step of the encoder and decoder paths,
+	\item between the encoder parts and their corresponding decoder parts (skip connections) which ensures that the feature maps which were learned during the downsampling will be utilized in the reconstruction. 
 \end{itemize}
 
-Moreover, selecting a proper loss function during training the model is important since the loss function reflects how good the model learns to predict.
-In this model, we have applied a mean square error \((mse)\) loss function which calculates the sum of the squared distances between the predicted output values and the ground truth values.
-Moreover, our focus during training the model was on minimizing the loss function and maximizing the accuracy metric.
-Accordingly, an optimizer function is required to perform such operation.
-In the developed model Adam optimizer was utilised~\cite{Kingma2015}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Several downsampling (Max-pool) blocks are used in the encoder section.
+Each block applies two convolutional layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides that selects the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, as a result, a reduction in computation complexity.
+Each convolutional layer does \((3\times3)\) convolution operations, then batch normalization (BN), and finally a Relu.
+Furthermore, after each downsampling block, the number of convolutional filters is increased, allowing the model to learn complex patterns successfully.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The bottleneck layer is a joining point in the model's deepest layer, located between the encoder and the decoder.
+Two convolutional layers with \((1024)\) filters make up the bottleneck, which aids the model in learning and recognizing complex features.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The decoder is composed of a number upsampling blocks that function together to recover original input dimensions and improve resolution.
+As in the downsampling block, each upsampling block transmits the input through two convolution layers, followed by a transmission up layer consisting of a transposed convolutional layer (upsampling).
+The transposed convolutional layer varies from the standard upsampling function in that it introduces learnable parameters for the transposed convolution filters, which improve the model's learning process.
+Furthermore, the number of filters used by the convolutional layer is reduced by half after each upsampling operation to keep the model symmetrical.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=\textwidth]{Figures/Chapter_4/figure4.png}
+	\end{center}
+	\caption{Res-UNet architecture.} 
+	\label{fig:Unet}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{VGG16 encoder-decoder}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The application of the VGG16~\cite{Simonyan2015} architecture as a backbone encoder to the UNet~\cite{Ronneberger2015} approach is addressed in this model.
+VGG16 is a classification algorithm that consists of 13 convolutional layers, pooling layers, and (3) dense layers.
+The dense layers were removed form the original VGG16 model, and a 13 convolutional layers were applied resulting in an encoder-decoder scheme for pixel-wise image segmentation.
+The architecture of the VGG16 encoder-decoder model is shown in Fig.~\ref{vgg16}.
+The model is U-shaped like, and consists of two parts: encoder and decoder.
+The encoder is made up of (five) convolutional blocks with a total of (13) \((3\times3)\) convolutional layers, followed by BN and Relu as the activation function.
+After each convolutional block, a Max pool operation with a pool size of \((2\times2)\) is conducted, followed by dropout. 
+The upsampling process is used to retrieve spatial resolution, and it contains \(5\) convolutional blocks of total \(13\) convolutional layers.
+Bilinear interpolation with \((2\times2)\) kernel size is used for upsampling.
+In order to improve recovering fine-grained information, skip connections were added between downsampling blocks and the matching upsampling blocks, allowing feature re-usability from earlier layers.
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=\textwidth]{Figures/Chapter_4/figure5.png}
+	\end{center}
+	\caption{VGG16 encoder decoder architecture.} 
+	\label{vgg16}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{FCN-DenseNet model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FCN-DenseNet is a pixel-wise image segmentation algorithm that was first introduced in~\cite{Jegou}.
+To boost the resolution of the final feature map, FCN-DenseNet uses a U-shaped encoder-decoder architecture with skip connections between downsampling and upsampling channels.
+Hence, FCN-DenseNet introduced a dense block representing its main component.
+The dense block is made up of \(n\) layers, each of which is made up of a set of operations, as given in Table~\ref{layers}.
+The purpose of the dense block is to concatenate the input (feature maps) of a layer with its output (feature maps) to emphasize spatial details information.
+The architecture of the dense block is presented in Fig.~\ref{dense_block}. 
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth,angle=-90]{Figures/Chapter_4/figure6.png}
+	\end{center}
+	\caption{Dense block architecture.} 
+	\label{dense_block}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A transition down layer was added to execute a \((1\times 1)\) convolution followed by a \((2\times 2)\) Maxpooling operation to minimize the spatial dimensionality of the resulting feature maps.
+As a result, a transition-up layer was added to recover the spatial resolution.
+FCN-DenseNet essentially upsamples feature maps from the previous layer using a transpose convolution technique.
+Upsampled feature maps are concatenated with those produced by the skip connection to provide the input to a new dense block.
+
+As the upsampling approach expands the spatial resolution of the feature maps, the input to the dense block is not concatenated with its output during upsampling to avoid the overhead of memory shortage.
+The FCN-DenseNet architecture for image segmentation utilized for delamination detection is shown in Fig.~\ref{fcn}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=.7\textwidth]{Figures/Chapter_4/FCN_dense_net.png}
+	\end{center}
+	\caption{FCN-DenseNet architecture.} 
+	\label{fcn}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Table~\ref{layers} presents the architecture of a single layer, the transition down and transition up layers in details.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h!]
+	\renewcommand{\arraystretch}{1.3}
+	\centering
+	\scriptsize
+	\resizebox{\textwidth}{!}
+	{
+		\begin{tabular}{ccccc}
+			\hline
+			Layer & & Transition Down & & Transition Up \\ 
+			\hline
+			Batch Normalization & & Batch Normalization & & \(3\times 3\) Transposed Convolution \\ 
+			Relu & & Relu & & strides = (\(2\times2\)) \\ 
+			(\(3\times3\)) Convolution & & (\(1\times1\)) Convolution & & \\ 
+			%		& &  \\ 
+			Dropout \(p=0.2\) & &Dropout \(p=0.2\) & & \\ 
+			& & (\(2\times2\)) Maxpooling & & \\ 
+			\hline
+		\end{tabular}
+	}
+	\caption{Layer, Transition Down and Transition Up layers.} 
+	\label{layers}	
+\end{table}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Pyramid Scene Parsing Network}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The main idea of PSPNet~\cite{zhao2017pyramid} is to combine local and global features to give appropriate global contextual information for pixel-level scene parsing.
+As a result, a spatial pyramid pooling module was developed to execute four different layers of pooling with four different pooling sizes and strides.
+The pyramid pooling module is able to capture contextual features from many scales in this way.
+
+To enhance the PSPNet model a ResNet-50 model~\cite{He2016} was added. 
+It works as a backbone for feature map extraction with dilation at the last two layers of ResNet. 
+The implemented PSPNet architecture is shown in Fig.~\ref{fig:PSPNet}.
+Hence, a pyramid pooling module was utilised at \(4\) pooling levels.
+The coarsest level of a single bin output depicted in the red box was generated using global average pooling.
+(\(2\times2\)), (\(4\times 4\)), and (\(8\times8\)) are the pooling sizes for the other three sub-region levels, respectively.
+To minimize the dimensionality of the generated feature maps, a \((1\times 1)\) convolutional layer was applied, followed by a BN and Relu.
+Subsequently, bilinear interpolation was used to upsample the feature maps created at each level.
+Furthermore, the upsampled features are combined with the output of ResNet-50 to produce both local and global context information.
+The pixel-wise segmentation predictions were then generated using two cascaded convolutional layers. 
+\begin{figure} [h!]
+	\centering
+	\includegraphics[width=.8\textwidth]{Figures/Chapter_4/figure7.png}
+	\caption{PSPNet architecture.} 
+	\label{fig:PSPNet}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Global Convolutional Network}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Peng et al.~\cite{Peng2017} introduced the Global Convolutional Network (GCN) to address the importance of having large kernels for both localization and classification operations for semantic segmentation in order to increase the size of respective fields.
+However, when performing classification and localization tasks, a contradiction emerges due to the fact that classification tasks necessitate invariant models for various transformations such as rotation and translation while localisation tasks necessitate models that are sensitive to any modification and appropriately assign each pixel to its semantic category.
+To alleviate such contradiction, two design principles were proposed:
+\((1)\) For the classification task, in order to improve the capability of 
+the model to handle different transformations, a large kernel size must be 
+used to enable dense connections between feature maps and per-pixel 
+classifiers; \((2)\) for localisation task, the model must be fully convolutional. 
+Additionally, fully connected or global pooling layers are not applied as 
+these layers will discard the localisation information. 
+
+The implemented GCN technique for semantic segmentation is shown in Fig.~\ref{fig:gcn}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_4/figure8.png}
+	\end{center}
+	\caption{Global Convolution Network whole architecture.} 
+	\label{fig:gcn}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A residual network was used as a backbone for improving the feature extraction process, as demonstrated in Fig.~\ref{fig:gcn}, further, the residual block is presented in Fig.~\ref{fig:res_gcn_br}a.
+A GCN block presented in Fig.~\ref{fig:res_gcn_br}b is placed after each residual block, which employs a mix of \((1\times k)\)+\((k\times 1)\) and \((k\times 1)\)+\((1\times k)\) convolutions to establish dense connections within \((k\times k)\) region in the feature map.
+The boundary refinement (BR) block, depicted in Fig.~\ref{fig:res_gcn_br}c, is then used to improve the predictions along the object borders, resulting in a lower resolution score map.
+Furthermore, the upsampling operation is done recursively, it upsamples the low 
+resolution score maps then concatenate it with a higher one to produce a new 
+score maps.
+The deconvolution operation is repeated until the original image size is 
+obtained.
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_4/figure9.png}
+	\end{center}
+	\caption{(a) Residual block, (b) Global Convolution Network block, (c) 
+		Boundary Refinement} 
+	\label{fig:res_gcn_br}
+\end{figure}
