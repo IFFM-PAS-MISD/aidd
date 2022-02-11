@@ -22,8 +22,9 @@ figure_output_path = prepare_figure_paths(modelname);
 input_data_path = '/pkudela_odroid_sensors/aidd/data/processed/exp/model_Abdalraheem/';
 
 % files for processing
-list1 = {'PSNR_exp_512_frames.csv'}; 
-list2 = {'Pearson_CC_exp_512_frames.csv'};
+list1 = {'Pearson_CC_exp_512_frames.csv'};
+list2 = {'PSNR_exp_512_frames.csv'}; 
+
 
 
 disp('Interpolation and RMS calcualation');

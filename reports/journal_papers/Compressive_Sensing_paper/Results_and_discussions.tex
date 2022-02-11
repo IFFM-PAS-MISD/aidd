@@ -4,6 +4,21 @@
 
 \subsection{Experimental cases}
 
+Experiment description
+
+\begin{figure} [h!]
+	\centering
+	\includegraphics[scale=1]{figure8.png}
+	\caption{Delamination arrangements in the specimen.}
+	\label{fig:specime}
+\end{figure}
+
+\begin{figure} [h!]
+	\centering
+	\includegraphics[scale=1]{figure9.png}
+	\caption{Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.}
+	\label{fig:points_metrics}
+\end{figure}
 
 \begin{figure} [h!]
 	\centering
@@ -100,36 +115,26 @@
 	\caption{Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.~\ref{fig:frame110_comparison}.}
 	\label{fig:frame110del_comparison}
 \end{figure} 
-
+\clearpage
 \begin{figure} [h!]
 	\centering
-	\begin{subfigure}[b]{\textwidth}
-		\centering
-		\includegraphics[scale=1]{figure12a.png}
-		\caption{CS: 3000 points}
-		\label{fig:metrics_CS3000}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{\textwidth}
-		\centering
-		\includegraphics[scale=1]{figure12b.png}
-		\caption{CS: 4000 points}
-		\label{fig:metrics_CS4000}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{\textwidth}
-		\centering
-		\includegraphics[scale=1]{figure12c.png}
-		\caption{DLSR: Abdalraheem}
-		\label{fig:metrics_Abdalraheem}
-	\end{subfigure}	
-	\hfill
-	\begin{subfigure}[b]{\textwidth}
-		\centering
-		\includegraphics[scale=1]{figure12b.png}
-		\caption{DLSR: Saeedf}
-		\label{fig:metrics_Saeed}
-	\end{subfigure}
+ 	\includegraphics[scale=1]{figure12.png}
 	\caption{Comparison of reconstruction accuracy at frame number $N_f$.}
 	\label{fig:frame_metrics}
 \end{figure}
+
+\begin{table}[h!]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR}	
+	\begin{tabular}{crrr} \toprule
+		%&Best & \(\mu\) & \(\sigma\)\\
+		%\cmidrule{1-4} 
+		\csvreader[table head=\toprule ,
+		late after line=\\ ]%
+		{table_metrics.csv}{Method=\method,Np=\np,Cr=\cr,PSNR=\psnr}%
+		{\method & \np & \cr & \psnr}%	
+		\bottomrule
+	\end{tabular}	
+	\label{tab:csv_results}
+\end{table}

@@ -2,12 +2,35 @@
 
 load project_paths projectroot src_path;
 
-figs_source_folder=[projectroot,'reports',filesep,'figures',filesep,'compressive',filesep];
+
 paper_folder = 'Compressive_Sensing_paper';
 fig_destination=[projectroot,'reports',filesep,'journal_papers',filesep,paper_folder,filesep,'figs',filesep];
 
-modelname='compressive_sensing_all_frames';
+figs_source_folder=[projectroot,'reports',filesep,'figures',filesep,'compressive',filesep];
+modelname='compressive_sensing_frame110_points';
+% figure 9a
+figname='points_metrics_128x128_frame_110_random.png';
+fig_source=[figs_source_folder,modelname,'_out',filesep,figname];
+copyfile(fig_source,fig_destination);
+% rename
+movefile([fig_destination,figname],[fig_destination,'figure9a.png'],'f');
 
+% figure 9b
+figname='points_metrics_delam_128x128_frame_110_random.png';
+fig_source=[figs_source_folder,modelname,'_out',filesep,figname];
+copyfile(fig_source,fig_destination);
+% rename
+movefile([fig_destination,figname],[fig_destination,'figure9b.png'],'f');
+
+% stitched figures 9 together
+I9a=imread([fig_destination,'figure9a.png']);
+I9b=imread([fig_destination,'figure9b.png']);
+I9=[I9a(1:1190,1:1417,:),I9b(1:1190,1:1417,:)];
+I1info=imfinfo([fig_destination,'figure9a.png']);
+imwrite(I9,[fig_destination,'figure9.png'],'png','ResolutionUnit','meter','XResolution',I1info.XResolution,'YResolution',I1info.YResolution);
+
+figs_source_folder=[projectroot,'reports',filesep,'figures',filesep,'compressive',filesep];
+modelname='compressive_sensing_all_frames';
 % figure 10a
 figname='ref_rect_128x128p_siatka_1024_klatka_110_default_random.png';
 fig_source=[figs_source_folder,modelname,'_out',filesep,'random',filesep,'1024p',filesep,figname];
@@ -112,4 +135,11 @@ copyfile(fig_source,fig_destination);
 % rename
 movefile([fig_destination,figname],[fig_destination,'figure12c.png'],'f');
 
+% stitched figures 12 together
+I12a=imread([fig_destination,'figure12a.png']);
+I12b=imread([fig_destination,'figure12b.png']);
+I12c=imread([fig_destination,'figure12c.png']);
+I12=[I12a(1:1181,1:3306,:);I12b(1:1181,1:3306,:);I12c(1:1181,1:3306,:)];
+I1info=imfinfo([fig_destination,'figure12a.png']);
+imwrite(I12,[fig_destination,'figure12.png'],'png','ResolutionUnit','meter','XResolution',I1info.XResolution,'YResolution',I1info.YResolution);
 

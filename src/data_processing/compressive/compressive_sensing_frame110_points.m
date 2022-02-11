@@ -26,15 +26,28 @@ y_points = 128;
 Lx=0.5; % plate length
 Ly=0.5; % plate width
 n = x_points*y_points;
+Nf =110; % frame number
 
-%No_of_measurement_points = [1024,3000,4000];
-No_of_measurement_points = [3000,4000];
+No_of_measurement_points = [1024,2000,3000,4000,5000,6000,7000];
 cmap = 'parula'; % default matlab map
 %cmap = 'jet';
-mask_type = 2;
+mask_type = 1;
 % mask_type = 1; % random mask
 % mask_type = 2; % jitter mask
+
+% initialization
+PSNR_metric = zeros(length(No_of_measurement_points),1);
+SSIM_metric = zeros(length(No_of_measurement_points),1);
+PEARSON_metric = zeros(length(No_of_measurement_points),1);
+MSE_metric = zeros(length(No_of_measurement_points),1);
+PSNR_metric_delam = zeros(length(No_of_measurement_points),1);
+SSIM_metric_delam = zeros(length(No_of_measurement_points),1);
+PEARSON_metric_delam = zeros(length(No_of_measurement_points),1);
+MSE_metric_delam = zeros(length(No_of_measurement_points),1);
+parameter_points = zeros(length(No_of_measurement_points),1);
+c=0;
 for points=No_of_measurement_points
+    c=c+1;
 figure_output_path = prepare_figure_paths(foldername,modelname);
 % create random or jitter mask
 switch mask_type
@@ -70,21 +83,11 @@ figure_output_path = [figure_output_path,filesep,mask_name,filesep,num2str(point
 % compute corresponding random coordinates
 [rand_XY] = random_coordinates(perm,x_points,y_points,Lx,Ly);
 
-% initialization
-PSNR_metric = zeros(512,1);
-SSIM_metric = zeros(512,1);
-PEARSON_metric = zeros(512,1);
-MSE_metric = zeros(512,1);
-PSNR_metric_delam = zeros(512,1);
-SSIM_metric_delam = zeros(512,1);
-PEARSON_metric_delam = zeros(512,1);
-MSE_metric_delam = zeros(512,1);
-parameter_frames = zeros(512,1);
-c = 0;
+
 %% CS meaurement and recovery
-for  p_frame = 1:512 % loop over frames
+  p_frame = Nf; 
     
-    c=c+1; 
+
 
     % ------------CS measurement-------------
     % interpolate random measurement points on uniform meshes
@@ -212,7 +215,7 @@ for  p_frame = 1:512 % loop over frames
     print([figure_output_path,'recon_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points),'_klatka_',num2str(p_frame),'_',cmap,'_',mask_name,'.png'],'-dpng','-r600');
     
     % close up at delamination reflection
-    if (p_frame==110)
+    
         figure('Position',[1 1 1920 1000])   
         set(gca,'LooseInset', max(get(gca,'TightInset'), 0));  
         subplot(1,2,1)
@@ -259,7 +262,7 @@ for  p_frame = 1:512 % loop over frames
         caxis([caxis_cut*Smin,caxis_cut*Smax]);
         print([figure_output_path,'recon_rect_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points),'_klatka_',num2str(p_frame),'_',cmap,'_',mask_name,'.png'],'-dpng','-r600');
         
-    end
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% quality metrics
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -299,100 +302,74 @@ for  p_frame = 1:512 % loop over frames
     mse_delam=immse(int_recon_image(zoom_y,zoom_x),ref_Frame(zoom_y,zoom_x));
     MSE_metric_delam(c,1) = mse_delam;
     
-    parameter_frames(c,1) = c;
+    parameter_points(c,1) = points;
     
-end
-%%{
-save([model_output_path,filesep,'frame_metrics_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points),'_',mask_name],'PSNR_metric','SSIM_metric','PEARSON_metric','MSE_metric','PSNR_metric_delam','SSIM_metric_delam','PEARSON_metric_delam','MSE_metric_delam','parameter_frames');
 
+%%{
+end
+save([model_output_path,filesep,'points_metrics_',num2str(x_points), 'x', num2str(y_points),'_frane_',num2str(p_frame),'_',mask_name],'PSNR_metric','SSIM_metric','PEARSON_metric','MSE_metric','PSNR_metric_delam','SSIM_metric_delam','PEARSON_metric_delam','MSE_metric_delam','parameter_points');
+figure_output_path = prepare_figure_paths(foldername,modelname);
 figure;
-plot(parameter_frames,MSE_metric,'m','LineWidth',1);
+plot(parameter_points,MSE_metric,'m','LineWidth',1);
 run font_param;
 legend('MSE','Location','east','Fontsize',legend_font_size,'FontName','Times');
 title(['grid ', num2str(x_points), 'x', num2str(y_points)]);
-xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
-run fig_param2;
-print([figure_output_path,'frame_MSE_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points),'_',mask_name],'-dpng','-r300');
+xlabel({'$N_p$'},'Fontsize',label_font_size,'interpreter','latex');
+run fig_param5;
+print([figure_output_path,'points_MSE_',num2str(x_points), 'x', num2str(y_points),'_frame_',num2str(p_frame),'_',mask_name],'-dpng','-r300');
 
 figure;
 yyaxis left;
-plot(parameter_frames,PSNR_metric,'LineWidth',1);
+plot(parameter_points,PSNR_metric,'o-','LineWidth',1);
 yyaxis right;
-plot(parameter_frames,PEARSON_metric,'LineWidth',1);
+plot(parameter_points,PEARSON_metric,'v-','LineWidth',1);
 run font_param;
-legend('PSNR','PEARSON CC','Location','east','Fontsize',legend_font_size,'FontName','Times');
-title(['CS: ', num2str(points),' points'],'Fontsize',title_font_size,'FontName','Times');
-xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
+leg1=legend('PSNR','PEARSON CC','Location','southoutside','Fontsize',legend_font_size,'FontName','Times');
+set(leg1,'Box','off');
+title('CS: frame 110','Fontsize',title_font_size,'FontName','Times');
+xlabel({'$N_p$'},'Fontsize',label_font_size,'interpreter','latex');
 set(gcf,'color','white');
-run fig_param2;
-print([figure_output_path,'frame_metrics_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points),'_',mask_name],'-dpng','-r600');
+run fig_param5;
+print([figure_output_path,'points_metrics_',num2str(x_points), 'x', num2str(y_points),'_frame_',num2str(p_frame),'_',mask_name],'-dpng','-r600');
 
 % metrics at delamination
 
 figure;
-plot(parameter_frames,SSIM_metric_delam,'b','LineWidth',1);
+plot(parameter_points,SSIM_metric_delam,'b','LineWidth',1);
 run font_param;
 legend('SSIM','Location','east','Fontsize',legend_font_size);
 title(['grid ', num2str(x_points), 'x', num2str(y_points),' delam'],'FontName','Times');
-xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
+xlabel({'$N_p$'},'Fontsize',label_font_size,'interpreter','latex');
 set(gcf,'color','white');
-run fig_param2;
-print([figure_output_path,'frame_SSIM_delam_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points),'_',mask_name],'-dpng','-r300');
+run fig_param5;
+print([figure_output_path,'points_SSIM_delam_',num2str(x_points), 'x', num2str(y_points),'_frame_',num2str(p_frame),'_',mask_name],'-dpng','-r300');
 
 figure;
-plot(parameter_frames,MSE_metric_delam,'m','LineWidth',1);
+plot(parameter_points,MSE_metric_delam,'m','LineWidth',1);
 run font_param;
 legend('MSE','Location','east','Fontsize',legend_font_size,'FontName','Times');
 %title(['grid ', num2str(x_points), 'x', num2str(y_points),' delam']);
-xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
-run fig_param2;
-print([figure_output_path,'frame_MSE_delam_',num2str(x_points), 'x', num2str(y_points),'_klatka_',num2str(points),'_',mask_name],'-dpng','-r300');
+xlabel({'$N_p$'},'Fontsize',label_font_size,'interpreter','latex');
+run fig_param5;
+print([figure_output_path,'points_MSE_delam_',num2str(x_points), 'x', num2str(y_points),'_frame_',num2str(p_frame),'_',mask_name],'-dpng','-r300');
 
 figure;
 yyaxis left;
-plot(parameter_frames,PSNR_metric_delam,'LineWidth',1);
+plot(parameter_points,PSNR_metric_delam,'o-','LineWidth',1);
 yyaxis right;
-plot(parameter_frames,PEARSON_metric_delam,'LineWidth',1);
+plot(parameter_points,PEARSON_metric_delam,'v-','LineWidth',1);
 run font_param;
-legend('PSNR','PEARSON CC','Location','southeast','Fontsize',legend_font_size,'FontName','Times');
-title(['CS: ', num2str(points),' points (delam)'],'Fontsize',title_font_size,'FontName','Times');
-xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
-run fig_param2;
-print([figure_output_path,'frame_metrics_delam_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points),'_',mask_name],'-dpng','-r600');
+leg2=legend('PSNR','PEARSON CC','Location','southoutside','Fontsize',legend_font_size,'FontName','Times');
+set(leg2,'Box','off');
+title('CS: frame 110 (delam)','Fontsize',title_font_size,'FontName','Times');
+xlabel({'$N_p$'},'Fontsize',label_font_size,'interpreter','latex');
+run fig_param5;
+print([figure_output_path,'points_metrics_delam_',num2str(x_points), 'x', num2str(y_points),'_frame_',num2str(p_frame),'_',mask_name],'-dpng','-r600');
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% mask
-%{
-figure('Position',[1 1 1920 1000])   
-    %set(gca,'LooseInset', max(get(gca,'TightInset'), 0));  
-ax1=subplot(1,2,1);
-    scatter(rand_XY(:,1),rand_XY(:,2),5,rand_Frame);colormap(ax1,cmap);axis square;axis off;
-    caxis([-xmax xmax])
-    title(['Input data: ',num2str(x_points),'x', num2str(y_points),' unique points: ',num2str(size(perm,1))])
-ax2=subplot(1,2,2);    
-    imagesc( reshape(x_mask,x_points,y_points)); axis equal;axis off; colormap(ax2,'gray');
-    ax2.YDir = 'normal';
-    switch mask_type
-        case 1
-            title('random mask');
-        case 2
-            title('jitter mask');
-    end
-%}    
-figure;   
-imagesc( reshape(x_mask,x_points,y_points)); axis equal;axis off; colormap('gray');
-set(gca,'YDir','normal');
-run font_param;
-switch mask_type
-    case 1
-        title('random mask','FontName','Times','Fontsize',title_font_size);
-    case 2
-        title('jitter mask','FontName','Times','Fontsize',title_font_size);
-end
-run fig_param3;
-print([figure_output_path,'mask_',mask_name,'_',num2str(x_points), 'x', num2str(y_points),'_points_',num2str(points)],'-dpng','-r600'); 
+
+
 %%}
-end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FUNCTIONS
 function perm = pointindexsearch(x_points,y_points,PQ)
