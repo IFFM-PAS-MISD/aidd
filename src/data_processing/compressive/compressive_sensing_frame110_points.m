@@ -67,7 +67,7 @@ switch mask_type
             load(['jitter_XY_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points)]);
         else
             % my jitter mask 
-            [perm,x_mask]=my_jitter_mask(No_of_measurement_points,x_points);
+            [perm,x_mask]=my_jitter_mask(points,x_points);
             save(['jitter_XY_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points)],'x_mask','perm');
         end
 end

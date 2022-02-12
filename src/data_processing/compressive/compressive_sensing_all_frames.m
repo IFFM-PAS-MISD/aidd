@@ -27,8 +27,8 @@ Lx=0.5; % plate length
 Ly=0.5; % plate width
 n = x_points*y_points;
 
-%No_of_measurement_points = [1024,3000,4000];
-No_of_measurement_points = [3000,4000];
+No_of_measurement_points = [1024,3000,4000];
+%No_of_measurement_points = [3000,4000];
 cmap = 'parula'; % default matlab map
 %cmap = 'jet';
 mask_type = 2;
@@ -54,7 +54,7 @@ switch mask_type
             load(['jitter_XY_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points)]);
         else
             % my jitter mask 
-            [perm,x_mask]=my_jitter_mask(No_of_measurement_points,x_points);
+            [perm,x_mask]=my_jitter_mask(points,x_points);
             save(['jitter_XY_',num2str(x_points), 'x', num2str(y_points),'p','_siatka_',num2str(points)],'x_mask','perm');
         end
 end
