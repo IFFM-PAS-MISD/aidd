@@ -29,5 +29,19 @@
 \contentsline {figure}{\numberline {4.2}{\ignorespaces The plate with 475 cases of random delaminations.\relax }}{44}{figure.caption.47}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Full wavefield at the top surface (a)--(c) and the bottom surface (d)--(f), respectively, at selected time instances showing the interaction of guided waves with delamination.\relax }}{45}{figure.caption.48}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces RMS of the full wavefield from the top surface of the plate (a) and the bottom surface of the plate (b).\relax }}{46}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces (a) RMS image: from the top of the plate, (b) Label\relax }}{46}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces \relax }}{47}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces CNN classifier architecture.\relax }}{48}{figure.caption.52}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Schematic diagram of the approach used for comparison of semantic segmentation methods accuracy.\relax }}{51}{figure.caption.53}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Res-UNet architecture.\relax }}{53}{figure.caption.54}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces VGG16 encoder decoder architecture.\relax }}{54}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Dense block architecture.\relax }}{55}{figure.caption.56}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces FCN-DenseNet architecture.\relax }}{56}{figure.caption.57}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces PSPNet architecture.\relax }}{57}{figure.caption.59}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Global Convolution Network whole architecture.\relax }}{58}{figure.caption.60}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces (a) Residual block, (b) Global Convolution Network block, (c) Boundary Refinement\relax }}{58}{figure.caption.61}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Encoder-Decoder ConvLSTM model architecture.\relax }}{59}{figure.caption.62}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Flow of input frames using Time distributed layer.\relax }}{60}{figure.caption.63}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
