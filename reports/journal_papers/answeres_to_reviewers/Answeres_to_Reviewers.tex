@@ -110,20 +110,68 @@
 	\textbf{Reviewer: 3} \\
 	The manuscript "Deep learning approach for delamination identification using animation of Lamb waves" generally tackles an interesting problem to the NDT community, and the results look promising. 
 	However, as already pointed out in previous reviews, the applicability of the presented approach in practice remains somewhat questionable: 
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		We partially agree with the concerns risen by the reviewer that the applicability of the proposed method is limited.
+	    For example, the access to the surface of the inspected structural element must be provided.
+        But, it is the same problem as with other methods which utilise full wavefields [12-14].
+        The other limitation is that numerical simulations must be performed first in which material properties must be similar to the material of the inspected structure.}
+	
 	\begin{enumerate}
 		\item The currently required number of measurements appears to be of the order of magnitude of that of typical c-scans.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			We are not sure if the Reviewer means the number of spatial scan points or the number of scans?
+			In the former case, the spacing of the grid is strictly related to the shortest wavelength of propagating Lamb wave modes. According to Nyquist parameter, at least two points per wavelength are required but often more points are used to get smooth visualisation of propagating waves. Hence, the same number of points is required regardless of the applied measuring technique (SLDV, air-coupled ultrasonics, Shearography).
+			If the Reviewer means the number of c-scans, it is required only one. The 475 wavefields corresponding to 475 delamination scenarios were calculated numerically and used for deep neural network training.
+		}
 		\item It would also likely require partial disassembly of the structure of interest, or an extremely complicated/costly setup. 
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			We agree with the Reviewer that the setup is costly and partial disassembly of the inspected structure may be required.
+			However, we are focusing solely on signal processing methods of full wavefield data and their accuracy for delamination identification rather than the implementation of SLDV for scanning structures.
+			Nevertheless, SLDV scanning has already found application in the automotive industry for vibration measurements.
+		}
 	\end{enumerate}
 
+    \textcolor{Cyan}{
+    	\textbf{Response:}
+    	In order to address the above-mentioned issues we modified the last paragraph of conclusions by mentioning limitations of the proposed method.  
+    }
+
+   \emph{It should be added that by using proposed models much better accuracy wasobtained on experimental data in comparison to previously developed FCNDenseNetmodels}.
+   
+   \emph{However, there are several limitations of the SLDV measurement technique which is used for full wavefield acquisition.
+   The measurements by using SLDV are stationary and time-consuming.
+   Therefore, the proposed technique is more appropriate for NDT than SHM.
+   However, it is probable in the future, aslaser technology progresses, that the process of data acquisition will be possible inan array of points instead of a single point, which will considerably decrease the measurement time.
+   It should be added, that the measurement time can also be reduced by using fewer points in the spatial grid along with the compressive sensing approach.
+   Another issue with SLDV measurements is that the laser needs access to the surface of the inspected structure which may require partial disassembly of the structure.
+   }
+
+	\emph{The limitation related to the developed deep learning model is that the material properties of the inspected structure have to be approximately known in order to simulate the dataset for training.}
+   
 	At the very least, the authors should investigate whether a sparser grid would be sufficient to produce results of similar quality. 
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}	
+		sdf
+	}
+
+
 	Furthermore, several additional items need to be addressed as detailed below, and I cannot recommend this paper for publication in its current form.
 	
 	While the specific approach presented in this manuscript may have not been applied by other researchers, as the authors pointed out themselves, there is an abundance of ANN/CNN/DNN literature that focuses on guided wave-based damage detection. 
 	Thus, the overall novelty of this manuscript may be somewhat overstated. And while the authors claim that their approach is "better than by using other methods", no quantitative comparison was presented. 
-	\\ \\
+
 	\textcolor{Cyan}{
-		\textbf{Response:}}
-	\\ \\
+		\textbf{Response:}
+		sdf
+	}
+
 	The authors seem to have implemented a number of required improvements as suggested in previous reviews, however, several points have only been addressed fairly vaguely. 
 	For example, a "size error metric" has been introduced and numerical values are provided. 
 	However, no definition of such metric is given. 
