@@ -1,0 +1,218 @@
+\documentclass[11pt,a2paper]{report}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{dirtytalk}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
+%% my added packages
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+%\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
+%\usepackage{breqn}
+\usepackage{multirow}
+
+\begin{document}
+	
+	\noindent We appreciate the time and effort that the reviewers have dedicated to providing valuable feedback on our manuscript. 
+	We would like to thank the reviewers for constructive comments which helped us to improve the manuscript. 
+	We have been able to incorporate changes to reflect most of the suggestions provided by the reviewers. 
+	We have highlighted the changes in a separate differential PDF document. The additional text is in the blue print. 
+	The removed text is in red. \\ \\
+	Here is a point-by-point response to the reviewers’ comments and concerns.
+	\\ \\
+	\textbf{Reviewer: 1}: \\
+	I thank the authors for taking into account my previous comments. 
+	Overall, I find the paper very interesting even if still we don't understand really well what is actually learned by the machine learning algorithms. 
+	I accept the paper but the authors should take into account the following comment and I rely on the Editor to ensure that it is the case:
+	\begin{enumerate}
+		\item Sec 2.2 is still impossible to understand in my opinion. 
+		For example on top figure 2, if you focus on the bottom left, you can see ht-1 and xt are crossing but we don't know which signal is going upward or rightward after that crossing.
+		\item There are no arrow indicating the input signals for sigma and some tanh boxes.
+		\item Capital letter are present in the text but not in the figure. 
+		In Eq 1 we see Wf but the text mentions W. 
+		In Eq 3 a multiplication is referred in the text and a convolution in the equation.		
+	\end{enumerate}	
+	\textcolor{Cyan}{
+	\textbf{Response:}}
+	\newpage 
+	\textbf{Reviewer: 2}\\
+	The authors have addressed previous comments and suggestions adequately. 
+	In this reviewer's opinion, the quality of the current manuscript meets the standards of MMSP and may be of interest to many of the journal's readers. However, I still have a little suggestion.
+	 
+	In this paper, the synthetic dataset used to train the proposed neural network is from the Ref.[45], and the ConvLSTM and the ADE models are the conventional networks. 
+	It seems that the authors just applied the existing techniques on the existing data to solve the similar question of delamination location. 
+	Some contents are very similar the previous work, such as:
+	\begin{enumerate}
+		\item Pawel Kudela and Abdalraheem Ijjeh. Synthetic dataset of a full wavefileld representing the propagation of Lamb waves and their interactions with delaminations, 2021. 
+		\item Abdalraheem A. Ijjeh, Saeed Ullah, and Pawel Kudela. Full wavefield processing by using FCN for delamination detection. Mechanical Systems and Signal Processing, 153:107537, may 2021.
+	\end{enumerate}
+
+	I would suggest that the authors strengthen the differences between the contribution of this paper and their previous work.
+	\\ \\ 
+	\textcolor{Cyan}{
+		\textbf{Response:}}
+	\newpage
+	\textbf{Reviewer: 3} \\
+	The manuscript "Deep learning approach for delamination identification using animation of Lamb waves" generally tackles an interesting problem to the NDT community, and the results look promising. 
+	However, as already pointed out in previous reviews, the applicability of the presented approach in practice remains somewhat questionable: 
+	\begin{enumerate}
+		\item The currently required number of measurements appears to be of the order of magnitude of that of typical c-scans.
+		\item It would also likely require partial disassembly of the structure of interest, or an extremely complicated/costly setup. 
+	\end{enumerate}
+
+	At the very least, the authors should investigate whether a sparser grid would be sufficient to produce results of similar quality. 
+	Furthermore, several additional items need to be addressed as detailed below, and I cannot recommend this paper for publication in its current form.
+	
+	While the specific approach presented in this manuscript may have not been applied by other researchers, as the authors pointed out themselves, there is an abundance of ANN/CNN/DNN literature that focuses on guided wave-based damage detection. 
+	Thus, the overall novelty of this manuscript may be somewhat overstated. And while the authors claim that their approach is "better than by using other methods", no quantitative comparison was presented. 
+	\\ \\
+	\textcolor{Cyan}{
+		\textbf{Response:}}
+	\\ \\
+	The authors seem to have implemented a number of required improvements as suggested in previous reviews, however, several points have only been addressed fairly vaguely. 
+	For example, a "size error metric" has been introduced and numerical values are provided. 
+	However, no definition of such metric is given. 
+	\begin{itemize}
+		\item It is not even clear if a large or small number is better in this context, i.e. is \(100\%\) the true size, or is \(0\%\) no size deviation? It also remains unclear whether the metric would produce a "perfect" value for a defect of the correct size but completely incorrect shape. 
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item Also, why is the localization error discussion not included in the manuscript?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+	\end{itemize}
+	
+	Many details of the simulations and the discussion thereof have been omitted. 
+	
+	\begin{itemize}
+		\item What are the applied material parameters?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item What are the stacking sequences?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item How do these compare to the real specimens used in the experiments?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item What are the other parameters of the numerical model?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item What is the sampling frequency, and why 512 frames?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item How does the spatial resolution compare to the smallest expected wave length? Is a 1px/mm resolution sufficient for practical implementations?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+	\end{itemize}
+
+	Within the produced 475 datasets, details on the differences are not presented. 
+	\begin{itemize}
+		\item Are size and location varied? If so by how much?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item What about the shape of the defect?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item How was it determined that 475 are sufficient?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+	\end{itemize}
+
+	For the measurements, more details need to be provided about where the scanning grid was applied in relation to the plate. 
+	\begin{itemize}
+		\item Was the grid aligned with the plate boundaries? Is this important for the algorithms to work?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item How is the "upscaling" to 500/512 points realized?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item How many time-averages had to be used to reach an acceptable SNR?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item What is the total scanning time for one specimen?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item What is the thickness of the Teflon insert?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item How is ground truth established for experiments?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item Have C-Scans been used to verify the size and shape of the delamination?
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+		\item Why is Case II the most difficult as "delaminations are barely visible" this should be true for all of the specimens (if not, why not?)
+			\\ \\
+		\textcolor{Cyan}{
+			\textbf{Response:}}
+		\\ \\
+	\end{itemize}
+
+	The two presented models should be compared in the conclusions. 
+	It also didn't become clear why the RMS approach is presented. 
+	Is this part of the analysis or a separate analysis for comparison? 
+		\\ \\
+	\textcolor{Cyan}{
+		\textbf{Response:}}
+	\\ \\
+	This may need to be addressed again in the conclusions.
+	The manuscript suffers from a substantial amount of minor and major language errors.
+		\\ \\
+	\textcolor{Cyan}{
+		\textbf{Response:}}
+	\\ \\
+	\newpage
+	\textbf{Reviewer: 4}  \\
+	I was not sure whether I was involved in the review since the first round, so I assume I just joined the third round (for 2nd revision).
+	Based from the comments I tracked from the first round and second round, it seems that the authors have sufficiently addressed the issues.
+	What I would like to point out is however, what is the major difference of the content of this paper compared to the previous work?
+	Full Wavefield Processing by Using FCN for Delamination Detection, J Mechanical Systems and Signal Processing, Volume 153, 15 May 2021, 107537.
+	It seems that both works have a big intersection. The only difference I could see here is that the utilization of ConvLSTM instead of ConvNet.	
+		\\ \\
+	\textcolor{Cyan}{
+		\textbf{Response:}}
+	\\ \\
+\end{document}
