@@ -43,11 +43,19 @@ The purpose of the forget gate is to decide what information to keep and what to
 The current input \(X_{t}\) and the previous hidden state  \(h_{t-1}\) are passed through a sigmoid function (\(\sigma\)) which will produce values between \(0\) and \(1\).
 Then the outputs of the sigmoid are multiplied with the previous cell state \(C_{t-1}\), accordingly, (\(0\)) outputs are discarded.
 The mathematical calculation at the forget gate ($f_t$) is depicted in Eq.~(\ref{eq:eq1}):
-\begin{equation}
-	f_{t}=\sigma\left(W_{f} \cdot\left[h_{t-1}, X_{t}\right]+b_{f}\right)
+
+\begin{align}
+	&f_{t}=\sigma\left( W_{f}  
+	\left[
+	\begin{array}{c}
+		h_{t-1} \\ x_{t}
+	\end{array} 
+	\right]
+	+ b_{f} \right), \\
+	&W_{f} = \left[ W_{h_{t-1}}  W_{x_{t}} \right],
 	\label{eq:eq1}
-\end{equation}
-where \(W\) represents the learnable weights, and \(b\) represents the bias term. 
+\end{align}
+where \(W_{f}\) represent the learnable weights at the hidden and input states  \(h_{t-1}\) and \(x_{t}\) , respectively, and \(b_{f}\) represents the bias term. 
 
 The input gate \(i_{t}\) takes the current input \(X_t\) with the previous hidden state \(h_{t-1}\) then apply the sigmoid function to get values in a range between 0 (not important) and 1 (important), then the
 same current input \(X_t\), and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at \(\tilde{C}_{t}\) that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
@@ -55,9 +63,19 @@ Then, the outputs from the sigmoid and \(\tanh\) functions are multiplied point-
 Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
 \begin{equation}
 	\begin{aligned}
-		i_{t} &=\sigma\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) 
+		i_{t} &=\sigma\left(W_{i} 
+		\left[
+		\begin{array}{c}
+			h_{t-1} \\ x_{t}
+		\end{array} 
+		\right]+b_{i}\right) 
 		\\
-		\tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right) 
+		\tilde{C}_{t} &=\tanh \left(W_{c} 
+		\left[
+		\begin{array}{c}
+			h_{t-1} \\ x_{t}
+		\end{array} 
+		\right]+b_{c}\right) 
 	\end{aligned} \label{eq:eq2}
 \end{equation}
 At this point, the network has sufficient information obtained from the input and forget gates. 
@@ -74,12 +92,19 @@ Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	\begin{aligned}
-		o_{t} &=\sigma\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right) \\
+		o_{t} &=\sigma\left(W_{o} *
+		\left[
+		\begin{array}{c}
+			h_{t-1} \\ x_{t}
+		\end{array} 
+		\right]
+		+b_{o}\right) \\
 		h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
 	\end{aligned}
 	\label{eq:eq4}
 \end{equation} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+where \(W_{f}, W_{i}, W_{c}\) and \(W_{o}\) have shared learnable weights.
 
 Recently, LSTMs have been widely used for large-scale learning of language translation models, speech recognition systems, chatbots, forecasting stock markets, text data analysis, and many more~\cite{graves2014towards, cho2014properties}. 
 However, LSTMs are inefficient regarding capturing spatial information by themselves when the time series inputs are consecutive images.
@@ -88,15 +113,15 @@ For ConvLSTM, the convolution operations are applied both at the input-to-state 
 ConvLSTM shown in Fig.~\ref{fig:ConvLSTM} is a variation of the LSTM cell as it performs a convolution operation within the LSTM cell.
 ConvLSTM is a combination of a convolution operation and an LSTM cell.
 Thus, ConvLSTM can capture the time-correlated and spatial features in a series of consecutive images. 
-Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \(X_1, \dots, X_t\), hidden states \(h_1, \dots, h_t\), cell states \(C_1, \dots, C_t\) and input, forget and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
+Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \(x_1, \dots, x_t\), hidden states \(h_1, \dots, h_t\), cell states \(C_1, \dots, C_t\) and input, forget and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
 \begin{equation}
 	\begin{aligned}
-		i_{t} &=\sigma\left(W_{x i} * X_{t}+W_{h i} * h_{t-1}+W_{c i} \cdot C_{t-1}+b_{i}\right) 
+		i_{t} &=\sigma\left(W_{x_t} * x_{t}+W_{h_{t-1}} * h_{t-1}+W_{c i} \cdot C_{t-1}+b_{i}\right) 
 		\\
-		f_{t} &=\sigma\left(W_{x f} * X_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot C_{t-1}+b_{f}\right) \\
-		C_{t} &=f_{t} \cdot C_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * X_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
+		f_{t} &=\sigma\left(W_{x f} * x_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot C_{t-1}+b_{f}\right) \\
+		C_{t} &=f_{t} \cdot C_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * x_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
 		\\
-		o_{t} &=\sigma\left(W_{x o} * X_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot C_{t}+b_{o}\right) \\
+		o_{t} &=\sigma\left(W_{x o} * x_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot C_{t}+b_{o}\right) \\
 		h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
 	\end{aligned}
 	\label{eq:eq5}
