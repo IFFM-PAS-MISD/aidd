@@ -1,6 +1,6 @@
 \documentclass[11pt,a2paper]{report}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{dirtytalk}
+%\usepackage{dirtytalk}
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{amsmath,amssymb,bm}
@@ -23,7 +23,7 @@
 	
 	\noindent We appreciate the time and effort that the reviewers have dedicated to providing valuable feedback on our manuscript. 
 	We would like to thank the reviewers for constructive comments which helped us to improve the manuscript. 
-	We have been able to incorporate changes to reflect most of the suggestions provided by the reviewers. 
+	We have incorporated changes to reflect the suggestions provided by the reviewers. 
 	We have highlighted the changes in a separate differential PDF document. The additional text is in the blue print. 
 	The removed text is in red. \\ \\
 	Here is a point-by-point response to the reviewers’ comments and concerns.
@@ -32,16 +32,36 @@
 	I thank the authors for taking into account my previous comments. 
 	Overall, I find the paper very interesting even if still we don't understand really well what is actually learned by the machine learning algorithms. 
 	I accept the paper but the authors should take into account the following comment and I rely on the Editor to ensure that it is the case:
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+	Thank you for your positive feedback.
+    }
 	\begin{enumerate}
 		\item Sec 2.2 is still impossible to understand in my opinion. 
 		For example on top figure 2, if you focus on the bottom left, you can see ht-1 and xt are crossing but we don't know which signal is going upward or rightward after that crossing.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+		Thank you for pointing that out. We improved the figure accordingly.
+		}
+		
 		\item There are no arrow indicating the input signals for sigma and some tanh boxes.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			Thank you for the suggestion. We have added arrows to the figure.
+		}
 		\item Capital letter are present in the text but not in the figure. 
 		In Eq 1 we see Wf but the text mentions W. 
-		In Eq 3 a multiplication is referred in the text and a convolution in the equation.		
+		In Eq 3 a multiplication is referred in the text and a convolution in the equation.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			Thank you for pointing that out. We have changed notations within the text so that it is consistent with the figure.
+		}		
 	\end{enumerate}	
-	\textcolor{Cyan}{
-	\textbf{Response:}}
+	
 	\newpage 
 	\textbf{Reviewer: 2}\\
 	The authors have addressed previous comments and suggestions adequately. 
@@ -58,7 +78,34 @@
 	I would suggest that the authors strengthen the differences between the contribution of this paper and their previous work.
 	\\ \\ 
 	\textcolor{Cyan}{
-		\textbf{Response:}}
+		\textbf{Response:}
+	We are sorry to hear that the contribution of this paper is not enough highlighted in comparison to our previous work. It should be noted that the dataset used in our previous paper is completely different from the one used in the current paper. In the previous paper, the dataset consists of RMS images computed from full wavefields. It means that there is only one image per delamination scenario. In the current paper, several images per delamination scenario in the form of propagating wavefields are used. Therefore, inputs for neural networks are in the form of a single image (previous paper) and several images (current paper). It should be noted, however, that both datasets were created at the same time by using the time domain spectral element method with the same random delamination arrangements (It is explained in the \emph{Dataset} section).
+	Moreover, since inputs to neural networks are different also the applied neural network (NN) architectures differ. The NN models used in the current paper are not taken directly from the literature but are rather inspired by some models and tailored to the particular problem of delamination identification.
+	We have rewritten last two paragraphs of the introduction to be more clear about it:
+    }
+
+	\emph{In our previous research work [45], we have developed a deep learning-based
+		semantic segmentation model with a fully convolutional neural network (FCN)
+		to identify delamination in CFRP.	
+		The full wavefield frames werenumerically generated to resemble measurements acquired by SLDV.
+		Each wavefield was corresponding to one delamination scenario.
+		Next, the root mean square (RMS) techniquewas applied on the full wavefield frames giving one image per delamination scenario.
+		Consequently,the developed deep neural network models were trained on a one-to-one prediction scheme (RMS image to damage map).
+	    The predicted damage map consisted of two classes: undamaged and damaged indicating the location, size and shape of the delamination.}
+	
+		\emph{In this work, we took a further step in which the full wavefield frames of
+		propagating Lamb waves were directly utilised in an end-to-enddeep learning model.
+		It means that the mid-step consisting of the calculation of RMS has been omitted.
+		Accordingly, a many-to-oneprediction scheme was used in the proposed deep learning models (many input frames to damage map).
+		In other words, a sequence of full wavefield frames (animation) is fed into the proposed deep learning models.
+		These models are inspired by convolutional long short-term memory (ConvLSTM) architectures and tailored to the particular problem of delamination identification.
+		Similarly to our previous research work [45] two classes (damaged and undamaged) were defined in the pixel-wise segmentation problem.}
+	
+	    \emph{To the best of our knowledge, it is the firstimplementation of deep neural networks utilising Lamb wave propagation animationsfor damage imaging with semantic segmentation. 
+	    The proposed modelsshowed excellent capabilities to identify the delamination in the numericallygenerated dataset.
+	    Moreover, the developed models can generalise so that they could be used for delaminationidentification in the real world scenarios.
+    	This is confirmed through the experiment on CFRP plates with single and multiple delaminations.}
+    
 	\newpage
 	\textbf{Reviewer: 3} \\
 	The manuscript "Deep learning approach for delamination identification using animation of Lamb waves" generally tackles an interesting problem to the NDT community, and the results look promising. 
