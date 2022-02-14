@@ -16,15 +16,15 @@ To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Ter
 	\centering
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1]{LSTM_img.png}
+		\includegraphics[scale=1]{figure2a.png}
 		\caption{LSTM}
 		\label{fig:LSTM}
 	\end{subfigure}
-	 \\ 
-	 \hfill
+	\\ 
+	\hfill
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1]{convlstm_image.png}
+		\includegraphics[scale=1]{figure2b.png}
 		\caption{ConvLSTM}
 		\label{fig:ConvLSTM}	
 	\end{subfigure}
@@ -40,12 +40,12 @@ These gates help regulate the flow of information that is added to or removed fr
 The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory.  
 
 The purpose of the forget gate is to decide what information to keep and what to neglect. 
-The current input \(X_{t}\) and the previous hidden state  \(h_{t-1}\) are passed through a sigmoid function which will produce values between \(0\) and \(1\).
+The current input \(X_{t}\) and the previous hidden state  \(h_{t-1}\) are passed through a sigmoid function (\(\sigma\)) which will produce values between \(0\) and \(1\).
 Then the outputs of the sigmoid are multiplied with the previous cell state \(C_{t-1}\), accordingly, (\(0\)) outputs are discarded.
 The mathematical calculation at the forget gate ($f_t$) is depicted in Eq.~(\ref{eq:eq1}):
 \begin{equation}
-f_{t}=\sigma\left(W_{f} \cdot\left[h_{t-1}, X_{t}\right]+b_{f}\right)
-\label{eq:eq1}
+	f_{t}=\sigma\left(W_{f} \cdot\left[h_{t-1}, X_{t}\right]+b_{f}\right)
+	\label{eq:eq1}
 \end{equation}
 where \(W\) represents the learnable weights, and \(b\) represents the bias term. 
 
@@ -54,17 +54,17 @@ same current input \(X_t\), and the hidden state \(h_{t-1}\) are passed through 
 Then, the outputs from the sigmoid and \(\tanh\) functions are multiplied point-by-point to eliminate \(0\) values.  
 Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
 \begin{equation}
-\begin{aligned}
-i_{t} &=\sigma\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) 
-\\
-\tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right) 
-\end{aligned} \label{eq:eq2}
+	\begin{aligned}
+		i_{t} &=\sigma\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) 
+		\\
+		\tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right) 
+	\end{aligned} \label{eq:eq2}
 \end{equation}
 At this point, the network has sufficient information obtained from the input and forget gates. 
 Hence, the current cell state \(C_t\) can be calculated by multiplying the previous cell state \(C_{t-1}\) with the output of the forget gate, then the result is added to the calculated input values as depicted in Eq.~(\ref{eq:eq3}): 
 \begin{equation}
-C_{t}=f_{t} * C_{t-1}+i_{t} * \tilde{C}_{t}
-\label{eq:eq3}
+	C_{t}=f_{t} \cdot C_{t-1}+i_{t} \cdot \tilde{C}_{t}
+	\label{eq:eq3}
 \end{equation}
 The output gate \(o_{t}\) computes the next hidden state \(h_{t}\) which
 holds information related to the current inputs. 
@@ -73,11 +73,11 @@ The current cell state \(C_{t}\) is passed through a \(\tanh\) function and mult
 Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-\begin{aligned}
-o_{t} &=\sigma\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right) \\
-h_{t} &=o_{t} * \tanh \left(C_{t}\right)
-\end{aligned}
-\label{eq:eq4}
+	\begin{aligned}
+		o_{t} &=\sigma\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right) \\
+		h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
+	\end{aligned}
+	\label{eq:eq4}
 \end{equation} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -91,17 +91,17 @@ Thus, ConvLSTM can capture the time-correlated and spatial features in a series 
 Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \(X_1, \dots, X_t\), hidden states \(h_1, \dots, h_t\), cell states \(C_1, \dots, C_t\) and input, forget and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
 \begin{equation}
 	\begin{aligned}
-		i_{t} &=\sigma\left(W_{x i} * X_{t}+W_{h i} * h_{t-1}+W_{c i} \odot C_{t-1}+b_{i}\right) 
+		i_{t} &=\sigma\left(W_{x i} * X_{t}+W_{h i} * h_{t-1}+W_{c i} \cdot C_{t-1}+b_{i}\right) 
 		\\
-		f_{t} &=\sigma\left(W_{x f} * X_{t}+W_{h f} * h_{t-1}+W_{c f} \odot C_{t-1}+b_{f}\right) \\
-		C_{t} &=f_{t} \odot C_{t-1}+i_{t} \odot \tanh \left(W_{x c} * X_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
+		f_{t} &=\sigma\left(W_{x f} * X_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot C_{t-1}+b_{f}\right) \\
+		C_{t} &=f_{t} \cdot C_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * X_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
 		\\
-		o_{t} &=\sigma\left(W_{x o} * X_{t}+W_{h o} * h_{t-1}+W_{c o} \odot C_{t}+b_{o}\right) \\
-		h_{t} &=o_{t} \odot \tanh \left(C_{t}\right)
+		o_{t} &=\sigma\left(W_{x o} * X_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot C_{t}+b_{o}\right) \\
+		h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
 	\end{aligned}
 	\label{eq:eq5}
 \end{equation}
-where \(*\) indicates the convolution operation, and \(\odot\) represents the 
-Hadamard product. 
+where (\(*\)) indicates the convolution operation.
+
 Recently, ConvLSTM has become very popular and is increasingly being used in 
 more and more image processing applications.

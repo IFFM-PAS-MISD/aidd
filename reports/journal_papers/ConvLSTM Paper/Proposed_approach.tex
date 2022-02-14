@@ -8,14 +8,14 @@ The developed models have a scheme of many-to-one sequence prediction, which tak
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=.2\textheight]{Fully_ConvLSTM2d_MODEL_updated.png}
+		\includegraphics[width=.2\textheight]{figure3a.png}
 		\caption{Model-\RNum{1}} % : Convolutional LSTM model.
 		\label{fig:convlstm_model}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=.2\textheight]{RNN_LSTM_MODEL_updated.png}
+		\includegraphics[width=.2\textheight]{figure3b.png}
 		\caption{Model-\RNum{2}} % : Time distributed AE model.
 		\label{fig:AE_convlstm}
 	\end{subfigure}
@@ -38,7 +38,7 @@ Therefore, a Time Distributed layer presented in Fig.~\ref{fig:TD} was introduce
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{Time_ditributed_layer.png}
+	\includegraphics[width=0.5\textwidth]{figure4.png}
 	\caption{Flow of input frames using Time distributed layer.}
 	\label{fig:TD}
 \end{figure}
@@ -56,10 +56,10 @@ The decoder part consists of two 2D convolutional operations followed by Batch N
 Skip connections linking the encoder with the corresponding decoder levels were added to enhance the features extraction process.
 The outputs of the decoder were forwarded into the ConvLSTM2D layer to learn long-term spatiotemporal features.
 
-In both models, we applied a 2D convolutional layer as the final output layer followed by a sigmoid activation function which outputs values in a range of \(0\) and \(1\) to indicate the delamination probability.
-Consequently, a threshold value must be chosen to classify the output into a damaged (\(1\)) or undamaged (\(0\)).
-Hence, we set the threshold value to (\(0.5\)).
-The reason for selecting such threshold value to the sigmoid activation function is explained in our previous research work~\cite{Ijjeh2021}.
+In both models, we applied a 2D convolutional layer as the final output layer followed by a sigmoid activation function which outputs values in a range from \((0,1)\) to indicate the delamination probability.
+Consequently, a threshold value must be chosen to classify the output into a damaged represented by (\(1\)) or undamaged represented by (\(0\)).
+Hence, we set the threshold value to (\(0.5\)) to exclude all values below the threshold by considering them as undamaged and taking only those values greater than the threshold to be considered as damaged.
+%The reason for selecting such threshold value to the sigmoid activation function is explained in our previous research work~\cite{Ijjeh2021}.
 %Further, Adadelta~\cite{zeiler2012adadelta} optimization method with binary cross-entropy (BCE) was applied to the first model, whereas in the second model, Adam optimizer~\cite{Kingma2014} with BCE was applied.
 
 For evaluating the performance of the proposed models, the mean 
@@ -69,8 +69,8 @@ area between the ground truth and the predicted output.
 Further, we have two output classes (damaged and undamaged), the \(IoU\) was calculated for the damaged class only. 
 Equation~(\ref{eqn:iou}) illustrated the \(IoU\) metric: 
 \begin{equation}
-IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y}
-\label{eqn:iou}
+	IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y}
+	\label{eqn:iou}
 \end{equation}
 where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -2,13 +2,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Nowadays, composite materials are extensively used for achieving the desired performance in a wide range of industries such as wind turbine, aerospace, marine, automotive, and many more.
-This vast usage of composite materials is due to their numerous advantages such as high strength, lightweight, low cost, non-conductivity, higher stiffness-to-mass ratio compared to metals, and effective corrosion resistance~\cite{giurgiutiu2015structural, stoik2010nondestructive, poudel2015comparison}. % baker2004composite, 
+This vast usage of composite materials is due to their numerous advantages such as high strength, lightweight, low cost, higher stiffness-to-mass ratio compared to metals, and effective corrosion resistance~\cite{giurgiutiu2015structural, stoik2010nondestructive, poudel2015comparison}. % baker2004composite, 
 However, these materials are prone to various kinds of defects such as cracks, fiber breakage, debonding, and delamination~\cite{poudel2015comparison, talreja2012damage}. % , heslehurst2014defects
 Among these defects, delamination is one of the most hazardous forms of defects in composite materials. 
 Delamination reduces the life of these structures and can lead to catastrophic failures if not detected at an early stage~\cite{talreja2012damage, wisnom2012role}.
 Therefore, for the safe operation of structures, it is crucial to identify the delamination effectively.
 
-The detection of delamination in composite materials is very challenging for traditional visual inspection techniques because it often occurs between plies of composite laminate and is invisible from external surfaces~\cite{staszewski2009health, tuo2019damage}. 
+The detection of delamination in composite materials is very challenging for traditional visual inspection techniques because it occurs between plies of composite laminate and is invisible from external surfaces~\cite{staszewski2009health, tuo2019damage}. 
 Therefore, different types of nondestructive testing (NDT) and structural health monitoring (SHM) techniques have been proposed for delamination identification in composite structures.
 Among various damage identification techniques, ultrasonic guided waves are widely known as one of the most promising techniques for the quantitative identification of defects in composite structures.
 The widespread applications of these waves are due to their higher sensitivity 
@@ -27,7 +27,7 @@ Damage identification techniques employing full wavefield signals are capable of
 Full wavefields provide valuable information regarding the interaction of guided Lamb waves with potential defects.  
 However, these full wavefields are very complex. 
 Analysing such wavefields are very difficult for conventional physics or classical machine learning-based models. 
- 
+
 Conversely, deep learning which is originated from artificial neural network (ANN), are capable of handling such complex and nonlinear data and has shown very promising results in various domains such as computer vision, object detection, speech recognition, remote sensing, medical sciences
 and many more~\cite{mohanty2016using, zhang2020well, pashaei2020review}.
 In recent years, deep learning has shown significant improvements in image segmentation due to the advancement in deep convolutional neural networks (CNNs).
@@ -57,12 +57,11 @@ very promising results.
 Further, different researchers have used basic ANN and deep learning 
 architectures for damage detection in composite structures by employing 
 vibration, thermography, and frequency-based approaches~\cite{chakraborty2005artificial, Khan2019a, luo2019temporal, 
-bang2020defect}. 
-However, only a few researchers have applied ANN and deep learning-based 
-approaches for damage detection in composite structures by utilising guided 
+	bang2020defect}. 
+Many researchers have applied ANN and deep learning-based approaches for damage detection in composite structures by utilising guided 
 Lamb waves~\cite{Su2004a, chetwynd2008damage, de2015application, feng2019locating, 
-mardanshahi2020detection, qian2020application, Tabian2019, 
-rautela2021ultrasonic}.
+	mardanshahi2020detection, qian2020application, Tabian2019, 
+	rautela2021ultrasonic}.
 
 Su and Ye~\cite{Su2004a} developed a Lamb wave-based delamination identification 
 technique in composite structures with the use of wavelet transform, 
@@ -117,9 +116,10 @@ The full wavefield frames were numerically generated to resemble measurements ac
 Consequently, the model was trained on a one-to-one prediction scheme.
 
 In this work, we took a further step in which the full wavefield frames of Lamb waves propagation instead of RMS images were utilised in an end-to-end deep learning model to identify delamination in CFRP.
-Accordingly, a many-to-one prediction scheme was adopted by employing convolutional-based recurrent neural networks (RNNs).
+Accordingly, a many-to-one prediction scheme was adopted by employing convolutional-based recurrent neural networks (RNNs) to perform pixel-wise image segmentation.
 A sequence of full wavefield frames is fed into the proposed deep learning models in order to identify the delamination.
-To our best knowledge, it is the first implementation of deep neural networks for segmentation of Lamb wave propagation animations.
-The proposed models showed excellent results in identifying the delamination in the numerically generated dataset and it also showed its capability to generalise delamination identification in the real world scenarios.   
+Hence, in the segmentation problem, there are two classes: undamaged and damaged.
+To the best of our knowledge, it is the first implementation of deep neural networks utilising Lamb wave propagation animations for damage imaging with semantic segmentation.
+The proposed models showed excellent results in identifying the delamination in the numerically generated dataset and it also showed its capability to generalise delamination identification in the real world scenarios.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

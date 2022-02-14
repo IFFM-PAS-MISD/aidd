@@ -1,26 +1,30 @@
 \section{Methodology}
 \subsection{Dataset}
-In this work, wave frames accompanied our previously numerically generated dataset in~\cite{Ijjeh2021} was utilised to train the proposed deep learning models.  
-Essentially, the dataset resembles the velocity measurements acquired by SLDV in the transverse direction.
-The dataset contains 475 simulated cases representing delaminations with different locations, shapes, and sizes. 
-Initially, the guided waves were excited at the centre of the plate by applying equivalent piezoelectric forces.
-Further, the carrier frequency is assumed \(50\) kHz, and the modulation frequency is \(10\) kHz.
-Moreover, every single simulated case contains \(512\) frames depicting the full wavefield propagation of Lamb waves at the bottom surface of a CFRP plate representing its interaction and reflection from the delamination and boundaries.
+In this work, synthetic dataset of propagating waves in carbon fibre reinforced composite plates was computed by using the parallel implementation of the time domain spectral element method~\cite{Kudela2020}. 
+Essentially, the dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric excitation at the centre of the plate. 
+The input signal was a five-cycle Hann window modulated sinusoidal tone burst. The carrier frequency was assumed as 50 kHz. 
+Similarly, to our previous work~\cite{Ijjeh2021}, 475 cases were simulated representing Lamb waves interaction with single delamination for each case. 
+It should be underlined, that the previous dataset contained Root Mean Squares (RMS) of full wavefield, representing wave energy spatial distribution in the form of images for each delamination case~\cite{Kudela2020d}. 
+Whereas currently utilized dataset contains frames of propagating waves (512 frames for each delamination scenario). 
+The new dataset is available online~\cite{kudela_pawel_2021_5414555}.
+
+The synthetic dataset is used for training the proposed neural network architectures with the aim of delamination identification directly from SLDV measurements without the need of baseline wavefield.
+
 Figure~\ref{fig:Full_wave} shows a sample number of frames at different time-steps of the propagated Lamb waves before and after the interaction with the delamination.
 The frame \(f_{0}\) depicts the initial interactions with the delamination which was calculated using the delamination location and the velocity of \(A0\) Lamb wave mode.
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=1\textwidth]{full_wavefield_updated.png}
+	\includegraphics[width=1\textwidth]{figure1.png}
 	\caption{Sample frames of full wave propagation.}
 	\label{fig:Full_wave}
 \end{figure}
 
-As mentioned earlier, the dataset contains \(475\) different cases, with a \(512\) frames per each case producing a total number of 243,\,200~frames, with a frame size of \((500\times500)\)~pixels.
+As mentioned earlier, the dataset contains \(475\) different cases, with a \(512\) frames per each case producing a total number of 243,\,200~frames, with a frame size of \((500\times500)\)~pixels representing the geometry of the specimen of size \((500\times500)\)~mm\(^{2}\).
 Thus, utilising all frames in each case has high computational and memory costs.
 
 Furthermore, the dataset was divided into two sets training and testing of a ratio \(80\%\) and \(20\% \) respectively.
 Moreover, a certain portion of the training set was preserved as a validation set to validate the model during the training process.
-Additionally, the dataset was normalised to a range of \((0, 1)\).
+Additionally, the dataset was normalised to a range of \((0, 1)\) to improve convergence of gradient descent algorithm.
 To train our proposed models, two training sets were prepared and tailored to two models described in section~\ref{proposed_approach}.
 We selected \(64\) and \(24\) consecutive frames in each delamination case regarding the first and the second training sets, respectively.
 Frames displaying the propagation of guided waves before interacting with the delamination have no features to be extracted.  
