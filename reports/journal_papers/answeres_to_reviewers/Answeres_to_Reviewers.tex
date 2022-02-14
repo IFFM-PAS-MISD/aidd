@@ -152,15 +152,18 @@
    Another issue with SLDV measurements is that the laser needs access to the surface of the inspected structure which may require partial disassembly of the structure.
    }
 
-	\emph{The limitation related to the developed deep learning model is that the material properties of the inspected structure have to be approximately known in order to simulate the dataset for training.}
+	\emph{The limitation related to the developed deep learning model is that the material properties of the inspected structure have to be approximately known in order to simulate the dataset for training.} 
+	
+	\vspace{5mm}
    
 	At the very least, the authors should investigate whether a sparser grid would be sufficient to produce results of similar quality. 
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}	
-		sdf
+    Thank you for pointing that out. We are currently working on this problem but it is out of the scope of this paper. Definitely, lower density grid can be applied with similar accuracy. Also, compressive sensing can be used to reduce the measurement time by using SLDV. We mentioned it briefly in the revised version of the conclusions.
 	}
 
+	\vspace{5mm}
 
 	Furthermore, several additional items need to be addressed as detailed below, and I cannot recommend this paper for publication in its current form.
 	
@@ -169,9 +172,14 @@
 
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		sdf
+	We are sorry but we cannot agree. First of all, there are indeed several papers related to ANN application for damage detection in which guided wave signals measured by sensors are used. There are much fewer papers related to the application of CNN/DNN for damage detection, localisation and size estimation. But there are almost no papers related to full wavefield processing. This raises the problem of quantitative comparison. There are no data available, benchmark datasets are nonexistent and codes are not provided.
+	We want to be transparent with our research so that we provide the dataset. Our code is also available on github so that researchers can reproduce the results and use it to compare with their methods. 
+	The code for Model-I and Model-II is available at \url{https://github.com/IFFM-PAS-MISD/aidd/tree/master/src/models}.
+	Secondly, a quantitative comparison between results obtained by the methods described in the current paper and our previous study [45] is provided. We even used the same experimental example so that the results can be directly compared. Also in our previous studies comparisons with other classic full wavefield signal processing methods such as RMS and adaptive wavenumber filtering method are given. The results obtained by the classic full wavefield signal processing methods were worse than the deep learning methods so we are not repeating all results here, only the best from previous studies.
 	}
 
+	\vspace{5mm}
+	
 	The authors seem to have implemented a number of required improvements as suggested in previous reviews, however, several points have only been addressed fairly vaguely. 
 	For example, a "size error metric" has been introduced and numerical values are provided. 
 	However, no definition of such metric is given. 
@@ -189,22 +197,29 @@
 	\end{itemize}
 	
 	Many details of the simulations and the discussion thereof have been omitted. 
+	\textcolor{Cyan}{
+		\textbf{Response:}
+	We apologise for this omission. However, it is mostly repeating the description from our previous paper and we thought that it is unnecessary. The data is also available in the dataset description in zenodo [48]. We supplemented the appropriate data in the updated version of the paper.}
 	
 	\begin{itemize}
 		\item What are the applied material parameters?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		The material is typical cross-ply CFRP laminate. The properties of single ply are as follows [GPa]:
+	    \(C_{11} = 52.55, \, C_{12} = 6.51, \, C_{22} = 51.83, C_{44} = 2.93, C_{55} = 2.92, C_{66} = 3.81\). The assumed mass density was 1522.4 kg/m\textsuperscript{3}}
 		\\ \\
 		\item What are the stacking sequences?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		In the numerical calculations a simple model of stacking sequence [0/90]\(_4\) was used.}
 		\\ \\
 		\item How do these compare to the real specimens used in the experiments?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		Thank you for this important question. }
 		\\ \\
 		\item What are the other parameters of the numerical model?
 			\\ \\
