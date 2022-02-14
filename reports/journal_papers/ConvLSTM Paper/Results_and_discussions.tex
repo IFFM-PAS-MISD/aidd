@@ -130,7 +130,8 @@ Therefore, to overcome this issue, we introduced a sliding window of frames.
 The window sizes are \(64\) and \(24\) for model-\RNum{1} and \RNum{2}, respectively.
 Accordingly, we slide the window over all input frames (depicting the experimental data).
 The shift of the window is one frame at a time.
-Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining obtaining the intermediate predictions of the experimental cases and finally calculating the RMS image, where \(f1\) is the starting frame and \(f_n\) is the last frame in which it equals \(512\), further, \((m)\) refers to frames block size, hence, \(m=64\) for model-\RNum{1} and \(m=24\) for model~\RNum{2}, and \(k\) represents the total number of blocks.
+Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining the intermediate predictions for the experimental cases and finally calculating the RMS image.
+Where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, in which \(n=512\), further, \((m)\) refers to frames block size, hence, \(m=64\) for model-\RNum{1} and \(m=24\) for model~\RNum{2}, and \(k\) represents the total number of blocks.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
