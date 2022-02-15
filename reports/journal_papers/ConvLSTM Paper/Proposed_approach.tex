@@ -2,7 +2,7 @@
 \label{proposed_approach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this work, we developed two end-to-end deep learning models utilising full wavefield frames of Lamb wave propagation for delamination identification in CFRP materials as presented in Fig.~\ref{fig:proposed_models}.
-The developed models have a scheme of many-to-one sequence prediction, which takes \(n\) number of frames representing the full wavefield propagation through time and their interaction with the delamination to extract the damage features, and finally predict the delamination location, shape, and size in a single output image.
+The developed models have a scheme of many-to-one sequence prediction, which takes \(m\) number of frames representing the full wavefield propagation through time and their interaction with the delamination to extract the damage features, and finally predict the delamination location, shape, and size in a single output image.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
@@ -24,16 +24,16 @@ The developed models have a scheme of many-to-one sequence prediction, which tak
 \end{figure} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The first proposed model presented in Fig.~\ref{fig:convlstm_model} 
-consists of three ConvLSTM layers that can process time series and computer vision tasks.
+The first proposed model presented in Fig.~\ref{fig:convlstm_model} takes \(64\) frames as input, and it consists of three ConvLSTM layers that can process time series and computer vision tasks.
+
 The first ConvLSTM layer has \(12\) filters, second layer has \(6\) filters and third layer has \(12\) filters.
 The kernel size of the ConvLSTM layers was set to (\(3\times3\)) with a stride of \(1\), padding was set to "same" which makes the output the same as the input in the case of stride \(1\).
 Furthermore, a \(\tanh\) (the hyperbolic tangent) activation function was used within the ConvLSTM layers that output values in a range between (\(-1\) and \(1\)).
 Moreover, we applied a Batch Normalization technique~\cite{Santurkar2018} after the first two ConvLSTM layers.  
 
-In the second model presented in Fig.~\ref{fig:AE_convlstm} we applied an autoencoder technique (AE) which is well-known for extracting spatial features.
+In the second implemented model presented in Fig.~\ref{fig:AE_convlstm} we applied an autoencoder technique (AE) which is well-known for extracting spatial features.
 The idea of AE is to compress the input data within the encoding process then learn how to reconstruct it back from the reduced encoded representation (latent space) to a representation that is as close to the original input as possible. 
-In this model, we have investigated the use of AE to process a sequence of input frames to perform image segmentation.
+In this model, we have investigated the use of AE to process a sequence of \(24\) frames to perform image segmentation.
 Therefore, a Time Distributed layer presented in Fig.~\ref{fig:TD} was introduced to the model, in which it distributes the input frames into the AE layers in order to process them independently.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
@@ -73,28 +73,11 @@ Equation~(\ref{eqn:iou}) illustrated the \(IoU\) metric:
 	\label{eqn:iou}
 \end{equation}
 where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{table}[]
-%	\centering
-%	\caption{Models parameters}
-%	\label{tab:parmeters}
-%	\begin{tabular}{ccc}
-%		\hline
-%		\multirow{2}{*}{Parameter} & \multicolumn{2}{c}{Model}               
-%		\\ 
-%		\cline{2-3} 
-%		& 1  & 2
-%		\\ \hline
-%		Optimizer &	Adadelta~\cite{zeiler2012adadelta} &  Adam~\cite{Kingma2014}              
-%		\\
-%		Batch size & 2  & 1                
-%		\\
-%		Dropout  & 0.0  & 0.2                
-%		\\
-%		Learning rate & 1.0 & 0.01             
-%		\\
-%		Loss function  & \multicolumn{2}{c}{Binary cross entropy} 
-%		\\ \hline
-%	\end{tabular}
-%\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Additionally, the size error metric depicted in Eqn.~\ref{eqn:mean_size_error} was utilised to evaluate the performance of the models.
+\begin{equation}
+	size \ error=\frac{|size(Y) - size(\hat{Y})|}{size(Y)}
+	\label{eqn:mean_size_error}
+\end{equation}
+where \(size(Y)\) and \(size(\hat{Y})\) refer to the size of the delamination in the ground truth and the predicted output, respectively.
+This metric can indicate how close the size of the predicted delamination is to the ground truth.
+Accordingly, the lower the value of the size error, the higher the accuracy of the identified damage. 
