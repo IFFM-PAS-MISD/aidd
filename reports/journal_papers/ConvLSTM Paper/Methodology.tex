@@ -31,5 +31,18 @@ We selected \(64\) and \(24\) consecutive frames in each delamination case regar
 Frames displaying the propagation of guided waves before interacting with the delamination have no features to be extracted.  
 Hence, only a certain number of frames was selected from the initial occurrence of the interactions with the delamination (see Fig.~\ref{fig:Full_wave} for details).
 
-Additionally, for the second training set, we have resized the frames to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
+Additionally, for the second training set, we have upsampled the frames to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
 Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding the first and second training sets, respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining the intermediate predictions for the testing cases and finally calculating the RMS image.
+Where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, in which \(n=512\), further, \((m)\) refers to frames block size, hence, \(m=64\) for model-\RNum{1} and \(m=24\) for model~\RNum{2}, and \(k\) represents the total number of blocks.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{methodology_diagram.png}
+	\caption{The procedure of calculating the RMS prediction image.}
+	\label{fig:Diagram_exp_predictions}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage

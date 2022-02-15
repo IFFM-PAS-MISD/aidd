@@ -20,18 +20,19 @@ Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted 
 As can be seen in all predicted outputs, our models are able to identify the delamination with high accuracy and without any noise.
 Furthermore, the achieved mean \(IoU\) with respect to all numerical data of \(95\) cases was \((0.90)\) for model-\RNum{1}, and \((0.87)\) for model-\RNum{2}. 
 
-Furthermore, the mean size error was calculated for all numerical cases (\(95\)) for models~\RNum{1} and~\RNum{2} equal to \(4.57 \%\) and \(8.42\%\), respectively.
-%\begin{table}[!h]
-%	\centering
-%	\caption{\(IoU\) of the numerical cases}
-%	\label{tab:numerical_cases_iou}
-%	\begin{tabular}{cccc}
-%		\hline
-%		& 1st case & 2nd case & 3rd case \\ \hline
-%		Model-\RNum{1} & \(0.86\) & \(0.89\) & \(0.98\)  \\
-%		Model-\RNum{2} & \(0.87\) & \(0.93\) & \(0.99\)  \\ \hline
-%	\end{tabular}
-%\end{table}
+Furthermore, the mean percentage size error was calculated for all numerical cases (\(95\)) for models~\RNum{1} and~\RNum{2} equal to \(4.57 \%\) and \(8.42\%\), respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+	\begin{tabular}{c|c|ccc|ccc}
+		\multirow{2}{*}{case number} & \multicolumn{1}{c|}{\multirow{2}{*}{A \(mm^2\)}} & \multicolumn{3}{c|}{Model-I}         & \multicolumn{3}{c}{Model-II}         \\ \cline{3-8} 
+		& \multicolumn{1}{c|}{}     & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ \hline
+		1 & 272 & \multicolumn{1}{c|}{0.86} & \multicolumn{1}{c|}{}           &          & \multicolumn{1}{c|}{0.87} & \multicolumn{1}{c|}{281}           & 3.3\%      \\ \hline
+		2    &  186  & \multicolumn{1}{c|}{0.89} & \multicolumn{1}{c|}{}           &            & \multicolumn{1}{c|}{0.93} & \multicolumn{1}{c|}{178} & 4.3\% \\ \hline
+		3    & 842 & \multicolumn{1}{c|}{0.98} & \multicolumn{1}{c|}{}           &            & \multicolumn{1}{c|}{0.99} & \multicolumn{1}{c|}{871}  & 3.4\% \\ \hline
+	\end{tabular}
+\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Numerical cases
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -129,16 +130,6 @@ Therefore, to overcome this issue, we introduced a sliding window of frames.
 The window sizes are \(64\) and \(24\) for model-\RNum{1} and \RNum{2}, respectively.
 Accordingly, we slide the window over all input frames (depicting the experimental data).
 The shift of the window is one frame at a time.
-Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining the intermediate predictions for the experimental cases and finally calculating the RMS image.
-Where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, in which \(n=512\), further, \((m)\) refers to frames block size, hence, \(m=64\) for model-\RNum{1} and \(m=24\) for model~\RNum{2}, and \(k\) represents the total number of blocks.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=1\textwidth]{methodology_diagram.png}
-	\caption{The procedure of calculating the RMS prediction image.}
-	\label{fig:Diagram_exp_predictions}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Single delamination}
 The first experimental case is for a CFRP specimen with single delamination created artificially by Teflon insert. 
 A plain weave fabric reinforcement was used.

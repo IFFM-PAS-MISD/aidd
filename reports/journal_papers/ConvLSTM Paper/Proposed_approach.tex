@@ -73,11 +73,11 @@ Equation~(\ref{eqn:iou}) illustrated the \(IoU\) metric:
 	\label{eqn:iou}
 \end{equation}
 where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth.
-Additionally, the size error metric depicted in Eqn.~\ref{eqn:mean_size_error} was utilised to evaluate the performance of the models:
+Additionally, the percentage size error ($\delta$) depicted in Eqn.~\ref{eqn:mean_size_error} was utilised to evaluate the performance of the models:
 \begin{equation}
-	size \ error=\frac{|size(Y) - size(\hat{Y})|}{size(Y)}
+	\delta=\frac{|A-\hat{A}|}{A} \times 100\%
 	\label{eqn:mean_size_error}
 \end{equation}
-where \(size(Y)\) and \(size(\hat{Y})\) refer to the size of the delamination in the ground truth and the predicted output, respectively.
+where \(A\) and \(\hat{A}\) refer to the total number of pixels of the damage class in the ground truth and the predicted output, respectively.
 This metric can indicate how close the size of the predicted delamination is to the ground truth.
-Accordingly, the lower the value of the size error, the higher the accuracy of the identified damage. 
+Accordingly, the lower the value of ($\delta$), the higher the accuracy of the identified damage. 
