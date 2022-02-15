@@ -7,7 +7,7 @@ For numerical cases, we need to mention that the predicted results were obtained
 Consequently, we skipped the part of producing intermediate predictions and further calculating the RMS image.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Further, the generalisation capabilities were evaluated on experimental datasets.  
+Furthermore, the generalisation capabilities were evaluated on experimental datasets.
 Single and multiple delamination scenarios were considered.
 The \(IoU\) metric was utilised to examine the performance of the models.
 Further, the proposed deep learning models were implemented
@@ -149,7 +149,7 @@ Figure~\ref{fig:model_1_CFRP_teflon_3o} shows the delamination prediction for mo
 Figure~\ref{fig:model_2_CFRP_teflon_3o} shows the predicted output of model-\RNum{2} which has as sliding window of \(24\) frames, and the highest \(IoU\) is \((0.47)\) was achieved for group of frames \((72-96)\).
 Moreover, since the window of model-\RNum{1} is larger than the window of model-\RNum{2}, it is expected that model-\RNum{1} starts to identify the delamination before model-\RNum{2}.
 It should be noted that for the same damage scenario, the \(IoU\) value for the models developed previously in~\cite{Ijjeh2021} was very low \((0.081)\).
-Furthermore, the size error metric for models~\RNum{1} and~\RNum{2} equal to \(41.78 \%\) and \(86.67\%\), respectively.
+Furthermore, the percentage size error metric (\(\delta\)) for models~\RNum{1} and~\RNum{2} equal to \(41.78 \%\) and \(86.67\%\), respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Single delaminatio of Teflon inserted
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -245,7 +245,20 @@ Figures~\ref{fig:RMS_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_CFRP_Teflon_3o_ijjeh
 Additionally, to separate undamaged and damaged classes from the RMS images, we applied a binary threshold with a value \((threshold=0.5)\) as shown in Figs.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh} for model-\RNum{1} and model-\RNum{2}, respectively. 
 The threshold level was selected to limit the influence of noise, and at the same time, highlight the damage.
 The calculated \(IoU\) values for the case of single delamination are \((0.46)\) and \((0.42)\) for model-\RNum{1} and model-\RNum{2}, respectively.
+
+Table~\ref{tab:single_case} presents the evaluation metrics for models-\RNum{1} and~\RNum{2}, receptively, regarding the experimental case of single delamination shown in Fig.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_images}.
+As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted sizes (\(\hat{A}\)) of delaminations were computed in \(mm^2\) with respect to the each case, hence, the percentage size error (\(\delta\)) were calculated for both models accordingly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+	\caption{Evaluation metrics for experimental case of single delamination}
+	\begin{tabular}{cccccccc}
+		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\ mm^2\)} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ \cline{3-5} & \cline(lt){6-8} & \multicolumn{1}{c|}{IoU} & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c|}{IoU}  &\multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ \hline
+		Single delamination & 225 & \multicolumn{1}{c|}{0.46} &  \multicolumn{1}{c|}{319} & 41.78\%    & \multicolumn{1}{c|}{0.42} & \multicolumn{1}{c|}{420} & 86.67\%    \\ \hline
+	\end{tabular}
+	\label{tab:single_case}
+\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -486,7 +499,9 @@ Figure~\ref{fig:L3_S4_B_5HC_predictions} shows the predicted outputs of model-\R
 The RMS images depicting the damage maps of Specimen~\RNum{4} are presented in Figs.~\ref{fig:RMS_L3_S4_B_saeed} and~\ref{fig:RMS_L3_S4_B_ijjeh} regarding model-\RNum{1} and model-\RNum{2}, respectively.
 Figure~\ref{fig:RMS_threshold_L3_S4_B_saeed} shows the thresholded RMS image for model-\RNum{1}, and the calculated value of \(IoU\) is \((0.07)\).
 Figure~\ref{fig:RMS_threshold_L3_S4_B_ijjeh}  shows the thresholded RMS image for model-\RNum{2}, and the calculated \(IoU\) is \((0.23)\).
-Furthermore, the mean size error metric with respect to the three delaminations for models~\RNum{1} and~\RNum{2} equal to \(79.41\%\) and \(10.61\%\), respectively.
+Furthermore, the mean percentage size error (\(\delta\)) with respect to the three delaminations (Specimen~\RNum{4}) for models~\RNum{1} and~\RNum{2} equal to \(79.41\%\) and \(10.61\%\), respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
