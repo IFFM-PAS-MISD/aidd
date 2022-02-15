@@ -1,7 +1,12 @@
 \section{Results and discussions}
 In this section,  we present the evaluation of the proposed models based on numerical data of \(95\) different cases representing the frames of the full wavefield propagation. 
-The developed models and their capabilities of predicting delamination location, shape and size were tested on numerical and experimental data.  
-Three representative cases were selected from numerical dataset to show the performance of developed models. 
+The developed models and their capabilities of predicting delamination location, shape and size were tested on numerical and experimental data.
+Three representative cases were selected from numerical dataset to show the performance of developed models.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+For numerical cases, we need to mention that the predicted results were obtained by using only the first block of frames after interacting with the damage, as the delamination ground truths are provided, which is not the case for real-life cases as in the experimental section. 
+Consequently, we skipped the part of producing intermediate predictions and further calculating the RMS image.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Further, the generalisation capabilities were evaluated on experimental datasets.  
 Single and multiple delamination scenarios were considered.
 The \(IoU\) metric was utilised to examine the performance of the models.
@@ -16,22 +21,26 @@ This case is also considered difficult due to the waves reflected from the edge 
 Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show prediction with respect to model-\RNum{1}, and \RNum{2}, respectively.
 In the third case, the delamination is located upper left corner but little farther from the edges as shown in Fig.~\ref{fig:num_GT_453} representing the GT. 
 Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted outputs with respect to model-\RNum{1}, and \RNum{2}, respectively.
-
 As can be seen in all predicted outputs, our models are able to identify the delamination with high accuracy and without any noise.
-Furthermore, the achieved mean \(IoU\) with respect to all numerical data of \(95\) cases was \((0.90)\) for model-\RNum{1}, and \((0.87)\) for model-\RNum{2}. 
 
-Furthermore, the mean percentage size error was calculated for all numerical cases (\(95\)) for models~\RNum{1} and~\RNum{2} equal to \(4.57 \%\) and \(8.42\%\), respectively.
+Table~\ref{tab:num_cases} presents the evaluation metrics for models-\RNum{1} and~\RNum{2}, receptively, regarding the numerical cases shown in Fig.~\ref{fig:num_case}.
+As shown in Table~\ref{tab:num_cases}, the actual (\(A\)) and predicted sizes (\(\hat{A}\)) of delaminations were computed in \(mm^2\) with respect to the each case, hence, the percentage size error (\(\delta\)) were calculated for both models accordingly.
+
+Furthermore, the achieved mean \(IoU\) with respect to all numerical data of \(95\) cases was \((0.90)\) for model-\RNum{1}, and \((0.87)\) for model-\RNum{2}. 
+Furthermore, the mean percentage size error (\(\delta\)) was calculated for all numerical cases (\(95\)) for models~\RNum{1} and~\RNum{2} equal to \(4.57 \%\) and \(8.42\%\), respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 \begin{table}[]
+	\caption{Evaluation metrics of the three numerical cases}
 	\begin{tabular}{c|c|ccc|ccc}
-		\multirow{2}{*}{case number} & \multicolumn{1}{c|}{\multirow{2}{*}{A \(mm^2\)}} & \multicolumn{3}{c|}{Model-I}         & \multicolumn{3}{c}{Model-II}         \\ \cline{3-8} 
-		& \multicolumn{1}{c|}{}     & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ \hline
-		1 & 272 & \multicolumn{1}{c|}{0.86} & \multicolumn{1}{c|}{}           &          & \multicolumn{1}{c|}{0.87} & \multicolumn{1}{c|}{281}           & 3.3\%      \\ \hline
-		2    &  186  & \multicolumn{1}{c|}{0.89} & \multicolumn{1}{c|}{}           &            & \multicolumn{1}{c|}{0.93} & \multicolumn{1}{c|}{178} & 4.3\% \\ \hline
-		3    & 842 & \multicolumn{1}{c|}{0.98} & \multicolumn{1}{c|}{}           &            & \multicolumn{1}{c|}{0.99} & \multicolumn{1}{c|}{871}  & 3.4\% \\ \hline
-	\end{tabular}
+		\multirow{2}{*}{case number} & \multicolumn{1}{c|}{\multirow{2}{*}{A \(mm^2\)}} & \multicolumn{3}{c|}{Model-I}         & \multicolumn{3}{c}{Model-II} \\ \cline{3-8} 
+		& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ \hline
+		1 & 272 & \multicolumn{1}{c|}{0.86} & \multicolumn{1}{c|}{318} & 16.9\% & \multicolumn{1}{c|}{0.87} & \multicolumn{1}{c|}{281} & 3.3\% \\ \hline
+		2 &  186  & \multicolumn{1}{c|}{0.89} & \multicolumn{1}{c|}{196} & 5.4\% & \multicolumn{1}{c|}{0.93} & \multicolumn{1}{c|}{178} & 4.3\% \\ \hline
+		3 & 842 & \multicolumn{1}{c|}{0.98} &\multicolumn{1}{c|}{871} & 3.4\%   & \multicolumn{1}{c|}{0.99} & \multicolumn{1}{c|}{871} & 3.4\% \\ \hline
+	\end{tabular}	
+	\label{tab:num_cases}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Numerical cases
