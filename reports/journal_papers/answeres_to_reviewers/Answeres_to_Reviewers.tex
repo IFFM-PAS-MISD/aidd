@@ -219,100 +219,135 @@
 			\\ \\
 		\textcolor{Cyan}{
 			\textbf{Response:}
-		Thank you for this important question. }
+		Thank you for this important question. The specimens were made from CFRP of similar parameters as in numerical simulations. However, plain weave fabric reinforcement was used in specimens in comparison to unidirectional stacked plies in the numerical model. Overall, the aim for performing numerical simulations was to have similar wave front patterns and wavelengths. However, elastic constants identification was not performed. As a result, discrepancies in wavelengths occurs. The wavelength in numerical wavefield was about 21.2 mm and in experimental case about 19.5 mm.}
 		\\ \\
 		\item What are the other parameters of the numerical model?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		The total wave propagation time was set to 0.75 ms so that the wave can propagate to plate edges and back to the actuator twice.
+	    }
 		\\ \\
 		\item What is the sampling frequency, and why 512 frames?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		The total number of time integration steps was 150000 which was selected for stability of the central difference scheme. It translates to sampling frequency of 200 MHz.}
 		\\ \\
 		\item How does the spatial resolution compare to the smallest expected wave length? Is a 1px/mm resolution sufficient for practical implementations?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+			As the Reviewer pointed out the resolution of measurement grid should be selected according to the shortest wavelength. In our experimental case it is about 19.5 mm. Considering that we used 333 points along the edge of the plate of length 500 mm it gives 13 points per wavelength. However, the grid is square and the longest distance between points is along the diagonal so correction should be taken which gives 9 points along the diagonal. In order to have good wave crests representation usually at least 5 nodes per wavelength are required.
+			In conclusion, 1px/mm resolution is sufficient for most practical implementations.
+		}
 		\\ \\
 	\end{itemize}
 
 	Within the produced 475 datasets, details on the differences are not presented. 
 	\begin{itemize}
 		\item Are size and location varied? If so by how much?
-			\\ \\
-		\textcolor{Cyan}{
-			\textbf{Response:}}
-		\\ \\
 		\item What about the shape of the defect?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
-		\\ \\
+			\textbf{Response:}
+		We apologise for the omission of this important detail. These parameters were given in our previous paper. We added missing information to the dataset description along with illustration.
+	   }
+		
+		\emph{
+			The following random factors were used in simulated delamination scenarios:
+			\begin{itemize}
+				\item delamination geometrical size	(ellipse minor and major axis randomly selected from the interval \(\left[10 \, \textrm{mm}, 40\, \textrm{mm}\right]\)),
+				\item delamination angle (randomly selected from the interval \( \left[ 0^{\circ}, 180^{\circ} \right]\)),
+				\item coordinates of the centre of delamination (randomly selected from the interval \(\left[0\, \textrm{mm}, 250\, \textrm{mm} -\delta \right]\) and \( \left[250\, \textrm{mm}+\delta, 500\, \textrm{mm} \right] \), where \(\delta = 10\, \textrm{mm}\)).
+			\end{itemize}
+		}
 		\item How was it determined that 475 are sufficient?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		In general, the larger the dataset, the better generalisation capabilities can be achieved by deep learning models.
+	    However, the computation time of large number of cases is still long.
+        Hence, a compromise was needed.
+        The convergence of the developed models confirmed that 475 cases were sufficient.}
 		\\ \\
 	\end{itemize}
-
+    
 	For the measurements, more details need to be provided about where the scanning grid was applied in relation to the plate. 
 	\begin{itemize}
 		\item Was the grid aligned with the plate boundaries? Is this important for the algorithms to work?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		Thank you for pointing that out. The measurement grid was aligned with the plate boundaries. It is not important for the algorithm to work as long as the same area is considered in numerical simulations.}
 		\\ \\
 		\item How is the "upscaling" to 500/512 points realized?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		The images were upsampled by using cubic interpolation.
+	    We apologise for using inaccurate term.}
 		\\ \\
 		\item How many time-averages had to be used to reach an acceptable SNR?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		We used 10 averages and it was enough to reach an acceptable SNR.
+	    But it is frequency dependent.}
 		\\ \\
 		\item What is the total scanning time for one specimen?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		The total scanning time is about 9h 40'.}
 		\\ \\
 		\item What is the thickness of the Teflon insert?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		We are uncertain about exact thickness of the Teflon insert but it should be in the range of 0.1-0.2 mm.
+	    }
 		\\ \\
 		\item How is ground truth established for experiments?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		The teflon inserts were manufactured according to our specification so that their positions and sizes were known.
+		The ground truths were prepared manually based on that specification.}
 		\\ \\
 		\item Have C-Scans been used to verify the size and shape of the delamination?
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		Unfortunately, we do not have appropriate equipment to conduct ultrasonic c-scans.}
 		\\ \\
 		\item Why is Case II the most difficult as "delaminations are barely visible" this should be true for all of the specimens (if not, why not?)
 			\\ \\
 		\textcolor{Cyan}{
-			\textbf{Response:}}
+			\textbf{Response:}
+		Thank you for pointig that out.
+	    Within the text it should be rather "delamination reflections are barely visible". It is because the measurements are conducted on the bottom surface of the plate and the dalaminations in the cross-section are farther away from the bottom surface than in other specimens (III and IV).
+        }
 		\\ \\
 	\end{itemize}
 
 	The two presented models should be compared in the conclusions. 
 	It also didn't become clear why the RMS approach is presented. 
 	Is this part of the analysis or a separate analysis for comparison? 
+	This may need to be addressed again in the conclusions.
 		\\ \\
 	\textcolor{Cyan}{
-		\textbf{Response:}}
-	\\ \\
-	This may need to be addressed again in the conclusions.
+		\textbf{Response:}
+	Thank you for your valuable remark.
+	We have added one more schematic illustration and separate section to better explain the need for calculation of RMS.
+    }
+	\\ \\	
 	The manuscript suffers from a substantial amount of minor and major language errors.
 		\\ \\
 	\textcolor{Cyan}{
-		\textbf{Response:}}
+		\textbf{Response:}
+		We have reread the paper carefully and corrected language errors.
+	}
 	\\ \\
 	\newpage
 	\textbf{Reviewer: 4}  \\
@@ -323,6 +358,33 @@
 	It seems that both works have a big intersection. The only difference I could see here is that the utilization of ConvLSTM instead of ConvNet.	
 		\\ \\
 	\textcolor{Cyan}{
-		\textbf{Response:}}
+		\textbf{Response:}
+	Thank you for your comment. The differences were explained already to the Reviewer 2. We repeat them here for your convenience.
+     It should be noted that the dataset used in our previous paper is completely different from the one used in the current paper. In the previous paper, the dataset consists of RMS images computed from full wavefields. It means that there is only one image per delamination scenario. In the current paper, several images per delamination scenario in the form of propagating wavefields are used. Therefore, inputs for neural networks are in the form of a single image (previous paper) and several images (current paper). It should be noted, however, that both datasets were created at the same time by using the time domain spectral element method with the same random delamination arrangements (It is explained in the \emph{Dataset} section).
+    Moreover, since inputs to neural networks are different also the applied neural network (NN) architectures differ. The NN models used in the current paper are not taken directly from the literature but are rather inspired by some models and tailored to the particular problem of delamination identification.
+    We have rewritten last two paragraphs of the introduction to be more clear about it:
+}
+
+\emph{In our previous research work [45], we have developed a deep learning-based
+semantic segmentation model with a fully convolutional neural network (FCN)
+to identify delamination in CFRP.	
+The full wavefield frames werenumerically generated to resemble measurements acquired by SLDV.
+Each wavefield was corresponding to one delamination scenario.
+Next, the root mean square (RMS) techniquewas applied on the full wavefield frames giving one image per delamination scenario.
+Consequently,the developed deep neural network models were trained on a one-to-one prediction scheme (RMS image to damage map).
+The predicted damage map consisted of two classes: undamaged and damaged indicating the location, size and shape of the delamination.}
+
+\emph{In this work, we took a further step in which the full wavefield frames of
+propagating Lamb waves were directly utilised in an end-to-enddeep learning model.
+It means that the mid-step consisting of the calculation of RMS has been omitted.
+Accordingly, a many-to-oneprediction scheme was used in the proposed deep learning models (many input frames to damage map).
+In other words, a sequence of full wavefield frames (animation) is fed into the proposed deep learning models.
+These models are inspired by convolutional long short-term memory (ConvLSTM) architectures and tailored to the particular problem of delamination identification.
+Similarly to our previous research work [45] two classes (damaged and undamaged) were defined in the pixel-wise segmentation problem.}
+
+\emph{To the best of our knowledge, it is the firstimplementation of deep neural networks utilising Lamb wave propagation animationsfor damage imaging with semantic segmentation. 
+The proposed modelsshowed excellent capabilities to identify the delamination in the numericallygenerated dataset.
+Moreover, the developed models can generalise so that they could be used for delaminationidentification in the real world scenarios.
+This is confirmed through the experiment on CFRP plates with single and multiple delaminations.}
 	\\ \\
 \end{document}
