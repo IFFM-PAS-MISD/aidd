@@ -58,7 +58,7 @@ The mathematical calculation at the forget gate ($f_t$) is depicted in Eq.~(\ref
 where \(W_{f}\) represent the learnable weights at the hidden and input states  \(h_{t-1}\) and \(x_{t}\) , respectively, and \(b_{f}\) represents the bias term. 
 
 The input gate \(i_{t}\) takes the current input \(X_t\) with the previous hidden state \(h_{t-1}\) then apply the sigmoid function to get values in a range between 0 (not important) and 1 (important), then the
-same current input \(X_t\), and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at \(\tilde{C}_{t}\) that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
+same current input \(X_t\), and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at a candidate cell state (\(\tilde{C}_{t}\)) that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
 Then, the outputs from the sigmoid and \(\tanh\) functions are multiplied point-by-point to eliminate \(0\) values.  
 Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
 \begin{equation}
@@ -92,7 +92,7 @@ Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	\begin{aligned}
-		o_{t} &=\sigma\left(W_{o} *
+		o_{t} &=\sigma\left(W_{o} 
 		\left[
 		\begin{array}{c}
 			h_{t-1} \\ x_{t}
@@ -126,7 +126,7 @@ Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \(x_1, \do
 	\end{aligned}
 	\label{eq:eq5}
 \end{equation}
-where (\(*\)) indicates the convolution operation.
+where (\(*\)) indicates the convolution operation which is basically an element wise multiplication operation.
 
 Recently, ConvLSTM has become very popular and is increasingly being used in 
 more and more image processing applications.
