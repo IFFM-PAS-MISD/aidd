@@ -15,29 +15,26 @@ on Keras API~\cite{chollet2015keras} running on top of TensorFlow on a Tesla V10
 \subsection{Numerical cases}
 In the first numerical case, the delamination is located at the upper left corner as shown in Fig.~\ref{fig:num_GT_391} representing its ground truth (GT).
 This case is considered difficult due to edge wave reflections which have similar patterns as delamination reflection.
-The predicted outputs are shown in Fig.~\ref{fig:Convlstm_num_391}, and~\ref{fig:AE_num_391} with respect to model-\RNum{1}, and \RNum{2}, respectively.
+The predicted outputs are shown in Fig.~\ref{fig:Convlstm_num_391}, and~\ref{fig:AE_num_391} with respect to Model-\RNum{1}, and \RNum{2}, respectively.
 For the second numerical case, the delamination is located at the upper centre of the plate as shown in Fig.~\ref{fig:num_GT_462} representing the GT.
 This case is also considered difficult due to the waves reflected from the edge which have similar patterns as those reflected from the delamination.
-Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show prediction with respect to model-\RNum{1}, and \RNum{2}, respectively.
+Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show prediction with respect to Model-\RNum{1}, and \RNum{2}, respectively.
 In the third case, the delamination is located upper left corner but little farther from the edges as shown in Fig.~\ref{fig:num_GT_453} representing the GT. 
-Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted outputs with respect to model-\RNum{1}, and \RNum{2}, respectively.
+Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted outputs with respect to Model-\RNum{1}, and \RNum{2}, respectively.
 As can be seen in all predicted outputs, our models are able to identify the delamination with high accuracy and without any noise.
 
-Table~\ref{tab:num_cases} presents the evaluation metrics for models-\RNum{1} and~\RNum{2}, receptively, regarding the numerical cases shown in Fig.~\ref{fig:num_case}.
-As shown in Table~\ref{tab:num_cases}, the actual (\(A\)) and predicted sizes (\(\hat{A}\)) of delaminations were computed in \(mm^2\) with respect to the each case, hence, the percentage size error (\(\delta\)) were calculated for both models accordingly.
+Table~\ref{tab:num_cases} presents the evaluation metrics for Models-\RNum{1} and~\RNum{2}, receptively, regarding the numerical cases shown in Fig.~\ref{fig:num_case}.
+As shown in Table~\ref{tab:num_cases}, the actual (\(A\)) and predicted areas (\(\hat{A}\)) of delaminations were computed in \(mm^2\) with respect to the each case, hence, the percentage area error (\(\epsilon\)) were calculated for both models accordingly.
 
-Furthermore, the achieved mean \(IoU\) with respect to all numerical data of \(95\) cases was \((0.90)\) for model-\RNum{1}, and \((0.87)\) for model-\RNum{2}. 
-Furthermore, the mean percentage size error (\(\delta\)) was calculated for all numerical cases (\(95\)) for models~\RNum{1} and~\RNum{2} equal to \(4.57 \%\) and \(8.42\%\), respectively.
+Furthermore, the achieved mean \(IoU\) with respect to all numerical data of \(95\) cases was \((0.90)\) for Model-\RNum{1}, and \((0.87)\) for Model-\RNum{2}. 
+Furthermore, the mean percentage area error (\(\epsilon\)) was calculated for all numerical cases (\(95\)) for Models~\RNum{1} and~\RNum{2} equal to \(4.57 \%\) and \(8.42\%\), respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Please add the following required packages to your document preamble:
-%\begin{comment}
 \begin{table}[]
 	\caption{Evaluation metrics of the three numerical cases}
 	\begin{tabular}{cccccccc}
 		\toprule
-		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A \(mm^2\)}} & \multicolumn{3}{c}{Model-I}         & \multicolumn{3}{c}{Model-II} \\ 
-		\cmidrule(lr){3-5} \cmidrule(lr){6-8} 
-		& \multicolumn{1}{c}{}  & \multicolumn{1}{c}{IoU}  & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c}{IoU}  & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ 
+		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II} \\ \cmidrule(lr){3-5} \cmidrule(lr){6-8} 
+		& \multicolumn{1}{c}{}  & \multicolumn{1}{c}{IoU}  & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) & \multicolumn{1}{c}{IoU}  & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ 
 		\midrule
 		1 & 272 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{318} & 16.9\% & \multicolumn{1}{c}{0.87} & \multicolumn{1}{c}{281} & 3.3\% \\ 
 		2 &  186  & \multicolumn{1}{c}{0.89} & \multicolumn{1}{c}{196} & 5.4\% & \multicolumn{1}{c}{0.93} & \multicolumn{1}{c}{178} & 4.3\% \\ 
@@ -47,6 +44,27 @@ Furthermore, the mean percentage size error (\(\delta\)) was calculated for all 
 	\label{tab:num_cases}
 \end{table}
 %\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean IoU for all \(95\) numerical test cases with respect the DL models.
+As shown in Table~\ref{tab:meanIoU_vs_input}, Model-\RNum{1} and Model-\RNum{2} are from the current work, and takes as input animations of the full wavefield, whereas the rest of the models are from our previous works~\cite{Ijjeh2021, Ijjeh2022} and takes as input RMS images.
+It can be concluded that the models which takes animations as an input surpass the models which take only the RMS images as input. 
+Moreover, Model-\RNum{1} has higher mean IoU compared to Model-\RNum{2}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{Mean IoU for numerical cases with respect to the input of the model}
+	\begin{tabular}{llc}
+		\toprule
+		Input & Model & mean IoU \\ 
+		\midrule
+		\multirow{2}{*}{Animations} & Model-I & 0.90 \\ & Model-II                    & 0.87     \\ \midrule
+		\multirow{3}{*}{RMS images}  & FCN-DenseNet~\cite{Ijjeh2021} & 0.62     \\
+		& FCN-DenseNet~\cite{Ijjeh2022} & 0.68     \\
+		& GCN~\cite{Ijjeh2022}          & 0.76     \\ 
+		\bottomrule
+	\end{tabular}
+	\label{tab:meanIoU_vs_input}
+\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Numerical cases
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -121,7 +139,7 @@ Furthermore, the mean percentage size error (\(\delta\)) was calculated for all 
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\caption{Delamination cases on numerical data (Figures: (b), (e), and (h) correspond to model-\RNum{1}. 
-		Figures: (c), (f) and (i) correspond to model-\RNum{2}).}
+		Figures: (c), (f) and (i) correspond to Model-\RNum{2}).}
 	\label{fig:num_case}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -132,29 +150,34 @@ In this work, we investigated our models on several experimentally acquired data
 Similarly to the synthetic dataset, we applied a frequency of \(50\)~kHz to excite a signal in a transducer placed at the centre of the plate. 
 \(A0\) mode wavelength for this particular CFRP material at such frequency is about \(20\)~mm. 
 The measurements were performed by using Polytec PSV-\(400\) SLDV on the bottom surface of the plate of dimensions \(500\times500\)~mm. 
-The sampling frequency was \(512\)~kHz. 
 The measurements were conducted on a regular grid of \(333\times333\) points. 
-Next, median filter using window size of three was applied to each frame. Additionally, all frames were upscaled to \(500\times500\) points and \(512\times512\) for model-\RNum{1} and model-\RNum{2}, respectively.
+The measurement area was aligned with the plate edges.
+The sampling frequency was \(512\)~kHz.
+To improve signal to noise ratio 10 averages were used.
+The total scanning time for one specimen was about 1h 40'.
+
+Next, median filter using window size of three was applied to each frame. Additionally, all frames were upsampled by using cubic interpolation to \(500 \times 500\) points for Model-~\RNum{1} and \(512\times512\) points for Model-\RNum{2}, respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 During the testing stage of the synthetic dataset,  we fed the models with a consecutive number of identified frames (window of frames) containing the interactions of the Lamb waves with the delamination to identify it.
 However, for the experimentally acquired data, the window of frames depicting the interaction of Lamb waves with the delaminations is unknown.
 Therefore, to overcome this issue, we introduced a sliding window of frames. 
-The window sizes are \(64\) and \(24\) for model-\RNum{1} and \RNum{2}, respectively.
+The window sizes are \(64\) and \(24\) for Model-\RNum{1} and \RNum{2}, respectively.
 Accordingly, we slide the window over all input frames (depicting the experimental data).
 The shift of the window is one frame at a time.
 \subsection{Single delamination}
-The first experimental case is for a CFRP specimen with single delamination created artificially by Teflon insert. 
+The first experimental case is for a CFRP specimen with single delamination created artificially by Teflon insert of thickness \(250\ \mu\)m. 
 A plain weave fabric reinforcement was used.
 The Teflon of a square shape was inserted during specimen manufacturing so its shape and location is known.
+Based on that the ground truth was prepared manually.
 Figure~\ref{fig:exp_CFRP_teflon_3o_GT} shows the GT image which corresponds to the artificial delamination location, shape and size.
 The number of the full wavefield frames is \(256\) frames in this case.
-Figure~\ref{fig:model_1_CFRP_teflon_3o} shows the delamination prediction for model-\RNum{1} in which the sliding window size is \(64\) frames, and the highest \(IoU\) is \((0.53)\) achieved for group of frames \((35-99)\).
-Figure~\ref{fig:model_2_CFRP_teflon_3o} shows the predicted output of model-\RNum{2} which has as sliding window of \(24\) frames, and the highest \(IoU\) is \((0.47)\) was achieved for group of frames \((72-96)\).
-Moreover, since the window of model-\RNum{1} is larger than the window of model-\RNum{2}, it is expected that model-\RNum{1} starts to identify the delamination before model-\RNum{2}.
+Figure~\ref{fig:model_1_CFRP_teflon_3o} shows the delamination prediction for Model-\RNum{1} in which the sliding window size is \(64\) frames, and the highest \(IoU\) is \((0.53)\) achieved for group of frames \((35-99)\).
+Figure~\ref{fig:model_2_CFRP_teflon_3o} shows the predicted output of Model-\RNum{2} which has as sliding window of \(24\) frames, and the highest \(IoU\) is \((0.47)\) was achieved for group of frames \((72-96)\).
+Moreover, since the window of Model-\RNum{1} is larger than the window of Model-\RNum{2}, it is expected that Model-\RNum{1} starts to identify the delamination before Model-\RNum{2}.
 It should be noted that for the same damage scenario, the \(IoU\) value for the models developed previously in~\cite{Ijjeh2021} was very low \((0.081)\).
-Furthermore, the percentage size error metric (\(\delta\)) for models~\RNum{1} and~\RNum{2} equal to \(41.78 \%\) and \(86.67\%\), respectively.
+Furthermore, the percentage area error metric (\(\epsilon\)) for Models~\RNum{1} and~\RNum{2} equal to \(41.78 \%\) and \(86.67\%\), respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Single delaminatio of Teflon inserted
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -195,14 +218,14 @@ Furthermore, the percentage size error metric (\(\delta\)) for models~\RNum{1} a
 In both models, the predictions were the highest for group of frames corresponding to the first interaction of the guided waves with the delamination.
 Accordingly, such frames contain the most valuable feature patterns regarding delamination. 
 Furthermore, this behaviour can be depicted in Fig.~\ref{fig:CFRP_Teflon_3o_IoU_centre_window}, which shows the \(IoU\) values with respect to the predicted outputs as we slide the window over all input frames from the starting frame till end.
-Since there are \(256\) frames of full wavefield in this damage case, there are \(192\) of windows for model-\RNum{1}, and \(232\) of windows for model-\RNum{2}.
-Consequently, model-\RNum{1} has \(192\) consecutive predictions, and model-\RNum{2} has \(232\) consecutive predictions.
+Since there are \(256\) frames of full wavefield in this damage case, there are \(192\) of windows for Model-\RNum{1}, and \(232\) of windows for Model-\RNum{2}.
+Consequently, Model-\RNum{1} has \(192\) consecutive predictions, and Model-\RNum{2} has \(232\) consecutive predictions.
 Furthermore, in Fig.~\ref{fig:CFRP_Teflon_3o_IoU_} we selected three places of the sliding window. 
 The first place depicted in a dark blue star shown in Fig.~\ref{fig:CFRP_teflon_3o_shapes_} represents group of frames \((72-96)\) which correspond to initial interaction of guided waves with the delamination.
 The second place depicted in pink pentagon shape shown in Fig.~\ref{fig:CFRP_teflon_3o_shapes_} represents group of frames \((129-153)\) which correspond to the guided waves reflected from the edges, in which we can notice the drop in the \(IoU\) values as these frames have less damage features.
 The third place depicted in green circle shown in Fig.~\ref{fig:CFRP_teflon_3o_shapes_} represents group of frames \((206-230)\) corresponding to the interaction of the guided waves reflected from the edges with the delamination.
 As we can see, the value of \(IoU\) increases again as the valuable features patterns regarding delamination start to appear again.
-The predicted outputs of model-\RNum{1} and model-\RNum{2} regarding the dark blue star, pink pentagon, and the green circle are shown in Fig.~\ref{fig:CFRP_Teflon_3o_predictions}.
+The predicted outputs of Model-\RNum{1} and Model-\RNum{2} regarding the dark blue star, pink pentagon, and the green circle are shown in Fig.~\ref{fig:CFRP_Teflon_3o_predictions}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% IoU ouput values with a sliding window
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -234,25 +257,25 @@ The predicted outputs of model-\RNum{1} and model-\RNum{2} regarding the dark bl
 \begin{figure}[!h]
 	\centering
 	\includegraphics[scale=1]{figure8.png}
-	\caption{Predictions of models \RNum{1} and \RNum{2} at different window places (Teflon insert-single delamination).}
+	\caption{Predictions of Models~\RNum{1} and~\RNum{2} at different window places (Teflon insert-single delamination).}
 	\label{fig:CFRP_Teflon_3o_predictions}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Additionally, for the experimental cases, we applied the root mean square (RMS) according to Eq.~\ref{RMS} for all \(N\) predicted outputs \(\hat{y}\) regarding all slided windows in order to show the damage map.
+Additionally, for the experimental cases, we applied the root mean square (RMS) according to Eq.~\ref{RMS} for all \(N\) predicted outputs \(\hat{Y}\) regarding all blocks of frames in order to show the damage map.
 \begin{equation}
-	RMS\ output = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{y}^2}	
+	RMS = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y}^2}	
 	\label{RMS}
 \end{equation}
 
-Figures~\ref{fig:RMS_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_CFRP_Teflon_3o_ijjeh} show the RMS images for the experimental case of single delamination predicted by model-\RNum{1} and model-\RNum{2}, respectively.
-Additionally, to separate undamaged and damaged classes from the RMS images, we applied a binary threshold with a value \((threshold=0.5)\) as shown in Figs.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh} for model-\RNum{1} and model-\RNum{2}, respectively. 
+Figures~\ref{fig:RMS_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_CFRP_Teflon_3o_ijjeh} show the RMS images for the experimental case of single delamination predicted by Model-\RNum{1} and Model-\RNum{2}, respectively.
+Additionally, to separate undamaged and damaged classes from the RMS images, we applied a binary threshold with a value \((threshold=0.5)\) as shown in Figs.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh} for Model-\RNum{1} and Model-\RNum{2}, respectively. 
 The threshold level was selected to limit the influence of noise, and at the same time, highlight the damage.
-The calculated \(IoU\) values for the case of single delamination are \((0.46)\) and \((0.42)\) for model-\RNum{1} and model-\RNum{2}, respectively.
+The calculated \(IoU\) values for the case of single delamination are \((0.46)\) and \((0.42)\) for Model-\RNum{1} and Model-\RNum{2}, respectively.
 
-Table~\ref{tab:single_case} presents the evaluation metrics for models-\RNum{1} and~\RNum{2}, receptively, regarding the experimental case of single delamination shown in Fig.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_images}.
-As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted sizes (\(\hat{A}\)) of delaminations were computed in \(mm^2\) with respect to the each case, hence, the percentage size error (\(\delta\)) were calculated for both models accordingly.
+Table~\ref{tab:single_case} presents the evaluation metrics for Models-\RNum{1} and~\RNum{2}, receptively, regarding the experimental case of single delamination shown in Fig.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_images}.
+As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted areas (\(\hat{A}\)) of delaminations were computed in \(mm^2\) with respect to the each case, hence, the percentage area error (\(\epsilon\)) were calculated for both models accordingly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
@@ -262,7 +285,7 @@ As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted sizes 
 	\toprule
 		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\ mm^2\)} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ 
 		\cmidrule(lr){3-5} \cmidrule(lr){6-8}
-		&  & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c}{IoU}  &\multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ 
+		&  & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\epsilon\) & \multicolumn{1}{c}{IoU}  &\multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\epsilon\) \\ 
 		\midrule
 		Single delamination & 225 & \multicolumn{1}{c}{0.46} &  \multicolumn{1}{c}{319} & 41.78\%    & \multicolumn{1}{c}{0.42} & \multicolumn{1}{c}{420} & 86.67\%    \\
 		\bottomrule
@@ -278,7 +301,7 @@ As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted sizes 
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure9a.png}
-		\caption{RMS image of model-\RNum{1} predicted output}
+		\caption{RMS image of Model-\RNum{1} predicted output}
 		\label{fig:RMS_CFRP_Teflon_3o_saeed}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -287,7 +310,7 @@ As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted sizes 
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure9b.png}
-		\caption{RMS image of model-\RNum{2} predicted output} 
+		\caption{RMS image of Model-\RNum{2} predicted output} 
 		\label{fig:RMS_CFRP_Teflon_3o_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -324,11 +347,12 @@ As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted sizes 
 \subsection{Multiple delaminations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In the second experimental case, we investigated three specimens of carbon/epoxy laminate reinforced by 16 layers of plain weave fabric as shown in Fig.~\ref{fig:plate_delam_arrangment}. 
+Teflon inserts of thickness of \(250\ \mu\)m) were used to simulate the delaminations.
 The prepregs GG 205 P (fibres Toray FT 300–3K 200 tex) by G. Angeloni and epoxy resin IMP503Z‐HT by Impregnatex Compositi were used for the fabrication of the specimen in the autoclave. 
-The average thickness was \(3.9 \pm 0.1\) mm.
+The average thickness of the specimen was \(3.9 \pm 0.1\) mm.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In Specimen~\RNum{2}, three large artificial delaminations (Teflon insert) of elliptic shape were inserted in the upper thickness quarter of the plate between the \(4^{th}\) and the \(5^{th}\) layer.
+In Specimen~\RNum{2}, three large artificial delaminations of elliptic shape were inserted in the upper thickness quarter of the plate between the \(4^{th}\) and the \(5^{th}\) layer.
 The delaminations were located at the same distance equal to \(150\) mm from the centre of the plate.
 For Specimen~\RNum{3} delaminations were inserted in the middle thickness of the plate between \(8^{th}\) layer and \(9^{th}\) layer.
 For Specimen~\RNum{4}, three small delaminations were inserted in the middle of thickness of the plate, and thee large delaminations were inserted at the lower quarter of the thickness of the plate between the \(12^{th}\) layer and \(13^{th}\) layer.
@@ -348,16 +372,19 @@ The measurement parameters were the same as in the experiment with single delami
 
 Since SLDV measurements were conducted from the bottom surface of the plate, the GT images and the output predictions of the proposed models are flipped horizontally (mirrored).
 Figure~\ref{fig:gt_specimen_2} shows the GT image of Specimen~\RNum{2}.
-The predicted output of model-\RNum{1} is shown in Fig.~\ref{fig:L3_S2_B_saeed} in which the highest calculated \(IoU\) value is \(0.15\) achieved for group of frames \((167-231)\).
-Figure~\ref{fig:L3_S2_B_ijjeh} shows the predicted output of model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.35\) achieved for group of frames \((68-92)\).
+The predicted output of Model-\RNum{1} is shown in Fig.~\ref{fig:L3_S2_B_saeed} in which the highest calculated \(IoU\) value is \(0.15\) achieved for group of frames \((167-231)\).
+Figure~\ref{fig:L3_S2_B_ijjeh} shows the predicted output of Model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.35\) achieved for group of frames \((68-92)\).
 
 Figure~\ref{fig:gt_specimen_3} shows the GT image of Specimen~\RNum{3}.
-The predicted output of model-\RNum{1} is shown in Fig.~\ref{fig:L3_S3_B_saeed} in which the highest calculated \(IoU\) value is \(0.18\) achieved for group of frames \((279-343)\).
-Figure~\ref{fig:L3_S3_B_ijjeh} shows the predicted output of model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.32\) achieved for group of frames \((60-84)\).
+The predicted output of Model-\RNum{1} is shown in Fig.~\ref{fig:L3_S3_B_saeed} in which the highest calculated \(IoU\) value is \(0.18\) achieved for group of frames \((279-343)\).
+Figure~\ref{fig:L3_S3_B_ijjeh} shows the predicted output of Model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.32\) achieved for group of frames \((60-84)\).
 
 Figure~\ref{fig:gt_specimen_4} shows the GT image of Specimen~\RNum{4}.
-The predicted output of model-\RNum{1} is shown in Fig.~\ref{fig:L3_S4_B_saeed} in which the highest calculated \(IoU\) value is \(0.18\) achieved for group of frames \((235-299)\).
-Figure~\ref{fig:L3_S4_B_ijjeh} shows the predicted output of model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.27\) achieved for group of frames \((68-92)\).
+The largest delaminations in the cross sections were assumed for GT, because the full wavefield was acquired from the bottom surface of the specimen.
+We need to mention that such a case with stacked delaminations in cross sections were not modeled numerically (see Specimen~\RNum{4} in Fig.~\ref{fig:plate_delam_arrangment}).
+Despite the models were not trained on such scenario, the predictions were satisfactory.
+The predicted output of Model-\RNum{1} is shown in Fig.~\ref{fig:L3_S4_B_saeed} in which the highest calculated \(IoU\) value is \(0.18\) achieved for group of frames \((235-299)\).
+Figure~\ref{fig:L3_S4_B_ijjeh} shows the predicted output of Model-\RNum{2}, in which the highest calculated \(IoU\) value is \(0.27\) achieved for group of frames \((68-92)\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Specimen~\RNum{2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -455,7 +482,7 @@ However, poor results were obtained.
 This is attributed to the fact that RMS images are fed to FCN-DenseNet which carry limited amount of damage related information. 
 On the other hand, currently proposed methods utilise full wavefield frames which carry more damage-reach features. 
 
-Moreover, in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window}, we presented the calculated \(IoU\) values corresponding to predicted outputs of model-\RNum{1} and \RNum{2} regarding Specimen~\RNum{4} as we slide the window of size~\(64\) and \(24\) frames, respectively, over the \(512\) full wavefield frames.
+Moreover, in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window}, we presented the calculated \(IoU\) values corresponding to predicted outputs of Model-\RNum{1} and \RNum{2} regarding Specimen~\RNum{4} as we slide the window of size~\(64\) and \(24\) frames, respectively, over the \(512\) full wavefield frames.
 Both models start to identify the delaminations after the propagated guided waves interact with the delamination.
 
 The red square depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} corresponds to \(IoU\) value calculated for group of frames before the interactions with delaminations (see first, middle and last frame in the group).
@@ -467,10 +494,10 @@ As a result, valuable features patterns regarding the damage start to appear.
 The pink pentagon shape depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} refers to a window of frames that pass the initial interaction with the delaminations, additionally, it shows the reflections of the guided waves from the edges just before interacting with the delaminations again.
 As can be seen, the calculated \(IoU\) values drop drastically as expected as there are no valuable damage features to be extracted. 
 
-The blue rectangle depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} represents a window of \((64)\) frames regarding model-\RNum{1}.
-It depicts the interactions of the reflected guided waves from the edges and their interaction with the delaminations, hence, model-\RNum{1} are able to identify the delaminations as it has a larger window.
+The blue rectangle depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} represents a window of \((64)\) frames regarding Model-\RNum{1}.
+It depicts the interactions of the reflected guided waves from the edges and their interaction with the delaminations, hence, Model-\RNum{1} are able to identify the delaminations as it has a larger window.
 
-The green circle depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} represents a window of \((24)\) frames regarding model-\RNum{2}.
+The green circle depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} represents a window of \((24)\) frames regarding Model-\RNum{2}.
 Although this window shows complex patterns of waves reflections, the model can extract the valuable damage features and identify the delaminations accordingly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
@@ -497,20 +524,20 @@ Although this window shows complex patterns of waves reflections, the model can 
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Figure~\ref{fig:L3_S4_B_5HC_predictions} shows the predicted outputs of model-\RNum{1} and model-\RNum{2} corresponding to the group of frames with respect to the red square, light blue star, pink pentagon, blue rectangle, and the green circle. 
+Figure~\ref{fig:L3_S4_B_5HC_predictions} shows the predicted outputs of Model-\RNum{1} and Model-\RNum{2} corresponding to the group of frames with respect to the red square, light blue star, pink pentagon, blue rectangle, and the green circle. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
 	\includegraphics[scale=1]{figure14.png}
-	\caption{Predictions of models \RNum{1} and \RNum{2} at different window places (Specimen~\RNum{4}).}
+	\caption{Predictions of Models~\RNum{1} and~\RNum{2} at different window places (Specimen~\RNum{4}).}
 	\label{fig:L3_S4_B_5HC_predictions}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The RMS images depicting the damage maps of Specimen~\RNum{4} are presented in Figs.~\ref{fig:RMS_L3_S4_B_saeed} and~\ref{fig:RMS_L3_S4_B_ijjeh} regarding model-\RNum{1} and model-\RNum{2}, respectively.
-Figure~\ref{fig:RMS_threshold_L3_S4_B_saeed} shows the thresholded RMS image for model-\RNum{1}, and the calculated value of \(IoU\) is \((0.07)\).
-Figure~\ref{fig:RMS_threshold_L3_S4_B_ijjeh}  shows the thresholded RMS image for model-\RNum{2}, and the calculated \(IoU\) is \((0.23)\).
-Furthermore, the mean percentage size error (\(\delta\)) with respect to the three delaminations (Specimen~\RNum{4}) for models~\RNum{1} and~\RNum{2} equal to \(79.41\%\) and \(10.61\%\), respectively.
+The RMS images depicting the damage maps of Specimen~\RNum{4} are presented in Figs.~\ref{fig:RMS_L3_S4_B_saeed} and~\ref{fig:RMS_L3_S4_B_ijjeh} regarding Model-\RNum{1} and Model-\RNum{2}, respectively.
+Figure~\ref{fig:RMS_threshold_L3_S4_B_saeed} shows the thresholded RMS image for Model-\RNum{1}, and the calculated value of \(IoU\) is \((0.07)\).
+Figure~\ref{fig:RMS_threshold_L3_S4_B_ijjeh}  shows the thresholded RMS image for Model-\RNum{2}, and the calculated \(IoU\) is \((0.23)\).
+Furthermore, the mean percentage area error (\(\epsilon\)) with respect to the three delaminations (Specimen~\RNum{4}) for Models~\RNum{1} and~\RNum{2} equal to \(79.41\%\) and \(10.61\%\), respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -521,7 +548,7 @@ Furthermore, the mean percentage size error (\(\delta\)) with respect to the thr
 	\begin{subfigure}[b]{.49\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure15a.png}
-		\caption{RMS image of model-\RNum{1} predicted output}
+		\caption{RMS image of Model-\RNum{1} predicted output}
 		\label{fig:RMS_L3_S4_B_saeed}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -530,7 +557,7 @@ Furthermore, the mean percentage size error (\(\delta\)) with respect to the thr
 	\begin{subfigure}[b]{.49\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure15b.png}
-		\caption{RMS image of model-\RNum{2} predicted output} 
+		\caption{RMS image of Model-\RNum{2} predicted output} 
 		\label{fig:RMS_L3_S4_B_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
