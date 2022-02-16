@@ -3,7 +3,7 @@ In this section,  we present the evaluation of the proposed models based on nume
 The developed models and their capabilities of predicting delamination location, shape and size were tested on numerical and experimental data.
 Three representative cases were selected from numerical dataset to show the performance of developed models.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-For numerical cases, we need to mention that the predicted results were obtained by using only the first block of frames after interacting with the damage, as the delamination ground truths are provided, which is not the case for real-life cases as in the experimental section. 
+For numerical cases, we need to mention that the predicted results were obtained by using only the first window of frames after interacting with the damage, as the delamination ground truths are provided, which is not the case for real-life cases as in the experimental section. 
 Consequently, we skipped the part of producing intermediate predictions and further calculating the RMS image.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -160,12 +160,8 @@ Next, median filter using window size of three was applied to each frame. Additi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-During the testing stage of the synthetic dataset,  we fed the models with a consecutive number of identified frames (window of frames) containing the interactions of the Lamb waves with the delamination to identify it.
-However, for the experimentally acquired data, the window of frames depicting the interaction of Lamb waves with the delaminations is unknown.
-Therefore, to overcome this issue, we introduced a sliding window of frames. 
-The window sizes are \(64\) and \(24\) for Model-\RNum{1} and \RNum{2}, respectively.
-Accordingly, we slide the window over all input frames (depicting the experimental data).
-The shift of the window is one frame at a time.
+During the testing stage of the synthetic dataset, we fed the models with a consecutive number of identified frames (window of frames) containing the interactions of the Lamb waves with the delamination to identify it.
+
 \subsection{Single delamination}
 The first experimental case is for a CFRP specimen with single delamination created artificially by Teflon insert of thickness \(250\ \mu\)m. 
 A plain weave fabric reinforcement was used.
@@ -263,7 +259,7 @@ The predicted outputs of Model-\RNum{1} and Model-\RNum{2} regarding the dark bl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Additionally, for the experimental cases, we applied the root mean square (RMS) according to Eq.~\ref{RMS} for all \(N\) predicted outputs \(\hat{Y}\) regarding all blocks of frames in order to show the damage map.
+Additionally, for the experimental cases, we applied the root mean square (RMS) according to Eq.~\ref{RMS} for all \(N\) predicted outputs \(\hat{Y}\) regarding all windows of frames in order to show the damage map.
 \begin{equation}
 	RMS = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y}^2}	
 	\label{RMS}

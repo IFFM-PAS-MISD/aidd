@@ -39,7 +39,7 @@ The synthetic dataset is used for training the proposed neural network architect
 
 Figure~\ref{fig:Full_wave} shows selected frames at different time-steps of the propagating Lamb waves before and after the interaction with the damage.
 Frame \(f_{1}\) represents the initial interactions with the delamination which was calculated using the delamination location and the velocity of the \(A0\) Lamb wave mode.
-While frame \(f_{m}\) represents the last frame in the training sequence block, accordingly, \(m=64\) for Model~\RNum{1}, and \(m=24\) for Model~\RNum{2}.
+While frame \(f_{m}\) represents the last frame in the training sequence window, accordingly, \(m=64\) for Model~\RNum{1}, and \(m=24\) for Model~\RNum{2}.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{figure2.png}
@@ -63,7 +63,10 @@ Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining the intermediate predictions for the testing cases and finally calculating the RMS image.
-Where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, in which \(n=512\), further, \((m)\) refers to frames block size, hence, \(m=64\) for Model-\RNum{1} and \(m=24\) for Model~\RNum{2}, and \(k\) represents the total number of blocks.
+Where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, (\(n=512\)) in our dataset.
+Further, \(m\) refers to the number of frames in the window, hence, \(m=64\) frames for Model-\RNum{1} and \(m=24\) frames for Model~\RNum{2}, and \(k\) represents the total number of windows.
+Accordingly, we slide the window over all input frames.
+The shift of the window is one frame at a time.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
