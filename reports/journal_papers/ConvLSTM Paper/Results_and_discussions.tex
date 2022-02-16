@@ -30,18 +30,23 @@ Furthermore, the achieved mean \(IoU\) with respect to all numerical data of \(9
 Furthermore, the mean percentage size error (\(\delta\)) was calculated for all numerical cases (\(95\)) for models~\RNum{1} and~\RNum{2} equal to \(4.57 \%\) and \(8.42\%\), respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Please add the following required packages to your document preamble:
-% \usepackage{multirow}
+%\begin{comment}
 \begin{table}[]
 	\caption{Evaluation metrics of the three numerical cases}
-	\begin{tabular}{c|c|ccc|ccc}
-		\multirow{2}{*}{case number} & \multicolumn{1}{c|}{\multirow{2}{*}{A \(mm^2\)}} & \multicolumn{3}{c|}{Model-I}         & \multicolumn{3}{c}{Model-II} \\ \cline{3-8} 
-		& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c|}{IoU}  & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ \hline
-		1 & 272 & \multicolumn{1}{c|}{0.86} & \multicolumn{1}{c|}{318} & 16.9\% & \multicolumn{1}{c|}{0.87} & \multicolumn{1}{c|}{281} & 3.3\% \\ \hline
-		2 &  186  & \multicolumn{1}{c|}{0.89} & \multicolumn{1}{c|}{196} & 5.4\% & \multicolumn{1}{c|}{0.93} & \multicolumn{1}{c|}{178} & 4.3\% \\ \hline
-		3 & 842 & \multicolumn{1}{c|}{0.98} &\multicolumn{1}{c|}{871} & 3.4\%   & \multicolumn{1}{c|}{0.99} & \multicolumn{1}{c|}{871} & 3.4\% \\ \hline
+	\begin{tabular}{cccccccc}
+		\toprule
+		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A \(mm^2\)}} & \multicolumn{3}{c}{Model-I}         & \multicolumn{3}{c}{Model-II} \\ 
+		\cmidrule(lr){3-5} \cmidrule(lr){6-8} 
+		& \multicolumn{1}{c}{}  & \multicolumn{1}{c}{IoU}  & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c}{IoU}  & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ 
+		\midrule
+		1 & 272 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{318} & 16.9\% & \multicolumn{1}{c}{0.87} & \multicolumn{1}{c}{281} & 3.3\% \\ 
+		2 &  186  & \multicolumn{1}{c}{0.89} & \multicolumn{1}{c}{196} & 5.4\% & \multicolumn{1}{c}{0.93} & \multicolumn{1}{c}{178} & 4.3\% \\ 
+		3 & 842 & \multicolumn{1}{c}{0.98} &\multicolumn{1}{c}{871} & 3.4\%   & \multicolumn{1}{c}{0.99} & \multicolumn{1}{c}{871} & 3.4\% \\ 
+		\bottomrule
 	\end{tabular}	
 	\label{tab:num_cases}
 \end{table}
+%\end{comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Numerical cases
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -251,14 +256,20 @@ As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted sizes 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
-\begin{table}[]
+\begin{table}[ht]
 	\caption{Evaluation metrics for experimental case of single delamination}
 	\begin{tabular}{cccccccc}
-		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\ mm^2\)} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ \cline{3-5} & \cline(lt){6-8} & \multicolumn{1}{c|}{IoU} & \multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c|}{IoU}  &\multicolumn{1}{c|}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ \hline
-		Single delamination & 225 & \multicolumn{1}{c|}{0.46} &  \multicolumn{1}{c|}{319} & 41.78\%    & \multicolumn{1}{c|}{0.42} & \multicolumn{1}{c|}{420} & 86.67\%    \\ \hline
+	\toprule
+		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\ mm^2\)} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ 
+		\cmidrule(lr){3-5} \cmidrule(lr){6-8}
+		&  & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) & \multicolumn{1}{c}{IoU}  &\multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\delta\) \\ 
+		\midrule
+		Single delamination & 225 & \multicolumn{1}{c}{0.46} &  \multicolumn{1}{c}{319} & 41.78\%    & \multicolumn{1}{c}{0.42} & \multicolumn{1}{c}{420} & 86.67\%    \\
+		\bottomrule
 	\end{tabular}
 	\label{tab:single_case}
 \end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
