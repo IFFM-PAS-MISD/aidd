@@ -45,17 +45,17 @@ Furthermore, the mean percentage area error (\(\epsilon\)) was calculated for al
 \end{table}
 %\end{comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean IoU for all \(95\) numerical test cases with respect the DL models.
+Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean intersection over union (\(\overline{IoU}\)) for all \(95\) numerical test cases with respect the DL models.
 As shown in Table~\ref{tab:meanIoU_vs_input}, Model-\RNum{1} and Model-\RNum{2} are from the current work, and takes as input animations of the full wavefield, whereas the rest of the models are from our previous works~\cite{Ijjeh2021, Ijjeh2022} and takes as input RMS images.
 It can be concluded that the models which takes animations as an input surpass the models which take only the RMS images as input. 
 Moreover, Model-\RNum{1} has higher mean IoU compared to Model-\RNum{2}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
-	\caption{Mean IoU for numerical cases with respect to the input of the model}
+	\caption{Mean intersection over union \(\overline{IoU}\) for numerical cases with respect to the input of the model}
 	\begin{tabular}{llc}
 		\toprule
-		Input & Model & mean IoU \\ 
+		Input & Model & \(\overline{IoU}\) \\ 
 		\midrule
 		\multirow{2}{*}{Animations} & Model-I & 0.90 \\ & Model-II                    & 0.87     \\ \midrule
 		\multirow{3}{*}{RMS images}  & FCN-DenseNet~\cite{Ijjeh2021} & 0.62     \\
@@ -81,14 +81,14 @@ Moreover, Model-\RNum{1} has higher mean IoU compared to Model-\RNum{2}.
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure7b.png} 
-		\caption{\(IoU\) value = 0.86}
+		\caption{\(IoU\) = 0.86}
 		\label{fig:Convlstm_num_391}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure7c.png}
-		\caption{\(IoU\) value =  0.87}
+		\caption{\(IoU\) =  0.87}
 		\label{fig:AE_num_391}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,14 +104,14 @@ Moreover, Model-\RNum{1} has higher mean IoU compared to Model-\RNum{2}.
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure7e.png}
-		\caption{\(IoU\) value = 0.89}
+		\caption{\(IoU\) = 0.89}
 		\label{fig:Convlstm_num_462}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure7f.png}
-		\caption{\(IoU\) value = 0.93}
+		\caption{\(IoU\) = 0.93}
 		\label{fig:AE_num_462}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -127,14 +127,14 @@ Moreover, Model-\RNum{1} has higher mean IoU compared to Model-\RNum{2}.
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure7h.png}
-		\caption{\(IoU\) value = 0.98 }
+		\caption{\(IoU\) = 0.98 }
 		\label{fig:Convlstm_num_453}
 	\end{subfigure}
 	\hfill	
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{figure7i.png}
-		\caption{\(IoU\) value = 0.99}
+		\caption{\(IoU\) = 0.99}
 		\label{fig:AE_num_453}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -283,9 +283,9 @@ As shown in Table~\ref{tab:single_case}, the actual (\(A\)) and predicted areas 
 	\caption{Evaluation metrics for experimental case of single delamination}
 	\begin{tabular}{cccccccc}
 	\toprule
-		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\ mm^2\)} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ 
+		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\) [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ 
 		\cmidrule(lr){3-5} \cmidrule(lr){6-8}
-		&  & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\epsilon\) & \multicolumn{1}{c}{IoU}  &\multicolumn{1}{c}{\(\hat{A}\ mm^2\)} & \(\epsilon\) \\ 
+		&  & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}] } & \(\epsilon\) & \multicolumn{1}{c}{IoU}  &\multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ 
 		\midrule
 		Single delamination & 225 & \multicolumn{1}{c}{0.46} &  \multicolumn{1}{c}{319} & 41.78\%    & \multicolumn{1}{c}{0.42} & \multicolumn{1}{c}{420} & 86.67\%    \\
 		\bottomrule
