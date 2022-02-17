@@ -2,27 +2,27 @@
 \label{conclusion}
 In this work, we present a novel deep learning-based approach for delamination identification in composite laminates.
 The developed approach introduces an end-to-end scheme that performs a many-to-one sequence prediction to identify delamination location, size, and shape.
-Accordingly, we trained the models on a consecutive number of frames depicting the full wavefield of Lamb waves propagation in a plate of CFRP, and their interactions with the delamination, and the edges.
+Accordingly, we trained our models on a consecutive number of frames depicting the full wavefield of Lamb waves propagation in a plate of CFRP, and their interactions with the delamination, and the edges.
 Hence, the models learn how to extract the valuable features regarding the damage from such frames in order to have a prediction.
 
 To evaluate the performance of the developed models, we examined them on a numerical test-set that was unseen before.
 The results verified their ability to identify the delaminations with high accuracy. 
-The implemented Model-~\RNum{1} showed a better accuracy compared to Model-\RNum{2}.
-Moreover, currently developed models surpass our previously developed models which takes as input RMS images.
+The implemented Model-\RNum{1} showed better accuracy compared to Model-\RNum{2}.
+Moreover, currently developed models surpass our previously developed models, which take as input RMS images.
 Furthermore, to evaluate the generalisation capability of the models, we tested them on several experimentally measured cases of single and multiple delaminations simulated by Teflon inserts.
 The predicted results are promising, considering the experimental case of multiple delaminations is difficult as the models were trained only on cases of single delamination.
 Consequently, the currently developed models showed their capability of identifying multiple delaminations at once in real-life cases.
 
-It should be added that by using proposed models much better accuracy was obtained on experimental data in comparison to previously developed models.
+It should be added that by using proposed models, much better accuracy was obtained on experimental data in comparison to previously developed models.
 
-However, there are several limitations of the SLDV measurement technique which is used for full wavefield acquisition.
-The measurements by using SLDV are stationary and time-consuming.
+However, there are several limitations to the SLDV measurement technique, which is used for full wavefield acquisition.
+The measurements constructed by using SLDV are stationary and time-consuming.
 Therefore, the proposed technique is more appropriate for NDT than SHM.
-However, it is probable in the future, as
-laser technology progresses, that the process of data acquisition will be possible in an array of points instead of a single point, which will considerably decrease the measurement time.
+However, it is probable that in the future, as laser technology progresses, the process of data acquisition will be possible at an array of points instead of a single point, which will considerably decrease the measurement time.
 It should be added, that the measurement time can also be reduced by using fewer points in the spatial grid along with the compressive sensing approach.
-Another issue with SLDV measurements is that the laser needs access to the surface of the inspected structure which may require partial disassembly of the structure.
+Another issue with SLDV measurements is that the laser needs access to the surface of the inspected structure, which may require partial disassembly of the structure.
 
 The limitation related to the developed deep learning model is that the material properties of the inspected structure have to be approximately known in order to simulate the dataset for training.
 
-
+Our code is also available on GitHub so that researchers can reproduce the results and use them to compare them with their methods. 
+The code for Model-I and Model-II is available at \url{https://github.com/IFFM-PAS-MISD/aidd/tree/master/src/models}.

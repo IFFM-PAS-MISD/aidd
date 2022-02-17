@@ -4,11 +4,11 @@ Feed-forward neural networks such as traditional ANNs and CNNs cannot learn temp
 To handle such problems, a recurrent neural network (RNN) was introduced, which was specifically developed to address sequential data~\cite{aggarwal2018neural, Lecun2015, goodfellow2016deep}. 
 RNNs contain loops among the different nodes in their architecture to retain information in the model for long periods.
 RNNs employ the current input with the previous memory state.
-This ability of memory-keeping enables RNNs to predict what comes next. 
+This ability to memory-keep enables RNNs to predict what comes next. 
 Furthermore, RNNs were designed to handle sequential data, which implies that updating the learnable weights must consider the extent of the time dimension. 
 Accordingly, the backpropagation~\cite{Rumelhart1986} algorithm responsible for updating the learnable weights needs some modification to work along with the time dimension.
 To alleviate this problem, backpropagation through time (BPTT)~\cite{aggarwal2018neural, goodfellow2016deep} was introduced. 
-In basic RNNs, short-term memories are only preserved, therefore it becomes unfeasible in the case of dealing with long sequences of data hence it may suffer from issues like vanishing or exploding gradients~\cite{bengio1994learning}.
+Therefore, in basic RNNs, short-term memories are only preserved, so it becomes unfeasible in the case of dealing with long sequences of data. Hence, such RNNs may suffer from issues like vanishing or exploding gradients~\cite{bengio1994learning}.
 Therefore, the fine-tuning of the model parameters and training of RNNs becomes very hard.
 To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Term Memory networks (LSTMs~\cite{Hochreiter1997}).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -33,15 +33,16 @@ To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Ter
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-LSTMs were developed to keep information related to long-term dependencies, and to solve the problem of vanishing/exploding gradients.
-Further, LSTMs handle inputs or outputs of any length that makes LSTMs powerful for solving very complex sequential problems. 
+LSTMs were developed to keep information related to long-term dependencies and to solve the problem of vanishing/exploding gradients.
+Further, LSTMs handle inputs or outputs of any length, which makes LSTMs powerful for solving very complex sequential problems. 
 Basic LSTM architecture shown in Fig.~\ref{fig:LSTM}  consists of four units: an input gate, a cell state, a forget gate, and an output gate.
 These gates help regulate the flow of information that is added to or removed from the cell state. 
-The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory.  
+The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory.
 
 The purpose of the forget gate is to decide what information to keep and what to neglect. 
-The current input \(X_{t}\) and the previous hidden state  \(h_{t-1}\) are passed through a sigmoid function (\(\sigma\)) which will produce values between \(0\) and \(1\).
-Then the outputs of the sigmoid are multiplied with the previous cell state \(C_{t-1}\), accordingly, (\(0\)) outputs are discarded.
+The current input \(x_{t}\) and the previous hidden state  \(h_{t-1}\) are passed through a sigmoid function (\(\sigma\)) which will produce values between \(0\) and \(1\).
+Then the outputs of the sigmoid are multiplied with the previous cell state \(c_t-1\). 
+Consequently, (\(0\)) outputs are discarded.
 The mathematical calculation at the forget gate ($f_t$) is depicted in Eq.~(\ref{eq:eq1}):
 
 \begin{align}
@@ -57,8 +58,8 @@ The mathematical calculation at the forget gate ($f_t$) is depicted in Eq.~(\ref
 \end{align}
 where \(W_{f}\) represent the learnable weights at the hidden and input states  \(h_{t-1}\) and \(x_{t}\) , respectively, and \(b_{f}\) represents the bias term. 
 
-The input gate \(i_{t}\) takes the current input \(X_t\) with the previous hidden state \(h_{t-1}\) then apply the sigmoid function to get values in a range between 0 (not important) and 1 (important), then the
-same current input \(X_t\), and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at a candidate cell state (\(\tilde{C}_{t}\)) that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
+The input gate \(i_{t}\) takes the current input \(x_t\) with the previous hidden state \(h_{t-1}\), then applies the sigmoid function to get values in a range between 0 (not important) and 1 (important).
+Then, the same current input \(x_t\), and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at a candidate cell state (\(\tilde{c}_{t}\)) that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
 Then, the outputs from the sigmoid and \(\tanh\) functions are multiplied point-by-point to eliminate \(0\) values.  
 Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
 \begin{equation}
@@ -70,7 +71,7 @@ Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
 		\end{array} 
 		\right]+b_{i}\right) 
 		\\
-		\tilde{C}_{t} &=\tanh \left(W_{c} 
+		\tilde{c}_{t} &=\tanh \left(W_{c} 
 		\left[
 		\begin{array}{c}
 			h_{t-1} \\ x_{t}
@@ -79,15 +80,16 @@ Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
 	\end{aligned} \label{eq:eq2}
 \end{equation}
 At this point, the network has sufficient information obtained from the input and forget gates. 
-Hence, the current cell state \(C_t\) can be calculated by multiplying the previous cell state \(C_{t-1}\) with the output of the forget gate, then the result is added to the calculated input values as depicted in Eq.~(\ref{eq:eq3}): 
+Hence, the current cell state \(c_{t}\) can be calculated by multiplying the previous cell state \(c_{t-1}\) with the output of the forget gate. 
+Then, the result is added to the calculated input values as depicted in Eq.~(\ref{eq:eq3}):
 \begin{equation}
-	C_{t}=f_{t} \cdot C_{t-1}+i_{t} \cdot \tilde{C}_{t}
+	c_{t}=f_{t} \cdot c_{t-1}+i_{t} \cdot \tilde{c}_{t}
 	\label{eq:eq3}
 \end{equation}
 The output gate \(o_{t}\) computes the next hidden state \(h_{t}\) which
 holds information related to the current inputs. 
-Accordingly, the current input \(X_{t}\) and the previous hidden state \(h_{t-1}\) are passed through a third sigmoid function to produce values between \(0\) and \(1\).
-The current cell state \(C_{t}\) is passed through a \(\tanh\) function and multiplied point-by-point with \(o_{t}\) to produce the new hidden state \(h_{t}\) which is transferred to the next timestamp.
+Accordingly, the current input \(x_{t}\) and the previous hidden state \(h_{t-1}\) are passed through a third sigmoid function to produce values between \(0\) and \(1\).
+The current cell state \(c_{t}\) is passed through a \(\tanh\) function and multiplied point-by-point with \(o_{t}\) to produce the new hidden state \(h_{t}\) which is transferred to the next timestamp.
 Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
@@ -99,7 +101,7 @@ Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
 		\end{array} 
 		\right]
 		+b_{o}\right) \\
-		h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
+		h_{t} &=o_{t} \cdot \tanh \left(c_{t}\right)
 	\end{aligned}
 	\label{eq:eq4}
 \end{equation} 
@@ -107,26 +109,26 @@ Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
 where \(W_{f}, W_{i}, W_{c}\) and \(W_{o}\) have shared learnable weights.
 
 Recently, LSTMs have been widely used for large-scale learning of language translation models, speech recognition systems, chatbots, forecasting stock markets, text data analysis, and many more~\cite{graves2014towards, cho2014properties}. 
-However, LSTMs are inefficient regarding capturing spatial information by themselves when the time series inputs are consecutive images.
-Accordingly, ConvLSTM layer which is a combination of CNN and LSTM unit was introduced by Shi et al.~\cite{xingjian2015convolutional} to solve such a problem.
+However, LSTMs are inefficient at capturing spatial information by themselves when the time series inputs are consecutive images.
+Hence, the ConvLSTM unit, which is a combination of CNN and LSTM units, was introduced by Shi et al.~\cite{xingjian2015convolutional} to solve such a problem.
 For ConvLSTM, the convolution operations are applied both at the input-to-state transition and at the state-to-state transitions.  
-ConvLSTM shown in Fig.~\ref{fig:ConvLSTM} is a variation of the LSTM cell as it performs a convolution operation within the LSTM cell.
+The ConvLSTM unit, shown in Fig.~\ref{fig:ConvLSTM} is a variation of the LSTM cell as it performs a convolution operation within the LSTM cell.
 ConvLSTM is a combination of a convolution operation and an LSTM cell.
-Thus, ConvLSTM can capture the time-correlated and spatial features in a series of consecutive images. 
-Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \(x_1, \dots, x_t\), hidden states \(h_1, \dots, h_t\), cell states \(C_1, \dots, C_t\) and input, forget and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
+Thus, ConvLSTM can capture the time-correlated and spatial features in a series of consecutive images.
+Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \(x_1, \dots, x_t\), hidden states \(h_1, \dots, h_t\), cell states \(c_1, \dots, c_t\) and input, forget, and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
 \begin{equation}
 	\begin{aligned}
-		i_{t} &=\sigma\left(W_{x_t} * x_{t}+W_{h_{t-1}} * h_{t-1}+W_{c i} \cdot C_{t-1}+b_{i}\right) 
+		i_{t} &=\sigma\left(W_{x_t} * x_{t}+W_{h_{t-1}} * h_{t-1}+W_{c i} \cdot c_{t-1}+b_{i}\right) 
 		\\
-		f_{t} &=\sigma\left(W_{x f} * x_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot C_{t-1}+b_{f}\right) \\
-		C_{t} &=f_{t} \cdot C_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * x_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
+		f_{t} &=\sigma\left(W_{x f} * x_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot c_{t-1}+b_{f}\right) \\
+		c_{t} &=f_{t} \cdot c_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * x_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
 		\\
-		o_{t} &=\sigma\left(W_{x o} * x_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot C_{t}+b_{o}\right) \\
-		h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
+		o_{t} &=\sigma\left(W_{x o} * x_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot c_{t}+b_{o}\right) \\
+		h_{t} &=o_{t} \cdot \tanh \left(c_{t}\right)
 	\end{aligned}
 	\label{eq:eq5}
 \end{equation}
-where (\(*\)) indicates the convolution operation which is basically an element wise multiplication operation.
+where (\(*\)) indicates the convolution operation, which is an element-wise multiplication operation.
 
 Recently, ConvLSTM has become very popular and is increasingly being used in 
 more and more image processing applications.
