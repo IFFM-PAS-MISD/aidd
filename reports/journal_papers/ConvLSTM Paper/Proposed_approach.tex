@@ -3,6 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this work, we developed two end-to-end deep learning models utilising full wavefield frames of Lamb wave propagation for delamination identification in CFRP materials, as presented in Fig.~\ref{fig:proposed_models}.
 The developed models have a scheme of many-to-one sequence prediction, which takes \(m\) number of frames representing the full wavefield propagation through time and their interaction with the delamination to extract the damage features and finally predict the delamination location, shape, and size in a single output image.
+The proposed deep learning models were implemented on Keras API~\cite{chollet2015keras} running on top of TensorFlow on a Tesla V100 GPU from NVIDIA.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
@@ -28,7 +29,7 @@ The first proposed model, presented in Fig.~\ref{fig:convlstm_model} takes \(64\
 The first ConvLSTM layer has \(12\) filters, the second layer has \(6\) filters, and the third layer has \(12\) filters.
 The kernel size of the ConvLSTM layers was set to (\(3\times3\)) with a stride of \((1)\). 
 Padding was set to "same", which makes the output the same as the input in the case of stride \(1\).
-Furthermore, a \(\tanh\) (the hyperbolic tangent) activation function was used within the ConvLSTM layers that output values in a range between (\(-1\) and \(1\)).
+Furthermore, a \(\tanh\) (the hyperbolic tangent) activation function was used within the ConvLSTM layers that output values in the range between (\(-1\) and \(1\)).
 Moreover, we applied a batch normalization technique~\cite{Santurkar2018} after the first two ConvLSTM layers.
 
 In the second implemented model presented in Fig.~\ref{fig:AE_convlstm}, we applied an autoencoder technique (AE) which is well-known for extracting spatial features.
@@ -54,8 +55,8 @@ The bottleneck presented in Fig.~\ref{fig:AE_convlstm} has the lowest level of d
 It consists of two 2D convolution operations followed by batch normalisation.
 The decoder part presented in Fig.~\ref{fig:AE_convlstm} is responsible for learning how to restore the original dimensions of the input.
 The decoder part consists of two 2D convolutional operations followed by batch normalization and dropout, and an upsampling is applied at the end of each decoder level to retrieve the dimensions of its inputs.
-Skip connections linking the encoder with the corresponding decoder levels were added to enhance the features extraction process.
-The outputs of the decoder were forwarded into the ConvLSTM2D layer to learn long-term spatiotemporal features.
+Skip connections linking the encoder with the corresponding decoder levels were added to enhance the feature extraction process.
+The outputs of the decoder were forwarded into the ConvLSTM2D layer to learn long-term spatio-temporal features.
 
 In both models, we applied a 2D convolutional layer as the final output layer followed by a sigmoid activation function that outputs values in a range from \((0,1)\) to indicate the delamination probability.
 Consequently, a threshold value must be chosen to classify the output into damaged (represented by \(1\)) or undamaged (represented by \(0\)).
@@ -66,18 +67,18 @@ intersection over union \(IoU\) (Jaccard index) was applied as the accuracy metr
 \(IoU\) is estimated by determining the intersection
 area between the ground truth and the predicted output. 
 Further, we have two output classes (damaged and undamaged), the \(IoU\) was calculated for the damaged class only. 
-Equation~(\ref{eqn:iou}) illustrated the \(IoU\) metric: 
+Equation~(\ref{eqn:iou}) defines the \(IoU\) metric: 
 \begin{equation}
-	IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y}
+	IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y},
 	\label{eqn:iou}
 \end{equation}
 where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth.
-Additionally, the percentage area error ($\epsilon$) depicted in Eqn.~\ref{eqn:mean_size_error} was utilised to evaluate the performance of the models:
+Additionally, the percentage area error $\epsilon$ depicted in Eq.~(\ref{eqn:mean_size_error}) was utilised to evaluate the performance of the models:
 \begin{equation}
-	\epsilon=\frac{|A-\hat{A}|}{A} \times 100\%
+	\epsilon=\frac{|A-\hat{A}|}{A} \times 100\%,
 	\label{eqn:mean_size_error}
 \end{equation}
 where \(A\) and \(\hat{A}\) refer to the area in mm\textsuperscript{2} of the damage class in the ground truth and the predicted output, respectively.
 This metric can indicate how close the area of the predicted delamination is to the ground truth.
-Accordingly, the lower the value of ($\epsilon$), the higher the accuracy of the identified damage. 
-Furthermore, for all predicted outputs, the delamination localisation error (the distance between the delamination centres of the GT and the predicted output) was less than (\(0.001\%\)), hence, it is not considered in the discussion section.
+Accordingly, the lower the value of $\epsilon$, the higher the accuracy of the identified damage. 
+Furthermore, for all predicted outputs, the delamination localisation error (the distance between the delamination centres of the GT and the predicted output) was less than \(0.001\%\), hence, it is not considered in the discussion section.
