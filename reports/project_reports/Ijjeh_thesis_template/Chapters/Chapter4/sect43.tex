@@ -33,7 +33,7 @@ An argmax function is used to find the maximum probability between each of them 
 	\label{argmax}
 \end{equation}
 Choosing the right loss function is crucial since it determines how effectively the model learns and performs.
-As a result, the categorical cross-entropy (CCE) loss function~\cite{Bonaccorso2020}, commonly known as the \say{softmax loss function}, was utilised.
+As a result, the categorical cross-entropy (CCE) loss function~\cite{Bonaccorso2020}, commonly known as the \enquote{softmax loss function}, was utilised.
 The difference between the actual damage (ground truth) and the expected damage is estimated using CCE as the objective function.
 Furthermore, because there are only two classes to predict, a Sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the anticipated outputs.
 The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the softmax value of the target class.

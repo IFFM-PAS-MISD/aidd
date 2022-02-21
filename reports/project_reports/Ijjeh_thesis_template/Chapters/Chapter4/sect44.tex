@@ -10,6 +10,81 @@ The proposed model showed excellent results in identifying the delamination in t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Data preprocessing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It is infeasible to gather a large dataset which includes interactions of guided waves with various defects by using the SLDV on real structures. 
+Therefore, in this work, a synthetic dataset of propagating waves in carbon fibre reinforced composite plates was computed by using the parallel implementation of the time domain spectral element method~\cite{Kudela2020}. 
+Essentially, the dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric (PZT) excitation at the centre of the plate. 
+The input signal was a five-cycle Hann window modulated sinusoidal tone burst. The carrier frequency was assumed to be 50 kHz. 
+The total wave propagation time was set to 0.75 ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
+The number of time integration steps was 150000, which was selected for the stability of the central difference scheme.
+
+The material was a typical cross-ply CFRP laminate. 
+The stacking sequence [0/90]\(_4\) was used in the model. 
+The properties of a single ply were as follows [GPa]:
+\(C_{11} = 52.55, \, C_{12} = 6.51, \, C_{22} = 51.83, C_{44} = 2.93, C_{55} = 2.92, C_{66} = 3.81\). 
+The assumed mass density was 1522.4 kg/m\textsuperscript{3}.
+These properties were selected so that wave front patterns and wavelengths simulated numerically are similar to the wavefields measured by the SLDV on CFRP specimens used later on for testing the developed methods for delamination identification.
+The shortest wavelength of the propagating A0 Lamb wave mode was 21.2 mm for numerical simulations and 19.5 mm for experimental measurements, respectively.
+
+Similar to our previous work~\cite{Ijjeh2021}, 475 cases were simulated, representing Lamb wave propagation and interaction with single delamination for each case. 
+The following random factors were used in simulated delamination scenarios:
+\begin{itemize}
+	\item delamination geometrical size	\(2b\) and \(2a\), namely ellipse minor and major axis randomly selected from the interval \(\left[10 \, \textrm{mm}, 40\, \textrm{mm}\right]\),
+	\item delamination angle \(\alpha\) randomly selected from the interval \( \left[ 0^{\circ}, 180^{\circ} \right]\),
+	\item coordinates of the centre of delamination \((x_c,y_c)\) randomly selected from the interval \(\left[0\, \textrm{mm}, 250\, \textrm{mm} -\delta \right]\) and \( \left[250\, \textrm{mm}+\delta, 500\, \textrm{mm} \right] \), where \(\delta = 10\, \textrm{mm}\)).
+\end{itemize}
+These parameters are defined in Fig.~\ref{fig:random_delaminations} which illustrates exemplary possible locations, sizes, and shapes of random delaminations used for Lamb wave propagation modeling.
+It should be noted that the numerical cases include delaminations located at the edge and corners of the plate.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.8]{Figures/Chapter_4/figure1.png}
+	\caption{Exemplary locations, sizes and shapes of random delaminations used for Lamb wave propagation modeling.}
+	\label{fig:random_delaminations}
+\end{figure}
+
+It should be underlined that the previous dataset contained the RMS of the full wavefield, representing wave energy spatial distribution in the form of images for each delamination case~\cite{Kudela2020d}.
+Hence, the currently utilised dataset contains frames of propagating waves (512 frames for each delamination scenario).
+The new dataset is available online~\cite{kudela_pawel_2021_5414555}.
+
+As mentioned earlier, the dataset contains 475 different cases of delaminations, with 512 frames per case, producing a total number of 243,\,200 frames with a frame size of \((500\times500)\)~pixels representing the geometry of the specimen of size \((500\times500)\)~mm\(^{2}\).
+Thus, using all frames in each case has high computational and memory costs.
+Frames displaying the propagation of guided waves before interaction with the delamination have no features to be extracted (see Fig.~\ref{fig:Full_wave}).
+Hence, for training, only a certain number of frames were selected from the initial occurrence of the interactions with the delamination.
+
+Figure~\ref{fig:Full_wave} shows selected frames at different time-steps of the propagating Lamb waves before and after the interaction with the damage.
+Frame \(f_{1}\) represents the initial interactions with the delamination, which was calculated using the delamination location and the velocity of the \(A0\) Lamb wave mode.
+While frame \(f_{m}\) represents the last frame in the training sequence window, accordingly, \(m=64\) for Model-I, and \(m=24\) for Model-II which will be discussed in the next subsection.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Figures/Chapter_4/figure2.png}
+	\caption{Sample frames of full wave propagation.}
+	\label{fig:Full_wave}
+\end{figure}
+
+Furthermore, the dataset was divided into two sets: training and testing, with a ratio of \(80\%\) and \(20\% \) respectively.
+Moreover, a certain portion of the training set was preserved as a validation set to validate the model during the training process.
+Additionally, the dataset was normalised to a range of \((0, 1)\) to improve the convergence of the gradient descent algorithm.
+
+Additionally, for the training set for Model-II, we have upsampled the frames (by using cubic interpolation) to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
+Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding the training sets for Model-I for Model-II, respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining intermediate predictions for the testing cases and finally calculating the RMS image, where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, (\(n=512\)) in our dataset.
+Further, \(m\) refers to the number of frames in the window, hence, \(m=64\) frames for Model-I and \(m=24\) frames for Model~II, and \(k\) represents the total number of windows.
+Accordingly, we slide the window over all input frames.
+The shift of the window is one frame at a time.
+Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to final damage map by using the RMS:
+
+\begin{equation}
+	RMS = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
+	\label{RMS}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Figures/Chapter_4/figure3_diagram.png}
+	\caption{The procedure of calculating the RMS prediction image (damage map).}
+	\label{fig:Diagram_exp_predictions}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Encoder-Decoder ConvLSTM model}
 \label{proposed_approach}
