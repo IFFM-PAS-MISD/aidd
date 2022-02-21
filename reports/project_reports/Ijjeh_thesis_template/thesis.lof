@@ -47,4 +47,13 @@
 \contentsline {figure}{\numberline {4.20}{\ignorespaces Flow of input frames using Time distributed layer.\relax }}{63}{figure.caption.66}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces High-resolution and Low-resolution frames at different time steps.\relax }}{73}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Residual Dense Block architecture.\relax }}{74}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Implemented Residual Dense Network architecture.\relax }}{74}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Sub-pixel convolution layer.\relax }}{75}{figure.caption.70}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Delamination arrangements in the specimen.\relax }}{76}{figure.caption.71}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{77}{figure.caption.72}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{77}{figure.caption.73}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.\nobreakspace {}\ref {fig:frame110_comparison}.\relax }}{78}{figure.caption.74}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Comparison of reconstruction accuracy at frame number $N_f$.\relax }}{79}{figure.caption.75}%
 \addvspace {10\p@ }
