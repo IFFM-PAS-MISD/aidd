@@ -45,15 +45,14 @@
 \contentsline {figure}{\numberline {4.18}{\ignorespaces The procedure of calculating the RMS prediction image (damage map).\relax }}{62}{figure.caption.64}%
 \contentsline {figure}{\numberline {4.19}{\ignorespaces Encoder-Decoder ConvLSTM model architecture.\relax }}{63}{figure.caption.65}%
 \contentsline {figure}{\numberline {4.20}{\ignorespaces Flow of input frames using Time distributed layer.\relax }}{63}{figure.caption.66}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces High-resolution and Low-resolution frames at different time steps.\relax }}{68}{figure.caption.67}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Residual Dense Block architecture.\relax }}{69}{figure.caption.68}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Implemented Residual Dense Network architecture.\relax }}{69}{figure.caption.69}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Sub-pixel convolution layer.\relax }}{70}{figure.caption.70}%
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces High-resolution and Low-resolution frames at different time steps.\relax }}{71}{figure.caption.67}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Residual Dense Block architecture.\relax }}{72}{figure.caption.68}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Implemented Residual Dense Network architecture.\relax }}{72}{figure.caption.69}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Sub-pixel convolution layer.\relax }}{73}{figure.caption.70}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Delamination arrangements in the specimen.\relax }}{74}{figure.caption.71}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{75}{figure.caption.72}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{75}{figure.caption.73}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.\nobreakspace {}\ref {fig:frame110_comparison}.\relax }}{76}{figure.caption.74}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Comparison of reconstruction accuracy at frame number $N_f$.\relax }}{77}{figure.caption.75}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Delamination arrangements in the specimen.\relax }}{73}{figure.caption.71}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{74}{figure.caption.72}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{74}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.\nobreakspace {}\ref {fig:frame110_comparison}.\relax }}{75}{figure.caption.74}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of reconstruction accuracy at frame number $N_f$.\relax }}{76}{figure.caption.75}%
 \addvspace {10\p@ }

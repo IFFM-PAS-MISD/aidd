@@ -1,3 +1,197 @@
-%% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
-\section{Summary}
+%% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
+\section{Super-Resolution image reconstruction for delamination identification}
 \label{sec45}
+Guided waves, in particular Lamb waves, are often utilised for structural health monitoring (SHM) as well as non-destructive testing (NDT).
+In the former case, usually an array of transducers is used for point-wise measurements.
+These are usually piezoelectric transducers that can work as actuators and sensors, i.e. in active guided wave-based SHM.
+It should be noted that round-robin actuator-sensor measurements can be conducted very fast, therefore nearly online monitoring of a structure is possible.
+
+Recently, a lot of research on the application of scanning laser Doppler vibrometer (SLDV) for NDT is reported~\cite{Flynn2013,Kudela2015,Kudela2018d,Segers2021,Segers2022}. 
+In this method, either piezoelectric transducer or pulse laser is used for guided wave excitation while the measurements are taken by SLDV at one point on the surface of an inspected structure.
+The process is repeated for other points automatically in a scanning fashion until full wavefield of Lamb waves is acquired.
+
+Full wavefield measurements are taken on a very dense grid of points opposite to sparsely measured signals by sensors.
+Hence, deliver much more useful data from which information about damage can be extracted in comparison to signals measured by an array of transducers.
+On the other hand, SLDV measurements take much more time than measurements conducted by an array of transducers.
+It makes the SLDV approach unsuitable for SHM in which continuous monitoring is required.
+But it is very capable for offline NDT applications.
+
+One can imagine that in a future matrix of laser heads instead of a single laser head used nowadays will be developed to reduce SLDV measurement time.
+Alternatively, compressive sensing (CS) and/or deep learning super-resolution (DLSR) can be applied.
+It means that SLDV measurements can be taken on a low-resolution grid of points and then full wavefield can be reconstructed at high-resolution.
+
+CS was originally proposed in the field of statistics~\cite{Candes2006,Donoho2006} and used for efficient acquisition and reconstruction of signals and images.
+It assumes that a signal or an image can be represented in a sparse form in another domain with appropriate bases (Fourier, cosine, wavelet).
+On such bases, many coefficients are close or equal to zero.
+The sparsity can be exploited to recover a signal or image from fewer samples than required by the Nyquist–Shannon sampling theorem.
+However, there is no unique solution for the estimation of unmeasured data.
+Therefore, optimisation methods for solving under-determined systems of linear equations that promote sparsity are applied~\cite{Chen1998,VanEwoutBerg2008,VandenBerg2019}.
+Moreover, a suitable sampling strategy is required.
+
+Since then, CS has found applications in medical imaging~\cite{Lustig2007}, communication systems~\cite{Gao2018}, and seismology~\cite{Herrmann2012}.
+It is also considered in the field of guided waves and ultrasonic signal processing~\cite{Harley2013,Mesnil2016,Perelli2012,Perelli2015,DiIanni2015,KeshmiriEsfandabadi2018,Chang2020}
+
+Harley and Mura~\cite{Harley2013} utilised a general model for Lamb waves propagating in a plate structure (without defects) and $L_1$ optimisation strategies to recover their frequency-wavenumber representation. 
+They applied sparse recovery by basis pursuit and sparse wavenumber synthesis.
+They used a limited number of transducers and achieved a good correlation between the true and estimated responses across a wide range of frequencies.
+Mensil and Ruzzene~\cite{Mesnil2016} were focused on the reconstruction of wavefield that includes the interaction of Lamb waves with delamination.
+Similar to previous studies, analytic solutions were utilised to create a compressive sensing matrix.
+However, the limitation of these methods is that dispersion curves of Lamb waves propagating in the analysed plate have to be known a priori.
+
+Perelli et al.~\cite{Perelli2012} incorporated the warped frequency transform into a compressive sensing framework for improved damage localisation.
+The wavelet packet transform and frequency warping was used in~\cite{Perelli2015} to generate a sparse decomposition of the acquired dispersive signal.
+
+Di Ianni et al.~\cite{DiIanni2015} investigated various bases in compressive sensing to reduce the acquisition time of SLDV measurements.
+Similarly, a damage detection and localisation technique based on a compressive sensing algorithm was presented in~\cite{KeshmiriEsfandabadi2018}.
+The authors have shown that the acquisition time can be reduced significantly without losing detection accuracy.
+
+Another application of compressive sensing was reported in~\cite{Chang2020}. 
+The authors used signals registered by an array of sensors for tomography of corrosion.
+They investigated the reconstruction success rate depending on the number of actuator-sensor paths.
+
+The group of DLSR methods is applied mostly to images~\cite{Dahl2017,Zhang2018,Wang2019} and videos~\cite{Zhang2017,Yan2019}.
+Image super-resolution (SR) is the process of recovering high-resolution images from low-resolution images.
+A similar approach can be used in videos where data is treated as a sequence of images.
+Notable applications are medical imaging, satellite imaging, surveillance and security, astronomical imaging, amongst others.
+Also deep learning super sampling developed by Nvidia and FidelityFX super-resolution developed by AMD was adopted for video games~\cite{Claypool2006}.
+Mostly supervised techniques are employed
+which benefit from recent advancements in deep learning methods ranging from enhanced convolutional neural networks (CNN)~\cite{Zhang2017}, through an extension of PixelCNN~\cite{Dahl2017} to generative adversarial networks (GANs)~\cite{Wang2019}, to name a few.
+Nevertheless, so far neither of these methods have been applied to wavefields of propagating Lamb waves.
+The exception is an enhancement of wavefields as the second step of SR followed by classic CS~\cite{Park2017a,KeshmiriEsfandabadi2020}.
+
+We propose a framework for full wavefield reconstruction of propagating Lamb waves from spatially sparse SLDV measurements of resolution below the Nyquist wavelength $\lambda_N$. 
+The Nyquist wavelength is the shortest spatial wavelength that can be accurately recovered from wavefield by sequential observations with spacing $\Delta x$ which is defined as $\lambda_N = 2 \Delta x$. 
+
+For the first time, an end-to-end approach for SR problem is used in which deep learning neural network is trained on a synthetic dataset and tested on experimental data acquired by SLDV.
+It means that the approach is solely based on DLSR.
+It is different from methods presented in the literature which utilize CS theory~\cite{Harley2013,KeshmiriEsfandabadi2018} or CS theory in conjunction with super-resolution convolutional neural networks for wavefield image enhancement~\cite{Park2017a,KeshmiriEsfandabadi2020}.
+The efficacy of the developed framework is presented and compared with conventional CS approach.  
+The performance of the proposed technique is validated by an experiment performed on a plate made of carbon fibre reinforced polymer (CFRP) with embedded Teflon inserts simulating delaminations.
+
+\subsection{Dataset preparation}
+\label{sec62}
+In order to train deep learning models to perform super-resolution image reconstruction, we have to reproduce a low-resolution training set from the original high-resolution dataset. 
+Initially, we have resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low- to high-resolutions.
+
+In this work, we have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
+Hence, we have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(21.5\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
+
+Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
+
+To reduce the computation complexity during the training process of the deep learning models, we selected \((128)\) consecutive frames per each delamination case.
+Frames displaying the propagation of guided waves before interacting with the delamination have no features to be extracted. 
+Hence, only a certain number of frames was selected from the initial occurrence of the interactions with the delamination.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	CR = \frac{(Low-resolution\ dimension)^2}{(Nyquist\ sampling\ rate)^2} = \frac{(32\times32)}{(69\times69)}=21.5\%
+	\label{CR}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	\centering
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_6/SR_case_1_frame_1.png}
+		\caption{SR Frame}
+		\label{fig:SR_1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_6/LR_case_1_frame_1.png}
+		\caption{LR frame}
+		\label{fig:LR_1}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_6/SR_case_1_frame_63.png}
+		\caption{SR frame}
+		\label{fig:SR_2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_6/LR_case_1_frame_63.png}
+		\caption{LR frame}
+		\label{fig:LR_2}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_6/SR_case_1_frame_128.png}
+		\caption{SR frame}
+		\label{fig:SR_3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_6/LR_case_1_frame_128.png}
+		\caption{LR frame}
+		\label{fig:LR_3}	
+	\end{subfigure}
+	\caption{High-resolution and Low-resolution frames at different time steps.}
+	\label{fig:SR_LR}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\subsection{DL approach for SR image reconstruction}
+\label{sec63}
+Single image Super-Resolution (SISR) aims to generate a visually pleasing high-resolution (HR) image from its de-graded low-resolution (LR) measurement.
+
+%\subsection{Residual Dense Network model}
+Residual dense network (RDN) introduced by Zhang et al.~\cite{Zhang2018} to perform SISR.
+RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
+Accordingly, to resolve this issue RND introduced a residual dense block (RDB) which is capable to fully exploiting all hierarchical features obtained from all convolutional layers.
+
+Figure~\ref{fig:RDB} shows the architecture of a RDB which consists of four  layers (\(L_1,\ L_2,\ L_3,\ L_4\)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{Figures/Chapter_6/RDB.png}
+	\end{center}
+	\caption{Residual Dense Block architecture.} 
+	\label{fig:RDB}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Therefore, a RDB can extract the abundant local features through dense connected convolutional layers leading to a local residual learning.
+The local feature fusion within each RDB is utilised to learn more useful features from the previous and current local features, therefore, stabilising the training process as the network depth increases.
+Consequently, RDB enables direct links from the previous RDB to all layers of the current RDB, resulting in a contiguous memory (CM) mechanism.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, the first implemented deep learning model was inspired by the RDN~\cite{Zhang2018} model is presented in Fig.~\ref{fig:RDN}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{Figures/Chapter_6/RDN.png}
+	\end{center}
+	\caption{Implemented Residual Dense Network architecture.} 
+	\label{fig:RDN}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The first segment in the model is the Shallow Feature Extraction Net (SFENet) which consists of two cascaded convolutional layers responsible for extracting shallow features from the original LR input.
+Then, the extracted features from SFENet are transferred to the segment of RDBs in which two RDBs were utilised.
+
+The third segment is the Dense Feature Fusion (DFF) which is responsible for fusing features that include global feature fusion and global residual learning.
+The purpose of global feature fusion is to learn global hierarchical features holistically.
+Hence, DFF fully utilise all features from all preceding segments.
+
+The last segment in the model is the Up-Sampling Net (UPNet), in which we applied the pixel shuffle technique~\cite{Shi2016}.
+Further, the pixel shuffle performs sub-pixel convolution operation that is responsible to reshape its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \((C.r^2)\) is total number of channels, and \(r\) is the up-scaling factor.
+Accordingly, the number of channels at the last layer (output from DFF segment) must equal \(C.r^2\) for the total number of pixels in order to match the HR image to be obtained.
+Hence, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
+Figure~\ref{fig:sub_pixel_layer} illustrates the process of the sub-pixel convolution layer as it is made up of two steps: a general convolutional operation and pixel rearrangement. 
+Further, it works through combining each pixel on multiple-channel feature maps into one \((r\times r)\) square area in the output image. 
+Therefore, each pixel on feature maps is equivalent to the sub-pixel on the generated output image.
+The final convolutional layer has \(1\) filter of size \((1\times 1)\), which will produce \(1\) output channel as the out HR gray images. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{Figures/Chapter_6/sub_pixel_convolution.png}
+	\end{center}
+	\caption{Sub-pixel convolution layer.} 
+	\label{fig:sub_pixel_layer}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
