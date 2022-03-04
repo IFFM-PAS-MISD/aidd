@@ -80,7 +80,7 @@ The achieved accuracy in the current implemented model surpasses the accuracy of
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Composite materials have gained popularity in recent years in a variety of industries, including aerospace, cars, construction, marine, and others, due to their lightweight, good fatigue, and corrosion resistance.
-Composite materials, on the other hand, may suffer from matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination, smith2009composite}
+Composite materials, on the other hand, may suffer from matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination}~\cite{smith2009composite}
 Delamination (the separation of layers in a laminate composite) is one of the most dangerous of these defects since it occurs largely below the top surfaces and is barely visible~\cite{Cai2012}.
 
 Delamination in composite materials can be caused by a variety of causes, including manufacturing flaws, notches, and impact events.
@@ -98,7 +98,7 @@ The number of sensing points determines the accuracy of the damage influence map
 As a result, damage localization resolution can be low.
 Therefore, a Scanning Laser Doppler Vibrometer (SLDV) is used to measure Lamb waves in a dense grid of points over the structure under investigation.
 Full wavefield propagation measurements are obtained, resulting in high-resolution damage influence maps.
-Damage detection techniques that use full wavefield signals can accurately estimate the size and location of damage~\cite{Girolamo2018a, kudela2018impact}.
+Damage detection techniques that use full wavefield signals can accurately estimate the size and location of damage~\cite{Girolamo2018a}.
 
 Conventional machine learning techniques such as support vector machine (SVM) \cite{noori2010application}, K-Nearest Neighbor (KNN)~\cite{Vitola2017}, decision tree~\cite{Mariniello2020}, particle swarm optimization (PSO)~\cite{Khatir2018}, and principle component analysis (PCA)~\cite{wang2014principal}
 have proven to be capable of detecting damage in the structures under investigation.
@@ -106,7 +106,7 @@ However, when dealing with large amounts of data, such techniques have drawbacks
 As a result, a data-driven technique for SHM applications has emerged in the form of deep learning (DL) end-to-end methods in recent years, with the process of feature engineering and classification done automatically.
 
 Due to rapid advancements in computer hardware and software, big data, and cloud-based computations, DL techniques in many SHM disciplines have gained increased attention in recent years~\cite{Azimi}.
-For SHM of civil engineering structures, many DL-based approaches were used for damage detection and localization~\cite{Cha2018, Kong2018}, corrosion detection~\cite{Atha2018}, and concrete crack detection~\cite{Dung2019}.
+For SHM of civil engineering structures, many DL-based approaches were used for damage detection and localization~\cite{Cha2018}~\cite{Kong2018}, corrosion detection~\cite{Atha2018}, and concrete crack detection~\cite{Dung2019}.
 
 
 Several DL approaches for guided wave-based damage identification and localization are discussed in the following.
@@ -127,7 +127,7 @@ The model uses response signals acquired by sensors to give an end-to-end strate
 The authors also used the wavelet transform to preprocess response data in order to generate the wavelet coefficient matrix (WCM), which was then input into the CNN model.
 
 This work builds on our earlier work~\cite{Ijjeh2021}, in which we developed a DL model trained on a numerically generated dataset that highly resembles SLDV measurements with high resolutions.
-The developed DL method was compared to a conventional damage methodology, the adaptive wave number filtering~\cite{Kudela2015, Radzienski2019a}.
+The developed DL method was compared to a conventional damage methodology, the adaptive wave number filtering~\cite{Kudela2015}~\cite{Radzienski2019a}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Current SHM approaches can accurately localize impact events~\cite{Ciampa2012} and damage~\cite{Nokhbatolfoghahai2020}.
@@ -140,20 +140,14 @@ Hence, it motivates us to use the full wavefield of Lamb waves propagation in a 
 In this paper, we present a DL model for semantic image segmentation that can be used in CFRP to identify delamination, localize it, and estimate its size.
 To demonstrate its generalisation ability, the model was evaluated on both numerical and experimental data.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The paper is organised into four sections, including the present one.
-Section~\ref{methodology} presents the dataset and the semantic segmentation models used for delamination detection. 
-Next, a detailed comparison of the semantic segmentation models is presented in section~\ref{section:results_and_discussions}.
-Finally, section~\ref{conclusion} presents conclusions and future works.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology}
 \label{methodology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dataset}
-In this work, our previously generated dataset~\cite{Ijjeh2021} was used for training various DL models.
-Further, the generated dataset resembles velocity measurements acquired by SLDV in the transverse direction (perpendicular to the plate surface).
-The dataset contains 475 simulated cases of full wavefield of propagating Lamb waves in a plate made of CFRP which is made of eight layers of a total thickness of \(3.9\) mm.
-%%%%%%%%%%%%%%%
+Our previously created dataset~\cite{Ijjeh2021} was utilized to train the DL model in this work.
+Furthermore, the produced dataset resembles SLDV transverse velocity measurements (perpendicular to the plate surface).
+The dataset includes 475 simulations of the full wavefield of propagating Lamb waves in a CFRP plate with eight layers and a total thickness of (3.9) mm.
+
 
 The delamination in the model is represented by two shell layers that are connected only at the boundary of the damaged area. 
 These elements are computed by considering the corresponding, reduced, number of laminae, and their offset form the neutral axis of the plate. 
@@ -218,7 +212,7 @@ Therefore, by using this technique, we aim to improve the ability of the model t
 \label{section:semantic_segmentation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The purpose of utilising deep learning methods is to perform the feature extraction process automatically through feeding the models  of the RMS of the full wavefield images from the bottom surface of the plate as in Fig.~\ref{fig:rmsbottom}.
-Therefore, the models will learn to recognise different complex patterns by themself, consequently identify the delamination. 
+Therefore, the models will learn to recognise different complex patterns by themselves, consequently identify the delamination. 
 In this work, we have performed a comparative study among four deep learning models based on fully convolutional networks (FCN)~\cite{shelhamer2017fully} that aim to perform pixel-wise segmentation by classifying every pixel of the input image as damaged or not. 
 
 FCN is built by stacking convolutional layers in an encoder-decoder scheme, therefore, dense layers are not included in FCN models. 
@@ -256,10 +250,7 @@ The IoU metric is defined as in Eqn.~\ref{IoU}:
 \end{equation}
 Where \(\hat{Y}\) represents the predicted vector of damaged and undamaged values, and \(Y\) represents the vector of ground truth values.
 The IoU can be calculated by multiplying the predicted output with its ground truth value to find the intersection, then it is divided over the union which can be calculated by counting all pixel values greater than zero of the predicted output and its ground truth.
-%As we mentioned earlier the ground truth values are either \((0\) or \(1)\) thus only the predicted values larger than \(0\) multiplied by their ground truth label \(1\) will be counted, the rest values will equal to \(0\). 
-%The union can be calculated by summing all values in both the predicted and the ground truth  vectors, then we subtract the intersection from their sum.
 Furthermore, Adam optimizer was applied as our optimization function in order to increase the IoU and to reduce the loss during the training.
-%The purpose of the optimizer is to change the learnable parameters such as the weights of the filters and biases in a way the loss is reduced and the accuracy metric is increased.
 
 In the next subsections, we present four FCN models for pixel-wise semantic segmentation to detect and localise delaminations.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -309,7 +300,7 @@ resolution score maps then concatenate it with a higher one to produce a new
 score maps.
 The deconvolution operation is repeated until the original image size is 
 obtained.
-\begin{figure} [h!]
+\begin{figure} [ht!]
 	\begin{center}
 		\includegraphics[scale=1.0]{figure9.png}
 	\end{center}
