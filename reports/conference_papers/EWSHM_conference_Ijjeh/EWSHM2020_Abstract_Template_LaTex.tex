@@ -7,6 +7,7 @@
 \usepackage[top=5cm, bottom=5.6cm, left=4.5cm, right=4.2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{array}
+\usepackage{booktabs}
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amsmath,amssymb,bm}
 %\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
@@ -300,6 +301,7 @@ resolution score maps then concatenate it with a higher one to produce a new
 score maps.
 The deconvolution operation is repeated until the original image size is 
 obtained.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [ht!]
 	\begin{center}
 		\includegraphics[scale=1.0]{figure9.png}
@@ -308,50 +310,29 @@ obtained.
 		Boundary Refinement} 
 	\label{fig:res_gcn_br}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results and discussions}
 \label{section:results_and_discussions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this section, five DL models of semantic segmentation approach including  Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet, and GCN were evaluated on exemplary three damage scenarios of an RMS of the numerically calculated full wavefield interpolated at the bottom surface of the plate in order to identify the delamination.
-Additionally, an experimental scenario was also used to evaluate the performance of the models to show the DL capabilities of generalization.
-For each model, the mean and the max \(IoU\) are calculated and presented as a metric of comparison.
-Moreover, the Accuracy of classification, Precision, Recall, and F1 score were calculated for each model.
-%\begin{equation}
-%	\rm Accuracy\ = \frac{TP+TN}{(Total\ number\ of\ tested\ samples)}
-%	\label{accuracy}
-%\end{equation}
-%
-%\begin{equation}
-%	\rm Pricision\ =\frac{TP}{TP+FP}
-%	\label{pricisoin}
-%\end{equation}
-%\begin{equation}
-%	\rm Recall\ = \frac{TP}{TP+ FN}
-%	\label{recall}
-%\end{equation}
-%\begin{equation}
-%	\rm F1 score =\frac{2 \times (Pricision\times Recall)}{(Pricision + Recall)} 
-%	\label{f1_score}
-%\end{equation}
-%where the Positive/Negative refers to the predicted output as (damage or non-damage) respectively, True Positive (TP) and True Negative (TN)  represent the correct classification, and the False Positive (FP) and False Negative (FN) represent the incorrect classification.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, the developed GCN model for semantic segmentation is evaluated on exemplary three damage scenarios of an RMS of the numerically calculated full wavefield interpolated at the bottom surface of the plate in order to identify the delamination.
+Additionally, an experimental scenario is also used to evaluate the performance of the model to show the DL capabilities of generalization.
+Further, the mean and the max \(IoU\) are calculated and presented.
 
-In this work, all semantic segmentation models were implemented and trained with Keras API~\cite{chollet2015keras} running on top of TensorFlow.
-Further, we have replaced the previous NVIDIA RTX2080 GPU utilised in our work~\cite{Ijjeh2021} with a superior NVIDIA Tesla V100 GPU with \(32\)GB memory that enables us to increase the total number of learnable parameters of the DL models that will allow them to learn and extract more features. 
-For training purposes, we have used the K-fold cross-validation technique with five folds. 
-Accordingly, each model has trained for \(5\) iterations. 
-For each iteration, we calculated the mean accuracy of all folds.
-Further, the number of epochs equals \(20\) per iteration.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The semantic segmentation model was developed and trained using Keras API~\cite{chollet2015keras} on top of TensorFlow in this study.
+Further, we have replaced the previous NVIDIA RTX2080 GPU in our work~\cite{Ijjeh2021} with a superior NVIDIA Tesla V100 GPU with (32) GB RAM, which allows us to enhance the total number of learnable parameters of the DL models, allowing them to train and extract more features.
+Additionally, we employed five folds of the K-fold cross-validation procedure.
+As a result, the model has been trained for (five) iterations.
+Furthermore, for iteration, the number of epochs equals (20).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical scenarios}
-In the following, three scenarios of numerical data regarding delamination of different locations, shapes, and angles are presented. 
-The first exemplary delamination scenario is shown in Fig.~\ref{fig:softmax_448}. 
-The delamination is located at the left edge of the plate, and it is surrounded by a line to represent its shape and location as shown in Fig.~\ref{fig:RMS_flat_shell_Vz_448}.
-Figures~\ref{fig:unet_pred_448}-~\ref{fig:gcn_pred_448} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-All models properly indicate the location of the delamination. 
-Moreover, pixels related to delamination location are clustered into a single spot without any additional noise. 
-VGG16 encoder-decoder and GCN models better visually resemble the actual shape of the delamination than other models.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Three numerical data scenarios for delamination of various locations, shapes, and angles are described in the following.
+Figure.~\ref{fig:RMS_flat_shell_Vz_448} depicts the first exemplary delamination case.
+As illustrated in Fig~\ref{fig:RMS_flat_shell_Vz_448}, the delamination is located at the left edge of the plate and is surrounded by a line to represent its shape and location.
+The predicted output of the GCN models is shown in Fig.~\ref{fig:gcn_pred_448}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The GCN model can correctly show the location of the delamination.
+Furthermore, delamination related pixels are aggregated into a single spot with no additional noise.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -366,47 +347,18 @@ VGG16 encoder-decoder and GCN models better visually resemble the actual shape o
 		\caption{GCN}
 		\label{fig:gcn_pred_448}
 	\end{subfigure}
-	\caption{First delamination scenario based on numerical data}
-	\label{fig:softmax_448}
-\end{figure} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In the second delamination scenario, shown in Fig.~\ref{fig:385_softmax}, the delamination is located at the upper left corner of the plate, and it is surrounded by an ellipse to represent its shape and location as shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-This is the most challenging damage scenario because of reflections coming from plate edges overshadows reflections from damage.
-As a result, changes in RMS patterns are barely visible.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Figures~\ref{fig:Unet_Pred__softmax_385} -~\ref{fig:gcn_pred_385} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-All models perform reasonably well, considering the difficult damage scenario.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!ht]
-	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11a.png}
 		\caption{RMS bottom with label}
 		\label{fig:RMS_flat_shell_Vz_385}
 	\end{subfigure}
-
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11f.png}
 		\caption{GCN}
 		\label{fig:gcn_pred_385}
 	\end{subfigure}
-	\caption{Second delamination scenario based on numerical data}
-	\label{fig:385_softmax}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The third delamination scenario is shown in Figure~\ref{fig:475_softmax}. 
-The delamination is located at the upper middle of the plate and it is surrounded by an ellipse to represent its shape and location as shown in Fig.~\ref{fig:RMS_flat_shell_Vz_475}.
-Figures~\ref{fig:Unet_Pred__softmax_475} -~\ref{fig:gcn_pred_475} show the predicted output of the Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, respectively. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this case, the elliptical shape of delamination is best preserved by Res-UNet and FCN-DenseNet. 
-However, the highest value of IoU is obtained by GCN (see Table~\ref{tab:table_numerical_scenarios}).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!ht]
-	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure12a.png}
@@ -418,87 +370,66 @@ However, the highest value of IoU is obtained by GCN (see Table~\ref{tab:table_n
 		\includegraphics[scale=1.0]{figure12f.png}
 		\caption{GCN}
 		\label{fig:gcn_pred_475}
-	\end{subfigure}	
-	\caption{Third delamination scenario based on numerical data}
-	\label{fig:475_softmax}
-\end{figure}
+	\end{subfigure}
+	\caption{Numerical delamination scenarios}
+	\label{fig:385_softmax}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The \(IoU\) values for all models regarding the predicted delamination are presented in Table.~\ref{tab:table_numerical_scenarios}.
-For the first and third scenarios, the GCN model has the highest \(IoU\) compared to the other models, and for the second scenario, the VGG16 encoder-decoder model has the highest \(IoU\) compared to the other models.
-Further, in all models, the predicted outputs have no noise regarding delamination identification.
+The second delamination scenario presented in Fig.~\ref{fig:RMS_flat_shell_Vz_385} includes delamination in the top left corner of the plate, which is surrounded by an ellipse to illustrate its form and position, as shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Because reflections from plate edges overshadow reflections from damage, this is the most difficult damage scenario.
+As a result, RMS pattern changes are barely visible.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The predicted output of the GCN model is shown in Figure~\ref{fig:gcn_pred_385}. 
+Further, the GCN model performs reasonably well, considering the difficult damage scenario.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:RMS_flat_shell_Vz_475} depicts the third delamination case.
+As shown in Fig.~\ref{fig:RMS_flat_shell_Vz_475}, the delamination is located in the upper middle of the plate and is surrounded by an ellipse to represent its shape and location.
+The predicted output of the GCN model is shown in Fig.~\ref{fig:gcn_pred_475}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The values of \(IoU\) obtained by GCN are with respect to the numerical cases are presented in Table~\ref{tab:table_numerical_scenarios}.
+Further, in all tested cases, the predicted outputs have no noise regarding delamination identification.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
-	\caption{\(IoU\) of Numerical scenarios}
+	\caption{\(IoU\) of Numerical cases}
 	\label{tab:table_numerical_scenarios}
 	{
-		\begin{tabular}{cccc}\hline
-			Model & 1st scenario & 2nd scenario & 3rd scenario \\ \hline 
-			GCN & \(0.791\) & \(0.696\) & \(0.875\) \\ \hline
+		\begin{tabular}{c|ccc|cc}
+			\toprule
+			 & 1st case & 2nd case & 3rd case & mean \(IoU\) & max \(IoU\) \\ 
+			 \midrule 
+			GCN & \(0.791\) & \(0.696\) & \(0.875\) & \(0.763\) & \(0.931\) \\ 
+			\bottomrule
 		\end{tabular}
 	}
 \end{table}
-Table~\ref{tab:table_iou} presents the mean and maximum values of \(IoU\) calculated for the previously unseen numerical test set (380 cases) for all models.
-Table~\ref{tab:table_iou} shows that all models have a relatively high \(IoU\), indicating their ability to detect and localise the delamination, which is higher compared to the traditional signal processing techniques such as the adaptive wavenumber filtering presented in our previous work~\cite{Ijjeh2021}. 
-The mean \(IoU\) for the adaptive wavenumber filtering technique regarding the whole testing samples was \(0.373\) compared to the previous FCN-DenseNet model, which has a mean \(IoU\) of \(0.623\).
-\begin{table}[]
-	\centering
-	\caption{Analysis of numerical data}
-	\label{tab:table_iou}
-	\begin{tabular}{ccc}\hline
-		 & mean \(IoU\) & max \(IoU\) \\ \hline
-		GCN & \(0.763\) & \(0.931\) \\ \hline
-	\end{tabular}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Further, in Table~\ref{tab:table_performance} the TP, TN, FP, and FN are presented for all models regarding the test set. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Moreover, Table~\ref{tab:evaluation_metric} presents the classification accuracy, precision, recall, and the F1-score values for all models as additional evaluation metrics.
-As shown in Table~\ref{tab:evaluation_metric}, all models have high classification accuracy, which indicates that all the presented models are capable of predicting the presence of the delamination in all the numerically generated cases. 
-However, the best performance was achieved by GCN.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Moreover, the total number of parameters in any DL model is a sum of the trainable parameters (weights of convolution filters) and non-trainable parameters (biases and pooling filters).
-Trainable parameters are continuously updated until we reach the minimum loss value, while the non-trainable parameters are not changed during the whole training process.
-Table~\ref{tab:table_parameters} shows the total number of parameters for all implemented models.
-Further, the total number of parameters can reflect the computation complexity of the model.
-It can be noted that as the number of total parameters increases, the required time for training increases.
-\begin{table}[]
-	\centering
-	\caption{Model parameters}
-	\label{tab:table_parameters}
-	\begin{tabular}{cc}\hline
-		Model &  Total parameters (\(\approx\)) \\ \hline
-		GCN & \(36\times 10^6\) \\ \hline
-	\end{tabular}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Additionally, Table~\ref{tab:table_numerical_scenarios} shows the mean and maximum (IoU) values calculated for the entire numerical test set (380 cases).
+Table~\ref{tab:table_numerical_scenarios} indicates that the model has a reasonably high \(IoU\), indicating that it has a better ability to identify and localize delamination than traditional signal processing approaches such adaptive wavenumber filtering, as shown in our earlier work~\cite{Ijjeh2021}.
+In comparison to the prior FCN-DenseNet model, which had a mean \(IoU\) of \(0.373\), the adaptive wavenumber filtering technique had a mean \(IoU\) of \(0.373\) for the entire testing set \(0.623\).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental scenario}
-In this scenario, an experimental case of CFRP with Teflon insert as artificial delamination is investigated presented in Fig.~\ref{fig:Exp_ERMS_teflon}. 
-Similar to the synthetic data set, we applied a frequency of \(50\) kHz to excite a signal in a transducer placed at the centre of the plate. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-A0 mode wavelength for this particular CFRP material at such frequency is about 20 mm. 
-The measurements were performed by Polytec PSV-400 SLDV on a bottom surface of the plate of dimensions 500 by 500 mm. 
-The measurement grid spacing was 1 mm and sampling frequency 512 kHz. 
-The measured full wavefield was further processed by an energy compensated RMS takes into account wave attenuation. 
-The results of such operation are shown in Fig.~\ref{fig:Delamination}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+An experimental case of CFRP with Teflon insert as artificial delamination is examined in this scenario and is shown in Fig.~\ref{fig:Exp_ERMS_teflon}.
+We used a frequency of (50) kHz to excite a signal in a transducer placed in the center of the plate, similar to the synthetic data set. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+At this frequency, the A0 mode wavelength for this particular CFRP material is around 20 mm.
+The measurements were conducted with a Polytec PSV-400 SLDV on the bottom surface of a \(500 \times 500\) mm plate.
+The sampling frequency is 512 kHz and the measuring grid spacing is 1 mm.
+The full wavefield was measured and then processed using energy compensated RMS considering wave attenuation.
+Figure~\ref{fig:Delamination} shows the effects of such a procedure.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 The delamination is surrounded by a square frame representing its shape and location. 
-Figures~(\ref{fig:unet_exp_7_} - \ref{fig:gcn_exp}) shows delamination prediction maps for Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, receptively.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The performance of the models were evaluated by using IoU metric which takes into account not only damage location but also its shape and size. 
-The following results were obtained: the Res-UNet IoU = 0.577, the VGG16 encoder-decoder \(IoU = 0.624\), the
-PSPNet \(IoU = 0.488\), the FCN-DenseNet \(IoU = 0.537\) and the GCN \(IoU =
-0.723\). 
-Similarly to the numerical dataset, the best accuracy was achieved by using GCN.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-As shown, the models are capable of precise detection and localisation of the delamination. 
-We can see that the models can identify the delamination with almost free noise, which indicates the models are capable of generalising and detecting the delamination on previously unseen data. 
-Considering the presented models were trained only on the numerically generated dataset, the models show high generalisation capability.
-The performance of the models can be further improved when they are trained on the experimental and the numerical data, as new features will be learned. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure~\ref{fig:gcn_exp}) shows delamination prediction map for the GCN model with \(IoU = 0.723\). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The model is capable of detecting and localizing the delamination with almost no noise, implying that the model can generalize and detect the delamination on previously unseen data.
+Despite the fact that the implemented model was trained on a synthetically generated dataset, it has a high degree of generalisation.. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -516,9 +447,7 @@ The performance of the models can be further improved when they are trained on t
 	\caption{Experimental results}
 	\label{fig:Exp_ERMS_teflon}
 \end{figure}
-\clearpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgments}
 The research was funded by the Polish National Science Center under grant agreement no 2018/31/B/ST8/00454.
 We would like to acknowledge dr Maciej Radzienski for providing the experimental data of full wavefield measured by SLDV.
