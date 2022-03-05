@@ -245,7 +245,7 @@ The CCE is illustrated by Eqn.~(\ref{CCE}), where \( P(x)_{i}\) is the  softmax 
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Further, it is crucial to select a suitable accuracy metric.
-Thus, we have used the intersection over union (IoU) as our accuracy metric. 
+Hence, we have used the intersection over union (IoU) as our accuracy metric. 
 We can compute the IoU by determining the intersection area between the ground truth and the predicted output.
 In this work,  the IoU is computed by considering the damaged class only.
 The IoU metric is defined as in Eqn.~\ref{IoU}
@@ -260,17 +260,12 @@ where \(\hat{Y}\) represents the predicted vector of damaged and undamaged value
 In the following subsection, we present the developed FCN model for pixel-wise semantic segmentation to detect and localise delaminations.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Global Convolutional Network}
-Global Convolutional Network (GCN) proposed by Peng et al. 
-~\cite{Peng2017} addressed the importance to have large kernels for both 
-localisation and classification for semantic segmentation to enlarge 
-respective fields.
-However, a contradiction arises when performing classification and localisation 
-tasks. 
-For instance, classification tasks require the models to be invariant for 
-different transformations such as rotation and translation.
-On the other hand, localisation tasks require the models to be sensitive for 
-any transformation, to accurately assign each pixel for its semantic category.
-Accordingly, to solve this contradiction, two design principles were suggested: 
+Peng et al.~\cite{Peng2017} introduced the Global Convolutional Network (GCN) to address the importance of having large kernels for both localisation and classification for semantic segmentation to extend respective fields.
+When performing classification and localization tasks, though, a contradiction develops.
+For example, classification tasks necessitate invariant models for various transformations such as rotation and translation.
+Localisation tasks, on the other hand, necessitate models that are sensitive to any modification in order to appropriately assign each pixel to its proper class.
+As a result, two design principles were proposed to resolve this inconsistency:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{enumerate}
 	\item For the classification task, in order to improve the capability of 
 	the model to handle different transformations, a large kernel size must be 
@@ -280,7 +275,7 @@ Accordingly, to solve this contradiction, two design principles were suggested:
 	Additionally, fully connected or global pooling layers are not applied as 
 	these layers will discard the localisation information. 
 \end{enumerate}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 Figure~\ref{fig:gcn} presents the proposed GCN module for semantic segmentation 
 utilised for delamination identification.
 \begin{figure} [h!]
