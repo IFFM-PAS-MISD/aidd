@@ -74,7 +74,7 @@ The achieved accuracy in the current implemented model surpasses the accuracy of
 \keywords{Lamb waves.  Structural health monitoring.  Semantic segmentation. Delamination identification. Deep learning. Fully convolutional neural networks.}
 %\end{abstract}
 %
-\\[2em]
+%\\[2em]
 
 % \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,8 +101,8 @@ Therefore, a Scanning Laser Doppler Vibrometer (SLDV) is used to measure Lamb wa
 Full wavefield propagation measurements are obtained, resulting in high-resolution damage influence maps.
 Damage detection techniques that use full wavefield signals can accurately estimate the size and location of damage~\cite{Girolamo2018a}.
 
-Conventional machine learning techniques such as support vector machine (SVM) \cite{noori2010application}, K-Nearest Neighbor (KNN)~\cite{Vitola2017}, decision tree~\cite{Mariniello2020}, particle swarm optimization (PSO)~\cite{Khatir2018}, and principle component analysis (PCA)~\cite{wang2014principal} have proven to be capable of detecting damage in the structures under investigation.
-However, when dealing with large amounts of data, such techniques have drawbacks because they necessitate a complex feature engineering computation~\cite{Gulgec2019}, which also requires a high level of experience and abilities to extract damage-sensitive features for specific SHM applications.
+%Conventional machine learning techniques such as support vector machine (SVM) \cite{noori2010application}, K-Nearest Neighbor (KNN)~\cite{Vitola2017}, decision tree~\cite{Mariniello2020}, particle swarm optimization (PSO)~\cite{Khatir2018}, and principle component analysis (PCA)~\cite{wang2014principal} have proven to be capable of detecting damage in the structures under investigation.
+%However, when dealing with large amounts of data, such techniques have drawbacks because they necessitate a complex feature engineering computation~\cite{Gulgec2019}, which also requires a high level of experience and abilities to extract damage-sensitive features for specific SHM applications.
 %As a result, a data-driven technique for SHM applications has emerged in the form of deep learning (DL) end-to-end methods in recent years, with the process of feature engineering and classification done automatically.
 
 Due to rapid advancements in computer hardware and software, big data, and cloud-based computations, deep learning (DL) techniques in many SHM disciplines have gained increased attention in recent years~\cite{Azimi}.
@@ -131,6 +131,7 @@ Current SHM approaches can accurately localize impact events~\cite{Ciampa2012} a
 With a sparse array of sensors, however, determining the size and shape of damage is challenging.
 To solve this difficulty, full wavefield ultrasonic techniques can be used locally to assess damage severity and then to estimate damage prognosis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Hence, it motivates us to use the full wavefield of Lamb waves propagation in a DL image segmentation approach to achieve a precise delamination detection and size estimation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this paper, we present a DL model for semantic image segmentation that can be used in CFRP to identify delamination, localize it, and estimate its size.
@@ -164,14 +165,14 @@ As a result, the matrices can be visualized as animated frames of propagating wa
 Furthermore, it should be noted that the simulated delaminations were closer to the top surface of the plate.
 As a result, utilizing the simulated full wavefield on the top surface of the plate rather than the bottom surface makes it easier to detect delamination.
 However, we used the more difficult situation of registering the full wavefield at the bottom surface of the plate to train the our developed model.
-For the full wavefield frames, the root mean square described in Eq.~(\ref{ref:rms}) was used to improve the visualisation.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N} s(x,y,t_k)^2}
-	\label{ref:rms}
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-where \(N\) refers to the number of sampling points (\(N=512\)).
+%%For the full wavefield frames, the root mean square described in Eq.~(\ref{ref:rms}) was used to improve the visualisation.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\begin{equation}
+%%	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N} s(x,y,t_k)^2}
+%%	\label{ref:rms}
+%%\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%where \(N\) refers to the number of sampling points (\(N=512\)).
 The results of applying RMS to the full wavefield from the top and bottom surfaces of the plate are shown in Figs~\ref{fig:rmstop} and \ref{fig:rmsbottom}, respectively.
 The dataset, which contains the RMS images, is available online~\cite{Kudela2020d}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -216,26 +217,26 @@ The decoder part is responsible for upsampling the condensed features maps to th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 At the output layer of the developed model, a softmax activation function is applied to compute the probability of damaged and undamaged occurrence for each single pixel.
 As a result, the sum of the two probabilities must equal one.
-The softmax is depicted by Eqn.~(\ref{softmax}), where \(P(x)_{i}\) is the probability of each target class  \(x_{j}\) across all possible target classes \(x_{j}\), C in our case is two classes (damaged and undamaged).
-The \(\mathrm{argmax}\) function is used to pick the highest probability between the damaged and undamaged probabilities in order to predict the label of the detected output (\(y_{pred}\)).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-	P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
-	\label{softmax}
-\end{equation} 
-\begin{equation}
-	y_{pred} = \mathrm{argmax_{i}}\left( P(x)_{i} \right)
-	\label{argmax}
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The softmax is depicted by Eqn.~(\ref{softmax}), where \(P(x)_{i}\) is the probability of each target class  \(x_{j}\) across all possible target classes \(x_{j}\), C in our case is two classes (damaged and undamaged).
+%The \(\mathrm{argmax}\) function is used to pick the highest probability between the damaged and undamaged probabilities in order to predict the label of the detected output (\(y_{pred}\)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{equation}
+%	P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
+%	\label{softmax}
+%\end{equation} 
+%\begin{equation}
+%	y_{pred} = \mathrm{argmax_{i}}\left( P(x)_{i} \right)
+%	\label{argmax}
+%\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The categorical cross-entropy (CCE) loss function, often known as the  \enquote{softmax loss function}, was used in the implemented model.
-The CCE is illustrated by Eqn.~(\ref{CCE}), where \( P(x)_{i}\) is the  softmax value of the target class. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-	CCE = -\log\left( P(x)_{i} \right)
-	\label{CCE}
-\end{equation}
+%The CCE is illustrated by Eqn.~(\ref{CCE}), where \( P(x)_{i}\) is the  softmax value of the target class. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{equation}
+%	CCE = -\log\left( P(x)_{i} \right)
+%	\label{CCE}
+%\end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Further, it is crucial to select a suitable accuracy metric.
 Hence, we have used the intersection over union (\(IoU\)) as our accuracy metric. 
@@ -268,6 +269,7 @@ As a result, two design principles were proposed to resolve this inconsistency:
 	these layers will discard the localisation information. 
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
 Figure~\ref{fig:gcn} presents the proposed GCN module for semantic segmentation 
 utilised for delamination identification.
 \begin{figure} [h!]
@@ -316,7 +318,7 @@ As a result, the model has been trained for (five) iterations.
 Furthermore, for iteration, the number of epochs equals (20).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical cases}
-Three numerical data cases for delamination of various locations, shapes, and angles are described in the following.
+Two numerical data cases for delamination of various locations, shapes, and angles are described in the following.
 Figure.~\ref{fig:RMS_flat_shell_Vz_448} depicts the first exemplary delamination case.
 As illustrated in Fig~\ref{fig:RMS_flat_shell_Vz_448}, the delamination is located at the left edge of the plate and is surrounded by a line to represent its shape and location.
 The predicted output of the GCN models is shown in Fig.~\ref{fig:gcn_pred_448}. 
@@ -328,93 +330,88 @@ Furthermore, delamination related pixels are aggregated into a single spot with 
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{figure10a.png}
+		\includegraphics[scale=.85]{figure10a.png}
 		\caption{}
 		\label{fig:RMS_flat_shell_Vz_448}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{figure10f.png}
+		\includegraphics[scale=0.85]{figure10f.png}
 		\caption{}
 		\label{fig:gcn_pred_448}
 	\end{subfigure}
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[scale=1.0]{figure11a.png}
+%		\caption{}
+%		\label{fig:RMS_flat_shell_Vz_385}
+%	\end{subfigure}
+%	\begin{subfigure}[b]{0.47\textwidth}
+%		\centering
+%		\includegraphics[scale=1.0]{figure11f.png}
+%		\caption{}
+%		\label{fig:gcn_pred_385}
+%	\end{subfigure}
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{figure11a.png}
-		\caption{}
-		\label{fig:RMS_flat_shell_Vz_385}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[scale=1.0]{figure11f.png}
-		\caption{}
-		\label{fig:gcn_pred_385}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[scale=1.0]{figure12a.png}
+		\includegraphics[scale=0.85]{figure12a.png}
 		\caption{}
 		\label{fig:RMS_flat_shell_Vz_475}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1.0]{figure12f.png}
+		\includegraphics[scale=0.85]{figure12f.png}
 		\caption{}
 		\label{fig:gcn_pred_475}
 	\end{subfigure}
-	\caption{Three numerical delamination cases}
+	\caption{Numerical delamination cases}
 	\label{fig:385_softmax}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The second delamination case presented in Fig.~\ref{fig:RMS_flat_shell_Vz_385} includes delamination in the top left corner of the plate, which is surrounded by an ellipse to illustrate its form and position, as shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385}.
+%The second delamination case presented in Fig.~\ref{fig:RMS_flat_shell_Vz_385} includes delamination in the top left corner of the plate, which is surrounded by an ellipse to illustrate its form and position, as shown in Fig.~\ref{fig:RMS_flat_shell_Vz_385}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Because reflections from plate edges overshadow reflections from damage, this is the most difficult damage case.
+%As a result, RMS pattern changes are barely visible.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The predicted output of the GCN model is shown in Figure~\ref{fig:gcn_pred_385}. 
+%Further, the GCN model performs reasonably well, considering the difficult damage case.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Because reflections from plate edges overshadow reflections from damage, this is the most difficult damage case.
-As a result, RMS pattern changes are barely visible.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The predicted output of the GCN model is shown in Figure~\ref{fig:gcn_pred_385}. 
-Further, the GCN model performs reasonably well, considering the difficult damage case.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Figure~\ref{fig:RMS_flat_shell_Vz_475} depicts the third delamination case.
+Figure~\ref{fig:RMS_flat_shell_Vz_475} depicts the second delamination case.
 As shown in Fig.~\ref{fig:RMS_flat_shell_Vz_475}, the delamination is located in the upper middle of the plate and is surrounded by an ellipse to represent its shape and location.
 The predicted output of the GCN model is shown in Fig.~\ref{fig:gcn_pred_475}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The values of \(IoU\) obtained by GCN are with respect to the numerical cases are presented in Table~\ref{tab:table_numerical_cases}.
 Further, in all tested cases, the predicted outputs have no noise regarding delamination identification.
+Additionally, Table~\ref{tab:table_numerical_cases} shows the mean and maximum (IoU) values calculated for the entire numerical test set (380 cases).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[]
+\begin{table}[ht!]
 	\centering
 	\caption{\(IoU\) of Numerical cases}
 	\label{tab:table_numerical_cases}
 	{
-		\begin{tabular}{ccc|cc}
+		\begin{tabular}{cc|cc}
 			\toprule
-			 1st case & 2nd case & 3rd case & mean \(IoU\) & max \(IoU\) \\ 
+			 1st case & 2nd case & mean \(IoU\) & max \(IoU\) \\ 
 			 \midrule 
-			\(0.791\) & \(0.696\) & \(0.875\) & \(0.763\) & \(0.931\) \\ 
+			\(0.791\) & \(0.875\) & \(0.763\) & \(0.931\) \\ 
 			\bottomrule
 		\end{tabular}
 	}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Additionally, Table~\ref{tab:table_numerical_cases} shows the mean and maximum (IoU) values calculated for the entire numerical test set (380 cases).
-Table~\ref{tab:table_numerical_cases} indicates that the model has a reasonably high \(IoU\), indicating that it has a better ability to identify and localize delamination than traditional signal processing approaches such adaptive wavenumber filtering, as shown in our earlier work~\cite{Ijjeh2021}.
-In comparison to the prior FCN-DenseNet model, which had a mean \(IoU\) of \(0.373\), the adaptive wavenumber filtering technique had a mean \(IoU\) of \(0.373\) for the entire testing set \(0.623\).
+%Table~\ref{tab:table_numerical_cases} indicates that the model has a reasonably high \(IoU\), indicating that it has a better ability to identify and localize delamination than traditional signal processing approaches such adaptive wavenumber filtering, as shown in our earlier work~\cite{Ijjeh2021}.
+%In comparison to the prior FCN-DenseNet model, which had a mean \(IoU\) of \(0.373\), the adaptive wavenumber filtering technique had a mean \(IoU\) of \(0.373\) for the entire testing set \(0.623\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental case}
 An experimental case of CFRP with Teflon insert as artificial delamination is examined in this case and is shown in Fig.~\ref{fig:Exp_ERMS_teflon}.
 We used a frequency of (50) kHz to excite a signal in a transducer placed in the center of the plate, similar to the synthetic data set. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 At this frequency, the A0 mode wavelength for this particular CFRP material is around 20 mm.
 The measurements were conducted with a Polytec PSV-400 SLDV on the bottom surface of a \(500 \times 500\) mm plate.
 The sampling frequency is 512 kHz and the measuring grid spacing is 1 mm.
 The full wavefield was measured and then processed using energy compensated RMS considering wave attenuation.
 Figure~\ref{fig:Delamination} shows the effects of such a procedure.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The delamination is surrounded by a square frame representing its shape and location. 
 Figure~\ref{fig:gcn_exp}) shows delamination prediction map for the GCN model with \(IoU = 0.723\). 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -425,13 +422,13 @@ Despite the fact that the implemented model was trained on a synthetically gener
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1]{figure13a.png}
+		\includegraphics[scale=0.85]{figure13a.png}
 		\caption{}
 		\label{fig:Delamination}	
 	\end{subfigure}	
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[scale=1]{figure13f.png}
+		\includegraphics[scale=0.85]{figure13f.png}
 		\caption{} 
 		\label{fig:gcn_exp}
 	\end{subfigure}
