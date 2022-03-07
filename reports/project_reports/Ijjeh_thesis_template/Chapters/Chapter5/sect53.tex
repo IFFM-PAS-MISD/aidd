@@ -2,19 +2,167 @@
 \section{Autoencoder ConvLSTM model}
 \label{sec53}
 
-%% SECTION CONTENT ////////////////////////////////////////////////////////////////////////////////////
-
-
-
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
 \subsection{Numerical cases}
 \label{sec531}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	\centering
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/m1_rand_single_delam_448.png}
+		\caption{}
+		\label{fig:RMS_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/predicted_448.png}
+		\caption{}
+		\label{fig:convlstm_pred_448}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/m1_rand_single_delam_456.png}
+		\caption{}
+		\label{fig:RMS_456}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/predicted_456.png}
+		\caption{}
+		\label{fig:convlstm_pred_456}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/m1_rand_single_delam_438.png}
+		\caption{}
+		\label{fig:RMS_438}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/predicted_438.png}
+		\caption{}
+		\label{fig:convlstm_pred_438}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/m1_rand_single_delam_397.png}
+		\caption{}
+		\label{fig:RMS_397}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/predicted_397.png}
+		\caption{}
+		\label{fig:convlstm_pred_397}	
+	\end{subfigure}
+	\caption{Four delamination cases based on numerical data (ConvLSTM autoencoder).}
+	\label{fig:Num_convlstm__case}
+\end{figure}
+\clearpage
 
 %% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
 \subsection{Experimental cases}
 \label{sec532}
 
+\subsubsection{Single delamination}
+\label{sec5321}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Single delaminatio of Teflon inserted
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\centering
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/figure8a.png}
+		\caption{GT of Teflon insert}
+		\label{fig:exp_CFRP_teflon_3o_GT}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/figure8c.png}
+		\caption{\(IoU\) = 0.47}
+		\label{fig:model_2_CFRP_teflon_3o}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{Experimental case: single delamination of Teflon insert.}
+	\label{fig:exp_Teflon_insert}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% IoU ouput values with a sliding window
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_5/figure9a_.png}
+		\caption{IoU for the sliding window centered at consecutive frames.}
+		\label{fig:CFRP_Teflon_3o_IoU_}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_5/figure9b_.png}
+		\caption{Corresponding frames of guided waves.} 
+		\label{fig:CFRP_teflon_3o_shapes_}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{IoU for the sliding window of frames (Teflon insert-single delamination).}
+	\label{fig:CFRP_Teflon_3o_IoU_centre_window}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Predicted outuputs at diffirent window places
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=1]{Figures/Chapter_5/figure10.png}
+	\caption{Predictions of Model~\RNum{1} and Model-\RNum{2} for window centered at selected frames (Teflon insert - single delamination).}
+	\label{fig:CFRP_Teflon_3o_predictions}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RMS predictions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure11b_RMS.png}
+		\caption{RMS predicted output}
+		\label{fig:RMS_CFRP_Teflon_3o_saeed}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.42\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure12b_Thresholded_RMS.png}
+		\caption{Thresholded RMS predicted output} 
+		\label{fig:RMS_CFRP_Teflon_3o_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{RMS image (damage map); Teflon insert - single delamination.}
+	\label{fig:RMS_CFRP_Teflon_3o_images}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsubsection{Multiple delaminations}
+\label{sec5322}
 
 
