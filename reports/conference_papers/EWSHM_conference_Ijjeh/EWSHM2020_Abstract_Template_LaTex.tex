@@ -68,7 +68,7 @@ Pawel Kudela\inst{1}\orcidID{0000-0002-5130-6443}}
 In this paper, we present a deep learning technique for image segmentation known as the global convolutional network, which we employ for delamination detection and localisation in composite materials.
 The model was trained and validated on our previously generated dataset that resembles full wavefield measurements acquired by a scanning laser Doppler vibrometer.
 Additionally, the model was verified on experimentally acquired data with a Teflon insert representing delamination, showing that the developed model can be used for delamination size estimation.
-The achieved accuracy in the current implemented model surpasses the accuracy of previous models with an improvement of up to $22.47\%$ for delamination identification.
+The achieved accuracy in the current implemented model surpasses the accuracy of previous models with an improvement of up to $22\%$ for delamination identification.
 
 
 \keywords{Lamb waves.  Structural health monitoring.  Semantic segmentation. Delamination identification. Deep learning. Fully convolutional neural networks.}
@@ -81,15 +81,15 @@ The achieved accuracy in the current implemented model surpasses the accuracy of
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Composite materials have gained popularity in recent years in a variety of industries, including aerospace, cars, construction, marine, and others, due to their lightweight, good fatigue, and corrosion resistance.
-Composite materials, on the other hand, may suffer from matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination}.
-Delamination (the separation of layers in a laminate composite) is one of the most dangerous of these defects since it occurs largely below the top surfaces and is barely visible~\cite{Cai2012}.
+On the other hand, composite materials, may suffer from matrix cracks, fibre breakage, debonding, and delamination~\cite{ip2004delamination}.
+Delamination (the separation of layers in a laminate composite) is one of the most dangerous of these defects since it occurs below the top surfaces and is barely visible~\cite{Cai2012}.
 %
 %Delamination in composite materials can be caused by a variety of causes, including manufacturing flaws, notches, and impact events.
 %As a result, delamination can decrease the strength and the performance of structures.
 %To avoid such outcomes, real-time delamination detection is crucial.
 In order to monitor the integrity of engineering structures, numerous physics-based approaches for damage detection and localization have been developed in the disciplines of structural health monitoring (SHM) and non-destructive testing (NDT).
 
-Guided waves, namely Lamb waves, are used in a well-known physics-based technique in the field of SHM for damage identification.
+Guided waves, in particular Lamb waves, are used in a well-known physics-based technique in the field of SHM for damage identification.
 Lamb waves are elastic waves that propagate within thin plates and shells that are restricted by stress-free surfaces~\cite{mitra2016guided}.
 Furthermore, Lamb waves are notable for their strong sensitivity to discontinuities (cracks, delaminations) and low amplitude loss, particularly in metallic structures~\cite{Keulen2014}.
 
@@ -100,23 +100,24 @@ As a result, damage localization resolution can be low.
 Therefore, a Scanning Laser Doppler Vibrometer (SLDV) is used to measure Lamb waves in a dense grid of points over the structure under investigation.
 Full wavefield propagation measurements are obtained, resulting in high-resolution damage influence maps.
 Damage detection techniques that use full wavefield signals can accurately estimate the size and location of damage~\cite{Girolamo2018a}.
+%Conventional machine learning techniques such as support vector machine (SVM), K-Nearest Neighbor (KNN), decision trees, particle swarm optimization (PSO), and principal component analysis (PCA), among others, have proven to be capable of detecting damage in the structures under investigation.
+However, when working with large amounts of measured data, conventional techniques, have drawbacks as they require a complex feature engineering computation~\cite{Gulgec2019}, further, they require a high level of experience and abilities to extract damage-sensitive features for specific SHM applications.
+Consequently, a data-driven technique for SHM applications has emerged in the form of deep learning (DL) end-to-end methods in recent years, with the process of feature engineering and classification done automatically.
 
-%Conventional machine learning techniques such as support vector machine (SVM) \cite{noori2010application}, K-Nearest Neighbor (KNN)~\cite{Vitola2017}, decision tree~\cite{Mariniello2020}, particle swarm optimization (PSO)~\cite{Khatir2018}, and principle component analysis (PCA)~\cite{wang2014principal} have proven to be capable of detecting damage in the structures under investigation.
-%However, when dealing with large amounts of data, such techniques have drawbacks because they necessitate a complex feature engineering computation~\cite{Gulgec2019}, which also requires a high level of experience and abilities to extract damage-sensitive features for specific SHM applications.
-%As a result, a data-driven technique for SHM applications has emerged in the form of deep learning (DL) end-to-end methods in recent years, with the process of feature engineering and classification done automatically.
-
-Due to rapid advancements in computer hardware and software, big data, and cloud-based computations, deep learning (DL) techniques in many SHM disciplines have gained increased attention in recent years~\cite{Azimi}.
-For SHM of civil engineering structures, many DL-based approaches were used for damage detection and localization~\cite{Cha2018}, corrosion detection~\cite{Atha2018}, and concrete crack detection~\cite{Dung2019}.
+%Due to rapid advancements in computer hardware and software, big data, and cloud-based computations, deep learning (DL) techniques in many SHM disciplines have gained increased attention in recent years~\cite{Azimi}.
+%For SHM of civil engineering structures, many DL-based approaches were used for damage detection and localization~\cite{Cha2018}, corrosion detection~\cite{Atha2018}, and concrete crack detection~\cite{Dung2019}.
 
 Several DL approaches for guided wave-based damage identification and localization are discussed in the following.
-For damage detection in curved composite panels, Chetwynd et al.~\cite{Chetwynd2008} developed a multi-layer perceptron MLP network.
-A force applicator with a circular tip loaded with a mass was used to simulate the damage.
-A PZT transducer array was also used to generate and detect Lamb waves as they propagated through the panel.
-In addition, for each Lamb wave response, a novelty index was calculated and compared to specific threshold values.
-As a result, if the index exceeds the threshold, it indicates that the structure has a defect.
-The generated novelty indices were sent into the MLP network, which performed two operations: classification and regression.
+For damage detection in curved composite panels, Chetwynd et al.~\cite{Chetwynd2008} developed a multi-layer perceptron MLP network,
+%A force applicator with a circular tip loaded with a mass was used to simulate the damage.
+%A PZT transducer array was also used to generate and detect Lamb waves as they propagated through the panel.
+%In addition, for each Lamb wave response, a novelty index was calculated and compared to specific threshold values.
+%As a result, if the index exceeds the threshold, it indicates that the structure has a defect.
+%The generated novelty indices were sent into the MLP network, 
+which performed two tasks: classification and regression.
 The classification network was created to identify three convex parts of the panel and determining whether or not it was damaged.
 The regression network, on the other hand, can identify the specific area of the damage.
+
 Melville et al.~\cite{Melville2018} developed a CNN model for damage state prediction based on full wavefield measurements of thin aluminum plates.
 When compared to the SVM, the model showed enhanced accuracy in terms of damage (\(99.98\%\)) compared to \(62\%\).
 For signal classification utilising Lamb waves, Ewald et al.~\cite{Ewald2019} developed a CNN model named DeepSHM.
@@ -163,7 +164,7 @@ Each simulated case depicts the interaction of Lamb waves with a single delamina
 The amplitudes of the propagating waves at location \((x,y)\) and time \((t)\) are stored in each simulated case in the dataset computed from the wave propagation model.
 As a result, the matrices can be visualized as animated frames of propagating waves at discrete time (\(t_k\)).
 Furthermore, it should be noted that the simulated delaminations were closer to the top surface of the plate.
-As a result, utilizing the simulated full wavefield on the top surface of the plate rather than the bottom surface makes it easier to detect delamination.
+As a result, utilizing the simulated full wavefield on the top surface of the plate rather than the bottom surface makes it easier to detect delamination because wave reflections from delamination are more pronounced.
 However, we used the more difficult situation of registering the full wavefield at the bottom surface of the plate to train the our developed model.
 %%For the full wavefield frames, the root mean square described in Eq.~(\ref{ref:rms}) was used to improve the visualisation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -213,7 +214,7 @@ In this paper, a deep learning model based on fully convolutional networks (FCN)
 Convolutional layers are used to replace dense layers in FCN.
 The encoder-decoder scheme is a well-known FCN technique.
 Through downsampling, the encoder extracts condensed feature maps from the input image (reducing the spatial dimensions).
-The decoder part is responsible for upsampling the condensed features maps to the same size as the original input image using techniques such as transposed convolution with strides and upsampling with interpolation, .
+The decoder part is responsible for upsampling the condensed features maps to the same size as the original input image using techniques such as transposed convolution with strides and upsampling with interpolation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 At the output layer of the developed model, a softmax activation function is applied to compute the probability of damaged and undamaged occurrence for each single pixel.
 As a result, the sum of the two probabilities must equal one.
@@ -404,7 +405,7 @@ Additionally, Table~\ref{tab:table_numerical_cases} shows the mean and maximum (
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental case}
 An experimental case of CFRP with Teflon insert as artificial delamination is examined in this case and is shown in Fig.~\ref{fig:Exp_ERMS_teflon}.
-We used a frequency of (50) kHz to excite a signal in a transducer placed in the center of the plate, similar to the synthetic data set. 
+We used a frequency of 50 kHz to excite a signal in a transducer placed in the center of the plate, similar to the synthetic data set. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 At this frequency, the A0 mode wavelength for this particular CFRP material is around 20 mm.
 The measurements were conducted with a Polytec PSV-400 SLDV on the bottom surface of a \(500 \times 500\) mm plate.
@@ -416,7 +417,7 @@ The delamination is surrounded by a square frame representing its shape and loca
 Figure~\ref{fig:gcn_exp}) shows delamination prediction map for the GCN model with \(IoU = 0.723\). 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The model is capable of detecting and localizing the delamination with almost no noise, implying that the model can generalize and detect the delamination on previously unseen data.
-Despite the fact that the implemented model was trained on a synthetically generated dataset, it has a high degree of generalisation.. 
+Despite the fact that the implemented model was trained on a synthetically generated dataset, it has a high degree of generalisation. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
