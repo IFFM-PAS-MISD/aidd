@@ -1,10 +1,24 @@
-\section{Purpose of the study}
+\section{Objectives and Motivations}
 \label{sec13}
-Recently, artificial intelligence (AI) based approaches have been utilized by numerous scientific fields. 
-Accordingly, we aim in this project to utilise AI in the field of NDT/SHM to develop an AI-driven diagnostic system for delamination identification in composite laminates. 
-Accordingly, embracing AI approach will contribute to various aspects of NDT/SHM, elastic wave behaviour, image and animation processing.
-Therefore, we propose an end-to-end deep learning approach which is capable of performing automatic feature extraction of the delamination characteristics, implying that the supervised deep learning model will learn by itself to extract the damage features and accordingly detect and localize the damage in
-the investigated composite laminates.
-For this purpose, supervised learning-based approach on a large dataset which was numerically generated representing the full wavefield of propagating elastic waves are implemented, mentioning that generating such dataset requires a lot of time (3-months). 
-As a result, we expect such a system will be an extra safety factor of functional structures hence it could reduce
-maintenance costs.
+
+The main objective of the work is to develop artificial intelligence (AI) driven diagnostic system for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP). 
+The project seeks to explore feasibility studies of artificial intelligence approaches for elastic wave propagation analysis. 
+Data corresponding to elastic wave propagation patterns are very complex, and it is difficult to explicitly program instructions that will output damage intensity map of an element of a structure based on anomalies in propagating elastic waves (e.g. reflections from delamination). 
+The main aim of the project is to explore possible solutions which employ deep neural networks (DNN) as they are promising approaches. 
+The progress in the machine learning field in the last decade, along with increasing computation power capabilities, makes it a perfect time to investigate potential applications of DNN. 
+DNN is an emerging tool that has successful applications in computer vision and speech recognition, among other applications. 
+Nowadays, certain neural network (NN) architectures surpass human-level accuracy in image classification. 
+The main advantage of DNN in comparison to other machine learning approaches is scalability. 
+It means that the performance of DNN increases with a NN size as well as the size of data used for supervised learning. 
+Therefore, we assume that it is possible to use the end-to-end approach in which DNN processes animation of propagating waves (input) directly into the damage intensity map (output).
+
+This research will help answer legitimate questions regarding utilising deep learning techniques by processing full wavefield of propagating elastic waves for delamination identification in composite laminates:
+\begin{itemize}
+	\item Can the proposed AI-driven diagnostic model be more accurate than the conventional signal processing technique?
+	\item Knowing that experimental signals contain noise, is it adequate to use a numerical model for generating a dataset?
+	\item Can a technique such as data augmentation enhance the training of deep learning models?
+	\item How well deep learning models can generalise to new unseen data? Further, to experimental data acquired by SLDV?
+	\item Is it computationally feasible to utilise all frames of propagating waves, or utilising certain frames can be efficient?
+	\item Does the implementation of different deep learning architectures results in different accuracies on damage identification? Is the comparison metric among these architectures sufficient for determining the efficient one?
+	\item Do deep learning techniques for delamination identification utilised in this project have any potential in practical applications in the long term?
+\end{itemize}
