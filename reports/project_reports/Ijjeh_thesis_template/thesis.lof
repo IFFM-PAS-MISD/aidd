@@ -1,28 +1,28 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Organization of SHM systems.\relax }}{6}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Fundamental Lamb wave modes: (a)\nobreakspace {}\(A_0\) mode, (b)\nobreakspace {}\( S_0\) mode\relax }}{10}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Fundamental Lamb wave modes: (a)\nobreakspace {}\(A_0\) mode, (b)\nobreakspace {}\( S_0\) mode\relax }}{9}{figure.caption.8}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces (a) Pulse echo (b) Pitch catch\relax }}{11}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces (a) Conventional Programming (b) Machine learning\relax }}{18}{figure.caption.13}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Machine Learning Approaches\relax }}{19}{figure.caption.15}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Reinforcement Learning\relax }}{20}{figure.caption.17}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Auto-associative Neural Network architecture\relax }}{23}{figure.caption.22}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces SVM for 2D and 3D feature space.\relax }}{25}{figure.caption.27}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces KNN algorithm: data classification with \(K=6\).\relax }}{26}{figure.caption.29}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Decision tree.\relax }}{27}{figure.caption.31}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Structure of Perceptron\relax }}{28}{figure.caption.32}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces The process of Gradient Descent\relax }}{29}{figure.caption.34}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Local minima\relax }}{30}{figure.caption.36}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Saddle point\relax }}{31}{figure.caption.37}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Convolution operation with a sliding kernel.\relax }}{32}{figure.caption.38}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Types of downsampling operations\relax }}{33}{figure.caption.39}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Convolutional Neural Network architecture\relax }}{33}{figure.caption.40}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces (a) RNN v.s. (b) Feed-forward neural network\relax }}{34}{figure.caption.41}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Unrolled RNN.\relax }}{35}{figure.caption.42}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces LSTM architecture.\relax }}{35}{figure.caption.43}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces ConvLSTM architecture.\relax }}{37}{figure.caption.44}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces (a) Conventional ML based SHM vs. (b) DL based SHM.\relax }}{38}{figure.caption.45}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces (a) Conventional Programming (b) Machine learning\relax }}{17}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Machine Learning Approaches\relax }}{18}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Reinforcement Learning\relax }}{18}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Auto-associative Neural Network architecture\relax }}{22}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces SVM for 2D and 3D feature space.\relax }}{24}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces KNN algorithm: data classification with \(K=6\).\relax }}{25}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Decision tree.\relax }}{26}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Structure of Perceptron\relax }}{27}{figure.caption.32}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces The process of Gradient Descent\relax }}{28}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Local minima\relax }}{29}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Saddle point\relax }}{30}{figure.caption.37}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Convolution operation with a sliding kernel.\relax }}{31}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Types of downsampling operations\relax }}{32}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Convolutional Neural Network architecture\relax }}{32}{figure.caption.40}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces (a) RNN v.s. (b) Feed-forward neural network\relax }}{33}{figure.caption.41}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Unrolled RNN.\relax }}{34}{figure.caption.42}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces LSTM architecture.\relax }}{34}{figure.caption.43}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces ConvLSTM architecture.\relax }}{36}{figure.caption.44}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces (a) Conventional ML based SHM vs. (b) DL based SHM.\relax }}{37}{figure.caption.45}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Setup for computing Lamb wave interactions with delamination.\relax }}{44}{figure.caption.46}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Exemplary locations, sizes and shapes of random delaminations used for Lamb wave propagation modeling.\relax }}{45}{figure.caption.47}%

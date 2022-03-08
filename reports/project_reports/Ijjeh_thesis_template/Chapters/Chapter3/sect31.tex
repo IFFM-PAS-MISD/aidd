@@ -2,13 +2,13 @@
 \section{Machine learning approach}
 \label{sec31}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Machine learning (ML) is a sub-field of AI which belongs to computer science field. 
+Machine learning (ML) is a sub-field of AI which belongs to the computer science field. 
 ML is defined as \enquote{the ability of a computer to learn without being explicitly programmed}~\cite{munoz2014machine}.
 
-The conventional way of software engineering is through creating rules by human and combine them with data to create a solution to a problem.
+The conventional way of software engineering is by creating rules by humans and combining them with data to create a solution to a problem.
 Alternatively, when it comes to ML, it utilises data and answers to learn the rules behind the problem~\cite{franoischollet2017learning}.
 In Fig.~\ref{fig:Machine_learning} the conventional software programming and ML are presented in (a) and (b) respectively.
-In ML, machines have to run into a learning process to learn inference rules which are responsible for controlling the relations within a phenomenon. Hence, it is called a ML.
+In ML, machines have to run into a learning process to learn inference rules, which are responsible for controlling the relations within a phenomenon. Hence, it is called an ML.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\begin{center}
@@ -22,11 +22,11 @@ In ML, machines have to run into a learning process to learn inference rules whi
 \paragraph{}
 ML techniques in SHM were heavily utilised by researchers for damage detection~\cite{raghavan2008effects, Su2009, Mitra2016}.
 Moreover, ML techniques attempt to map the patterns of the input data acquired by sensors to output targets for a damage estimation at different levels. 
-Accordingly, ML techniques demands high domain knowledge of the examiner to perform hand-crafted damage-sensitive feature extraction on the raw data acquired by sensors before being fed into a suitable ML model.
+Accordingly, ML techniques demand high domain knowledge of the examiner to perform hand-crafted damage-sensitive feature extraction on the raw data acquired by sensors before being fed into a suitable ML model.
 Generally, the process of damage-sensitive features extraction (hand-crafted) in the field of SHM emerged due to the enormous development in the physics-based SHM techniques such as modal strain energy (MSE)~\cite{Kim}, modal curvature (MC)~\cite{Wahab}, modal assurance criterion (MAC), and Coordinate (MAC)~\cite{Allemang2003}, modal flexibility (MF)~\cite{Jaishi}, damage locating vector (DLV)~\cite{Bernal2002}, wavelet transform~\cite{Staszewski,Kima} and probabilistic reconstruction algorithm (PRA)~\cite{Hay2006} among others.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-There are different methods which can be implemented when performing ML. 
+Different methods can be implemented when performing ML. 
 Generally, those methods are grouped into four approaches: Supervised learning, Unsupervised learning, Reinforcement learning, and Transfer learning approach.
 Fig.~\ref{fig:Machine_learning_approaches} shows the different types of ML approaches.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -40,11 +40,11 @@ Fig.~\ref{fig:Machine_learning_approaches} shows the different types of ML appro
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{}
-Supervised learning is the task of learning a machine the inference rules from the training data, and how to map inputs with outputs.
-The training data is a collection of variables together with its labels e.g. a set of civil images of structures that are labelled as cracked or undamaged.
+Supervised learning is the task of training a machine how to develop inference rules from the training data, and how to map inputs with outputs.
+The training data is a collection of variables together with its labels (e.g. a set of civil images) of structures that are labelled as cracked or undamaged (healthy).
 During the learning process, the machine gets a collection of inputs simultaneously with the corresponding label (ground truth).
 Accordingly, by comparing its predicted output with the correct output to find errors, it modifies the model and the learning occurs~\cite{Ongsulee2018}. 
-Supervised learning uses patterns to predict the values of the output label  for new unlabeled data by applying methods like regression and classification~\cite{Ongsulee2018}. 
+Supervised learning uses patterns to predict the values of the output label for new unlabeled data by applying methods like regression and classification~\cite{Ongsulee2018}. 
 %Fig~\ref{fig:Machine_learning_approaches} presents most utilised algorithms for ML different approaches like: 
 %K Nearest Neighbors algorithm (KNN) where K represents the number of the nearest neighbours used for classification of the observations in a test sample, based on their characteristics e.g. the mean distance. 
 %Moreover,Decision Trees where the data keeps splitting according to a specific parameter. 
@@ -58,9 +58,8 @@ Consequently, unsupervised learning is more difficult than supervised learning, 
 %The most well-known techniques used in Unsupervised learning is clustering~\cite{Russell2010}. 
 %In which it creates subgroups within the input data based on their characteristics, Fig~\ref{fig:Machine_learning_approaches} presents most Clustering algorithms like:k-means algorithm, which intends to split n observations into k clusters, where each observation relates to the cluster that has the nearest mean distance.   
 
-Reinforcement learning is based on the trial and error principle, which means the algorithm learns through actions that explore the environment in a way that results with the greatest rewards~\cite{Russell2010}.
-In this approach of learning the process consists of three parts: the agent which is responsible for making decisions, the environment that relates to any interaction with the agent, and the actions that are made by the agent. Fig.~\ref{fig:ReinforcementLearning} illustrates the procedure of the reinforcement learning approach.
-%Fig~\ref{fig:Machine_learning_approaches} presents some examples of reinforcement learning.
+Reinforcement learning is based on the trial and error principle, which means the algorithm learns through actions that explore the environment in a way that results in the greatest rewards~\cite{Russell2010}.
+In this approach of learning, the process consists of three parts: the agent, which is responsible for making decisions, the environment that relates to any interaction with the agent, and the actions that are made by the agent. Figure.~\ref{fig:ReinforcementLearning} illustrates the procedure of the reinforcement learning approach.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\begin{center}
@@ -72,8 +71,8 @@ In this approach of learning the process consists of three parts: the agent whic
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Transfer learning is different compared to the traditional ML approaches that are designed to particular tasks, which means their learning and knowledge can not be transferred from one model to another.
-Therefore, when starting a new ML task we have to start from scratch.
+Transfer learning differs compared to the traditional ML approaches that are designed for particular tasks, which means their learning, and knowledge can not be transferred from one model to another.
+Therefore, when starting a new ML task, we have to start from scratch.
 On the contrary, in transfer learning, the model knowledge (e.g features and weights) can be transferred from a previously learned task to a new learning task.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection[Data prepossessing and FE]{Data prepossessing and feature extraction techniques}		
