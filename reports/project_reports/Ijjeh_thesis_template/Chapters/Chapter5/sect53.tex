@@ -6,6 +6,43 @@
 \label{sec531}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{Evaluation metrics of the four numerical cases}
+	\begin{tabular}{ccccc}
+		\toprule
+		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+		\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+		\midrule
+		1 & 717 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{613} & \(14.5\%\) \\ 
+		2 & 257 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{171} & \(33.46\%\) \\ 
+		3 & 105 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{106} & \(0.95\%\) \\ 
+		4 & 537 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{549} & \(2.23\%\) \\ 
+		\bottomrule
+	\end{tabular}	
+	\label{tab:num_cases}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+	\centering
+	\caption{Mean intersection over union \(\overline{IoU}\) for numerical cases with respect to the input of the model}
+	\begin{tabular}{llc}
+		\toprule
+		Input & Model & \(\overline{IoU}\) \\ 
+		\midrule
+		Animations & Autoencoder ConvLSTM & 0.87 \\ 
+		\midrule
+		\multirow{3}{*}{RMS images}  
+		& FCN-DenseNet~\cite{Ijjeh2021} & 0.62   \\
+		& FCN-DenseNet~\cite{Ijjeh2022} & 0.68   \\
+		& GCN~\cite{Ijjeh2022}          & 0.76   \\ 
+		\bottomrule
+	\end{tabular}
+	\label{tab:meanIoU_vs_input}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{.48\textwidth}
@@ -115,7 +152,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1]{Figures/Chapter_5/figure9b_.png}
+		\includegraphics[scale=1.1]{Figures/Chapter_5/figure9b_.png}
 		\caption{Corresponding frames of guided waves.} 
 		\label{fig:CFRP_teflon_3o_shapes_}
 	\end{subfigure}
@@ -130,12 +167,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
-	\includegraphics[scale=1]{Figures/Chapter_5/figure10.png}
+	\includegraphics[scale=1.1]{Figures/Chapter_5/figure10.png}
 	\caption{Predictions for window centered at selected frames (Teflon insert - single delamination).}
 	\label{fig:CFRP_Teflon_3o_predictions}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -165,4 +201,131 @@
 \subsubsection{Multiple delaminations}
 \label{sec5322}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specimens delamination arrangements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\centering
+	\includegraphics[scale=.75]{Figures/Chapter_5/figure8.png}
+	\caption{Delamination arrangements in the specimen.}
+	\label{fig:specime}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specimen~II
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\centering
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/figure14a.png}
+		\caption{GT of Specimen~II}
+		\label{fig:gt_specimen_2}
+	\end{subfigure}
+	\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/figure14c.png}
+		\caption{\(IoU\) = \(0.35\)} 
+		\label{fig:L3_S2_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/figure14a.png}
+		\caption{GT of Specimen~III}
+		\label{fig:gt_specimen_3}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/figure14f.png}
+		\caption{\(IoU\) = \(0.32\)} 
+		\label{fig:L3_S3_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Specimen~IV
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/figure14a.png}
+		\caption{GT of Specimen~IV}
+		\label{fig:gt_specimen_4}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/figure14i.png}
+		\caption{\(IoU\) = \(0.27\)} 
+		\label{fig:L3_S4_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{Experimental cases of Specimens II, III, and IV.}
+	\label{fig:exp_case}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_5/figure15a.png}
+		\caption{IoU for the sliding window centered at consecutive frames.}
+		\label{fig:L3_S4_B_333x333p_50kHz_5HC_IoU}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1.1]{Figures/Chapter_5/figure15b.png}
+		\caption{Corresponding frames of guided waves.} 
+		\label{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{IoU for the sliding window of frames (Specimen~IV).}
+	\label{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=1]{Figures/Chapter_5/figure16.png}
+	\caption{Predictions for window centered at selected frames (Specimen~IV).}
+	\label{fig:L3_S4_B_5HC_predictions}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RMS predictions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure17b.png}
+		\caption{} 
+		\label{fig:RMS_L3_S4_B_ijjeh}
+	\end{subfigure}
+		\hfill
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{.42\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure18b.png}
+		\caption{} 
+		\label{fig:RMS_threshold_L3_S4_B_ijjeh}
+	\end{subfigure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\caption{Specimen~IV: (a) RMS image (damage map), (b) Thresholded RMS image}
+	\label{fig:RMS_L3_S4_B__images}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage

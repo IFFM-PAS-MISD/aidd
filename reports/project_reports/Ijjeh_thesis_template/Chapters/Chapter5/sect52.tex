@@ -203,24 +203,67 @@
 \end{figure}
 \clearpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{table}[ht!]
+%	\centering
+%	\caption{\(IoU\) of Numerical cases}
+%	\label{tab:table_numerical_cases}
+%	{
+%		\begin{tabular}{lcccc}
+%			\toprule
+%			Model & 1st case & 2nd case & 3rd case & 4th case \\ 
+%			\midrule 
+%			Res-UNet & \(0.50\) & \(0.45\) & \(0.67\) & \(0.80\) \\ 
+%			VGG16 encoder-decoder & \(0.51\) & \(0.69\) & \(0.75\) & \(0.65\)\\ 
+%			PSPNet & \(0.39\) & \(0.00\) & \(0.44\)  & \(0.77\) \\ 
+%			FCN-DenseNet & \(0.73\) & \(0.52\) & \(0.66\) & \(0.72\) \\
+%			GCN & \(0.79\) & \(0.71\) & \(0.72\) & \(0.86\) \\ 
+%			\bottomrule
+%		\end{tabular}
+%	}
+%\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[ht!]
 	\centering
-	\caption{\(IoU\) of Numerical cases}
-	\label{tab:table_numerical_cases}
-	{
-		\begin{tabular}{lcccc}
-			\toprule
-			Model & 1st case & 2nd case & 3rd case & 4th case \\ 
-			\midrule 
-			Res-UNet & \(0.50\) & \(0.45\) & \(0.67\) & \(0.80\) \\ 
-			VGG16 encoder-decoder & \(0.51\) & \(0.69\) & \(0.75\) & \(0.65\)\\ 
-			PSPNet & \(0.39\) & \(0.00\) & \(0.44\)  & \(0.77\) \\ 
-			FCN-DenseNet & \(0.73\) & \(0.52\) & \(0.66\) & \(0.72\) \\
-			GCN & \(0.79\) & \(0.71\) & \(0.72\) & \(0.86\) \\ 
-			\bottomrule
-		\end{tabular}
-	}
+	\caption{Evaluation metrics of the four numerical cases}
+	\begin{tabular}{cccccc}
+		\toprule
+		\multirow{2}{*}{Model} & \multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+		\cmidrule(lr){4-6} & & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+		\midrule
+		\multirow{4}{*}{Res-UNet} 
+		& 1 & 717 & \multicolumn{1}{c}{0.50} & \multicolumn{1}{c}{402} & \(43.93\%\) \\ 
+		& 2 & 257 & \multicolumn{1}{c}{0.45} & \multicolumn{1}{c}{143} & \(44.36\%\) \\ 
+		& 3 & 105 & \multicolumn{1}{c}{0.67} & \multicolumn{1}{c}{88} & \(16.19\%\) \\ 
+		& 4 & 537 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{478} & \(10.99\%\) \\ 
+		\midrule
+		\multirow{4}{*}{VGG16 encoder-decoder} 
+		& 1 & 717 & \multicolumn{1}{c}{0.51} & \multicolumn{1}{c}{410} & \(42.82\%\) \\ 
+		& 2 & 257 & \multicolumn{1}{c}{0.69} & \multicolumn{1}{c}{203} & \(21.01\%\) \\ 
+		& 3 & 105 & \multicolumn{1}{c}{0.75} & \multicolumn{1}{c}{117} & \(11.43\%\) \\ 
+		& 4 & 537 & \multicolumn{1}{c}{0.65} & \multicolumn{1}{c}{385} & \(28.31\%\) \\ 
+		\midrule
+		\multirow{4}{*}{FCN-DenseNet} 
+		& 1 & 717 & \multicolumn{1}{c}{0.73} & \multicolumn{1}{c}{1073} & \(49.65\%\) \\ 
+		& 2 & 257 & \multicolumn{1}{c}{0.52} & \multicolumn{1}{c}{505} & \(96.50\%\) \\ 
+		& 3 & 105 & \multicolumn{1}{c}{0.66} & \multicolumn{1}{c}{118} & \(12.38\%\) \\ 
+		& 4 & 537 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{815} & \(51.77\%\) \\ 
+		\midrule
+		\multirow{4}{*}{PSPNet} 
+		& 1 & 717 & \multicolumn{1}{c}{0.39} & \multicolumn{1}{c}{596} & \(16.88\%\) \\ 
+		& 2 & 257 & \multicolumn{1}{c}{0.00} & \multicolumn{1}{c}{0} & \(-\%\) \\ 
+		& 3 & 105 & \multicolumn{1}{c}{0.44} & \multicolumn{1}{c}{} & \(\%\) \\ 
+		& 4 & 537 & \multicolumn{1}{c}{0.77} & \multicolumn{1}{c}{} & \(\%\) \\ 
+		\midrule
+		\multirow{4}{*}{GCN} 
+		& 1 & 717 & \multicolumn{1}{c}{0.79} & \multicolumn{1}{c}{} & \(\%\) \\ 
+		& 2 & 257 & \multicolumn{1}{c}{0.71} & \multicolumn{1}{c}{} & \(\%\) \\ 
+		& 3 & 105 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{} & \(\%\) \\ 
+		& 4 & 537 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{} & \(\%\) \\ 
+		\bottomrule
+	\end{tabular}	
+	\label{tab:RMS_num_cases}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -262,6 +305,7 @@
 		\end{tabular}
 	}
 \end{table}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental cases}
 \label{sec522}
