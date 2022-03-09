@@ -36,9 +36,9 @@
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Schematic diagram of the approach used for comparison of semantic segmentation methods accuracy.\relax }}{52}{figure.caption.54}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Res-UNet architecture.\relax }}{54}{figure.caption.55}%
 \contentsline {figure}{\numberline {4.11}{\ignorespaces VGG16 encoder decoder architecture.\relax }}{55}{figure.caption.56}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Dense block architecture.\relax }}{55}{figure.caption.57}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Dense block architecture.\relax }}{56}{figure.caption.57}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces FCN-DenseNet architecture.\relax }}{56}{figure.caption.58}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces PSPNet architecture.\relax }}{57}{figure.caption.60}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces PSPNet architecture.\relax }}{58}{figure.caption.60}%
 \contentsline {figure}{\numberline {4.15}{\ignorespaces Global Convolution Network whole architecture.\relax }}{58}{figure.caption.61}%
 \contentsline {figure}{\numberline {4.16}{\ignorespaces (a) Residual block, (b) Global Convolution Network block, (c) Boundary Refinement\relax }}{59}{figure.caption.62}%
 \contentsline {figure}{\numberline {4.17}{\ignorespaces Sample frames of full wave propagation.\relax }}{60}{figure.caption.63}%
