@@ -1,3 +1,4 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -9,5 +10,5 @@
 \contentsline {table}{\numberline {5.2}{\ignorespaces Analysis of numerical cases\relax }}{77}{table.caption.77}%
 \contentsline {table}{\numberline {5.3}{\ignorespaces Model parameters\relax }}{77}{table.caption.78}%
 \contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics of the four numerical cases\relax }}{79}{table.caption.80}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Mean intersection over union \(\overline {IoU}\) for numerical cases with respect to the input of the model\relax }}{79}{table.caption.81}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Mean \(IoU\) for numerical cases with respect to the input of the model\relax }}{79}{table.caption.81}%
 \addvspace {10\p@ }
