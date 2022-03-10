@@ -6,7 +6,7 @@
 \label{sec531}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[]
+\begin{table}[!ht]
 	\centering
 	\caption{Evaluation metrics of the four numerical cases}
 	\begin{tabular}{ccccc}
@@ -14,22 +14,22 @@
 		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
 		\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
 		\midrule
-		1 & 717 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{613} & \(14.5\%\) \\ 
-		2 & 257 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{171} & \(33.46\%\) \\ 
-		3 & 105 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{106} & \(0.95\%\) \\ 
-		4 & 537 & \multicolumn{1}{c}{} & \multicolumn{1}{c}{549} & \(2.23\%\) \\ 
+		1 & 717 & \multicolumn{1}{c}{0.78} & \multicolumn{1}{c}{613} & \(14.5\%\) \\ 
+		2 & 257 & \multicolumn{1}{c}{0.53} & \multicolumn{1}{c}{171} & \(33.46\%\) \\ 
+		3 & 105 & \multicolumn{1}{c}{0.94} & \multicolumn{1}{c}{106} & \(0.95\%\) \\ 
+		4 & 537 & \multicolumn{1}{c}{0.94} & \multicolumn{1}{c}{549} & \(2.23\%\) \\ 
 		\bottomrule
 	\end{tabular}	
 	\label{tab:num_cases}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[]
+\begin{table}[!ht]
 	\centering
 	\caption{Mean \(IoU\) for numerical cases with respect to the input of the model}
 	\begin{tabular}{llc}
 		\toprule
-		Input & Model & \(\overline{IoU}\) \\ 
+		Input & Model & mean \(IoU\) \\ 
 		\midrule
 		Animations & Autoencoder ConvLSTM & 0.87 \\ 
 		\midrule
