@@ -30,6 +30,7 @@ Accordingly, CNN models with fully connected dense layers were developed for del
 Moreover, the developed models are based on supervised learning to perform a classification task, therefore for each generated case of delamination a ground truth (label) is given.
  
 \subsection{Data preprocessing}
+\label{sec421}
 In order to reduce the computation complexity for the model, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels.  
 Then, it was split it into \((14\times 14)\) blocks, and each block has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49blocks}.
 Consequently, the preprocessed dataset has a size of \((93100\times 32\times 32 \times 1)\), where (\(93100\)) is the total number of blocks for all \(475\) cases.
@@ -76,6 +77,7 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{CNN classification models}
+\label{sec422}
 The architecture of the implemented CNN model for classification purposes is presented in Fig.~\ref{CNN_model}
 The model takes an input block of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
 Moreover, in the convolution operation, the padding was set to be the same,  and the activation function was Relu.

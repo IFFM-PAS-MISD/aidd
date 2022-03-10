@@ -29,7 +29,7 @@ The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the sof
 It should be noted, as there are only two classes to predict, a Sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the predicted outputs.
 
 The implemented DL models for pixel-wise semantic segmentation for delaminations identification are depicted in Figure~\ref{fig:flowchart}.
-In the following subsections, the data preprocessing and the five DL models will be illustrated.
+In the following subsections~(\ref{sec431}~-~\ref{sec436}), the data preprocessing and the five DL models will be illustrated.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -40,6 +40,7 @@ In the following subsections, the data preprocessing and the five DL models will
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Data preprocessing}
+\label{sec431}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The implemented FCN models for pixel-wise image segmentation have a one-to-one prediction scheme.
 In other words, the models take one image input and predict one output image.
@@ -56,6 +57,7 @@ The main advantage of the K-folds method versus a regular train/test split is to
 Therefore, by using this technique, I aim to improve the ability of the model to generalise and reduce overfitting.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Residual UNet model}
+\label{sec432}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The Residual UNet (Res-UNet) model was inspired based on residual learning~\cite{He2016} and UNet approaches~\cite{Ronneberger2015}.
 The Res-UNet architecture is depicted in Fig.~\ref{fig:Unet}.
@@ -92,6 +94,7 @@ Furthermore, the number of filters used by the convolutional layer is reduced by
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{VGG16 encoder-decoder}
+\label{sec433}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The application of the VGG16~\cite{Simonyan2015} architecture as a backbone encoder to the UNet~\cite{Ronneberger2015} approach is addressed in this model.
 VGG16 is a classification algorithm that consists of 13 convolutional layers, pooling layers, and (3) dense layers.
@@ -113,6 +116,7 @@ In order to improve recovering fine-grained information, skip connections were a
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{FCN-DenseNet model}
+\label{sec434}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 FCN-DenseNet is a pixel-wise image segmentation algorithm that was first introduced in~\cite{Jegou}.
 To boost the resolution of the final feature map, FCN-DenseNet uses a U-shaped encoder-decoder architecture with skip connections between downsampling and upsampling channels.
@@ -171,6 +175,7 @@ Table~\ref{layers} presents the architecture of a single layer, the transition d
 \end{table}\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pyramid Scene Parsing Network}
+\label{sec435}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The main idea of PSPNet~\cite{zhao2017pyramid} is to combine local and global features to give appropriate global contextual information for pixel-level scene parsing.
 As a result, a spatial pyramid pooling module was developed to execute four different layers of pooling with four different pooling sizes and strides.
@@ -194,6 +199,7 @@ The pixel-wise segmentation predictions were then generated using two cascaded c
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Global Convolutional Network}
+\label{sec436}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Peng et al.~\cite{Peng2017} introduced the Global Convolutional Network (GCN) to address the importance of having large kernels for both localization and classification operations for semantic segmentation in order to increase the size of respective fields.
 However, when performing classification and localization tasks, a contradiction emerges due to the fact that classification tasks necessitate invariant models for various transformations such as rotation and translation while localisation tasks necessitate models that are sensitive to any modification and appropriately assign each pixel to its semantic category.
