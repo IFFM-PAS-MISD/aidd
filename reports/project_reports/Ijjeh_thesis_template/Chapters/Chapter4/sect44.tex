@@ -1,7 +1,7 @@
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
 \section{Delamination identification using animation of full wavefield frames}
 \label{sec44}
-In this section, we used full wavefield frames of Lamb waves propagation in an end-to-end deep learning model to identify CFRP delamination instead of using RMS images as in the FCN models.
+In this section, I utilised full wavefield frames of Lamb waves propagation in an end-to-end deep learning model to identify CFRP delamination instead of using RMS images as in the FCN models.
 Accordingly, a many-to-one prediction scheme was adopted by employing convolutional-based recurrent neural networks (RNNs) to perform pixel-wise image segmentation.
 A sequence of full wavefield frames is fed into the proposed deep learning models in order to identify the delamination.
 Hence, in the segmentation problem, there are two classes: undamaged and damaged.
@@ -35,13 +35,13 @@ Furthermore, the dataset was divided into two sets: training and testing, with a
 Moreover, a certain portion of the training set was preserved as a validation set to validate the model during the training process.
 Additionally, the dataset was normalised to a range of \((0, 1)\) to improve the convergence of the gradient descent algorithm.
 
-Additionally, for the training set for Model-II, we have upsampled the frames (by using cubic interpolation) to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
+Additionally, for the training set for Model-II, I have upsampled the frames (by using cubic interpolation) to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
 Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding the training sets for Model-I for Model-II, respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining intermediate predictions for the testing cases and finally calculating the RMS image, where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, (\(n=512\)) in our dataset.
 Further, \(m\) refers to the number of frames in the window, hence, \(m=64\) frames for Model-I and \(m=24\) frames for Model~II, and \(k\) represents the total number of windows.
-Accordingly, we slide the window over all input frames.
+Accordingly, I slide the window over all input frames.
 The shift of the window is one frame at a time.
 Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to final damage map by using the RMS:
 
@@ -57,28 +57,28 @@ Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and c
 	\label{fig:Diagram_exp_predictions}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Encoder-Decoder ConvLSTM model}
+\subsection{Autoencoder ConvLSTM model}
 \label{proposed_approach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this work, we developed an end-to-end deep learning model utilising full wavefield frames of Lamb wave propagation for delamination identification in CFRP materials as presented in Fig.~\ref{fig:proposed_convLSTM_model}.
+In this work, I developed an end-to-end deep learning model utilising full wavefield frames of Lamb wave propagation for delamination identification in CFRP materials as presented in Fig.~\ref{fig:proposed_convLSTM_model}.
 The developed model has a scheme of many-to-one sequence prediction, which takes \(n\) number of frames representing the full wavefield propagation through time and their interaction with the delamination to extract damage features, and finally predict the delamination location, shape, and size in a single output image.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
 	\includegraphics[width=5cm]{Figures/Chapter_4/figure3b.png}
-	\caption{Encoder-Decoder ConvLSTM model architecture.}
+	\caption{Autoencoder ConvLSTM model architecture.}
 	\label{fig:proposed_convLSTM_model}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In the implemented model, we applied an autoencoder technique (AE) which is well-known for extracting spatial features.
+In the implemented model, I applied an autoencoder technique (AE) which is well-known for extracting spatial features.
 The idea of AE is to compress the input data within the encoding process then learn how to reconstruct it back from the reduced encoded representation (latent space) to a representation that is as close to the original input as possible. 
-Hence, we have investigated the use of AE to process a sequence of input frames to perform image segmentation.
+Hence, I have investigated the use of AE to process a sequence of input frames to perform image segmentation.
 Therefore, a Time Distributed layer presented in Fig.~\ref{fig:TD} was introduced to the model, in which it distributes the input frames into the AE layers in order to process them independently.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=5cm]{Figures/Chapter_4/figure4_TD.png}
+	\includegraphics[width=8cm]{Figures/Chapter_4/figure4_TD.png}
 	\caption{Flow of input frames using Time distributed layer.}
 	\label{fig:TD}
 \end{figure}
@@ -99,12 +99,7 @@ The decoder part consists of two 2D convolutional operations followed by Batch N
 Skip connections linking the encoder with the corresponding decoder levels were added to enhance the features extraction process.
 The outputs of the decoder were forwarded into the ConvLSTM2D layer to learn long-term spatiotemporal features.
 
-Further, we applied a 2D convolutional layer as the final output layer followed by a sigmoid activation function which outputs values in a range from \((0,1)\) to indicate the delamination probability.
+Further, I applied a 2D convolutional layer as the final output layer followed by a sigmoid activation function which outputs values in a range from \((0,1)\) to indicate the delamination probability.
 Consequently, a threshold value must be chosen to classify the output into a damaged represented by (\(1\)) or undamaged represented by (\(0\)).
-Hence, we set the threshold value to (\(0.5\)) to exclude all values below the threshold by considering them as undamaged and taking only those values greater than the threshold to be considered as damaged.
-
-For evaluating the performance of the proposed model, the mean 
-intersection over union \(IoU\) (was also used in FCN models and CNN classifier model) was applied as the accuracy metric. 
-\(IoU\) is estimated by determining the intersection
-area between the ground truth and the predicted output. 
-\newpage
+Hence, I set the threshold value to (\(0.5\)) to exclude all values below the threshold by considering them as undamaged and taking only those values greater than the threshold to be considered as damaged.
+\clearpage

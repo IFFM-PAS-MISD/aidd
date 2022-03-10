@@ -1,5 +1,5 @@
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
-\section{Delamination identification using FCN}
+\section{Delamination identification using FCN models}
 \label{sec43}
 DL approaches have advanced quickly in recent years in many different real-world applications.
 An important and challenging application among others in DL is computer vision, in which we train a machine to automatically extract useful information from digital images, videos, and other visual inputs.
@@ -17,43 +17,16 @@ Hence, FCN can be implemented by stacking convolutional layers and skipping dens
 The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations.
 While the decoder is responsible for upsampling the condensed feature maps to the original input shape.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The softmax activation function was used at the output layer for all constructed models.
-For every single pixel, the softmax estimates the probability of each predicted output being damaged or undamaged, implying that the sum of the two probabilities must be one.
-The softmax activation function is depicted by Eq.~(\ref{softmax}), where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) across all potential target classes \(x_{j}\), C in our instance being two classes (damaged and undamaged).
-An argmax function is used to find the maximum probability between each of them in order to predict the label of the output (\(y_{pred}\)).
-\begin{equation}
-	P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
-	\label{softmax}
-\end{equation} 
-\begin{equation}
-	y_{pred} = argmax_{i}\left( P(x)_{i} \right)
-	\label{argmax}
-\end{equation}
-Choosing the right loss function is crucial since it determines how effectively the model learns and performs.
-As a result, the categorical cross-entropy (CCE) loss function~\cite{Bonaccorso2020}, commonly known as the \enquote{softmax loss function}, was utilised.
+The softmax function (see Eqn.\ref{softmax}) was used at the output layer for all developed FCN models.
+Additionally, the categorical cross-entropy (CCE) loss function~\cite{Bonaccorso2020}, commonly known as the \enquote{softmax loss function}, was utilised in all FCN models.
 The difference between the actual damage (ground truth) and the expected damage is estimated using CCE as the objective function.
-Furthermore, because there are only two classes to predict, a Sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the anticipated outputs.
 The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the softmax value of the target class.
 \begin{equation}	
 	CCE = -\log\left( P(x)_{i} \right)
 	\label{CCE}
 \end{equation}
 
-Further, it is important to choose an appropriate accuracy metric for the training purposes.
-Hence, intersection over union \((IoU)\) (Jaccard index)~\cite{Bertels2019} was utilised to measure the accuracy of prediction during training process.
-The intersection area between the ground truth and the predicted output is used to estimate \((IoU)\).
-In this work, the (IoU) is calculated solely for the damaged class label.
-Eq.~(\ref{IoU}) defines the (IoU) metric as follows:
-\begin{equation}
-	IoU = \frac{Intersection}{Union} = \frac{\hat{Y} \cap Y}{\hat{Y} \cup Y} 
-	\label{IoU}
-\end{equation}
-where \(\hat{Y}\) refers to the predicted tensor values, while \(Y\) refers to the tensor of ground truth values.
-
-Moreover, the Adam optimizer was used as our optimizer to improve the (IoU) and decrease the loss during training.
+It should be noted, as there are only two classes to predict, a Sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the predicted outputs.
 
 The implemented DL models for pixel-wise semantic segmentation for delaminations identification are depicted in Figure~\ref{fig:flowchart}.
 In the following subsections, the data preprocessing and the five DL models will be illustrated.
@@ -74,13 +47,13 @@ Accordingly, to train the FCN models, the calculated RMS images of the full wave
 The dataset consisting of RMS images which were used in this research paper is available online~\cite{Kudela2020d}.
 
 To enhance the performance of the optimizer during the training process, the colour scale values were normalised to a range of \((0-1)\) instead of the initial scale which was in a range of \((0-255)\). 
-Furthermore, we have applied data augmentation to the dataset (\(475\) RMS images) by flipping the images horizontally, vertically, and diagonally. 
+Furthermore, I have applied data augmentation to the dataset (\(475\) RMS images) by flipping the images horizontally, vertically, and diagonally. 
 As a result, the dataset size increased four times \(1900\) images were produced. 
-We have split the dataset into two portions: \(80\%\) for the training set and \(20\%\) for the testing set. 
+I have split the dataset into two portions: \(80\%\) for the training set and \(20\%\) for the testing set. 
 Moreover, a K-folds cross-validation method~\cite{Srinivasan2019} was applied to the training set to reduce the overfitting which happens when the model is able to fit on the training data, while it poorly fit on the new unseen data. 
 In other words, the model only learns the patterns of the training data therefore the model will not generalise well. 
 The main advantage of the K-folds method versus a regular train/test split is to reduce the overfitting by utilising data more efficiently as every data sample is used in both training and validation. 
-Therefore, by using this technique, we aim to improve the ability of the model to generalise and reduce overfitting.
+Therefore, by using this technique, I aim to improve the ability of the model to generalise and reduce overfitting.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Residual UNet model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

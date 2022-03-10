@@ -1,21 +1,58 @@
-% Note that the text in the [] brackets is the one that will
-% appear in the table of contents, whilst the text in the {}
-% brackets will appear in the main thesis.
-
-%% CHAPTER HEADER /////////////////////////////////////////////////////////////////////////////////////
 \chapter[Results and Discussions]{Results and Discussions}
 \label{ch5}
 
-%% CHAPTER INTRODUCTION ///////////////////////////////////////////////////////////////////////////////
 The results and discussion regarding delamination identification in CFRP plates will be presented. 
-Accordingly, to verify the developed DL models, we evaluated them on unseen numerical test cases and further on experimental test cases.
-In the first section, we will present and discuss the results of the developed CNN classifier. 
-In the second section, we will present and discuss the results of the five developed FCN models, and accordingly, a comparison between them will be made.
-In the third section, the results, and discussion regarding the developed AE-ConvLSTM model are presented.
-In section four, the results of applying a super-resolution image reconstruction of full wavefield will be presented. 
+Accordingly, to verify the developed DL models, I evaluated them on unseen numerical test cases and further on experimental test cases.
 
-%% INCLUDE SECTIONS ///////////////////////////////////////////////////////////////////////////////////
+To evaluate the performance of the proposed models, the intersection over union \(IoU\) (Jaccard index) was applied as the accuracy metric.
+\(IoU\) is estimated by determining the intersection
+area between the ground truth and the predicted output.
+Further, we have two output classes (damaged and undamaged), the \(IoU\) was calculated for the damaged class only.
+Equation~(\ref{eqn:iou}) defines the \(IoU\) metric:
+\begin{equation}
+	IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y},
+	\label{eqn:iou}
+\end{equation}
+where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth.
 
+Additionally, the percentage area error $\epsilon$ depicted in Eq.~(\ref{eqn:mean_size_error}) was utilised to evaluate the performance of the FCN models and the Autoencoder ConvLSTM model:
+\begin{equation}
+	\epsilon=\frac{|A-\hat{A}|}{A} \times 100\%,
+	\label{eqn:mean_size_error}
+\end{equation}
+where \(A\) and \(\hat{A}\) refer to the area in mm\textsuperscript{2} of the damage class in the ground truth and the predicted output, respectively.
+Such metric can indicate how close the area of the predicted delamination is to the ground truth.
+Accordingly, the lower the value of $\epsilon$, the higher the accuracy of the identified damage. 
+
+For evaluating the DLSR model developed to perform super-resolution image reconstruction of full wavefield, two metrics are utilised.
+The first metric is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
+Equation~\ref{PSNR} depicts the mathematical representation of the PSNR:
+\begin{equation}
+	PSNR=20log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
+	\label{PSNR}
+\end{equation}
+where \(R\) represents the maximum fluctuation value exists in the input image, in our case \(R\) is \(255\), as I used 8-bit unsigned integer data type.
+
+The second utilised metric is the Pearson correlation coefficient, which measures the linear relationship between two variables \(X\) (represents the ground truth values) and \(Y\) (represents the predicted values), and its value is between -1 and 1, where:
+\begin{itemize}
+	\item -1 represents a perfect negative linear correlation.
+	\item 0 represents no linear correlation.
+	\item 1 represents a perfect positive linear correlation.
+\end{itemize}
+Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC commonly denoted as \(r_{xy}\):
+\begin{equation}
+	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
+	\label{Pearson}
+\end{equation}
+where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual value points representing the ground truth and predicted values, receptively, and \(\bar{x}\) is the mean value of the sample and analogously to \(\bar{y}\).
+
+In the following, I will present and discuss the results of the developed CNN classifier models in section~\ref{sec51}. 
+In section~\ref{sec52}, the results of the five developed FCN models will be presented and discussed.
+Accordingly, a comparison between the developed FCN models will be made.
+In section~\ref{sec53}, the results and discussion regarding the developed AE-ConvLSTM model are presented.
+Finally, in section~\ref{sec54}, I will present the results of applying the developed DLSR model to numerical cases to identify the damage in the reconstructed frames.
+Furthermore, I will apply the DLSR model to an experimental scenario to identify the delamination.
+%% INCLUDE SECTIONS ////////////////////////////////////////////////////////////////////////////////
 \input{Chapters/Chapter5/sect51}
 \input{Chapters/Chapter5/sect52}
 \input{Chapters/Chapter5/sect53}

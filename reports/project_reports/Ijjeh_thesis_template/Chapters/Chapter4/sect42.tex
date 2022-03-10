@@ -1,4 +1,4 @@
-%% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
+%% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
 \section{Delamination detection using fully connected CNN classifier}
 \label{sec42}
 
@@ -66,7 +66,7 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/GT_7_7_389.png}
+		\includegraphics[width=5cm]{Figures/Chapter_4/GT_8_8_389.png}
 		\caption{Label image splitted into (\(16\times 16\)) blocks.}
 		\label{fig:GT_64blocks}
 	\end{subfigure}
@@ -75,7 +75,7 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{CNN classification model}
+\subsection{CNN classification models}
 The architecture of the implemented CNN model for classification purposes is presented in Fig.~\ref{CNN_model}
 The model takes an input block of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
 Moreover, in the convolution operation, the padding was set to be the same,  and the activation function was Relu.
@@ -83,9 +83,31 @@ Then, a pooling layer is applied, which has a pool filter of size (\(2\times 2\)
 This operation of convolution and pooling is repeated two times.
 The output of the second pooling layer is flattened and fed into the dense layers in which the model has two fully connected layers.
 The first dense layer has (\(4096\)) neurons, and the second dense layer has (\(1024\)) neurons.
+A dropout of probability (\(p = 0.5\)) was added to the model to reduce the overfitting issue.
 
-Moreover, a dropout of probability (\(p = 0.5\)) was added to the model to reduce the overfitting issue.
-The final layer in the model is the output layer, in which the model outputs two predictions (damaged and undamaged), hence, a softmax activation function was applied. 
+Moreover, selecting a proper objective function (loss) during training is important as the loss function reflects how well the model learns to predict.
+Hence, I have applied the mean square error \((MSE)\) loss function depicted in Eqn.~\ref{mse}, which calculates the sum of the squared distances between the predicted output values and the ground truth values.
+\begin{equation}
+	MSE=\frac{1}{M*N}\sum_{M,N}^{}(Y_{(m,n)}-\hat{Y}_{(m,n)})^2
+	\label{mse}
+\end{equation}
+where \(M\) and \(N\)) are the number of rows and columns in the input images, \(Y_{(m,n)}\) is the ground truth value, and \(\hat{Y}_{(m,n)}\) is the predicted value.
+
+The final layer in the model is the output layer, in which the model outputs two predictions (damaged and undamaged), hence, softmax activation function was used.
+The softmax estimates the probability of each predicted output as being damaged or undamaged, which implies that the sum of the two probabilities must be one.
+The softmax activation function is depicted by Eq.~(\ref{softmax}), where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) across all potential target classes \(x_{j}\), C in our instance being two classes (damaged and undamaged).
+\begin{equation}
+	P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
+	\label{softmax}
+\end{equation} 
+
+Additionally, an argmax function is used to find the maximum probability between each of them in order to predict the label of the output (\(y_{pred}\)).
+Equation~\ref{argmax} depicts the argmax function.
+\begin{equation}
+	y_{pred} = argmax_{i}\left( P(x)_{i} \right)
+	\label{argmax}
+\end{equation}
+
 Accordingly, the whole block of size \((32\times 32)\) is classified as damaged if there is at least one pixel of delamination, otherwise, it is considered undamaged.
 Finally, the predicted output (delamination) is surrounded by a bounding box as the final output.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,15 +118,3 @@ Finally, the predicted output (delamination) is surrounded by a bounding box as 
 	\label{CNN_model}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Furthermore, to evaluate the predicted outputs we have utilised two accuracy metrics:
-\begin{itemize}
-	\item The classification accuracy to measure the capability of the model to detect the delamination.
-	\item The intersection over union (IoU) to measure the intersection between the bounding box area which surrounds the predicted delamination and the ground truth delamination.
-\end{itemize}
-
-Moreover, selecting a proper loss function during training the model is important since the loss function reflects how well the model learns to predict.
-In this model, I have applied the mean square error \((MSE)\) loss function, which calculates the sum of the squared distances between the predicted output values and the ground truth values.
-Moreover, my focus during training the models was on minimizing the loss function and maximizing the accuracy metric.
-Accordingly, an optimizer function is required to perform such an operation.
-Hence, in the developed models Adam optimizer was utilised~\cite{Kingma2015}. 

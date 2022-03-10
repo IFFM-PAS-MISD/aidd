@@ -70,15 +70,15 @@ The performance of the proposed technique is validated by an experiment performe
 
 \subsection{Dataset preparation}
 \label{sec62}
-In order to train deep learning models to perform super-resolution image reconstruction, we have to reproduce a low-resolution training set from the original high-resolution dataset. 
-Initially, we have resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low- to high-resolutions.
+In order to train deep learning models to perform super-resolution image reconstruction, I have to reproduce a low-resolution training set from the original high-resolution dataset. 
+Initially, I have resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low- to high-resolutions.
 
-In this work, we have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
-Hence, we have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(21.5\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
+In this work, I have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
+Hence, I have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(21.5\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
 
 Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
 
-To reduce the computation complexity during the training process of the deep learning models, we selected \((128)\) consecutive frames per each delamination case.
+To reduce the computation complexity during the training process of the deep learning models, I selected \((128)\) consecutive frames per each delamination case.
 Frames displaying the propagation of guided waves before interacting with the delamination have no features to be extracted. 
 Hence, only a certain number of frames was selected from the initial occurrence of the interactions with the delamination.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -177,7 +177,7 @@ The third segment is the Dense Feature Fusion (DFF) which is responsible for fus
 The purpose of global feature fusion is to learn global hierarchical features holistically.
 Hence, DFF fully utilise all features from all preceding segments.
 
-The last segment in the model is the Up-Sampling Net (UPNet), in which we applied the pixel shuffle technique~\cite{Shi2016}.
+The last segment in the model is the Up-Sampling Net (UPNet), in which I applied the pixel shuffle technique~\cite{Shi2016}.
 Further, the pixel shuffle performs sub-pixel convolution operation that is responsible to reshape its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \((C.r^2)\) is total number of channels, and \(r\) is the up-scaling factor.
 Accordingly, the number of channels at the last layer (output from DFF segment) must equal \(C.r^2\) for the total number of pixels in order to match the HR image to be obtained.
 Hence, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
