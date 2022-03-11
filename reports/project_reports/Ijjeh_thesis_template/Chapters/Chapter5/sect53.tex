@@ -1,47 +1,14 @@
 %% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
 \section{Autoencoder ConvLSTM model}
 \label{sec53}
-
+In this section, the evaluation of the developed AE-ConvLSTM model will be presented on the numerical test data and, further, on the experimental data to demonstrate its capability to predict delamination location, shape, and size.
+Hence, the four representative damage cases were selected from the numerical dataset to show the performance of the developed models.
+For numerical cases, it should be noted that the predicted results were obtained by using only the first window of frames after the interaction with the damage, as the delamination ground truths are provided, which is not the case for real-life scenarios as in the experimental section. 
+Consequently, the part of producing intermediate predictions and further calculating the RMS image was skipped (see Fig.~\ref{fig:Diagram_exp_predictions}).
 \subsection{Numerical cases}
 \label{sec531}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[!ht]
-	\centering
-	\caption{Evaluation metrics of the four numerical cases}
-	\begin{tabular}{ccccc}
-		\toprule
-		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
-		\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
-		\midrule
-		1 & 717 & \multicolumn{1}{c}{0.78} & \multicolumn{1}{c}{613} & \(14.5\%\) \\ 
-		2 & 257 & \multicolumn{1}{c}{0.53} & \multicolumn{1}{c}{171} & \(33.46\%\) \\ 
-		3 & 105 & \multicolumn{1}{c}{0.94} & \multicolumn{1}{c}{106} & \(0.95\%\) \\ 
-		4 & 537 & \multicolumn{1}{c}{0.94} & \multicolumn{1}{c}{549} & \(2.23\%\) \\ 
-		\bottomrule
-	\end{tabular}	
-	\label{tab:num_cases}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[!ht]
-	\centering
-	\caption{Mean \(IoU\) for numerical cases with respect to the input of the model}
-	\begin{tabular}{llc}
-		\toprule
-		Input & Model & mean \(IoU\) \\ 
-		\midrule
-		Animations & Autoencoder ConvLSTM & 0.87 \\ 
-		\midrule
-		\multirow{3}{*}{RMS images}  
-		& FCN-DenseNet~\cite{Ijjeh2021} & 0.62   \\
-		& FCN-DenseNet~\cite{Ijjeh2022} & 0.68   \\
-		& GCN~\cite{Ijjeh2022}          & 0.76   \\ 
-		\bottomrule
-	\end{tabular}
-	\label{tab:meanIoU_vs_input}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
@@ -100,9 +67,47 @@
 		\caption{}
 		\label{fig:convlstm_pred_397}	
 	\end{subfigure}
-	\caption{Four delamination cases based on numerical data (ConvLSTM autoencoder).}
+	\caption{Four delamination cases based on numerical data (AE-ConvLSTM).}
 	\label{fig:Num_convlstm__case}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!ht]
+	\centering
+	\caption{Evaluation metrics of the four numerical cases}
+	\begin{tabular}{ccccc}
+		\toprule
+		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+		\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+		\midrule
+		1 & 717 & \multicolumn{1}{c}{0.78} & \multicolumn{1}{c}{613} & \(14.5\%\) \\ 
+		2 & 257 & \multicolumn{1}{c}{0.53} & \multicolumn{1}{c}{171} & \(33.46\%\) \\ 
+		3 & 105 & \multicolumn{1}{c}{0.94} & \multicolumn{1}{c}{106} & \(0.95\%\) \\ 
+		4 & 537 & \multicolumn{1}{c}{0.94} & \multicolumn{1}{c}{549} & \(2.23\%\) \\ 
+		\bottomrule
+	\end{tabular}	
+	\label{tab:num_cases}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!ht]
+	\centering
+	\caption{Mean \(IoU\) for numerical cases with respect to the input of the model}
+	\begin{tabular}{llc}
+		\toprule
+		Input & Model & mean \(IoU\) \\ 
+		\midrule
+		Animations & Autoencoder ConvLSTM & 0.87 \\ 
+		\midrule
+		\multirow{3}{*}{RMS images}  
+		& FCN-DenseNet~\cite{Ijjeh2021} & 0.62   \\
+		& FCN-DenseNet~\cite{Ijjeh2022} & 0.68   \\
+		& GCN~\cite{Ijjeh2022}          & 0.76   \\ 
+		\bottomrule
+	\end{tabular}
+	\label{tab:meanIoU_vs_input}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 
 %% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
