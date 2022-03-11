@@ -32,12 +32,12 @@ Moreover, the developed models are based on supervised learning to perform a cla
 \subsection{Data preprocessing}
 \label{sec421}
 In order to reduce the computation complexity for the model, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels.  
-Then, it was split it into \((14\times 14)\) blocks, and each block has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49blocks}.
-Consequently, the preprocessed dataset has a size of \((93100\times 32\times 32 \times 1)\), where (\(93100\)) is the total number of blocks for all \(475\) cases.
+Then, it was split it into \((14\times 14)\) patches, and each patch has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49patches}.
+Consequently, the preprocessed dataset has a size of \((93100\times 32\times 32 \times 1)\), where (\(93100\)) is the total number of patches for all \(475\) cases.
 
-To investigate the effect of increasing the resolution of RMS images over delamination identification, I made another preparation by upsampling the RMS input image to \((512\times 512)\) pixels with cubic interpolation. Then the upsampled RMS image was split into \(16\times 16\) blocks, and each block has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_64blocks}.
-The second preprocess dataset has a size of \((121600 \times 32 \times 32 \times 1)\), where (\(121600\)) is the total number of blocks for all \(475\) cases.
-For each block in the RMS input image, there is a corresponding block in the ground truth image of size \((32\times 32)\) as presented in Figs.~\ref{fig:GT_49blocks} and~\ref{fig:GT_64blocks}, respectively.
+To investigate the effect of increasing the resolution of RMS images over delamination identification, I made another preparation by upsampling the RMS input image to \((512\times 512)\) pixels with cubic interpolation. Then the upsampled RMS image was split into \(16\times 16\) patches, and each patch has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_64patches}.
+The second preprocess dataset has a size of \((121600 \times 32 \times 32 \times 1)\), where (\(121600\)) is the total number of patches for all \(475\) cases.
+For each patch in the RMS input image, there is a corresponding patch in the ground truth image of size \((32\times 32)\) as presented in Figs.~\ref{fig:GT_49patches} and~\ref{fig:GT_64patches}, respectively.
 
 For training purposes, the dataset was divided into two portions: \(80\%\)	training set and \(20\%\) testing set. 
 Additionally, the validation set was created as a \(20\%\) of the training set.
@@ -46,30 +46,30 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/7_7_blocks_389.png}
-		\caption{RMS image splitted into (\(14\times 14\)) blocks.}
-		\label{fig:RMS_49blocks}
+		\includegraphics[width=5cm]{Figures/Chapter_4/7_7_patches_389.png}
+		\caption{RMS image splitted into (\(14\times 14\)) patches.}
+		\label{fig:RMS_49patches}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[width=5cm]{Figures/Chapter_4/8_8_blocks_389.png}
-		\caption{RMS image splitted into (\(16\times 16\)) blocks.}
-		\label{fig:RMS_64blocks}
+		\includegraphics[width=5cm]{Figures/Chapter_4/8_8_patches_389.png}
+		\caption{RMS image splitted into (\(16\times 16\)) patches.}
+		\label{fig:RMS_64patches}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=5cm]{Figures/Chapter_4/GT_7_7_389.png}
-		\caption{Label image splitted into (\(14\times 14\)) blocks.}
-		\label{fig:GT_49blocks}
+		\caption{Label image splitted into (\(14\times 14\)) patches.}
+		\label{fig:GT_49patches}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=5cm]{Figures/Chapter_4/GT_8_8_389.png}
-		\caption{Label image splitted into (\(16\times 16\)) blocks.}
-		\label{fig:GT_64blocks}
+		\caption{Label image splitted into (\(16\times 16\)) patches.}
+		\label{fig:GT_64patches}
 	\end{subfigure}
 	\caption{}
 	\label{fig:grid_mesh}
@@ -79,7 +79,7 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 \subsection{CNN classification models}
 \label{sec422}
 The architecture of the implemented CNN model for classification purposes is presented in Fig.~\ref{CNN_model}
-The model takes an input block of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
+The model takes an input patch of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
 Moreover, in the convolution operation, the padding was set to be the same,  and the activation function was Relu.
 Then, a pooling layer is applied, which has a pool filter of size (\(2\times 2\)) with a stride of (\(2\)).
 This operation of convolution and pooling is repeated two times.
@@ -110,7 +110,7 @@ Equation~\ref{argmax} depicts the argmax function.
 	\label{argmax}
 \end{equation}
 
-Accordingly, the whole block of size \((32\times 32)\) is classified as damaged if there is at least one pixel of delamination, otherwise, it is considered undamaged.
+Accordingly, the whole patch of size \((32\times 32)\) is classified as damaged if there is at least one pixel of delamination, otherwise, it is considered undamaged.
 Finally, the predicted output (delamination) is surrounded by a bounding box as the final output.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[h!]

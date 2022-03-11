@@ -50,24 +50,24 @@
 \contentsline {figure}{\numberline {4.23}{\ignorespaces Implemented Residual Dense Network architecture.\relax }}{68}{figure.caption.69}%
 \contentsline {figure}{\numberline {4.24}{\ignorespaces Sub-pixel convolution layer.\relax }}{69}{figure.caption.70}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Output predictions for the implemented CNN classifiers\relax }}{73}{figure.caption.71}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces First delamination case based on numerical data.\relax }}{74}{figure.caption.72}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Second delamination case based on numerical data.\relax }}{75}{figure.caption.73}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Third delamination case based on numerical data.\relax }}{76}{figure.caption.74}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{77}{figure.caption.75}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{79}{figure.caption.79}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Four delamination cases based on numerical data (ConvLSTM autoencoder).\relax }}{81}{figure.caption.82}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Experimental case: single delamination of Teflon insert.\relax }}{82}{figure.caption.84}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces IoU for the sliding window of frames (Teflon insert-single delamination).\relax }}{82}{figure.caption.85}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Predictions for window centered at selected frames (Teflon insert - single delamination).\relax }}{83}{figure.caption.86}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Teflon insert - single delamination.\relax }}{83}{figure.caption.87}%
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Delamination arrangements in the specimen.\relax }}{84}{figure.caption.89}%
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Experimental cases of Specimens II, III, and IV.\relax }}{85}{figure.caption.90}%
-\contentsline {figure}{\numberline {5.14}{\ignorespaces IoU for the sliding window of frames (Specimen\nobreakspace {}IV).\relax }}{86}{figure.caption.91}%
-\contentsline {figure}{\numberline {5.15}{\ignorespaces Predictions for window centered at selected frames (Specimen\nobreakspace {}IV).\relax }}{86}{figure.caption.92}%
-\contentsline {figure}{\numberline {5.16}{\ignorespaces Specimen\nobreakspace {}IV: (a) RMS image (damage map), (b) Thresholded RMS image\relax }}{87}{figure.caption.93}%
-\contentsline {figure}{\numberline {5.17}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{88}{figure.caption.94}%
-\contentsline {figure}{\numberline {5.18}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{88}{figure.caption.95}%
-\contentsline {figure}{\numberline {5.19}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.\nobreakspace {}\ref {fig:frame110_comparison}.\relax }}{89}{figure.caption.96}%
-\contentsline {figure}{\numberline {5.20}{\ignorespaces Comparison of reconstruction accuracy at frame number $N_f$.\relax }}{90}{figure.caption.97}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Output predictions for the implemented CNN classifiers\relax }}{74}{figure.caption.72}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces First delamination case based on numerical data.\relax }}{76}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Second delamination case based on numerical data.\relax }}{77}{figure.caption.74}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Third delamination case based on numerical data.\relax }}{78}{figure.caption.75}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{79}{figure.caption.76}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{82}{figure.caption.80}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Four delamination cases based on numerical data (ConvLSTM autoencoder).\relax }}{84}{figure.caption.83}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Experimental case: single delamination of Teflon insert.\relax }}{85}{figure.caption.85}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces IoU for the sliding window of frames (Teflon insert-single delamination).\relax }}{85}{figure.caption.86}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Predictions for window centered at selected frames (Teflon insert - single delamination).\relax }}{86}{figure.caption.87}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Teflon insert - single delamination.\relax }}{86}{figure.caption.88}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Delamination arrangements in the specimen.\relax }}{87}{figure.caption.90}%
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Experimental cases of Specimens II, III, and IV.\relax }}{88}{figure.caption.91}%
+\contentsline {figure}{\numberline {5.14}{\ignorespaces IoU for the sliding window of frames (Specimen\nobreakspace {}IV).\relax }}{89}{figure.caption.92}%
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Predictions for window centered at selected frames (Specimen\nobreakspace {}IV).\relax }}{89}{figure.caption.93}%
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Specimen\nobreakspace {}IV: (a) RMS image (damage map), (b) Thresholded RMS image\relax }}{90}{figure.caption.94}%
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{91}{figure.caption.95}%
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{91}{figure.caption.96}%
+\contentsline {figure}{\numberline {5.19}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.\nobreakspace {}\ref {fig:frame110_comparison}.\relax }}{92}{figure.caption.97}%
+\contentsline {figure}{\numberline {5.20}{\ignorespaces Comparison of reconstruction accuracy at frame number $N_f$.\relax }}{93}{figure.caption.98}%
 \addvspace {10\p@ }
