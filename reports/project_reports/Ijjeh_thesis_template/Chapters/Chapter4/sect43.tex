@@ -51,10 +51,20 @@ To enhance the performance of the optimizer during the training process, the col
 Furthermore, I have applied data augmentation to the dataset (\(475\) RMS images) by flipping the images horizontally, vertically, and diagonally. 
 As a result, the dataset size increased four times \(1900\) images were produced. 
 I have split the dataset into two portions: \(80\%\) for the training set and \(20\%\) for the testing set. 
-Moreover, a K-folds cross-validation method~\cite{Srinivasan2019} was applied to the training set to reduce the overfitting which happens when the model is able to fit on the training data, while it poorly fit on the new unseen data. 
+Moreover, a K-folds cross-validation technique~\cite{Srinivasan2019} was applied to the training set to reduce the overfitting which happens when the model is able to fit on the training data, while it poorly fit on the new unseen data.
 In other words, the model only learns the patterns of the training data therefore the model will not generalise well. 
 The main advantage of the K-folds method versus a regular train/test split is to reduce the overfitting by utilising data more efficiently as every data sample is used in both training and validation. 
 Therefore, by using this technique, I aim to improve the ability of the model to generalise and reduce overfitting.
+Figure~\ref{fig:cross_validation} illustrates the K-folds cross validation technique.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{Figures/Chapter_4/cross_validation.png}
+	\end{center}
+	\caption{K-folds cross validation.} 
+	\label{fig:cross_validation}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Residual UNet model}
 \label{sec432}
