@@ -133,7 +133,8 @@ target/
 *.jpg
 *.tif
 *.tiff
-
+*.PNG
+*.svg
 # animations/large files
 *.avi
 *.mpg
