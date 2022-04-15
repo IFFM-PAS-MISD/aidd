@@ -71,22 +71,23 @@ for k = test_case
             for frame = 1:nft
                 Data_frame_interp = squeeze(interp2(X,Y,Data(:,:,frame),XI,YI,'spline'));
                 % extract signals at 8 points of coordinates [pixels]
-                        % S1(101,450)
-                        % S2(400,450)
-                        % S3(450,400)
-                        % S4(450,101)
-                        % S5(400,51)
-                        % S6(101,51)
-                        % S7(51,101)
-                        % S8(51,400)
-                        S(test_case,1,:)=Data_frame_interp(101,450,:);
-                        S(test_case,2,:)=Data_frame_interp(400,450,:);
-                        S(test_case,3,:)=Data_frame_interp(450,400,:);
-                        S(test_case,4,:)=Data_frame_interp(450,101,:);
-                        S(test_case,5,:)=Data_frame_interp(400,51,:);
-                        S(test_case,6,:)=Data_frame_interp(101,51,:);
-                        S(test_case,7,:)=Data_frame_interp(51,101,:);
-                        S(test_case,8,:)=Data_frame_interp(51,400,:);  
+                        % S1(139,480)
+                        % S2(24,170)
+                        % S3(49,292)
+                        % S4(410,112)
+                        % S5(345,373)
+                        % S6(157,127)
+                        % S7(470,250)
+                        % S8(17,345)
+                        S(test_case,1,:)=Data_frame_interp(139,480,:);
+                        S(test_case,2,:)=Data_frame_interp(24,170,:);
+                        S(test_case,3,:)=Data_frame_interp(49,292,:);
+                        S(test_case,4,:)=Data_frame_interp(410,112,:);
+                        S(test_case,5,:)=Data_frame_interp(345,373,:);
+                        S(test_case,6,:)=Data_frame_interp(157,127,:);
+                        S(test_case,7,:)=Data_frame_interp(470,250,:);
+                        S(test_case,8,:)=Data_frame_interp(17,345,:);
+                        
                         t_frames(c,frame) = time(frame);
             end                  
             %% END OF PROCESSING

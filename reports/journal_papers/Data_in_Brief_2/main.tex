@@ -1,0 +1,586 @@
+%% This is file `dib-template.tex',
+%% 
+%% Copyright 2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+%%
+%% $Id: dib-template.tex 185 2020-08-07 09:06:08Z rishi $
+%%
+%% Use the option review to obtain double line spacing
+%\documentclass[times,review,preprint]{elsarticle}
+
+%% Use the options `final' to obtain the final layout
+%% Use longtitle option to break abstract to multiple pages if overfull.
+%% For Review pdf (With double line spacing)
+%\documentclass[times,review]{elsarticle}
+%% For abstracts longer than one page.
+%\documentclass[times,review,longtitle]{elsarticle}
+%% For Review pdf without preprint line
+%\documentclass[times,review,nopreprintline]{elsarticle}
+%% Final pdf
+\documentclass[times,final]{elsarticle}
+%%
+%\documentclass[times,final,longtitle]{elsarticle}
+%%
+
+%%
+%% Stylefile to load DIB template
+\usepackage{dib}
+\usepackage{framed,multirow}
+\usepackage{float} 
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{siunitx}[range-units=single]
+
+%% For line numbers
+%\usepackage[switch]{lineno}
+
+% Following three lines are needed for this document.
+% If you are not loading colors or url, then these are
+% not required.
+\usepackage{url}
+\usepackage{xcolor}
+\definecolor{newcolor}{rgb}{.8,.349,.1}
+
+%%
+\usepackage{longtable}
+\usepackage[colorlinks]{hyperref}
+%% added packages
+\usepackage{caption}
+\usepackage{subcaption}
+%\graphicspath{{figs/}}
+\journal{Data in Brief}
+
+\begin{document}
+
+\verso{Pawel Kudela \textit{et al.}}
+
+\begin{frontmatter}
+
+\dochead{Data Article}
+%The article title must include the word 'data' or 'dataset'.  
+%Please avoid the use of acronyms and abbreviations where possible. 
+%For co-submission authors, the title should be unique, 
+%i.e. not the same as your research paper. 
+%A maximum of 250 characters is allowed.
+\title{Dataset on full ultrasonic guided wavefield measurements of a CFRP plate with fully bonded and partially debonded omega stringer}%
+%\tnotetext[tnote1]{This is an example for title footnote coding.}
+%Tip: here are a few examples of recent suitable article titles - these are short and clear:
+%%Adolescent Rat Social Play: Amygdalar Proteomic and Transcriptomic Data
+%%Execution Data Logs of a Supercomputer Workload Over its Extended Lifetime
+%%Calgary Preschool Magnetic Resonance Imaging (MRI) Dataset]
+
+%%Authors
+\author[1]{Kudela \snm{Pawel}\corref{cor1}}
+\cortext[cor1]{Corresponding author: pk@imp.gda.pl}
+\author[1]{Radzienski \snm{Maciej}}
+\author[2]{Moix-Bonet \snm{Maria}}
+\author[2]{Willberg \snm{Christian}}
+\author[3]{Lugovtsova \snm{Yevgeniya}}
+\author[3]{Bulling \snm{Jannis}}
+\author[4]{Tsch\"oke \snm{Kilian}}
+\author[5]{Moll \snm{Jochen}}
+
+%%Affiliations
+\address[1]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, 80-231 Gdansk, Poland}
+\address[2]{Institute of Composite Structures and Adaptative Systems,
+	German Aerospace Center, 38108 Braunschweig, Germany}
+\address[3]{Federal Institute for Materials Research and Testing (BAM), 12205 Berlin, Germany}
+\address[4]{Fraunhofer Institute for Ceramic Technologies and Systems IKTS, Systems for Condition Monitoring, 01109 Dresden, Germany}
+\address[5]{J.W. Goethe-University, Department of Physics, 60438 Frankfurt, Germany}
+
+%\received{1 May 2013}
+%\finalform{10 May 2013}
+%\accepted{13 May 2013}
+%\availableonline{15 May 2013}
+%\communicated{S. Sarkar}
+
+
+\begin{abstract}
+%%%%
+The fourth dataset dedicated to the Open Guided Waves platform \cite{moll_open_2018} presented in this work aims at a carbon fiber
+composite plate with an additional omega stringer at constant temperature conditions. 
+The dataset provides full ultrasonic guided wavefields. 
+Two types of signals were used for guided wave excitation, namely chirp signal and tone-burst signal. The chirp signal had a frequency range of  \num{20}-\SI{500}{\kilo\hertz}. The tone-burst signals had a form of sine modulated by Hann window with 5 cycles and carrier frequencies \SIlist{16.5;50;100;200;300}{\kilo\hertz}.
+The piezoceramic actuator used for this purpose was attached to the center of the stringer side surface of the core plate.
+Three scenarios are provided with this setup: (1) wavefield measurements without damage, (2) wavefield measurements with a local stringer debond and (3) wavefield measurements with a large stringer debond.
+The defects were caused by impacts performed from the backside of the plate.
+As result, the stringer feet debonds locally which was verified with conventional ultrasound measurements.
+
+%%%%
+\end{abstract}
+
+\begin{keyword}
+%% Keywords
+%[Include 4-8 keywords (or phrases) to facilitate others finding your
+%article online. 
+%\noindent\textbf{Tip:} Try Google Scholar to find which terms are most common in your
+%field. In biomedical fields, MeSH terms are a good 'common vocabulary'
+%to draw from]
+\KWD Lamb waves\sep Composite panel \sep Impact damage \sep Damage detection \sep Scanning laser Doppler vibrometry \sep Structural Health Monitoring \sep Non-Destructive Evaluation
+\end{keyword}
+
+\end{frontmatter}
+
+%% For linenumbers
+%\linenumbers
+% \section*{Data in Brief Article Template}
+
+
+
+%\pagebreak
+
+{\fontsize{7.5pt}{9pt}\selectfont
+%%%
+\noindent\textbf{Specifications Table} \\
+ 
+%Every section of this table is mandatory. 
+%Please enter information in the right-hand column and remove all the instructions
+\begin{longtable}{|p{33mm}|p{94mm}|}
+\hline
+\endhead
+\hline
+\endfoot
+Subject                & Mechanical Engineering\\
+\hline                         
+Specific subject area  & Non-destructive testing, guided wave propagation, full wavefield signal processing\\
+\hline
+Type of data           &  Figures, matrices in hdf format
+                         \\             
+%\clearpage
+How data were acquired & Polytec PSV-400 scanning laser Doppler vibrometer; \\
+\hline                         
+Data format            & Raw
+                         \\
+\hline                         
+Parameters for data\newline 
+collection             & The planar plate dimensions were \SI{0.5}{\meter} by \SI{0.5}{\meter} whereas the scanning area covered almost the entire surface of the plate excluding the border about \SI{9}{\milli\meter} wide. Measurements were performed in ambient temperature and humidity conditions. Various excitation signals were used, namely, Hann windowed tone-burst signal with \num{5} cycles and carrier frequencies \SIlist{16.5;50;100;200;300}{\kilo\hertz} and chirp signal in the frequency range \num{20}-\SI{500}{\kilo\hertz} .\\  
+
+\hline
+Description of          
+data\newline 
+collection             & One laser head was used for registration of transverse velocities of guided wave propagation on a surface of a CFRP plate with a stringer while the excitation was performed by using a piezoelectric transducer located at the centre of the plate on the opposite side. The measurements were acquired for the intact plate and after consecutive impacts. \\
+\hline                         
+Data source location   & Data was obtained at Institute of Fluid-Flow Machinery, Polish Academy of Sciences, Mechanics of Intelligent Structures Department, Gdansk, Poland; Impact was introduced and ultrasonic testing was performed at German Aerospace Center (DLR), Institute of Composite Structures and Adaptive Systems, Braunschweig, Germany
+ \\
+\hline                         
+\hypertarget{target1}
+{Data accessibility}   & Data is available at Zenodo platform:  
+    
+%                         Repository name: [Name repository]\newline
+                         Data identification number: 10.5281/zenodo.5105861 \newline
+                         Direct URL to data: \url{https://doi.org/10.5281/zenodo.5105861} \newline
+\\                         
+% \hline                         
+%Related                 
+%research\newline
+%article                & [If your data article is related to a research article - %\textbf{especially 
+%                         if it is a co-submission} - please cite your associated research 
+%                         article here. Authors should only list \textbf{one article}.\newline
+
+%                         Authors' names\newline
+%                         Title\newline
+%                         Journal\newline
+%                         DOI: \textbf{OR} for co-submission manuscripts `In Press'\newline
+
+%                         \textbf{For example, for a direct submission:}\newline
+
+%                         J. van der Geer, J.A.J. Hanraads, R.A. Lupton, The art of writing a scientific article, 
+ %                        J. Sci. Commun. 163 (2010) 51-59. https://doi.org/10.1016/j.Sc.2010.00372\newline
+
+  %                       \textbf{Or, for a co-submission (when your related research article has not yet published):}\newline
+
+%                         J. van der Geer, J.A.J. Hanraads, R.A. Lupton, The art of writing a 
+%                         scientific article, J. Sci. Commun. In Press.\newline
+
+%                         \textbf{Or, if your data article is not directly related to a research article, 
+%                         please delete this last row of the table.}] 
+\end{longtable}
+}
+%%%            
+
+\section*{Value of the Data}
+
+% [Provide 3-6 bullet points explaining why these data are of value to the scientific community. 
+% Bullet points 1-3 must specifically answer the questions next to the bullet point, 
+% but do not include the question itself in your answer. You may 
+% provide up to three additional bullet points to outline the value of these data. 
+% Please keep points brief, with ideally no more than 400 characters for each point.]
+
+\begin{itemize}
+\itemsep=0pt
+\parsep=0pt
+% Your first bullet point must explain why these data are useful or important? 
+    \item These data provide a data set for elastic guided wave inspection techniques for carbon fibre reinforced polymers with and without an introduced damage. The data thus overcomes the current limitation by a lack of freely available benchmark measurements.
+% Your second bullet point must explain who can benefit from these data?
+    \item The development of new guided wave-based techniques and the comparison of existing algorithms require high-quality benchmark measurements. Therefore, all researchers in the field of non-destructive evaluation as well as in the field of guided wave-based monitoring can benefit from these data.
+%Your third point bullet must explain how these data might be used/reused for further insights and/or development of experiments.
+    \item The data set might be used to evaluate existing signal evaluation techniques, to enable comparisons of evaluation methods and finally to develop new signal evaluation techniques based on elastic guided wave measurements.
+%In the next three points you may like to explain how these data could potentially make an impact on society and highlight any other additional value of these data.
+    \item Structural Health Monitoring (SHM) and non-destructive evaluation (NDE) aim to assess the integrity of a structure non-destructively. These research areas are therefore rapidly gaining in importance, and not only due to the increasing digitization of society.
+    \item As importance of ultrasonic guided waves is also growing rapidly, new signal evaluation techniques need to be developed. The provided data set therefore makes an impact in applications ranging from aerospace and automotive to all areas of lightweight construction.
+\end{itemize}
+
+\section{Data Description}
+The datasets within this article provide full ultrasonic guided wavefield of a CFRP plate with fully bonded (intact) and partially debonded (impacted) omega stringer measured for various excitation frequencies. The measured datasets \cite{kudela_dataset_2021} are organized as follows:
+
+\begin{itemize} 
+\item \textit{OGW\_CFRP\_Stringer\_Wavefield\_Intact}: Baseline wavefield measurements of the intact CFRP plate with the omega stringer
+\item \textit{OGW\_CFRP\_Stringer\_Wavefield\_FirstImpact}: Wavefield measurements of the CFRP plate with the omega stringer impacted with \SI{15.3}{\joule} at location [\SI{0.38}{\meter}, \SI{0.33}{\meter}]
+\item \textit{OGW\_CFRP\_Stringer\_Wavefield\_SecondImpact}: Wavefield measurements of the CFRP plate with the omega stringer impacted for the second time with \SI{19}{\joule} at location [\SI{0.38}{\meter}, \SI{0.34}{\meter}]
+\end{itemize}
+
+Each folder contains a number of h5-files for two excitation types: Hann-windowed burst and chirp. The folder name for the burst excitation describes the excitation frequency and number of cycles, peak-to-peak voltage used to drive the PZT and number of averages per point used to record the wavefield, \textit{e.g.} \textbf{BURST\_16\_5kHz\_5HC\_10Vpp\_x3} reads as \SI{16.5}{\kilo\hertz} centre excitation frequency, \num{5} cycles Hann-windowed burst, \SI{10}{\volt} peak-to-peak and \num{3} averages per point. The folder name for the chirp excitation describes the excitation frequency range and chirp duration, peak-to-peak voltage used to drive the PZT and number of averages per point used to record the wavefield, \textit{e.g.} \textbf{CHIRP\_20-500kHz\_125us\_6Vpp\_x3} reads as \SI{20}{}-\SI{500}{\kilo\hertz} excitation frequency range, \SI{125}{\micro\second} chirp duration, \SI{6}{\volt} peak-to-peak and \num{3} averages per point. 
+It should be noted that these descriptions correspond to signals coming from a signal generator which were next amplified 20 times by a high voltage amplifier.
+
+To open a h5-file and to see how the h5-files are organized the following options are available:
+
+\begin{itemize} 
+\item HDFView \url{https://support.hdfgroup.org/products/java/hdfview/}
+\item HDF Compass \url{https://github.com/HDFGroup/hdf-compass} 
+\item a MATLAB command \textit{h5disp}
+\end{itemize}
+
+In addition, MATLAB and Python scripts are included which can be used to read out the dataset and to visualise the wavefield. 
+
+\section{Experimental Design, Materials and Methods}
+%Sample reference: \cite{droz_data_2019,kubrusly_dataset_2018}
+
+\subsection{Description of composite panel}
+
+The CFRP plate corresponds to the \textit{wave field} plate in \cite{Moll2020}. It was manufactured  with a  dimension of \SI{0.5}{\meter} $\times$ \SI{0.5}{\meter} and a nominal thickness of \SI{2}{\milli\meter}. The
+corresponding ply thickness is \SI{0.125}{\milli\meter}. The prepreg  \mbox{M21~/~34\%~/~UD134~/~T700~/~300} from Hexply~\textsuperscript{\textregistered} was used to manufacture the plates with a quasi-isotropic (QI) layup of \mbox{$[45/0/-45/90/-45/0/45/90]_S$}. 
+The material properties of a single unidirectional layer were measured based on  standard test procedures~\cite{moll_open_2018}. 
+The prepreg \mbox{~M21~/~34\%~/~UD194~/~T700~/~IMA-12K} from Hexply~\textsuperscript{\textregistered} was used to separately manufacture the omega stringer. 
+The~stringer was  built also in a quasi-isotropic layup \mbox{$[-45/0/90/45/90/-45]_S$} with the dimensions depicted in \autoref{fig:plate_dimensions}. The~nominal thickness is 1.5\,mm with a ply thickness of \SI{0.125}{\milli\meter}. The material properties of plate and stringer are listed in \autoref{tab:material_plate_stringer}. 
+The omega stringer was bonded to the plate by using Loctite Hysol 9466. The adhesive was cured in vacuum at room temperature.
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{\textwidth}
+	\centering
+		\includegraphics[]{plate_omega_stringer2.png}
+		\caption{Specimen dimensions and measurement area denoted by grey colour.}
+		\label{fig:sldv_area}
+	\end{subfigure}
+	\begin{subfigure}[b]{\textwidth}
+	\centering
+	\includegraphics[]{Stringer_Geometry_s.PNG}
+	\caption{Omega stringer cross-section geometry in \si{\milli\meter}, taken from~\cite{Moll2020}.}
+	\label{fig:stringer_crosssection}
+	\end{subfigure}
+	\caption{Plate with omega stringer geometry.}
+	\label{fig:plate_dimensions}
+\end{figure}
+
+\begin{table}[H]
+	\caption{Stiffness values and density for unidirectional  
+\mbox{M21~/~34\%~/~UD134~/~T700~/~300} 
+material used for~the~plate, taken from~\cite{moll_open_2018}, and \mbox{M21~/~34\%~/~UD194~/~IMA-12K} as material used for~the~stringer. 
+}\label{tab:material_plate_stringer}
+%Please confirm table format
+	\centering
+	%% \tablesize{} %% You can specify the~fontsize here, e.g.,~\tablesize{\footnotesize}. if~commented out \small will be~used.
+	\begin{tabular}{ccc}
+		      \hline
+		\textbf{Parameter} &\mbox{M21~/~34\%~/~UD134~/~T700~/~300}& \mbox{M21~/~34\%~/~UD194~/~IMA-12K} \\
+	\hline		
+		$C_{1111}$ [\si{\giga\pascal}]& 130& 174\\
+		$C_{1122}$ [\si{\giga\pascal}]& 6.1& 4.1\\
+		$C_{1133}$ [\si{\giga\pascal}]& 6.1& 4.1 \\
+        $C_{2222}$ [\si{\giga\pascal}]& 11.2&9.6\\  
+        $C_{2233}$ [\si{\giga\pascal}]& 5.2& 2.9\\
+		$C_{3333}$ [\si{\giga\pascal}]& 11.2&9.6\\
+        $C_{1212}$ [\si{\giga\pascal}]& 3&3.3\\
+		$C_{2323}$ [\si{\giga\pascal}]& 4.2& 5.9\\
+        $C_{1313}$ [\si{\giga\pascal}]& 4.2& 5.9\\
+        $\rho$ [\si{\kilo\gram\per\cubic\meter}]&1571&1580\\
+	\hline
+	\end{tabular}
+\end{table}
+
+
+A mobile impactor from ID-Lindner has been used to create Barely Visible Impact Damages (BVID) in the specimen. The mobile impactor generates an impact with a defined energy by shooting a metal projectile by means of compressed air. A hemi-spherical projectile with a radius of \SI{25}{\milli\meter} has been employed in order to create BVID. Two impacts have been carried out. The first was executed with an energy of  \SI{15.3}{\joule} and a speed of \SI{6}{\meter\per\second} on the coordinates x=\SI{0.38}{\meter} and y=\SI{0.33}{\meter} according to \autoref{fig:sldv_area}. During the second impact the projectile had a speed of \SI{6.7}{\meter\per\second} and the impact energy of \SI{19}{\joule}. The second impact was located \SI{10}{\milli\meter} above the first impact position, with the intention of increasing the damage size.
+	
+
+\subsection{Ultrasound NDT measurements}
+
+As a reference, non-destructive inspection (NDI) was carried out with the ultrasound equipment USPC 4000 AirTech, from Hillger. \autoref{fig:US_damage} displays the C-Scans made after each impact. The colour coding indicates the time-of-flight of the back-wall echo. As observed in \autoref{fig:US_damage1}, the first impact created a minimal debonding between skin and stringer with dimensions around 12x50mm. After the second impact the debonding grew considerably, affecting both feet of the omega stringer. The large extent of the second impact, with damaged areas far from the impact location, can be explained by the mechanical properties of the specimen. The impact induces a bending load in the specimen. Due to the stiffness of the stringer, the bending load generates large shear forces in the bonded joint. The adhesive layer, probably weakened from the first impact, did not withstand the shear forces during the second impact. The final damage on the specimen is displayed on \autoref{fig:US_damage2}.
+
+\begin{figure} [htp]
+	\centering
+	\begin{subfigure}[b]{\textwidth}
+	\centering
+		\includegraphics[width=\textwidth]{OGW4_Impact1_arrow.png}
+		\caption{C-Scan after first impact with arrow indicating the impact position}
+		\label{fig:US_damage1}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{\textwidth}
+	\centering
+		\includegraphics[width=\textwidth]{OGW4_Impact2_arrow.png}
+		\caption{C-Scan after second impact with arrow indicating the impact position}
+		\label{fig:US_damage2}
+	\end{subfigure}
+	\caption{Ultrasound C-scans after impacts with back-wall echo time-of-flight}
+	\label{fig:US_damage}
+\end{figure}
+
+\subsection{Data acquisition using scanning laser Doppler vibrometry}
+
+Guided waves were excited by a piezoelectric disk of diameter \SI{10}{\milli\meter} attached to the back surface of the specimen (the side with omega stringer).
+The following excitation signals were applied in consecutive measurements:
+\begin{itemize}
+\item Hann windowed tone-burst signal with 5 cycles and carrier frequencies (\(f_c\)) \SI{16.5}{\kilo\hertz}, \SI{50}{\kilo\hertz}, \SI{100}{\kilo\hertz}, \SI{200}{\kilo\hertz}, \SI{300}{\kilo\hertz},
+\item chirp signal in the frequency range \num{20}-\SI{500}{\kilo\hertz} lasting \SI{200}{\micro\second}.
+\end{itemize}
+The excitation signals used in this paper are illustrated both in the time and frequency domains in Figures~\ref{fig:exc16_5}-\ref{fig:chirp}.
+\begin{figure} [h!]
+	\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{time_excitation_frequency16.5.png}
+		\caption{Time domain}
+		\label{fig:time_exc16_5}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency_excitation_frequency16.5.png}
+		\caption{Frequency domain}
+		\label{fig:freq_exc16_5}
+	\end{subfigure}
+	\caption{The tone-burst excitation signal for the carrier frequency $f_c=16.5$ kHz}
+	\label{fig:exc16_5}
+\end{figure}
+\begin{figure} [h!]
+	\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{time_excitation_frequency50.png}
+		\caption{Time domain}
+		\label{fig:time_exc50}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency_excitation_frequency50.png}
+		\caption{Frequency domain}
+		\label{fig:freq_exc50}
+	\end{subfigure}
+	\caption{The tone-burst excitation signal for the carrier frequency $f_c=50$ kHz}
+	\label{fig:exc50}
+\end{figure}
+\begin{figure} [h!]
+	\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{time_excitation_frequency100.png}
+		\caption{Time domain}
+		\label{fig:time_exc100}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency_excitation_frequency100.png}
+		\caption{Frequency domain}
+		\label{fig:freq_exc100}
+	\end{subfigure}
+	\caption{The tone-burst excitation signal for the carrier frequency $f_c=100$ kHz}
+	\label{fig:exc100}
+\end{figure}
+\begin{figure} [h!]
+	\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{time_excitation_frequency200.png}
+		\caption{Time domain}
+		\label{fig:time_exc200}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency_excitation_frequency200.png}
+		\caption{Frequency domain}
+		\label{fig:freq_exc200}
+	\end{subfigure}
+	\caption{The tone-burst excitation signal for the carrier frequency $f_c=200$ kHz}
+	\label{fig:exc200}
+\end{figure}
+\begin{figure} [h!]
+	\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{time_excitation_frequency300.png}
+		\caption{Time domain}
+		\label{fig:time_exc300}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{frequency_excitation_frequency300.png}
+		\caption{Frequency domain}
+		\label{fig:freq_exc300}
+	\end{subfigure}
+	\caption{The tone-burst excitation signal for the carrier frequency $f_c=300$ kHz}
+	\label{fig:exc300}
+\end{figure}
+\begin{figure} [h!]
+	\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{chirp_time.png}
+		\caption{Time domain}
+		\label{fig:time_chirp}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=0.8\textwidth]{chirp_frequency.png}
+		\caption{Frequency domain}
+		\label{fig:freq_chirp}
+	\end{subfigure}
+	\caption{The chirp excitation signal}
+	\label{fig:chirp}
+\end{figure}
+
+The applied peak to peak voltage at the signal generator varied depending on the type of the signal from \SI{4}{\volt} to \SI{11}{\volt}. 
+Next, signals were amplified \num{20} times.
+
+The measurements using scanning laser Doppler vibrometer (SLDV) were conducted on the opposite side of the specimen in respect to the piezoelectric transducer and omega stringer (on the flat surface).
+The specimen central area excluding border of width about 9 mm was measured in \num{483} $\times$ \num{483} points. 
+The specimen with highlighted measurement area is presented in \autoref{fig:sldv_area}.
+At every measurement point, \num{1024} time samples were registered for Hann windowed signals and \num{2048} time samples for chirp signals. The sampling frequency for burst excitation measurements was in range of \SI{256}{\kilo\hertz} up to \SI{2.56}{\mega\hertz} chosen from series to be around \num{10} times higher than \(f_c\). The sampling frequency for chirp excitation was \SI{1.28}{\mega\hertz}.
+
+The measurements were taken \num{10} times in every grid point and averaged to improve the signal to noise ratio.
+The exception was the case of Hann windowed tone-burst signal of carrier frequency \SI{16.5}{\kilo\hertz} where only \num{3} averages were applied.
+The origin of the coordinate system is located in the lower-left corner of the specimen.
+
+It should be noted that the dataset contains raw signals, however, a band-pass filter embedded in the Polytec data acquisition system was used during measurements.
+The band-pass cut off frequencies were \(f_{cut1} = \num{0.5}f_c \) and \(f_{cut2} = \num{1.5}f_c \).
+%\clearpage
+
+\subsection{Wavefield animation}
+Full wavefields of guided waves measured by the scanning laser Doppler vibrometer are of great importance in the field of SHM and NDE. They can be used for validation of various numerical models~\cite{Shen2016,Kudela2020a} as well as for development of damage identification algorithms \cite{Radzienski2011,ROGGE2013,MESNIL2015,LUGOVTSOVA2021,Staszewski2012}. Hence, our aim is to provide such a dataset so that various methods can be quantitatively compared.
+
+The dataset is accompanied by Matlab script \verb+Read_AcousticWavefield.m+ as well as Python scripts \verb+readData.py+ and \verb+makeVideo.py+ which can be used for reading and visualising data. The scripts should be copied to the desired sub-folder with \verb+*.h5+ files so that data will be processed in the current path or alternatively scripts can be modified by including full paths.
+
+Exemplary frames of propagating waves for the case of \SI{100}{\kilo\hertz} excitation are presented in \autoref{fig:frames}.
+Three cases are presented: (i) intact specimen (\autoref{fig:frame128_intact} and \autoref{fig:frame192_intact}), (ii) specimen after first impact (\autoref{fig:frame128_1st_impact} and \autoref{fig:frame192_1st_impact}) and (iii) specimen after second impact.
+It can be noted that slight differences in the wave pattern caused by the impact appear at \SI{0.15}{\milli\second} in \autoref{fig:frame192_1st_impact}.
+In \autoref{fig:frame128_2nd_impact} reflection from the stringer is not present which means that the stringer foot debonded from the plate.
+
+\begin{figure} [h!]
+	\centering
+		\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{frame128_100kHz_intact.png}
+		\caption{Intact, \SI{0.10}{\milli\second}}
+		\label{fig:frame128_intact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{frame192_100kHz_intact.png}
+		\caption{Intact, \SI{0.15}{\milli\second}}
+		\label{fig:frame192_intact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{frame128_100kHz_1st_impact.png}
+		\caption{First impact, \SI{0.10}{\milli\second}}
+		\label{fig:frame128_1st_impact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{frame192_100kHz_1st_impact.png}
+		\caption{First impact, \SI{0.15}{\milli\second}}
+		\label{fig:frame192_1st_impact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{frame128_100kHz_2nd_impact.png}
+		\caption{Second impact, \SI{0.10}{\milli\second}}
+		\label{fig:frame128_2nd_impact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{frame192_100kHz_2nd_impact.png}
+		\caption{Second impact, \SI{0.15}{\milli\second}}
+		\label{fig:frame192_2nd_impact}
+	\end{subfigure}
+	\caption{Exemplary frames of propagating waves for the case of intact plate, first impact and second impact.}
+	\label{fig:frames}
+\end{figure}
+
+%\clearpage
+\subsection{Postprocessing}
+
+A simple postprocessing was applied to the acquired full wavefield measurements.
+The goal is to show that partial debonding of the stringer from the host plate is a challenging problem.
+Simple signal processing method such as weighted root mean square (WRMS)\cite{Radzienski2011} is not able to highlight the defected area. Only slight changes in the energy distribution are visible as it is presented in \autoref{fig:WRMS}.
+Therefore, more advanced signal processing algorithms must be developed and the provided dataset can serve as a benchmark.
+On the other hand, after second impact, stringer has partially debonded from the plate. Based on WRMS image in \autoref{fig:WRMS_2nd_impact} it can be concluded that the debonding is extensive - only upper right part of the foot of the stringer remains in contact with the plate. 
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{WRMS_100kHz_intact.png}
+		\caption{WRMS intact}
+		\label{fig:WRMS_intact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{WRMS_100kHz_1st_impact.png}
+		\caption{WRMS first impact}
+		\label{fig:WRMS_1st_impact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{WRMS_100kHz_2nd_impact.png}
+		\caption{WRMS second impact}
+		\label{fig:WRMS_2nd_impact}
+	\end{subfigure}
+	\caption{WRMS showing energy distribution for the case of intact plate, first impact and second impact.}
+	\label{fig:WRMS}
+\end{figure}
+
+Another post-processing technique used in this work is a local wavenumber mapping technique introduced by Rogge and Leckey \cite{ROGGE2013} in combination with the one-frequency-approach of Mesnil~\textit{et~al.}~\cite{MESNIL2015}. Wavenumber mapping allows to identify discontinuties in wavenumbers which are caused by local changes in thickness. For instance, a wave travelling in a pristine composite plate will have a different wavenumber than that of a delaminated region. The wavenumber in the damaged region will be equal to that of the plate portion above/below the delamination, when measurement are done on top/bottom. 
+
+The necessary steps along with the source code to calculate the wavenumber maps can be found in~\cite{LUGOVTSOVA2021}. The A0-like mode only was used for the analysis due to its sensitivity to the thickness variation. All other modes were filtered out by applying a radial filter in the wavenumber domain leaving the wavenumbers between \SI{350}{\radian\per\meter} and \SI{750}{\radian\per\meter} only. The point-wise window size of 31 x 31 bins was applied which corresponds to \SI{31}{\milli\meter} and fulfills the wavenumber resolution criteria of the window size being at least two wavelengths of the expected modes \cite{ROGGE2013}. Moreover, the wavenumber maps were filtered using a median filter of 11 x 11 bins to reduce the influence of the measurement noise and artefacts. Calculations were done in MATLAB on a 64-bit Windows 10 PC with 32~GB RAM for a wavefield data set which was zero-padded in space to the size of 512 × 512 x 1024. The computational time for one wavenumber map was about \SI{18}{\minute}.
+
+\begin{figure} [h]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{LW_100kHz_intact_jet.png}
+		\caption{intact plate}
+		\label{fig:LW_intact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{LW_100kHz_1st_impact_jet.png}
+		\caption{plate after the first impact}
+		\label{fig:LW_1st_impact}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{LW_100kHz_2nd_impact_jet.png}
+		\caption{plate after the second impact}
+		\label{fig:LW_2nd_impact}
+	\end{subfigure}
+	\caption{Local wavenumber maps at \SI{100}{kHz} calculated from the wavefield measurements at the same excitation frequency. A black dot marks the position of the impact.}
+	\label{fig:LW}
+\end{figure}
+
+First of all, the transducer is visible in every wavenumber map in the middle of sample having the wavenumber of \SI{520}{\radian\per\meter}. A typical edge artifact can be observed too. The feet of the stringer are highlighted at positions around $y=\SI{0.33}{\meter}$ and $y=\SI{0.42}{\meter}$ with the wavenumber of $\approx$~\SI{500}{\radian\per\meter}. Note that the wavenumber for the upper foot are not homogeneous through its length which may indicate the lack of bonding at the discontinuities, \textit{e.g.} see a region at $y=\SI{0.42}{\meter}$ and $x=\SI{0.18}{}-\SI{0.24}{\meter}$ in~\autoref{fig:LW_intact} and \ref{fig:LW_1st_impact}. These discontinuities are also partially visible in WRMS maps shown in~\autoref{fig:WRMS_intact} and \ref{fig:WRMS_1st_impact}. Moreover, the anisotropy of the composite plate becomes apparent in the wavenumber maps, especially for the case of the second impact shown in~\autoref{fig:LW_2nd_impact}. The left upper as well as the right bottom quadrants of the map have wavenumbers around \SI{610}{\radian\per\meter}, whereas the left bottom and right upper quadrants have wavenumbers around \SI{560}{\radian\per\meter}.    
+
+As for the impact damage, the first impact caused only a small delamination in the structure which is hardly recognisable in the wavenumber map, confer Fig.~\autoref{fig:LW_intact} and \ref{fig:LW_1st_impact}. A black dot in~\autoref{fig:LW_1st_impact} marks the impact position. The change in the wavenumber between intact structure and the structure after the first impact varies between \SI{5}{\radian\per\meter} and \SI{29}{\radian\per\meter}, measured to the right of the impact location at positions $y=\SI{0.33}{\meter}$ and $x=\SI{0.415}{\meter}$, and $y=\SI{0.33}{\meter}$ and $x=\SI{0.418}{\meter}$, respectively. This damage would probably go unnoticed, if one would not know where to look at. The WRMS map shown in~\autoref{fig:WRMS_1st_impact} gives a better indication of the damage thanks to the scattering of the waves at the delamination.
+For the case of the second impact, both WRMS (\autoref{fig:WRMS_2nd_impact}) and wavenumber (\autoref{fig:LW_2nd_impact}) maps indicated the debonding of the whole bottom foot and the left half of the upper foot. All in all, for the case presented here, the only difference of wavenumber mapping over WRMS is additional information provided about the plate's anisotropy. 
+
+\clearpage
+\section*{Acknowledgments}
+Pawel Kudela would like to thank the Polish National Science Center for the finance support under grant agreement no. 2018/31/B/ST8/00454. Jannis Bulling gratefully acknowledges the German Research Foundation for funding (DFG project number 428590437).
+
+\section*{Declaration of Competing Interest}
+
+The authors declare that they have no known competing
+financial interests or personal relationships which have, or could be
+perceived to have, influenced the work reported in this article. 
+
+\section*{CRediT authorship contribution statement}
+\textbf{Pawel Kudela}: Funding acquisition, Supervision, Project administration, Software, Visualization, Data Curation, Writing - Original Draft, Writing - Review \& Editing.\textbf{Maciej Radzienski}: Investigation, Validation, Writing - Original Draft, Writing - Review \& Editing. \textbf{Maria Moix-Bonet}: Investigation, Visualization, Data Curation, Writing - Original Draft, Writing - Review \& Editing. \textbf{Christian Wilberg}: Software, Validation, Writing - Original Draft, Writing - Review \& Editing.\textbf{Yevgeniya Lugovtsova}: Investigation, Visualization, Writing - Original Draft, Writing - Review \& Editing.\textbf{Jannis Bulling}: Funding acquisition, Investigation, Data Curation, Writing - Original Draft, Writing - Review \& Editing. \textbf{Kilian Tsch\"oke}: Investigation, Data Curation, Writing - Original Draft, Writing - Review \& Editing. \textbf{Jochen Moll}: Conceptualization, Supervision, Methodology, Writing - Original Draft, Writing - Review \& Editing.
+
+\bibliographystyle{model1-num-names}
+%\bibliography{refs/refs}
+\bibliography{refs}
+
+
+
+\end{document}
+
+%%
