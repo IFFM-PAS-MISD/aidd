@@ -65,7 +65,11 @@
 % Load the graphicx package (see http://ctan.org/pkg/graphicx)
 \usepackage{graphicx}
 \usepackage{subcaption}
-\usepackage{dirtytalk}
+\usepackage{multirow}
+
+
+
+\usepackage{csquotes}
 % Nomenclature package
 % Source: http://tex.stackexchange.com/questions/112884/how-to-achieve-nomenclature-entries-like-symbol-description-dimension-and-uni
 \usepackage[intoc]{nomencl}
@@ -165,8 +169,8 @@
 \bibliography{References/thesis}
 
 % Color package (see http://ctan.org/pkg/xcolor)
-\usepackage[table]{xcolor}
-
+\usepackage[table, dvipsnames]{xcolor}
+%\usepackage[dvipsnames]{xcolor}
 % EPS to PDF conversion (see http://ctan.org/pkg/epstopdf)
 \usepackage{epstopdf}
 
@@ -251,6 +255,7 @@
 \newif\ifsignaturepage \signaturepagetrue
 \newif\ifcopyright \copyrighttrue
 \newif\ifabswithesis \abswithesistrue
+\newif\ifdedicate \dedicatetrue
 \newif\ifack \acktrue
 \newif\ifpublication \publicationtrue
 \newif\ifnomencl \nomencltrue
@@ -411,6 +416,15 @@
 }
 
 % Command to make the acknowledgements page
+\def\dedicatepage{
+	\newpage
+	% Set up the default behavior for headers and footers
+	\thispagestyle{empty}
+	\prefacesection{DEDICATION}
+	\Dedication
+}
+
+% Command to make the acknowledgements page
 \def\ackpage{
     \newpage
     % Set up the default behavior for headers and footers
@@ -440,9 +454,12 @@
 \def\beforepreface{
 \iftitlepg\titlepg\fi
 \ifack\engquote\fi
+\ifdedicate\dedicatepage\fi
 \ifack\ackpage\fi
 \ifabswithesis\abswithesis\fi
 \ifack\publication\fi
+
+
 }
 
 % Takes care of the table of contents, figures etc 

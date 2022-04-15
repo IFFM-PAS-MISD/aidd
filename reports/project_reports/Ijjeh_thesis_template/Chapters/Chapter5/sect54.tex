@@ -1,0 +1,123 @@
+\section{DLSR model}
+\label{sec54}
+
+\subsection{Numerical cases}
+\label{sec541}
+\subsection{Experimental cases}
+\label{sec542}
+Experiment description
+
+\begin{figure} [h!]
+	\centering
+	\includegraphics[scale=1]{Figures/Chapter_5/figure9.png}
+	\caption{Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.}
+	\label{fig:points_metrics}
+\end{figure}
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure10a.png}
+		\caption{Reference}
+		\label{fig:frame110_ref}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure10b.png}
+		\caption{CS: 1024 points}
+		\label{fig:frame110_CS1024}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure10c.png}
+		\caption{CS: 3000 points}
+		\label{fig:frame110_CS3000}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure10d.png}
+		\caption{CS: 4000 points}
+		\label{fig:frame110_CS4000}
+	\end{subfigure}
+	%	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure10e.png}
+		\caption{DLSR: model I}
+		\label{fig:frame110_Abdalraheem}
+	\end{subfigure}
+	\caption{Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.}
+	\label{fig:frame110_comparison}
+\end{figure}
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure11a.png}
+		\caption{Reference}
+		\label{fig:frame110delam_ref}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure11b.png}
+		\caption{CS: 1024 points}
+		\label{fig:frame110delam_CS1024}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure11c.png}
+		\caption{CS: 3000 points}
+		\label{fig:frame110delam_CS3000}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure11d.png}
+		\caption{CS: 4000 points}
+		\label{fig:frame110delam_CS4000}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Figures/Chapter_5/figure11e.png}
+		\caption{DLSR: model I}
+		\label{fig:frame110delam_Abdalraheem}
+	\end{subfigure}
+	\caption{Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.~\ref{fig:frame110_comparison}.}
+	\label{fig:frame110del_comparison}
+\end{figure} 
+\clearpage
+\begin{figure} [h!]
+	\centering
+	\includegraphics[scale=1]{Figures/Chapter_5/figure12.png}
+	\caption{Comparison of reconstruction accuracy at frame number $N_f$.}
+	\label{fig:frame_metrics}
+\end{figure}
+
+%\begin{table}[h!]
+%	\renewcommand{\arraystretch}{1.3}
+%	\centering \footnotesize
+%	\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.}	
+%	\begin{tabular}{lrrrcrc} 
+%		\toprule
+%		& & & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+%		\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+%		Method & $N_p$ & CR [\%] & PSNR & PEARSON CC& PSNR & PEARSON CC \\
+%		\midrule
+%		\csvreader
+%		[table head=\toprule,
+%		late after line=\\ 
+%		]{table_metrics.csv}{
+%			1=\one, 2=\two, 3=\three, 4=\four, 5=\five, 6=\six, 7=\seven
+%		}%
+%		{\one & \two & \three & \four & \five & \six & \seven }%	
+%		\bottomrule
+%	\end{tabular}	
+%	\label{tab:csv_results}
+%\end{table}

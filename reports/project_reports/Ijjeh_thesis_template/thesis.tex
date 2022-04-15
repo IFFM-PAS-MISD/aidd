@@ -24,7 +24,6 @@
 \usepackage{Packages/mathphdthesis}
 
 
-
 \includeonly{
 Frontbackmatter/prelude 	% Contains all the relevant candidate information (name, degrees, abstract etc)
 ,Frontbackmatter/newcom 	% Place all you new commands in here
@@ -35,7 +34,6 @@ Frontbackmatter/prelude 	% Contains all the relevant candidate information (name
 ,Chapters/Chapter4/chap4
 ,Chapters/Chapter5/chap5
 ,Chapters/Chapter6/chap6
-,Chapters/Chapter7/chap7
 ,Appendices/app0   			% Needed to switch to appendix mode
 ,index  					% Places the index in the thesis
 }
@@ -51,10 +49,9 @@ Frontbackmatter/prelude 	% Contains all the relevant candidate information (name
 	\include{Chapters/Chapter4/chap4}
 	\include{Chapters/Chapter5/chap5}
 	\include{Chapters/Chapter6/chap6}
-	\include{Chapters/Chapter7/chap7}
 	\include{Appendices/app0}
 	\include{index}
 	% Bibliography
-	\addcontentsline{toc}{chapter}{References/Bibliography}
+	\addcontentsline{toc}{chapter}{/References/Bibliography}
 	\printbibliography
 \end{document}

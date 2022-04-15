@@ -1,19 +1,155 @@
 %% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
-\section{CNN classifier model}
+\section{CNN classifier models}
 \label{sec51}
 
-%% SECTION CONTENT ////////////////////////////////////////////////////////////////////////////////////
+In this section, the predicted outputs of utilising the CNN classifier on the selected four RMS numerical cases (from the top of the plate), which have delaminations of different locations, shapes, and angles.
+As mentioned before, 
+%\subsection{Numerical cases}
+%\label{sec511}
 
-\lipsum[1]
+In the first numerical case, the delamination is located at left edge of the plate, as shown in Fig.~\ref{fig:GT_case_448}, representing its ground truth (GT).
+The predicted output using (\(14\times14\)) and (\(16\times16\)) patches are presented in Fig.~\ref{fig:pred_7_7_case_448} and Fig.~\ref{fig:pred_8_8_case_448}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+For second numerical case, the delamination is located at upper left corner of the plate, as shown in Fig.~\ref{fig:GT_case_456}, representing its ground truth (GT).
+The predicted output using (\(14\times14\)) and (\(16\times16\)) patches are presented in Fig.~\ref{fig:pred_7_7_case_456} and Fig.~\ref{fig:pred_8_8_case_456}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In third numerical case, the delamination is located near to center upper edge of the plate, as shown in Fig.~\ref{fig:GT_case_438}, representing its ground truth (GT).
+The predicted output using (\(14\times14\)) and (\(16\times16\)) patches are presented in Fig.~\ref{fig:pred_7_7_case_438} and Fig.~\ref{fig:pred_8_8_case_438}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It is important to notice that the first, second and the third cases are considered difficult due to the edge wave reflections that have the similar patterns as delamination reflection.
+However, the CNN classifiers were able to detect the delamination in such difficult cases.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+For four numerical case, the delamination is located in the upper left quarter of the plate, as shown in Fig.~\ref{fig:GT_case_397}, representing its ground truth (GT).
+The predicted output using (\(14\times14\)) and (\(16\times16\)) patches are presented in Fig.~\ref{fig:pred_7_7_case_397} and Fig.~\ref{fig:pred_8_8_case_397}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
-\subsection{Numerical cases}
-\label{sec511}
+Table~\ref{tab:table_all_numerical_cases_bounding_boxes} presents the \(IoU\) values for CNN classier with respect to the input patch size for the numerical cases shown in Fig.~\ref{fig:bounding_boxes_predictions}.
+Furthermore, the mean \(IoU\) for all \(95\) test cases is \((0.16)\) and \((0.2)\) for (\(14\times14\)) and (\(16\times16\)) patches, receptively.
+Consequently, it can be concluded that when increasing the input resolution (i.e., using \((16times16)\) patches), the obtained \(IoU\) values increased.
+It should also be mentioned, that for both input patches, the CNN classifier was able to detect all the delaminations for the \(95\) test cases.
 
-\lipsum[1]
+Moreover, the CNN classier model was tested on experimental data, however, due to the poor quality of the obtained results, I did not present them.
 
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
-\subsection{Experimental case}
-\label{sec512}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[ht!]
+	\centering
+	\caption{Analysis of numerical cases}
+	\label{tab:table_all_numerical_cases_bounding_boxes}
+	{
+		\begin{tabular}{lcc}
+			\toprule
+			Case & \multicolumn{2}{c}{Patches} \\ 
+			\cmidrule(lr){2-3} & \multicolumn{1}{c}{\((14\times14)\)} & \multicolumn{1}{c}{\((16\times16)\)} \\			
+			\midrule 
+			1 & \(0.26\) & \(0.34\) \\
+			2 & \(0.18\) & \(0.23\) \\
+			2 & \(0.07\) & \(0.04\) \\
+			4 & \(0.12\) & \(0.24\) \\
+			\bottomrule
+		\end{tabular}
+	}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\centering
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%% case 448
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/m1_rand_single_delam_448.png}
+		\caption{}
+		\label{fig:GT_case_448}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_7_7_448.png}
+		\caption{\(IoU=0.26\)}
+		\label{fig:pred_7_7_case_448}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_8_8_448.png}
+		\caption{\(IoU=0.34\)}
+		\label{fig:pred_8_8_case_448}
+	\end{subfigure}	
 
-\lipsum[1]
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%% case 456
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/m1_rand_single_delam_456.png}
+		\caption{}
+		\label{fig:GT_case_456}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_7_7_456.png}
+		\caption{\(IoU=0.18\)}
+		\label{fig:pred_7_7_case_456}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_8_8_456.png}
+		\caption{\(IoU=0.23\)}
+		\label{fig:pred_8_8_case_456}
+	\end{subfigure}	
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%% case 438
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/m1_rand_single_delam_438.png}
+		\caption{}
+		\label{fig:GT_case_438}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_7_7_438.png}
+		\caption{\(IoU=0.07\)}
+		\label{fig:pred_7_7_case_438}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_8_8_438.png}
+		\caption{\(IoU=0.04\)}
+		\label{fig:pred_8_8_case_438}
+	\end{subfigure}
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%% case 397
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/m1_rand_single_delam_397.png}
+		\caption{}
+		\label{fig:GT_case_397}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_7_7_397.png}
+		\caption{\(IoU=0.12\)}
+		\label{fig:pred_7_7_case_397}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{Figures/Chapter_5/predicted_output_8_8_397.png}
+		\caption{\(IoU=0.24\)}
+		\label{fig:pred_8_8_case_397}
+	\end{subfigure}
+	\caption{Output predictions for the implemented CNN classifiers}
+	\label{fig:bounding_boxes_predictions}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage

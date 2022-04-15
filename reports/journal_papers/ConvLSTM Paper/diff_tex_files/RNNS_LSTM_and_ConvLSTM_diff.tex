@@ -1,0 +1,171 @@
+\subsection{Introduction to RNNs, LSTM, and ConvLSTM}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Feed-forward neural networks such as traditional ANNs and CNNs cannot learn temporal features from the data and hence are not the best choice for sequential data processing.
+To handle such problems, a recurrent neural network (RNN) was introduced, which was specifically developed to address sequential data~\cite{aggarwal2018neural, Lecun2015, goodfellow2016deep}. 
+RNNs contain loops among the different nodes in their architecture to retain information in the model for long periods.
+RNNs employ the current input with the previous memory state.
+This ability \DIFdelbegin \DIFdel{of memory-keeping }\DIFdelend \DIFaddbegin \DIFadd{to memory-keep }\DIFaddend enables RNNs to predict what comes next. 
+Furthermore, RNNs were designed to handle sequential data, which implies that updating the learnable weights must consider the extent of the time dimension. 
+Accordingly, the backpropagation \DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{Rumelhart1986} }\hspace{0pt}%DIFAUXCMD
+algorithm }\DIFdelend \DIFaddbegin \DIFadd{algorithm~\mbox{%DIFAUXCMD
+\cite{Rumelhart1986} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend responsible for updating the learnable weights needs some modification to work along with the time dimension.
+To alleviate this problem, backpropagation through time (BPTT)~\cite{aggarwal2018neural, goodfellow2016deep} was introduced. 
+\DIFdelbegin \DIFdel{In }\DIFdelend \DIFaddbegin \DIFadd{Therefore, in }\DIFaddend basic RNNs, short-term memories are only preserved, \DIFdelbegin \DIFdel{therefore }\DIFdelend \DIFaddbegin \DIFadd{so }\DIFaddend it becomes unfeasible in the case of dealing with long sequences of data\DIFdelbegin \DIFdel{hence it }\DIFdelend \DIFaddbegin \DIFadd{. Hence, such RNNs }\DIFaddend may suffer from issues like vanishing or exploding gradients~\cite{bengio1994learning}.
+Therefore, the fine-tuning of the model parameters and training of RNNs becomes very hard.
+To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Term Memory networks (LSTMs\DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
+\cite{Hochreiter1997}}\hspace{0pt}%DIFAUXCMD
+)}\DIFdelend \DIFaddbegin \DIFadd{)~\mbox{%DIFAUXCMD
+\cite{Hochreiter1997}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\DIFdelbeginFL %DIFDELCMD < \includegraphics[scale=1]{figure2a.png}
+%DIFDELCMD < 		%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[scale=1]{figure4a.png}
+		\DIFaddendFL \caption{LSTM}
+		\label{fig:LSTM}
+	\end{subfigure}
+	\\ 
+	\hfill
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\DIFdelbeginFL %DIFDELCMD < \includegraphics[scale=1]{figure2b.png}
+%DIFDELCMD < 		%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[scale=1]{figure4b.png}
+		\DIFaddendFL \caption{ConvLSTM}
+		\label{fig:ConvLSTM}	
+	\end{subfigure}
+	\caption{LSTM and ConvLSTM architectures.}
+	\label{fig:lstm_convlstm}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+LSTMs were developed to keep information related to long-term dependencies \DIFdelbegin \DIFdel{, }\DIFdelend and to solve the problem of vanishing/exploding gradients.
+Further, LSTMs handle inputs or outputs of any length\DIFdelbegin \DIFdel{that }\DIFdelend \DIFaddbegin \DIFadd{, which }\DIFaddend makes LSTMs powerful for solving very complex sequential problems. 
+Basic LSTM architecture shown in Fig.~\ref{fig:LSTM}  consists of four units: an input gate, a cell state, a forget gate, and an output gate.
+These gates help regulate the flow of information that is added to or removed from the cell state. 
+The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory.
+
+The purpose of the forget gate is to decide what information to keep and what to neglect. 
+The current input \DIFdelbegin \DIFdel{\(X_{t}\) }\DIFdelend \DIFaddbegin \DIFadd{\(x_{t}\) }\DIFaddend and the previous hidden state  \(h_{t-1}\) are passed through a sigmoid function (\(\sigma\)) which will produce values between \(0\) and \(1\).
+Then the outputs of the sigmoid are multiplied with the previous cell state \DIFdelbegin \DIFdel{\(C_{t-1}\), accordingly}\DIFdelend \DIFaddbegin \DIFadd{\(c_t-1\). 
+Consequently}\DIFaddend , (\(0\)) outputs are discarded.
+The mathematical calculation at the forget gate ($f_t$) is depicted in Eq.~(\ref{eq:eq1}):
+\DIFdelbegin \begin{displaymath}
+\DIFdel{f_{t}=\sigma\left(W_{f} \cdot\left[h_{t-1}, X_{t}\right]+b_{f}\right)
+%DIFDELCMD < \label{eq:eq1}%%%
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin 
+
+\begin{align}
+	&\DIFadd{f_{t}=\sigma\left( W_{f}  
+	\left[
+	\begin{array}{c}
+		h_{t-1} \\ x_{t}
+	\end{array} 
+	\right]
+	+ b_{f} \right), }\\
+	&\DIFadd{W_{f} = \left[ W_{h_{t-1}}  W_{x_{t}} \right],
+	\label{eq:eq1}
+}\end{align}\DIFaddend 
+where \DIFdelbegin \DIFdel{\(W\) represents }\DIFdelend \DIFaddbegin \DIFadd{\(W_{f}\) represent }\DIFaddend the learnable weights \DIFdelbegin \DIFdel{, }\DIFdelend \DIFaddbegin \DIFadd{at the hidden and input states, \(h_{t-1}\) }\DIFaddend and \DIFdelbegin \DIFdel{\(b\) }\DIFdelend \DIFaddbegin \DIFadd{\(x_{t}\), respectively, and \(b_{f}\) }\DIFaddend represents the bias term. 
+
+The input gate \(i_{t}\) takes the current input \DIFdelbegin \DIFdel{\(X_t\) }\DIFdelend \DIFaddbegin \DIFadd{\(x_t\) }\DIFaddend with the previous hidden state \(h_{t-1}\)\DIFdelbegin \DIFdel{then apply }\DIFdelend \DIFaddbegin \DIFadd{, then applies }\DIFaddend the sigmoid function to get values in a range between 0 (not important) and 1 (important)\DIFdelbegin \DIFdel{, then }\DIFdelend \DIFaddbegin \DIFadd{.
+Then, }\DIFaddend the same current input \DIFdelbegin \DIFdel{\(X_t\)}\DIFdelend \DIFaddbegin \DIFadd{\(x_t\)}\DIFaddend , and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at \DIFdelbegin \DIFdel{\(\tilde{C}_{t}\) }\DIFdelend \DIFaddbegin \DIFadd{a candidate cell state (\(\tilde{c}_{t}\)) }\DIFaddend that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
+Then, the outputs from the sigmoid and \(\tanh\) functions are multiplied point-by-point to eliminate \(0\) values.  
+Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
+\begin{equation}
+	\DIFdelbegin %DIFDELCMD < \begin{aligned}
+%DIFDELCMD < i_{t} &=\sigma\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) 
+%DIFDELCMD < \\
+%DIFDELCMD < \tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right) 
+%DIFDELCMD < \end{aligned}%%%
+\DIFdelend \DIFaddbegin \begin{aligned}
+		i_{t} &=\sigma\left(W_{i} 
+		\left[
+		\begin{array}{c}
+			h_{t-1} \\ x_{t}
+		\end{array} 
+		\right]+b_{i}\right), 
+		\\
+		\tilde{c}_{t} &=\tanh \left(W_{c} 
+		\left[
+		\begin{array}{c}
+			h_{t-1} \\ x_{t}
+		\end{array} 
+		\right]+b_{c}\right). 
+	\end{aligned}\DIFaddend  \label{eq:eq2}
+\end{equation}
+At this point, the network has sufficient information obtained from the input and forget gates. 
+Hence, the current cell state \DIFdelbegin \DIFdel{\(C_t\) }\DIFdelend \DIFaddbegin \DIFadd{\(c_{t}\) }\DIFaddend can be calculated by multiplying the previous cell state \DIFdelbegin \DIFdel{\(C_{t-1}\) }\DIFdelend \DIFaddbegin \DIFadd{\(c_{t-1}\) }\DIFaddend with the output of the forget gate\DIFdelbegin \DIFdel{, then }\DIFdelend \DIFaddbegin \DIFadd{. 
+Then, }\DIFaddend the result is added to the calculated input values as depicted in Eq.~(\ref{eq:eq3}):
+\begin{equation}
+	\DIFdelbegin \DIFdel{C}\DIFdelend \DIFaddbegin \DIFadd{c}\DIFaddend _{t}=f_{t} \cdot \DIFdelbegin \DIFdel{C}\DIFdelend \DIFaddbegin \DIFadd{c}\DIFaddend _{t-1}+i_{t} \cdot \DIFdelbegin %DIFDELCMD < \tilde{C}%%%
+\DIFdelend \DIFaddbegin \tilde{c}\DIFaddend _{t}\DIFaddbegin \DIFadd{.
+	}\DIFaddend \label{eq:eq3}
+\end{equation}
+The output gate \(o_{t}\) computes the next hidden state \(h_{t}\) which
+holds information related to the current inputs. 
+Accordingly, the current input \DIFdelbegin \DIFdel{\(X_{t}\) }\DIFdelend \DIFaddbegin \DIFadd{\(x_{t}\) }\DIFaddend and the previous hidden state \(h_{t-1}\) are passed through a third sigmoid function to produce values between \(0\) and \(1\).
+The current cell state \DIFdelbegin \DIFdel{\(C_{t}\) }\DIFdelend \DIFaddbegin \DIFadd{\(c_{t}\) }\DIFaddend is passed through a \(\tanh\) function and multiplied point-by-point with \(o_{t}\) to produce the new hidden state \(h_{t}\) which is transferred to the next timestamp.
+Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	\DIFdelbegin %DIFDELCMD < \begin{aligned}
+%DIFDELCMD < o_{t} &=\sigma\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right) \\
+%DIFDELCMD < h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
+%DIFDELCMD < \end{aligned}%%%
+\DIFdelend \DIFaddbegin \begin{aligned}
+		o_{t} &=\sigma\left(W_{o} 
+		\left[
+		\begin{array}{c}
+			h_{t-1} \\ x_{t}
+		\end{array} 
+		\right]
+		+b_{o}\right), \\
+		h_{t} &=o_{t} \cdot \tanh \left(c_{t}\right),
+	\end{aligned}\DIFaddend 
+	\label{eq:eq4}
+\end{equation} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DIFaddbegin \DIFadd{where \(W_{f}, W_{i}, W_{c}\) and \(W_{o}\) have shared learnable weights across time.
+}\DIFaddend 
+
+Recently, LSTMs have been widely used for large-scale learning of language translation models, speech recognition systems, chatbots, forecasting stock markets, text data analysis, and many more~\cite{graves2014towards, cho2014properties}. 
+However, LSTMs are inefficient \DIFdelbegin \DIFdel{regarding }\DIFdelend \DIFaddbegin \DIFadd{at }\DIFaddend capturing spatial information by themselves when the time series inputs are consecutive images.
+\DIFdelbegin \DIFdel{Accordingly, ConvLSTM layer which is a combination of CNN and LSTM }\DIFdelend \DIFaddbegin \DIFadd{Hence, the ConvLSTM }\DIFaddend unit was introduced by Shi et al.~\cite{xingjian2015convolutional} to solve such a problem.
+For ConvLSTM, the convolution operations are applied both at the input-to-state transition and at the state-to-state transitions.  
+\DIFdelbegin \DIFdel{ConvLSTM }\DIFdelend \DIFaddbegin \DIFadd{The ConvLSTM unit, }\DIFaddend shown in Fig.~\ref{fig:ConvLSTM} is a variation of the LSTM cell as it performs a convolution operation within the LSTM cell.
+ConvLSTM is a combination of a convolution operation and an LSTM cell.
+Thus, ConvLSTM can capture the time-correlated and spatial features in a series of consecutive images.
+Equation~(\ref{eq:eq5}) depicts the ConvLSTM operations as the inputs \DIFdelbegin \DIFdel{\(X_1, \dots, X_t\)}\DIFdelend \DIFaddbegin \DIFadd{\(x_1, \dots, x_t\)}\DIFaddend , hidden states \(h_1, \dots, h_t\), cell states \DIFdelbegin \DIFdel{\(C_1, \dots, C_t\) }\DIFdelend \DIFaddbegin \DIFadd{\(c_1, \dots, c_t\) }\DIFaddend and input, forget\DIFaddbegin \DIFadd{, }\DIFaddend and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
+\begin{equation}
+	\DIFdelbegin %DIFDELCMD < \begin{aligned}
+%DIFDELCMD < 		i_{t} &=\sigma\left(W_{x i} * X_{t}+W_{h i} * h_{t-1}+W_{c i} \cdot C_{t-1}+b_{i}\right) 
+%DIFDELCMD < 		\\
+%DIFDELCMD < 		f_{t} &=\sigma\left(W_{x f} * X_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot C_{t-1}+b_{f}\right) \\
+%DIFDELCMD < 		C_{t} &=f_{t} \cdot C_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * X_{t}+W_{h c} * h_{t-1}+b_{c}\right) 
+%DIFDELCMD < 		\\
+%DIFDELCMD < 		o_{t} &=\sigma\left(W_{x o} * X_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot C_{t}+b_{o}\right) \\
+%DIFDELCMD < 		h_{t} &=o_{t} \cdot \tanh \left(C_{t}\right)
+%DIFDELCMD < 	\end{aligned}%%%
+\DIFdelend \DIFaddbegin \begin{aligned}
+		i_{t} &=\sigma\left(W_{x_t} * x_{t}+W_{h_{t-1}} * h_{t-1}+W_{c i} \cdot c_{t-1}+b_{i}\right),
+		\\
+		f_{t} &=\sigma\left(W_{x f} * x_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot c_{t-1}+b_{f}\right), \\
+		c_{t} &=f_{t} \cdot c_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * x_{t}+W_{h c} * h_{t-1}+b_{c}\right), 
+		\\
+		o_{t} &=\sigma\left(W_{x o} * x_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot c_{t}+b_{o}\right), \\
+		h_{t} &=o_{t} \cdot \tanh \left(c_{t}\right),
+	\end{aligned}\DIFaddend 
+	\label{eq:eq5}
+\end{equation}
+where (\(*\)) indicates the convolution \DIFaddbegin \DIFadd{operation, which is an element-wise multiplication }\DIFaddend operation.
+
+Recently, ConvLSTM has become very popular and is increasingly being used in 
+more and more image processing applications.

@@ -1,21 +1,17 @@
-% Note that the text in the [] brackets is the one that will
-% appear in the table of contents, whilst the text in the {}
-% brackets will appear in the main thesis.
-
-%% CHAPTER HEADER /////////////////////////////////////////////////////////////////////////////////////
+%% CHAPTER HEADER ////////////////////////////////////////////////////////////////////////////////
 \chapter[Data-driven for SHM]{Data-driven approaches for SHM}
 \label{ch3}
-
 %% CHAPTER INTRODUCTION ///////////////////////////////////////////////////////////////////////////////
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Artificial Intelligence (AI) refers to the ability of machines to imitate the human mind in such a way as "learning and problem-solving"~\cite{Russell2010}.
+Artificial Intelligence (AI) refers to the ability of machines to imitate the human mind in such a way as  \enquote{learning and problem-solving}~\cite{Russell2010}.
 AI has various definitions, however, it can be defined as any device that can sense its environment and consequently takes steps that maximize its opportunity of accomplishing its goals~\cite{Russell2010}.
 Historically, AI was introduced in 1956 at the Dartmouth summer conference by John McCarthy.
-For many years after, AI has been in what so-called AI winter due to the lack of  computational power.
+For many years after, AI has been in \enquote{AI winter} due to the lack of computational power.
 Moreover, its algorithms were not fully understood mathematically.
-However, in recent years, AI has returned to the stage due to several reasons. The first reason was the advanced evolution occurred in technology that produced high computational powers e.g. Graphics Processing Unit (GPU). 
-GPU computational power exceeds the traditional Central Processing Units (CPUs), due to the high capability of parallel computing, which makes it more efficient in running algorithms for large data.
-The second reason is the tremendous data available nowadays, which can remarkably improve the learning process of an AI system, since, its effectiveness depends on learning from its environment. 
+However, in recent years, AI has returned to the stage due to several reasons. 
+The first reason was the advanced evolution that occurred in technology that produced high computational powers (e.g. Graphics Processing Unit (GPU)). 
+GPU computational power exceeds the traditional Central Processing Units (CPUs) due to the high capability of parallel computing, which makes it more efficient in running algorithms for large data.
+The second reason is the tremendous data available nowadays, which can remarkably improve the learning process of an AI system, as its effectiveness depends on learning from its environment. 
 
 In general, AI can be divided into two classes: Strong AI and weak AI. Tab.~\ref{tab:Strong_Weak_AI} presents the main differences between them.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,27 +32,29 @@ In general, AI can be divided into two classes: Strong AI and weak AI. Tab.~\ref
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{}
-Engineering structures such as buildings, roads, tunnels, power generation systems, rotating machinery, and aircrafts are considered very important in our modern life.
-However, such structures are prone to various types of damage, therefore it is essential to maintain them and keep them safe during their operational lifetime.
+Engineering structures such as buildings, roads, tunnels, power generation systems, rotating machinery, and aircraft are considered important in our modern life.
+However, such structures are prone to various types of damage.
+Therefore, it is essential to maintain them and keep them safe during their operational lifetime.
 Health monitoring presents an essential tool in management activities as it allows identifying early and progressive structural damage~\cite{Farrar2007}. 
 Obtained data from monitoring structures are large and need to be transformed into valuable information to assist the development and design of maintenance activities, improve safety, reduce uncertainties and extend our knowledge regarding the monitored structure.
 
 SHM is one of the most robust tools for managing infrastructure.
-Traditionally, the procedure of performing an autonomous damage identification for engineering structures whether civil, mechanical or aerospace is referred to as SHM~\cite{farrar2001vibration}.
+Traditionally, the procedure of performing an autonomous damage identification for engineering structures, such as civil, mechanical or aerospace, is referred to as SHM~\cite{farrar2001vibration}.
 SHM aims to describe a real-time evaluation of a structure during its life-cycle~\cite{Balageas2010}. 
 Moreover, SHM assists in detecting and characterizing damage in a structure as a whole or its parts. 
 Damage detection in a structure is crucial since it may reduce safety and performance during its operational lifetime~\cite{Yuan2016}.
-Furthermore, the SHM approach involves monitoring a structure continuously through an array of sensors that periodically measure the response of the structure then extracting the sensitive damage features from these measurements to perform statistical analysis on these features to examine the condition of the structure.
+Furthermore, the SHM approach involves monitoring a structure continuously through an array of sensors that periodically measure the response of the structure, then extracting the sensitive damage features from these measurements to perform statistical analysis on these features to examine the condition of the structure.
 
 Generally, there are two approaches to SHM: physics-based and
 data-based.
 In the physics-based approach, the inverse problem method is applied in which numerical models such as finite element models are implemented. 
-Furthermore, damage identification results by comparing the registered readings from the structure and the estimated data from the models.
-On the other hand,  the data-based approach is related to the AI domain (machine learning and deep learning), in which artificial models are developed to learn the behavior of the structure based on earlier registered data that leads to performing pattern recognition for the damage identification.
+Damage identification results by comparing the registered readings from the structure and the estimated data from the models.
+On the other hand, the data-based approach is related to the AI domain (machine learning and deep learning), in which models are developed to learn the behavior of the structure based on earlier registered data that leads to performing pattern recognition for the damage identification.
 
-The data-based approach can be applied in both supervised and unsupervised learning~\cite{worden2007application}.
-Supervised learning can be utilised in the field of SHM where data of the damaged and undamaged conditions are available in which the detection models can train~\cite{figueiredo2018machine}.
-On the other hand, unsupervised learning is applied when data of undamaged cases are only available, therefore the detection models train only on such data~\cite{figueiredo2018machine}.
+The data-based approach can be applied for both supervised and unsupervised learning~\cite{worden2007application}.
+Supervised learning can be utilised in the field of SHM, where data of the damaged and undamaged conditions are available in which the detection models can train~\cite{figueiredo2018machine}.
+On the other hand, unsupervised learning is applied when data of undamaged cases are only available.
+Therefore, the detection models train only on such data~\cite{figueiredo2018machine}.
 
 %% INCLUDE SECTIONS ///////////////////////////////////////////////////////////////////////////////////
 
@@ -64,5 +62,5 @@ On the other hand, unsupervised learning is applied when data of undamaged cases
 \input{Chapters/Chapter3/sect32}
 \input{Chapters/Chapter3/sect33}
 \input{Chapters/Chapter3/sect34}
-\input{Chapters/Chapter3/sect35}
-\input{Chapters/Chapter3/sect36}
+%\input{Chapters/Chapter3/sect35}
+%\input{Chapters/Chapter3/sect36}
