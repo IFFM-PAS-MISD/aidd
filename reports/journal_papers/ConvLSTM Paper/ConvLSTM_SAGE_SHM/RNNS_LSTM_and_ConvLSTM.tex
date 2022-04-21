@@ -10,13 +10,25 @@ Accordingly, the backpropagation algorithm~\cite{Rumelhart1986} responsible for 
 To alleviate this problem, backpropagation through time (BPTT)~\cite{aggarwal2018neural, goodfellow2016deep} was introduced. 
 Therefore, in basic RNNs, short-term memories are only preserved, so it becomes unfeasible in the case of dealing with long sequences of data. Hence, such RNNs may suffer from issues like vanishing or exploding gradients~\cite{bengio1994learning}.
 Therefore, the fine-tuning of the model parameters and training of RNNs becomes very hard.
-To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Term Memory networks (LSTMs)~\cite{Hochreiter1997}.
+To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short 
+Term Memory networks (LSTMs)~\cite{Hochreiter1997}.
+
+LSTMs were developed to keep information related to long-term dependencies and 
+to solve the problem of vanishing/exploding gradients.
+Further, LSTMs handle inputs or outputs of any length, which makes LSTMs 
+powerful for solving very complex sequential problems. 
+Basic LSTM architecture shown in Figure~\ref{fig:LSTM} consists of four units: 
+an input gate, a cell state, a forget gate, and an output gate.
+These gates help regulate the flow of information that is added to or removed 
+from the cell state. 
+The hidden states in LSTM hold the short-term memory, while the cells state 
+holds the long-term memory.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{0.5\textwidth}
 		\centering
-		\includegraphics[width=.3\textheight]{figure4a.png}
+		\includegraphics[width=.27\textheight]{figure4a.png}
 		\caption{\centering LSTM}
 		\label{fig:LSTM}
 	\end{subfigure}
@@ -24,7 +36,7 @@ To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Ter
 	\hfill
 	\begin{subfigure}[b]{0.5\textwidth}
 		\centering
-		\includegraphics[width=.3\textheight]{figure4b.png}
+		\includegraphics[width=.27\textheight]{figure4b.png}
 		\caption{\centering ConvLSTM}
 		\label{fig:ConvLSTM}	
 	\end{subfigure}
@@ -32,13 +44,6 @@ To overcome such issues, Hochreiter and Schmidhuber developed the Long-Short Ter
 	\label{fig:lstm_convlstm}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-LSTMs were developed to keep information related to long-term dependencies and to solve the problem of vanishing/exploding gradients.
-Further, LSTMs handle inputs or outputs of any length, which makes LSTMs powerful for solving very complex sequential problems. 
-Basic LSTM architecture shown in Figure~\ref{fig:LSTM} consists of four units: 
-an input gate, a cell state, a forget gate, and an output gate.
-These gates help regulate the flow of information that is added to or removed from the cell state. 
-The hidden states in LSTM hold the short-term memory, while the cells state holds the long-term memory.
 
 The purpose of the forget gate is to decide what information to keep and what to neglect. 
 The current input \(x_{t}\) and the previous hidden state  \(h_{t-1}\) are passed through a sigmoid function (\(\sigma\)) which will produce values between \(0\) and \(1\).
