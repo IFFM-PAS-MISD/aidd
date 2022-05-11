@@ -32,11 +32,11 @@ Artificial neuron structure is presented in Fig.~\ref{fig:artificial Neuron}.
 		\centering
 		\includegraphics[scale=1]{Figures/Chapter_1/artificial_neuron.png}
 	\end{center}
-	\caption{Structure of Perceptron} 
+	\caption{Structure of Perceptron.} 
 	\label{fig:artificial Neuron}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Equation~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Equation~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Equation~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Equation~\ref{z}.
+There are several non-linear functions used in artificial neural networks such as the Rectified Linear unit (Relu) which is used commonly, shown in Eqn~\ref{Eq:relu}. Other non-linear functions are the Sigmoid logistic function as shown in Eqn~\ref{sigmoid} and hyperbolic tangent function tanh as shown in Eqn~\ref{tanh} ~\cite{Lecun2015}, where \(z\) is the summation of adjustable weights \(\{w_0,w_1,...,w_n \}\) multiplied by input variables (from previous layer) \(\{x_0,x_1,_...,x_n\}\) and a bias \(b\) as shown in Eqn~\ref{z}:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	Relu(z) = 
@@ -78,13 +78,13 @@ GD aims to reduce the cost function \(J(w)\) at each step to reach the \(J_{min}
 		\centering
 		\includegraphics[scale=1]{Figures/Chapter_3/Gradient_decent.png}
 	\end{center}
-	\caption{The process of Gradient Descent} 
+	\caption{The process of Gradient Descent.} 
 	\label{fig:GD}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Accordingly, the weights are modified as shown in Eqn.~\ref{weight_updates} where the partial derivative \(\frac{\partial J(w)}{\partial w_i}\) is the gradient, and \(\alpha \) is the learning rate which is the amount that the weights are updated during the learning process~\cite{Russell2010}.
 Therefore, the learning rate monitors the rate at which the neural network learns.
-Hence, small learning rates require more training time because of the small changes made to the weights when updated, whereas large learning rates result in accelerated changes, consequently, require less training time.
+Hence, small learning rates require more training time because of the small changes made to the weights when updated, whereas large learning rates result in accelerated changes, consequently, require less training time:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	w_{i+1}= w_{i} -\alpha \frac{\partial J(w)}{\partial w_i} 
@@ -107,12 +107,12 @@ Figure~\ref{fig:local_minima} shows that during the optimization process, it is 
 		\centering
 		\includegraphics[scale=1]{Figures/Chapter_3/local_minima.png}
 	\end{center}
-	\caption{Local minima} 
+	\caption{Local minima.} 
 	\label{fig:local_minima}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A saddle point is any location where all gradients of a cost function vanish but are neither a global nor a local minimum as shown if Fig.\ref{fig:saddle_point}.
+A saddle point is any location where all gradients of a cost function vanish but are neither a global nor a local minimum as shown in Fig.~\ref{fig:saddle_point}.
 
 The vanishing gradients are the most encountered problem during the optimization process as the gradients become too small, causing the learning process stuck for a long time before it makes any progress or stops at all~\cite{Brownlee2017a}.
 On the other hand, the exploding gradients problem occurs when the gradients become so large that lead to numerical overflow and result in \enquote{NaN} values~\cite{Brownlee2017a}.
@@ -122,7 +122,7 @@ On the other hand, the exploding gradients problem occurs when the gradients bec
 		\centering
 		\includegraphics[scale=1]{Figures/Chapter_3/saddle_point.png}
 	\end{center}
-	\caption{Saddle point} 
+	\caption{Saddle point.} 
 	\label{fig:saddle_point}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,17 +131,17 @@ Convolutional Neural Networks (CNNs) are a special type of artificial neural net
 CNNs are one of the most utilised architectures in DL for image processing as they can recognise complex patterns of images by performing convolution operations.
 
 In mathematics, a convolution is an operation performed between any two functions, as for example \(f, g:\mathbb{R}^{d} \to \mathbb{R}\) to produce at third function \((f\ast g)\) depicted in Eqn.~\ref{eqn:convolution}.
-In which, we measure the overlap between \(f\) and \(g\), as one function is flipped and shifted by \(x\).
+In which, we measure the overlap between \(f\) and \(g\), as one function is flipped and shifted by \(x\):
 \begin{equation}
-	(f\ast g)(x) = \int_{}^{} f(z).g(x-z)dz
+	(f\ast g)(x) = \int_{}^{} f(z)g(x-z)dz
 	\label{eqn:convolution}
 \end{equation}
-In the case of discrete objects defined on the set \(\mathbb{Z}\) of integers, the integral operation turns into a summation,  as depicted in Eqn.~\ref{eqn:discrete_conv}
+In the case of discrete objects defined on the set \(\mathbb{Z}\) of integers, the integral operation turns into a summation of elementwise multiplied components, as depicted in Eqn.~\ref{eqn:discrete_conv}:
 \begin{equation}		
 	(f\ast g)(x) = \sum_{a}^{} f(a)g(i-a)
 	\label{eqn:discrete_conv}
 \end{equation}
-For inputs with two dimensions, we have a corresponding sum with indices \((a,b)\) for \(f\) and \((i-a, j-b)\) for \(y\) respectively as depicted in Eqn.~\ref{eqn:2d_conv} and that describes a cross correlation operation.
+For inputs with two dimensions, we have a corresponding sum with indices \((a,b)\) for \(f\) and \((i-a, j-b)\) for \(y\) respectively as depicted in Eqn.~\ref{eqn:2d_conv} that describes a cross correlation operation:
 \begin{equation}
 	(f\ast g)(i,j) = \sum_{a}^{}\sum_{b}^{}f(a,b)g(i-a,j-b)
 	\label{eqn:2d_conv}
@@ -149,14 +149,13 @@ For inputs with two dimensions, we have a corresponding sum with indices \((a,b)
 %%%%%%%%%%%%%%%%%%%% from here
 Convolution operation for image processing is essentially a cross-correlation operation also known as a sliding dot product or sliding inner-product. 
 CNNs were designed to process data as tensors with different dimensions. 
-For a 1D data tensor, it can represent various data forms, such as signals and sequences, in addition to languages.
-For a 2D data tensor, it can represent an image in greyscale (one channel), further, by combining three 2D tensors a coloured 3D image is produced due to different intensities of the pixels in the (RGB) channels.
+For a 1D data tensor, it can represent various data forms, such as signals and sequences, in addition to sentences in various languages in translation problems.
+For a 2D data tensor, it can represent an image in grayscale (one channel), further, by combining three 2D tensors a coloured 3D image is produced due to different intensities of the pixels in the (RGB) channels.
 A 4D tensor represents volumetric data, such as a sequence of 3D images or a video.
 
-%Commonly, a CNN consists of three main parts: convolutional layers, downsampling layers, and dense layers.
 A convolutional layer, has a number \( n\) of convolution kernels (filters), in  which,  each kernel has a set of weights, of a size \((w_k,h_k,d_k)\).
 The kernel slides over an input image of a size \((w,h,d)\) performing a convolution operation (dot product), where \(w\) and \(h\) represent the image width and height, respectively, while \(d\) represents the depth (number of channels).
-The output of the convolution operation is feature maps that are locally connected to the output of the previous layer. 
+The output of the convolution operation are feature maps that are locally connected to the output of the previous layer. 
 Figure~\ref{fig:convolution_3d} illustrates the convolution operation for a 3D input and the calculated output (feature map) with a new shape of \((h_{n}\times w_{n} \times d_{n})\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
@@ -170,28 +169,30 @@ Figure~\ref{fig:convolution_3d} illustrates the convolution operation for a 3D i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Typically, the feature map size diminishes due to the convolution operation, though, the feature map can keep the same size of the input by applying some padding over the input. 
-Equations~\ref{new_hight} and~\ref{new_width} illustrates the calculations of new height and width of the output, where \(h_{n}\) and \(w_{n}\) are the new height and width dimensions of the feature map respectively after applying the convolution. 
-The padding \(p\) which is added to the input image of a feature map to guarantee that both the input and the output have the same dimensions.
-\(h_{k}\) and \(w_{k}\) represent the height and the width of the convolutional kernel, respectively.
-The stride \(s\) defines how much the convolutional kernel slides each step during convolution.
-The number of channels at the output feature map \((d_{n})\) equals the applied number of convolutional kernels \((n)\). 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The calculations of new height and width of the output are illustrated in Eqns~\ref{new_hight} and~\ref{new_width}:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	h_{n} = \frac{h+2\times p-h_{k}}{s}+1  
+	h_{n} = \frac{h+2\times p-h_{k}}{s}+1
 	\label{new_hight}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	w_{n} = \frac{w+2\times p-w_{k}}{s}+1
+	w_{n} = \frac{w+2\times p-w_{k}}{s}+1.
 	\label{new_width}
-\end{equation}
+\end{equation} 
+where \(h_{n}\) and \(w_{n}\) are the new height and width dimensions of the feature map respectively after applying the convolution. 
+The padding \(p\) is added to the input image of a feature map to guarantee that both the input and the output have the same dimensions.
+\(h_{k}\) and \(w_{k}\) represent the height and the width of the convolutional kernel, respectively.
+The stride \(s\) defines how much the convolutional kernel slides each step during convolution.
+The number of channels at the output feature map \((d_{n})\) equals the applied number of convolutional kernels \((n)\). 
+
 Typically,  when we train a CNN model, its kernel weights are initialised randomly.
 Accordingly, during the backpropagation process, all learnable parameters (kernels weights) are updated.
 Consequently, kernels learn to detect different types of edges (vertical, horizontal, and diagonal edges), color intensities, etc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Commonly, a convolutional operation is followed by a non-linear activation function such as (relu, sigmoid, tanh), followed by a downsampling operation (pooling).
-The idea behind pooling operation is to aggregate related features into one by reducing the spatial dimensions of the feature maps(e.g., width, height, and depth)~\cite{Lecun2015}, which reduces the computation complexity.
+The idea behind pooling operation is to aggregate related features into one by reducing the spatial dimensions of the feature maps (e.g., width, height, and depth)~\cite{Lecun2015}, which reduces the computation complexity.
 Figure~\ref{fig:downsampling} presents the downsampling operations that are max and average pooling, further, the pool size is \(2 \times 2\) with strides of \(2\).
 The Maxpool picks the maximum value in the local pool filter in a feature map, whereas the average pool picks the average value in the local pool filter in a feature map.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,7 +201,7 @@ The Maxpool picks the maximum value in the local pool filter in a feature map, w
 		\centering
 		\includegraphics[scale=1]{Figures/Chapter_3/downsampling.png}
 	\end{center}
-	\caption{Types of downsampling operations} 
+	\caption{Types of downsampling operations.} 
 	\label{fig:downsampling}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -214,13 +215,12 @@ Figure~\ref{fig:CNN} presents the default architecture of a CNN.
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_3/cnn.png}
 	\end{center}
-	\caption{Convolutional Neural Network architecture} 
+	\caption{Convolutional Neural Network architecture.} 
 	\label{fig:CNN}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-CNN became popular after the competition of the \enquote{Large Scale Visual Recognition Challenge 2012 (ILSVRC2012)}. 
-When \textcite{Krizhevsky2012} introduced AlexNet~\cite{Krizhevsky2012}, which is a deep CNN applied on a large dataset of \(1,000,000\) images and \(1,000\) different classes.
+CNN became popular after the competition of the \enquote{Large Scale Visual Recognition Challenge 2012 (ILSVRC2012)}, when \textcite{Krizhevsky2012} introduced AlexNet~\cite{Krizhevsky2012}, which is a deep CNN applied on a large dataset of \(1,000,000\) images and \(1,000\) different classes.
 AlexNet results were magnificent. 
 The success has stimulated the progress of the development in GPUs technology and the use of the non-linear activation function Relu~\cite{Lecun2015}.
 In the next years, several spectacular CNNs architectures were presented (e.g VGG-16, ResNet, Inception-v4, and others).
@@ -252,7 +252,7 @@ However, in feed-forward networks shown in Fig.~\ref{fig:FFNN}, the inputs and o
 		\caption{} 
 		\label{fig:FFNN}
 	\end{subfigure}	
-	\caption{(a) RNN v.s. (b) Feed-forward neural network}
+	\caption{(a) RNN v.s. (b) Feed-forward neural network.}
 	\label{fig:rnn_vs_FFNN}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -293,11 +293,11 @@ The hidden states in LSTM hold the short-term memory, while the cells state hold
 The purpose of the forget gate is to determine which information to consider and which to neglect.
 The current input \(x_t\) and the previous hidden state \(h_{t-1}\) are passed through a sigmoid function which will produce values between \(0\) and \(1\).
 Then the outputs of the sigmoid are multiplied with the previous cell state \(c_{t-1}\) to discard outputs equal to zero.
-Equation~\ref{eqn:forget_gate} depicts the calculation at the forget gate.
+Equation~\ref{eqn:forget_gate} depicts the calculation at the forget gate:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	\centering
-	f_t = \sigma(W_f.[h_{t-1}, X_{t}]+ b_f)
+	f_t = \sigma(W_f.[h_{t-1}, X_{t}]+ b_f),
 	\label{eqn:forget_gate}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -306,18 +306,18 @@ where \(W\) represents the learnable weights, and \(b\) represents the bias term
 The input gate \(i_{t}\) takes the current input \(X_t\) with the previous hidden state \(h_{t-1}\) then apply the sigmoid function to get values in a range between 0 (not important) and 1 (important), then the
 same current input \(X_t\), and the hidden state \(h_{t-1}\) are passed through a \(\tanh\) function at \(\tilde{C}_{t}\) that will regulate the network by transferring the values into a range between \(-1\) and \(1\).
 Then, the outputs from the sigmoid and \(\tanh\) functions are multiplied point-by-point to eliminate \(0\) values.  
-Equation~(\ref{eq:eq2}) depicts the calculation at the input gate:
+Equation~\ref{eq:eq2} depicts the calculation at the input gate:
 \begin{equation}
 	\begin{aligned}
-		i_{t} &=\sigma\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) 
+		i_{t} &=\sigma\left(W_{i} \cdot\left[h_{t-1}, X_{t}\right]+b_{i}\right) ,
 		\\
-		\tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right) 
+		\tilde{C}_{t} &=\tanh \left(W_{s} \cdot\left[h_{t-1}, X_{t}\right]+b_{c}\right).
 	\end{aligned} \label{eq:eq2}
 \end{equation}
 At this point, the network has sufficient information obtained from the input and forget gates. 
-Hence, the current cell state \(C_t\) is calculated by multiplying the previous cell state \(C_{t-1}\) with the output of the forget gate, then the result is added to the calculated input values as depicted in Eqn.~(\ref{eq:eq3}).
+Hence, the current cell state \(C_t\) is calculated by multiplying the previous cell state \(C_{t-1}\) with the output of the forget gate, then the result is added to the calculated input values as depicted in Eqn.~\ref{eq:eq3}:
 \begin{equation}
-	C_{t}=f_{t} * C_{t-1}+i_{t} * \tilde{C}_{t}
+	C_{t}=f_{t} * C_{t-1}+i_{t} * \tilde{C}_{t}.
 	\label{eq:eq3}
 \end{equation}
 The output gate \(o_{t}\) computes the next hidden state \(h_{t}\) which
@@ -328,8 +328,8 @@ Equation~(\ref{eq:eq4}) illustrates the calculations at the output gate:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	\begin{aligned}
-		o_{t} &=\sigma\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right) \\
-		h_{t} &=o_{t} * \tanh \left(C_{t}\right)
+		o_{t} &=\sigma\left(W_{o}\left[h_{t-1}, X_{t}\right]+b_{o}\right),\\
+		h_{t} &=o_{t} * \tanh \left(C_{t}\right).
 	\end{aligned}
 	\label{eq:eq4}
 \end{equation} 

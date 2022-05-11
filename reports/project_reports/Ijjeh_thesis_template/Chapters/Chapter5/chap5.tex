@@ -114,10 +114,10 @@ Equation~\ref{PSNR} depicts the mathematical representation of the PSNR:
 	PSNR=20log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
 	\label{PSNR}
 \end{equation}
-where \(R\) represents the maximum fluctuation value that exists in the input image. 
-In our case, \(R\) is \(255\), as I used an 8-bit unsigned integer data type.
+where \(R\) represents the maximum fluctuation value that exists in the input image, and its equal to \(255\), as I used an 8-bit unsigned integer data type.
+\(MSE\) refers to the mean square error between the predicted output and the corresponding ground truth (see Eqn.~\ref{mse}).
 
-The second utilised metric is the Pearson correlation coefficient, which measures the linear relationship between two variables \(X\) (representing the ground truth values) and \(Y\) (representing the predicted values), and its value is between -1 and 1, where:
+The second utilised metric is the Pearson correlation coefficient that measures the linear relationship between two variable matrices \textbf{\(X\)} (represents the ground truth values) and \textbf{\(Y\)} (represents the predicted values), and its value is between -1 and 1, where:
 \begin{itemize}
 	\item -1 represents a perfect negative linear correlation.
 	\item 0 represents no linear correlation.
@@ -130,9 +130,6 @@ Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC 
 \end{equation}
 where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) is the mean value of the sample, analogously to \(\bar{y}\).
 
-It should also be mentioned that all developed models were implemented and trained with the Keras API~\cite{chollet2015keras} running on top of TensorFlow~\cite{Abadi2016}.
-The NVIDIA GeForce RTX 2070 with \(8\) GBs of memory was utilised to train the CNN classification models.
-Furthermore, the NVIDIA Tesla V100 GPU with \(32\) GBs of memory was utilised to train the FCN models, the AE-ConvLSTM model, and the DLSR model.
 
 In the following, I will present and discuss the results of the developed CNN classifier models in section~\ref{sec51}. 
 In section~\ref{sec52}, the results of the five developed FCN models will be presented and discussed.

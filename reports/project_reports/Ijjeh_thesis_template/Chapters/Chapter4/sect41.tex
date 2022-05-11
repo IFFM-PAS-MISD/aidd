@@ -25,10 +25,10 @@ The delamination was modelled between the third and fourth layer (see Fig.~\ref{
 It should be noted that Fig.~\ref{fig:plate_setup} shows an exaggerated cross-section through the delamination. 
 Zero-volume delamination was assumed in the model. 
 Delamination spatial location was selected randomly so that the interaction of guided waves with delamination is different for each case.
-It includes cases when delamination is located at the edge of the plate, which is the most difficult to identify by signal processing methods.
+It includes cases when delamination is located in the corner of the plate, which is the most difficult to identify by signal processing methods.
 \begin{figure}
 	\centering
-	\includegraphics[scale=1]{Figures/Chapter_4/plate_delam_arrangement_MSSP.PNG}
+	\includegraphics[scale=1]{Figures/Chapter_4/plate_delam_arrangement_MSSP_thesis.PNG}
 	\caption{Setup for computing Lamb wave interactions with delamination.}
 	\label{fig:plate_setup}
 \end{figure}
@@ -41,7 +41,7 @@ In summary, the following random parameters were simulated in each case:
 	\item coordinates of the centre of delamination (randomly selected from the interval \(\left[0\, \textrm{mm}, 250\, \textrm{mm} -\delta \right]\) and \( \left[250\, \textrm{mm}+\delta, 500\, \textrm{mm} \right] \), where \(\delta = 10\, \textrm{mm}\)).
 \end{itemize}
 These parameters are defined in Fig.~\ref{fig:random_delaminations}, which shows exemplary random delamination locations, sizes, and shapes for Lamb wave propagation modeling.
-And it is important to note that the numerical cases include delaminations at the edges and the corners of the plate and corners.
+It is important to note that the numerical cases include delaminations at the edges and the corners of the plate.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[scale=0.8]{Figures/Chapter_4/figure1.png}
@@ -63,7 +63,7 @@ An example of the simulated full wavefield data on the top and bottom surfaces i
 It should be noted that stronger wave entrapment at delamination can be observed for the case of the wavefield at the top surface.
 It is because the delamination within the cross-section is located closer to the top surface.
 It makes it easier to detect delamination by processing wavefields at the top surface.
-It is better visible if the root mean square (RMS) according to Eq.~(\ref{eq:rms}) is applied to the wavefield.
+It is better visible if the root mean square (RMS) is applied to the wavefield.
 The result of this operation is presented in Fig.~\ref{fig:rms}.
 Based on the image analysis, the shape of the delamination can be easier to discern for the top case.
 \begin{figure} [h!]
