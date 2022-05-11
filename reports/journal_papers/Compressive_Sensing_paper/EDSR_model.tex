@@ -1,9 +1,23 @@
-\subsubsection{Model II: Enhanced Deep Super-Resolution}
-
+\subsubsection{Model II:}
+In this model, we applied a simple approach of convolutional neural 
+networks.
+The model is composed of a total of 16 cascaded convolutional layers, in which 
+the first layer has a kernel of size \((5\times 5)\), whereas all of the 
+remaining layers have a kernel size of \((3\times 3)\).
+Accordingly, a ReLU (Rectified Linear Unit) activation function is applied 
+after each convolution operation. 
+For the final output of the model, the UPNet as of Model-I with sub-pixel 
+convolution operation is applied.
+As the input low-resolution data here is also \((32\times 32)\), therefore an 
+up-scaling factor equal to 16 is applied in order to acquire the HR output 
+image of size \((512\times 512)\).
+The architecture of this model is shown in Figure~\ref{fig:Model_II}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
-		\includegraphics[scale=1.0]{RDB.png}
+		\includegraphics[scale=1.0]{Model_II.png}
 	\end{center}
-	\caption{Enhanced Deep Super-Resolution architecture.} 
-	\label{fig:EDSR}
+	\caption{Model-II architecture.} 
+	\label{fig:Model_II}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
