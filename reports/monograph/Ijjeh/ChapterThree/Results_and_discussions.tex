@@ -7,28 +7,28 @@ The mean and maximum (IoU) for each model is calculated and displayed as a compa
 Furthermore, for each model, the accuracy of classification, precision, recall, and F1 score were determined using Eqs.~(\ref{accuracy} -~\ref{f1_score}):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	\rm Accuracy\ = \frac{TP+TN}{(Total\ number\ of\ tested\ samples)}
+	\rm Accuracy\ = \frac{TP+TN}{(Total\ number\ of\ tested\ samples)},
 	\label{accuracy}
 \end{equation}
 
 \begin{equation}
-	\rm Pricision\ =\frac{TP}{TP+FP}
+	\rm Pricision\ =\frac{TP}{TP+FP},
 	\label{pricisoin}
 \end{equation}
 \begin{equation}
-	\rm Recall\ = \frac{TP}{TP+ FN}
+	\rm Recall\ = \frac{TP}{TP+ FN},
 	\label{recall}
 \end{equation}
 \begin{equation}
-	\rm F1\ score =\frac{2 \times (Pricision\times Recall)}{(Pricision + Recall)} 
+	\rm F1\ score =\frac{2 \times (Pricision\times Recall)}{(Pricision + Recall)},
 	\label{f1_score}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 where the Positive/Negative refers to the predicted output as (damage or non-damage) respectively, True Positive (TP) and True Negative (TN) represent the correct classification, and the False Positive (FP) and False Negative (FN) represent the incorrect classification.
 
 For training purposes, a K-fold cross-validation technique was implemented with five folds.
-As a result, each model has cycled over \((5)\) iterations of training.
-Furthermore, for each iteration, the number of epochs equals \((20)\).
+As a result, each model has cycled over 5 iterations of training.
+Furthermore, for each iteration, the number of epochs equals 20.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical scenarios}
 Three numerical data scenarios for delamination at various locations, shape, orientations and angles are discussed in the following.
@@ -45,45 +45,45 @@ Other models, such as the VGG16 encoder-decoder and GCN, are more visually simil
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure10a.png}
-		\caption{RMS bottom with label}
+		\caption{RMS bottom with label.}
 		\label{fig:RMS_flat_shell_Vz_448}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure10b.png}
-		\caption{Res-UNet}
+		\caption{Res-UNet.}
 		\label{fig:unet_pred_448}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure10c.png}
-		\caption{VGG16 encoder-decoder}
+		\caption{VGG16 encoder-decoder.}
 		\label{fig:vgg16_pred_448}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure10d.png}
-		\caption{PSPNet}
+		\caption{PSPNet.}
 		\label{fig:pspnet_pred_448}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure10e.png}
-		\caption{FCN-DenseNet}
+		\caption{FCN-DenseNet.}
 		\label{fig:fcn_densenet_pred_448}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure10f.png}
-		\caption{GCN}
+		\caption{GCN.}
 		\label{fig:gcn_pred_448}
 	\end{subfigure}
-	\caption{First delamination scenario based on numerical data}
+	\caption{First delamination scenario based on numerical data.}
 	\label{fig:softmax_448}
 \end{figure} 
 \clearpage
@@ -103,7 +103,7 @@ Considering the challenging damage scenario, all models perform reasonably well.
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11a.png}
-		\caption{RMS bottom with label}
+		\caption{RMS bottom with label.}
 		\label{fig:RMS_flat_shell_Vz_385}
 	\end{subfigure}
 	\hfill
@@ -116,37 +116,37 @@ Considering the challenging damage scenario, all models perform reasonably well.
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11b.png}
-		\caption{Res-UNet}
+		\caption{Res-UNet.}
 		\label{fig:Unet_Pred__softmax_385}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11c.png}
-		\caption{VGG16 encoder-decoder}			\label{fig:vgg16_pred__softmax_385}			
+		\caption{VGG16 encoder-decoder.}			\label{fig:vgg16_pred__softmax_385}			
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11d.png}
-		\caption{PSPNet}
+		\caption{PSPNet.}
 		\label{fig:pspnet_pred__softmax_385}
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11e.png}
-		\caption{FCN-DenseNet}
+		\caption{FCN-DenseNet.}
 		\label{fig:fcn_densenet_pred__softmax_385}
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure11f.png}
-		\caption{GCN}
+		\caption{GCN.}
 		\label{fig:gcn_pred_385}
 	\end{subfigure}
-	\caption{Second delamination scenario based on numerical data}
+	\caption{Second delamination scenario based on numerical data.}
 	\label{fig:385_softmax}
 \end{figure}
 \clearpage
@@ -164,44 +164,44 @@ GCN, on the other hand, gets the highest IoU value (see Table~\ref{tab:table_num
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure12a.png}
-		\caption{RMS bottom with label}
+		\caption{RMS bottom with label.}
 		\label{fig:RMS_flat_shell_Vz_475}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure12b.png}
-		\caption{Res-UNet}
+		\caption{Res-UNet.}
 		\label{fig:Unet_Pred__softmax_475}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure12c.png}
-		\caption{VGG16 encoder-decoder}			\label{fig:vgg16_pred__softmax_475}			
+		\caption{VGG16 encoder-decoder.}			\label{fig:vgg16_pred__softmax_475}			
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure12d.png}
-		\caption{PSPNet}
+		\caption{PSPNet.}
 		\label{fig:pspnet_pred__softmax_475}
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure12e.png}
-		\caption{FCN-DenseNet}
+		\caption{FCN-DenseNet.}
 		\label{fig:fcn_densenet_pred__softmax_475}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{figure12f.png}
-		\caption{GCN}
+		\caption{GCN.}
 		\label{fig:gcn_pred_475}
 	\end{subfigure}	
-	\caption{Third delamination scenario based on numerical data}
+	\caption{Third delamination scenario based on numerical data.}
 	\label{fig:475_softmax}
 \end{figure}
 \clearpage
@@ -213,7 +213,7 @@ Additionally, there is no noise in the predicted outputs for delamination identi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
-	\caption{\(IoU\) of Numerical scenarios}
+	\caption{\(IoU\) of Numerical scenarios.}
 	\label{tab:table_numerical_scenarios}
 	\resizebox{\textwidth}{!}
 	{
@@ -234,7 +234,7 @@ Additionally, Table~\ref{tab:table_iou} demonstrates that all models have a high
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
-	\caption{Analysis of numerical data}
+	\caption{Analysis of numerical data.}
 	\label{tab:table_iou}
 	\begin{tabular}{ccc}\hline
 		Model & mean \(IoU\) & max \(IoU\) \\ \hline
@@ -251,7 +251,7 @@ Table~\ref{tab:table_performance} presents the TP, TN, FP, and FN for all models
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
-	\caption{Model classification performance}
+	\caption{Model classification performance.}
 	\label{tab:table_performance}
 	\begin{tabular}{ccccc} \hline
 		Model& TP & TN & FP & FN \\ \hline
@@ -270,7 +270,7 @@ Furthermore, it can be concluded that the GCN model outperformed the other imple
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
-	\caption{Evaluation metric}
+	\caption{Evaluation metric.}
 	\label{tab:evaluation_metric}
 	\resizebox{\textwidth}{!}
 	{
@@ -389,7 +389,7 @@ It should be noted that as the number of total parameters increases, the require
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
-	\caption{Model parameters}
+	\caption{Model parameters.}
 	\label{tab:table_parameters}
 	\begin{tabular}{cc}\hline
 		Model & Total parameters (\(\approx\)) \\ \hline
@@ -430,45 +430,45 @@ It is expected that when the models are trained on experimental and numerical da
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1]{figure13a.png}
-		\caption{ERMS} % CFRP Teflon inserted \& Label
+		\caption{ERMS.} % CFRP Teflon inserted \& Label
 		\label{fig:Delamination}	
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1]{figure13b.png}
-		\caption{Res-UNet} 
+		\caption{Res-UNet.} 
 		\label{fig:unet_exp_7_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1]{figure13c.png}
-		\caption{VGG16 encoder-decoder} 
+		\caption{VGG16 encoder-decoder.} 
 		\label{fig:vgg16_exp_7_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1]{figure13d.png}
-		\caption{PSPNet} 
+		\caption{PSPNet.} 
 		\label{fig:pspnet_exp_7_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1]{figure13e.png}
-		\caption{FCN-DenseNet} 
+		\caption{FCN-DenseNet.} 
 		\label{fig:fcn_densenet_exp}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[scale=1]{figure13f.png}
-		\caption{GCN} 
+		\caption{GCN.} 
 		\label{fig:gcn_exp}
 	\end{subfigure}
-	\caption{Experimental results}
+	\caption{Experimental results.}
 	\label{fig:Exp_ERMS_teflon}
 \end{figure}
 \clearpage
