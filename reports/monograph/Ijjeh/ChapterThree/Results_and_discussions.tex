@@ -266,7 +266,7 @@ Table~\ref{tab:table_performance} presents the TP, TN, FP, and FN for all models
 
 As additional evaluation metrics, Table~\ref{tab:evaluation_metric} displays the classification accuracy, precision, recall, and F1-score values for all models.
 All models show high classification accuracy, as shown in Table~\ref{tab:evaluation_metric}, indicating that all of the offered models are capable of predicting the existence of delamination in all numerically generated cases.
-Furthermore, it can be concluded that the GCN model outperformed the other implemented models.
+Moreover, it can be concluded that the GCN model outperformed the other implemented models.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 	\centering
@@ -284,102 +284,6 @@ Furthermore, it can be concluded that the GCN model outperformed the other imple
 		\end{tabular}
 	}
 \end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Figures~\ref{fig:res_unet_iou_loss}-\ref{fig:GCN_iou_loss} show the accuracy and the loss graphs of the training and validation phases during epochs for Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN models, respectively.
-%\begin{figure} [!h]
-%	\centering
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{0.47\textwidth}
-%	 \centering		\includegraphics[width=\textwidth]{Unet_kfold_iou_per_epochs_softmax.png}	\caption{}
-%	 \label{fig:unet_accuracy_metric}
-%	\end{subfigure}
-%	\hfill	
-%	\begin{subfigure}[b]{0.47\textwidth}
-%	 \centering
-%	 \includegraphics[width=\textwidth]{Unet_kfold_loss_per_epochs_softmax.png}
-%	 \caption{}
-%	 \label{fig:unet_loss_metric}
-%	\end{subfigure}
-%	\caption{Accuracy and loss of the Res-UNet model}
-%	\label{fig:res_unet_iou_loss}
-%\end{figure}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure}[!h]
-%	\centering
-%	\begin{subfigure}[b]{0.47\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{FCN_VGG16_iou_per_epochs_softmax.png}
-%		\caption{}
-%		\label{fig:vgg16_accuracy_metric}
-%	\end{subfigure}		
-%	\hfill
-%	\begin{subfigure}[b]{0.47\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{FCN_VGG16_loss_per_epochs_softmax.png}
-%		\caption{}
-%		\label{fig:vgg16_loss_metric}
-%	\end{subfigure}
-%	\caption{Accuracy and loss of the VGG16 encoder-decoder model}
-%	\label{fig:Vgg16_iou_loss}
-%\end{figure}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure}[!h]
-%	\begin{subfigure}[b]{0.47\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{FCN_DenseNet_iou_per_epochs_softmax.png}
-%	\caption{}
-%	\label{fig:fcn_densenet_accuracy_metric}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.47\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{FCN_DenseNet_loss_per_epochs_softmax.png}
-%	\caption{}
-%	\label{fig:fcn_densenet_loss_metric}
-%	\end{subfigure}	
-%\caption{Accuracy and loss of the FCN-DenseNet model}
-%\label{fig:FCN_DenseNet_iou_loss}
-%\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure} [!h]
-%	\centering
-%	\begin{subfigure}[b]{0.47\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{PSPNet_kfold_iou_per_epochs_softmax.png}
-%		\caption{}
-%		\label{fig:psp_accuracy_metric}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.47\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{PSPNet_kfold_loss_per_epochs_softmax.png}
-%	\caption{}
-%	\label{fig:psp_loss_metric}
-%	\end{subfigure}
-%	\caption{Accuracy and loss of the PSPNet model}
-%	\label{fig:PSPNet_iou_loss}
-%\end{figure}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure} [!h]
-%	\centering
-%	\begin{subfigure}[b]{0.47\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{GCN_kfold_iou_per_epochs_softmax.png}
-%		\caption{}
-%		\label{fig:gcn_accuracy_metric}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.47\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{GCN_kfold_loss_per_epochs_softmax.png}			
-%		\caption{}
-%		\label{fig:gcn_loss_metric}
-%	\end{subfigure}
-%	\caption{Accuracy and loss of the GCN model}
-%	\label{fig:GCN_iou_loss}	
-%\end{figure}
-%\clearpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Furthermore, the total number of parameters in each DL model is the sum of trainable (convolution filter weights) and non-trainable parameters (biases and pooling filters).
 The trainable parameters are updated continuously until the minimal loss value is reached, whereas the non-trainable parameters remain unchanged during the training process.
