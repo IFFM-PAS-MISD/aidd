@@ -1,51 +1,81 @@
 \section{Results and discussions}
+In this section, the evaluation of the developed DLSR models based on the numerical test cases representing the LR frames are presented.
+Additionally, the developed models were evaluated on an experimental test case to demonstrate their capability of super-resolution image reconstruction.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Two metrics were utilised to evaluate the performance of the developed DLSR models:
+The first one is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
+Equation~\ref{PSNR} depicts the mathematical representation of the PSNR:
+\begin{equation}
+	PSNR=20log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
+	\label{PSNR}
+\end{equation}
+where \(R\) represents the maximum fluctuation value that exists in the input image, and its equal to \(255\).
+\(MSE\) refers to the mean square error between the predicted output and the corresponding ground truth.
+
+The second metric is the Pearson correlation coefficient (Pearson CC) that measures the linear relationship between two variable sets \textbf{\(X\)} (represents the ground truth values) and \textbf{\(Y\)} (represents the predicted values).
+Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC commonly denoted as \(r_{xy}\):
+\begin{equation}
+	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
+	\label{Pearson}
+\end{equation}
+where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) is the mean value of the sample, analogously to \(\bar{y}\).
+
+
+The developed DLSR models were trained using L2-MSE loss function. 
+Minimizing L2 is generally preferred since it maximizes the PSNR. 
+We implemented the proposed networks with the Keras~\cite{chollet2015keras} API running on the top of TensorFlow, and trained them using NVIDIA RTX 2080 and Tesla V100 GPU. 
+It takes 3 days to train Model-I, and 5 hours to train Model-II.
+The source code is publicly available online.(we can add link here to GitHub)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical cases}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[scale=1]{SR_output_475_frame_1.png}
-		\caption{HR frame / GT}
+		\caption{DLSR: Model~I}
 		\label{fig:num_f1_ijjeh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[scale=1]{Saeed_SR_output_475_frame_1.png}
-		\caption{LR frame}
+		\caption{DLSR: Model~II}
 		\label{fig:num_f1_saeed}	
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[scale=1]{SR_output_475_frame_64.png}
-		\caption{HR frame / GT}
+		\caption{DLSR: Model~I}
 		\label{fig:num_f64_ijjeh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[scale=1]{Saeed_SR_output_475_frame_64.png}
-		\caption{LR frame}
+		\caption{DLSR: Model~II}
 		\label{fig:num_f64_saeed}	
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[scale=1]{SR_output_475_frame_128.png}
-		\caption{HR frame / GT}
+		\caption{DLSR: Model~I}
 		\label{fig:num_f128_ijjeh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[scale=1]{Saeed_SR_output_475_frame_128.png}
-		\caption{LR frame}
+		\caption{DLSR: Model~II}
 		\label{fig:num_f128_saeed}	
 	\end{subfigure}
-	\caption{Model~I:~(a), (c) and (e), Model~II:~(b), (d) and (f)}
+	\caption{
+		Comparison of reconstructed frames with DLSR Model~I and II for frames $N_f = 91, 154\ \text{and}\ 218 $.}
 	\label{fig:num_results}
 \end{figure}
 \clearpage
