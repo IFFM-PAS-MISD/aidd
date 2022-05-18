@@ -8,7 +8,7 @@ The input signal was a five-cycle Hann window modulated sinusoidal tone burst. T
 The dataset contains \(475\) cases of full wavefield representing the propagation of Lamb waves and their interactions with random delaminations of different locations, shapes, sizes, and orientations in a CFRP plate.
 Figure~\ref{fig:All_cases} shows the plate with overlayed 475 delaminations.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
+\begin{figure} [!ht]
 	\begin{center}
 		\includegraphics[scale=1.0]{figure1.png}
 	\end{center}
@@ -23,7 +23,7 @@ Further, for each simulated case we have generated a \((512)\) frames.
 Accordingly, the dataset has a shape of \((475\times500\times500\times512)\) in which \(475\) represents the total number of simulated cases, \((500\times500)\) represents height and width of the frame, and \(512\) is the total number of frames per each case.
 Hence, the dataset resembles high-resolution frames of propagating waves.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
+\begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[scale=1.0]{wavefield_propagation.png}
 	\end{center}
@@ -62,7 +62,7 @@ Hence, only a certain number of frames was selected from the initial occurrence 
 	\label{CR}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [!h]
+\begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
