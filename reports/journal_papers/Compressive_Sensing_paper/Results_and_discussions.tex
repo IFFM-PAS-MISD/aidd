@@ -14,7 +14,7 @@ where \(R\) represents the maximum fluctuation value that exists in the input im
 \(MSE\) refers to the mean square error between the predicted output and the corresponding ground truth.
 
 The second metric is the Pearson correlation coefficient (Pearson CC) that measures the linear relationship between two variable sets \textbf{\(X\)} (represents the ground truth values) and \textbf{\(Y\)} (represents the predicted values).
-Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC commonly denoted as \(r_{xy}\):
+Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC:
 \begin{equation}
 	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
 	\label{Pearson}
@@ -24,72 +24,80 @@ where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual 
 The developed DLSR models were trained using MSE (L2 norm) loss function.
 Further, we implemented the proposed networks with the Keras~\cite{chollet2015keras} API running on the top of TensorFlow, and trained them using NVIDIA RTX 2080 and Tesla V100 GPU. 
 The source code is publicly available online.(we can add link here to GitHub)
-
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical cases}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The results of the reconstruction of HR frames for a numerical test case by the developed DLSR models are presented in Fig.~\ref{fig:num_results}.
+It must be noted that the LR frames used to recover the HR frames were not used in the training set.
 
+Figure~\ref{fig:num_results} presents the recovery of three HR frames (\ref{fig:HR_1}, \ref{fig:HR_2}, and \ref{fig:HR_3}) at different time steps with frame numbers \(N_f=91, 154,\ \text{and}\ 218\) respectively.
+Figures~\ref{fig:num_f1_ijjeh} and~\ref{fig:num_f1_saeed} show the recovery of the HR frame presented in~\ref{fig:HR_1}, which depicts the initial interaction of propagating Lamb waves with the damage.
+Figures~\ref{fig:num_f64_ijjeh} and~\ref{fig:num_f64_saeed} show the recovery of the HR frame presented in~\ref{fig:HR_2}, which depicts the propagating Lamb and their reflections from damage and boundaries of the plate.
+Figures~\ref{fig:num_f128_ijjeh} and~\ref{fig:num_f128_saeed} show the recovery of complex phenomena of wave propagation in the plate presented in Fig.~\ref{fig:HR_3}.
+Table~\ref{tab:num_results} presents the comparison results for the reconstructed frames with the developed DLSR models at three $N_f$.
+For the tested frames, both DLSR models recovered the HR frames with high PSNR and Pearson CC values.
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{HR_image_case_475_frame_1.png}
+		\includegraphics[scale=0.8]{HR_image_case_475_frame_1.png}
 		\caption{HR frame \\ (PSNR/ Pearson CC)}
 		\label{fig:HR_1}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{SR_output_475_frame_1.png}
+		\includegraphics[scale=0.8]{SR_output_475_frame_1.png}
 		\caption{Model~I \\($46.38\ \text{dB}/\ 0.9991$)}
 		\label{fig:num_f1_ijjeh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{Saeed_SR_output_475_frame_1.png}
+		\includegraphics[scale=0.8]{Saeed_SR_output_475_frame_1.png}
 		\caption{Model~II \\ ($48.43\ \text{dB}/\ 0.9995$)}
 		\label{fig:num_f1_saeed}	
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{HR_image_case_475_frame_64.png}
+		\includegraphics[scale=0.8]{HR_image_case_475_frame_64.png}
 		\caption{HR frame \\ (PSNR/ Pearson CC)}
 		\label{fig:HR_2}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{SR_output_475_frame_64.png}
+		\includegraphics[scale=0.8]{SR_output_475_frame_64.png}
 		\caption{Model~I \\ ($45.23\ \text{dB}/\ 0.9978$)}
 		\label{fig:num_f64_ijjeh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{Saeed_SR_output_475_frame_64.png}
+		\includegraphics[scale=0.8]{Saeed_SR_output_475_frame_64.png}
 		\caption{Model~II \\ $(48.34\ \text{dB}/\ 0.9990)$}
 		\label{fig:num_f64_saeed}	
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{HR_image_case_475_frame_128.png}
+		\includegraphics[scale=0.8]{HR_image_case_475_frame_128.png}
 		\caption{HR frame \\ (PSNR/ Pearson CC)}
 		\label{fig:HR_3}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{SR_output_475_frame_128.png}
+		\includegraphics[scale=0.8]{SR_output_475_frame_128.png}
 		\caption{Model~I \\ ($42.66\ \text{dB}/\ 0.9949$)}
 		\label{fig:num_f128_ijjeh}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=1\textwidth]{Saeed_SR_output_475_frame_128.png}
+		\includegraphics[scale=0.8]{Saeed_SR_output_475_frame_128.png}
 		\caption{Model~II \\ $(44.51\ \text{dB}/\ 0.9966)$}
 		\label{fig:num_f128_saeed}	
 	\end{subfigure}
@@ -97,26 +105,54 @@ The source code is publicly available online.(we can add link here to GitHub)
 		Comparison of reconstructed frames with DLSR Model~I and II for frames $N_f = 91, 154\ \text{and}\ 218 $ respectively. }
 	\label{fig:num_results}
 \end{figure}
-\clearpage
+
+
+\begin{table}[!ht]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Quality metrics for numerical case reconstructed with DLSR models at three time steps.}	
+	\begin{tabular}{llcc} 
+		\toprule		
+		$N_f$ & DLSR & PSNR & PEARSON CC\\
+		\midrule
+		\multirow{2}{*}{91} & Model-I  & \(46.38\) dB & \(0.9991\) \\
+		 				   & Model-II & \(48.43\) dB & \(0.9995\) \\
+		\midrule
+		\multirow{2}{*}{154} & Model-I  & \(45.23\) dB & \(0.9978\) \\
+							& Model-II & \(48.34\) dB & \(0.9990\) \\
+		\midrule
+		\multirow{2}{*}{154} & Model-I  & \(42.66\) dB & \(0.9949\) \\
+							& Model-II & \(44.51\) dB & \(0.9966\) \\
+		\bottomrule
+	\end{tabular}	
+	\label{tab:num_results}
+\end{table}
+
+The achieved PSNR and Pearson CC metrics regarding the full wavefield of 512 frames for the previously evaluated test case are presented in Fig.\ref{fig:num_case_475_metrics}, where Figs~\ref{fig:num_model_I} and~\ref{fig:num_model_II} relate to models I and II, respectively.
+For both DLSR models, the reconstructed HR frames have high PSNR and Pearson CC values.
+However, as we move forward in frames, the metrics values start to decrease, which is expected as the wave patterns become more complex and sophisticated.
+It is noteworthy to restate that the DLSR models were trained only on a set of $128$ frames per case representing the propagation of Lamb waves starting from the time point (frame) of interaction with damage. 
+However, the developed DLSR models are capable of reconstructing the full wavefield of $512$ frames, indicating the capability to generalise.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
 		\includegraphics[scale=1]{frame_metrics_DLSR_model_1_num.png}
-%		\caption{}
+		\caption{}
 		\label{fig:num_model_I}
 	\end{subfigure} \\
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
 		\includegraphics[scale=1]{frame_metrics_DLSR_model_2_num.png}
-%		\caption{}
+		\caption{}
 		\label{fig:num_model_II}
 	\end{subfigure}
 	\caption{Comparison of reconstruction accuracy for a numerical test case.}
 	\label{fig:num_case_475_metrics}
 \end{figure}
 
+\clearpage
 \subsection{Experimental cases}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
