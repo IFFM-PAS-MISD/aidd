@@ -42,15 +42,15 @@ In summary, the following random parameters were simulated in each case:
 \end{itemize}
 These parameters are defined in Fig.~\ref{fig:random_delaminations}, which shows exemplary random delamination locations, sizes, and shapes for Lamb wave propagation modeling.
 It is important to note that the numerical cases include delaminations at the edges and the corners of the plate.
-\begin{figure}[!h]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[scale=0.8]{Figures/Chapter_4/figure1.png}
 	\caption{Exemplary locations, sizes and shapes of random delaminations used for Lamb wave propagation modeling.}
 	\label{fig:random_delaminations}
 \end{figure}
-
 It resulted in random spatial placement of delaminations. The plate with overlayed 475 delamination cases is shown in Fig.~\ref{fig:random_delam}.
-\begin{figure}
+
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[scale=1.25]{Figures/Chapter_4/dataset2_labels_ellipses.png}
 	\caption{The plate with 475 cases of random delaminations.}
@@ -59,6 +59,7 @@ It resulted in random spatial placement of delaminations. The plate with overlay
 
 The output from the top and bottom surfaces of the plate in the form of particle velocities at the nodes of spectral elements were interpolated on the uniform grid of 500\(\times\)500 points by using shape functions of elements (see~\cite{Kudela2020} for more details).
 It essentially resembles measurements acquired by SLDV in the transverse direction (perpendicular to the plate surface).
+
 An example of the simulated full wavefield data on the top and bottom surfaces is presented in Fig.~\ref{fig:wavefield}.
 It should be noted that stronger wave entrapment at delamination can be observed for the case of the wavefield at the top surface.
 It is because the delamination within the cross-section is located closer to the top surface.
@@ -66,7 +67,7 @@ It makes it easier to detect delamination by processing wavefields at the top su
 It is better visible if the root mean square (RMS) is applied to the wavefield.
 The result of this operation is presented in Fig.~\ref{fig:rms}.
 Based on the image analysis, the shape of the delamination can be easier to discern for the top case.
-\begin{figure} [h!]
+\begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
@@ -114,7 +115,7 @@ Based on the image analysis, the shape of the delamination can be easier to disc
 	\label{fig:wavefield}
 \end{figure} 
 
-\begin{figure} [h!]
+\begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
