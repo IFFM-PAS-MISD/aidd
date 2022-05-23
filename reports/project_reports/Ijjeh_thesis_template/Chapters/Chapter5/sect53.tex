@@ -8,7 +8,6 @@ Consequently, the part of producing intermediate predictions and further calcula
 
 \subsection{Numerical cases}
 \label{sec531}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %In the first numerical case, the delamination is located at left edge of the plate, as shown in Fig.~\ref{fig:RMS_448}, representing its ground truth (GT).
@@ -22,7 +21,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 %As can be seen in all predicted outputs, our models are able to identify the delamination with high accuracy and without any noise.
 %
 %Table~\ref{tab:num_cases} presents the evaluation metrics for Model-\RNum{1} and~\RNum{2}, respectively, regarding the numerical cases shown in Fig.~\ref{fig:num_case}.
-%Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union \(IoU\) and percentage area error \(\epsilon\) with respect to each case. 
+%Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union IoU and percentage area error \(\epsilon\) with respect to each case. 
 %The performance of the~Model-\RNum{2} is slightly better than the Model-~\RNum{1} for the selected delamination scenarios.
 %However, all delamination cases should be considered for evaluation so the mean values of the proposed metrics were calculated next.
 %
@@ -114,10 +113,10 @@ Consequently, the part of producing intermediate predictions and further calcula
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[!ht]
 	\centering
-	\caption{Mean \(IoU\) for numerical cases with respect to the input of the model}
+	\caption{Mean IoU for numerical cases with respect to the input of the model}
 	\begin{tabular}{llc}
 		\toprule
-		Input & Model & mean \(IoU\) \\ 
+		Input & Model & mean IoU \\ 
 		\midrule
 		Animations & Autoencoder ConvLSTM & 0.87 \\ 
 		\midrule
@@ -156,7 +155,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/convlstm_AE_CFRP_teflon_3o.png}
-		\caption{\(IoU\) = 0.47}
+		\caption{IoU = 0.47}
 		\label{fig:convlstm_AE_CFRP_teflon_3o}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,7 +254,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/L3_S2_B_ijjeh.png}
-		\caption{\(IoU\) = \(0.35\)} 
+		\caption{IoU = \(0.35\)} 
 		\label{fig:L3_S2_B_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -271,7 +270,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/L3_S3_B_ijjeh.png}
-		\caption{\(IoU\) = \(0.32\)} 
+		\caption{IoU = \(0.32\)} 
 		\label{fig:L3_S3_B_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -290,7 +289,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/L3_S4_B_ijjeh.png}
-		\caption{\(IoU\) = \(0.27\)} 
+		\caption{IoU = \(0.27\)} 
 		\label{fig:L3_S4_B_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
