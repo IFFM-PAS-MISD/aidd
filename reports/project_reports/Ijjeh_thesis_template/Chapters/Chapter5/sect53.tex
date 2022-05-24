@@ -10,28 +10,21 @@ Consequently, the part of producing intermediate predictions and further calcula
 \label{sec531}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%In the first numerical case, the delamination is located at left edge of the plate, as shown in Fig.~\ref{fig:RMS_448}, representing its ground truth (GT).
-%This case is considered difficult due to edge wave reflections that have similar patterns as delamination reflection.
-%The predicted output of the AEis shown in Fig.~\ref{fig:convlstm_pred_448}
-%For the second numerical case, the delamination is located at the upper centre of the plate, as shown in Fig.~\ref{fig:num_GT_462}, representing the GT.
-%This case is also considered difficult due to the waves reflected from the edge have similar patterns to those reflected from the delamination.
-%Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show prediction with respect to Model-\RNum{1}, and \RNum{2}, respectively.
-%In the third case, the delamination is located in the upper left corner but a little farther from the edges, as shown in Fig.~\ref{fig:num_GT_453}, representing the GT. 
-%Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted outputs with respect to Model-\RNum{1}, and \RNum{2}, respectively.
-%As can be seen in all predicted outputs, our models are able to identify the delamination with high accuracy and without any noise.
-%
-%Table~\ref{tab:num_cases} presents the evaluation metrics for Model-\RNum{1} and~\RNum{2}, respectively, regarding the numerical cases shown in Fig.~\ref{fig:num_case}.
-%Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union IoU and percentage area error \(\epsilon\) with respect to each case. 
-%The performance of the~Model-\RNum{2} is slightly better than the Model-~\RNum{1} for the selected delamination scenarios.
-%However, all delamination cases should be considered for evaluation so the mean values of the proposed metrics were calculated next.
-%
-%Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean intersection over union (\(\overline{IoU}\)) for \(95\) numerical test cases with respect to the DL models.
-%As shown in Table~\ref{tab:meanIoU_vs_input}, Model-\RNum{1} and Model-\RNum{2} are from the current work, and take as input animations of the full wavefields, whereas the rest of the models are from our previous works~\cite{Ijjeh2021, Ijjeh2022} and take as input RMS images.
-%It can be concluded that the models that take animations as an input surpass the models that take only the RMS images as input. 
-%Moreover, Model-\RNum{1} has a higher \(\overline{IoU}\) compared to Model-\RNum{2} (\(0.90\) versus \(0.87\)).
+In the first numerical case, the delamination is located at left edge of the plate, as shown in Fig.~\ref{fig:RMS_448}, representing its ground truth (GT).
+This case is considered difficult due to edge wave reflections that have similar patterns as the delamination reflection.
+The predicted output of the AE-ConvLSTM model is shown in Fig.~\ref{fig:convlstm_pred_448}
+In the second numerical test case, the delamination is located at the left upper corner of the plate, as shown in Fig.~\ref{fig:RMS_456}, which represents the GT.
+This case is also considered difficult due to the waves reflected from the edges have similar patterns to those reflected from the delamination.
+Figure~\ref{fig:convlstm_pred_456} shows predicted damage map of AE-ConvLSTM model.
+In the third case, the delamination is located in the upper centre of the edge as shown in Fig.~\ref{fig:RMS_438}, representing the GT. 
+Figure~\ref{fig:convlstm_pred_438} shows the predicted output of this case.
+The fourth test case has a delamination located upper left quarter as shown in Fig.~\ref{fig:RMS_397} representing the GT.
+The predicted damage map of this case is presented in Fig.~\ref{fig:convlstm_pred_397}.
+
+As shown in all predicted damage maps, the developed AE-ConvLSTM model can accurately identify the shape, size , and location of the delamination without any noise regardless of how difficult the test case is.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [!h]
+
+\begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
@@ -91,9 +84,12 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\caption{Four delamination cases based on numerical data (AE-ConvLSTM).}
 	\label{fig:Num_convlstm__case}
 \end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[!ht]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Table~\ref{tab:num_cases} presents the evaluation metrics for AE-ConvLSTM model regarding the numerical cases shown in Fig.~\ref{fig:Num_convlstm__case}.
+Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union IoU and percentage area error \(\epsilon\) with respect to each case. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!h]
 	\centering
 	\caption{Evaluation metrics of the four numerical cases}
 	\begin{tabular}{ccccc}
@@ -110,8 +106,12 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\label{tab:num_cases}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean intersection over union (\(\overline{IoU}\)) for \(95\) numerical test cases with respect to the DL models.
+As shown in Table~\ref{tab:meanIoU_vs_input}, AE-ConvLSTM model takes as input animations of the full wavefields, whereas the rest models presented in~\cite{Ijjeh2021, Ijjeh2022} take as input RMS images.
+As anticipated, the IoU value when taking animations as an input outperforms that when taking only the RMS images as input. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[!ht]
+\begin{table}[!h]
 	\centering
 	\caption{Mean IoU for numerical cases with respect to the input of the model}
 	\begin{tabular}{llc}
@@ -128,16 +128,15 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\end{tabular}
 	\label{tab:meanIoU_vs_input}
 \end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SUBSECTION HEADER 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental cases}
 \label{sec532}
 
 \subsubsection{Single delamination}
 \label{sec5321}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Single delaminatio of Teflon inserted
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
