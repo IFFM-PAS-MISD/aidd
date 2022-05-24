@@ -344,11 +344,17 @@ The measurements were performed by using Polytec PSV-\(400\) SLDV on the bottom 
 The measurements were conducted on a regular grid of \(333\times333\) points. 
 The measurement area was aligned with the plate edges.
 The sampling frequency was \(512\)~kHz.
-The measured full wavefield was further processed by an energy compensated RMS which takes into account wave attenuation. 
+The experimental case is for a CFRP specimen with a single delamination.
+A plain weave fabric reinforcement was used for manufacturing the composite specimen. 
+The delamination between layers of the fabric was created artificially by a Teflon insert of a thickness 250 $\mu$m. 
+The Teflon of a square shape was inserted during specimen manufacturing, so its shape and location are known. 
+The number of full wavefield frames for this case is $fn = 256$.
+Furthermore, the measured full wavefield was further processed by an energy compensated RMS which takes into account wave attenuation. 
 The results of such operation are shown in Fig.~\ref{fig:ERMS_with_label}.
 The delamination is surrounded by a square frame representing its shape and location. 
 Figures~(\ref{fig:unet_exp_erms} - \ref{fig:gcn_exp_erms}) shows delamination prediction maps for Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, receptively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Table~\ref{tab:rms_exp_case} presents the evaluation metrics for all FCN models, regarding the experimental case shown in Figs.~\ref{fig:exp_erms__case}.
 Table~\ref{tab:rms_exp_case} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union \(IoU\) and percentage area error \(\epsilon\) with respect to each FCN model. 
 The overall performance of the GCN model is better than other models for the selected delamination scenarios.

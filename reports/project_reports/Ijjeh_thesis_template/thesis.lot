@@ -8,7 +8,8 @@
 \contentsline {table}{\numberline {5.1}{\ignorespaces IoU values of numerical cases\relax }}{74}{table.caption.72}%
 \contentsline {table}{\numberline {5.2}{\ignorespaces Evaluation metrics of the four numerical cases\relax }}{81}{table.caption.78}%
 \contentsline {table}{\numberline {5.3}{\ignorespaces Analysis of numerical cases\relax }}{81}{table.caption.79}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics of the experimental case\relax }}{82}{table.caption.80}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics of the four numerical cases\relax }}{85}{table.caption.83}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Mean IoU for numerical cases with respect to the input of the model\relax }}{85}{table.caption.84}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics of the experimental case\relax }}{83}{table.caption.80}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics of the four numerical cases\relax }}{86}{table.caption.83}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Mean IoU for numerical cases with respect to the input of the model\relax }}{86}{table.caption.84}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Evaluation metrics for experimental case of single delamination\relax }}{90}{table.caption.89}%
 \addvspace {10\p@ }

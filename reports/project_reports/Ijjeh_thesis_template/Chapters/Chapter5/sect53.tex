@@ -137,6 +137,14 @@ As anticipated, the IoU value when taking animations as an input outperforms tha
 
 \subsubsection{Single delamination}
 \label{sec5321}
+In this section, the investigation of AE-ConvLSTM model using experimentally acquired data of a single delamination case presented in subsection.~\ref{sec522} is presented. 
+The Teflon of a square shape was inserted during specimen manufacturing, so its shape and location are known.
+Based on that, the ground truth was prepared manually and it is shown in Fig.~\ref{fig:exp_CFRP_teflon_3o_GT}. 
+Furthermore, the number of full wavefield frames for this case is \(fn = 256\).
+Figure~\ref{fig:convlstm_AE_CFRP_teflon_3o} shows the predicted output of the AE-ConvLSTM model for a window of frames \((72-96)\) for which the highest \(IoU=0.47\) was achieved.
+Furthermore, the percentage area error metric \(\epsilon\) for AE-ConvLSTM model was equal to \(86.67\%\).
+
+It should be noted that for the same damage scenario, the IoU value for the models developed previously in~\cite{Ijjeh2021} was low \((IoU=0.081)\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Single delaminatio of Teflon inserted
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,6 +171,20 @@ As anticipated, the IoU value when taking animations as an input outperforms tha
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The predictions were highest for the window of frames corresponding to the first interaction of the guided waves with the delamination.
+Hence, such frames contain the most valuable feature patterns regarding delamination. 
+This behaviour is depicted in Fig.~\ref{fig:CFRP_Teflon_3o_IoU_centre_window}, which shows the IoU values with respect to the predicted outputs as I slide the window over all input frames from the starting frame till the end.
+Since there are \(256\) frames of full wavefield in this damage case, there are \(232\) windows.
+Consequently, the AE-ConvLSTM model has \(232\) consecutive predictions.
+Furthermore, in Fig.~\ref{fig:CFRP_Teflon_3o_center_frames} three places for the sliding window were selected. 
+The first place depicted in a dark blue star shown in Fig.~\ref{fig:CFRP_teflon_3o_preds_frames} represents a window centered at frame \(fn=84\), which correspond to the initial interaction of guided waves with the delamination.
+The second place is depicted in the pink pentagon shape shown in Fig.~\ref{fig:CFRP_teflon_3o_preds_frames} which represents a window centered at frame \(fn=141\) corresponding to guided waves reflected from the edges.
+We can notice the drop in the \(IoU\) values as these frames have fewer damage features.
+The third place, depicted in the green circle shown in Fig.~\ref{fig:CFRP_teflon_3o_preds_frames} represents a window centered at frame \(fn=218\) corresponding to the interaction of guided waves reflected from the edges with the delamination.
+As we can see, the value of \(IoU\) increases again as the valuable feature patterns regarding delamination start to appear again.
+
+The predicted outputs of AE-ConvLSTM model for windows centered at frame 84 (the dark blue star), frame 141 (pink pentagon), and frame 218 (the green circle) are shown in Fig.~\ref{fig:CFRP_Teflon_3o_predictions}.
+Apart from correctly identified delamination, some noise is obtained near edges of the specimen.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% IoU ouput values with a sliding window
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -170,14 +192,14 @@ As anticipated, the IoU value when taking animations as an input outperforms tha
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1]{Figures/Chapter_5/CFRP_Teflon_3o_center_frames.png}
+		\includegraphics[scale=1.2]{Figures/Chapter_5/CFRP_Teflon_3o_center_frames.png}
 		\caption{IoU for the sliding window centered at consecutive frames.}
 		\label{fig:CFRP_Teflon_3o_center_frames}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1.1]{Figures/Chapter_5/CFRP_teflon_3o_shapes_frames.png}
+		\includegraphics[scale=1.32]{Figures/Chapter_5/CFRP_teflon_3o_shapes_frames.png}
 		\caption{Corresponding frames of guided waves.} 
 		\label{fig:CFRP_teflon_3o_preds_frames}
 	\end{subfigure}
@@ -186,16 +208,39 @@ As anticipated, the IoU value when taking animations as an input outperforms tha
 	\label{fig:CFRP_Teflon_3o_IoU_centre_window}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Predicted outuputs at diffirent window places
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1.1]{Figures/Chapter_5/CFRP_Teflon_3o_predictions.png}
 	\caption{Predictions for window centered at selected frames (Teflon insert - single delamination).}
 	\label{fig:CFRP_Teflon_3o_predictions}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure show the RMS image for the experimental case of single delamination predicted the AE-ConvLSTM model.
+Additionally, to separate undamaged and damaged classes from the RMS images, we applied a binary threshold with a value \((threshold=0.5)\) as shown in Fig~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh} 
+The threshold level was selected to limit the influence of noise and, at the same time, highlight the damage.
+The calculated \(IoU\) values for the case of single delamination is \(IoU=0.42\).
+
+Table~\ref{tab:single_case} presents the evaluation metrics for the AE-ConvsLSTM model, regarding the experimental case of single delamination shown in Fig.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh}.
+As shown in Table~\ref{tab:single_case}, the actual \(A\) and predicted areas \(\hat{A}\) of delaminations were computed in [mm\textsuperscript{2}] with respect to each case. 
+The percentage area error \(\epsilon\) was calculated for both models accordingly.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[ht]
+	\caption{Evaluation metrics for experimental case of single delamination}
+	\centering
+	\begin{tabular}{ccccc}
+		\toprule
+		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\) [mm\textsuperscript{2}]} &  \multicolumn{3}{c}{AE-ConvLSTM model}  \\ 
+		\cmidrule(lr){3-5} &  & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}] } & \(\epsilon\) \\ 
+		\midrule
+		Single delamination & 225 & \multicolumn{1}{c}{0.42} & \multicolumn{1}{c}{420} & 86.67\%    \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:single_case}
+\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions
@@ -206,7 +251,7 @@ As anticipated, the IoU value when taking animations as an input outperforms tha
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure11b_RMS.png}
 		\caption{RMS image (damage map)}
-		\label{fig:RMS_CFRP_Teflon_3o_saeed}
+		\label{fig:RMS_CFRP_Teflon_3o_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\hfill
@@ -215,7 +260,7 @@ As anticipated, the IoU value when taking animations as an input outperforms tha
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure12b_Thresholded_RMS.png}
 		\caption{Thresholded RMS image} 
-		\label{fig:RMS_CFRP_Teflon_3o_ijjeh}
+		\label{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\caption{Teflon insert - single delamination.}
