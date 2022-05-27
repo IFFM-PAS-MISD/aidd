@@ -20,7 +20,10 @@
 \usepackage{float}
 \usepackage{eso-pic} 
 \usepackage{wrapfig}
+\usepackage{animate,media9,movie15}
+\usepackage{subfig}
 
+\usepackage{multimedia}
 
 %\usepackage{FiraSans}
 
@@ -31,13 +34,15 @@
 
 %\usepackage{bibentry}
 %\nobibliography*
-\usepackage{animate}
 \usepackage{ifthen}
 \newcounter{angle}
 \setcounter{angle}{0}
 %\usepackage{bibentry}
 %\nobibliography*
 \usepackage{caption}%
+
+
+
 \captionsetup[figure]{labelformat=empty}%
 \graphicspath{{figures/}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,7 +76,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % option 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{PhD project presentation}
+\title{Deep learning techniques for damage identification in CFRP materials}
 \subtitle{Feasibility studies of artificial intelligence driven diagnostics}
 \author{\textbf{Abdalraheem Ijjeh\\Supervisor: Prof. Pawel Kudela}}
 % logo align to Institute 
@@ -283,6 +288,7 @@
 			\hspace{3cm}
 			\includegraphics[scale=0.20]{Composite_3d.png}
 		\end{figure}
+	
 	\end{wrapfigure}
 	Composites materials are formed by combining materials together to form an overall structure with properties that differ from that of the individual components as shown in the below image.
 
@@ -513,219 +519,160 @@ For the classical machine learning techniques, we have to perform feature extrac
 On the contrary, in deep learning techniques, the process of feature extraction is done automatically without the need for human intervention, since the model will learn by itself to perform this process.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Objective of the Project}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Objective of the Project}
-	\begin{itemize}
-		\item To develop an AI driven diagnostic model for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).
-		\item End-to-end approach (Perform feature extraction, selection and classification automatically.)
-	\end{itemize}
-\end{frame}
-\note{
-Our main objectives in this project are to explore the feasibility of using an AI approach in detecting defects such as delaminations in composite laminates such as carbon fibre reinforced polymers (CFRP). \\
-And accordingly to develop an end to end models that can identify delaminations in composite laminates which are capable of performing feature extraction and classification without the need for human intervention.
-}
+\section{Synthetic Dataset generation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}{Objective of the Project Cont.}
-%
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Dataset generation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Dataset generation}
-		\begin{minipage}[c]{0.45\textwidth}
+\begin{frame}{Dataset description}
+		\begin{minipage}[c]{0.35\textwidth}
 		\begin{itemize}
-			\item 475 cases.
+			\justifying
 			\item Delamination has a different shape, size and location for each case.
-			\item CFRP is made of 8-layers (delamination was modelled between the 3rd and 4th layer)
-			\item Root mean square (RMS) was applied to the wavefield (To improve the visibility)  
+			\item CFRP is made of 8-layers.
+			\item Delamination was modelled between the 3rd and 4th layer.	\item 475 cases.
+			\item Root mean square (RMS) was applied to the wavefield (To improve the visibility).			
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}[c]{0.45\textwidth}
-		%\begin{wrapfigure}{r}%{0.5\textwidth}
-		%\centering
-		%\vspace{-10pt}
-		\hspace{1cm}
-		\includegraphics[scale=1.0]{dataset2_labels_ellipses.png}
-		%\end{wrapfigure}
+	\begin{minipage}[c]{0.6\textwidth}
+		\begin{figure}
+			\centering			
+			\subfloat[Delamination orientation \label{fig:1}]{\includegraphics[width=0.52\textwidth]{figure1.png}}\qquad
+			\subfloat[all cases overlapped \label{fig:2}]{\includegraphics[width=0.35\textwidth]{figure_overlap.png}}
+		\end{figure}
 	\end{minipage}
 \end{frame}
 
 \note{
-Dataset generation.
-Numerically generating 475 cases of full wavefield of propagating Lamb waves in a plate made of CFRP as shown in the figure. \\
-Essentially, the output resembles measurements acquired by SLDV in the transverse direction (perpendicular to the plate surface). \\
-Each delamination with different shape, size and location was modelled randomly on the plate.\\ 
-To improve the delamination visibility Root mean square RMS was applied.
-The dataset is used to train the deep learning models in order to identify the delaminations..
+	Dataset generation.
+	Numerically generating 475 cases of full wavefield of propagating Lamb waves in a plate made of CFRP as shown in the figure. \\
+	Essentially, the output resembles measurements acquired by SLDV in the transverse direction (perpendicular to the plate surface). \\
+	Each delamination with different shape, size and location was modelled randomly on the plate.\\ 
+	To improve the delamination visibility Root mean square RMS was applied.
+	The dataset is used to train the deep learning models in order to identify the delaminations..
 }
+\setcounter{subfigure}{0}
+\begin{frame}{Training Sample case}
+	\begin{figure}
+		\centering		
+		\subfloat[Full wavefield \label{fig:3}]{\animategraphics[autoplay,loop, controls,width=4cm]{16}{figures/gif_figs/7_output/flat_shell_Vz_7_500x500bottom-}{1}{512}}\qquad
+		\subfloat[RMS image \label{fig:4}]{\includegraphics[width=4cm]{RMS_flat_shell_Vz_7_500x500bottom.png}}\qquad
+		\subfloat[Ground truth (label) \label{fig:5}]{\includegraphics[width=4cm]{m1_rand_single_delam_7.png}}
+	\end{figure}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
 \section{Deep learning techniques for delamination identification}
-%\subsection{Convolutional Neural Networks CNN}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{wrapfigure}{r}{0.5\textwidth}		
-%	\centering
-%	\vspace{0pt}
-%	\hspace{15pt}
-%	\includegraphics[width=0.25\textwidth]{hardware.png}
-%\end{wrapfigure}
-%
-%\begin{wrapfigure}{r}{0.5\textwidth}
-%	\centering
-%	\vspace{-40pt}
-%	\hspace{15pt}
-%	\includegraphics[width=0.25\textwidth]{big_data.jpg}	
-%\end{wrapfigure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}{Deep learning approach cont.}
-%	\begin{itemize}
-%		\item Deep learning technologies offered the opportunity of being implemented in NDT and further with SHM approaches.
-%		\item Deep learning techniques handled issues regarding data preprocessing and feature extraction
-%		\item End-to-end approaches are developed, in which the whole unprocessed data are fed into the model, hence, it will learn by itself to recognise the patterns and detect the damage
-%	\end{itemize}
-%\end{frame}
-%\note{
-%	We can say that deep learning techniques rapidly developed after AlexNet in 2012 was created, actually it was a breakthrough. \\
-%	Due to the rapid development in deep learning feild, deep learning techniques could be implemented in NDT and further with SHM approches. \\
-%	Moreover, the application of deep learning techniques in NDT and SHM regarding damage detection and identification is still new and not fully integrated or investigated. \\
-%	The beuty about deep learning techniques is it offers an end to end approchs, accordingly, processes of feature extraction or classification are skipped, because it will be performed automaticlly by the model which will learn by itself to perfom these processes.
-%
-%}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Computer Vision}
-	The increasingly advancement in deep learning field has vastly improved computer vision (CV) applications such as: 
-	\begin{itemize}
-		\item Image classification
-		\item Object detection and localisation
-		\item Image segmentation
-	\end{itemize} 
-\end{frame}
-\note{
-Computer Vision, often abbreviated as CV, is defined as a field of study that seeks to develop techniques to help computers “see” and understand the content of digital images such as photographs and videos.\\
-Many popular computer vision applications involve trying to recognize things in photographs; for example, \\
-Image classification concerns what broad categories are there in the image. \\
-Object detection and localisation concerns with whare are the objects in the image.\\
-and Image segmentation which is the process of partitioning an image into multiple segments.  Image segmentation is typically used to locate objects and boundaries (lines, curves, etc.) in images. 
-More precisely, image segmentation is the process of assigning a label to every pixel in an image such that pixels with the same label share certain characteristics.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Convolutional Neural Network CNN}
-	\begin{itemize}
-		\item CNN is a type of feedforward ANNs which additionally performs convolution operations  
-		\item CNNs are designed to handle data as tensors with different dimensions such as: 1D signals, 2D and 3D images and sequence of images (videos)in 4D.
-	\end{itemize}
-\end{frame}
-\note{
-The convolutional neural network, or CNN for short, is a specialized type of neural network model designed for working with two-dimensional image data, although they can be used with one-dimensional and three-dimensional data. \\
-Central to the convolutional neural network is the convolutional layer that gives the network its name. This layer performs an operation called a “convolution“.\\	
-CNNs are primarily used in applications of CV (previously mentioned).\\
-The innovation of convolutional neural networks is the ability to automatically learn a large number of filters in parallel specific to a training dataset under the constraints of a specific predictive modelling problem, such as image classification. The result is highly specific features that can be detected anywhere on input images.	
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Convolutional Neural Network CNN cont.}
-	\begin{wrapfigure}{r}{0.62\textwidth}
-		\centering
-		\vspace{-35pt}
-		\hspace{0pt}
-		\includegraphics[width=0.62\textwidth]{Fig_Convnet.png}
-	\end{wrapfigure}
-	Typical architecture of a CNN consists of three main parts:
-	\begin{itemize}
-		\item Convolutional layer
-		\item Downsampling layer
-		\item Dense layer
-	\end{itemize}
-\end{frame}
-\note{
-In the context of a convolutional neural network, convolution is a linear operation that involves the multiplication of a set of weights with the input, much like a traditional neural network. 
-Given that the technique was designed for two-dimensional input, the multiplication is performed between an array of input data and a two-dimensional array of weights, called a filter or a kernel. \\
-The filter is smaller than the input data and the type of multiplication applied between a filter-sized patch of the input and the filter is a dot product. 		
-The output of multiplying the filter with the input array one time is a single value. 
-As the filter is applied multiple times to the input array, the result is a two-dimensional array of output values that represent filtering of the input.
-The two-dimensional output array from this operation is called a “feature map“.	
-Once a feature map is created, we can pass each value in the feature map through a nonlinearity, such as a ReLU, much like we do for the outputs of a fully connected layer.
-After the feature maps are produced, downsampling is applied to reduce the spatial resolution on the exact positioning of features within networks.
-Finally, the feature maps are flattened and input into the dense layer.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Convolutional Neural Network CNN cont.}
+\begin{frame}{What is computer vision?}
+	\begin{minipage}[c]{0.30\textwidth}
+		Computer vision is a field of artificial intelligence (AI) that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
+	\end{minipage}
+\hfill
+	\begin{minipage}[c]{0.65\textwidth}
+			\begin{figure}
+			\centering
+			\includegraphics[width=1\textwidth]{computer_vision_tasks.png}
+		\end{figure}
+	\end{minipage}
 
+\end{frame}
+
+\begin{frame}{Image semantic segmentation}
+	\begin{minipage}[c]{0.35\textwidth}
+		Based on inputs to a DL model two image segmentation schemes can be developed:
+		\medskip
+		\begin{enumerate}			
+			\item \textbf{One-to-one \\(RMS based approach)} 
+			\medskip
+			\item \textbf{Many-to-one \\(Full wavefield frames)}
+		\end{enumerate}
+	\end{minipage}
+	\begin{minipage}[c]{0.6\textwidth}
+		\begin{figure}
+			\centering
+			\subfloat[Single input]{\includegraphics[width=.32\textwidth]{RMS_flat_shell_Vz_381_500x500bottom.png}}\qquad
+			\subfloat[Single output]{\includegraphics[width=.32\textwidth]{GCN_381.png}}\qquad
+			\\
+			\subfloat[Full wavefield frames]{\animategraphics[autoplay,loop,width=.32\textwidth]{4}{figures/gif_figs/381_output/flat_shell_Vz_381_500x500bottom-}{85}{113}}\qquad
+			\subfloat[Single output]{\includegraphics[width=.32\textwidth]{GCN_381.png}}
+			
+		\end{figure}
+	\end{minipage}	
+\end{frame}
+
+
+\begin{frame}{Deep learning techniques}
 	\begin{minipage}[c]{0.45\textwidth}
+		RMS based \\
+		CNN, FCN
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.45\textwidth}
+		Full wavefield frames\\
+		RNN, LSTM and  ConvLSTM
+	\end{minipage}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Developed model for delamination identification}
+	\begin{minipage}[c]{0.45\textwidth}
+		\textbf{RMS based models: \\}
+			\begin{itemize}
+				\item Res-UNet
+				\item VGG 16 encoder-decoder
+				\item FCN-DenseNet
+				\item PSPNet
+				\item GCN
+			\end{itemize}
+		{\tiny  
+			\begin{enumerate}
+				\item Ijjeh AA, Kudela P. Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study. Mechanical Systems and Signal Processing. 2022 Apr 1;168:108671.
+				\item Ijjeh AA, Ullah S, Kudela P. Full wavefield processing by using FCN for delamination detection. Mechanical Systems and Signal Processing. 2021 May 15;153:107537.
+				
+			\end{enumerate}}	
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{.45\textwidth}
+	\textbf{Full wavefield frames based model:}
 		\begin{itemize}
-			\item 	Fully CNN (FCN) is a neural network in which dense layer is replaced with convolutional layers. 
-			\item The idea behind FCN is to stack a group of convolutional layers in an
-			encoder-decoder style.
+			\item Autoencoder ConvLSTM
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}[c]{0.45\textwidth}
-		\centering
-		\includegraphics[width=0.85\textwidth]{encoder_decoder_1.png}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
+\begin{frame}{RMS based models}
+	\begin{minipage}[c]{0.55\textwidth}
+		\begin{figure}
+			\subfloat[Res-UNet model]{\includegraphics[width=1\textwidth]{figure4.png}}
+		\end{figure}
 	\end{minipage}
+	\begin{minipage}[c]{0.35\textwidth}
+		\begin{figure}
+			\subfloat[Data flow \& intermediate outputs of layers \label{fig:}]{\animategraphics[autoplay,loop, controls,width=.8\textwidth]{1}{figures/gif_figs/381__inter_pred/intermediate_output-}{0}{103}}
+\end{figure}
+	\end{minipage}
+
 \end{frame}
-\note{
-The idea behind FCN is to stack a group of convolutional layers in an
-encoder-decoder style. \\
-The encoder is capable for downsampling the input image through convolutions with strides, consequently, resulting in a compressed feature representation of the input image, and the decoder is capable to upsample the image with compressed features applying techniques like transposed convolution with strides and upsampling with interpolation (e.g. bilinear or nearest).
-}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Convolutional Neural Network CNN cont.}
+\setcounter{subfigure}{0}
+\begin{frame}{Autoencoder ConvLSTM model}
+	\begin{minipage}[c]{.4\textwidth}
+	\begin{figure}
 		\centering
-		\includegraphics[width=.95\textwidth]{encoder_decoder.png}
+		\includegraphics[width=.55\textwidth]{figure5b.png}
+	\end{figure}
+	\end{minipage}
+	\begin{minipage}[c]{.55\textwidth}
+	\begin{figure}
+		\subfloat[Input frames]{\animategraphics[autoplay,loop,width=.40\textwidth]{4}{figures/gif_figs/381_output/flat_shell_Vz_381_500x500bottom-}{85}{113}}\qquad
+		\subfloat[Prediction]{\includegraphics[width=.40\textwidth]{GCN_381.png}}\qquad
+	\end{figure}
+	\end{minipage}
+	
 \end{frame}
-\note{
-Finally, in this slide, we present an abstract level of how FCN models perform Image segmentation to identify the delamination as shown in the figure.
-The input to the model is an RMS Image with delamination located almost at the upper middle of the image. 
-The FCN is responsible for performing image segmentation accordingly, Identifying the delamination as shown on the predicted damage on the right.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[fragile]{Convolution}
-%	\animategraphics[loop,controls,scale=0.25]{2}{ConV-}{0}{8}
-%	\transpush
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[fragile]{Activation functions}
-%	\animategraphics[loop,controls,scale=0.25]{1}{activation_functions/ac-}{0}{98}
-%	\transpush
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[fragile]{TanH}
-%	\animategraphics[loop,controls,scale=0.25]{5}{sigmoid/sig-}{0}{467}
-%	\transpush
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[fragile]{Maxpool}
-%	\animategraphics[loop,controls,scale=0.25]{2}{maxpool-}{0}{13}
-%	\transpush
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[fragile]{Transposed Convolution}
-%	\animategraphics[loop,controls,scale=0.25]{1}{abdalraheem-}{0}{15}
-%	\transpush
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%\begin{frame}[fragile]{Transposed convolution}
-%%	\animategraphics[loop,controls,scale=0.25]{1}{TransposedConv-}{0}{67}
-%%	\transpush
-%%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[fragile]{LSTM}
-%	\animategraphics[loop,controls,scale=0.25]{1}{LSTM/lstm-}{0}{12}
-%	\transpush
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[fragile]{Intermediate outputs}
-%	\animategraphics[loop,controls,width=\linewidth]{10}{450/input }{1}{220}
-%	\transblindsvertical<2,3>
-%\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}[t,label=A]{Acknowledgements}
-%		\begin{alertblock}{Project title: Elastic constants identification of composite laminates by using Lamb wave dispersion curves and optimization methods}
-%The research was funded by the Polish National Science Center under grant agreement 
-%no 2018/29/B/ST8/00045. 
-%\end{alertblock}
-%\end{frame}	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=blue, bg=white}
 \begin{frame}[standout]
