@@ -1,8 +1,442 @@
 \section{DLSR model}
 \label{sec54}
+In this section, the performance evaluation of the developed DLSR model based on the numerical test cases representing the LR frames are presented.
+Additionally, the developed model was evaluated on an experimental test case to demonstrate their capability of super-resolution image reconstruction.
 
 \subsection{Numerical cases}
 \label{sec541}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The results of the reconstruction of HR frames for a numerical test case by the developed DLSR models are presented in Fig.~\ref{fig:num_results}.
+It must be noted that the LR frames used to recover the HR frames were not used in the training set.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Case 397
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_full_frame_GT.png}
+		\caption{Reference $N_f=127$}
+		\label{fig:ref_397_full_127}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_full_frame_GT.png}
+		\caption{Reference $N_f=191$}
+		\label{fig:ref_397_full_191}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_full_frame_GT.png}
+		\caption{Reference $N_f=255$}
+		\label{fig:ref_397_full_255}	
+	\end{subfigure}
+	\hfill
+		\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_397_full_127}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_397_full_191}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_397_full_255}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_397}
+\end{figure}
+
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_delamination_GT.png}
+		\caption{Reference $N_f=127$}
+		\label{fig:ref_397_damage_127}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_delamination_GT.png}
+		\caption{Reference $N_f=191$}
+		\label{fig:ref_397_damage_191}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_delamination_GT.png}
+		\caption{Reference $N_f=255$}
+		\label{fig:ref_397_damage_255}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_397_damage_127}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_397_damage_191}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_397_damage_255}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_damage_area_397}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Case 438
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_full_frame_GT.png}
+		\caption{Reference $N_f=154$}
+		\label{fig:ref_438_full_154}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_full_frame_GT.png}
+		\caption{Reference $N_f=218$}
+		\label{fig:ref_438_full_218}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_full_frame_GT.png}
+		\caption{Reference $N_f=282$}
+		\label{fig:ref_438_full_282}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_438_full_154}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_438_full_218}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_438_full_282}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_438}
+\end{figure}
+
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_delamination_GT.png}
+		\caption{Reference $N_f=154$}
+		\label{fig:ref_438_damage_154}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_delamination_GT.png}
+		\caption{Reference $N_f=218$}
+		\label{fig:ref_438_damage_218}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_delamination_GT.png}
+		\caption{Reference $N_f=282$}
+		\label{fig:ref_438_damage_282}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_438_damage_154}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_438_damage_218}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_438_damage_282}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_damage_area_438}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Case 448
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_full_frame_GT.png}
+		\caption{Reference $N_f=211$}
+		\label{fig:ref_448_full_211}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_full_frame_GT.png}
+		\caption{Reference $N_f=275$}
+		\label{fig:ref_448_full_275}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_full_frame_GT.png}
+		\caption{Reference $N_f=339$}
+		\label{fig:ref_448_full_339}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_448_full_211}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_448_full_275}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_448_full_339}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_448}
+\end{figure}
+
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_delamination_GT.png}
+		\caption{Reference $N_f=211$}
+		\label{fig:ref_448_damage_211}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_delamination_GT.png}
+		\caption{Reference $N_f=275$}
+		\label{fig:ref_448_damage_275}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_delamination_GT.png}
+		\caption{Reference $N_f=339$}
+		\label{fig:ref_448_damage_339}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_448_damage_211}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_448_damage_275}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_448_damage_339}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_damage_area_448}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Case 456
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_full_frame_GT.png}
+		\caption{Reference $N_f=159$}
+		\label{fig:ref_456_full_159}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_full_frame_GT.png}
+		\caption{Reference $N_f=223$}
+		\label{fig:ref_456_full_223}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_full_frame_GT.png}
+		\caption{Reference $N_f=287$}
+		\label{fig:ref_456_full_287}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_456_full_159}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_456_full_223}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_full_frame_pred.png}
+		\caption{}
+		\label{fig:pred_456_full_287}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_456}
+\end{figure}
+
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_delamination_GT.png}
+		\caption{Reference $N_f=159$}
+		\label{fig:ref_456_damage_159}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_delamination_GT.png}
+		\caption{Reference $N_f=223$}
+		\label{fig:ref_456_damage_223}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_delamination_GT.png}
+		\caption{Reference $N_f=287$}
+		\label{fig:ref_456_damage_287}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_456_damage_159}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_456_damage_223}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_delamination_pred.png}
+		\caption{}
+		\label{fig:pred_456_damage_287}	
+	\end{subfigure}
+	\caption{}
+	\label{fig:num_results_CS_damage_area_456}
+\end{figure}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+	\centering \footnotesize
+	\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.}	
+	\begin{tabular}{lccccc}
+		\toprule
+		& & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+		\cmidrule(lr){3-4} \cmidrule(lr){5-6}
+		Case & $N_f$ & PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+		\midrule
+		\multirow{3}{*}{}  & 127  & 42.95 & 0.999 & 33.02 & 0.993 \\
+		\multirow{3}{*}{} 1 & 191  & 39.97 & 0.993 & 39.95 & 0.981 \\
+		\multirow{3}{*}{}  & 255 & 36.91 & 0.992 & 30.57 & 0.948 \\ 
+		\midrule
+		\multirow{3}{*}{}  & 154 & 47.00 & 0.998 & 38.52 & 0.995 \\
+		\multirow{3}{*}{} 2 & 218 & 44.87 & 0.996 & 41.75 & 0.972\\
+		\multirow{3}{*}{}  & 282 & 42.18 & 0.992 & 42.05 & 0.992 \\ 
+		\midrule
+		\multirow{3}{*}{}  & 211 & 44.37 & 0.996 & 40.04 & 0.980 \\
+		\multirow{3}{*}{} 3 & 275 & 38.81 & 0.988 & 32.92 & 0.964 \\
+		\multirow{3}{*}{}  & 339 & 24,35 & 0.829 & 26.50 & 0.921 \\ 
+		\midrule
+		\multirow{3}{*}{}  & 159 & 48.60 & 0.998 & 46.67 & 0.998 \\
+		\multirow{3}{*}{} 4 & 223 & 37.64 & 0.989 & 24.32 & 0.916 \\
+		\multirow{3}{*}{}  & 287 & 39.64 & 0.989 & 40.62 & 0.871 \\ 
+		
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Experimental cases
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental cases}
 \label{sec542}
 Experiment description
