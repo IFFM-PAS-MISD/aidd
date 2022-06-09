@@ -1,3 +1,4 @@
+%\PassOptionsToPackage{draft}{graphicx}
 %\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
 \documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
 %\graphicspath{{../../figures/}}
@@ -24,7 +25,6 @@
 \usepackage{subfig}
 
 \usepackage{multimedia}
-
 %\usepackage{FiraSans}
 
 %\usepackage{comment}
@@ -41,10 +41,9 @@
 %\nobibliography*
 \usepackage{caption}%
 
-
-
 \captionsetup[figure]{labelformat=empty}%
 \graphicspath{{figures/}}
+\usefonttheme{structurebold}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metropolis theme custom modification file
 \input{metropolis_mods.tex}
@@ -76,9 +75,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % option 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Deep learning techniques for damage identification in CFRP materials}
+\title{Deep learning for damage identification in CFRP materials}
 \subtitle{Feasibility studies of artificial intelligence driven diagnostics}
-\author{\textbf{Abdalraheem Ijjeh\\Supervisor: Prof. Pawel Kudela}}
+\author{\textbf{Abdalraheem Ijjeh\\Supervisor: Prof. Paweł Kudela}}
 % logo align to Institute 
 \institute{Institute of Fluid Flow Machinery \\ 
 	Polish Academy of Sciences \\ 
@@ -257,6 +256,8 @@
 %\tikzexternalize % activate!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+	
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \maketitle
 \note{
@@ -264,7 +265,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SLIDES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame1]{Table of contents}
+\begin{frame}[label=frame1]{Outlines}
   	\setbeamertemplate{section in toc}[sections numbered]
 	\tableofcontents
 \end{frame}
@@ -276,80 +277,30 @@
 	Then I will talk about the Dataset generation in the fourth section. \\
 	Finally, in the last section, I am going to talk about deep learning techniques for delamination identification.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
+\section{Composite laminates}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Composite materials}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Composite materials}
-	\begin{wrapfigure}{r}{7cm}
-		\begin{figure}[h!]
-			\centering
-			\vspace{-1cm}
-			\hspace{3cm}
-			\includegraphics[scale=0.20]{Composite_3d.png}
-		\end{figure}
-	
-	\end{wrapfigure}
-	Composites materials are formed by combining materials together to form an overall structure with properties that differ from that of the individual components as shown in the below image.
+\subsection{Defects of composite laminates}
+\begin{frame}{Defects of composite materials}
 
-	\tiny {Image source: https://en.wikipedia.org/wiki/Composite\_material}
-
-\end{frame}
-\note{
-	A composite material can be defined as a combination of a matrix and a reinforcement, which when combined gives properties superior to the properties of the individual components. \\
-	The reinforcement fibres (e.g Glass, carbon) can be cut, aligned, placed in different ways to affect the properties of the resulting composite.
-	The matrix, normally a form of resin (e.g polyester, epoxy), keeps the reinforcement in the desired orientation. \\
-	It protects the reinforcement from chemical and environmental attack, and it bonds the reinforcement so that applied loads can be effectively transferred.
-	The Gray layer is a protection for the composite. 
-	}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}{{Composite materials} Cont.}
-		\begin{wrapfigure}{r}{7cm}
-		\begin{figure}[h!]
-			\centering
-			\vspace{-2cm}
-			\includegraphics[scale=1]{composite_materials.png}
-		\end{figure}
-	\end{wrapfigure}
-	\textbf{Examples of Composite Uses:}
-	\begin{itemize}
-		\item Aerospace structures
-		\item Automotive
-		\item Energy %(e.g. wind turbines)
-		\item Infrastructure (e.g. bridges, roads, railways,...)
-		\item Pipes and tanks
-	\end{itemize}
-\end{frame}
-\note{
-	Composite materials have enormous life application:
-	in aerospace applications like components of the aircraft (whether business or military), rockets and missiles etc.\\	
-	In the Automobile industries for example (steel and aluminium body). \\
-	In the energy application, composites are used in wind turbines.\\ 
-	In infrastructures, composites have so many applications for example bridges, roads, railways, in communication antennae, etc.\\
-	Now, why to use composite materials? 
-	As shown in the figure, composites have so many advantages over metals such as their lightweight, flexibility in design, can embed instruments like sensors (FBGs to monitor the structure), their capability to perform better regarding fatigue strength, their lower cost, their capability to resists corrosion caused by environmental causes,  and other advantages.
-	}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Defects in composite materials}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Problems of composite materials}
-	Composite materials can have several kinds of defects such as:
-	\begin{wrapfigure}{r}{0.5\textwidth}
+	\begin{minipage}[c]{.40\textwidth}			
+		Composite materials can have several kinds of defects such as:
+		\begin{itemize}
+			\item Cracks
+			\item Fibre breakage
+			\item Debonding		
+			\item Delamination 
+		\end{itemize}
+	\textbf{Delamination} is one of the most hazardous forms of the defects. 
+	It leads to very catastrophic failures if not detected at early stages.
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.55\textwidth}
 		\begin{figure}[h!]
 			\centering
 			\vspace{-10pt}
-			\includegraphics[width=0.48\textwidth]{delamination1.png}
+			\includegraphics[width=.7\textwidth]{damage_composites.png}
 		\end{figure}
-	\end{wrapfigure}
-	\begin{itemize}
-		\item Cracks
-		\item Fibre breakage
-		\item Debonding		
-		\item Delamination 
-	\end{itemize}
-	Among these defects, delamination is one of the most hazardous forms of the defects, which essentially leads to very catastrophic failures if not detected at early stages.
-	
-	\tiny {Image source: https://docplayer.biz.tr/151413952-Tabakali-kompozitlerde-yapraklanma-delamination-bolgesinin-burkulma-mukavemetine-etkileri.html}
+	\end{minipage}
 \end{frame}
 \note{
 	Generally, impact damage in composite materials is caused by various impact events that result from the lack of reinforcement in the out-of-plane direction.
@@ -363,21 +314,20 @@
 	Therefore, delamination detection in the early stages can help to avoid structural collapses.
 	}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Damage detection in composite materials}
+\subsection{Damage detection in composite laminates}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Damage detection in composite materials}
-		\begin{wrapfigure}{r}{0.5\textwidth}
-		\begin{figure}[h!]
-			\centering
-			\vspace{-2.5cm}
-			\hspace{-2.0cm}
-			\includegraphics[width=0.55\textwidth]{GW_LambWaves.png}
-		\end{figure}
-	\end{wrapfigure}
+\begin{frame}{Conventional approaches}
 	Conventional structural damage detection methods involve two processes:
 	\begin{itemize}
 		\item Feature extraction 
 		\item Feature classification	
+	\end{itemize}
+	\subfloat{\includegraphics[width=.95\textwidth]{conventional_ML.png}}
+		Drawbacks of Conventional methods:
+	\begin{itemize}
+		\item Requires a great amount of human labor and computational effort.
+		\item Demands a high amount of experience of the practitioner.
+		\item Inefficient with big data which requires a complex computation of damage features.  
 	\end{itemize}
 \end{frame}
 \note{
@@ -386,14 +336,6 @@
 	Then we can attempt to classify these features, which are sensitive to minor damage and that can be distinguished from the response to natural and environmental changes (baseline).
 	}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Damage detection in composite materials Cont.}
-	Drawbacks of Conventional methods:
-	\begin{itemize}
-		\item Requires a great amount of human labor and computational effort.
-		\item Demands a high amount of experience of the practitioner.
-		\item Inefficient with big data which requires a complex computation of damage features.  
-	\end{itemize}
-\end{frame}
 \note{
 	Conventional methods of damage detection focus on patterns
 	extraction from registered measurements and accordingly make decisions based on these patterns. 
@@ -402,15 +344,17 @@
 	Accordingly, introducing new patterns will cause them to fail in detecting the damage.
 	Furthermore, these methods could fail in detecting damage when dealing with big data requiring a complex computation of damage features.
 }
+\setcounter{subfigure}{0}
+\section{Deep learning based approaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{AI, Machine learning and Deep learning}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{AI, Machine learning and Deep learning}
+\subsection{Introducing deep learning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{What is deep learning?}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.88\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
+		\includegraphics[width=0.5\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
 	\end{figure}
-\tiny{Image source: https://top6sites.com/2020/05/15/ai-vs-machine-learning-vs-deep-learning/}
 \end{frame}
 
 \note{
@@ -424,55 +368,60 @@
 		Deep learning algorithms as Artificial Neural Network (ANN) can be taught to perform the same tasks for machines.
 		\item Deep Learning is the most exciting and powerful branch of Machine Learning. 
 		It's a technique that teaches computers to do what comes naturally to humans: learn by example. 
-		Deep learning is a key technology behind driverless cars, enabling them to recognize a stop sign or to distinguish a pedestrian from a lamppost. It is the key to voice control in consumer devices like phones, tablets, TVs, and hands-free speakers. Deep learning is getting lots of attention lately and for good reason. 
+		Deep learning is a key technology behind driver-less cars, enabling them to recognize a stop sign or to distinguish a pedestrian from a lamppost. It is the key to voice control in consumer devices like phones, tablets, TVs, and hands-free speakers. Deep learning is getting lots of attention lately and for good reason. 
 		It’s achieving results that were not possible before.
-		\end{itemize}}
-
+\end{itemize}}
+\setcounter{subfigure}{0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{AI, Machine learning and Deep learning Cont.}
-		\begin{minipage}[c]{0.45\textwidth}
+\begin{frame}{Deep learning, why now?}
+	\begin{minipage}[c]{0.4\textwidth}
 		AI technologies are in accelerating growth due to:
 		\begin{itemize}
 			\item Exponential development in computer hardware industries
-			% (CPUs, GPUs, FPGAs, TPUs and ASICs)
+			 (e.g. CPUs, GPUs, FPGAs, TPUs and ASICs)
 			\item Era of Big data, 	
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}[c]{0.45\textwidth}
+	\begin{minipage}[c]{0.55\textwidth}
 		\begin{figure}
 			\centering
-			\includegraphics[width=0.75\textwidth]{CPU.jpg}
-			\includegraphics[width=.75\textwidth]{big_data_icon.jpg}	
-		\end{figure}
-	\tiny{Image source: https://depositphotos.com/213472866/stock-illustration-big-data-color-icon-cloud.html}
+			\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{10}{figures/gif_figs/gpu/gpu_-}{0}{34}}			
+		\end{figure}	
 	\end{minipage}
-
+	
 \end{frame}
 \note{
-In recent years, the field of AI has been developed in the accelerating rate due to:
-the advanced evolution occurred in technology that produced high computational powers \\
-like Central Processing Units, Graphical Processing Units,
-Field Programmable Gate Arrays, Tensor Processing Units, and Application Specific Integrated Circuit.\\
-The second thing that causes AI to be in accelerating growth is that in recent years the era of big data began, which is extremely essential in the learning process of AI systems.\\
-We can say that deep learning techniques rapidly developed after AlexNet was developed.
-AlexNet is the name of a convolutional neural network which has had a large impact on the field of machine learning, specifically in the application of deep learning to computer vision. 
-It famously won the 2012 ImageNet Large Scale Visual Recognition Challenge-2012 competition which was a breakthrough.	}
+	In recent years, the field of AI has been developed in the accelerating rate due to:
+	the advanced evolution occurred in technology that produced high computational powers \\
+	like Central Processing Units, Graphical Processing Units,
+	Field Programmable Gate Arrays, Tensor Processing Units, and Application Specific Integrated Circuit.\\
+	The second thing that causes AI to be in accelerating growth is that in recent years the era of big data began, which is extremely essential in the learning process of AI systems.\\
+	We can say that deep learning techniques rapidly developed after AlexNet was developed.
+	AlexNet is the name of a convolutional neural network which has had a large impact on the field of machine learning, specifically in the application of deep learning to computer vision. 
+	It famously won the 2012 ImageNet Large Scale Visual Recognition Challenge-2012 competition which was a breakthrough.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{AI, Machine learning and Deep learning Cont.}	
-	\begin{minipage}[c]{0.45\textwidth}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Common learning strategies}
+	\centering			
+	\subfloat{\includegraphics[width=0.9\textwidth]{learning.png}}
+\end{frame}
+\setcounter{subfigure}{0}
+\begin{frame}{Artificial neuron}	
+	\begin{minipage}[c]{0.40\textwidth}
 		\begin{itemize}
 			\item 	Neuron is responsible for acting as a gate (previous-to-next) layers with a nonlinear operation.	
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}[c]{0.45\textwidth}
+	\begin{minipage}[c]{0.55\textwidth}
 		\begin{figure}
 			\centering
-			\includegraphics[width=0.75\textwidth]{fig_neuron.png}
-			\includegraphics[width=1.0\textwidth]{neuron_perceptron.png}	
+			\subfloat[Biological neuron]{\includegraphics[width=.85\textwidth]{real_neuron.png}} \\
+			\subfloat[Artificial neuron]{\includegraphics[width=0.85\textwidth]{neuron.jpeg}} 
 		\end{figure}
 	\end{minipage}
-
-\tiny{source of biological neuron: https://tlr.gitbook.io/data-science/neural-network/perceptron}
+	
 \end{frame}
 \note{
 	The idea behind perceptrons or (artificial neurons) is that it is possible to mimic certain parts of biological neurons, such as dendrites, cell bodies and axons using a simplified mathematical models of what limited knowledge we have on their inner workings: 
@@ -482,48 +431,56 @@ It famously won the 2012 ImageNet Large Scale Visual Recognition Challenge-2012 
 	Connections can become stronger or weaker, new connections can appear while others can cease to exist. 
 	We can mimic most of this process by coming up with a function that receives a list of weighted input signals and outputs some kind of signal if the sum of these weighted inputs reaches a certain threshold value.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{AI, Machine learning and Deep learning Cont.}
-	\begin{wrapfigure}{r}{0.5\textwidth}
+\setcounter{subfigure}{0}
+\begin{frame}{Artificial neural networks}
+	\begin{minipage}[c]{0.4\textwidth}
+		Artificial neural network (ANN) can be created by cascading n-layers of “neurons”. 
+		\begin{itemize}
+			\item Input layer.
+			\item Hidden layer(s).
+			\item Output layer.	
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.55\textwidth}
 		\centering
-		\vspace{-40pt}
-		\hspace{15pt}
-		\includegraphics[width=0.45\textwidth]{ANN.png}
-	\end{wrapfigure}
-Artificial neural network (ANN) can be created by cascading n-layers of “neurons”. 
-\begin{itemize}
-	\item	Input layer.
-	\item	Hidden layer(s).
-	\item	Output layer.	
-\end{itemize}
+		\includegraphics[width=0.95\textwidth]{ann.png}
+	\end{minipage}	
 \end{frame}
 \note{
-Artificial Neural Networks or ANN is an information processing paradigm that is inspired by the way the biological nervous system such as brain process information. 
-It is composed of a large number of highly interconnected processing elements(neurons) working together in harmony to solve a specific problem such as regression, classification, image detection and identification and in time series data.
-A basic ANN is composed of three layers:\\
-the input layer, the hidden layer or layers and finally an output layer.
-Information flows from the input layer, through the hidden layer to the output layer.
+	Artificial Neural Networks or ANN is an information processing paradigm that is inspired by the way the biological nervous system such as brain process information. 
+	It is composed of a large number of highly interconnected processing elements(neurons) working together in harmony to solve a specific problem such as regression, classification, image detection and identification and in time series data.
+	A basic ANN is composed of three layers:\\
+	the input layer, the hidden layer or layers and finally an output layer.
+	Information flows from the input layer, through the hidden layer to the output layer.
 }
+\setcounter{subfigure}{0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{AI, Machine learning and Deep learning Cont.}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=.47]{MLvsDL.png}
-	\end{figure}
-\tiny{Image source: https://lawtomated.com/a-i-technical-machine-vs-deep-learning/ }
+\begin{frame}{Neural network training}
+	\begin{minipage}[c]{0.35\textwidth}
+			Loss function and Backpropagation
+	\end{minipage}
+\hfill
+	\begin{minipage}[c]{0.6\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=.95\textwidth]{loss.png}
+			\caption{Objective function (Loss)}
+		\end{figure}
+	\end{minipage}
+
 \end{frame}
-\note{
-Feature extraction (aka feature engineering) is the process of putting domain knowledge into the creation of feature extractors to reduce the complexity of the data and make patterns more visible to learning algorithms. \\
-This process is difficult and expensive in terms of time and expertise.
-The shown diagram summaries the core distinction between machine learning and deep learning techniques. \\
-For the classical machine learning techniques, we have to perform feature extraction by ourselves, then we use a suitable method to do the classification. \\
-On the contrary, in deep learning techniques, the process of feature extraction is done automatically without the need for human intervention, since the model will learn by itself to perform this process.
-}
+\begin{frame}{Why deep learning?}
+	\textbf{End-to-end} \\
+	\subfloat{\includegraphics[width=.95\textwidth]{DL_approach.png}}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Synthetic Dataset generation}
+\subsection{Synthetic Dataset generation}
+\setcounter{subfigure}{0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Dataset description}
-		\begin{minipage}[c]{0.35\textwidth}
+	\centering
+	\begin{minipage}[c]{0.35\textwidth}
 		\begin{itemize}
 			\justifying
 			\item Delamination has a different shape, size and location for each case.
@@ -559,10 +516,9 @@ On the contrary, in deep learning techniques, the process of feature extraction 
 	\end{figure}
 \end{frame}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computer vision}
 \setcounter{subfigure}{0}
-\section{Deep learning techniques for delamination identification}
 \begin{frame}{What is computer vision?}
 	\begin{minipage}[c]{0.30\textwidth}
 		Computer vision is a field of artificial intelligence (AI) that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
@@ -577,8 +533,10 @@ On the contrary, in deep learning techniques, the process of feature extraction 
 
 \end{frame}
 
+\subsection{Semantic segmentation}
+\setcounter{subfigure}{0}
 \begin{frame}{Image semantic segmentation}
-	\begin{minipage}[c]{0.35\textwidth}
+	\begin{minipage}[l]{0.35\textwidth}
 		Based on inputs to a DL model two image segmentation schemes can be developed:
 		\medskip
 		\begin{enumerate}			
@@ -587,7 +545,7 @@ On the contrary, in deep learning techniques, the process of feature extraction 
 			\item \textbf{Many-to-one \\(Full wavefield frames)}
 		\end{enumerate}
 	\end{minipage}
-	\begin{minipage}[c]{0.6\textwidth}
+	\begin{minipage}[l]{0.6\textwidth}
 		\begin{figure}
 			\centering
 			\subfloat[Single input]{\includegraphics[width=.32\textwidth]{RMS_flat_shell_Vz_381_500x500bottom.png}}\qquad
@@ -600,22 +558,31 @@ On the contrary, in deep learning techniques, the process of feature extraction 
 	\end{minipage}	
 \end{frame}
 
-
-\begin{frame}{Deep learning techniques}
-	\begin{minipage}[c]{0.45\textwidth}
-		RMS based \\
-		CNN, FCN
+\setcounter{subfigure}{0}
+\subsection{Developed models}
+\begin{frame}{Common deep learning architectures}
+	
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{RMS based}\\
+		\begin{itemize}
+			\item Convolutional neural networks (CNN)
+			\item Fully convolutional network (FCN)
+		\end{itemize}		
 	\end{minipage}
 	\hfill
-	\begin{minipage}[c]{0.45\textwidth}
-		Full wavefield frames\\
-		RNN, LSTM and  ConvLSTM
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{Full wavefield frames}\\
+		\begin{itemize}
+			\item Recurrent neural network (RNN)
+			\item Long short-term memory (LSTM)
+			\item ConvLSTM
+		\end{itemize}	
 	\end{minipage}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Developed model for delamination identification}
-	\begin{minipage}[c]{0.45\textwidth}
+	\begin{minipage}[t]{0.45\textwidth}
 		\textbf{RMS based models: \\}
 			\begin{itemize}
 				\item Res-UNet
@@ -632,7 +599,7 @@ On the contrary, in deep learning techniques, the process of feature extraction 
 			\end{enumerate}}	
 	\end{minipage}
 	\hfill
-	\begin{minipage}[c]{.45\textwidth}
+	\begin{minipage}[t]{.45\textwidth}
 	\textbf{Full wavefield frames based model:}
 		\begin{itemize}
 			\item Autoencoder ConvLSTM
@@ -649,7 +616,7 @@ On the contrary, in deep learning techniques, the process of feature extraction 
 	\end{minipage}
 	\begin{minipage}[c]{0.35\textwidth}
 		\begin{figure}
-			\subfloat[Data flow \& intermediate outputs of layers \label{fig:}]{\animategraphics[autoplay,loop, controls,width=.8\textwidth]{1}{figures/gif_figs/381__inter_pred/intermediate_output-}{0}{103}}
+			\subfloat[Data flow \& intermediate outputs of layers \label{fig:}]{\animategraphics[autoplay, controls,width=.8\textwidth]{10}{figures/gif_figs/381__inter_pred/intermediate_output-}{0}{103}}
 \end{figure}
 	\end{minipage}
 
