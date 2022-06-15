@@ -271,7 +271,7 @@
 \end{frame}
 \note{
 	The presentation will be as follow: 
-	In the first section, I am going to introduce and define composite materials, then I will talk beirfly about defects in composite materials, and the conventional approach of damage detection in composite materials. \\
+	In the first section, I am going to introduce and define composite materials, then I will talk briefly about defects in composite materials, and the conventional approach of damage detection in composite materials. \\
 	In the second section, I will briefly introduce Artificial intelligence, machine learning and deep learning approaches.\\
 	In the third section, the objectives of the project will be presented. \\
 	Then I will talk about the Dataset generation in the fourth section. \\
@@ -279,27 +279,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Composite laminates}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Defects of composite laminates}
-\begin{frame}{Defects of composite materials}
-
-	\begin{minipage}[c]{.40\textwidth}			
-		Composite materials can have several kinds of defects such as:
+\subsection{Delamination in composite laminates}
+\begin{frame}{Defects of composite laminates}
+	\small		
+	Composite laminates can have different types of damage such as: \\
+	\textbf{Cracks, fibre breakage, debonding, and delamination.} \\ 
+	\begin{minipage}[c]{.40\textwidth}	
+		
 		\begin{itemize}
-			\item Cracks
-			\item Fibre breakage
-			\item Debonding		
-			\item Delamination 
+			\footnotesize	
+			\item Delamination is a critical failure mechanism in laminated fibre-reinforced polymer matrix composites.
+			\item Delamination is one of the most hazardous forms of the defects. 
+			It leads to very catastrophic failures if not detected at early stages.
 		\end{itemize}
-	\textbf{Delamination} is one of the most hazardous forms of the defects. 
-	It leads to very catastrophic failures if not detected at early stages.
+	
 	\end{minipage}
 	\hfill
-	\begin{minipage}[c]{0.55\textwidth}
-		\begin{figure}[h!]
-			\centering
-			\vspace{-10pt}
-			\includegraphics[width=.7\textwidth]{damage_composites.png}
-		\end{figure}
+	\begin{minipage}[c]{0.50\textwidth}
+%		\begin{figure}[h!]
+		\subfloat{\includegraphics[width=.95\textwidth]{damage_composites.png}}
+%		\end{figure}
+		\tiny
+			(source: https://industrialndt.com/ultrasonic-testing-for-fiber-glass-reinforced-plastic/)
 	\end{minipage}
 \end{frame}
 \note{
@@ -319,8 +320,8 @@
 \begin{frame}{Conventional approaches}
 	Conventional structural damage detection methods involve two processes:
 	\begin{itemize}
-		\item Feature extraction 
-		\item Feature classification	
+		\item \textbf{Feature extraction}
+		\item \textbf{Feature classification}
 	\end{itemize}
 	\subfloat{\includegraphics[width=.95\textwidth]{conventional_ML.png}}
 		Drawbacks of Conventional methods:
@@ -348,13 +349,15 @@
 \section{Deep learning based approaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Introducing deep learning}
+\subsection{Introduction to deep learning}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{What is deep learning?}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.5\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
+		\includegraphics[width=0.85\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
 	\end{figure}
+	\tiny
+	(source: https://www.ingeniovirtual.com/)
 \end{frame}
 
 \note{
@@ -386,7 +389,9 @@
 		\begin{figure}
 			\centering
 			\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{10}{figures/gif_figs/gpu/gpu_-}{0}{34}}			
-		\end{figure}	
+		\end{figure}
+	\tiny
+	(source: https://www.techbooky.com/)	
 	\end{minipage}
 	
 \end{frame}
@@ -405,7 +410,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Common learning strategies}
 	\centering			
-	\subfloat{\includegraphics[width=0.9\textwidth]{learning.png}}
+	\begin{figure}
+		\includegraphics[width=0.9\textwidth]{learning.png}
+	\end{figure}
+	\tiny
+	(source: https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)
 \end{frame}
 \setcounter{subfigure}{0}
 \begin{frame}{Artificial neuron}	
@@ -413,12 +422,15 @@
 		\begin{itemize}
 			\item 	Neuron is responsible for acting as a gate (previous-to-next) layers with a nonlinear operation.	
 		\end{itemize}
+		\begin{equation}
+			y = f(\sum_{i=0}^{n}w_{i}x_i+ b)
+		\end{equation}
 	\end{minipage}
 	\begin{minipage}[c]{0.55\textwidth}
 		\begin{figure}
 			\centering
-			\subfloat[Biological neuron]{\includegraphics[width=.85\textwidth]{real_neuron.png}} \\
-			\subfloat[Artificial neuron]{\includegraphics[width=0.85\textwidth]{neuron.jpeg}} 
+			\subfloat[Biological neuron]{\includegraphics[width=.75\textwidth]{real_neuron.png}} \\
+			\subfloat[Artificial neuron]{\includegraphics[width=0.65\textwidth]{neuron.png}} 
 		\end{figure}
 	\end{minipage}
 	
@@ -454,25 +466,70 @@
 	the input layer, the hidden layer or layers and finally an output layer.
 	Information flows from the input layer, through the hidden layer to the output layer.
 }
+
+\setcounter{subfigure}{0}
+\begin{frame}{Convolutional neural networks}
+	\begin{minipage}[c]{0.35\textwidth}
+		\textbf{Convolution operation}\\
+		\subfloat{\animategraphics[autoplay,loop, controls,width=4cm]{1}{figures/gif_figs/conv_op/conv_op-}{0}{8}}
+	\end{minipage}
+	\begin{minipage}[0]{0.6\textwidth}
+		\subfloat{\includegraphics[[width=0.95\textwidth]{cnn.png}}
+	\end{minipage}
+	\tiny
+	(source: https://github.com/tbozinis/simple-convolution)
+\end{frame}
 \setcounter{subfigure}{0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Neural network training}
-	\begin{minipage}[c]{0.35\textwidth}
-			Loss function and Backpropagation
+\begin{frame}{Training process}
+	
+	\begin{minipage}[ct]{0.4\textwidth}
+			\begin{itemize}
+				\footnotesize
+				\item Feed-forward pass (initial predictions are done).
+				\item Calculating the loss between the prediction and actual  values via optimization process e.g. (Gradient descent).
+				\item Updating all learnable parameters using backpropagation technique.				
+				\begin{equation}
+					w_{jk}\leftarrow w_{jk}-\alpha \frac{\partial J}{\partial w_{jk}}					
+				\end{equation}
+				\begin{equation}										
+					b_{jk}\leftarrow b_{jk}-\alpha \frac{\partial J}{\partial b_{jk}}
+				\end{equation}
+			\end{itemize}
+		
 	\end{minipage}
 \hfill
-	\begin{minipage}[c]{0.6\textwidth}
+	\begin{minipage}[c]{0.55\textwidth}
 		\begin{figure}
 			\centering
-			\includegraphics[width=.95\textwidth]{loss.png}
-			\caption{Objective function (Loss)}
+			\subfloat{\animategraphics[autoplay,loop, controls,width=6cm]{2}{figures/gif_figs/sgd/SGD.gif-}{0}{10}}
 		\end{figure}
+	\tiny
+	(source: https://suniljangirblog.files.wordpress.com/2018/12/1-1.gif?w=379
+	)
 	\end{minipage}
 
 \end{frame}
 \begin{frame}{Why deep learning?}
-	\textbf{End-to-end} \\
+	\centering
+	\textbf{End-to-end approach} 
+	\par\medskip
 	\subfloat{\includegraphics[width=.95\textwidth]{DL_approach.png}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computer vision}
+\setcounter{subfigure}{0}
+\begin{frame}{What is computer vision?}
+	\begin{minipage}[c]{0.30\textwidth}
+		Computer vision is a field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.65\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=1\textwidth]{computer_vision_tasks.png}
+		\end{figure}
+	\end{minipage}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Synthetic Dataset generation}
@@ -483,10 +540,10 @@
 	\begin{minipage}[c]{0.35\textwidth}
 		\begin{itemize}
 			\justifying
+			\item 475 cases.
 			\item Delamination has a different shape, size and location for each case.
 			\item CFRP is made of 8-layers.
-			\item Delamination was modelled between the 3rd and 4th layer.	\item 475 cases.
-			\item Root mean square (RMS) was applied to the wavefield (To improve the visibility).			
+			\item Delamination was modelled between the 3rd and 4th layer.			
 		\end{itemize}
 	\end{minipage}
 	\begin{minipage}[c]{0.6\textwidth}
@@ -516,28 +573,12 @@
 	\end{figure}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Computer vision}
-\setcounter{subfigure}{0}
-\begin{frame}{What is computer vision?}
-	\begin{minipage}[c]{0.30\textwidth}
-		Computer vision is a field of artificial intelligence (AI) that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
-	\end{minipage}
-\hfill
-	\begin{minipage}[c]{0.65\textwidth}
-			\begin{figure}
-			\centering
-			\includegraphics[width=1\textwidth]{computer_vision_tasks.png}
-		\end{figure}
-	\end{minipage}
-
-\end{frame}
 
 \subsection{Semantic segmentation}
 \setcounter{subfigure}{0}
 \begin{frame}{Image semantic segmentation}
 	\begin{minipage}[l]{0.35\textwidth}
-		Based on inputs to a DL model two image segmentation schemes can be developed:
+		Segmentation schemes can be developed:
 		\medskip
 		\begin{enumerate}			
 			\item \textbf{One-to-one \\(RMS based approach)} 
@@ -559,7 +600,7 @@
 \end{frame}
 
 \setcounter{subfigure}{0}
-\subsection{Developed models}
+\subsection{Developed DL models}
 \begin{frame}{Common deep learning architectures}
 	
 	\begin{minipage}[t]{0.45\textwidth}
@@ -604,6 +645,8 @@
 		\begin{itemize}
 			\item Autoencoder ConvLSTM
 		\end{itemize}
+	\tiny
+	\item Ullah S, Ijjeh AA, Kudela P. Deep learning approach for delamination identification using animation of Lamb waves. (submitted / under review)
 	\end{minipage}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -616,7 +659,7 @@
 	\end{minipage}
 	\begin{minipage}[c]{0.35\textwidth}
 		\begin{figure}
-			\subfloat[Data flow \& intermediate outputs of layers \label{fig:}]{\animategraphics[autoplay, controls,width=.8\textwidth]{10}{figures/gif_figs/381__inter_pred/intermediate_output-}{0}{103}}
+			\subfloat[Data flow \& intermediate outputs of layers \label{fig:}]{\animategraphics[autoplay, controls,width=.8\textwidth]{4}{figures/gif_figs/381__inter_pred/intermediate_output-}{0}{103}}
 \end{figure}
 	\end{minipage}
 
@@ -639,7 +682,22 @@
 	\end{minipage}
 	
 \end{frame}
-
+\setcounter{subfigure}{0}
+\begin{frame}{Experimental results}
+	\begin{minipage}[ct]{0.5\textwidth}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.95\textwidth]{figure3.png}
+	\end{figure}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.4\textwidth}
+			\centering
+			\subfloat{\animategraphics[autoplay,controls, loop,width=.40\textwidth]{12}{figures/gif_figs/exp/exp-}{0}{487}} 
+			\par\medskip
+			\subfloat{\includegraphics[width=.95\textwidth]{exp_rms_thresholded.png}}\qquad
+	\end{minipage}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=blue, bg=white}
 \begin{frame}[standout]
