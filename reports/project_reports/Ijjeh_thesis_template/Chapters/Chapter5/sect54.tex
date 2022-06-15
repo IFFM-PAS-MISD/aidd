@@ -1,207 +1,242 @@
 \section{DLSR model}
 \label{sec54}
-In this section, the performance evaluation of the developed DLSR model based on the numerical test cases representing the LR frames are presented.
+In this section, the performance evaluation of the developed DLSR model based on the numerical test cases are presented.
+It must be noted that the LR frames used to recover the HR frames were not used in the training set.
+Furthermore,  the DLSR model was trained on the full wavefield animation of a window size $128$ frames per case
+Accordingly, each numerical test case was evaluated at three different frames (time steps):
+\begin{itemize}
+	\item The first frame represents the initial interaction of the guided waves with the delamination (the first frame in the window).
+	\item The second frame represents the interaction with the delamination after 64 frames of the initial interaction (the middle frame in the window).
+	\item The third frame represents the interaction with the delamination after 128 frames of the first frame (the last frame in the window).
+\end{itemize}
+
 Additionally, the developed model was evaluated on an experimental test case to demonstrate their capability of super-resolution image reconstruction.
 
 \subsection{Numerical cases}
 \label{sec541}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The results of the reconstruction of HR frames for a numerical test case by the developed DLSR models are presented in Fig.~\ref{fig:num_results}.
-It must be noted that the LR frames used to recover the HR frames were not used in the training set.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Case 397
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [!ht]
+The results of recovering HR frames for the first numerical test case by the developed DLSR model are presented in Fig.~\ref{fig:num_results_CS_397}.
+In this case, the delamination is located at the upper left quarter of the plate.
+The reference frames for this test case are $N_f=127$, $N_f=191$, and $N_f=255$ presented in Figs.~\ref{fig:ref_397_full_127}, \ref{fig:ref_397_full_191} and \ref{fig:ref_397_full_255}, respectively.
+Additionally, the region of guided waves interaction with the delamination is depicted with a square box.
+Figures~\ref{fig:pred_397_full_127}, \ref{fig:pred_397_full_191}, and \ref{fig:pred_397_full_255} show the corresponding recovered frame at $N_f=127$, $N_f=191$, and $N_f=255$, respectively, with the DLSR model.
+
+The calculated quality metrics for the whole plate regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}, which proves that the DLSR model can recover the LR frames into HR frames with high quality.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_full_frame_GT.png}
-		\caption{Reference $N_f=127$}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_127_full_frame_GT.png}
+		\caption{HR reference, $N_f=127$}
 		\label{fig:ref_397_full_127}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_full_frame_GT.png}
-		\caption{Reference $N_f=191$}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_191_full_frame_GT.png}
+		\caption{HR reference, $N_f=191$}
 		\label{fig:ref_397_full_191}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_full_frame_GT.png}
-		\caption{Reference $N_f=255$}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_255_full_frame_GT.png}
+		\caption{HR reference, $N_f=255$}
 		\label{fig:ref_397_full_255}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 		\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_full_frame_pred.png}
-		\caption{}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_127_full_frame_pred.png}
+		\caption{SR frame, $N_f=127$}
 		\label{fig:pred_397_full_127}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_full_frame_pred.png}
-		\caption{}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_191_full_frame_pred.png}
+		\caption{SR frame, $N_f=191$}
 		\label{fig:pred_397_full_191}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_full_frame_pred.png}
-		\caption{}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_255_full_frame_pred.png}
+		\caption{SR frame, $N_f=255$}
 		\label{fig:pred_397_full_255}	
 	\end{subfigure}
-	\caption{}
+	\caption{First numerical case with respect to the reconstruction of whole plate}
 	\label{fig:num_results_CS_397}
 \end{figure}
+
+Figure~\ref{fig:num_results_CS_damage_area_397} presents a zoom in at the delamination region that shows the interaction of the guided waves with the delamination regarding the test case presented in Fig.~\ref{fig:num_results_CS_397}.
+Figures~\ref{fig:ref_397_damage_127}, \ref{fig:ref_397_damage_191}, and \ref{fig:ref_397_damage_255} show the reference delamination regions with respect to Figs.~\ref{fig:ref_397_full_127}, \ref{fig:ref_397_full_191}, and \ref{fig:ref_397_full_255}, respectively.
+Figures.\ref{fig:pred_397_damage_127}, \ref{fig:pred_397_damage_191}, and \ref{fig:pred_397_damage_255} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_397_full_127}, \ref{fig:pred_397_full_191}, and \ref{fig:pred_397_full_255}, respectively.
+
+The calculated quality metrics for the delamination region regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}.
+The acquired quality proves that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
 
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_delamination_GT.png}
-		\caption{Reference $N_f=127$}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_127_delamination_GT.png}
+		\caption{Reference}
 		\label{fig:ref_397_damage_127}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_delamination_GT.png}
-		\caption{Reference $N_f=191$}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_191_delamination_GT.png}
+		\caption{Reference}
 		\label{fig:ref_397_damage_191}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_delamination_GT.png}
-		\caption{Reference $N_f=255$}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_255_delamination_GT.png}
+		\caption{Reference}
 		\label{fig:ref_397_damage_255}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_127_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_127_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_397_damage_127}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_191_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_191_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_397_damage_191}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_397_frame_255_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_397_frame_255_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_397_damage_255}	
 	\end{subfigure}
-	\caption{}
+	\caption{First numerical case with respect to the delamination region}
 	\label{fig:num_results_CS_damage_area_397}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Case 438
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:num_results_CS_438} show the results of HR frames reconstruction for the second numerical test case by the developed DLSR model.
+Furthermore, the delamination is located at the upper edge centre of the plate in this case.
+The reference frames for this test case are $N_f=154$, $N_f=218$, and $N_f=282$ presented in Figs.~\ref{fig:ref_438_full_154}, \ref{fig:ref_438_full_218} and \ref{fig:ref_438_full_282}, respectively.
+The region of guided waves interaction with the delamination is depicted with a square box.
+Figures~\ref{fig:pred_438_full_154}, \ref{fig:pred_438_full_218}, and \ref{fig:pred_438_full_282} show the corresponding recovered frame at $N_f=154$, $N_f=218$, and $N_f=282$, respectively, with the DLSR model.
+
+The calculated quality metrics for the whole plate regarding the second test case are presented in Table~\ref{tab:num_DLSR_results}.
+The results prove that the DLSR model can recover the LR frames into HR frames with high quality.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_154_full_frame_GT.png}
 		\caption{Reference $N_f=154$}
 		\label{fig:ref_438_full_154}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_218_full_frame_GT.png}
 		\caption{Reference $N_f=218$}
 		\label{fig:ref_438_full_218}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_282_full_frame_GT.png}
 		\caption{Reference $N_f=282$}
 		\label{fig:ref_438_full_282}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_154_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_438_full_154}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_218_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_438_full_218}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_282_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_438_full_282}	
 	\end{subfigure}
-	\caption{}
+	\caption{Second numerical case with respect to the reconstruction of whole plate}
 	\label{fig:num_results_CS_438}
 \end{figure}
 
+Figure~\ref{fig:num_results_CS_damage_area_438} presents a zoom in at the delamination region that shows the interaction of the guided waves with the delamination regarding the test case presented in Fig.~\ref{fig:num_results_CS_438}.
+Figures~\ref{fig:ref_438_damage_154}, \ref{fig:ref_438_damage_218}, and \ref{fig:ref_438_damage_282} show the reference delamination regions with respect to Figs.~\ref{fig:ref_438_full_154}, \ref{fig:ref_438_full_218}, and \ref{fig:ref_438_full_282}, respectively.
+Figures.\ref{fig:pred_438_damage_154}, \ref{fig:pred_438_damage_218}, and \ref{fig:pred_438_damage_282} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_438_full_154}, \ref{fig:pred_438_full_218}, and \ref{fig:pred_438_full_282}, respectively.
+
+The calculated quality metrics for the delamination region regarding the second test case are presented in Table~\ref{tab:num_DLSR_results}.
+The acquired quality proves that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_154_delamination_GT.png}
 		\caption{Reference $N_f=154$}
 		\label{fig:ref_438_damage_154}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_218_delamination_GT.png}
 		\caption{Reference $N_f=218$}
 		\label{fig:ref_438_damage_218}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_282_delamination_GT.png}
 		\caption{Reference $N_f=282$}
 		\label{fig:ref_438_damage_282}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_154_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_154_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_438_damage_154}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_218_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_218_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_438_damage_218}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_438_frame_282_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_438_frame_282_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_438_damage_282}	
 	\end{subfigure}
-	\caption{}
+	\caption{Second numerical case with respect to the delamination region}
 	\label{fig:num_results_CS_damage_area_438}
 \end{figure}
 
@@ -209,147 +244,176 @@ It must be noted that the LR frames used to recover the HR frames were not used 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Case 448
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure~\ref{fig:num_results_CS_448} show the results of HR frames reconstruction for the third numerical test case by the developed DLSR model.
+Furthermore, the delamination is located at the left edge centre of the plate in this case.
+The reference frames for this test case are $N_f=211$, $N_f=275$, and $N_f=339$ presented in Figs.~\ref{fig:ref_448_full_211}, \ref{fig:ref_448_full_275} and \ref{fig:ref_448_full_339}, respectively.
+The region of guided waves interaction with the delamination is depicted with a square box.
+Figures~\ref{fig:pred_448_full_211}, \ref{fig:pred_448_full_275}, and \ref{fig:pred_448_full_339} show the corresponding recovered frame at $N_f=211$, $N_f=275$, and $N_f=339$, respectively, with the DLSR model.
+
+The calculated quality metrics for the whole plate regarding the second test case are presented in Table~\ref{tab:num_DLSR_results}.
+The measured quality metrics prove that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_211_full_frame_GT.png}
 		\caption{Reference $N_f=211$}
 		\label{fig:ref_448_full_211}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_275_full_frame_GT.png}
 		\caption{Reference $N_f=275$}
 		\label{fig:ref_448_full_275}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_339_full_frame_GT.png}
 		\caption{Reference $N_f=339$}
 		\label{fig:ref_448_full_339}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_211_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_448_full_211}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_275_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_448_full_275}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_339_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_448_full_339}	
 	\end{subfigure}
-	\caption{}
+	\caption{Third numerical case with respect to the reconstruction of whole plate}
 	\label{fig:num_results_CS_448}
 \end{figure}
 
+Figure~\ref{fig:num_results_CS_damage_area_448} presents a zoom in at the delamination region that shows the interaction of the guided waves with the delamination regarding the test case presented in Fig.~\ref{fig:num_results_CS_448}.
+Figures~\ref{fig:ref_448_damage_211}, \ref{fig:ref_448_damage_275}, and \ref{fig:ref_448_damage_339} show the reference delamination regions with respect to Figs.~\ref{fig:ref_448_full_211}, \ref{fig:ref_448_full_275}, and \ref{fig:ref_448_full_339}, respectively.
+Figures.\ref{fig:pred_448_damage_211}, \ref{fig:pred_448_damage_275}, and \ref{fig:pred_448_damage_339} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_448_full_211}, \ref{fig:pred_448_full_275}, and \ref{fig:pred_448_full_339}, respectively.
+The calculated quality metrics for the delamination region regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}.
+The measured quality metrics prove that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_211_delamination_GT.png}
 		\caption{Reference $N_f=211$}
 		\label{fig:ref_448_damage_211}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_275_delamination_GT.png}
 		\caption{Reference $N_f=275$}
 		\label{fig:ref_448_damage_275}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_339_delamination_GT.png}
 		\caption{Reference $N_f=339$}
 		\label{fig:ref_448_damage_339}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_211_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_211_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_448_damage_211}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_275_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_275_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_448_damage_275}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_448_frame_339_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_448_frame_339_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_448_damage_339}	
 	\end{subfigure}
-	\caption{}
+	\caption{Third numerical case with respect to the delamination region}
 	\label{fig:num_results_CS_damage_area_448}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Case 456
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure~\ref{fig:num_results_CS_456} show the results of HR frames reconstruction for the fourth numerical test case by the developed DLSR model.
+Furthermore, the delamination is located at the upper left corner of the plate in this case.
+The reference frames for this test case are $N_f=159$, $N_f=223$, and $N_f=287$ presented in Figs.~\ref{fig:ref_456_full_159}, \ref{fig:ref_456_full_223} and \ref{fig:ref_456_full_287}, respectively.
+The region of guided waves interaction with the delamination is depicted with a square box.
+Figures~\ref{fig:pred_456_full_159}, \ref{fig:pred_456_full_223}, and \ref{fig:pred_456_full_287} show the corresponding recovered frame at $N_f=159$, $N_f=223$, and $N_f=287$, respectively, with the DLSR model.
+
+The calculated quality metrics for the whole plate regarding the second test case are presented in Table~\ref{tab:num_DLSR_results}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:num_results_CS_damage_area_456} presents a zoom in at the delamination region that shows the interaction of the guided waves with the delamination regarding the test case presented in Fig.~\ref{fig:num_results_CS_456}.
+Figures~\ref{fig:ref_456_damage_159}, \ref{fig:ref_456_damage_223}, and \ref{fig:ref_456_damage_287} show the reference delamination regions with respect to Figs.~\ref{fig:ref_456_full_159}, \ref{fig:ref_456_full_223}, and \ref{fig:ref_456_full_287}, respectively.
+Figures~\ref{fig:pred_456_damage_159}, \ref{fig:pred_459_damage_223}, and \ref{fig:pred_456_damage_287} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_456_full_159}, \ref{fig:pred_456_full_223}, and \ref{fig:pred_456_full_287}, respectively.
+The calculated quality metrics for the delamination region regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}.
+The measured quality metrics prove that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
+
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_159_full_frame_GT.png}
 		\caption{Reference $N_f=159$}
 		\label{fig:ref_456_full_159}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_223_full_frame_GT.png}
 		\caption{Reference $N_f=223$}
 		\label{fig:ref_456_full_223}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_full_frame_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_287_full_frame_GT.png}
 		\caption{Reference $N_f=287$}
 		\label{fig:ref_456_full_287}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_159_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_456_full_159}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_223_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_456_full_223}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_full_frame_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_287_full_frame_pred.png}
 		\caption{}
 		\label{fig:pred_456_full_287}	
 	\end{subfigure}
-	\caption{}
+	\caption{Fourth numerical case with respect to the reconstruction of whole plate}
 	\label{fig:num_results_CS_456}
 \end{figure}
 
@@ -357,55 +421,54 @@ It must be noted that the LR frames used to recover the HR frames were not used 
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_159_delamination_GT.png}
 		\caption{Reference $N_f=159$}
 		\label{fig:ref_456_damage_159}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_223_delamination_GT.png}
 		\caption{Reference $N_f=223$}
 		\label{fig:ref_456_damage_223}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_delamination_GT.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_287_delamination_GT.png}
 		\caption{Reference $N_f=287$}
 		\label{fig:ref_456_damage_287}	
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_159_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_159_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_456_damage_159}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
-		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_223_delamination_pred.png}
+		\includegraphics[width=.85\textwidth]{Figures/Chapter_5/output_456_frame_223_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_456_damage_223}
 	\end{subfigure}
-	\hfill
+%	\hfill
 	\begin{subfigure}[b]{.32\textwidth}
 		\centering
 		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/output_456_frame_287_delamination_pred.png}
 		\caption{}
 		\label{fig:pred_456_damage_287}	
 	\end{subfigure}
-	\caption{}
+	\caption{Fourth numerical case with respect to the delamination region}
 	\label{fig:num_results_CS_damage_area_456}
 \end{figure}
 
-
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
-\begin{table}[]
+\begin{table}[!h]
 	\centering \footnotesize
-	\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.}	
+	\caption{Quality metrics for the DLSR model for four numerical test cases calculated at three different frames $N_f$ per case.}	
 	\begin{tabular}{lccccc}
 		\toprule
 		& & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
@@ -426,10 +489,10 @@ It must be noted that the LR frames used to recover the HR frames were not used 
 		\midrule
 		\multirow{3}{*}{}  & 159 & 48.60 & 0.998 & 46.67 & 0.998 \\
 		\multirow{3}{*}{} 4 & 223 & 37.64 & 0.989 & 24.32 & 0.916 \\
-		\multirow{3}{*}{}  & 287 & 39.64 & 0.989 & 40.62 & 0.871 \\ 
-		
+		\multirow{3}{*}{}  & 287 & 39.64 & 0.989 & 40.62 & 0.871 \\ 		
 		\bottomrule
 	\end{tabular}
+	\label{tab:num_DLSR_results}
 \end{table}
 
 \clearpage
@@ -439,14 +502,38 @@ It must be noted that the LR frames used to recover the HR frames were not used 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental cases}
 \label{sec542}
-Experiment description
+Experimental studies were performed on a ($500 \times 500\times 3.9$) mm\textsuperscript{3} CFRP laminate composed of 16 plain-woven prepreg layers (GG 205P) stacked in one direction. 
+During the specimen production, three Teflon inserts were put in between layers at the positions and sizes presented in Fig.~\ref{fig:specimen}.
 
+\begin{figure} [!ht]
+	\centering
+	\includegraphics[scale=.8]{Figures/Chapter_5/figure8.png}
+	\caption{Delamination arrangements in the specimen.}
+	\label{fig:specimen}
+\end{figure}
+
+Guided waves were excited by 10 mm wide round PZT attached to the centre of the plate front surface with cyanoacrylate glue. 
+A hann-window-modulated 50 kHz five-cycle sinusoidal signals were used for excitation purposes.
+Out-of-plane velocities were measured in 389286 randomly spaced points covering the whole back surface of the specimen using SLDV. 
+The sampling frequency was 512 kHz, and at each point, 512 time samples (1 ms) were registered ten times and averaged.
+The backside of the specimen was covered with retroreflective film to increase surface reflectivity and thus improve the SNR of measured signals.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:points_metrics} presents a comparison of the recovered full HR frame and the delamination region at ($N_f=110$) with various number of measurement points $N_p$ with the CS method.
+As shown in Fig.~\ref{fig:points_metrics}, when the value of $N_p$ increases, we get a better recovery of both the full HR frame and the exact delamination region.
+However, for lower values of $N_P$ such as $N_p=1024$, the PSNR and Pearson CC values for the recovered HR frame were poor, indicating that the conventional CS method is not efficient below the Nyquist sampling rate.
 \begin{figure} [h!]
 	\centering
 	\includegraphics[scale=1]{Figures/Chapter_5/figure9.png}
 	\caption{Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.}
 	\label{fig:points_metrics}
 \end{figure}
+
+Figure~\ref{fig:frame110_comparison} shows the recovery of the reference frame presented in Fig.~\ref{fig:frame110_CS1024} at $N_f=110$ with the CS method and DLSR model.
+Figures~\ref{fig:frame110_CS1024},~\ref{fig:frame110_CS3000} and ~\ref{fig:frame110_CS4000} show reconstructed HR frames with CS method at $N_p=1024$ , $N_p=3000$ and $N_p=4000$ points, respectively.
+As expected, when decreasing the $N_p$ points, the CS method is not able to recover HR frames accurately.
+Figure~\ref{fig:frame110_Abdalraheem} presents the reconstructed HR frame with the DLSR model.
+The DLSR model recovered the HR frame with $N_p=1024$ points, which is \(19.2\%\) of the Nyquist sampling rate.
 
 \begin{figure} [h!]
 	\centering
@@ -487,6 +574,13 @@ Experiment description
 	\caption{Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.}
 	\label{fig:frame110_comparison}
 \end{figure}
+
+Furthermore, Fig.~\ref{fig:frame110del_comparison} presents the recovery of the HR frame $N_f=110$ at the delamination region with respect to Fig.~\ref{fig:frame110_comparison}.
+Figure~\ref{fig:frame110delam_ref} shows the reference region of interest we are attempting to recover, which shows reflected waves from damage.
+Figures~\ref{fig:frame110delam_CS1024} and~\ref{fig:frame110delam_CS3000} show a poor reconstruction of the reflected waves at $N_p=1024$ and $N_p=3000$, respectively, using the CS method.
+Figure~\ref{fig:frame110delam_CS4000} shows the recovery of the reflected frames at $N_p=4000$ using the CS method, in which the reflected waves are recognisable.
+Figure~\ref{fig:frame110delam_Abdalraheem} shows the recovery of the reflected waves using DLSR model.
+The recovered reflected waves from damage using DLSR model are visible and can be easily recognised, which indicates that the DLSR approach can be more efficient than the conventional CS method. 
 
 \begin{figure} [h!]
 	\centering
