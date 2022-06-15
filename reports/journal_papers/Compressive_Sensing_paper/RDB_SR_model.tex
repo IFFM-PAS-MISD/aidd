@@ -2,7 +2,7 @@
 
 Residual dense network (RDN) was introduced by Zhang et al.~\cite{Zhang2018} to perform SISR.
 RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
-Accordingly, to resolve this issue, RND introduced a residual dense block (RDB) that is capable of fully exploiting all hierarchical features obtained from all convolutional layers.
+Accordingly, to resolve this issue, a residual dense block (RDB) was introduced that is capable of fully exploiting all hierarchical features obtained from all convolutional layers.
 
 Figure~\ref{fig:RDB} shows the architecture of a RDB, which consists of four layers (\(L_1,\ L_2,\ L_3,\ L_4\)).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,7 +19,8 @@ The local feature fusion within each RDB is utilised to learn more useful featur
 Consequently, RDB enables direct links from the previous RDB to all layers of the current RDB, resulting in a contiguous memory (CM) mechanism.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this work, the first implemented deep learning model was inspired by the RDN~\cite{Zhang2018} model is presented in Fig.~\ref{fig:RDN}.
+In this work, the first implemented deep learning model was inspired by the RDN~\cite{Zhang2018}. 
+The model is presented in Fig.~\ref{fig:RDN}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}

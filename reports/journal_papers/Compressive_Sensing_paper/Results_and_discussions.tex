@@ -5,15 +5,15 @@ Additionally, the developed models were evaluated in an experimental test case t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Two metrics were utilised to evaluate the performance of the developed DLSR models:
 The first one is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
-Equation~\ref{PSNR} depicts the mathematical representation of the PSNR:
+Equation~(\ref{PSNR}) depicts the mathematical representation of the PSNR:
 \begin{equation}
-	PSNR=20log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
+	PSNR=20\mathrm{log}_{10}\left(\frac{R}{\sqrt{MSE}}\right)
 	\label{PSNR}
 \end{equation}
 where \(R\) represents the maximum fluctuation value that exists in the input image, and it is equal to \(255\).
 \(MSE\) refers to the mean square error between the predicted output and the corresponding ground truth.
 
-The second metric is the Pearson correlation coefficient (Pearson CC) measures the linear relationship between two variable sets \textbf{\(X\)} (represents the ground truth values) and \textbf{\(Y\)} (represents the predicted values).
+The second metric is the Pearson correlation coefficient (Pearson CC), which measures the linear relationship between two variable sets \textbf{\(X\)} (represents the ground truth values) and \textbf{\(Y\)} (represents the predicted values).
 Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC:
 \begin{equation}
 	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
@@ -22,9 +22,7 @@ Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC:
 where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) is the mean value of the sample, analogously to \(\bar{y}\).
 
 The developed DLSR models were trained using the MSE (L2 norm) loss function.
-Further, we implemented the proposed networks with the Keras~\cite{chollet2015keras} API running on top of TensorFlow and trained them using NVIDIA RTX 2080 and Tesla V100 GPU. 
-The source code is publicly available online. \\
-\textbf{(We can add a link to GitHub)}
+Further, we implemented the proposed networks with the Keras~\cite{chollet2015keras} API running on top of TensorFlow and trained them using NVIDIA RTX 2080 and Tesla V100 GPU.
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical cases}
@@ -129,9 +127,9 @@ Both DLSR models recovered the HR frames with high PSNR and Pearson CC values re
 	\label{tab:num_results}
 \end{table}
 
-The achieved PSNR and Pearson CC metrics regarding the full wavefield of 512 frames for the previously evaluated test case are presented in Fig.\ref{fig:num_case_475_metrics}, where Figs~\ref{fig:num_model_I} and~\ref{fig:num_model_II} relate to models I and II, respectively.
+The achieved PSNR and Pearson CC metrics regarding the full wavefield of 512 frames for the previously evaluated test case are presented in Fig.~\ref{fig:num_case_475_metrics}, where Figs.~\ref{fig:num_model_I} and~\ref{fig:num_model_II} relate to models I and II, respectively.
 For both DLSR models, the reconstructed HR frames have high PSNR and Pearson CC values.
-However, as we move forward in time of waves propagation, metric values start to decrease, which is expected as the wave patterns become more complex and sophisticated.
+However, as we move forward in time of propagating waves, metric values start to decrease, which is expected as the wave patterns become more complex and sophisticated.
 It is noteworthy to restate that the DLSR models were trained only on a set of $128$ frames per case representing the propagation of Lamb waves starting from the time point (frame) of interaction with damage. 
 However, the developed DLSR models are capable of reconstructing the full wavefield of $512$ frames, indicating the capability to generalise.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -157,7 +155,7 @@ However, the developed DLSR models are capable of reconstructing the full wavefi
 \subsection{Experimental cases}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Experimental studies were performed on a $500 \times 500\times 3.9$ mm3 CFRP laminate composed of 16 plain-woven prepreg layers (GG 205P) stacked in one direction. 
+Experimental studies were performed on a $500 \times 500\times 3.9$ mm\textsuperscript{3} CFRP laminate composed of 16 plain-woven prepreg layers (GG 205P) stacked in one direction. 
 During the specimen production, three Teflon inserts were put in between layers at the positions and sizes presented in Fig.~\ref{fig:specimen}.
 
 \begin{figure} [!ht]
@@ -174,7 +172,7 @@ The sampling frequency was 512 kHz, and at each point, 512 time samples (1 ms) 
 The backside of the specimen was covered with retroreflective film to increase surface reflectivity and thus improve the SNR of measured signals.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Figure~\ref{fig:points_metrics} presents a comparison of the recovered full HR frame and the delamination region at ($N_f=110$) with various values of $N_p$ with the CS method.
+Figure~\ref{fig:points_metrics} presents a comparison of the recovered full HR frame and the delamination region at ($N_f=110$) with various number of measurement points $N_p$ with the CS method.
 As shown in Fig.~\ref{fig:points_metrics}, when the value of $N_p$ increases, we get a better recovery of both the full HR frame and the exact delamination region.
 However, for lower values of $N_P$ such as $N_p=1024$, the PSNR and Pearson CC values for the recovered HR frame were poor, indicating that the conventional CS method is not efficient below the Nyquist sampling rate.
 
@@ -301,8 +299,8 @@ The recovered reflected waves from damage using DLSR models are visible and can 
 	\label{fig:frame_metrics}
 \end{figure}
 \clearpage
-Table~\ref{tab:csv_results} presents a detailed comparison of the quality metrics for CS methods and DLSR models for various numbers of points $N_p$ and the corresponding ratios CR calculated for the frame no. $N_p=110$.
-
+Table~\ref{tab:csv_results} presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and DLSR models for various numbers of points $N_p$ and the corresponding compression ratios CR calculated for the frame $N_f=110$.
+It should be underlined, that for Np=1024, the CS recovery algorithm behaves poorly at the delamination region whereas DLSR models are still able to achieve high PSNR and Pearson CC values.
 \begin{table}[!ht]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
