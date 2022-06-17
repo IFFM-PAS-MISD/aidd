@@ -621,9 +621,24 @@ The recovered reflected waves from damage using DLSR model are visible and can b
 	\label{fig:frame110del_comparison}
 \end{figure} 
 \clearpage
+Figure~\ref{fig:frame_metrics} shows the measured PSNR and PEARSON CC metrics for the full wavefield consisting of $512$ frames, regarding the CS method in which the measuring points are 3000 and 4000, and the DLSR model of 1024 points, respectively.
+As shown in Fig.~\ref{fig:frame_metrics} 
 \begin{figure} [h!]
 	\centering
-	\includegraphics[scale=1]{Figures/Chapter_5/figure12.png}
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_5/figure12a.png}
+	\end{subfigure}
+	\vfill
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_5/figure12b.png}
+	\end{subfigure}
+	\vfill
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{Figures/Chapter_5/frame_metrics_DLSR_model_1_.png}
+	\end{subfigure}	
 	\caption{Comparison of reconstruction accuracy at frame number $N_f$.}
 	\label{fig:frame_metrics}
 \end{figure}
