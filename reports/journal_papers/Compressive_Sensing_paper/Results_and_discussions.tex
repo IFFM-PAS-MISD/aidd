@@ -1,9 +1,14 @@
 \section{Results and discussions}
-In this section, the evaluation of the developed DLSR models based on the numerical test cases representing the LR frames is presented.
-Additionally, the developed models were evaluated in an experimental test case to demonstrate their capability for super-resolution image reconstruction.
+In this section, the evaluation of the developed DLSR models is presented.
+Firstly, accuracy of the developed models for recovery of high-resolution frames from the low-resolution frames based on the numerical test cases was investigated.
+Next, the developed models were evaluated on an experimental test case to demonstrate their capability for super-resolution image reconstruction of propagating Lamb wave patterns.
+Additionally, conventional CS approach was applied as a reference with various number of points used for reconstruction of the wavefield.
+Moreover, two types of masks (sub-sampling schemes) for the construction of measurement matrix were tested, namely random mask and jitter mask.
+The jitter mask was defined according to the algorithm presented in~\cite{DiIanni2015}. 
+It should be noted that in CS method priors were not exploited.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Two metrics were utilised to evaluate the performance of the developed DLSR models:
+Two following metrics were utilised to evaluate the performance of the developed DLSR models and CS method.
 The first one is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
 Equation~(\ref{PSNR}) depicts the mathematical representation of the PSNR:
 \begin{equation}
@@ -172,8 +177,8 @@ The sampling frequency was 512 kHz, and at each point, 512 time samples (1 ms) 
 The backside of the specimen was covered with retroreflective film to increase surface reflectivity and thus improve the SNR of measured signals.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Figure~\ref{fig:points_metrics} presents a comparison of the recovered full HR frame and the delamination region at ($N_f=110$) with various number of measurement points $N_p$ with the CS method.
-As shown in Fig.~\ref{fig:points_metrics}, when the value of $N_p$ increases, we get a better recovery of both the full HR frame and the exact delamination region.
+Figure~\ref{fig:points_metrics} presents a comparison of the CS reconstruction accuracy depending on the number of measurement points $N_p$ calculated for the whole frame $N_f=110$ and delamination region highlighted by the square in Fig.~\ref{fig:frame110_comparison}.
+As shown in Fig.~\ref{fig:points_metrics}, when the value of $N_p$ increases, a better recovery of both the full HR frame and the reflection at delamination region is observed.
 However, for lower values of $N_P$ such as $N_p=1024$, the PSNR and Pearson CC values for the recovered HR frame were poor, indicating that the conventional CS method is not efficient below the Nyquist sampling rate.
 
 \begin{figure} [!ht]
@@ -244,6 +249,7 @@ Figure~\ref{fig:frame110delam_CS4000} shows the recovery of the reflected frames
 Figures~\ref{fig:frame110delam_Abdalraheem} and~\ref{fig:frame110delam_Saeed} show the recovery of the reflected waves using DLSR models, respectively.
 The recovered reflected waves from damage using DLSR models are visible and can be easily recognised, which indicates that the DLSR approach can be more efficient than the conventional CS method. 
 
+
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{0.32\textwidth}
@@ -294,13 +300,19 @@ The recovered reflected waves from damage using DLSR models are visible and can 
 \clearpage
 \begin{figure} [!ht]
 	\centering
- 	\includegraphics[scale=1]{figure12.png}
-	\caption{Comparison of reconstruction accuracy at frame number $N_f$.}
+ 	\includegraphics[scale=1]{figure12_cropped.png}
+	\caption{Comparison of reconstruction accuracy depending on the frame number $N_f$.}
 	\label{fig:frame_metrics}
 \end{figure}
 \clearpage
-Table~\ref{tab:csv_results} presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and DLSR models for various numbers of points $N_p$ and the corresponding compression ratios CR calculated for the frame $N_f=110$.
-It should be underlined, that for Np=1024, the CS recovery algorithm behaves poorly at the delamination region whereas DLSR models are still able to achieve high PSNR and Pearson CC values.
+Next reconstruction accuracy metrics were calculated for each consecutive frame $N_f$ and put together in Fig.~\ref{fig:frame_metrics}.
+It should be noted that PSNR behaviour is very similar regardless the applied reconstruction method.
+Moreover, the PSNR values obtained by DLSR models by using only 1024 points are on the level similar to CS by using 3000 points.
+However, the obtained Pearson CC values for DLSR models are lower than for CS and reach negative values at the frame corresponding to the moment when A0 mode reaches the edges of the plate.
+
+Table~\ref{tab:csv_results} presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and DLSR models for various numbers of points $N_p$ and the corresponding compression ratios CR.
+Metrics were calculated for the frame $N_f=110$ on the whole plate and delamination region, respectively.
+It should be underlined, that for $N_p=1024$ points, the CS recovery algorithm behaves poorly at the delamination region whereas DLSR models are still able to achieve high PSNR and Pearson CC values.
 \begin{table}[!ht]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
