@@ -10,7 +10,7 @@ Hence, deep learning methods have the capability to generalise and learn new fea
 
 DL approach makes it possible to use registered data in their raw form without any need to perform feature extraction.
 Hence, such an approach has an end-to-end structure that automatically learns and discovers the hidden features in a high dimensional input data~\cite{LeCun, Networks}. 
-Figure ~\ref{fig:ML_vs_DL} illustrates the main differences between the conventional ML-based SHM and DL-based SHM approaches.
+Figure~\ref{fig:ML_vs_DL} illustrates the main differences between the conventional ML-based SHM and DL-based SHM approaches.
 
 \begin{figure}[!ht]
 	\centering
@@ -59,7 +59,7 @@ The methodology is based on the use of principal component analysis (PCA) and ma
 PCA means to analyse a large amount of information by finding the principal components.
 However, the PCA method is not invariant to scaling, thus, data must be normalized~\cite{Tibaduiza2016}. 
 Next, normalised data is fed to several machine learning models for training. 
-For this purpose, several classification algorithms were applied, Decision trees, KNN and SVM. 
+For this purpose, several classification algorithms were applied, decision trees, KNN and SVM. 
 However, only a few of these models presented good outputs in damage detection. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% KNN
@@ -95,25 +95,27 @@ AE signal frequency was found to be a good feature for discrimination. According
 %Classification operation is responsible for predicting whether there is damage or not in a specific location. 
 %Where the regression operation is responsible for the exact estimation of the damage location.
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Ful wavefield +ConvNets
+
 Full wavefield scanning using SLDV is time-consuming, however, simply reducing the number of scanning points will result in low-quality images. 
 \textcite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by SLDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. 
 Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. 
 Accordingly, the damage features will be altered.
 Furthermore,~\textcite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by SLDV. 
-Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. Their results show good results when compared with traditional machine learning SVM.
+Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. 
+The developed model shown good results when compared with traditional machine learning SVM.
 Moreover,~\textcite{Melville2017} introduced a method for detecting damage in structures based on the k-means algorithm. 
-The method is known as \enquote{dictionary learning} which uses full wavefield data collected from thin metal plates. 
+The method is known as~\enquote{dictionary learning} which uses full wavefield data collected from thin metal plates. 
 The method was applied to structures with different material types and thicknesses that were not used during training to prove how well the model in damage detection in various conditions. 
 However, their work was not implemented for a further step, which is damage localization and classification.
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
 \subsection{Guided waves Based SHM through DL}
-The guided waves approaches are widely utilised in SHM/NDT due to the fact it can detect very small damage sizes ~\cite{Guemes2020}. 
+The guided waves approaches are widely utilised in SHM/NDT due to the fact it can detect very small damage sizes~\cite{Guemes2020}. 
 Damage detection and identification approaches using guided waves are based on the measurements of the PZT sensors, whether bonded or embedded into the investigated structure. 
 PZT sensor(s) are responsible for the excitation of the structure by a short ultrasonic pulse (usually, the used frequency is in the range of hundreds of kHz) that propagates through an investigated structure such as plates or pipes as an elastic wave.
 The registered signals (baseline) are stored and compared with other registered signals acquired through the lifetime of the investigated structure.
 Damage detection using the baseline subtraction approach for guided waves is based on subtracting damage-free registered measurements from the newly registered measurements to obtain the new changes that occurred to the structure.
 These changes are considered as damage information.
-The baseline approach is effective in controlled environments where the variations of the operational/environments (i.e. considerations of multiple sensing modalities, uncertainty in material properties, bounding conditions, etc. ) are negligible ~\cite{Yuan2020}.  
+The baseline approach is effective in controlled environments where the variations of the operational/environments (i.e. considerations of multiple sensing modalities, uncertainty in material properties, bounding conditions, etc.) are negligible~\cite{Yuan2020}.  
 Such variations can alter registered data leading to false alarms.
 The effect of such variations can be reduced through physics-based modeling, which can simulate an undamaged scenario (baseline) for the wave propagation through the investigated structure.
 Then, the simulated baseline can be used in the subtraction for damage detection.
@@ -144,7 +146,7 @@ Response data of wave propagation were used to calculate damage indexes which we
 Accordingly, the model performs automatic feature extraction in conjunction with the probability ellipse-based method. 
 The ANN model and probability ellipse (PE) method were applied to identify damage location.
 The results from the ANN model and the PE presents how it is useful to apply damage indexes as a baseline for such methods in order to evaluate damage in aluminum and composite structures. 
-Ewald et al.~\cite{Ewald2019} present a CNN model called (DeepSHM) for signal classification using Lamb waves.
+Ewald et al.~\cite{Ewald2019} presented a CNN model called (DeepSHM) for signal classification using Lamb waves.
 Furthermore, the model provides an end-to-end approach for SHM by utilising response signals captured by sensors.
 Moreover, response signals were preprocessed by wavelet transform to get the wavelet coefficient matrix (WCM).
 Further, the CNN model was trained with the WCM to obtain neural weights.

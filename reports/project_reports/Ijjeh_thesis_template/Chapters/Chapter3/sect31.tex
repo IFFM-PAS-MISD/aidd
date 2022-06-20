@@ -79,22 +79,21 @@ On the contrary, in transfer learning, the model knowledge (e.g features and wei
 
 In SHM applications, the damage identification process is based on comparing the collected data from the structure without damage (base-line) with its current status to determine if there are any occurrence of changes such as damage.
 Accordingly, signal processing techniques must be applied to the collected data to identify components of interest in a registered signal from a structure.
-In general, the process of extracting features of the defects occurred in structures can be achieved in different domains: time domain, frequency domain, time-frequency domain, electromechanical impedance domain, and modal analysis domain~\cite{Khan2019}.
+In general, the process of extracting features of the defects occurred in structures can be achieved in different domains: time domain, frequency domain, time-frequency domain, impedance domain, and modal analysis domain~\cite{Khan2019}.
 
 In this section, various methods for signal processing, data prepossessing and feature extraction are presented.
 
 \subsubsection{Fourier Transform} 
-Fourier Transform (TF) is considered as a conventional method for signal analysis, it is used to decompose the registered signal in the time domain for its frequency components. 
-FT works by first transforming a function inn the time domain into a function in the frequency domain. 
+Fourier Transform (TF) is considered as a conventional method for signal analysis, it is used to decompose the registered time domain signal into its frequency components. 
 Then, the signal can be analysed for its frequency components because the FT coefficients of the transformed function demonstrate the contribution of the sines and cosines functions at each frequency.
 FT presents global information about the frequency content, therefore, it is suited for signals with stationary frequency content meaning their frequency content does not change with time~\cite{Raghavan2006}.
-Alternatively, there are other time-frequency representations (TER) that are able to identify the local frequency content and are better suited for non-stationary-frequency signals~\cite{Raghavan2006}.
+Alternatively, there are other time-frequency representations (TFR) that are able to identify the local frequency content and are better suited for non-stationary-frequency signals~\cite{Raghavan2006}.
 Short-time Fourier transform (STFT) is considered as the simplest example of a TER, in which STFT divides the signal into a number of short overlapping segments in the time-domain, each segment is multiplied in time using a fixed modulation window and the FT is used on resulting signal~\cite{Raghavan2006}
 
 \subsubsection{Wavelet Transform} 
-Wavelet Transform (WT) is a mathematical function for data preprocessing that enhancing the process of feature extraction in a wide range of applications such as civil engineering, power engineering, traffic engineering, mechanical systems and aerospace engineering. . 		
-Furthermore, WT is considered as one of the most widely used tools for signal preprocessing in SHM in recent years~\cite{Taha2006}.		
-The principal idea of WT is splitting data signal into different scale components, accordingly, analysing each component with a resolution matched to its scale~\cite{Graps1995},hence wavelets are referring to little or small waves. 
+Wavelet Transform (WT) is a mathematical function for data preprocessing that enhances the process of feature extraction in a wide range of applications such as civil engineering, power engineering, traffic engineering, mechanical systems and aerospace engineering.
+Furthermore, WT is considered as one of the most widely used tools for signal preprocessing in SHM in recent years~\cite{Taha2006}.
+The principal idea of WT is splitting data signal into different scale components, accordingly, analysing each component with a resolution matched to its scale~\cite{Graps1995}.
 The WT is based on dilated scales and shifted windows that can perform a time-frequency resolution of a data signal. 
 WT is represented in the following Eqn~\ref{wavelet}, that yields a 2D coefficients matrix  $WT\{x\}(a,b)$. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,7 +102,7 @@ WT is represented in the following Eqn~\ref{wavelet}, that yields a 2D coefficie
 	\label{wavelet}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-$\Psi_{a,b}$ is defined as the mother wavelet which scaled and dilated wavelets  where a and b are the scale and dilation parameters.
+$\Psi_{a,b}$ is defined as the mother wavelet which scaled and dilated wavelets  where $a$ and $b$ are the scale and dilation parameters.
 Scaling in WT indicates stretching or compressing it in the time domain. 
 Therefore, compressed wavelets are represented by smaller scales while stretched wavelets can be produced by larger scales~\cite{Graps1995}.
 %\subsubsection{Principle component analysis} Principle component analysis (PCA) is a technique of multi-variable and mega-variate analysis used for reducing complex data dimensionality in ML. 
@@ -179,7 +178,7 @@ Besides, PCA proves to be an effective tool to improve the training efficiency a
 PCA is dimensionality reduction technique utilised to reduce the dimensionality of large data (input space) into a lower dimension (feature space) through transforming a large set of variables into a smaller one with minimal loss information~\cite{Jolliffe2002}.
 Moreover, PCA can be utilised for damage detection by eliminating noise and obtaining sensitive features of damage as eigenvectors.
 The PCA technique is illustrated below.
-In the beginning, a matrix \(U(t)\) is constructed as shown in Eqn. \ref{U(t)}, which contains all registered data with time histories.
+In the beginning, a matrix \(U(t)\) is constructed as shown in Eqn. \ref{U(t)}, which contains all registered data with time histories:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	U(t)=
@@ -188,20 +187,20 @@ In the beginning, a matrix \(U(t)\) is constructed as shown in Eqn. \ref{U(t)}, 
 		u_1{(t2)}       & u_2{(t2)} & \dots & u_M{(t2)} \\
 		\vdots 			& \vdots 	& \ddots & \vdots \\
 		u_1{(t_N)}      & u_2{(t_N)} & \dots & u_M{(t_N)}
-	\end{bmatrix}\ ,
+	\end{bmatrix}\ .
 	\label{U(t)}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-where \(t\) corresponds to the time, \(u_i\ (i = 1, 2, ..., M)\) represents to the response from the \(i-th\) sensor installed in the monitored structure, \(M\) represents the total number of sensors, \(t_j\ (j = 1, 2, ..., N)\) represents the \(j-th\) time step of the data registering and \(N\) is the total time observations during monitoring.
+where \(t\) corresponds to the time, \(u_i\ (i = 1, 2, ..., M)\) represents the response from the \(i-th\) sensor installed in the monitored structure, \(M\) represents the total number of sensors, \(t_j\ (j = 1, 2, ..., N)\) represents the \(j-th\) time step of the data and \(N\) is the total time observations during monitoring.
 Additionally, each column represents data registration of one sensor.
 The next step is to normalise the time series of each sensor data registrations by subtracting the mean value shown in Eqn.~\ref{mean value}:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	\bar{u_i} = \frac{1}{N}\sum_{j=1}^{N}u_i(t_j)\ ,
+	\bar{u_i} = \frac{1}{N}\sum_{j=1}^{N}u_i(t_j)\ .
 	\label{mean value}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Equation~\ref{normalised matrix} represents the normalised matrix.
+Equation~\ref{normalised matrix} represents the normalised matrix:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
 	U'(t)=
@@ -217,14 +216,14 @@ Equation~\ref{normalised matrix} represents the normalised matrix.
 After computing the normalised matrix, the covariance matrix is computed as shown in Eqn.~\ref{covariance}:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	C = \frac{1}{M}U'^TU' \ ,
+	C = \frac{1}{M}U'^TU' \ .
 	\label{covariance}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Next, the eigenvalue and the corresponding eigenvector of the covariance matrix are computed through solving the following equation~\ref{eigvalue}:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	(C-\lambda_iI)\psi_i =0 \ ,
+	(C-\lambda_iI)\psi_i =0 \ .
 	\label{eigvalue}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -237,7 +236,8 @@ Accordingly, the first few eigenvectors are utilised as sensitive features for d
 \subsubsection{Auto-associative Neural Networks}
 Auto-associative Neural Network (AANN) which is also called autoencoder is considered as one of the ANN architectures. 
 Generally, AANN is composed of five layers as shown in the Fig.~\ref{fig:AANN}, which includes the input layer, mapping layer, bottleneck layer (has less neurons than the input and the output layers), demapping layer and the output layer. 
-AANN is considered as an unsupervised learning technique, the idea behind AANN is to map the input using nonlinear functions then reconstruct it using nonlinear functions so the network can learn from the inputs themselves.
+AANN is considered as an unsupervised learning technique. 
+The idea behind AANN is to map the input using nonlinear functions then reconstruct it using nonlinear functions so the network can learn from the inputs themselves.
 The main purpose of the bottleneck is to push the model to learn important features of the mapped data patterns.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
@@ -250,15 +250,15 @@ The main purpose of the bottleneck is to push the model to learn important featu
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{}
-Originally, AANN technique was based on nonlinear principal component analysis (NLPCA) which is a powerful statistical technique used in the process of the feature extracting and data dimensionality reduction~\cite{Dervilis2014}. 
-The difference between the PCA and NLPCA is that NLPCA is utilising nonlinear functions for mapping the input data as shown in Eqn~\ref{NLPCA}.
+Originally, AANN technique was based on nonlinear principal component analysis (NLPCA) which is a powerful statistical technique used in the process of the feature extraction and data dimensionality reduction~\cite{Dervilis2014}. 
+The difference between the PCA and NLPCA is that NLPCA is the utilisation of nonlinear functions for mapping the input data as shown in Eqn~\ref{NLPCA}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	T= G(X)
+	T= G(X) .
 	\label{NLPCA}
 \end{equation} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-As mentioned in the previously $T$ is the score matrix, $X$ is the input data with of size $(m \times n)$ where m represents the number of variables and n represents the number of observations, and G is a nonlinear vector function that holds several individual nonlinear functions. 
+As mentioned in previously, $T$ is the score matrix, $X$ is the input data of size $(m \times n)$ where $m$ represents the number of variables and $n$ represents the number of observations, and $G$ is a nonlinear vector function that holds several individual nonlinear functions. 
 Accordingly, the demapping process is performed by the inverse of the Eqn~\ref{NLPCA} using a nonlinear function $H$ as shown in Eqn~\ref{inverseNLPCA}.
 The loss of information occurred due to the mapping and demapping process can be calculated in the reconstruction error matrix as shown in Eqn~\ref{errorMatrix}~\cite{Dervilis2014}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -276,9 +276,9 @@ The loss of information occurred due to the mapping and demapping process can be
 MSD is an effective multivariate distance measuring technique in which it measures the distance between a point and a distribution.
 Therefore, MSD is utilised with multivariate statistics outlier detection~\cite{Worden2000}.
 Assuming \(X\) to be a training set with data acquired when the undamaged structure is under environmental and/or operational variations (EOVs) with multivariate mean vector \(\mu\) and covariance matrix \(\Sigma\)~\cite{Farrar2013}.
-Accordingly, the damage index \((DI_i)\) between feature vectors from training set \(X\) and any new feature vector from the test matrix \(Z\) is calculated using Eqn.~\ref{msd}.
+Accordingly, the damage index \((DI_i)\) between feature vectors from training set \(X\) and any new feature vector from the test matrix \(Z\) is calculated using Eqn.~\ref{msd}:
 \begin{equation}
-	DI_i = (z_i-\mu)\Sigma^{-1}(z_i-\mu)^T
+	DI_i = (z_i-\mu)\Sigma^{-1}(z_i-\mu)^T,
 	\label{msd}
 \end{equation}
 where \(z_i\) is a tested feature vector.
@@ -291,33 +291,33 @@ Additionally, GMM has also been referred to as Expectation-Maximization (EM) clu
 %%%%%%%%%%
 The damage detection is performed based on multiple MSD-based algorithms, in which the covariance matrices and mean vectors are functions of the main components.
 %%%%%%%%%%
-A GMM is defined as a superposition of K Gaussian distributions as shown in Eqn. \ref{gmm}.
-
+A GMM is defined as a superposition of \(K\) Gaussian distributions as shown in Eqn. \ref{gmm}:
 \begin{equation}
 	p(x) = \sum_{k=1}^K P(k) \mathcal{N}(x|\mu_k,\Sigma_k) 
 	\label{gmm}
 \end{equation}
 where \(x\) represents the training samples in the dataset, and \(P(k)\) corresponds to the mixture proportion (contribution weight) of the \(k-\)th distribution, in which the mixture proportion must satisfy \(0\leq P(x)\leq 1\).
-The sum of all mixture proportion satisfies the following Eqn.~\ref{mixture}
+The sum of all mixture proportion satisfies the following Eqn.~\ref{mixture}:
 \begin{equation}
-	\sum_{k=1}^{K}P(x) =1 
+	\sum_{k=1}^{K}P(x) =1.
 	\label{mixture}
 \end{equation}  
-\(\mathcal{N}(x|\mu_k,\Sigma_k)\) refers to the conditional probability of the instance \(x\) for the \(k-\)th Gaussian distribution \(\mathcal{N}(\mu_k,\Sigma_k)\) presented in Eqn.~\ref{conditional}, where \(\mu_k\) and \(\Sigma_k\) are the mean and the covariance of that Gaussian distribution respectively.
+\(\mathcal{N}(x|\mu_k,\Sigma_k)\) refers to the conditional probability of the instance \(x\) for the \(k-\)th Gaussian distribution \(\mathcal{N}(\mu_k,\Sigma_k)\) presented in Eqn.~\ref{conditional}:
 \begin{equation}
 	\mathcal{N}(x|\mu_k,\Sigma_k) = \frac{\exp(-\frac{1}{2}(x-\mu_k)^T\Sigma_k^{-1}(x-\mu_k))}{(2\pi)^{\frac{d}{2}\sqrt{\det(\Sigma_k)}}}
 	\label{conditional}		
 \end{equation}
+where \(\mu_k\) and \(\Sigma_k\) are the mean and the covariance of that Gaussian distribution respectively.
 The complete GMM is parameterized by the mean vectors, covariance matrices and the mixture weights from all component densities \(\{\mu_k,\Sigma_k, P(x)\}_{k=1,\hdots,K}\).
 
 The parameters can be carried out from the training data using the classical maximum likelihood estimator (CMLE) based on the EM algorithm~\cite{Dempster1977}.
-Damage can be detected through estimating \(k\) \(DIs\) for each data sample \(x\) as shown in Eqn. \ref{DIs}
+Damage can be detected through estimating \(k\) \(DIs\) for each data sample \(x\) as shown in Eqn. \ref{DIs}:
 \begin{equation}
-	DI_q(x) = (x-\mu_k)\Sigma_k^{-1}(x-\mu_k)^T
+	DI_q(x) = (x-\mu_k)\Sigma_k^{-1}(x-\mu_k)^T,
 	\label{DIs}
 \end{equation}
 where \(\mu_k\) and \(\Sigma_k\) refers to all observations from the \(k\) data component.
-For each observation the DI is given by the smallest DI estimated on each component as in Eqn. \ref{DI}
+For each observation the \(DI\) is given by the smallest \(DI\) estimated on each component as in Eqn. \ref{DI}
 \begin{equation}
 	DI(x) = \min[DI_k(x)]
 	\label{DI}

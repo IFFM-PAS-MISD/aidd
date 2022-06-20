@@ -1,5 +1,5 @@
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
-\section{Delamination identification using FCN models}
+\section{FCN models for delamination identification}
 \label{sec43}
 DL approaches have advanced quickly in recent years in many different real-world applications.
 An important and challenging application among others in DL is computer vision, in which we train a machine to automatically extract useful information from digital images, videos, and other visual inputs.
@@ -8,8 +8,8 @@ Consequently, this technique aims to assign a class to each pixel in the input i
 Thus, it can be utilised in several real-world applications like self-driving automobiles, medical imaging, traffic management systems, video surveillance, and more.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section, we present five DL models based on Fully Convolutional Networks (FCN)~\cite{Shelhamer2017} that aim to automatically perform feature extraction by training the models using full wavefield images. 
-Hence, the models will learn by themselves to recognise the different patterns further, detect the delamination and localise it.
+In this section, I present five DL models based on Fully Convolutional Networks (FCN)~\cite{Shelhamer2017} that aim to automatically perform feature extraction by training the models using full wavefield images. 
+Therefore, the models will learn by themselves to recognise the different patterns further, detect the delamination and localise it.
 Consequently, the implemented models will perform a pixel-wise segmentation by classifying every pixel of the input image as damaged or not.
 
 The key idea of FCN is to replace the dense layers of neurons with convolutional layers, hence, reducing the computation complexity.
@@ -17,12 +17,12 @@ Hence, FCN can be implemented by stacking convolutional layers and skipping dens
 The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations.
 While the decoder is responsible for upsampling the condensed feature maps to the original input shape.
 
-The softmax function (see Eqn.\ref{softmax}) was used at the output layer for all developed FCN models.
+The softmax function (see Eqn.~\ref{softmax}) was used at the output layer for all developed FCN models.
 Additionally, the categorical cross-entropy (CCE) loss function~\cite{Bonaccorso2020}, commonly known as the \enquote{softmax loss function}, was utilised in all FCN models.
 The difference between the actual damage (ground truth) and the expected damage is estimated using CCE as the objective function.
-The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the softmax value of the target class.
+The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the softmax value of the target class:
 \begin{equation}	
-	CCE = -\log\left( P(x)_{i} \right)
+	CCE = -\log\left( P(x)_{i} \right).
 	\label{CCE}
 \end{equation}
 
@@ -49,7 +49,7 @@ The dataset consisting of RMS images which were used in this research paper is a
 
 To enhance the performance of the optimizer during the training process, the colour scale values were normalised to a range of \((0-1)\) instead of the initial scale which was in a range of \((0-255)\). 
 Furthermore, I have applied data augmentation to the dataset (\(475\) RMS images) by flipping the images horizontally, vertically, and diagonally. 
-As a result, the dataset size increased four times \(1900\) images were produced. 
+As a result, the dataset size increased four times -\(1900\) images were produced. 
 I have split the dataset into two portions: \(80\%\) for the training set and \(20\%\) for the testing set. 
 Moreover, a K-folds cross-validation technique~\cite{Srinivasan2019} was applied to the training set to reduce the overfitting which happens when the model is able to fit on the training data, while it poorly fit on the new unseen data.
 In other words, the model only learns the patterns of the training data therefore the model will not generalise well. 
@@ -81,7 +81,7 @@ As a result, residual connections were established at two levels in order to pre
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Several downsampling (Max-pool) blocks are used in the encoder section.
-Each block applies two convolutional layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides that selects the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, as a result, a reduction in computation complexity.
+Each block applies two convolutional layers followed by a (\(2\times2\)) max pooling with a (\(2\times2\)) strides that selects the maximum value in a local pool filter in one feature map (or \(n\)-feature maps), resulting in a reduction in the dimension of feature maps~\cite{Lecun2015}, and in turn, a reduction in computation complexity.
 Each convolutional layer does \((3\times3)\) convolution operations, then batch normalization (BN), and finally a Relu.
 Furthermore, after each downsampling block, the number of convolutional filters is increased, allowing the model to learn complex patterns successfully.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -90,7 +90,7 @@ The bottleneck layer is a joining point in the model's deepest layer, located be
 Two convolutional layers with \((1024)\) filters make up the bottleneck, which aids the model in learning and recognizing complex features.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The decoder is composed of a number upsampling blocks that function together to recover original input dimensions and improve resolution.
+The decoder is composed of a number of upsampling blocks that function together to recover original input dimensions and improve resolution.
 As in the downsampling block, each upsampling block transmits the input through two convolution layers, followed by a transmission up layer consisting of a transposed convolutional layer (upsampling).
 The transposed convolutional layer varies from the standard upsampling function in that it introduces learnable parameters for the transposed convolution filters, which improve the model's learning process.
 Furthermore, the number of filters used by the convolutional layer is reduced by half after each upsampling operation to keep the model symmetrical.
@@ -235,8 +235,8 @@ The implemented GCN technique for semantic segmentation is shown in Fig.~\ref{fi
 A residual network was used as a backbone for improving the feature extraction process, as demonstrated in Fig.~\ref{fig:gcn}, further, the residual block is presented in Fig.~\ref{fig:res_gcn_br}a.
 A GCN block presented in Fig.~\ref{fig:res_gcn_br}b is placed after each residual block, which employs a mix of \((1\times k)\)+\((k\times 1)\) and \((k\times 1)\)+\((1\times k)\) convolutions to establish dense connections within \((k\times k)\) region in the feature map.
 The boundary refinement (BR) block, depicted in Fig.~\ref{fig:res_gcn_br}c, is then used to improve the predictions along the object borders, resulting in a lower resolution score map.
-Furthermore, the upsampling operation is done recursively, it upsamples the low 
-resolution score maps then concatenate it with a higher one to produce a new 
+Furthermore, the upsampling operation is done recursively. 
+It upsamples the low resolution score maps then concatenate it with a higher one to produce a new 
 score maps.
 The deconvolution operation is repeated until the original image size is 
 obtained.

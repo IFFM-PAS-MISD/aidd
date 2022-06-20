@@ -3,10 +3,26 @@
 \label{ch4}
 
 %% CHAPTER INTRODUCTION ///////////////////////////////////////////////////////////////////////////////
+In this chapter, I investigate several deep learning methodologies to detect and localise delamination in composite laminates.
+The deep learning models were trained using a supervised scheme. 
+Hence, it uses a training set to train the developed models to predict the desired output.
+Accordingly, a synthetic dataset was built, representing the full wavefield of the Lamp waves propagating in a CFRP plate and their interaction with the delamination and the boundaries of the plate.
+The acquisition process of the synthetic dataset is explained in details in the section~\ref{sec41}.
 
-We need to illustrate the dataset and what does it resembles thoroughly.
-Then talk about all models from bounding boxes, RMS input models and full wave field frames models with extreme explanation. Lots of tables and figures
+The developed methods are end-to-end approaches, in which the whole unprocessed training dataset is fed into the model.
+Hence, it will learn by itself to identify distinct patterns and detect damage.
+In section~\ref{sec42}, a fully connected CNN classifier model for detecting and localising delamination is presented in details.
+In section~\ref{sec43}, I present five FCN models for delamination identification. Further, the developed models were trained using the RMS images in which the developed models are performing image pixel-wise image segmentation.
+In section~\ref{sec44}, a deep learning model for delamination identification utilising the animation of full wavefield is presented.
+Finally, in section~\ref{sec45}, I present a deep learning model for super-resolution image reconstruction.
+Hence, the full wavefield of Lamb waves is recovered from low-resolution measurements into high-resolution measurements.
+Accordingly, this can allow for a precise recovery of propagating waves and their interactions with delaminations and the boundaries of the plate.
+Consequently, the reconstructed full wavefield can be used in damage imaging. 
 
+
+Furthermore, all developed models were implemented and trained with the Keras API~\cite{chollet2015keras} running on top of TensorFlow~\cite{Abadi2016}.
+The NVIDIA GeForce RTX 2070 with \(8\) GBs of memory was utilised to train the CNN classification models.
+Furthermore, the NVIDIA Tesla V100 GPU with \(32\) GBs of memory was utilised to train the FCN models, the AE-ConvLSTM model, and the DLSR model.
 %% INCLUDE SECTIONS ///////////////////////////////////////////////////////////////////////////////////
 
 \input{Chapters/Chapter4/sect41}

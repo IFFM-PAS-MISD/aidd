@@ -12,11 +12,11 @@ Guided waves, namely Lamb waves, are used in a well-known physics-based techniqu
 Lamb waves are elastic waves that propagate through thin plates and shells that are bounded by stress-free surfaces~\cite{mitra2016guided}.
 Lamb waves are notable for their strong sensitivity to discontinuities (cracks, delaminations) and low amplitude loss, particularly in metallic elements of structures~\cite{Keulen2014}.
 
-An array of PZT transducers can be used to excite the examined structure and generate Lamb waves, which can subsequently be registered as reflected waves from damage.
+An array of Piezoelectric transducers (PZT's) can be used to excite the examined structure and generate Lamb waves, which can subsequently be registered as reflected waves from damage.
 After that, a damage influence map is generated.
 The number of sensing points determines the accuracy of the damage influence map in displaying damage location.
 As a result, damage localization resolution may be limited.
-Alternatively, a Scanning Laser Doppler Vibrometer (SLDV) is used to measure Lamb waves in a dense grid of spots over the structure under investigation.
+Alternatively, a scanning laser Doppler vibrometer  (SLDV) is used to measure Lamb waves in a dense grid of points over the structure under investigation.
 The collected data represents a complete wavefield propagation, resulting in high-resolution damage influence maps.
 Damage detection systems that use whole wavefield signals can accurately estimate the extent and location of damage~\cite{Girolamo2018a, kudela2018impact}.
 \\
@@ -43,9 +43,9 @@ The proposed model had a damage quantification success rate up to \(95\% \).
 In comparison to vibration-based SHM, DL applications for guided wave-based SHM have received less attention in the literature.
 
 Several DL approaches for guided wave-based damage identification and localization are discussed in the following sections.
-For damage detection in curved composite panels, Chetwynd et al.~\cite{Chetwynd2008damage} suggested a multi-layer perceptron MLP network.
+For damage detection in curved composite panels, Chetwynd et al.~\cite{Chetwynd2008damage} suggested a multi-layer perceptron (MLP) network.
 A force applicator with a circular tip loaded by a mass was used to imitate the damage.
-Lamb waves propagating through the panel were also generated and registered using an array of PZT transducers.
+Lamb waves propagating through the panel were also generated and registered using an array of PZT.
 In addition, for each Lamb wave response, a novelty index was calculated and compared to specific threshold values.
 As a result, if the index exceeds the threshold, it shows that the structure is damaged.
 The generated novelty indices were fed into the MLP network, which performed two operations: classification and regression.
@@ -64,19 +64,19 @@ The model uses reflected signals acquired by sensors to perform an end-to-end st
 The authors also used the wavelet transform to preprocess response data in order to generate the wavelet coefficient matrix (WCM), which was then input into the CNN model.
 
 Liu and Zhang~\cite{Liu2020a} developed a CNN model for detecting damage in thin aluminum plates.
-Lamb waves were generated using analytical procedures that were used for training and validation.
+Analytical formulas have been derived for generating Lamb wave signals subsequently used for training and validation of the proposed crack damage detection technique.
 Furthermore, the authors validated their model by putting it to the test on real-world data using a notch crack to simulate damage.
 
-In addition, Esfandabadi et al.~\cite{esfandabadideep} studied the use of compressive sensing technique~\cite{Candes2006} in conjunction with super-resolution techniques to obtain high-resolution wavefield scans using neural networks trained on various aluminum and Composite Fibre Reinforced Polymer (CFRP) plates.
+In addition, Esfandabadi et al.~\cite{esfandabadideep} studied the use of compressive sensing technique~\cite{Candes2006} in conjunction with super-resolution techniques to obtain high-resolution wavefield scans using neural networks trained on various aluminum and carbon fibre reinforced polymer (CFRP) plates.
 To recover high spatial frequency information from low-resolution wavefield scans, the authors implemented two types of CNN architecture: Super-Resolution Convolutional Neural Networks (SRCNNs) and Very-Deep Super Resolution (VDSR) using compressive sensing.
 Enhancing the resolution, on the other hand, has a negative impact on the affected region, changing the damage characteristics.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Current SHM approaches can effectively localize impact events~\cite{Ciampa2012}, or damage~\cite{Nokhbatolfoghahai2020}.
 However, with a sparse array of sensors, determining the magnitude and shape of damage is challenging.
-To solve this issue, full wavefield ultrasonic methods can be used locally to assess damage severity and then to estimate damage prognosis.
+To solve this issue, full wavefield ultrasonic methods can be used locally to assess damage severity and then estimate damage prognosis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this chapter, we compare five DL models for semantic image segmentation that have been used in CFRP for delamination detection, localization, and size estimate.
+In this chapter, we compare five DL models for semantic image segmentation that have been used in CFRP for delamination detection, localization, and size estimation.
 To demonstrate their generalization ability, the models were tested using numerical and experimental data.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

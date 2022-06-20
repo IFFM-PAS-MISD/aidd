@@ -2,11 +2,11 @@
 \section{Delamination detection using fully connected CNN classifier}
 \label{sec42}
 
-In this section, I present my initial attempt to solve the problem of delamination detection in CFRP materials was on utilising CNN models for classification purposes.
+In this section, I present my initial attempt to solve the problem of delamination detection in CFRP materials by utilising CNN models for classification purposes.
 
-The developed models were trained on the on RMS images from the synthetically generated dataset of the propagating Lamb waves (from the top of the surface of the plate) to predict the delamination location using bounding boxes as shown in Fig~\ref{fig:RMS_14}, while, Fig.~\ref{fig:label_14} shows its corresponding ground truth.
+The developed models were trained on RMS images from the synthetically generated dataset of the propagating Lamb waves (from the top of the surface of the plate) to predict the delamination location using bounding boxes as shown in Fig.~\ref{fig:RMS_14}, while, Fig.~\ref{fig:label_14} shows its corresponding ground truth.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
+\begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
@@ -21,7 +21,7 @@ The developed models were trained on the on RMS images from the synthetically ge
 		\caption{}
 		\label{fig:label_14}
 	\end{subfigure}
-	\caption{(a) RMS image: from the top of the plate, (b) Label}
+	\caption{(a) RMS image: from the top of the plate, (b) Label.}
 	\label{fig:RMS_GT}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,7 +32,7 @@ Moreover, the developed models are based on supervised learning to perform a cla
 \subsection{Data preprocessing}
 \label{sec421}
 In order to reduce the computation complexity for the model, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels.  
-Then, it was split it into \((14\times 14)\) patches, and each patch has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49patches}.
+Then, it was split into \((14\times 14)\) patches, and each patch has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49patches}.
 Consequently, the preprocessed dataset has a size of \((93100\times 32\times 32 \times 1)\), where (\(93100\)) is the total number of patches for all \(475\) cases.
 
 To investigate the effect of increasing the resolution of RMS images over delamination identification, I made another preparation by upsampling the RMS input image to \((512\times 512)\) pixels with cubic interpolation. Then the upsampled RMS image was split into \(16\times 16\) patches, and each patch has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_64patches}.
@@ -71,7 +71,7 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 		\caption{Label image splitted into (\(16\times 16\)) patches.}
 		\label{fig:GT_64patches}
 	\end{subfigure}
-	\caption{}
+	\caption{Data preparation for bounding box method.}
 	\label{fig:grid_mesh}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,25 +88,27 @@ The first dense layer has (\(4096\)) neurons, and the second dense layer has (\(
 A dropout of probability (\(p = 0.5\)) was added to the model to reduce the overfitting issue.
 
 Moreover, selecting a proper objective function (loss) during training is important as the loss function reflects how well the model learns to predict.
-Hence, I have applied the mean square error \((MSE)\) loss function depicted in Eqn.~\ref{mse}, which calculates the sum of the squared distances between the predicted output values and the ground truth values.
+Hence, I have applied the mean square error \((MSE)\) loss function depicted in Eqn.~\ref{mse}, which calculates the sum of the squared distances between the predicted output values and the ground truth values:
 \begin{equation}
-	MSE=\frac{1}{M*N}\sum_{M,N}^{}(Y_{(m,n)}-\hat{Y}_{(m,n)})^2
+	MSE=\frac{1}{M*N}\sum_{M,N}^{}(Y_{(m,n)}-\hat{Y}_{(m,n)})^2,
 	\label{mse}
 \end{equation}
-where \(M\) and \(N\)) are the number of rows and columns in the input images, \(Y_{(m,n)}\) is the ground truth value, and \(\hat{Y}_{(m,n)}\) is the predicted value.
+where \(M\) and \(N\) are the number of rows and columns in the input images, \(Y_{(m,n)}\) is the ground truth value, and \(\hat{Y}_{(m,n)}\) is the predicted value.
 
-The final layer in the model is the output layer, in which the model outputs two predictions (damaged and undamaged), hence, softmax activation function was used.
-The softmax estimates the probability of each predicted output as being damaged or undamaged, which implies that the sum of the two probabilities must be one.
-The softmax activation function is depicted by Eq.~(\ref{softmax}), where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) across all potential target classes \(x_{j}\), C in our instance being two classes (damaged and undamaged).
+The final layer in the model is the output layer, in which the model outputs two predictions (damaged and undamaged).
+Hence, the softmax activation function was used, which estimates the probability of each predicted output as being damaged or undamaged, implying that the sum of the two probabilities must be one.
+The reason behind choosing the softmax at the output layer is to avoid thresholding of the predicted output (e.g. a sigmoid produces values in a range between (\(0\) and \(1\))).
+The softmax activation function is depicted by Eq.~(\ref{softmax}): 
 \begin{equation}
-	P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}
+	P(x)_{i} = \frac{e^{x_{i}}}{\sum_{j}^{C} e^{x_{j}}}.
 	\label{softmax}
 \end{equation} 
+where \(P(x)_{i}\) is the probability of each target class \(x_{j}\) across all potential target classes \(x_{j}\), C in our instance being two classes (damaged and undamaged).
 
 Additionally, an argmax function is used to find the maximum probability between each of them in order to predict the label of the output (\(y_{pred}\)).
 Equation~\ref{argmax} depicts the argmax function.
 \begin{equation}
-	y_{pred} = argmax_{i}\left( P(x)_{i} \right)
+	y_{pred} = \mathrm{argmax}_{i}\left( P(x)_{i} \right)
 	\label{argmax}
 \end{equation}
 

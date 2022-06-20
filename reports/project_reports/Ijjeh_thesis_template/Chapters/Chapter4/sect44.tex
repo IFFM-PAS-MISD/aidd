@@ -1,11 +1,11 @@
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
-\section{Delamination identification using animation of full wavefield frames}
+\section{DL model for delamination identification based on animation of full wavefield}
 \label{sec44}
 In this section, I utilised full wavefield frames of Lamb waves propagation in an end-to-end deep learning model to identify CFRP delamination instead of using RMS images as in the FCN models.
 Accordingly, a many-to-one prediction scheme was adopted by employing convolutional-based recurrent neural networks (RNNs) to perform pixel-wise image segmentation.
 A sequence of full wavefield frames is fed into the proposed deep learning models in order to identify the delamination.
 Hence, in the segmentation problem, there are two classes: undamaged and damaged.
-To the best of our knowledge, it is the first implementation of deep neural networks utilising lamb wave propagation animations for damage imaging with semantic segmentation.
+To the best of our knowledge, it is the first implementation of deep neural networks utilising Lamb wave propagation animations for damage imaging with semantic segmentation.
 The proposed model showed excellent results in identifying the delamination in the numerically generated dataset, and it also showed their capability to generalise delamination identification in real world scenarios.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Data preprocessing}
@@ -13,7 +13,7 @@ The proposed model showed excellent results in identifying the delamination in t
 Similar to the previous work~\cite{Ijjeh2021}, 475 cases were simulated, representing Lamb wave propagation and interaction with single delamination for each case. 
 
 It should be underlined that the previous dataset contained the RMS of the full wavefield, representing wave energy spatial distribution in the form of images for each delamination case~\cite{Kudela2020d}.
-Hence, the currently utilised dataset contains frames of propagating waves (512 frames for each delamination scenario).
+On the other hand, the currently utilised dataset contains frames of propagating waves (512 frames for each delamination scenario).
 The new dataset is available online~\cite{Kudela2021}.
 
 As mentioned earlier, the dataset contains 475 different cases of delaminations, with 512 frames per case, producing a total number of 243,\,200 frames with a frame size of \((500\times500)\)~pixels representing the geometry of the specimen of size \((500\times500)\)~mm\(^{2}\).
@@ -23,7 +23,7 @@ Hence, for training, only a certain number of frames were selected from the init
 
 Figure~\ref{fig:Full_wave} shows selected frames at different time-steps of the propagating Lamb waves before and after the interaction with the damage.
 Frame \(f_{1}\) represents the initial interactions with the delamination, which was calculated using the delamination location and the velocity of the \(A0\) Lamb wave mode.
-While frame \(f_{m}\) represents the last frame in the training sequence window, accordingly, \(m=64\) for Model-I, and \(m=24\) for Model-II which will be discussed in the next subsection.
+While frame \(f_{m}\) represents the last frame in the training sequence window, \(m=24\) for the developed model which will be discussed in the next subsection.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{Figures/Chapter_4/figure2.png}
@@ -35,12 +35,12 @@ Furthermore, the dataset was divided into two sets: training and testing, with a
 Moreover, a certain portion of the training set was preserved as a validation set to validate the model during the training process.
 Additionally, the dataset was normalised to a range of \((0, 1)\) to improve the convergence of the gradient descent algorithm.
 
-Additionally, for the training set for Model-II, I have upsampled the frames (by using cubic interpolation) to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
-Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding the training sets for Model-I for Model-II, respectively.
+Additionally, for the training purposes, I have upsampled the frames (by using cubic interpolation) to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
+Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding the training set.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining intermediate predictions for the testing cases and finally calculating the RMS image, where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, (\(n=512\)) in our dataset.
-Further, \(m\) refers to the number of frames in the window, hence, \(m=64\) frames for Model-I and \(m=24\) frames for Model~II, and \(k\) represents the total number of windows.
+Further, \(m\) refers to the number of frames in the window, hence, \(m=24\) frames for the developed model, and \(k\) represents the total number of windows.
 Accordingly, I slide the window over all input frames.
 The shift of the window is one frame at a time.
 Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to final damage map by using the RMS:

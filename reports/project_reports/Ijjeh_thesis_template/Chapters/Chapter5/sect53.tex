@@ -8,31 +8,23 @@ Consequently, the part of producing intermediate predictions and further calcula
 
 \subsection{Numerical cases}
 \label{sec531}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the first numerical case, the delamination is located at left edge of the plate, as shown in Fig.~\ref{fig:RMS_448}, representing its ground truth (GT).
+This case is considered difficult due to edge wave reflections that have similar patterns as the delamination reflection.
+The predicted output of the AE-ConvLSTM model is shown in Fig.~\ref{fig:convlstm_pred_448}
+In the second numerical test case, the delamination is located at the left upper corner of the plate, as shown in Fig.~\ref{fig:RMS_456}, which represents the GT.
+This case is also considered difficult due to the waves reflected from the edges have similar patterns to those reflected from the delamination.
+Figure~\ref{fig:convlstm_pred_456} shows predicted damage map of AE-ConvLSTM model.
+In the third case, the delamination is located in the upper centre of the edge as shown in Fig.~\ref{fig:RMS_438}, representing the GT. 
+Figure~\ref{fig:convlstm_pred_438} shows the predicted output of this case.
+The fourth test case has a delamination located upper left quarter as shown in Fig.~\ref{fig:RMS_397} representing the GT.
+The predicted damage map of this case is presented in Fig.~\ref{fig:convlstm_pred_397}.
 
+As shown in all predicted damage maps, the developed AE-ConvLSTM model can accurately identify the shape, size , and location of the delamination without any noise regardless of how difficult the test case is.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%In the first numerical case, the delamination is located at left edge of the plate, as shown in Fig.~\ref{fig:RMS_448}, representing its ground truth (GT).
-%This case is considered difficult due to edge wave reflections that have similar patterns as delamination reflection.
-%The predicted output of the AEis shown in Fig.~\ref{fig:convlstm_pred_448}
-%For the second numerical case, the delamination is located at the upper centre of the plate, as shown in Fig.~\ref{fig:num_GT_462}, representing the GT.
-%This case is also considered difficult due to the waves reflected from the edge have similar patterns to those reflected from the delamination.
-%Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show prediction with respect to Model-\RNum{1}, and \RNum{2}, respectively.
-%In the third case, the delamination is located in the upper left corner but a little farther from the edges, as shown in Fig.~\ref{fig:num_GT_453}, representing the GT. 
-%Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted outputs with respect to Model-\RNum{1}, and \RNum{2}, respectively.
-%As can be seen in all predicted outputs, our models are able to identify the delamination with high accuracy and without any noise.
-%
-%Table~\ref{tab:num_cases} presents the evaluation metrics for Model-\RNum{1} and~\RNum{2}, respectively, regarding the numerical cases shown in Fig.~\ref{fig:num_case}.
-%Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union \(IoU\) and percentage area error \(\epsilon\) with respect to each case. 
-%The performance of the~Model-\RNum{2} is slightly better than the Model-~\RNum{1} for the selected delamination scenarios.
-%However, all delamination cases should be considered for evaluation so the mean values of the proposed metrics were calculated next.
-%
-%Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean intersection over union (\(\overline{IoU}\)) for \(95\) numerical test cases with respect to the DL models.
-%As shown in Table~\ref{tab:meanIoU_vs_input}, Model-\RNum{1} and Model-\RNum{2} are from the current work, and take as input animations of the full wavefields, whereas the rest of the models are from our previous works~\cite{Ijjeh2021, Ijjeh2022} and take as input RMS images.
-%It can be concluded that the models that take animations as an input surpass the models that take only the RMS images as input. 
-%Moreover, Model-\RNum{1} has a higher \(\overline{IoU}\) compared to Model-\RNum{2} (\(0.90\) versus \(0.87\)).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [!h]
+
+\begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
@@ -92,9 +84,12 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\caption{Four delamination cases based on numerical data (AE-ConvLSTM).}
 	\label{fig:Num_convlstm__case}
 \end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[!ht]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Table~\ref{tab:num_cases} presents the evaluation metrics for AE-ConvLSTM model regarding the numerical cases shown in Fig.~\ref{fig:Num_convlstm__case}.
+Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union IoU and percentage area error \(\epsilon\) with respect to each case. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!h]
 	\centering
 	\caption{Evaluation metrics of the four numerical cases}
 	\begin{tabular}{ccccc}
@@ -111,13 +106,17 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\label{tab:num_cases}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean intersection over union (\(\overline{IoU}\)) for \(95\) numerical test cases with respect to the DL models.
+As shown in Table~\ref{tab:meanIoU_vs_input}, AE-ConvLSTM model takes as input animations of the full wavefields, whereas the rest models presented in~\cite{Ijjeh2021, Ijjeh2022} take as input RMS images.
+As anticipated, the IoU value when taking animations as an input outperforms that when taking only the RMS images as input. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[!ht]
+\begin{table}[!h]
 	\centering
-	\caption{Mean \(IoU\) for numerical cases with respect to the input of the model}
+	\caption{Mean IoU for numerical cases with respect to the input of the model}
 	\begin{tabular}{llc}
 		\toprule
-		Input & Model & mean \(IoU\) \\ 
+		Input & Model & mean IoU \\ 
 		\midrule
 		Animations & Autoencoder ConvLSTM & 0.87 \\ 
 		\midrule
@@ -129,16 +128,23 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\end{tabular}
 	\label{tab:meanIoU_vs_input}
 \end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SUBSECTION HEADER 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental cases}
 \label{sec532}
 
 \subsubsection{Single delamination}
 \label{sec5321}
+In this section, the investigation of AE-ConvLSTM model using experimentally acquired data of a single delamination case presented in subsection.~\ref{sec522} is presented. 
+The Teflon of a square shape was inserted during specimen manufacturing, so its shape and location are known.
+Based on that, the ground truth was prepared manually and it is shown in Fig.~\ref{fig:exp_CFRP_teflon_3o_GT}. 
+Furthermore, the number of full wavefield frames for this case is \(fn = 256\).
+Figure~\ref{fig:convlstm_AE_CFRP_teflon_3o} shows the predicted output of the AE-ConvLSTM model for a window of frames \((72-96)\) for which the highest \(IoU=0.47\) was achieved.
+Furthermore, the percentage area error metric \(\epsilon\) for AE-ConvLSTM model was equal to \(86.67\%\).
 
+It should be noted that for the same damage scenario, the IoU value for the models developed previously in~\cite{Ijjeh2021} was low \((IoU=0.081)\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Single delaminatio of Teflon inserted
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -156,7 +162,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=.8\textwidth]{Figures/Chapter_5/convlstm_AE_CFRP_teflon_3o.png}
-		\caption{\(IoU\) = 0.47}
+		\caption{IoU = 0.47}
 		\label{fig:convlstm_AE_CFRP_teflon_3o}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -165,6 +171,20 @@ Consequently, the part of producing intermediate predictions and further calcula
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The predictions were highest for the window of frames corresponding to the first interaction of the guided waves with the delamination.
+Hence, such frames contain the most valuable feature patterns regarding delamination. 
+This behaviour is depicted in Fig.~\ref{fig:CFRP_Teflon_3o_IoU_centre_window}, which shows the IoU values with respect to the predicted outputs as I slide the window over all input frames from the starting frame till the end.
+Since there are \(256\) frames of full wavefield in this damage case, there are \(232\) windows.
+Consequently, the AE-ConvLSTM model has \(232\) consecutive predictions.
+Furthermore, in Fig.~\ref{fig:CFRP_Teflon_3o_center_frames} three places for the sliding window were selected. 
+The first place depicted in a dark blue star shown in Fig.~\ref{fig:CFRP_teflon_3o_preds_frames} represents a window centered at frame \(fn=84\), which correspond to the initial interaction of guided waves with the delamination.
+The second place is depicted in the pink pentagon shape shown in Fig.~\ref{fig:CFRP_teflon_3o_preds_frames} which represents a window centered at frame \(fn=141\) corresponding to guided waves reflected from the boundaries.
+We can notice the drop in the \(IoU\) values as these frames have fewer damage features.
+The third place, depicted in the green circle shown in Fig.~\ref{fig:CFRP_teflon_3o_preds_frames} represents a window centered at frame \(fn=218\) corresponding to the interaction of guided waves reflected from the edges with the delamination.
+As we can see, the value of \(IoU\) increases again as the valuable feature patterns regarding delamination start to appear again.
+
+The predicted outputs of AE-ConvLSTM model for windows centered at frame 84 (the dark blue star), frame 141 (pink pentagon), and frame 218 (the green circle) are shown in Fig.~\ref{fig:CFRP_Teflon_3o_predictions}.
+Apart from correctly identified delamination, some noise is obtained near edges of the specimen.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% IoU ouput values with a sliding window
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,14 +192,16 @@ Consequently, the part of producing intermediate predictions and further calcula
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1]{Figures/Chapter_5/CFRP_Teflon_3o_center_frames.png}
+	\includegraphics[scale=1.2]{Figures/Chapter_5/CFRP_Teflon_3o_center_frames.png}
 		\caption{IoU for the sliding window centered at consecutive frames.}
 		\label{fig:CFRP_Teflon_3o_center_frames}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\par\medskip
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1.1]{Figures/Chapter_5/CFRP_teflon_3o_shapes_frames.png}
+		\includegraphics[scale=1.2]{Figures/Chapter_5/CFRP_teflon_3o_shapes_frames.png}
 		\caption{Corresponding frames of guided waves.} 
 		\label{fig:CFRP_teflon_3o_preds_frames}
 	\end{subfigure}
@@ -192,12 +214,36 @@ Consequently, the part of producing intermediate predictions and further calcula
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Predicted outuputs at diffirent window places
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1.1]{Figures/Chapter_5/CFRP_Teflon_3o_predictions.png}
 	\caption{Predictions for window centered at selected frames (Teflon insert - single delamination).}
 	\label{fig:CFRP_Teflon_3o_predictions}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure show the RMS image for the experimental case of single delamination predicted the AE-ConvLSTM model.
+Additionally, to separate undamaged and damaged classes from the RMS images, we applied a binary threshold with a value \((threshold=0.5)\) as shown in Fig~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh} 
+The threshold level was selected to limit the influence of noise and, at the same time, highlight the damage.
+The calculated \(IoU\) values for the case of single delamination is \(IoU=0.42\).
+
+Table~\ref{tab:single_case} presents the evaluation metrics for the AE-ConvLSTM model regarding the experimental case of single delamination shown in Fig.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh}.
+As shown in Table~\ref{tab:single_case}, the actual \(A\) and predicted areas \(\hat{A}\) of delaminations were computed in [mm\textsuperscript{2}] with respect to each case. 
+The percentage area error \(\epsilon\) was calculated for both models accordingly.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[ht]
+	\caption{Evaluation metrics for experimental case of single delamination}
+	\centering
+	\begin{tabular}{ccccc}
+		\toprule
+		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\) [mm\textsuperscript{2}]} &  \multicolumn{3}{c}{AE-ConvLSTM model}  \\ 
+		\cmidrule(lr){3-5} &  & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}] } & \(\epsilon\) \\ 
+		\midrule
+		Single delamination & 225 & \multicolumn{1}{c}{0.42} & \multicolumn{1}{c}{420} & 86.67\%    \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:single_case}
+\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions
@@ -208,7 +254,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure11b_RMS.png}
 		\caption{RMS image (damage map)}
-		\label{fig:RMS_CFRP_Teflon_3o_saeed}
+		\label{fig:RMS_CFRP_Teflon_3o_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\hfill
@@ -217,7 +263,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_5/figure12b_Thresholded_RMS.png}
 		\caption{Thresholded RMS image} 
-		\label{fig:RMS_CFRP_Teflon_3o_ijjeh}
+		\label{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\caption{Teflon insert - single delamination.}
@@ -227,7 +273,40 @@ Consequently, the part of producing intermediate predictions and further calcula
 \clearpage
 \subsubsection{Multiple delaminations}
 \label{sec5322}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the second experimental case, we investigated three specimens of carbon/epoxy laminate reinforced by 16 layers of plain weave fabric as shown in Fig.~\ref{fig:Delaminations_arrangements_specimen}. 
+Teflon inserts with a thickness of \(250\ \mu\)m were used to simulate the delaminations.
+The prepregs GG 205 P (fibres Toray FT 300–3K 200 tex) by G.~Angeloni and epoxy resin IMP503Z‐HT by Impregnatex Compositi were used for the fabrication of the specimen in the autoclave. 
+The average thickness of the specimen was \(3.9 \pm 0.1\) mm.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+In Specimen~II, three large artificial delaminations of elliptic shape were inserted in the upper thickness quarter of the plate between the \(4^{th}\) and the \(5^{th}\) layer.
+The delaminations were located at the same distance, equal to \(150\) mm from the centre of the plate.
+For Specimen~III delaminations were inserted in the middle of the cross-section of the plate between \(8^{th}\) layer and \(9^{th}\) layer.
+For Specimen~IV, three small delaminations were inserted in the upper quarter of the cross-section of the plate, and three large delaminations were inserted at the lower quarter of the cross-section of the plate between the \(12^{th}\) layer and \(13^{th}\) layer.
+The details of Specimen~II, III, and IV are presented in Fig.~\ref{fig:Delaminations_arrangements_specimen}.
+
+Furthermore, the SLDV measurements were conducted from the bottom surface of the plate. 
+Consequently, Specimen~II is the most difficult case.
+It is because the delaminations in the cross-section are farther away from the bottom surface than in other specimens (III and IV).
+As a consequence, the reflections from delaminations are barely visible in the measured wavefield.
+For Specimens~II, III, and IV, we have generated \(f_n=512\) consecutive frames representing the full wavefield measurements in the plate.
+The measurement parameters were the same as in the experiment with the single delamination.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Since SLDV measurements were conducted from the bottom surface of the plate, the GT images and the output predictions of the proposed models are flipped horizontally (mirrored).
+Figure~\ref{fig:GT_specimen_2} shows the GT image of Specimen~II.
+Figure~\ref{fig:L3_S2_B_ijjeh} shows the predicted output of AE-ConvLSTM model, in which the highest \(IoU=0.35\) was achieved for window of frames \((68-92)\).
+
+Figure~\ref{fig:GT_specimen_3} shows the GT image of Specimen~III.
+Figure~\ref{fig:L3_S3_B_ijjeh} shows the predicted output of AE-ConvLSTM model, in which the highest \(IoU=0.32\) was achieved for window of frames \((60-84)\).
+
+Figure~\ref{fig:gt_specimen_4} shows the GT image of Specimen~IV.
+The largest delaminations in the cross-sections were assumed to be GT because the full wavefield was acquired from the bottom surface of the specimen.
+We need to mention that such a case with stacked delaminations in the cross-section was not modeled numerically (see Specimen~IV in Fig.~\ref{fig:Delaminations_arrangements_specimen}).
+Although the models were not trained on such a scenario, the predictions were satisfactory.
+Figure~\ref{fig:L3_S4_B_ijjeh} shows the predicted output of AE-ConvLSTM model, in which the highest \(IoU=0.27\) was achieved for window of frames \((68-92)\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Specimens delamination arrangements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,7 +334,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/L3_S2_B_ijjeh.png}
-		\caption{\(IoU\) = \(0.35\)} 
+		\caption{IoU = \(0.35\)} 
 		\label{fig:L3_S2_B_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -264,14 +343,14 @@ Consequently, the part of producing intermediate predictions and further calcula
 		\centering
 		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/GT_specimen_2.png}
 		\caption{GT of Specimen~III}
-		\label{fig:gt_specimen_3}
+		\label{fig:GT_specimen_3}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/L3_S3_B_ijjeh.png}
-		\caption{\(IoU\) = \(0.32\)} 
+		\caption{IoU = \(0.32\)} 
 		\label{fig:L3_S3_B_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -290,7 +369,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
 		\includegraphics[width=0.75\textwidth]{Figures/Chapter_5/L3_S4_B_ijjeh.png}
-		\caption{\(IoU\) = \(0.27\)} 
+		\caption{IoU = \(0.27\)} 
 		\label{fig:L3_S4_B_ijjeh}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -298,13 +377,36 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\label{fig:exp_case}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+It is worth mentioning that FCN-DenseNet model was tested, which I developed previously~\cite{Ijjeh2021} for data related to specimens II-IV. 
+However, poor results were obtained. 
+This is attributed to the fact that RMS images are fed to FCN-DenseNet, which carries a limited amount of damage-related information. 
+On the other hand, currently proposed methods utilise full wavefield frames, which carry more damage-reach features. 
+
+Moreover, in Fig.~\ref{fig:L3_S4_B_333x333p_corresponding_frames}, we presented the calculated IoU values corresponding to predicted outputs of AE-ConvLSTM model regarding Specimen~IV as the window of size~\(24\) frames slides, over the \(512\) full wavefield frames.
+The developed model starts to identify the delaminations after propagating guided waves interact with the delaminations.
+
+The red square depicted in Fig.~\ref{fig:L3_S4_B_333x333p_frames} corresponds to \(IoU\) value calculated for the window of frames before the interactions with delaminations (the frame for the centre of the window is shown).
+This behaviour is expected since the models were trained on those frames depicting the beginning of the interactions of guided wave with delamination. 
+As a result, valuable patterns start to appear later on.
+
+The light blue star depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window} refers to a window of frames regarding the initial interactions of propagating guided waves with the delaminations and before reflecting from the edges.
+Hence, valuable patterns regarding the damage are starting to appear.
+
+The pink pentagon shape depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window} refers to a window of frames that pass the initial interaction with the delaminations. 
+Furthermore, it shows the reflections of the guided waves from the edges just before interacting with the delaminations again.
+As can be seen, the calculated IoU values drop drastically, as expected, as there are no valuable damage features to be extracted.  
+
+The green circle depicted in Fig.~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window} refers to the a window of frames that represent waves reflection from boundaries and their interaction with the damage.
+Although this frame shows complex patterns of wave reflections, the model can extract the valuable damage features and identify the delaminations accordingly.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!h]
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\centering
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
-		\includegraphics[scale=1]{Figures/Chapter_5/L3_S4_B_333x333p_corresponding_frames.png}
+		\includegraphics[scale=1.2]{Figures/Chapter_5/L3_S4_B_333x333p_corresponding_frames.png}
 		\caption{IoU for the sliding window centered at consecutive frames.}
 		\label{fig:L3_S4_B_333x333p_corresponding_frames}
 	\end{subfigure}
@@ -314,7 +416,7 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\begin{subfigure}[b]{1\textwidth}
 		\centering
 		\includegraphics[scale=1.2]{Figures/Chapter_5/L3_S4_B_333x333p_frames.png}
-		\caption{Corresponding frames of guided waves.} 
+		\caption{Corresponding frames regarding the centre of the windows of frames of guided waves.} 
 		\label{fig:L3_S4_B_333x333p_frames}
 	\end{subfigure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -322,15 +424,20 @@ Consequently, the part of producing intermediate predictions and further calcula
 	\label{fig:L3_S4_B_333x333p_50kHz_5HC_IoU_centre_window}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:L3_S4_B_5HC_preds_selected_frames} shows the predicted outputs corresponding to the window of frames for the red square, light blue star, pink pentagon, and green circle, respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
-	\includegraphics[scale=1]{Figures/Chapter_5/L3_S4_B_5HC_preds_selected_frames.png}
+	\includegraphics[scale=1.2]{Figures/Chapter_5/L3_S4_B_5HC_preds_selected_frames.png}
 	\caption{Predictions for window centered at selected frames (Specimen~IV).}
 	\label{fig:L3_S4_B_5HC_preds_selected_frames}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The RMS image depicting the damage map of Specimen~IV is presented in Fig.~\ref{fig:RMS_L3_S4_B_ijjeh}.
+Figure~\ref{fig:RMS_threshold_L3_S4_B_ijjeh} shows the thresholded RMS image, and the calculated \(IoU=0.23\).
+Furthermore, the mean percentage area error \(\epsilon\) with respect to the three delaminations (Specimen~IV) equal to \(10.61\%\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

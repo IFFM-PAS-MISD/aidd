@@ -251,7 +251,7 @@ The overall performance of the GCN model is better than other models for the sel
 	\caption{Evaluation metrics of the four numerical cases}
 	\label{tab:RMS_num_cases}
 	\begin{tabular}{cccccc}
-		\toprule
+		\toprule[1.5pt]
 		\multirow{2}{*}{Model} & \multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
 		\cmidrule(lr){4-6} & & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
 		\midrule
@@ -284,7 +284,7 @@ The overall performance of the GCN model is better than other models for the sel
 		& 2 & 257 & \multicolumn{1}{c}{0.71} & \multicolumn{1}{c}{215} & \(16.34\%\) \\ 
 		& 3 & 105 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{177} & \(68.57\%\) \\ 
 		& 4 & 537 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{523} & \(2.61\%\) \\ 
-		\bottomrule
+		\bottomrule[1.5pt]
 	\end{tabular}	
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -344,11 +344,17 @@ The measurements were performed by using Polytec PSV-\(400\) SLDV on the bottom 
 The measurements were conducted on a regular grid of \(333\times333\) points. 
 The measurement area was aligned with the plate edges.
 The sampling frequency was \(512\)~kHz.
-The measured full wavefield was further processed by an energy compensated RMS takes into account wave attenuation. 
+The experimental case is for a CFRP specimen with a single delamination.
+A plain weave fabric reinforcement was used for manufacturing the composite specimen. 
+The delamination between layers of the fabric was created artificially by a Teflon insert of a thickness 250 $\mu$m. 
+The Teflon of a square shape was inserted during specimen manufacturing, so its shape and location are known. 
+The number of full wavefield frames for this case is $fn = 256$.
+Furthermore, the measured full wavefield was further processed by an energy compensated RMS which takes into account wave attenuation. 
 The results of such operation are shown in Fig.~\ref{fig:ERMS_with_label}.
 The delamination is surrounded by a square frame representing its shape and location. 
 Figures~(\ref{fig:unet_exp_erms} - \ref{fig:gcn_exp_erms}) shows delamination prediction maps for Res-UNet, VGG16 encoder-decoder, PSPNet, FCN-DenseNet and GCN models, receptively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Table~\ref{tab:rms_exp_case} presents the evaluation metrics for all FCN models, regarding the experimental case shown in Figs.~\ref{fig:exp_erms__case}.
 Table~\ref{tab:rms_exp_case} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union \(IoU\) and percentage area error \(\epsilon\) with respect to each FCN model. 
 The overall performance of the GCN model is better than other models for the selected delamination scenarios.
@@ -365,7 +371,7 @@ Given that the provided models were only trained on a numerically generated data
 	\label{tab:rms_exp_case}
 	\begin{tabular}{lcccc}
 		\toprule
-		\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+		\multirow{2}{*}{Model} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
 		\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ \midrule
 		Res-UNet & \multirow{5}{*}{210} & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{323}  & \(53.8\%\) \\ 
 		VGG16 encoder-decoder &  & \multicolumn{1}{c}{0.62} & \multicolumn{1}{c}{320} & \(52.4\%\) 

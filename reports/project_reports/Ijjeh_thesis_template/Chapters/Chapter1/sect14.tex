@@ -1,3 +1,24 @@
 \section{Thesis contribution}
 \label{sec14}
-The main novelty of this work consists of applying for the first time a full wavefield data of elastic waves propagation (numerically generated dataset) as an input to various supervised deep neural networks, which is capable of identifying damage.
+The novelty of this work consists of applying for the first time a full wavefield data of elastic waves propagation (numerically generated dataset) as an input to various supervised deep neural networks, which is capable of identifying damage.
+Accordingly, two main approaches were adopted:
+\begin{enumerate}
+	\item One-to-one approach
+	\item Many-to-one approach
+\end{enumerate}
+
+For the one-to-one approach, the developed models take one input image (RMS image of the full wavefield frames) and generates one output image of the damage map. 
+The developed models that are based on one-to-one approach are:
+\begin{itemize}
+	\item Res-UNet
+	\item VGG16 encoder-decoder
+	\item PSPNet
+	\item FCN-DenseNet
+	\item GCN
+\end{itemize}
+Whereas, for the many-to-one approach, a number frames (representing the propagation of elastic waves) are fed to the developed models in order to generate a damage map.
+For such approach, an autoencoder ConvLSTM models were developed.
+
+Furthermore, we have developed deep learning models to perform an end-to-end superresulution technique regarding the elastic waves propagation and their interaction with the damage and the specimen boundaries.
+Accordingly, a Low-Resolution (LR) input frame is captured using a uniform mesh, which is fed to deep learning model to produce a High-Resolution (HR) frame.
+Later, the predicted HR frames are fed to the many-to-one models in order to identify the damage.

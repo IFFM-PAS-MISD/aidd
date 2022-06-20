@@ -1,65 +1,234 @@
 \section{Results and discussions}
+In this section, the evaluation of the developed DLSR models based on the numerical test cases representing the LR frames is presented.
+Additionally, the developed models were evaluated in an experimental test case to demonstrate their capability for super-resolution image reconstruction.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Two metrics were utilised to evaluate the performance of the developed DLSR models:
+The first one is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
+Equation~(\ref{PSNR}) depicts the mathematical representation of the PSNR:
+\begin{equation}
+	PSNR=20\mathrm{log}_{10}\left(\frac{R}{\sqrt{MSE}}\right)
+	\label{PSNR}
+\end{equation}
+where \(R\) represents the maximum fluctuation value that exists in the input image, and it is equal to \(255\).
+\(MSE\) refers to the mean square error between the predicted output and the corresponding ground truth.
+
+The second metric is the Pearson correlation coefficient (Pearson CC), which measures the linear relationship between two variable sets \textbf{\(X\)} (represents the ground truth values) and \textbf{\(Y\)} (represents the predicted values).
+Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC:
+\begin{equation}
+	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
+	\label{Pearson}
+\end{equation}
+where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) is the mean value of the sample, analogously to \(\bar{y}\).
+
+The developed DLSR models were trained using the MSE (L2 norm) loss function.
+Further, we implemented the proposed networks with the Keras~\cite{chollet2015keras} API running on top of TensorFlow and trained them using NVIDIA RTX 2080 and Tesla V100 GPU.
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical cases}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The results of the reconstruction of HR frames for a numerical test case by the developed DLSR models are presented in Fig.~\ref{fig:num_results}.
+It must be noted that the LR frames used to recover the HR frames were not used in the training set.
+
+Figure~\ref{fig:num_results} presents the recovery of three HR frames (\ref{fig:HR_1}, \ref{fig:HR_2}, and \ref{fig:HR_3}) at different time steps with frame numbers \(N_f=91, 154,\ \text{and}\ 218\) respectively.
+Figures~\ref{fig:num_f1_ijjeh} and~\ref{fig:num_f1_saeed} show the recovery of the HR frame presented in~\ref{fig:HR_1}, which depicts the initial interaction of propagating Lamb waves with the damage.
+Figures~\ref{fig:num_f64_ijjeh} and~\ref{fig:num_f64_saeed} show the recovery of the HR frame presented in~\ref{fig:HR_2}, which depicts the propagating Lamb and their reflections from damage and boundaries of the plate.
+Figures~\ref{fig:num_f128_ijjeh} and~\ref{fig:num_f128_saeed} show the recovery of complex phenomena of wave propagation in the plate presented in Fig.~\ref{fig:HR_3}.
+Table~\ref{tab:num_results} presents the comparison results for the reconstructed frames with the developed DLSR models at three $N_f$.
+Both DLSR models recovered the HR frames with high PSNR and Pearson CC values regarding the unseen LR frames.
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{HR_image_case_475_frame_1.png}
+		\caption{HR frame \\ (PSNR/ Pearson CC)}
+		\label{fig:HR_1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{SR_output_475_frame_1.png}
+		\caption{Model~I \\($46.38\ \text{dB}/\ 0.9991$)}
+		\label{fig:num_f1_ijjeh}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Saeed_SR_output_475_frame_1.png}
+		\caption{Model~II \\ ($48.43\ \text{dB}/\ 0.9995$)}
+		\label{fig:num_f1_saeed}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{HR_image_case_475_frame_64.png}
+		\caption{HR frame \\ (PSNR/ Pearson CC)}
+		\label{fig:HR_2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{SR_output_475_frame_64.png}
+		\caption{Model~I \\ ($45.23\ \text{dB}/\ 0.9978$)}
+		\label{fig:num_f64_ijjeh}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Saeed_SR_output_475_frame_64.png}
+		\caption{Model~II \\ $(48.34\ \text{dB}/\ 0.9990)$}
+		\label{fig:num_f64_saeed}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{HR_image_case_475_frame_128.png}
+		\caption{HR frame \\ (PSNR/ Pearson CC)}
+		\label{fig:HR_3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{SR_output_475_frame_128.png}
+		\caption{Model~I \\ ($42.66\ \text{dB}/\ 0.9949$)}
+		\label{fig:num_f128_ijjeh}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.32\textwidth}
+		\centering
+		\includegraphics[scale=0.8]{Saeed_SR_output_475_frame_128.png}
+		\caption{Model~II \\ $(44.51\ \text{dB}/\ 0.9966)$}
+		\label{fig:num_f128_saeed}	
+	\end{subfigure}
+	\caption{
+		Comparison of reconstructed frames with DLSR Model~I and II for frames $N_f = 91, 154\ \text{and}\ 218 $ respectively. }
+	\label{fig:num_results}
+\end{figure}
+
+
+\begin{table}[!ht]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Quality metrics for numerical case reconstructed with DLSR models at three time steps.}	
+	\begin{tabular}{llcc} 
+		\toprule		
+		$N_f$ & DLSR & PSNR & PEARSON CC\\
+		\midrule
+		\multirow{2}{*}{91} & Model-I  & \(46.38\) dB & \(0.9991\) \\
+		 				   & Model-II & \(48.43\) dB & \(0.9995\) \\
+		\midrule
+		\multirow{2}{*}{154} & Model-I  & \(45.23\) dB & \(0.9978\) \\
+							& Model-II & \(48.34\) dB & \(0.9990\) \\
+		\midrule
+		\multirow{2}{*}{154} & Model-I  & \(42.66\) dB & \(0.9949\) \\
+							& Model-II & \(44.51\) dB & \(0.9966\) \\
+		\bottomrule
+	\end{tabular}	
+	\label{tab:num_results}
+\end{table}
+
+The achieved PSNR and Pearson CC metrics regarding the full wavefield of 512 frames for the previously evaluated test case are presented in Fig.~\ref{fig:num_case_475_metrics}, where Figs.~\ref{fig:num_model_I} and~\ref{fig:num_model_II} relate to models I and II, respectively.
+For both DLSR models, the reconstructed HR frames have high PSNR and Pearson CC values.
+However, as we move forward in time of propagating waves, metric values start to decrease, which is expected as the wave patterns become more complex and sophisticated.
+It is noteworthy to restate that the DLSR models were trained only on a set of $128$ frames per case representing the propagation of Lamb waves starting from the time point (frame) of interaction with damage. 
+However, the developed DLSR models are capable of reconstructing the full wavefield of $512$ frames, indicating the capability to generalise.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{frame_metrics_DLSR_model_1_num.png}
+		\caption{}
+		\label{fig:num_model_I}
+	\end{subfigure} \\
+	\begin{subfigure}[b]{1\textwidth}
+		\centering
+		\includegraphics[scale=1]{frame_metrics_DLSR_model_2_num.png}
+		\caption{}
+		\label{fig:num_model_II}
+	\end{subfigure}
+	\caption{Comparison of reconstruction accuracy for a numerical test case of full wavefield.}
+	\label{fig:num_case_475_metrics}
+\end{figure}
+\clearpage
 
 \subsection{Experimental cases}
 
-Experiment description
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Experimental studies were performed on a $500 \times 500\times 3.9$ mm\textsuperscript{3} CFRP laminate composed of 16 plain-woven prepreg layers (GG 205P) stacked in one direction. 
+During the specimen production, three Teflon inserts were put in between layers at the positions and sizes presented in Fig.~\ref{fig:specimen}.
 
-\begin{figure} [h!]
+\begin{figure} [!ht]
 	\centering
-	\includegraphics[scale=1]{figure8.png}
+	\includegraphics[scale=.8]{figure8.png}
 	\caption{Delamination arrangements in the specimen.}
-	\label{fig:specime}
+	\label{fig:specimen}
 \end{figure}
 
-\begin{figure} [h!]
+Guided waves were excited by 10 mm wide round PZT attached to the centre of the plate front surface with cyanoacrylate glue. 
+A hann-window-modulated 50 kHz five-cycle sinusoidal signals were used for excitation purposes.
+Out-of-plane velocities were measured in 389286 randomly spaced points covering the whole back surface of the specimen using SLDV. 
+The sampling frequency was 512 kHz, and at each point, 512 time samples (1 ms) were registered ten times and averaged.
+The backside of the specimen was covered with retroreflective film to increase surface reflectivity and thus improve the SNR of measured signals.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:points_metrics} presents a comparison of the recovered full HR frame and the delamination region at ($N_f=110$) with various number of measurement points $N_p$ with the CS method.
+As shown in Fig.~\ref{fig:points_metrics}, when the value of $N_p$ increases, we get a better recovery of both the full HR frame and the exact delamination region.
+However, for lower values of $N_P$ such as $N_p=1024$, the PSNR and Pearson CC values for the recovered HR frame were poor, indicating that the conventional CS method is not efficient below the Nyquist sampling rate.
+
+\begin{figure} [!ht]
 	\centering
 	\includegraphics[scale=1]{figure9.png}
 	\caption{Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.}
 	\label{fig:points_metrics}
 \end{figure}
 
-\begin{figure} [h!]
+Figure~\ref{fig:frame110_comparison} shows the recovery of the reference frame presented in Fig.~\ref{fig:frame110_CS1024} at $N_f=110$ with the CS method and DLSR models.
+Figures~\ref{fig:frame110_CS1024},~\ref{fig:frame110_CS3000} and ~\ref{fig:frame110_CS4000} show reconstructed HR frames with CS method at $N_p=1024$ , $N_p=3000$ and $N_p=4000$ points, respectively.
+As expected, when decreasing the $N_p$ points, the CS method is not able to recover HR frames accurately.
+Figures~\ref{fig:frame110_Abdalraheem}, and~\ref{fig:frame110_Saeed} present the reconstructed HR frame with the DLSR models I and II, respectively.
+Both DLSR models recovered the HR frame with $N_p=1024$ points, which is \(19.2\%\) of the Nyquist sampling rate.
+
+\begin{figure} []
 	\centering
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure10a.png}
+		\includegraphics[scale=0.7]{figure10a.png}
 		\caption{Reference}
 		\label{fig:frame110_ref}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure10b.png}
+		\includegraphics[scale=0.7]{figure10b.png}
 		\caption{CS: 1024 points}
 		\label{fig:frame110_CS1024}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure10c.png}
+		\includegraphics[scale=0.7]{figure10c.png}
 		\caption{CS: 3000 points}
 		\label{fig:frame110_CS3000}
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure10d.png}
+		\includegraphics[scale=0.7]{figure10d.png}
 		\caption{CS: 4000 points}
 		\label{fig:frame110_CS4000}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure10e.png}
+		\includegraphics[scale=0.7]{figure10e.png}
 		\caption{DLSR: model I}
 		\label{fig:frame110_Abdalraheem}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure10d.png}
+		\includegraphics[scale=0.7]{figure10f.png}
 		\caption{DLSR: model II}
 		\label{fig:frame110_Saeed}
 	\end{subfigure}
@@ -68,46 +237,53 @@ Experiment description
 	\label{fig:frame110_comparison}
 \end{figure} 
 
-\begin{figure} [h!]
+Furthermore, Fig.~\ref{fig:frame110del_comparison} presents the recovery of the HR frame $N_f=110$ at the delamination region with respect to Fig.~\ref{fig:frame110_comparison}.
+Figure~\ref{fig:frame110delam_ref} shows the reference region of interest we are attempting to recover, which shows reflected waves from damage.
+Figures~\ref{fig:frame110delam_CS1024} and~\ref{fig:frame110delam_CS3000} show a poor reconstruction of the reflected waves at $N_p=1024$ and $N_p=3000$, respectively, using the CS method.
+Figure~\ref{fig:frame110delam_CS4000} shows the recovery of the reflected frames at $N_p=4000$ using the CS method, in which the reflected waves are recognisable.
+Figures~\ref{fig:frame110delam_Abdalraheem} and~\ref{fig:frame110delam_Saeed} show the recovery of the reflected waves using DLSR models, respectively.
+The recovered reflected waves from damage using DLSR models are visible and can be easily recognised, which indicates that the DLSR approach can be more efficient than the conventional CS method. 
+
+\begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure11a.png}
+		\includegraphics[scale=0.7]{figure11a.png}
 		\caption{Reference}
 		\label{fig:frame110delam_ref}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure11b.png}
+		\includegraphics[scale=0.7]{figure11b.png}
 		\caption{CS: 1024 points}
 		\label{fig:frame110delam_CS1024}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure11c.png}
+		\includegraphics[scale=0.7]{figure11c.png}
 		\caption{CS: 3000 points}
 		\label{fig:frame110delam_CS3000}
 	\end{subfigure}	
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure11d.png}
+		\includegraphics[scale=0.7]{figure11d.png}
 		\caption{CS: 4000 points}
 		\label{fig:frame110delam_CS4000}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure11e.png}
+		\includegraphics[scale=0.7]{figure11e.png}
 		\caption{DLSR: model I}
 		\label{fig:frame110delam_Abdalraheem}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.8]{figure11d.png}
+		\includegraphics[scale=0.7]{figure11f.png}
 		\caption{DLSR: model II}
 		\label{fig:frame110delam_Saeed}
 	\end{subfigure}
@@ -116,14 +292,16 @@ Experiment description
 	\label{fig:frame110del_comparison}
 \end{figure} 
 \clearpage
-\begin{figure} [h!]
+\begin{figure} [!ht]
 	\centering
  	\includegraphics[scale=1]{figure12.png}
 	\caption{Comparison of reconstruction accuracy at frame number $N_f$.}
 	\label{fig:frame_metrics}
 \end{figure}
-
-\begin{table}[h!]
+\clearpage
+Table~\ref{tab:csv_results} presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and DLSR models for various numbers of points $N_p$ and the corresponding compression ratios CR calculated for the frame $N_f=110$.
+It should be underlined, that for Np=1024, the CS recovery algorithm behaves poorly at the delamination region whereas DLSR models are still able to achieve high PSNR and Pearson CC values.
+\begin{table}[!ht]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
 	\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.}	
