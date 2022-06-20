@@ -26,12 +26,12 @@ y_points = 128;
 Lx=0.5; % plate length
 Ly=0.5; % plate width
 n = x_points*y_points;
-
-No_of_measurement_points = [1024,3000,4000];
+No_of_measurement_points = 4000;
+%No_of_measurement_points = [1024,3000,4000];
 %No_of_measurement_points = [3000,4000];
 cmap = 'parula'; % default matlab map
 %cmap = 'jet';
-mask_type = 2;
+mask_type = 1;
 % mask_type = 1; % random mask
 % mask_type = 2; % jitter mask
 for points=No_of_measurement_points

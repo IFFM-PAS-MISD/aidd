@@ -29,10 +29,10 @@ caxis_cut = 0.6;
 
 %%
 % create path to the experimental raw data folder
-input_data_path = '/pkudela_odroid_sensors/aidd/data/processed/exp/model_Abdalraheem/';
+input_data_path = '/pkudela_odroid_sensors/aidd/data/processed/exp/Saeed_exp_case/';
 
 % files for processing
-list = {'SR_Pred_output_110_frame_UNIFORM_MESH_16th_pixel.png'}; 
+list = {'Saeed_SR_exp_pred_frame_110.mat'}; 
 
 
 
@@ -42,16 +42,16 @@ nFile   = length(list);
 success = false(1, nFile);
 for k = 1:nFile
     filename = list{k};
-    processed_filename = ['frame110_delam_DLSR_model_',num2str(k)]; % filename of processed .mat data
+    processed_filename = ['frame110_delam_DLSR_model_',num2str(k+1)]; % filename of processed .mat data
     % check if already exist
     if(overwrite||(~overwrite && ~exist([figure_output_path,processed_filename,'.png'], 'file')))
         try 
             % load experimental data files
             disp('loading data');
-            imdata = rgb2gray(imread([input_data_path,filename]));         
+            load([input_data_path,filesep,filename],'f'); % f     
             %% PROCESS DATA
             fprintf('Processing:\n%s\n',filename);
-            int_recon_image = im2double(imdata);
+            int_recon_image = double(f);
             int_recon_image = flipud(int_recon_image)-mean(mean(int_recon_image));
             s_zoom_max = max(max(abs(int_recon_image(zoom_y,zoom_x))));
             % reconstructed
@@ -60,9 +60,9 @@ for k = 1:nFile
             figure;
             imagesc(int_recon_image(zoom_y,zoom_x));colormap(cmap);
             run fig_param4;
-            %caxis([-s_zoom_max s_zoom_max]);
+            caxis([-s_zoom_max s_zoom_max]);
             drawnow;
-            print([figure_output_path,'frame110_delam_DLSR_model_',num2str(k),'.png'],'-dpng','-r600');
+            print([figure_output_path,'frame110_delam_DLSR_model_',num2str(k+1),'.png'],'-dpng','-r600');
 
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename);

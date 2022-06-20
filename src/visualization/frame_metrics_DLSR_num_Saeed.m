@@ -20,11 +20,11 @@ figure_output_path = prepare_figure_paths(modelname);
 %%
 % Abdalraheem model
 % create path to the experimental raw data folder
-input_data_path = '/pkudela_odroid_sensors/aidd/data/processed/exp/model_Abdalraheem/';
+input_data_path = '/pkudela_odroid_sensors/aidd/data/processed/num/model_Saeed/';
 
 % files for processing
-list1 = {'Pearson_CC_exp_512_frames.csv'};
-list2 = {'PSNR_exp_512_frames.csv'}; 
+list1 = {'Saeed_Pearson_CC_Num_case_475_512_frames.csv'};
+list2 = {'Saeed_PSNR_Num_case_475_512_frames.csv'}; 
 
 
 
@@ -35,7 +35,7 @@ success = false(1, nFile);
 for k = 1:nFile
     filename1 = list1{k};
     filename2 = list2{k};
-    processed_filename = ['frame_metrics_DLSR_model_',num2str(k)]; % filename of processed .mat data
+    processed_filename = ['frame_metrics_DLSR_model_',num2str(k+1),'_num']; % filename of processed .mat data
     % check if already exist
     if(overwrite||(~overwrite && ~exist([figure_output_path,processed_filename,'.png'], 'file')))
         try 
@@ -57,27 +57,12 @@ for k = 1:nFile
             plot(parameter_frames,PEARSON_metric,'LineWidth',1);
             ylim([-0.5 1]);
             run font_param;
-            legend('PSNR','PEARSON CC','Location','northeast','Fontsize',legend_font_size,'FontName','Times');
-            title('DLSR model I: 1024 points','Fontsize',title_font_size,'FontName','Times');
+            legend('PSNR','PEARSON CC','Location','east','Fontsize',legend_font_size,'FontName','Times');
+            title('DLSR model II: 1024 points','Fontsize',title_font_size,'FontName','Times');
             xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
             set(gcf,'color','white');
             run fig_param2;
             print([figure_output_path,processed_filename],'-dpng','-r600');
-            
-            figure;
-            yyaxis left;
-            plot(parameter_frames,PSNR_metric,'LineWidth',1);
-            ylim([10 60]);
-            yyaxis right;
-            plot(parameter_frames,PEARSON_metric,'LineWidth',1);
-            ylim([-0.5 1]);
-            run font_param;
-            legend('PSNR','PEARSON CC','Location','northeast','Fontsize',legend_font_size,'FontName','Times');
-            title('DLSR model: 1024 points','Fontsize',title_font_size,'FontName','Times');
-            xlabel({'$N_f$'},'Fontsize',label_font_size,'interpreter','latex');
-            set(gcf,'color','white');
-            run fig_param2;
-            print([figure_output_path,processed_filename,'_'],'-dpng','-r600');
         
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename1);

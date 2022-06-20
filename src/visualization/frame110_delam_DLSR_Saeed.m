@@ -24,16 +24,15 @@ y_points = 128;
 Lx=0.5; % plate length
 Ly=0.5; % plate width
 cmap = 'default';
-caxis_cut = 0.6;
+caxis_cut = 0.8;
 %% Processing parameters
 
 %%
 % create path to the experimental raw data folder
-input_data_path = '/pkudela_odroid_sensors/aidd/data/processed/exp/model_Abdalraheem/';
+input_data_path = '/pkudela_odroid_sensors/aidd/data/processed/exp/model_Saeed/';
 
 % files for processing
-list = {'SR_Pred_output_110_frame_UNIFORM_MESH_16th_pixel.png'}; 
-
+list = {'Saeed_SR_Pred_frame_110_UNIFORM_MESH.png'}; 
 
 
 disp('Interpolation and RMS calcualation');
@@ -42,7 +41,7 @@ nFile   = length(list);
 success = false(1, nFile);
 for k = 1:nFile
     filename = list{k};
-    processed_filename = ['frame110_delam_DLSR_model_',num2str(k)]; % filename of processed .mat data
+    processed_filename = ['frame110_delam_DLSR_model_',num2str(k+1)]; % filename of processed .mat data
     % check if already exist
     if(overwrite||(~overwrite && ~exist([figure_output_path,processed_filename,'.png'], 'file')))
         try 
@@ -62,7 +61,7 @@ for k = 1:nFile
             run fig_param4;
             %caxis([-s_zoom_max s_zoom_max]);
             drawnow;
-            print([figure_output_path,'frame110_delam_DLSR_model_',num2str(k),'.png'],'-dpng','-r600');
+            print([figure_output_path,'frame110_delam_DLSR_model_',num2str(k+1),'.png'],'-dpng','-r600');
 
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename);
