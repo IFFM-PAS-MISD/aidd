@@ -2,19 +2,26 @@
 \section{Summary}
 \label{sec55}
 
-In this chapter, I investigated several end-to-end DL models that were trained on a large synthetically generated dataset representing the full wavefield of the Lamp waves propagating in a CFRP plate and their interaction with discontinuities such as the delamination and the plate edges, acquired by SLDV from the bottom surface of the plate. 
-The developed models perform: 
-\begin{enumerate}
-	\item Delamination detection and localisation with surrounding boxes, in which two CNN models were developed.
-	\item Delamination identification (pixel-wise image segmentation):
-		\begin{itemize}
-			\item One-to-one based models, in which, I utilised the RMS images as an input.
-			Hence, five DL models have been developed: \\ Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet, and GCN.
-			\item Many-to-one based model, in which a sequence of full wavefield frames were utilised as an input to the model.
-		\end{itemize} 
-\end{enumerate}
+The results of investigating several end-to-end DL models are presented in this chapter. 
+The developed DL models were trained on a large synthetically generated dataset representing the full wavefield of the Lamp waves propagating in a CFRP plate and their interaction with discontinuities such as delamination and the plate edges, acquired by SLDV from the bottom surface of the plate. 
 
-As mentioned, data acquisition with a high spatial resolution is frequently required for precise damage estimation and necessitates a lengthy scanning time.
-This chapter studies a unique way for acquiring high-resolution wavefields with fewer measurement points in order to reduce acquisition time.
-To recover high spatial frequency information from low-resolution images, such a technology combines the compressive sensing methodology outlined in the preceding chapter with convolutional neural networks.
+The first developed DL models were trained on RMS images to perform delamination detection and localisation through surrounding boxes.
+Hence, two CNN models were developed according to the RMS image resolution of $14\times14$ and $16\times16$ blocks with a size of $32\times32$ pixels, respectively.
+The CNN models were evaluated on numerical test cases, proving their ability to detect and localise delamination in previously unseen data.
+The IoU metric was applied to evaluate the obtained results.
+
+The DL models for pixel-wise image segmentation were also trained on RMS images in a one-to-one scheme to perform delamination identification.
+Accordingly, five FCN models were developed: Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet, and GCN.
+The FCN models were evaluated on numerical test cases demonstrating their ability to identify delamination in previously unseen data. 
+Furthermore, the FCN models were evaluated on an experimental test case, in which the models showed their capability to generalise.
+
+The AE ConvLSTM model was trained on a many-to-one scheme, in which a number of full wavefield frames were input to the DL model to perform delamination identification.
+To evaluate the performance of the AE ConvLSTM model, I tested it on several numerical test cases, showing its ability to identify the delamination of previously unseen data.
+The AE ConvLSTM model was evaluated on several experimental test cases, indicating its capability to generalise well.
+
+The last developed DL model (DLSR) presents a remarkable way of acquiring HR wavefields with fewer measuring points to reduce acquisition time.
+The DLSR model was also numerically and experimentally evaluated. 
+It demonstrates its ability to recover HR frames from the LR frames with high accuracy, resulting in a significantly faster data acquisition process.
+
+
 

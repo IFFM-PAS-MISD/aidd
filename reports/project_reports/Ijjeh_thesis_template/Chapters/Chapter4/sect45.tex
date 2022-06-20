@@ -62,14 +62,14 @@ The exception is an enhancement of wavefields as the second step of SR followed 
 We propose a framework for full wavefield reconstruction of propagating Lamb waves from spatially sparse SLDV measurements of resolution below the Nyquist wavelength $\lambda_N$. 
 The Nyquist wavelength is the shortest spatial wavelength that can be accurately recovered from wavefield by sequential observations with spacing $\Delta x$ which is defined as $\lambda_N = 2 \Delta x$. 
 
-For the first time, an end-to-end approach for SR problem is used in which deep learning neural network is trained on a synthetic dataset and tested on experimental data acquired by SLDV.
+For the first time, an end-to-end approach for the SR problem is used in which a deep learning neural network is trained on a synthetic dataset and tested on experimental data acquired by SLDV.
 It means that the approach is solely based on DLSR.
-It is different from methods presented in the literature which utilize CS theory~\cite{Harley2013,KeshmiriEsfandabadi2018} or CS theory in conjunction with super-resolution convolutional neural networks for wavefield image enhancement~\cite{Park2017a,KeshmiriEsfandabadi2020}.
-The efficacy of the developed framework is presented and compared with conventional CS approach.  
+It is different from methods presented in the literature which utilize CS theory~\cite{Harley2013, KeshmiriEsfandabadi2018} or CS theory in conjunction with super-resolution convolutional neural networks for wavefield image enhancement~\cite{Park2017a, KeshmiriEsfandabadi2020}.
+The efficacy of the developed framework is presented and compared with the conventional CS approach.
 The performance of the proposed technique is validated by an experiment performed on a plate made of carbon fibre reinforced polymer (CFRP) with embedded Teflon inserts simulating delaminations.
 
 \subsection{Dataset preparation}
-\label{sec62}
+\label{sec451}
 In order to train deep learning models to perform super-resolution image reconstruction, I have to reproduce a low-resolution training set from the original high-resolution dataset. 
 Initially, I have resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low- to high-resolutions.
 
