@@ -1,6 +1,23 @@
-%% SECTION HEADER /////////////////////////////////////////////////////////////////////////////////////
 \section{Future work}
 \label{sec62}
+
+In the conducted research work, the developed deep learning models for damage detection and localisation were trained on a single type of defect, "delamination", in CFRP structures.
+Therefore, this work can be expanded to identify other types of defects in CFRP structures.
+It is noteworthy to mention that generating the utilised dataset in the developed models in this work took roughly three months of computation.
+However, with the advances in computational power, such a dataset can be generated in a reasonable time.
+Accordingly, such a dataset will be utilised to train deep learning models that can detect and localise different types of defects at once in an end-to-end approach.
+The performance of the developed models can be further improved if they are trained on experimental data, allowing them to learn new complex patterns.
+However, the presented studies are limited to only one type of signal at a carrier frequency of 50 kHz.
+Accordingly, a new dataset with a higher excitation frequency can be generated.
+Furthermore, the proposed approaches have proven to be feasible for delamination identification.
+As a result, the next step would be to acquire a large experimental data set consisting of full wavefields from structures with stiffeners and rivets as well as basic plate-like structures.
+In comparison to a naive numerical data set, such data would significantly improve the performance of the proposed models.
+
+Furthermore, the developed model for super-resolution image reconstruction in this work, trained only on a low-resolution dataset with a compression ratio of $19.2\%$ of the Nyquist sampling rate, which can be further extended to various compression ratios.
+Another issue that can be further explored and investigated is when recovering an HR frame from an LR frame acquired with a very compressed number of scanning points (below Nyquist sampling rate). 
+The reflected waves from damage are weak because they represent a relatively small fraction of the wave energy acquired by the measuring points, and they rapidly fade away far from the damaged area.
+
+
 
 
 
