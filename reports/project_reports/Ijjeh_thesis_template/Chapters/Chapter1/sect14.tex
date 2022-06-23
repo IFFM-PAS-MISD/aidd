@@ -1,6 +1,6 @@
 \section{Thesis contribution}
 \label{sec14}
-The novelty of this work consists of applying for the first time a full wavefield data of elastic waves propagation (numerically generated dataset) as an input to various supervised deep neural networks, which is capable of identifying damage.
+The novelty of this work consists of applying for the first time a full wavefield dataset of elastic wave propagation (a numerically generated dataset) as an input to various supervised deep neural networks, which is capable of identifying damage.
 Accordingly, two main approaches were adopted:
 \begin{enumerate}
 	\item One-to-one approach
@@ -16,9 +16,10 @@ The developed models that are based on one-to-one approach are:
 	\item FCN-DenseNet
 	\item GCN
 \end{itemize}
-Whereas, for the many-to-one approach, a number frames (representing the propagation of elastic waves) are fed to the developed models in order to generate a damage map.
-For such approach, an autoencoder ConvLSTM models were developed.
+Whereas, for the many-to-one approach, a number of frames (representing the propagation of elastic waves) are fed to the developed models in order to generate a damage map.
+For such an approach, an autoencoder ConvLSTM model was developed.
 
-Furthermore, we have developed deep learning models to perform an end-to-end superresulution technique regarding the elastic waves propagation and their interaction with the damage and the specimen boundaries.
-Accordingly, a Low-Resolution (LR) input frame is captured using a uniform mesh, which is fed to deep learning model to produce a High-Resolution (HR) frame.
-Later, the predicted HR frames are fed to the many-to-one models in order to identify the damage.
+Furthermore, we have developed deep learning models to perform an end-to-end super-resolution technique regarding elastic wave propagation and their interaction with the damage and the specimen boundaries.
+Accordingly, a low-resolution input frame is acquired using a uniform mesh grid with a low number of scanning points.
+Then, the low-resolution frames are fed to a deep learning model to produce high-resolution frames.
+Later, the predicted high-resolution frames can be fed to the many-to-one models to identify the damage.

@@ -1,14 +1,14 @@
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
 \section{Super-Resolution image reconstruction for delamination identification}
 \label{sec45}
-Guided waves, in particular Lamb waves, are often utilised for structural health monitoring (SHM) as well as non-destructive testing (NDT).
-In the former case, usually an array of transducers is used for point-wise measurements.
-These are usually piezoelectric transducers that can work as actuators and sensors, i.e. in active guided wave-based SHM.
-It should be noted that round-robin actuator-sensor measurements can be conducted very fast, therefore nearly online monitoring of a structure is possible.
+As previously stated, guided waves, specifically Lamb waves, are frequently used for SHM and NDT.
+For point-wise measurements in the former scenario, an array of transducers is typically used.
+These are typically piezoelectric transducers that can function as actuators as well as sensors, as in active guided wave-based SHM.
+It should be emphasized that round-robin actuator-sensor measurements can be performed very quickly, allowing for near-real-time monitoring of a structure.
 
-Recently, a lot of research on the application of scanning laser Doppler vibrometer (SLDV) for NDT is reported~\cite{Flynn2013,Kudela2015,Kudela2018d,Segers2021,Segers2022}. 
-In this method, either piezoelectric transducer or pulse laser is used for guided wave excitation while the measurements are taken by SLDV at one point on the surface of an inspected structure.
-The process is repeated for other points automatically in a scanning fashion until full wavefield of Lamb waves is acquired.
+There has been a lot of recent research on the application of SLDV for NDT \cite{Flynn2013,Kudela2015,Kudela2018d,Segers2021,Segers2022}.
+For guided wave excitation, either a piezoelectric transducer or a pulse laser is utilized, and measurements are taken by SLDV at one location on the surface of an inspected structure.
+The method is continued automatically for other points in a scanning fashion until the full wavefield of Lamb waves is obtained.
 
 Full wavefield measurements are taken on a very dense grid of points opposite to sparsely measured signals by sensors.
 Hence, deliver much more useful data from which information about damage can be extracted in comparison to signals measured by an array of transducers.
@@ -74,7 +74,7 @@ In order to train deep learning models to perform super-resolution image reconst
 Initially, I have resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low- to high-resolutions.
 
 In this work, I have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
-Hence, I have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(21.5\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
+Hence, I have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(19.2\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
 
 Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
 
