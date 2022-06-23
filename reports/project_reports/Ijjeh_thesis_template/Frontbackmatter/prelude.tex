@@ -56,9 +56,32 @@ And finally, I would like to thank everyone who supported me during my journey o
 
 % Abstract to be bound with thesis
 \newcommand{\abstextwithesis}
-{
-	%Basic abstract goes here. Can use paragraphs and normal \LaTeX commands.
-	...
+{	
+	Structural health monitoring (SHM) and non-destructive testing (NDT) technologies are employed to predict the structural remaining functional life via proper diagnosis and prognosis methods.
+	As a result, the purpose is to detect and characterise defects that may risk the integrity and functionality of a structure.
+	However, it is observed that the progress in the fields of SHM and NDT, which utilise elastic waves, has slowed down in recent years.
+	It may be attributed to the limitations of classic techniques of signal processing applied to a complex and challenging problem of the extraction of damage-related features from signals of propagating waves.
+	On the other hand, the accelerated progress in the field of artificial intelligence (AI) technologies in recent years, mainly in deep learning and computer vision, revealed new dimensions for solving problems and offered the opportunity to be implemented and integrated with the NDT and further with SHM approaches.
+	
+	The main objective of the dissertation is to develop a novel AI-driven diagnostic system for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).
+	Hence, the potential of utilising artificial intelligence-based approaches to investigate damage detection and identification based on the propagation of Lamb waves is explored.
+	The developed AI systems adopt an end-to-end strategy capable of processing the animation of propagating Lamb waves directly into the damage intensity map.
+	
+	Additionally, the issue of the slow data acquisition of high-resolution full wavefield imaging techniques was addressed.
+	Hence, to overcome such an issue, I present a deep learning approach to recover the high-resolution frames of Lamb wave propagation and their interaction with delamination and boundaries from low-resolution measurements.
+	Consequently, such a method will speed up the data acquisition process.
+	
+	In summary, this dissertation will investigate the feasibility of utilising full wavefields of Lamb wave propagation based on various deep learning-based approaches in order to identify delamination in composite laminates.
+	
+	Following an introductory chapter and a review of the state-of-the-art (Chapters 1-3), the dissertation discusses its contribution in Chapter four which consists of four parts:
+	\begin{itemize}
+		\item Development of a fully connected convolutional neural network (CNN) classification model capable of detecting and localising delamination in a CFRP plate utilising a surrounding box.
+		\item Delamination identification using fully convolutional networks (FCN) trained on RMS input images of the full wavefield, in which the FCN models are capable of performing pixel-wise image segmentation.
+		\item Delamination identification is based on the animation of the full wavefield, in which the model is capable of identifying the delamination in the CFRP plate only by utilising the full wavefield images of Lamb wave propagation.
+		\item Super-resolution image reconstruction for delamination identification, in which the developed deep learning model is capable of recovering the high-resolution full wavefield of Lamb wave propagation from low-resolution measurements with a compression ratio of $19.2\%$ which is below the Nyquist sampling rate.
+	\end{itemize}
+	Furthermore, the developed models were verified on experimentally acquired data with single and multiple Teflon inserts representing delamination, indicating that the developed models can be used for
+	delamination detection and localisation and further size estimation.
 }
 
 % Puplications page
