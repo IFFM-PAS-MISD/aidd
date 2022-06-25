@@ -12,5 +12,5 @@
 \contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics of the four numerical cases\relax }}{86}{table.caption.82}%
 \contentsline {table}{\numberline {5.6}{\ignorespaces Mean IoU for numerical cases with respect to the input of the model\relax }}{86}{table.caption.83}%
 \contentsline {table}{\numberline {5.7}{\ignorespaces Evaluation metrics for experimental case of single delamination\relax }}{90}{table.caption.88}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Quality metrics for the DLSR model for four numerical test cases calculated at three different frames $N_f$ per case.\relax }}{101}{table.caption.104}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Quality metrics for the DLSR model for four numerical test cases calculated at three different frames $N_f$ per case.\relax }}{100}{table.caption.104}%
 \addvspace {10\p@ }
