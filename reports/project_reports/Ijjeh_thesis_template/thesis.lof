@@ -66,14 +66,14 @@
 \contentsline {figure}{\numberline {5.14}{\ignorespaces IoU for the sliding window of frames (Specimen\nobreakspace {}IV).\relax }}{93}{figure.caption.93}%
 \contentsline {figure}{\numberline {5.15}{\ignorespaces Predictions for window centered at selected frames (Specimen\nobreakspace {}IV).\relax }}{93}{figure.caption.94}%
 \contentsline {figure}{\numberline {5.16}{\ignorespaces Specimen\nobreakspace {}IV: (a) RMS image (damage map), (b) Thresholded RMS image.\relax }}{93}{figure.caption.95}%
-\contentsline {figure}{\numberline {5.17}{\ignorespaces First numerical case with respect to the reconstruction of whole plate\relax }}{95}{figure.caption.96}%
-\contentsline {figure}{\numberline {5.18}{\ignorespaces First numerical case with respect to the delamination region\relax }}{95}{figure.caption.97}%
-\contentsline {figure}{\numberline {5.19}{\ignorespaces Second numerical case with respect to the reconstruction of whole plate\relax }}{96}{figure.caption.98}%
-\contentsline {figure}{\numberline {5.20}{\ignorespaces Second numerical case with respect to the delamination region\relax }}{97}{figure.caption.99}%
-\contentsline {figure}{\numberline {5.21}{\ignorespaces Third numerical case with respect to the reconstruction of whole plate\relax }}{97}{figure.caption.100}%
-\contentsline {figure}{\numberline {5.22}{\ignorespaces Third numerical case with respect to the delamination region\relax }}{98}{figure.caption.101}%
-\contentsline {figure}{\numberline {5.23}{\ignorespaces Fourth numerical case with respect to the reconstruction of whole plate\relax }}{99}{figure.caption.102}%
-\contentsline {figure}{\numberline {5.24}{\ignorespaces Fourth numerical case with respect to the delamination region\relax }}{99}{figure.caption.103}%
+\contentsline {figure}{\numberline {5.17}{\ignorespaces First numerical case with respect to the reconstruction of whole plate.\relax }}{95}{figure.caption.96}%
+\contentsline {figure}{\numberline {5.18}{\ignorespaces First numerical case with respect to the delamination region.\relax }}{95}{figure.caption.97}%
+\contentsline {figure}{\numberline {5.19}{\ignorespaces Second numerical case with respect to the reconstruction of whole plate.\relax }}{96}{figure.caption.98}%
+\contentsline {figure}{\numberline {5.20}{\ignorespaces Second numerical case with respect to the delamination region.\relax }}{97}{figure.caption.99}%
+\contentsline {figure}{\numberline {5.21}{\ignorespaces Third numerical case with respect to the reconstruction of whole plate.\relax }}{97}{figure.caption.100}%
+\contentsline {figure}{\numberline {5.22}{\ignorespaces Third numerical case with respect to the delamination region.\relax }}{98}{figure.caption.101}%
+\contentsline {figure}{\numberline {5.23}{\ignorespaces Fourth numerical case with respect to the reconstruction of whole plate.\relax }}{99}{figure.caption.102}%
+\contentsline {figure}{\numberline {5.24}{\ignorespaces Fourth numerical case with respect to the delamination region.\relax }}{99}{figure.caption.103}%
 \contentsline {figure}{\numberline {5.25}{\ignorespaces Delamination arrangements in the specimen.\relax }}{101}{figure.caption.105}%
 \contentsline {figure}{\numberline {5.26}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{102}{figure.caption.106}%
 \contentsline {figure}{\numberline {5.27}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{103}{figure.caption.107}%

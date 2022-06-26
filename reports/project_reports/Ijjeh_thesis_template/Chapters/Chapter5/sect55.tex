@@ -3,12 +3,13 @@
 \label{sec55}
 
 The results of investigating several end-to-end DL models are presented in this chapter. 
-The developed DL models were trained on a large synthetically generated dataset representing the full wavefield of the Lamp waves propagating in a CFRP plate and their interaction with discontinuities such as delamination and the plate edges, acquired by SLDV from the bottom surface of the plate. 
+The developed DL models were trained on a large synthetically generated dataset representing the full wavefield of the Lamb waves propagating in a CFRP plate and their interaction with discontinuities such as delamination and the plate edges, acquired by SLDV. 
 
-The first developed DL models were trained on RMS images to perform delamination detection and localisation through surrounding boxes.
+The first developed DL models were trained on RMS images to perform delamination detection and localisation through bounding boxes.
 Hence, two CNN models were developed according to the RMS image resolution of $14\times14$ and $16\times16$ blocks with a size of $32\times32$ pixels, respectively.
 The CNN models were evaluated on numerical test cases, proving their ability to detect and localise delamination in previously unseen data.
 The IoU metric was applied to evaluate the obtained results.
+However, these models were not able to predict delaminations properly for the experimental test cases.
 
 The DL models for pixel-wise image segmentation were also trained on RMS images in a one-to-one scheme to perform delamination identification.
 Accordingly, five FCN models were developed: Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet, and GCN.
