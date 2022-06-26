@@ -4,7 +4,7 @@
 
 In this section, I present my initial attempt to solve the problem of delamination detection in CFRP materials by utilising CNN models for classification purposes.
 
-The developed models were trained on RMS images from the synthetically generated dataset of the propagating Lamb waves (from the top of the surface of the plate) to predict the delamination location using bounding boxes as shown in Fig.~\ref{fig:RMS_14}, while, Fig.~\ref{fig:label_14} shows its corresponding ground truth.
+The bounding box method was used for the classification of the location of the delamination with the input as RMS (Fig.~\ref{fig:RMS_14}) and the binary representation of the delamination shape as ground truth (label shown in Fig.~\ref{fig:label_14}).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
@@ -78,7 +78,7 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 
 \subsection{CNN classification models}
 \label{sec422}
-The architecture of the implemented CNN model for classification purposes is presented in Fig.~\ref{CNN_model}
+The architecture of the implemented CNN model for classification purposes is presented in Fig.~\ref{CNN_model}.
 The model takes an input patch of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
 Moreover, in the convolution operation, the padding was set to be the same,  and the activation function was Relu.
 Then, a pooling layer is applied, which has a pool filter of size (\(2\times 2\)) with a stride of (\(2\)).

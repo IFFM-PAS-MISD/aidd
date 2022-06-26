@@ -2,7 +2,7 @@
 \section{Synthetic dataset acquisition}
 \label{sec41}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The essential part of this work was in generating a synthetic dataset of a full wavefield of propagating Lamb waves in a plate made of CFRP.
+The essential part of this work was the generation of a synthetic dataset of a full wavefield of propagating Lamb waves in a plate made of CFRP.
 Therefore, in this work, a numerical dataset of propagating waves in carbon fibre reinforced composite plates was computed by using the parallel implementation of the time domain spectral element method~\cite{Kudela2020}.
 
 The dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric (PZT) excitation placed at the centre of the plate. 
@@ -41,7 +41,7 @@ In summary, the following random parameters were simulated in each case:
 	\item coordinates of the centre of delamination (randomly selected from the interval \(\left[0\, \textrm{mm}, 250\, \textrm{mm} -\delta \right]\) and \( \left[250\, \textrm{mm}+\delta, 500\, \textrm{mm} \right] \), where \(\delta = 10\, \textrm{mm}\)).
 \end{itemize}
 These parameters are defined in Fig.~\ref{fig:random_delaminations}, which shows exemplary random delamination locations, sizes, and shapes for Lamb wave propagation modeling.
-It is important to note that the numerical cases include delaminations at the edges and the corners of the plate.
+It is important to note that the numerical cases include delaminations at edges and corners of the plate.
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[scale=0.8]{Figures/Chapter_4/figure1.png}
@@ -64,7 +64,18 @@ An example of the simulated full wavefield data on the top and bottom surfaces i
 It should be noted that stronger wave entrapment at delamination can be observed for the case of the wavefield at the top surface.
 It is because the delamination within the cross-section is located closer to the top surface.
 It makes it easier to detect delamination by processing wavefields at the top surface.
-It is better visible if the root mean square (RMS) is applied to the wavefield.
+
+It must be noted that the output from the wave propagation model is in the form of a 3D matrix that contains the amplitudes of propagating waves at location $(x,y)$ and time $t_k$.
+Hence, we can view it as a set of frames of propagating waves at discrete time moments.
+It is better visible if the root mean square (RMS) according to Eqn.\ref{eqn:rms} is applied to the wavefield.
+%%%%%%%%%%%%%%%
+\begin{equation}
+	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k-1}^{N}s(x,y,t_k)^2}
+	\label{eqn:rms} 
+\end{equation}
+%%%%%%%%%%%%%%%
+where the number of sampling points N was 512. 
+Therefore, the dataset was collapsed to 475 2D matrices in which amplitudes are stored as double-precision values.
 The result of this operation is presented in Fig.~\ref{fig:rms}.
 Based on the image analysis, the shape of the delamination can be easier to discern for the top case.
 \begin{figure} [!ht]

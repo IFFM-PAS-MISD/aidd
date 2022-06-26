@@ -4,7 +4,7 @@
 
 %% CHAPTER INTRODUCTION ///////////////////////////////////////////////////////////////////////////////
 In this chapter, several DL methodologies were presented in order to detect and localise delamination in composite laminates based on non-contact ultrasonic wavefield imaging that can provide precise details about the health status of the investigated specimen.
-Accordingly, a large synthetic dataset was generated representing the full wavefield of the Lamp waves propagating in a CFRP plate and their interaction with discontinuities such as the delamination and the plate edges, acquired by SLDV from the bottom surface of the plate.
+Accordingly, a large synthetic dataset was generated representing the full wavefield of the Lamb waves propagating in a CFRP plate and their interaction with discontinuities such as the delamination and the plate edges, acquired by SLDV from the bottom surface of the plate.
 The acquisition process of the synthetic dataset is explained in details in the section~\ref{sec41}.
 
 The deep learning models were trained using a supervised scheme. 
@@ -13,11 +13,11 @@ The developed methods are end-to-end approaches, in which the whole unprocessed 
 Hence, it will learn by itself to identify distinct patterns and detect damage.
 In section~\ref{sec42}, a fully connected CNN classifier model for detecting and localising delamination is presented in details.
 In section~\ref{sec43}, I present five FCN models for delamination identification. 
-Further, the developed models were trained using the RMS images in which the developed models are performing image pixel-wise image segmentation.
+Further, the developed models were trained using the RMS images in which the developed models are performing pixel-wise image segmentation.
 In section~\ref{sec44}, a deep learning model for delamination identification utilising the animation of full wavefield is presented.
 
 As mentioned earlier, ultrasonic wavefield imaging with SLDV can provide detailed information on the health status of an inspected structure.
-However, high spatial resolution, which is frequently required for precise damage estimation, typically demands a prolonged scanning time.
+However, high spatial resolution, which is frequently required for precise damage size estimation, typically demands a prolonged scanning time.
 In section~\ref{sec45}, I present a DL model for image super-resolution reconstruction in which the full wavefields of Lamb waves are recovered from low-resolution wavefields acquired with a reduced number of measuring points into high-resolution wavefields.
 Accordingly, this can allow for a precise recovery of propagating waves and their interactions with discontinuities such as delaminations and boundaries of the plate.
 Consequently, this process will speed up the acquisition of data.

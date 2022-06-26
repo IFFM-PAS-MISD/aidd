@@ -1,8 +1,8 @@
-\section{DLSR model}
+\section{Predictions of DLSR model}
 \label{sec54}
 In this section, the performance evaluation of the developed DLSR model based on the numerical test cases are presented.
-It must be noted that the LR frames used to recover the HR frames were not used in the training set.
-Furthermore,  the DLSR model was trained on the full wavefield animation of a window size $128$ frames per case
+%It must be noted that the LR frames used to recover the HR frames were not used in the training set.
+The DLSR model was trained on the full wavefield animation of a window size $128$ frames per case
 Accordingly, each numerical test case was evaluated at three different frames (time steps):
 \begin{itemize}
 	\item The first frame represents the initial interaction of the guided waves with the delamination (the first frame in the window).
@@ -24,7 +24,7 @@ The reference frames for this test case are $N_f=127$, $N_f=191$, and $N_f=255$ 
 Additionally, the region of guided waves interaction with the delamination is depicted with a square box.
 Figures~\ref{fig:pred_397_full_127}, \ref{fig:pred_397_full_191}, and \ref{fig:pred_397_full_255} show the corresponding recovered frame at $N_f=127$, $N_f=191$, and $N_f=255$, respectively, with the DLSR model.
 
-The calculated quality metrics for the whole plate regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}, which proves that the DLSR model can recover the LR frames into HR frames with high quality.
+The calculated quality metrics for the whole plate regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}, which proves that the DLSR model can map the LR frames to HR frames with high quality.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 	\centering
@@ -75,10 +75,10 @@ The calculated quality metrics for the whole plate regarding the first test case
 
 Figure~\ref{fig:num_results_CS_damage_area_397} presents a zoom in at the delamination region that shows the interaction of the guided waves with the delamination regarding the test case presented in Fig.~\ref{fig:num_results_CS_397}.
 Figures~\ref{fig:ref_397_damage_127}, \ref{fig:ref_397_damage_191}, and \ref{fig:ref_397_damage_255} show the reference delamination regions with respect to Figs.~\ref{fig:ref_397_full_127}, \ref{fig:ref_397_full_191}, and \ref{fig:ref_397_full_255}, respectively.
-Figures.\ref{fig:pred_397_damage_127}, \ref{fig:pred_397_damage_191}, and \ref{fig:pred_397_damage_255} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_397_full_127}, \ref{fig:pred_397_full_191}, and \ref{fig:pred_397_full_255}, respectively.
+Figures~\ref{fig:pred_397_damage_127}, \ref{fig:pred_397_damage_191}, and \ref{fig:pred_397_damage_255} show the zoom in of the reconstructed frames of Figs.~\ref{fig:pred_397_full_127}, \ref{fig:pred_397_full_191}, and \ref{fig:pred_397_full_255}, respectively.
 
 The calculated quality metrics for the delamination region regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}.
-The acquired quality proves that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
+The acquired quality proves that the DLSR model can map the LR frames to HR frames with high quality at the delamination region.
 
 \begin{figure} [!ht]
 	\centering
@@ -138,7 +138,7 @@ The region of guided waves interaction with the delamination is depicted with a 
 Figures~\ref{fig:pred_438_full_154}, \ref{fig:pred_438_full_218}, and \ref{fig:pred_438_full_282} show the corresponding recovered frame at $N_f=154$, $N_f=218$, and $N_f=282$, respectively, with the DLSR model.
 
 The calculated quality metrics for the whole plate regarding the second test case are presented in Table~\ref{tab:num_DLSR_results}.
-The results prove that the DLSR model can recover the LR frames into HR frames with high quality.
+The results prove that the DLSR model can map the LR frames to HR frames with high quality.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
@@ -192,7 +192,7 @@ Figures~\ref{fig:ref_438_damage_154}, \ref{fig:ref_438_damage_218}, and \ref{fig
 Figures.\ref{fig:pred_438_damage_154}, \ref{fig:pred_438_damage_218}, and \ref{fig:pred_438_damage_282} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_438_full_154}, \ref{fig:pred_438_full_218}, and \ref{fig:pred_438_full_282}, respectively.
 
 The calculated quality metrics for the delamination region regarding the second test case are presented in Table~\ref{tab:num_DLSR_results}.
-The acquired quality proves that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
+The acquired quality proves that the DLSR model can map the LR frames to HR frames with high quality at the delamination region.
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
@@ -251,7 +251,7 @@ The region of guided waves interaction with the delamination is depicted with a 
 Figures~\ref{fig:pred_448_full_211}, \ref{fig:pred_448_full_275}, and \ref{fig:pred_448_full_339} show the corresponding recovered frame at $N_f=211$, $N_f=275$, and $N_f=339$, respectively, with the DLSR model.
 
 The calculated quality metrics for the whole plate regarding the second test case are presented in Table~\ref{tab:num_DLSR_results}.
-The measured quality metrics prove that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
+The measured quality metrics prove that the DLSR model can map the LR frames to HR frames with high quality at the delamination region.
 \begin{figure} [!ht]
 	\centering
 	\begin{subfigure}[b]{.32\textwidth}
@@ -303,7 +303,7 @@ Figure~\ref{fig:num_results_CS_damage_area_448} presents a zoom in at the delami
 Figures~\ref{fig:ref_448_damage_211}, \ref{fig:ref_448_damage_275}, and \ref{fig:ref_448_damage_339} show the reference delamination regions with respect to Figs.~\ref{fig:ref_448_full_211}, \ref{fig:ref_448_full_275}, and \ref{fig:ref_448_full_339}, respectively.
 Figures.\ref{fig:pred_448_damage_211}, \ref{fig:pred_448_damage_275}, and \ref{fig:pred_448_damage_339} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_448_full_211}, \ref{fig:pred_448_full_275}, and \ref{fig:pred_448_full_339}, respectively.
 The calculated quality metrics for the delamination region regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}.
-The measured quality metrics prove that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
+The measured quality metrics prove that the DLSR model can map the LR frames to HR frames with high quality at the delamination region.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
@@ -368,7 +368,7 @@ Figure~\ref{fig:num_results_CS_damage_area_456} presents a zoom in at the delami
 Figures~\ref{fig:ref_456_damage_159}, \ref{fig:ref_456_damage_223}, and \ref{fig:ref_456_damage_287} show the reference delamination regions with respect to Figs.~\ref{fig:ref_456_full_159}, \ref{fig:ref_456_full_223}, and \ref{fig:ref_456_full_287}, respectively.
 Figures~\ref{fig:pred_456_damage_159}, \ref{fig:pred_456_damage_223}, and \ref{fig:pred_456_damage_287} show the zoom in of the reconstructed frames of Figs.\ref{fig:pred_456_full_159}, \ref{fig:pred_456_full_223}, and \ref{fig:pred_456_full_287}, respectively.
 The calculated quality metrics for the delamination region regarding the first test case are presented in Table~\ref{tab:num_DLSR_results}.
-The measured quality metrics prove that the DLSR model can recover the LR frames into HR frames with high quality at the delamination region.
+The measured quality metrics prove that the DLSR model can map the LR frames to HR frames with high quality at the delamination region.
 
 \begin{figure} [!ht]
 	\centering

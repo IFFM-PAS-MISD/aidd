@@ -1,16 +1,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces AI classes\relax }}{16}{table.caption.10}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces AI classes\relax }}{18}{table.caption.10}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Layer, Transition Down and Transition Up layers.\relax }}{57}{table.caption.59}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Layer, Transition Down and Transition Up layers.\relax }}{59}{table.caption.59}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces IoU values of numerical cases\relax }}{74}{table.caption.71}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Evaluation metrics of the four numerical cases\relax }}{81}{table.caption.77}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Analysis of numerical cases\relax }}{81}{table.caption.78}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics of the experimental case\relax }}{83}{table.caption.79}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics of the four numerical cases\relax }}{86}{table.caption.82}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Mean IoU for numerical cases with respect to the input of the model\relax }}{86}{table.caption.83}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Evaluation metrics for experimental case of single delamination\relax }}{90}{table.caption.88}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces IoU values of numerical cases.\relax }}{74}{table.caption.71}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Evaluation metrics of the four numerical cases.\relax }}{81}{table.caption.77}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Analysis of numerical cases.\relax }}{81}{table.caption.78}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics of the experimental case.\relax }}{82}{table.caption.79}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics of the four numerical cases.\relax }}{85}{table.caption.82}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Mean IoU for numerical cases with respect to the input of the model.\relax }}{85}{table.caption.83}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Evaluation metrics for experimental case of single delamination.\relax }}{89}{table.caption.88}%
 \contentsline {table}{\numberline {5.8}{\ignorespaces Quality metrics for the DLSR model for four numerical test cases calculated at three different frames $N_f$ per case.\relax }}{100}{table.caption.104}%
 \addvspace {10\p@ }
