@@ -10,7 +10,11 @@ Accordingly, each numerical test case was evaluated at three different frames (t
 	\item The third frame represents the interaction with the delamination after 128 frames of the first frame (the last frame in the window).
 \end{itemize}
 
-Additionally, the developed model was evaluated on an experimental test case to demonstrate their capability of super-resolution image reconstruction.
+Additionally, the developed DLSR model was evaluated in an experimental test case to demonstrate its capability for super-resolution image reconstruction.
+Additionally, the conventional CS approach was applied as a reference with a different number of points used for the reconstruction of the wavefield in the experimental test case.
+Moreover, two types of masks (sub-sampling schemes) for the construction of the measurement matrix were tested, namely random mask and jitter mask.
+The jitter mask was defined according to the algorithm presented in~\cite{DiIanni2015}. 
+It should be noted that in the CS method, priors were not exploited.
 
 \subsection{Numerical cases}
 \label{sec541}
@@ -624,7 +628,7 @@ The recovered reflected waves from damage using DLSR model are visible and can b
 
 Next, reconstruction accuracy metrics were calculated for each consecutive frame $N_f$ and put together in Fig.~\ref{fig:frame_metrics}.
 It should be noted that PSNR behaviour is very similar regardless the applied reconstruction method.
-Moreover, the PSNR values obtained by DLSR model by using only 1024 points are on the level similar to CS by using 3000 points.
+Moreover, the PSNR values obtained by DLSR model by using only $1024$ points are on the level similar to CS by using $3000$ points.
 However, the obtained Pearson CC values for DLSR model is lower than for CS and reach negative values at the frame corresponding to the moment when A0 mode reaches the edges of the plate.
 \begin{figure} [h!]
 	\centering
@@ -646,24 +650,28 @@ However, the obtained Pearson CC values for DLSR model is lower than for CS and 
 	\label{fig:frame_metrics}
 \end{figure}
 
-%\begin{table}[h!]
-%	\renewcommand{\arraystretch}{1.3}
-%	\centering \footnotesize
-%	\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.}	
-%	\begin{tabular}{lrrrcrc} 
-%		\toprule
-%		& & & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
-%		\cmidrule(lr){4-5} \cmidrule(lr){6-7}
-%		Method & $N_p$ & CR [\%] & PSNR & PEARSON CC& PSNR & PEARSON CC \\
-%		\midrule
-%		\csvreader
-%		[table head=\toprule,
-%		late after line=\\ 
-%		]{table_metrics.csv}{
-%			1=\one, 2=\two, 3=\three, 4=\four, 5=\five, 6=\six, 7=\seven
-%		}%
-%		{\one & \two & \three & \four & \five & \six & \seven }%	
-%		\bottomrule
-%	\end{tabular}	
-%	\label{tab:csv_results}
-%\end{table}
+Table~\ref{tab:csv_results} presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and DLSR model for various numbers of points $N_p$ and the corresponding compression ratios CR.
+Metrics were calculated for the frame $N_f=110$ on the whole plate and delamination region, respectively.
+It should be underlined, that for $N_p=1024$ points, the CS recovery algorithm behaves poorly at the delamination region whereas DLSR model is still able to achieve high PSNR and Pearson CC values.
+\begin{table}[!ht]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.}	
+	\begin{tabular}{lrrrcrc} 
+		\toprule
+		& & & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+		\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+		Method & $N_p$ & CR [\%] & PSNR & PEARSON CC& PSNR & PEARSON CC \\
+		\midrule
+		\csvreader
+		[table head=\toprule,
+		late after line=\\ 
+		]{table_metrics.csv}{
+			1=\one, 2=\two, 3=\three, 4=\four, 5=\five, 6=\six, 7=\seven
+		}%
+		{\one & \two & \three & \four & \five & \six & \seven }%	
+		\bottomrule
+	\end{tabular}	
+	\label{tab:csv_results}
+\end{table}
+\clearpage
