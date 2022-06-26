@@ -110,7 +110,7 @@ However, their work was not implemented for a further step, which is damage loca
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
 \subsection{Guided waves Based SHM through DL}
 The guided waves approaches are widely utilised in SHM/NDT due to the fact it can detect very small damage sizes~\cite{Guemes2020}. 
-Damage detection and identification approaches using guided waves are based on the measurements of the PZT sensors, whether bonded or embedded into the investigated structure. 
+Damage detection and localisation approaches using guided waves are based on the measurements of the PZT sensors, whether bonded or embedded into the investigated structure. 
 PZT sensor(s) are responsible for the excitation of the structure by a short ultrasonic pulse (usually, the used frequency is in the range of hundreds of kHz) that propagates through an investigated structure such as plates or pipes as an elastic wave.
 The registered signals (baseline) are stored and compared with other registered signals acquired through the lifetime of the investigated structure.
 Damage detection using the baseline subtraction approach for guided waves is based on subtracting damage-free registered measurements from the newly registered measurements to obtain the new changes that occurred to the structure.
@@ -127,7 +127,7 @@ In the following, several approaches utilising guided waves for SHM/NDT based on
 \textcite{Melville1949} proposed a CNN model for the prediction of damage state in thin metal plates to overcome the issue of inaccurate representation of guided wave propagation when applying conventional approaches. 
 The model utilizes the full wavefield scans of thin plates (aluminum).
 Moreover, the acquired raw data used for training the model was divided into undamaged and damaged states equally.
-The model achieved higher accuracy regarding damage  \(99.98\%\) when compared to SVM that achieved \(62\%\).
+The model achieved higher accuracy regarding damage detection equal \(99.98\%\) when compared to SVM that achieved \(62\%\).
 
 \textcite{Sammons2016} proposed a CNN model based on X-ray computed tomography for delamination estimation in a composite structure.
 Furthermore, image segmentation was applied to the input images to identify the damage.
