@@ -72,6 +72,14 @@ AE signals were clustered based on several metrics such as the AE signal duratio
 Accordingly, the clustered labelled data is fed into a KNN supervised classifier.
 A trained classifier is able to classify new coming data accordingly.
 Regarding the unsupervised classification, the Kohonen classifier was utilised~\cite{58325}, which is a self-organising map (SOM) which is a neural network consisting of neurons as processing units. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\textcite{Nazarko2020} monitored the axial bolt forces using elastic wave propagation signals.
+Six-bolt flange connections were put through a series of static tensile tests in the lab. For the accurate measurement of axial force, some bolts were equipped with washer load cells.
+Additionally, a few bolts were equipped with piezoelectric transducers (actuator and sensor operating in a pitch-catch arrangement) to capture the elastic wave signals.
+The outcomes of the ultrasonic testing were then integrated with the artificial neural network (ANN) for both signal compression and as a tool for user interface. 
+The outcomes demonstrated that ANNs could predict the axial forces in bolts with a reasonable amount of accuracy. 
+Significant potential exists for actual NDT inspections, according to the suggested method~\cite{Nazarko2020}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% KNN
 \textcite{Pashmforoush2014} proposed a technique to classify damage of various lay-up configurations in glass/polyester composites.
@@ -150,6 +158,13 @@ Ewald et al.~\cite{Ewald2019} presented a CNN model called (DeepSHM) for signal 
 Furthermore, the model provides an end-to-end approach for SHM by utilising response signals captured by sensors.
 Moreover, response signals were preprocessed by wavelet transform to get the wavelet coefficient matrix (WCM).
 Further, the CNN model was trained with the WCM to obtain neural weights.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textcite{Nazarko2016} investigated the potential of utilising artificially deteriorated signals of Lamb waves in training a novelty detection (ND) system for early damage detection.
+In order to train auto-associative neural networks, the authors used principal components that were generated from signals that were measured experimentally.
+The measurements of Lamb waves in the investigated specimens made of aluminum and glass fiber reinforced polymer serve as an excellent illustration of how the ND algorithm accurately handles both simple and complex signals.
+It was also noted that the proposed ND method maintained its sensitivity and robustness when it used raw signals with a relatively low sampling rate, on a relatively narrow time window, and further noised signals.
+
 %\textcite{Ijjeh2021} presented a fully convolutional network (FCN)  for damage identification in composite plates base on a supervised learning approach.
 %Furthermore, the authors utilised a full wavefield of Lamb waves propagation, which was numerically generated resembling measurements acquired by scanning laser Doppler vibrometer (SLDV).
 %The model performs a pixel-wise segmentation that is able to identify the delamination which results in damaged and undamaged classes.
