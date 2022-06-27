@@ -103,6 +103,9 @@ Further, I applied a 2D convolutional layer as the final output layer followed b
 Consequently, a threshold value must be chosen to classify the output into a damaged represented by (\(1\)) or undamaged represented by (\(0\)).
 Hence, I set the threshold value to (\(0.5\)) to exclude all values below the threshold by considering them as undamaged and taking only those values greater than the threshold to be considered as damaged.
 
+Furthermore, Fig.~\ref{fig:ae_convlstm_loss} presents the plot of the loss and validation loss values for epochs during the training phase of the AE-ConvLSTM model.
+The number of epochs for the AE-ConvLSTM model was set to $100$.
+As shown in the Fig.~\ref{fig:ae_convlstm_loss}, the developed AE-ConvLSTM model converges, and it has no signs of overfitting or underfitting.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.7\textwidth]{Figures/Chapter_4/ae_convlstm_loss.png}

@@ -251,37 +251,44 @@ obtained.
 
 \section{Convergence of FCN models}
 
+When a deep learning model approaches convergence during training, the loss falls within an error range around the final value.
+In other words, a model converges when extra training is ineffective.
+Figure~\ref{fig:FCN_model_convergence} presents the plot of the loss and validation loss values with respect to epochs during the training phase.
+I set the number of epochs in all developed FCN models to 20, as this was sufficient to train the models.
+It is clear that all developed FCN models converge after a certain number of epochs, in which the loss reaches its minimum value.
+Furthermore, the FCN models do not show any sign of overfitting or underfitting as shown in Figs.~\ref{fig:UNet_loss},~\ref{fig:VGG16_loss},~\ref{fig:FCN_densenet_loss},~\ref{fig:PSPNet_loss}, and \ref{fig:GCN_loss} regarding Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN, receptively.
 
 \begin{figure} [h!]
 	\centering
-	\begin{subfigure}[b]{0.49\textwidth}
+	\begin{subfigure}[b]{.49\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_4/UNet_loss.png}
 		\caption{}
 		\label{fig:UNet_loss}
 	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.49\textwidth}
+%	\hfill
+	\begin{subfigure}[b]{.49\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_4/VGG16_loss.png}
 		\caption{}
 		\label{fig:VGG16_loss}
 	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.49\textwidth}
+%	\hfill
+	\begin{subfigure}[b]{.49\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_4/FCN_densenet_loss.png}
 		\caption{}
 		\label{fig:FCN_densenet_loss}
 	\end{subfigure}	
-	\hfill
-	\begin{subfigure}[b]{0.49\textwidth}
+%	\hfill
+	\begin{subfigure}[b]{.49\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_4/PSPNET_loss.png}
 		\caption{}
 		\label{fig:PSPNet_loss}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.49\textwidth}
+
+	\begin{subfigure}[b]{.49\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{Figures/Chapter_4/GCN_loss.png}
 		\caption{}
