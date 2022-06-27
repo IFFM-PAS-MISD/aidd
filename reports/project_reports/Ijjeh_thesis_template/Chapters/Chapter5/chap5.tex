@@ -91,14 +91,24 @@ Accordingly, to evaluate the performance of the proposed models, the intersectio
 \(IoU\) is estimated by determining the intersection area between the ground truth and the predicted output.
 Furthermore, we have two output classes (damaged and undamaged). 
 The \(IoU\) was calculated for the damaged class only.
-Equation~(\ref{eqn:iou}) defines the \(IoU\) metric:
+The illustration of the IoU metric is presented in Fig.~\ref{fig:iou} where Eqn.~(\ref{eqn:iou}) defines the \(IoU\) metric:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=.75]{Figures/Chapter_5/IoU_figure.png}
+	\end{center}
+	\caption{Intersection over union.} 
+	\label{fig:iou}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y},
+	\textup{IoU}=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y},
 	\label{eqn:iou}
 \end{equation}
-where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth (label).
 
-Additionally, the percentage area error $\epsilon$ depicted in Eq.~(\ref{eqn:mean_size_error}) was utilised to evaluate the performance of the FCN models and the Autoencoder ConvLSTM model:
+Additionally, the percentage area error $\epsilon$ depicted in Eqn.~(\ref{eqn:mean_size_error}) was utilised to evaluate the performance of the FCN models and the Autoencoder ConvLSTM model:
 \begin{equation}
 	\epsilon=\frac{|A-\hat{A}|}{A} \times 100\%,
 	\label{eqn:mean_size_error}

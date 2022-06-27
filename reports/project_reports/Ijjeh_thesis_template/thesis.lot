@@ -5,13 +5,13 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {4.1}{\ignorespaces Layer, Transition Down and Transition Up layers.\relax }}{59}{table.caption.59}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces IoU values of numerical cases.\relax }}{75}{table.caption.71}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Evaluation metrics of the four numerical cases.\relax }}{82}{table.caption.77}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Analysis of numerical cases.\relax }}{82}{table.caption.78}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics of the experimental case.\relax }}{83}{table.caption.79}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics of the four numerical cases.\relax }}{86}{table.caption.82}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Mean IoU for numerical cases with respect to the input of the model.\relax }}{86}{table.caption.83}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Evaluation metrics for experimental case of single delamination.\relax }}{90}{table.caption.88}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Quality metrics for the DLSR model for four numerical test cases calculated at three different frames $N_f$ per case.\relax }}{102}{table.caption.104}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.\relax }}{106}{table.caption.110}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces IoU values of numerical cases.\relax }}{78}{table.caption.75}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Evaluation metrics of the four numerical cases.\relax }}{84}{table.caption.81}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Analysis of numerical cases.\relax }}{84}{table.caption.82}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Evaluation metrics of the experimental case.\relax }}{85}{table.caption.83}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Evaluation metrics of the four numerical cases.\relax }}{88}{table.caption.86}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Mean IoU for numerical cases with respect to the input of the model.\relax }}{88}{table.caption.87}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Evaluation metrics for experimental case of single delamination.\relax }}{92}{table.caption.92}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Quality metrics for the DLSR model for four numerical test cases calculated at three different frames $N_f$ per case.\relax }}{104}{table.caption.108}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.\relax }}{108}{table.caption.114}%
 \addvspace {10\p@ }

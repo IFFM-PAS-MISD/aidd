@@ -102,4 +102,13 @@ The outputs of the decoder were forwarded into the ConvLSTM2D layer to learn lon
 Further, I applied a 2D convolutional layer as the final output layer followed by a sigmoid activation function which outputs values in a range from \((0,1)\) to indicate the delamination probability.
 Consequently, a threshold value must be chosen to classify the output into a damaged represented by (\(1\)) or undamaged represented by (\(0\)).
 Hence, I set the threshold value to (\(0.5\)) to exclude all values below the threshold by considering them as undamaged and taking only those values greater than the threshold to be considered as damaged.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.7\textwidth]{Figures/Chapter_4/ae_convlstm_loss.png}
+	\caption{}
+	\label{fig:ae_convlstm_loss}
+\end{figure}
+
+
 \clearpage
