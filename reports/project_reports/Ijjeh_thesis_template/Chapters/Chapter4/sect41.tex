@@ -67,10 +67,11 @@ It makes it easier to detect delamination by processing wavefields at the top su
 
 It must be noted that the output from the wave propagation model is in the form of a 3D matrix that contains the amplitudes of propagating waves at location $(x,y)$ and time $t_k$.
 Hence, we can view it as a set of frames of propagating waves at discrete time moments.
-It is better visible if the root mean square (RMS) according to Eqn.\ref{eqn:rms} is applied to the wavefield.
+It is better visible if the root mean square (RMS) according to Eqn.~\ref{eqn:rms} is applied to the wavefield.
+The RMS is defined as:
 %%%%%%%%%%%%%%%
 \begin{equation}
-	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k-1}^{N}s(x,y,t_k)^2}
+	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k-1}^{N}s(x,y,t_k)^2}, 
 	\label{eqn:rms} 
 \end{equation}
 %%%%%%%%%%%%%%%

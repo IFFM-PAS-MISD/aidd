@@ -43,10 +43,10 @@ Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of o
 Further, \(m\) refers to the number of frames in the window, hence, \(m=24\) frames for the developed model, and \(k\) represents the total number of windows.
 Accordingly, I slide the window over all input frames.
 The shift of the window is one frame at a time.
-Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to final damage map by using the RMS:
+Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to final damage map by using the $\bar{RMS}$:
 
 \begin{equation}
-	RMS = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
+	\bar{RMS} = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
 	\label{RMS}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,7 +92,7 @@ The purpose of having different scale levels is to extract feature maps from the
 Every level at the encoder consists of two 2D convolution operations followed by a Batch Normalization then a Dropout is applied. 
 Furthermore, at the end of each level a Maxpooling operation is applied to reduce the dimensionality of the inputs. 
 
-The bottleneck presented in Fig.~\ref{fig:proposed_convLSTM_model} has the lowest level of dimensions of the input data, further it consists of two 2D convolution operations followed by a Batch Normalization.
+The bottleneck presented in Fig.~\ref{fig:proposed_convLSTM_model} has the lowest level of dimensions of the input data, further it consists of two 2D convolution operations followed by a Batch Normaliza\-tion.
 
 The decoder part presented in Fig.~\ref{fig:proposed_convLSTM_model}, is responsible for learning how to restore the original dimensions of the input.
 The decoder part consists of two 2D convolutional operations followed by Batch Normalization and Dropout, and an upsampling operation is applied at the end of each decoder level to retrieve the dimensions of its inputs.
@@ -109,7 +109,7 @@ As shown in the Fig.~\ref{fig:ae_convlstm_loss}, the developed AE-ConvLSTM model
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.7\textwidth]{Figures/Chapter_4/ae_convlstm_loss.png}
-	\caption{}
+	\caption{AE-ConvLSTM model: training and validation losses during training phase.}
 	\label{fig:ae_convlstm_loss}
 \end{figure}
 

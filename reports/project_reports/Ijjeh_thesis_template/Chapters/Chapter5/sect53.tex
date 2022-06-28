@@ -109,7 +109,7 @@ Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted 
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean intersection over union (\(\overline{IoU}\)) for \(95\) numerical test cases with respect to the DL models.
+Table~\ref{tab:meanIoU_vs_input} presents a comparison of the mean (\({\textup{IoU}}\)) for \(95\) numerical test cases with respect to the DL models.
 As shown in Table~\ref{tab:meanIoU_vs_input}, AE-ConvLSTM model takes as input animations of the full wavefields, whereas the rest models presented in~\cite{Ijjeh2021, Ijjeh2022} take as input RMS images.
 As anticipated, the IoU value when taking animations as an input outperforms that when taking only the RMS images as input. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -441,6 +441,7 @@ Figure~\ref{fig:L3_S4_B_5HC_preds_selected_frames} shows the predicted outputs c
 
 The RMS image depicting the damage map of Specimen~IV is presented in Fig.~\ref{fig:RMS_L3_S4_B_ijjeh}.
 Figure~\ref{fig:RMS_threshold_L3_S4_B_ijjeh} shows the thresholded RMS image, and the calculated IoU\(=0.23\).
+
 Furthermore, the mean percentage area error \(\epsilon\) with respect to the three delaminations (Specimen~IV) is equal to \(10.61\%\).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RMS predictions

@@ -121,7 +121,7 @@ Two metrics are utilised for evaluating the DLSR model developed to perform supe
 The first metric is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
 Equation~(\ref{PSNR}) depicts the mathematical representation of the PSNR:
 \begin{equation}
-	PSNR=20\log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
+	PSNR=20\log_{10}\left(\frac{R}{\sqrt{MSE}}\right),
 	\label{PSNR}
 \end{equation}
 where \(R\) represents the maximum fluctuation value that exists in the input image, and its equal to \(255\), as I used an 8-bit unsigned integer data type.
@@ -135,7 +135,7 @@ The second utilised metric is the Pearson correlation coefficient that measures 
 \end{itemize}
 Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC commonly denoted as \(r_{xy}\):
 \begin{equation}
-	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
+	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}},
 	\label{Pearson}
 \end{equation}
 where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) is the mean value of the sample, analogously to \(\bar{y}\).

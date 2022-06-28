@@ -18,7 +18,7 @@ As you progress deeper into the stages, those extracted features become increasi
 
 \subsection{Multilayer Perceptrons}
 
-The simplest DL networks are called multilayer perceptron (MLP), which are constructed from a group of multiple layers of perceptrons (artificial neurons).
+The simplest DL networks are called multilayer perceptron (MLP), which are construct\-ed from a group of multiple layers of perceptrons (artificial neurons).
 Hence, the term "deep" came from multiple layers.
 A perceptron has several inputs and outputs which have weighted connections with a nonlinear activation function.
 By performing this operation, a non-linearity is injected into the network, which is important for the learning process.
@@ -180,7 +180,7 @@ The calculations of new height and width of the output are illustrated in Eqns~\
 	w_{n} = \frac{w+2\times p-w_{k}}{s}+1.
 	\label{new_width}
 \end{equation} 
-where \(h_{n}\) and \(w_{n}\) are the new height and width dimensions of the feature map respectively after applying the convolution. 
+where \(h_{n}\) and \(w_{n}\) are the new height and width dimensions of the feature map respective\-ly after applying the convolution. 
 The padding \(p\) is added to the input image of a feature map to guarantee that both the input and the output have the same dimensions.
 \(h_{k}\) and \(w_{k}\) represent the height and the width of the convolutional kernel, respectively.
 The stride \(s\) defines how much the convolutional kernel slides each step during convolution.
@@ -229,7 +229,7 @@ In the next years, several spectacular CNNs architectures were presented (e.g VG
 \label{sec222}
 Recurrent neural network (RNN) is a class of ANN that was introduced to work with time-series data (sequential data).
 RNN technique can remember its data input, because of its internal memory, which makes it a powerful and promising technique in the field of DL.
-Since there are temporal problems such as natural language processing, language translation, image captioning, and so on, they require to be handled sequentially.
+Since there are temporal problems such as natural language processing, language translation, image captioning, and so on, they require to be handled sequentia\-lly.
 In the traditional deep neural networks (feed-forward), the information only moves in one direction from the input layer through hidden layers to the output layers.
 However, this is not the case for the RNN technique, which implies the current output of an RNN depends on the prior input sequence.
 Accordingly, future events are also utilised for predicting the output of a given sequence.
@@ -274,7 +274,7 @@ In RNNs, there are two paths of data propagation (forward and backward).
 Hence, there are learnable weights for both directions.
 Further, weights are updated using back-propagation through time (BBTT)~\cite{Werbos1990}.
 BBTT depends on the number of timestamps, so it is computationally expensive when there are a high number of timestamps as BBTT performs a back-propagation algorithm on unrolled RNN.
-Consequently, when implementing RNNs, issues may arise during updating the learnable weights using BBTT, which are vanishing and exploding gradients.
+Consequently, when implementing RNNs, issues may arise during updating the learnable weights using BBTT, which are vanishing and exploding gradien\-ts.
 To overcome such issues, ~\textcite{Hochreiter1997} introduced a long short-term memory (LSTM), which is a memory extension for a regular RNN to address the problem of long-term dependencies.
 Further, LSTMs handle inputs or outputs of any length, which makes LSTMs powerful for solving very complex sequential problems.
 LSTM is composed of four units: an input gate, a cell state, a forget gate, and an output gate as presented in Fig.~\ref{fig:lstm}.

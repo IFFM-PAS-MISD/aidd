@@ -92,7 +92,7 @@ Two convolutional layers with \((1024)\) filters make up the bottleneck, which a
 
 The decoder is composed of a number of upsampling blocks that function together to recover original input dimensions and improve resolution.
 As in the downsampling block, each upsampling block transmits the input through two convolution layers, followed by a transmission up layer consisting of a transposed convolutional layer (upsampling).
-The transposed convolutional layer varies from the standard upsampling function in that it introduces learnable parameters for the transposed convolution filters, which improve the model's learning process.
+The transposed convolutional layer varies from the standard upsampling function in that it introduces learnable parameters for the transposed convolution filters, which improve learning process of the model.
 Furthermore, the number of filters used by the convolutional layer is reduced by half after each upsampling operation to keep the model symmetrical.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
@@ -294,7 +294,7 @@ Furthermore, the FCN models do not show any sign of overfitting or underfitting 
 		\caption{}
 		\label{fig:GCN_loss}
 	\end{subfigure}
-	\caption{}
+	\caption{FCN models: training and validation losses during training phase.}
 	\label{fig:FCN_model_convergence}
 \end{figure} 
 \clearpage

@@ -5,7 +5,7 @@
 The importance of SHM systems originated from their ability to monitor the condition of structures in real-time.
 SHM systems can be developed using data-driven methods, which require a huge amount of data that are captured by monitoring the status of a structure.
 In recent years, non-contact systems have gained attention for damage detection and localisation in SHM applications.
-Full wavefields of elastic waves propagation can be excited by a fixed piezoelectric transducer and measured using scanning laser Doppler vibrometry (SLDV).
+Full wavefields of elastic waves propaga\-tion can be excited by a fixed piezoelectric transducer and measured using scanning laser Doppler vibrometry (SLDV).
 The main objective of this dissertation was to investigate the feasibility of utilising deep learning-based approaches for delamination identification in composite laminated structures.
 Accordingly, in this dissertation, I present for the first time the utilisation of the full wavefield of Lamb waves propagation in composite laminates along with deep learning approaches for delamination identification. 
 
@@ -19,13 +19,16 @@ The main outcomes of this dissertation can be summarized as follow:
 \begin{itemize}
 	\item Developing CNN classifier models capable of performing the first levels of SHM, namely damage detection and localisation.
 	\item Developing several FCN models for image semantic segmentation capable of performing damage identification and size estimation through training on RMS images of the full wavefields.
+	Moreover, applying data augmentation techniques to the training dataset (\(475\) RMS images) such as flipping the images horizontally, vertically, and diagonally and further applying K-fold cross-validation to the training dataset have improved the performance of the developed models in their generalisation capability.
 	The results were promising, and the deep learning models surpassed the conventional technique ii.e. adaptive wavenumber filtering in detecting delaminations of different shapes, sizes and angles in the unseen numerically generated data. 
-	Additionally, the models show their ability to generalise by detecting the delamination in the experimentally acquired data.
+	Additionally, the models show their ability to generali\-se by detecting the delamination in the experimentally acquired data.
 	\item Developing a novel deep learning-based method that presents an end-to-end approach that performs a many-to-one sequence prediction to detect the location, size, and shape of delamination.
-	The developed model can identify and estimate delaminations through simultaneously processing a sequence of full wavefield frames.
+	The developed model can identify and estimate delaminations through simultaneously processing a sequence of a certain number of frames of a full wavefield.
+	Therefore, using a certain number of full wavefield frames is sufficient for delamination identification.
 	To assess its generalisation capability, the model was evaluated on various experimentally measured cases of single and multiple Teflon-insert delaminations.
 	The results were promising, and yet the experimental case of multiple delamina\-tions was difficult because the model had only been trained on scenarios with single delamination.
 	As a result, the model demonstrated its ability to detect multiple delaminations at once in real-world scenarios.
+	\item It can be concluded that the performance of the AE-ConvLSTM model, which takes animations of full wavefield as an input, surpasses that of the FCN models that take only the RMS images as input.
 	\item Despite the advantages of acquiring full wavefield by SLDV, it requires several hours of automatic measurements to improve the signal-to-noise ratio (SNR) of ultrasonic responses via averaging procedures.
 	Therefore, there is a paramount need to develop a method to speed up data acquisition while simulta\-neously maintaining the valuable and complex information content obtained from the full wavefield.
 	Consequently, a deep learning model was developed for super-resolution image reconstruction that can recover the high-resolution full wavefield frames with high accuracy from the low-resolution acquired full wavefield by SLDV.

@@ -27,6 +27,8 @@ Furthermore, the reconstructed full wavefield can be used in damage imaging.
 All developed models were implemented and trained with the Keras API~\cite{chollet2015keras} running on top of TensorFlow~\cite{Abadi2016}.
 The NVIDIA GeForce RTX 2070 with \(8\) GBs of memory was utilised to train the CNN classification models.
 Furthermore, the NVIDIA Tesla V100 GPU with \(32\) GBs of memory was utilised to train the FCN models, the AE-ConvLSTM model, and the DLSR model.
+Moreover, training the developed models requires tuning of many hyperparameters such as learning rate, momentum, choice of the optimizer, dropout rate, batch size, and number of epochs, among others.
+Accordingly, to obtain satisfactory results, I used the trial and error approach to tune the hyperparameters of the developed models.
 %% INCLUDE SECTIONS ///////////////////////////////////////////////////////////////////////////////////
 
 \input{Chapters/Chapter4/sect41}

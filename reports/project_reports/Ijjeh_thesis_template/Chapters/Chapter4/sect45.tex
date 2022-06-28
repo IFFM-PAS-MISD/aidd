@@ -79,7 +79,7 @@ Hence, I have performed image subsampling with bi-cubic interpolation and a unif
 Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
 
 To reduce the computation complexity during the training process of the deep learning models, I selected \((128)\) consecutive frames per each delamination case.
-Frames displaying the propagation of guided waves before interacting with the delamination have no features to be extracted. 
+Frames display\-ing the propagation of guided waves before interacting with the delamination have no features to be extracted. 
 Hence, only a certain number of frames was selected from the initial occurrence of the interactions with the delamination.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
@@ -138,14 +138,14 @@ Hence, only a certain number of frames was selected from the initial occurrence 
 
 \subsection{DL approach for SR image reconstruction}
 \label{sec63}
-Single image Super-Resolution (SISR) aims to generate a visually pleasing high-resolution (HR) image from its de-graded low-resolution (LR) measurement.
+Single image Super-Resolution (SISR) aims to generate a visually pleasing high-resolu\-tion (HR) image from its de-graded low-resolution (LR) measurement.
 
 %\subsection{Residual Dense Network model}
 Residual dense network (RDN) was introduced by Zhang et al.~\cite{Zhang2018} to perform SISR.
 RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
 Accordingly, to resolve this issue RND introduced a residual dense block (RDB) which is capable to fully exploit all hierarchical features obtained from all convolutional layers.
 
-Figure~\ref{fig:RDB} shows the architecture of a RDB which consists of four  layers (\(L_1,\ L_2,\ L_3,\ L_4\)).
+Figure~\ref{fig:RDB} shows the architecture of a RDB which consists of four  layers (\(L_1,\ L_2,\ L_3,\- \ L_4\)).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
@@ -205,7 +205,7 @@ As shown in the Fig.~\ref{fig:dlsr_loss}, the developed AE-ConvLSTM model conver
 	\begin{center}
 		\includegraphics[width=.85\textwidth]{Figures/Chapter_4/dlsr_loss.png}
 	\end{center}
-	\caption{} 
+	\caption{DLSR model: training and validation losses during training phase.} 
 	\label{fig:dlsr_loss}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
