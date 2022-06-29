@@ -24,7 +24,7 @@ The GCN model better visually resembles the actual shape of the delamination tha
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[width=.9\textwidth]{Figures/Chapter_5/RMS_flat_shell_Vz_448_500x500bottom.png}
-		\caption{}
+		\caption{RMS \& Label.}
 		\label{fig:RMS_bottom_448}
 	\end{subfigure}
 	\hfill
@@ -84,7 +84,7 @@ However, the rest models perform reasonably well, considering the difficult dama
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[width=0.9\textwidth]{Figures/Chapter_5/RMS_flat_shell_Vz_456_500x500bottom.png}
-		\caption{}
+		\caption{RMS \& Label.}
 		\label{fig:RMS_bottom_456}
 	\end{subfigure}
 	\hfill
@@ -142,7 +142,7 @@ In this case, the elliptical shape of delamination is best preserved by Res-UNet
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[width=0.9\textwidth]{Figures/Chapter_5/RMS_flat_shell_Vz_438_500x500bottom.png}
-		\caption{}
+		\caption{RMS \& Label.}
 		\label{fig:RMS_bottom_438}
 	\end{subfigure}
 	\hfill
@@ -198,7 +198,7 @@ All models perform reasonably well for this damage case.
 	\begin{subfigure}[b]{.48\textwidth}
 		\centering
 		\includegraphics[width=0.9\textwidth]{Figures/Chapter_5/RMS_flat_shell_Vz_397_500x500bottom.png}
-		\caption{}
+		\caption{RMS \& Label.}
 		\label{fig:RMS_bottom_397}
 	\end{subfigure}
 	\hfill
@@ -430,9 +430,53 @@ Similarly to the numerical dataset, the best accuracy was achieved by using GCN.
 
 
 It should be noted that the developed FCN-DenseNet model presented in~\cite{Ijjeh2021} was compared to the conventional adaptive wavenumber filtering method presented in~\cite{Kudela2015, Radzienski2019}.
-Furthermore, the FCN-DenseNet model showed better performance in delamination identification.
-Moreover, the FCN models show good generalisation behaviour in predicting the delamination in the unseen numerically generated data.
+
+%Furthermore, the FCN-DenseNet model showed better performance in delamination identification for numerical cases.
+The FCN models show good generalisation behaviour in predicting the delamination in the unseen numerically generated data.
 We can observe that the models can identify delamination with nearly no noise, indicating that the models can generalize and detect delamination on previously unseen data.
 It has been shown that the achieved accuracy of the FCN models presented in~\cite{Ijjeh2022} surpasses the accuracy of previous models in~\cite{Ijjeh2021} with an improvement of 22.47\%.
 Given that the provided models were only trained on a numerically generated dataset, they had a high degree of generalisation.
 Additionally, the models show their ability to generalise by detecting the delamination in the experimentally acquired data.
+
+Figure~\ref{fig:exp_erms_case_comp} presents a comparison between the predicted outputs regarding the experimental case with the adaptive wavenumber filtering presented in~\cite{Ijjeh2021} and the two versions of the developed FCN-DenseNet models presented in~\cite{Ijjeh2021} and~\cite{Ijjeh2022}, respectively.
+Figure.~\ref{fig:ERMSF} shows the damage map represents the energy-based root mean square index of frames filtered in the wavenumber domain (ERMSF).
+To eliminate low values from the ERMSF, a binary threshold is applied as shown in Fig.~\ref{fig:Binary_ERMSF}.
+The threshold level was set to minimise the influence of edge noise while still highlighting the damage.
+The calculated IoU equals $(0.401)$.
+Figure.~\ref{fig:FCN_densenet_2021} shows the predicted output for the developed FCN-DenseNet model in~\cite{Ijjeh2021}, and the calculated IoU equals $0.081$. 
+Fig.~\ref{fig:FCN_densenet_2022} shows the predicted output of the improved FCN-DenseNet model developed in~\cite{Ijjeh2022}, and the calculated IoU equals to $0.54$.
+Accordingly, the improved version of the FCN-DenseNet model developed in~\cite{Ijjeh2022} surpasses both the adaptive wavenumber filtering method and the FCN-DenseNet model developed in~\cite{Ijjeh2021}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!h]
+	\centering
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.7\textwidth]{Figures/Chapter_5/ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
+		\caption{ERMSF.}
+		\label{fig:ERMSF}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.7\textwidth]{Figures/Chapter_5/Binary_ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}
+		\caption{Binary ERMSF.}
+		\label{fig:Binary_ERMSF}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.7\textwidth]{Figures/Chapter_5/Predicted_Predicted_ERMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_7_softmax.png}
+		\caption{FCN-DenseNet~\cite{Ijjeh2021}}
+		\label{fig:FCN_densenet_2021}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+		\centering
+		\includegraphics[width=0.7\textwidth]{Figures/Chapter_5/Fig_FCN_DenseNet_7.png}
+		\caption{FCN-DenseNet~\cite{Ijjeh2022}}
+		\label{fig:FCN_densenet_2022}	
+	\end{subfigure}
+	\caption{Compression for the experimental case with adaptive wavenumber filtering, FCN-DenseNet~\cite{Ijjeh2021}, FCN-DenseNet~\cite{Ijjeh2022}.}
+	\label{fig:exp_erms_case_comp}
+\end{figure}
+

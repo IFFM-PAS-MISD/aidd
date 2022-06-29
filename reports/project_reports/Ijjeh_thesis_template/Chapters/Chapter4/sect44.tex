@@ -3,10 +3,10 @@
 \label{sec44}
 In this section, I utilised full wavefield frames of Lamb waves propagation in an end-to-end deep learning model to identify CFRP delamination instead of using RMS images as in the FCN models.
 Accordingly, a many-to-one prediction scheme was adopted by employing convolutional-based recurrent neural networks (RNNs) to perform pixel-wise image segmentation.
-A sequence of full wavefield frames is fed into the proposed deep learning models in order to identify the delamination.
+A sequence of full wavefield frames is fed into the proposed deep learning models to identify the delamination.
 Hence, in the segmentation problem, there are two classes: undamaged and damaged.
 To the best of my knowledge, it is the first implementation of deep neural networks utilising Lamb wave propagation animations for damage imaging with semantic segmentation.
-The proposed model showed excellent results in identifying the delamination in the numerically generated dataset, and it also showed their capability to generalise delamination identification in real world scenarios.
+The proposed model showed excellent results in identifying the delamination in the numerically generated dataset, and it also showed its capability to generalise delamination identification in real-world scenarios.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Data preprocessing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,10 +43,10 @@ Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of o
 Further, \(m\) refers to the number of frames in the window, hence, \(m=24\) frames for the developed model, and \(k\) represents the total number of windows.
 Accordingly, I slide the window over all input frames.
 The shift of the window is one frame at a time.
-Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to final damage map by using the $\bar{RMS}$:
+Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to the final damage map by using the $\overline{RMS}$:
 
 \begin{equation}
-	\bar{RMS} = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
+	\overline{RMS} = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
 	\label{RMS}
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,7 +103,7 @@ Further, I applied a 2D convolutional layer as the final output layer followed b
 Consequently, a threshold value must be chosen to classify the output into a damaged represented by (\(1\)) or undamaged represented by (\(0\)).
 Hence, I set the threshold value to (\(0.5\)) to exclude all values below the threshold by considering them as undamaged and taking only those values greater than the threshold to be considered as damaged.
 
-Furthermore, Fig.~\ref{fig:ae_convlstm_loss} presents the plot of the loss and validation loss values for epochs during the training phase of the AE-ConvLSTM model.
+Furthermore, Fig.~\ref{fig:ae_convlstm_loss} presents the plot of the training loss and validation loss values with respect to epochs during the training phase of the AE-ConvLSTM model.
 The number of epochs for the AE-ConvLSTM model was set to $100$.
 As shown in the Fig.~\ref{fig:ae_convlstm_loss}, the developed AE-ConvLSTM model converges, and it has no signs of overfitting or underfitting.
 \begin{figure}[!h]

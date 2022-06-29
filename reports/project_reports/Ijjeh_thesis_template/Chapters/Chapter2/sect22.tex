@@ -1,16 +1,17 @@
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
 \section[Guided waves based SHM]{Guided waves based SHM}
 \label{sec22}
-The approach of adopting elastic waves propagation methods in SHM includes generation of elastic waves in the examined structure and recording their displacement as a function of time~\cite{Ostachowicz2012}. 
-The generated waves propagate until they reflect from discontinuit\-ies, edges or damage in the structure. The reflected waves hold information about the location and the size of the damage.  
+The approach of adopting elastic wave propagation methods in SHM includes the generation of elastic waves in the examined structure and recording their displacement as a function of time~\cite{Ostachowicz2012}. 
+The generated waves propagate until they reflect from discontinuit\-ies, edges, or damage in the structure. 
+The reflected waves contain informa\-tion about the location and the size of the damage.
 
-Designing a robust SHM system requires knowledge in various scientific fields (e.g. mechanical and electrical engineering, as well as in computer science, mathematics, and physics)~\cite{Willberg2013}.
-Moreover, it requires a deep understanding of various material types and the design of transducers working alone and in networks. 
+Designing a robust SHM system requires knowledge in various scientific fields (e.g., mechanical and electrical engineering, as well as computer science, mathematics, and physics)~\cite{Willberg2013}.
+Moreover, it requires a deep understanding of various material types and the design of transducers working alone and in networks.
 Also, there is a need to be familiar with signal processing methods and damage evaluation techniques~\cite{Willberg2013}.
 
-In this literature, I will focus on the guided wave-based SHM techniques for composite materials, which has brought large attention in the past two decades~\cite{Mitra2016}.
+In the literature, I will focus on the guided wave-based SHM techniques for composite materials, which have attracted much attention in the past two decades~\cite{Mitra2016}.
 Guided waves are essentially elastic waves propagating within bounded 
-structures~\cite{Mitra2016}, e.g. in a thin plate, they are being guided by the boundaries of the plate. 
+structures~\cite{Mitra2016}, e.g., in a thin plate, elastic waves are guided by the boundaries of the plate.
 
 There are a few benefits from adopting guided wave-based schemes for SHM in structures over vibration-based methods. 
 Generally, transducers utilised in SHM systems are affordable, and due to the lightweight of those transducers, they can be implemented easily in the structure.
@@ -18,18 +19,15 @@ In addition, it is possible to scan a relatively large area compared to a small 
 Moreover, an important advantage for guided waves over a vibration-based scheme is their high sensitivity for detecting small defects due to the ability to use high-frequency signals (excited and registered).
 In such a case, guided waves are not sensitive to low-frequency vibrations~\cite{Mitra2016,Croxford2007}.
 
-Various types of guided waves have been investigated for the purpose of SHM. 
+Various types of guided waves have been investigated for SHM. 
 A well-known approach is the use of Lamb waves, which propagate within thin plates and shells bounded by stress-free surfaces~\cite{Mitra2016}.
 Lamb waves were given their name after Horace Lamb, who discovered them and developed a theory to describe the phenomena of their propagation~\cite{Ostachowicz2012}. 
-However, Lamb could not generate those waves physically until Worlton~\cite{Worlton1961} who saw the opportunity to utilise Lamb waves 
+However, Lamb could not generate those waves physically until \textcite{Worlton1961} saw the opportunity to utilise Lamb waves 
 characteristics in damage detection~\cite{Ostachowicz2012}.
-Lamb waves, in general, are generated and received by piezoelectric (PZT) 
-transducers~\cite{Cai2012}.
-Due to the multi-mode and dispersion properties, the propagation of Lamb waves 
-is quite complex~\cite{Ostachowicz2012}. 
+Lamb waves, in general, are generated and registered by piezoelectric (PZT) transducers~\cite{Cai2012}.
+Due to the multi-mode and dispersion properties, the propaga\-tion of Lamb waves is quite complex~\cite{Ostachowicz2012}. 
 In practical applications, two forms of Lamb waves arise depending on the distribution of the displacement on the top and bottom bounding surfaces.
-These forms are symmetric denoted as \(S_0, S_1, S_2,...., \) and antisymmetric, denoted as 
-\(A_0,A_1,A_2,....,\) ~\cite{Ostachowicz2012}. 
+These forms are symmetric, denoted as \(S_0, S_1, S_2,\dots,\) and antisymmetric, denoted as \(A_0,A_1,A_2,\dots,\) ~\cite{Ostachowicz2012}. 
 Fig.~\ref{fig:LambModes} illustrates the propagation of the fundamental Lamb waves for \(A_0\) and \(S_0\) modes in a structure.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
@@ -41,15 +39,14 @@ Fig.~\ref{fig:LambModes} illustrates the propagation of the fundamental Lamb wav
 	\label{fig:LambModes}
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{}
-Regardless of Lamb waves promising characteristics, using them for SHM applications hold some essential challenges. 
-Among them are the dispersive nature of Lamb wave propagating modes that can convert into each other in the presence of defects and other changes in the mechanical 
-impedance~\cite{Willberg2015}. 
-Moreover, ascribed to some flaws in the bonding within actuators, sensors and the structure, random noise will emerge in the relevant sensors due to the high sensitivity of Lamb waves toward structural perturbations. 
-Noise arising from environmental sources, like temperature changing, or anisotropy of the material also summed up to the received signals making them very complicated and challenging to recognize and interpret~\cite{Willberg2015}.
-Moreover, an essential point concerns the choice of a carrier frequency for the Lamb waves because the higher the frequency is, the damage detection of small size is more likely detected.
-However,  when the frequency increases, the number of propagating wave modes will increase accordingly.
-As a result, multiple wave modes propagate and each wave mode has different velocity which causes a problem with reflection identification and misinterpretation of the location and the size of the damage~\cite{Ostachowicz2012}. 
-It was found that each wave mode shows a varying sensitivity to individual damage. 
-\textcite{Kessler2002b,Ihn2008} found that \(A0\) mode is suitable for delaminations to be detected in composite materials, and \(S0\) mode was found suitable for cracks detection in metallic elements~\cite{Ihn2004,Ihn2008}.
+
+Regardless of the promising characteristics of Lamb waves, using them for SHM applica\-tions poses some essential challenges.
+Among them is the dispersive nature of Lamb wave propagating modes that can convert into each other in the presence of defects and other changes in the mechanical impedance~\cite{Willberg2015}. 
+Moreover, due to some flaws in the bonding within actuators, sensors, and the structure, random noise will emerge in the relevant sensors due to the high sensitivity of Lamb waves toward structural perturbations.
+Noise arising from environmental sources, like temperature changes or anisotropy of the material, also summed up to the received signals, making them very complicated and challenging to recognize and interpret~\cite{Willberg2015}.
+Moreover, an essential point concerns the choice of a carrier frequency for the Lamb waves, because the higher the frequency is, the damage detection of small size is more likely to be detected.
+However, when the frequency increases, the number of propagating wave modes will increase accordingly.
+As a result, multiple wave modes propagate and each wave mode has a different velocity, which causes a problem with reflection identification and misinterpretation of the location and size of the damage~\cite{Ostachowicz2012}. 
+It was found that each wave mode shows varying sensitivity to individual damage.
+\textcite{Kessler2002b,Ihn2008} found that \(A0\) mode is suitable for delaminations to be detected in composite materials, and \(S0\) mode was found suitable for crack detection in metallic elements~\cite{Ihn2004,Ihn2008}.
 It was also observed that the design of the transducer influences in a great manner the excited and registered wave modes~\cite{Ostachowicz2010}.

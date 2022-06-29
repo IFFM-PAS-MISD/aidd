@@ -26,7 +26,7 @@ The CCE is illustrated by Eq.~(\ref{CCE}), where \( P(x)_{i}\) refers to the sof
 	\label{CCE}
 \end{equation}
 
-It should be noted, as there are only two classes to predict, a Sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the predicted outputs.
+It should be noted, as there are only two classes to predict, a sigmoid activation function at the output layer can be combined with a binary cross-entropy (BCE) without affecting the predicted outputs.
 
 The implemented DL models for pixel-wise semantic segmentation for delaminations identification are depicted in Figure~\ref{fig:flowchart}.
 In the following subsections~(\ref{sec431}~-~\ref{sec436}), the data preprocessing and the five DL models will be illustrated.
@@ -236,7 +236,7 @@ A residual network was used as a backbone for improving the feature extraction p
 A GCN block presented in Fig.~\ref{fig:res_gcn_br}b is placed after each residual block, which employs a mix of \((1\times k)\)+\((k\times 1)\) and \((k\times 1)\)+\((1\times k)\) convolutions to establish dense connections within \((k\times k)\) region in the feature map.
 The boundary refinement (BR) block, depicted in Fig.~\ref{fig:res_gcn_br}c, is then used to improve the predictions along the object borders, resulting in a lower resolution score map.
 Furthermore, the upsampling operation is done recursively. 
-It upsamples the low resolution score maps then concatenate it with a higher one to produce a new 
+It upsamples the low-resolution score maps and then concatenate them with a higher one to produce a new 
 score maps.
 The deconvolution operation is repeated until the original image size is 
 obtained.
@@ -245,7 +245,7 @@ obtained.
 		\includegraphics[width=.8\textwidth]{Figures/Chapter_4/figure9.png}
 	\end{center}
 	\caption{(a) Residual block, (b) Global Convolution Network block, (c) 
-		Boundary Refinement} 
+		Boundary Refinement.} 
 	\label{fig:res_gcn_br}
 \end{figure}
 
@@ -253,7 +253,7 @@ obtained.
 
 When a deep learning model approaches convergence during training, the loss falls within an error range around the final value.
 In other words, a model converges when extra training is ineffective.
-Figure~\ref{fig:FCN_model_convergence} presents the plot of the loss and validation loss values with respect to epochs during the training phase.
+Figure~\ref{fig:FCN_model_convergence} presents the plots of the training loss and validation loss values with respect to epochs during the training phase regarding the developed models.
 I set the number of epochs in all developed FCN models to 20, as this was sufficient to train the models.
 It is clear that all developed FCN models converge after a certain number of epochs, in which the loss reaches its minimum value.
 Furthermore, the FCN models do not show any sign of overfitting or underfitting as shown in Figs.~\ref{fig:UNet_loss},~\ref{fig:VGG16_loss},~\ref{fig:FCN_densenet_loss},~\ref{fig:PSPNet_loss}, and \ref{fig:GCN_loss} regarding Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet and GCN, receptively.

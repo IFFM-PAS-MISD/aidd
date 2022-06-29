@@ -2,85 +2,86 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Organization of SHM systems.\relax }}{7}{figure.caption.6}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Fundamental Lamb wave modes: (a)\nobreakspace {}\(A_0\) mode, (b)\nobreakspace {}\( S_0\) mode\relax }}{11}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces (a) Pulse echo (b) Pitch catch\relax }}{12}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces (a) Pulse echo (b) Pitch catch.\relax }}{12}{figure.caption.8}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces (a) Conventional Programming (b) Machine learning\relax }}{19}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Machine Learning Approaches\relax }}{20}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Reinforcement Learning\relax }}{20}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Auto-associative Neural Network architecture\relax }}{24}{figure.caption.21}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces SVM for 2D and 3D feature space.\relax }}{26}{figure.caption.26}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces KNN algorithm: data classification with \(K=6\).\relax }}{27}{figure.caption.28}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Decision tree.\relax }}{28}{figure.caption.30}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Structure of Perceptron.\relax }}{29}{figure.caption.31}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces The process of Gradient Descent.\relax }}{30}{figure.caption.33}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Local minima.\relax }}{31}{figure.caption.35}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Saddle point.\relax }}{32}{figure.caption.36}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Convolution operation with a sliding kernel.\relax }}{33}{figure.caption.37}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Types of downsampling operations.\relax }}{34}{figure.caption.38}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Convolutional Neural Network architecture.\relax }}{34}{figure.caption.39}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces (a) RNN v.s. (b) Feed-forward neural network.\relax }}{35}{figure.caption.40}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Unrolled RNN.\relax }}{36}{figure.caption.41}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces LSTM architecture.\relax }}{36}{figure.caption.42}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces ConvLSTM architecture.\relax }}{38}{figure.caption.43}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces (a) Conventional ML based SHM vs. (b) DL based SHM.\relax }}{39}{figure.caption.44}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces (a) Conventional Programming (b) Machine learning.\relax }}{19}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Machine Learning Approaches.\relax }}{20}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Reinforcement Learning.\relax }}{20}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Auto-associative Neural Network architecture.\relax }}{24}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces SVM for 2D and 3D feature space.\relax }}{26}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces KNN algorithm: data classification with \(K=6\).\relax }}{27}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Decision tree.\relax }}{28}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Structure of Perceptron.\relax }}{29}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces The process of Gradient Descent.\relax }}{30}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Local minima.\relax }}{31}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Saddle point.\relax }}{31}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Convolution operation with a sliding kernel.\relax }}{33}{figure.caption.32}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Types of downsampling operations.\relax }}{34}{figure.caption.33}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Convolutional Neural Network architecture.\relax }}{34}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces (a) RNN v.s. (b) Feed-forward neural network.\relax }}{35}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Unrolled RNN.\relax }}{36}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces LSTM architecture.\relax }}{36}{figure.caption.37}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces ConvLSTM architecture.\relax }}{38}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces (a) Conventional ML based SHM vs. (b) DL based SHM.\relax }}{39}{figure.caption.39}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Setup for computing Lamb wave interactions with delamination.\relax }}{47}{figure.caption.45}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Exemplary locations, sizes and shapes of random delaminations used for Lamb wave propagation modeling.\relax }}{48}{figure.caption.46}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces The plate with 475 cases of random delaminations.\relax }}{48}{figure.caption.47}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Full wavefield at the top surface (a)--(c) and the bottom surface (d)--(f), respectively, at selected time instances showing the interaction of guided waves with delamination.\relax }}{49}{figure.caption.48}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces RMS of the full wavefield from the top surface of the plate (a) and the bottom surface of the plate (b).\relax }}{50}{figure.caption.49}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces (a) RMS image: from the top of the plate, (b) Label.\relax }}{50}{figure.caption.50}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Data preparation for bounding box method.\relax }}{51}{figure.caption.51}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces CNN classifier architecture.\relax }}{53}{figure.caption.52}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Schematic diagram of the approach used for comparison of semantic segmentation methods accuracy.\relax }}{55}{figure.caption.53}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces K-folds cross validation.\relax }}{55}{figure.caption.54}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Res-UNet architecture.\relax }}{57}{figure.caption.55}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces VGG16 encoder decoder architecture.\relax }}{58}{figure.caption.56}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Dense block architecture.\relax }}{59}{figure.caption.57}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces FCN-DenseNet architecture.\relax }}{60}{figure.caption.58}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces PSPNet architecture.\relax }}{61}{figure.caption.60}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Global Convolution Network whole architecture.\relax }}{62}{figure.caption.61}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces (a) Residual block, (b) Global Convolution Network block, (c) Boundary Refinement\relax }}{62}{figure.caption.62}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces FCN models: training and validation losses during training phase.\relax }}{63}{figure.caption.63}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Sample frames of full wave propagation.\relax }}{65}{figure.caption.64}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces The procedure of calculating the RMS prediction image (damage map).\relax }}{66}{figure.caption.65}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Autoencoder ConvLSTM model architecture.\relax }}{67}{figure.caption.66}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Flow of input frames using Time distributed layer.\relax }}{67}{figure.caption.67}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces AE-ConvLSTM model: training and validation losses during training phase.\relax }}{68}{figure.caption.68}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces High-resolution (HR) and Low-resolution (LR) frames at different time steps.\relax }}{70}{figure.caption.69}%
-\contentsline {figure}{\numberline {4.25}{\ignorespaces Residual Dense Block architecture.\relax }}{71}{figure.caption.70}%
-\contentsline {figure}{\numberline {4.26}{\ignorespaces Implemented Residual Dense Network architecture.\relax }}{71}{figure.caption.71}%
-\contentsline {figure}{\numberline {4.27}{\ignorespaces Sub-pixel convolution layer.\relax }}{72}{figure.caption.72}%
-\contentsline {figure}{\numberline {4.28}{\ignorespaces DLSR model: training and validation losses during training phase.\relax }}{73}{figure.caption.73}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Setup for computing Lamb wave interactions with delamination.\relax }}{47}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Exemplary locations, sizes and shapes of random delaminations used for Lamb wave propagation modeling.\relax }}{48}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces The plate with 475 cases of random delaminations.\relax }}{48}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Full wavefield at the top surface (a)--(c) and the bottom surface (d)--(f), respectively, at selected time instances showing the interaction of guided waves with delamination.\relax }}{49}{figure.caption.43}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces RMS of the full wavefield from the top surface of the plate (a) and the bottom surface of the plate (b).\relax }}{50}{figure.caption.44}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces (a) RMS image: from the top of the plate, (b) Label.\relax }}{50}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Data preparation for bounding box method.\relax }}{51}{figure.caption.46}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces CNN classifier architecture.\relax }}{53}{figure.caption.47}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Schematic diagram of the approach used for comparison of semantic segmentation methods accuracy.\relax }}{55}{figure.caption.48}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces K-folds cross validation.\relax }}{55}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Res-UNet architecture.\relax }}{57}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces VGG16 encoder decoder architecture.\relax }}{58}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Dense block architecture.\relax }}{59}{figure.caption.52}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces FCN-DenseNet architecture.\relax }}{60}{figure.caption.53}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces PSPNet architecture.\relax }}{61}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Global Convolution Network whole architecture.\relax }}{62}{figure.caption.56}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces (a) Residual block, (b) Global Convolution Network block, (c) Boundary Refinement.\relax }}{62}{figure.caption.57}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces FCN models: training and validation losses during training phase.\relax }}{63}{figure.caption.58}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Sample frames of full wave propagation.\relax }}{65}{figure.caption.59}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces The procedure of calculating the RMS prediction image (damage map).\relax }}{66}{figure.caption.60}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Autoencoder ConvLSTM model architecture.\relax }}{67}{figure.caption.61}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Flow of input frames using Time distributed layer.\relax }}{67}{figure.caption.62}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces AE-ConvLSTM model: training and validation losses during training phase.\relax }}{68}{figure.caption.63}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces High-resolution (HR) and Low-resolution (LR) frames at different time steps.\relax }}{70}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Residual Dense Block architecture.\relax }}{71}{figure.caption.65}%
+\contentsline {figure}{\numberline {4.26}{\ignorespaces Implemented Residual Dense Network architecture.\relax }}{71}{figure.caption.66}%
+\contentsline {figure}{\numberline {4.27}{\ignorespaces Sub-pixel convolution layer.\relax }}{72}{figure.caption.67}%
+\contentsline {figure}{\numberline {4.28}{\ignorespaces DLSR model: training and validation losses during training phase.\relax }}{73}{figure.caption.68}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Intersection over union.\relax }}{74}{figure.caption.74}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Output predictions for the implemented CNN classifiers.\relax }}{78}{figure.caption.76}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces First delamination case based on numerical data.\relax }}{79}{figure.caption.77}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Second delamination case based on numerical data.\relax }}{80}{figure.caption.78}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Third delamination case based on numerical data.\relax }}{81}{figure.caption.79}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{82}{figure.caption.80}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{85}{figure.caption.84}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Four delamination cases based on numerical data (AE-ConvLSTM).\relax }}{88}{figure.caption.85}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Experimental case: single delamination of Teflon insert.\relax }}{89}{figure.caption.89}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces IoU for the sliding window of frames (Teflon insert-single delamination).\relax }}{90}{figure.caption.90}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Predictions for window centered at selected frames (Teflon insert - single delamination).\relax }}{91}{figure.caption.91}%
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Teflon insert - single delamination.\relax }}{91}{figure.caption.93}%
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Delamination arrangements in the specimen.\relax }}{93}{figure.caption.95}%
-\contentsline {figure}{\numberline {5.14}{\ignorespaces Experimental cases of Specimens II, III, and IV.\relax }}{94}{figure.caption.96}%
-\contentsline {figure}{\numberline {5.15}{\ignorespaces IoU for the sliding window of frames (Specimen\nobreakspace {}IV).\relax }}{95}{figure.caption.97}%
-\contentsline {figure}{\numberline {5.16}{\ignorespaces Predictions for window centered at selected frames (Specimen\nobreakspace {}IV).\relax }}{96}{figure.caption.98}%
-\contentsline {figure}{\numberline {5.17}{\ignorespaces Specimen\nobreakspace {}IV: (a) RMS image (damage map), (b) Thresholded RMS image.\relax }}{96}{figure.caption.99}%
-\contentsline {figure}{\numberline {5.18}{\ignorespaces First numerical case with respect to the reconstruction of whole plate.\relax }}{98}{figure.caption.100}%
-\contentsline {figure}{\numberline {5.19}{\ignorespaces First numerical case with respect to the delamination region.\relax }}{99}{figure.caption.101}%
-\contentsline {figure}{\numberline {5.20}{\ignorespaces Second numerical case with respect to the reconstruction of whole plate.\relax }}{99}{figure.caption.102}%
-\contentsline {figure}{\numberline {5.21}{\ignorespaces Second numerical case with respect to the delamination region.\relax }}{100}{figure.caption.103}%
-\contentsline {figure}{\numberline {5.22}{\ignorespaces Third numerical case with respect to the reconstruction of whole plate.\relax }}{101}{figure.caption.104}%
-\contentsline {figure}{\numberline {5.23}{\ignorespaces Third numerical case with respect to the delamination region.\relax }}{101}{figure.caption.105}%
-\contentsline {figure}{\numberline {5.24}{\ignorespaces Fourth numerical case with respect to the reconstruction of whole plate.\relax }}{102}{figure.caption.106}%
-\contentsline {figure}{\numberline {5.25}{\ignorespaces Fourth numerical case with respect to the delamination region.\relax }}{103}{figure.caption.107}%
-\contentsline {figure}{\numberline {5.26}{\ignorespaces Delamination arrangements in the specimen.\relax }}{104}{figure.caption.109}%
-\contentsline {figure}{\numberline {5.27}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{104}{figure.caption.110}%
-\contentsline {figure}{\numberline {5.28}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{105}{figure.caption.111}%
-\contentsline {figure}{\numberline {5.29}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.\nobreakspace {}\ref {fig:frame110_comparison}.\relax }}{106}{figure.caption.112}%
-\contentsline {figure}{\numberline {5.30}{\ignorespaces Comparison of reconstruction accuracy at frame number $N_f$.\relax }}{107}{figure.caption.113}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Intersection over union.\relax }}{74}{figure.caption.69}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Output predictions for the implemented CNN classifiers.\relax }}{78}{figure.caption.71}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces First delamination case based on numerical data.\relax }}{79}{figure.caption.72}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Second delamination case based on numerical data.\relax }}{80}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Third delamination case based on numerical data.\relax }}{81}{figure.caption.74}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{82}{figure.caption.75}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{85}{figure.caption.79}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Compression for the experimental case with adaptive wavenumber filtering, FCN-DenseNet\nobreakspace {}\blx@tocontentsinit {0}\cite {Ijjeh2021}, FCN-DenseNet\nobreakspace {}\blx@tocontentsinit {0}\cite {Ijjeh2022}.\relax }}{87}{figure.caption.80}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Four delamination cases based on numerical data (AE-ConvLSTM).\relax }}{89}{figure.caption.81}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Experimental case: single delamination of Teflon insert.\relax }}{90}{figure.caption.85}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces IoU for the sliding window of frames (Teflon insert-single delamination).\relax }}{91}{figure.caption.86}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Predictions for window centered at selected frames (Teflon insert - single delamination).\relax }}{92}{figure.caption.87}%
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Teflon insert - single delamination.\relax }}{92}{figure.caption.89}%
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Delamination arrangements in the specimen.\relax }}{94}{figure.caption.91}%
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Experimental cases of Specimens II, III, and IV.\relax }}{95}{figure.caption.92}%
+\contentsline {figure}{\numberline {5.16}{\ignorespaces IoU for the sliding window of frames (Specimen\nobreakspace {}IV).\relax }}{96}{figure.caption.93}%
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Predictions for window centered at selected frames (Specimen\nobreakspace {}IV).\relax }}{97}{figure.caption.94}%
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Specimen\nobreakspace {}IV: (a) RMS image (damage map), (b) Thresholded RMS image.\relax }}{97}{figure.caption.95}%
+\contentsline {figure}{\numberline {5.19}{\ignorespaces First numerical case with respect to the reconstruction of whole plate.\relax }}{99}{figure.caption.96}%
+\contentsline {figure}{\numberline {5.20}{\ignorespaces First numerical case with respect to the delamination region.\relax }}{100}{figure.caption.97}%
+\contentsline {figure}{\numberline {5.21}{\ignorespaces Second numerical case with respect to the reconstruction of whole plate.\relax }}{100}{figure.caption.98}%
+\contentsline {figure}{\numberline {5.22}{\ignorespaces Second numerical case with respect to the delamination region.\relax }}{101}{figure.caption.99}%
+\contentsline {figure}{\numberline {5.23}{\ignorespaces Third numerical case with respect to the reconstruction of whole plate.\relax }}{102}{figure.caption.100}%
+\contentsline {figure}{\numberline {5.24}{\ignorespaces Third numerical case with respect to the delamination region.\relax }}{102}{figure.caption.101}%
+\contentsline {figure}{\numberline {5.25}{\ignorespaces Fourth numerical case with respect to the reconstruction of whole plate.\relax }}{103}{figure.caption.102}%
+\contentsline {figure}{\numberline {5.26}{\ignorespaces Fourth numerical case with respect to the delamination region.\relax }}{104}{figure.caption.103}%
+\contentsline {figure}{\numberline {5.27}{\ignorespaces Delamination arrangements in the specimen.\relax }}{105}{figure.caption.105}%
+\contentsline {figure}{\numberline {5.28}{\ignorespaces Comparison of reconstruction accuracy depending on the number of measurement points $N_p$.\relax }}{105}{figure.caption.106}%
+\contentsline {figure}{\numberline {5.29}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the frame $N_f = 110$. Rectangle box indicates the region of the strongest reflection from delamination.\relax }}{106}{figure.caption.107}%
+\contentsline {figure}{\numberline {5.30}{\ignorespaces Comparison of reference wavefield with reconstructed one by CS and DLSR for the region of delamination reflection (close up region of frame $N_f = 110$ as indicated in Fig.\nobreakspace {}\ref {fig:frame110_comparison}.\relax }}{107}{figure.caption.108}%
+\contentsline {figure}{\numberline {5.31}{\ignorespaces Comparison of reconstruction accuracy at frame number $N_f$.\relax }}{108}{figure.caption.109}%
 \addvspace {10\p@ }

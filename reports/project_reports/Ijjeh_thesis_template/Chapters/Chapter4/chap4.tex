@@ -3,18 +3,18 @@
 \label{ch4}
 
 %% CHAPTER INTRODUCTION ///////////////////////////////////////////////////////////////////////////////
-In this chapter, several DL methodologies were presented in order to detect and localise delamination in composite laminates based on non-contact ultrasonic wavefield imaging that can provide precise details about the health status of the investigated specimen.
+In this chapter, several DL methodologies were presented to detect and localise delamin\-ation in composite laminates based on non-contact ultrasonic wavefield imaging that can provide precise details about the health status of the investigated specimen.
 Accordingly, a large synthetic dataset was generated representing the full wavefield of the Lamb waves propagating in a CFRP plate and their interaction with discontinuities such as the delamination and the plate edges, acquired by SLDV from the bottom surface of the plate.
-The acquisition process of the synthetic dataset is explained in details in the section~\ref{sec41}.
+The acquisition process of the synthetic dataset is explained in detail in the section~\ref{sec41}.
 
 The deep learning models were trained using a supervised scheme. 
 Hence, it uses a training set to train the developed models to predict the desired output.
 The developed methods are end-to-end approaches, in which the whole unprocessed training dataset is fed into the model.
 Hence, it will learn by itself to identify distinct patterns and detect damage.
-In section~\ref{sec42}, a fully connected CNN classifier model for detecting and localising delamination is presented in details.
+In section~\ref{sec42}, a fully connected CNN classifier model for detecting and localising delamination is presented in detail.
 In section~\ref{sec43}, I present five FCN models for delamination identification. 
 Further, the developed models were trained using the RMS images in which the developed models are performing pixel-wise image segmentation.
-In section~\ref{sec44}, a deep learning model for delamination identification utilising the animation of full wavefield is presented.
+In section~\ref{sec44}, a deep learning model for delamination identification utilising the animation of a full wavefield is presented.
 
 As mentioned earlier, ultrasonic wavefield imaging with SLDV can provide detailed information on the health status of an inspected structure.
 However, high spatial resolution, which is frequently required for precise damage size estimation, typically demands a prolonged scanning time.
@@ -23,11 +23,10 @@ Accordingly, this can allow for a precise recovery of propagating waves and thei
 Consequently, this process will speed up the acquisition of data.
 Furthermore, the reconstructed full wavefield can be used in damage imaging. 
 
-
 All developed models were implemented and trained with the Keras API~\cite{chollet2015keras} running on top of TensorFlow~\cite{Abadi2016}.
 The NVIDIA GeForce RTX 2070 with \(8\) GBs of memory was utilised to train the CNN classification models.
 Furthermore, the NVIDIA Tesla V100 GPU with \(32\) GBs of memory was utilised to train the FCN models, the AE-ConvLSTM model, and the DLSR model.
-Moreover, training the developed models requires tuning of many hyperparameters such as learning rate, momentum, choice of the optimizer, dropout rate, batch size, and number of epochs, among others.
+Moreover, training the developed models requires tuning of many hyperparameters such as learning rate, momentum, choice of the optimizer, dropout rate, batch size, and the number of epochs, among others.
 Accordingly, to obtain satisfactory results, I used the trial and error approach to tune the hyperparameters of the developed models.
 %% INCLUDE SECTIONS ///////////////////////////////////////////////////////////////////////////////////
 

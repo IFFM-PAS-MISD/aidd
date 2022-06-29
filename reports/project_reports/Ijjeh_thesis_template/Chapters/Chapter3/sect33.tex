@@ -1,12 +1,12 @@
 \section{Data-driven based SHM/NDT Techniques: Related work}
 \label{sec33}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The importance of SHM systems originated from their ability to monitor the condition of structures in real-time.
+The importance of SHM systems originates from their ability to monitor the condition of structures in real-time.
 SHM systems can be developed using data-driven methods, which require a huge amount of data that are captured by monitoring the status of a structure.
 
-The process of extracting features from structures in conventional techniques needs a lot of time and experts in the field. 
+The process of extracting features from structures in conventional techniques needs a lot of time and experts in the field.
 Therefore, introducing machine learning methods to the feature extraction process became necessary.
-Hence, deep learning methods have the capability to generalise and learn new features by themselves, which improves their functionality in damage estimation.
+Hence, deep learning methods can generalise and learn new features by themselves, which improves their functionality in damage estimation.
 
 DL approach makes it possible to use registered data in their raw form without any need to perform feature extraction.
 Hence, such an approach has an end-to-end structure that automatically learns and discovers the hidden features in a high dimensional input data~\cite{LeCun, Networks}.
@@ -34,12 +34,12 @@ Figure~\ref{fig:ML_vs_DL} illustrates the main differences between the conventio
 \textcite{Worden2007} have proposed several axioms related to SHM systems implemented using machine learning methods. 
 According to them, damage detection can be perform\-ed in unsupervised learning.
 However, recognising the damage type and how significant it is can not be performed without supervised learning. 
-Moreover, the feature extraction process is essential for damage detection, and it can be performed through analysing and processing the signals captured by the sensors (e.g. PZT actuators), then converting them to damage information.
+Moreover, the feature extraction process is essential for damage detection, and it can be performed by analysing and processing the signals captured by the sensors (e.g. PZT actuators), and then converting them to damage information.
 Therefore, introducing machine learning methods to the feature extraction process became necessary.
-Hence, machine learning methods have the capability to generalise and learn new features by themselves, which improves their functionality in damage estimation.
+Hence, machine learning methods can generalise and learn new features by themselves, which improves their functionality in damage estimation.
 
 \subsection{Machine leaning based SHM/NDT}
-In recent years data-driven methods based on machine learning have been increased in a significant way. 
+In recent years data-driven methods based on machine learning have increased in a significant way. 
 In the following, I will present some methods for damage detection and estimation based on machine learning techniques.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%PZT + SVM
@@ -48,20 +48,21 @@ For this purpose, a collection of PZT transducers were attached to the surface o
 Accordingly, a time-frequency domain was utilised to extract features related to defects from the registered response. 
 Those extracted features were fed to one-class SVM, which performs classification and damage estimation. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + SVM
-Moreover, \textcite{Dib2018} proposed a novelty classifier based on one-class SVM for detecting damage. 
-The method was conducted by extracting data from damage impact on a glass-fibre composite plate, then evaluating the performance of the classifier. 
-To extract the necessary features from the propagated wave the registered signal was segmented into L time bins, and the Fourier transform was applied on each time bin.
-Accordingly, the features vector was constructed from the signal phase and the amplitude for each segmented time bin.
 
+Moreover, \textcite{Dib2018} proposed a novelty classifier based on one-class SVM for detecting damage. 
+The method was conducted by extracting data from damage impact on a glass-fibre composite plate and then evaluating the performance of the classifier. 
+To extract the necessary features from the propagated wave the registered signal was segmented into L time bins, and the Fourier transform was applied to each time bin.
+Accordingly, the features vector was constructed from the signal phase and the amplitude for each segmented time bin.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + PCA+ KNN + SVM
+
 \textcite{Vitola2016} developed a damage detection and classification methodology that was examined on aluminium plates.
 An array of PZT transducers was placed on the plate surface to sense wave propagation in the structure.
-The methodology is based on the use of principal component analysis (PCA) and machine learning techniques for recognising patterns. 
-PCA means to analyse a large amount of information by finding the principal components.
-However, the PCA method is not invariant to scaling, thus, data must be normalized~\cite{Tibaduiza2016}. 
-Next, normalised data is fed to several machine learning models for training. 
-For this purpose, several classification algorithms were applied, decision trees, KNN and SVM. 
-However, only a few of these models presented good outputs in damage detection. 
+The methodology is based on the use of principal component analysis (PCA) and machine learning techniques for recognising patterns.
+PCA means analysing a large amount of information by finding the principal components.
+However, the PCA method is not invariant to scaling, thus, data must be normalized~\cite{Tibaduiza2016}.
+Next, normalised data is fed to several machine learning models for training.
+For this purpose, several classification algorithms were applied, decision trees, KNN and SVM.
+However, only a few of these models presented good outputs in damage detection.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% KNN
 \textcite{Godin2004} applied Acoustic Emission signals (AE) in their approach, which happen due to a sudden release of stored energy when damage occurs.
@@ -71,21 +72,23 @@ Authors in this work presented supervised and unsupervised classifiers to recogn
 For clustering AE signals, a K-means algorithm was used. 
 AE signals were clustered based on several metrics such as the AE signal duration, amplitude, rise time, and the number of counts to the peak.
 Accordingly, the clustered labelled data is fed into a KNN supervised classifier.
-A trained classifier is able to classify new coming data accordingly.
+A trained classifier can classify new coming data accordingly.
 Regarding the unsupervised classification, the Kohonen classifier was utilised~\cite{58325}, which is a self-organising map (SOM) which is a neural network consisting of neurons as processing units. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \textcite{Nazarko2020} monitored the axial bolt forces using elastic wave propagation signals.
-Six-bolt flange connections were put through a series of static tensile tests in the lab. For the accurate measurement of axial force, some bolts were equipped with washer load cells.
+Six-bolt flange connections were put through a series of static tensile tests in the lab. 
+For the accurate measurement of axial force, some bolts were equipped with washer load cells.
 Additionally, a few bolts were equipped with piezoelectric transducers (actuator and sensor operating in a pitch-catch arrangement) to capture the elastic wave signals.
 The outcomes of the ultrasonic testing were then integrated with the artificial neural network (ANN) for both signal compression and as a tool for user interface. 
 The outcomes demonstrated that ANNs could predict the axial forces in bolts with a reasonable amount of accuracy. 
 Significant potential exists for actual NDT inspections, according to the suggested method~\cite{Nazarko2020}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% KNN
-\textcite{Pashmforoush2014} proposed a technique to classify damage of various lay-up configurations in glass/polyester composites.
+\textcite{Pashmforoush2014} proposed a technique to classify damage to various lay-up configurations in glass/polyester composites.
 For this purpose, the K-means algorithm with the genetic algorithm was utilised. 
-PCA was used to reduce the data dimensionality.
+PCA was used to reduce the data dimensionali\-ty.
 Next, a combination of the K-means algorithm with the genetic algorithm is used for clustering the data. 
 The reason for applying the genetic algorithm is to find the optimal number of cluster centres for the KNN algorithm.
 Parameters of the AE signals such as peak amplitude, frequency, rise time, energy, and duration were estimated for each cluster and utilised as discriminative features. 
@@ -93,8 +96,8 @@ AE signal frequency was found to be a good feature for discrimination. According
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textcite{Nazarko2016} investigated the potential of utilising artificially deteriorated signals of Lamb waves in training a novelty detection (ND) system for early damage detection.
-In order to train auto-associative neural networks, the authors used principal components that were generated from signals that were measured experimentally.
-The measurements of Lamb waves in the investigated specimens made of aluminum and glass fiber reinforced polymer serve as an excellent illustration of how the ND algorithm accurately handles both simple and complex signals.
+To train auto-associative neural networks, the authors used principal components that were generated from signals that were measured experimentally.
+The measurements of Lamb waves in the investigated specimens made of aluminium and glass fibre reinforced polymer serve as an excellent illustration of how the ND algorithm accurately handles both simple and complex signals.
 It was also noted that the proposed ND method maintained its sensitivity and robustness when it used raw signals with a relatively low sampling rate, on a relatively narrow time window, and further noised signals.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% PZT + ConvNet
 %\textcite{Sammons2016} utilised X-ray computed tomography for estimating the delaminations in a CFRP. For this purpose, they utilised the Convolutional Network (ConvNet ) for performing image segmentation of the defected input images to estimate the delaminations. There ConvNet was capable of identifying  and quantifying small delaminations. 
@@ -138,9 +141,9 @@ In the following, methods for damage size estimation based on machine learning a
 %In the following, several approaches utilising guided waves for SHM/NDT based on data-driven techniques for damage detection and localisation are presented.
 
 \textcite{Melville1949} proposed a CNN model for the prediction of damage state in thin metal plates to overcome the issue of inaccurate representation of guided wave propagation when applying conventional approaches. 
-The model utilizes the full wavefie\-ld scans of thin plates (aluminum).
+The model utilizes the full wavefie\-ld scans of thin plates (aluminium).
 Moreover, the acquired raw data used for training the model was divided into undamaged and damaged states equally.
-The model achieved higher accuracy regarding damage detection equal \(99.98\%\) when compared to SVM that achieved \(62\%\).
+The model achieved higher accuracy regarding damage detection equal \(99.98\%\) when compared to SVM which achieved \(62\%\).
 
 \textcite{Sammons2016} proposed a CNN model based on X-ray computed tomography for delamination estimation in a composite structure.
 Furthermore, image segmentation was applied to the input images to identify the damage.
@@ -149,16 +152,16 @@ However, the model was only able to identify small delaminations.
 Moreover,~\textcite{Chetwynd2008} presented a multi-layer perceptron (MLP) network for damage detection in curved composite panels, in which, stiffeners were added to represent the damage.
 The Authors in this work investigated the propagation of Lamb waves through the panel in which they were generated and registered by a PZT array.
 Furthermore, for each Lamb wave response, a novelty index was obtained.
-The index value is compared to some threshold value, in which if the index value exceeds the threshold it implies that there is damage in the structure.
+The index value is compared to some threshold value, in which if the index value exceeds the threshold it implies that there is damage to the structure.
 Accordingly, the MLP network was fed by obtained novelty indexes, and performed two operations: classification and regression.
-The classification network was designed to define three convex regions of the panel then to determine whether the panel is damaged or not.
-On the other hand, the regression network is capable of estimating the exact location of the damage.
+The classification network was designed to define three convex regions of the panel and then to determine whether the panel is damaged or not.
+On the other hand, the regression network is capable of estimating the exact location of the damage
 
-Furthermore,~\textcite{DeFenza2015} proposed an artificial neural network (ANN) model for damage detection in plates made of aluminum alloys and composite utilising Lamb waves.
+Furthermore,~\textcite{DeFenza2015} proposed an artificial neural network (ANN) model for damage detection in plates made of aluminium alloys and composite utilising Lamb waves.
 Response data of wave propagation were used to calculate damage indexes which were fed into the model as an input.
 Accordingly, the model performs automatic feature extraction in conjunction with the probability ellipse-based method. 
-The ANN model and probability ellipse (PE) method were applied to identify damage location.
-The results from the ANN model and the PE presents how it is useful to apply damage indexes as a baseline for such methods in order to evaluate damage in aluminum and composite structures. 
+The ANN model and probability ellipse (PE) method were applied to identify the damage location.
+The results from the ANN model and the PE presents how it is useful to apply damage indexes as a baseline for such methods to evaluate damage in aluminium and composite structures. 
 Ewald et al.~\cite{Ewald2019} presented a CNN model called (DeepSHM) for signal classification using Lamb waves.
 Furthermore, the model provides an end-to-end approach for SHM by utilising response signals captured by sensors.
 Moreover, response signals were preprocessed by wavelet transform to get the wavelet coefficient matrix (WCM).
@@ -168,7 +171,7 @@ Full wavefield scanning using SLDV is time-consuming, however, simply reducing t
 \textcite{esfandabadideep} proposed a compressive Sensing technique using ConvNets to enhance the resolution for images captured by SLDV while decreasing the number of measurement scan points down to \(10\%\) of the number of the full gird scanning points. 
 Although, the proposed technique enhanced the image resolution, however, there is a side effect, which resembles the fact when enhancing the resolution, the most affected region is the damaged area. 
 Accordingly, the damage features will be altered.
-On the other hand, this may be an indication to the location of the damage.
+On the other hand, this may be an indication of the location of the damage.
 
 Furthermore,~\textcite{Melville2018} proposed a technique for damage detection in thin metal plates (aluminum and steel), using full wavefield data scanned by SLDV. 
 Using this data to train a deep neural network of 4 hidden layers including 2 convolutional layers for features extraction and 2 fully connected layers. 
