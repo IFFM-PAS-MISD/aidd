@@ -70,23 +70,42 @@ The performance of the proposed technique is validated by an experiment performe
 
 \subsection{Dataset preparation}
 \label{sec451}
-In order to train deep learning models to perform super-resolution image reconstruction, I have to reproduce a low-resolution training set from the original high-resolution dataset. 
-Initially, I have resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while preforming image reconstruction from the low- to high-resolutions.
+To train a deep learning model to perform super-resolution image reconstruction, I have to reproduce a low-resolution training set from the original high-resolution dataset.
+Initially, I resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while performing image reconstruction from the low-to high-resolution.
 
-In this work, I have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
+
+The maximum possible distance between grid points according to Nyquist theorem is calculated as in Eqn.~(\ref{eq:dx}):
+\begin{equation}
+	d_{max}= \frac{1}{2*K_{max}} = \frac{1}{2*5128\ [\textup{m}]} = \frac{\lambda}{2} = \frac{19.5}{2}\ \textup{mm}.
+	\label{eq:dx}	
+\end{equation} 
+where $K_{max}$ is the maximum wavenumber.
+
+On the other hand, the longest distance between grid points is $c=\sqrt{2}dx$, as shown in Fig.~\ref{fig:Nyquist}, where $dx=L/500$, and $L$ is the plate length, $c=(L/500).\sqrt{2}$, and $d_{max}/c = (19.5/2)/((L/500).\sqrt{2}) = 72.5 \approx73 $ points.
+
+\begin{figure} [!h]
+	\centering
+	\includegraphics[scale=2]{Figures/Chapter_4/Nyquist_wavelength.png}
+	\caption{Maximum distance between grid points.}
+	\label{fig:Nyquist}
+\end{figure}
+
+
+To train the DLSR model, I have generated \((n\times n)\) low-resolution full wavefield frames, where $n=32$ points, which is below the Nyquist sampling rate of a 2D frame.
 Hence, I have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(19.2\%\) from the Nyquist sampling rate as depicted in Eqn.~(\ref{CR}):
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+	CR(\%) = (\frac{n}{N_{Nyq}})^2 = (\frac{32}{73})^2=19.2\%
+	\label{CR}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
 
 To reduce the computation complexity during the training process of the deep learning models, I selected \((128)\) consecutive frames per each delamination case.
 Frames display\-ing the propagation of guided waves before interacting with the delamination have no features to be extracted. 
 Hence, only a certain number of frames was selected from the initial occurrence of the interactions with the delamination.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-	CR = \frac{(Low-resolution\ dimension)^2}{(Nyquist\ sampling\ rate)^2} = \frac{(32\times32)}{(73\times73)}=19.2\%
-	\label{CR}
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{figure} [!h]
 	\centering
 	\begin{subfigure}[b]{.48\textwidth}
