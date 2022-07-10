@@ -47,7 +47,7 @@
 \contentsline {figure}{\numberline {4.21}{\ignorespaces Autoencoder ConvLSTM model architecture.\relax }}{67}{figure.caption.61}%
 \contentsline {figure}{\numberline {4.22}{\ignorespaces Flow of input frames using Time distributed layer.\relax }}{67}{figure.caption.62}%
 \contentsline {figure}{\numberline {4.23}{\ignorespaces AE-ConvLSTM model: training and validation losses during training phase.\relax }}{68}{figure.caption.63}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Maximum distance between grid points.\relax }}{70}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Longest distance between grid points.\relax }}{70}{figure.caption.64}%
 \contentsline {figure}{\numberline {4.25}{\ignorespaces High-resolution (HR) and Low-resolution (LR) frames at different time steps.\relax }}{71}{figure.caption.65}%
 \contentsline {figure}{\numberline {4.26}{\ignorespaces Residual Dense Block architecture.\relax }}{72}{figure.caption.66}%
 \contentsline {figure}{\numberline {4.27}{\ignorespaces Implemented Residual Dense Network architecture.\relax }}{72}{figure.caption.67}%

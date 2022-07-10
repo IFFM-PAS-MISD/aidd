@@ -5,97 +5,19 @@ In this chapter, the results and discussions regarding delamination identificati
 Accordingly, to verify the developed DL models, I evaluated them on \(95\) unseen numerical test cases and further on experimental test cases.
 Moreover, I have selected four numerical test cases to present. 
 The selected four numerical cases were chosen to represent the random distribution of delamination locations.
-%Figure~\ref{numerical_cases} shows the selected numerical test cases that are evaluated and further presented will the developed models
-%
-%\begin{figure} [ht!]
-%	\centering
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 448
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_448_500x500bottom.png}
-%		\caption{First RMS case}
-%		\label{fig:RMS_bottom_448}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_448.png}
-%		\caption{}
-%		\label{fig:GT_case_448}
-%	\end{subfigure}	
-%	\par\medskip
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 456
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_456_500x500bottom.png}
-%		\caption{Second RMS case}
-%		\label{fig:RMS_bottom_456}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_456.png}
-%		\caption{}
-%		\label{fig:GT_case_456}
-%	\end{subfigure}	
-%	\hfill
-%	\par\medskip
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 438
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_438_500x500bottom.png}
-%		\caption{Second RMS case}
-%		\label{fig:RMS_bottom_438}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_438.png}
-%		\caption{}
-%		\label{fig:GT_case_438}
-%	\end{subfigure}	
-%	\par\medskip
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 397
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_397_500x500bottom.png}
-%		\caption{Second RMS case}
-%		\label{fig:RMS_bottom_397}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_397.png}
-%		\caption{}
-%		\label{fig:GT_case_397}
-%	\end{subfigure}	
-%	\hfill
-%	\par\medskip	
-%	\caption{Four selected numerical cases}
-%	\label{numerical_cases}
-%\end{figure} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Furthermore, I have applied the super-resolution image reconstruction technique to LR full wavefield animations for both the numerical test cases and the experimental case. 
 Then, I applied the AE-ConvLSTM model to the reconstructed frames in order to identify the delamination.
 
-Accordingly, to evaluate the performance of the proposed models, the intersection over union \(IoU\) (Jaccard index) was applied as the accuracy metric.
-\(IoU\) is estimated by determining the intersection area between the ground truth and the predicted output.
+Accordingly, to evaluate the performance of the proposed models, the intersection over union IoU (Jaccard index) was applied as the accuracy metric.
+IoU is estimated by determining the intersection area between the ground truth and the predicted output.
 Furthermore, we have two output classes (damaged and undamaged). 
-The \(IoU\) was calculated for the damaged class only.
-The illustration of the IoU metric is presented in Fig.~\ref{fig:iou} where Eqn.~(\ref{eqn:iou}) defines the \(IoU\) metric:
+The IoU was calculated for the damaged class only.
+The illustration of the IoU metric is presented in Fig.~\ref{fig:iou} where Eqn.~(\ref{eqn:iou}) defines the IoU metric:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
-		\includegraphics[scale=.75]{Figures/Chapter_5/IoU_figure.png}
+		\includegraphics[scale=1.1]{Figures/Chapter_5/IoU_figure.png}
 	\end{center}
 	\caption{Intersection over union.} 
 	\label{fig:iou}

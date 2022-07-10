@@ -74,24 +74,35 @@ To train a deep learning model to perform super-resolution image reconstruction,
 Initially, I resized the frames in the original high-resolution dataset to \((512\times512)\) pixels to obtain the desired output frame shape while performing image reconstruction from the low-to high-resolution.
 
 
-The maximum possible distance between grid points according to Nyquist theorem is calculated as in Eqn.~(\ref{eq:dx}):
+The maximum permissible distance between grid points according to Nyquist theorem is calculated as in Eqn.~(\ref{eq:dx}):
 \begin{equation}
-	d_{max}= \frac{1}{2*K_{max}} = \frac{1}{2*5128\ [\textup{m}]} = \frac{\lambda}{2} = \frac{19.5}{2}\ \textup{mm}.
+	d_{max}= \frac{1}{2*k_{max}} = \frac{1}{2*51.28\ [\textup{m}]} = \frac{\lambda}{2} = \frac{19.5}{2}\ \textup{[mm]}.
 	\label{eq:dx}	
 \end{equation} 
-where $K_{max}$ is the maximum wavenumber.
+where $k_{max}$ is the maximum wavenumber, and $\lambda$ is the shortest wavelength.
 
-On the other hand, the longest distance between grid points is $c=\sqrt{2}dx$, as shown in Fig.~\ref{fig:Nyquist}, where $dx=L/500$, and $L$ is the plate length, $c=(L/500).\sqrt{2}$, and $d_{max}/c = (19.5/2)/((L/500).\sqrt{2}) = 72.5 \approx73 $ points.
+On the other hand, the longest distance between grid points on uniform square grid in 2D space is along the diagonal as shown in Fig.~\ref{fig:Nyquist}.
+Therefore, the number of Nyquist sampling points along edges of the plate is defined as:
+\begin{equation}
+	\begin{align}
+	N_x= \frac{L}{d_{max}/\sqrt{2}}, \\
+	N_y=  \frac{W}{d_{max}/\sqrt{2}},
+	\end{align}
+	\label{eq:Nyq}
+\end{equation}
+where $L$ is the plate length, and $W$ is the plate width.
+
+In our particular case, $L=W=500$~[mm], and number of Nyquist points $N_x= N_y= N_{Nyq} =73$.
 
 \begin{figure} [!h]
 	\centering
-	\includegraphics[scale=2]{Figures/Chapter_4/Nyquist_wavelength.png}
-	\caption{Maximum distance between grid points.}
+	\includegraphics[scale=1]{Figures/Chapter_4/Nyquist_wavelength.png}
+	\caption{Longest distance between grid points.}
 	\label{fig:Nyquist}
 \end{figure}
 
 
-To train the DLSR model, I have generated \((n\times n)\) low-resolution full wavefield frames, where $n=32$ points, which is below the Nyquist sampling rate of a 2D frame.
+To train the DLSR model, I have generated low-resolution full wavefield frames of \((n\times n)\) points, where $n=32$, which is below the Nyquist sampling rate of a 2D frame.
 Hence, I have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(19.2\%\) from the Nyquist sampling rate as depicted in Eqn.~(\ref{CR}):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
@@ -102,9 +113,8 @@ Hence, I have performed image subsampling with bi-cubic interpolation and a unif
 
 Figure~\ref{fig:SR_LR} shows a three SR Frames with their corresponding LR frames at different time steps.
 
-To reduce the computation complexity during the training process of the deep learning models, I selected \((128)\) consecutive frames per each delamination case.
-Frames display\-ing the propagation of guided waves before interacting with the delamination have no features to be extracted. 
-Hence, only a certain number of frames was selected from the initial occurrence of the interactions with the delamination.
+Furthermore, I selected \((128)\) consecutive full wavefield frames per delamination case to reduce computation complexity during training.
+The selected frames start from the initial occurrence of the interaction with the delamination, as frames displaying the propagation of guided waves before interacting with the delamination have no valuable features to be extracted.
 
 \begin{figure} [!h]
 	\centering
