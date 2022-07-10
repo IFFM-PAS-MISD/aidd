@@ -1,0 +1,315 @@
+% \iffalse meta-comment
+%<*internal>
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+Copyright (C) 2011 by Clemens Koppensteiner
+-------------------------------------------
+
+This file may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either version 1.3
+of this license or (at
+ your option) any later version.
+The latest version of this license is in:
+
+   http://www.latex-project.org/lppl.txt
+
+and version 1.3 or later is part of all distributions of LaTeX
+version 2005/12/01 or later.
+\endpreamble
+\generate{\file{onimage.sty} {\from{onimage.dtx}{onimage}}}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+%<onimage>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%<onimage>\ProvidesPackage{onimage}
+%<onimage>   [2011/07/05 v0.3 Drawing on images in TikZ]
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+\usepackage{lmodern}
+\usepackage[demo]{graphicx}
+\usepackage{tikz}
+\usepackage{onimage}
+\usepackage[numbered]{hypdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% \GetFileInfo{onimage.sty}
+% 
+% \title{The \textsf{onimage} package\thanks{This document
+% corresponds to \textsf{onimage}~\fileversion,
+% dated \filedate.}}
+% \author{TeX.SX}
+% \maketitle
+%
+% \changes{v0.1}{2011/04/07}{Initial version}
+% \changes{v0.2}{2011/07/04}{More flexible coordinate transformations}
+% \changes{v0.3}{2011/07/05}{Option to show help lines}
+%
+% \section{Drawing on top of an image}
+%
+% The question \enquote{\href{http://tex.stackexchange.com/q/9559}{Drawing on an image with TikZ}} asks
+% for a method to draw on top of an image file (included by |\includegraphics|)
+% with TikZ. The basic solution to this problem is to include the image in a
+% node inside the |tikzpicture| environment and add TikZ |\draw| commands as one
+% normally would. To make this process easy it is useful to set the coordinate
+% system relative to the size of the picture, so that the draw graphics are
+% scaled whenever the image is scaled.
+%
+% \DescribeEnv{tikzonimage}^^A
+% The |tikzonimage| environment is used to include an image file and then use
+% TikZ to draw on top of it. It starts a new |tikzpicture| environment and sets
+% the coordinate system so that the origin is at the lower left corner of the 
+% image. By default it also scales the coordinate system so that the point
+% $(1,1)$ is at the upper right corner of the image.
+%
+% \begin{quote}
+%  |\begin{\tikzonimage}|\oarg{image options}\marg{image file}\oarg{TikZ options}
+% \end{quote}
+%
+% The contents of the first optional argument are are passed to |\includegraphics|,
+% the second optional argument works in exactly the same way as the optional
+% argument of the |tikzpicture| environment. For example, in order to draw a
+% small red circle in the middle of |some_image.jpg|, one could write
+% 
+%\begin{verbatim}
+%\begin{tikzonimage}[width=0.3\textwidth]{some_image.jpg}[color=red]
+%    \fill (0.5,0.5) circle [radius=2pt];
+%\end{tikzonimage}
+%\end{verbatim}
+%
+% Note that the radius has to be given with an absolute unit, so that the circle
+% does not get squeezed into an ellipse if |some_image.jpg| is not square.
+%
+% \DescribeMacro{tsx/scale cs}^^A
+% The coordinate system scaling behaviour can be modified with the |tsx/scale cs| option.
+% Its default value is |both|, resulting in the behaviour described above. 
+% If the option is set to |x|, then the coordinate system as set so that $(1,0)$ is at the lower right corner of the image and the rectangle with vertices $(0,0)$, $(0,1)$, $(1,1)$ and $(1,0)$ is a square.
+% This is demonstrated in Figure \ref{fig:scale-cs:x}.
+% \begin{figure}
+%   \centering
+%   \begin{tikzonimage}[width=3cm,height=2cm]{some_image.jpg}[color=red,tsx/scale cs=x]
+%       \path[use as bounding box] (0,0) -- (1,1);    
+%       \fill (1,1) circle [radius=2pt] node[right,black] {$(1,1)$};    
+%   \end{tikzonimage}
+%   \caption{The \texttt{tsx/scale cs=x} option.}
+%   \label{fig:scale-cs:x}
+% \end{figure}^^A
+% Setting |tsx/scale cs=y| works analogously.
+% If no scaling is desired at all, it can be disabled by setting the option to |none|.
+%
+% \DescribeMacro{tsx/show help lines}^^A
+% For easier placement of graphics on top of the image, it is often desirable to display a grid of lines on top of it during the development process.
+% This can be achieved with the |tsx/show help lines| option, which causes the package to display a grid with coordinate labels on top of the image.
+% An example is shown in Figure \ref{fig:show help lines}.
+% \begin{figure}
+%   \centering
+%   \begin{tikzonimage}[width=5cm, height=3cm]{some_image.jpg}[tsx/show help lines=4]
+%   \end{tikzonimage}
+%   \caption{The \texttt{tsx/show help lines} option.}
+%   \label{fig:show help lines}
+% \end{figure}^^A
+% The option takes an argument to specify how many lines are shown (technically this is not quite true: the number displayed of lines is one higher; for example, Figure \ref{fig:show help lines} is created with \texttt{tsx/show help lines=4}).
+% The default value is $10$.
+% If the argument is not an integer, then it is interpreted as a dimension specifying the distance between the lines.
+%
+% \DescribeEnv{tikzonnode}^^A
+% Sometimes one would like to include several images into a |tikzpicture| and
+% still have the rescaled coordinate system for each of them. For this reason
+% this package also provides an environment to change the coordinate system so
+% that it matches an arbitrary node.
+% 
+% \begin{quote}
+%  |\begin{\tikzonnode}|\marg{node}\oarg{TikZ options}
+% \end{quote}
+%
+% The |tikzonnode| environment acts like a |scope| so that, for example, it limits
+% clipping. To draw a red circle in the middle of a node with some text, one 
+% could write
+%
+%\begin{verbatim}
+%\begin{tikzpicture}
+%    \node (A) [text width=2cm] {abc abc abc abc abc abc abc abc abc};
+%    \begin{tikzonnode}{A}[color=red]
+%        \fill (0.5,0.5) circle [radius=2pt];
+%    \end{tikzonnode}
+%\end{tikzpicture}
+%\end{verbatim}
+%
+% The environment respects the |tsx/scale cs| and |tsx/show help lines| options.
+%
+% \StopEventually{\PrintChanges}
+% \section{Implementation}
+%
+% \iffalse
+% <*onimage>
+% \fi
+%    \begin{macrocode}
+\RequirePackage{tikz}
+\RequirePackage{xstring}
+
+%    \end{macrocode}
+% These options control the scaling of the coordinate system in the |tikzonnode| environment.
+%    \begin{macrocode}
+\newif\iftsx@scalecs@x
+\newif\iftsx@scalecs@y
+\tikzset{
+    tsx/scale cs/.is choice,
+    tsx/scale cs/x/.code={\tsx@scalecs@xtrue\tsx@scalecs@yfalse},
+    tsx/scale cs/y/.code={\tsx@scalecs@xfalse\tsx@scalecs@ytrue},
+    tsx/scale cs/both/.code={\tsx@scalecs@xtrue\tsx@scalecs@ytrue},
+    tsx/scale cs/none/.code={\tsx@scalecs@xfalse\tsx@scalecs@yfalse},
+    tsx/scale cs=both
+}
+
+%    \end{macrocode}
+% The next option controls the display of the help lines.
+% By default they are disabled.
+%    \begin{macrocode}
+\tikzset{
+    tsx/show help lines/.initial=0,
+    tsx/show help lines/.default=10
+}
+%    \end{macrocode}
+% \begin{environment}{tikzonnode}
+% The implementation is pretty straightforward. |tikzonnode| simply creates a
+% |scope| with the options for the coordinate system shift and passes
+% the optional argument.
+%    \begin{macrocode}
+\def\tikzonnode#1{%
+    \pgfutil@ifnextchar[{\tikzonnode@opt#1}{\tikzonnode@opt#1[]}%
+}
+\def\tikzonnode@opt#1[#2]{%
+    \pgfpointanchor{#1}{south west}%
+    \pgfgetlastxy\tse@tikz@shift@x\tse@tikz@shift@y
+    \begin{scope}[
+            shift={(\tse@tikz@shift@x,\tse@tikz@shift@y)},
+            #2]%
+%    \end{macrocode}
+% Note that PGF stores the |x| and |y| vector in |\pgf@xx|, |\pgf@xy|, etc.
+% For simplicity we set some of these values directly.
+%    \begin{macrocode}
+        \iftsx@scalecs@x
+            \tikzset{x={(#1.south east)}}
+            \iftsx@scalecs@y\else
+                \pgf@yx=\pgf@xy
+                \pgf@yy=\pgf@xx
+            \fi
+        \fi
+        \iftsx@scalecs@y
+            \tikzset{y={(#1.north west)}}
+            \iftsx@scalecs@x\else
+                \pgf@xx=\pgf@yy
+                \pgf@xy=\pgf@yx
+            \fi
+        \fi
+%    \end{macrocode}
+% Draw the help lines, if requested.
+%    \begin{macrocode}
+        \begingroup
+            \pgfkeys{/pgf/number format/.cd,fixed,precision=2}
+            \tikzset{tsx/show help lines/.get=\tsx@helplines}
+            \IfInteger\tsx@helplines{
+%    \end{macrocode}
+% If |show help lines| is set to an integer, just draw that many evenly spaced lines.
+%    \begin{macrocode}
+                \ifnum\tsx@helplines>1
+                    \pgfmathsetmacro\tsx@stepsize{1/\tsx@helplines}
+                    \draw[help lines,xstep=\tsx@stepsize,ystep=\tsx@stepsize] (0,0) grid (1,1);
+                    \pgfmathsetmacro\tsx@numlines{\tsx@helplines - 1}
+                    \foreach \i in {1,...,\tsx@numlines} {
+                        \pgfmathsetmacro\tsx@step{\i*\tsx@stepsize}
+                        \node [help lines, anchor=west,rotate=-90] at (\tsx@step,0) {\pgfmathprintnumber{\tsx@step}};
+                        \node [help lines, anchor=east] at (0,\tsx@step) {\pgfmathprintnumber{\tsx@step}};
+                    }
+                \fi
+            }{
+%    \end{macrocode}
+% If it is a dimension, draw lines that much apart.
+%    \begin{macrocode}
+                \let\tsx@stepsize\tsx@helplines
+
+                \pgfpointanchor{#1}{south west}
+                \pgfgetlastxy\tsx@sw@x\tsx@sw@y
+                \pgfpointanchor{#1}{north east}
+                \pgfgetlastxy\tsx@ne@x\tsx@ne@y
+                \pgfmathsetmacro\tsx@width{\tsx@ne@x-\tsx@sw@x}
+                \pgfmathsetmacro\tsx@height{\tsx@ne@y-\tsx@sw@y}
+
+                \IfDecimal{\tsx@stepsize}{
+                    \let\tsx@stepsize@multx=\pgf@xx
+                    \let\tsx@stepsize@multy=\pgf@yy
+                }{
+                    \def\tsx@stepsize@multx{1}
+                    \def\tsx@stepsize@multy{1}
+                }
+                \pgfmathsetmacro\tsx@numlinesx{floor(\tsx@width/(\tsx@stepsize*\tsx@stepsize@multx))}
+                \pgfmathsetmacro\tsx@numlinesy{floor(\tsx@height/(\tsx@stepsize*\tsx@stepsize@multy))}
+                
+                \ifdim\tsx@numlinesx pt>0pt
+                \ifdim\tsx@numlinesy pt>0pt
+                    \draw[help lines,xstep=\tsx@stepsize,ystep=\tsx@stepsize] (0,0) grid (\tsx@width pt,\tsx@height pt);
+                    \foreach \x in {1,...,\tsx@numlinesx} {
+                        \pgfmathsetmacro\tsx@step{\x*\tsx@stepsize*\tsx@stepsize@multx}
+                        \node [help lines, anchor=west,rotate=-90] at (\tsx@step pt,0) {\x};
+                    }
+                \foreach \y in {1,...,\tsx@numlinesy} {
+                    \pgfmathsetmacro\tsx@step{\y*\tsx@stepsize*\tsx@stepsize@multy}
+                    \node [help lines, anchor=east] at (0,\tsx@step pt) {\y};
+                }
+                \fi
+                \fi
+                }
+        \endgroup
+}
+\def\endtikzonnode{%
+    \end{scope}%
+}
+%    \end{macrocode}
+% \end{environment}
+% \begin{environment}{tikzonimage}
+% To draw on a picture, we simply include it in a node and use |tikzonnode| to
+% set the coordinate system.
+%    \begin{macrocode}
+\def\tikzonimage{%
+    \pgfutil@ifnextchar[{\tikzonimage@opt}{\tikzonimage@opt[]}%
+}
+\def\tikzonimage@opt[#1]#2{%
+    \begin{tikzpicture}
+        \node[inner sep=0] (image) {\includegraphics[#1]{#2}};
+        \begin{tikzonnode}{image}%
+}
+\def\endtikzonimage{%
+        \end{tikzonnode}
+    \end{tikzpicture}%
+}
+%    \end{macrocode}
+% \end{environment}
+% \iffalse
+% </onimage>
+% \fi
+% \Finale
