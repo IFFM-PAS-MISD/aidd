@@ -61,7 +61,7 @@
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Third delamination case based on numerical data.\relax }}{82}{figure.caption.75}%
 \contentsline {figure}{\numberline {5.6}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{83}{figure.caption.76}%
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Fourth delamination case based on numerical data.\relax }}{86}{figure.caption.80}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Comparsion of the experimental case by using the adaptive wavenumber filtering method\nobreakspace {}\blx@tocontentsinit {0}\cite {}, FCN-DenseNet\nobreakspace {}\blx@tocontentsinit {0}\cite {Ijjeh2021}, FCN-DenseNet\nobreakspace {}\blx@tocontentsinit {0}\cite {Ijjeh2022}.\relax }}{88}{figure.caption.81}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Comparsion of the experimental case by using the adaptive wavenumber filtering method\nobreakspace {}\blx@tocontentsinit {0}\cite {Kudela2015, Radzienski2019}, FCN-DenseNet\nobreakspace {}\blx@tocontentsinit {0}\cite {Ijjeh2021}, FCN-DenseNet\nobreakspace {}\blx@tocontentsinit {0}\cite {Ijjeh2022}.\relax }}{88}{figure.caption.81}%
 \contentsline {figure}{\numberline {5.9}{\ignorespaces Four delamination cases based on numerical data (AE-ConvLSTM).\relax }}{90}{figure.caption.82}%
 \contentsline {figure}{\numberline {5.10}{\ignorespaces Experimental case: single delamination of Teflon insert.\relax }}{91}{figure.caption.86}%
 \contentsline {figure}{\numberline {5.11}{\ignorespaces IoU for the sliding window of frames (Teflon insert-single delamination).\relax }}{92}{figure.caption.87}%
