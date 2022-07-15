@@ -1,7 +1,4 @@
-
-%% 
 %% Copyright 2007, 2008, 2009 Elsevier Ltd
-%% 
 %% This file is part of the 'Elsarticle Bundle'.
 %% ---------------------------------------------
 %% 
@@ -41,7 +38,7 @@
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amsmath,amssymb,bm}
 %\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
-\usepackage[colorlinks=true,citecolor=green]{hyperref}
+\usepackage[breaklinks,colorlinks=true,citecolor=green]{hyperref}
 %% my added packages
 \usepackage{float}
 \usepackage{csquotes}
@@ -52,6 +49,7 @@
 \usepackage{csvsimple} % for csv read
 \usepackage{graphicx}
 \usepackage{natbib}
+
 \newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 
 
@@ -121,7 +119,9 @@ Paper/figs}}
 		\cortext[cor1]{Corresponding author}
 
 \begin{abstract}
-	\input{Abstract}
+	\begin{sloppypar}
+		\input{Abstract}
+	\end{sloppypar}	
 \end{abstract}
 
 \begin{keyword}
