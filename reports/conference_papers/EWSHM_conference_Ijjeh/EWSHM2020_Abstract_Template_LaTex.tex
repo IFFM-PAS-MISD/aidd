@@ -104,16 +104,9 @@ Damage detection techniques that use full wavefield signals can accurately estim
 However, when working with large amounts of measured data, conventional techniques, have drawbacks as they require a complex feature engineering computation~\cite{Gulgec2019}, further, they require a high level of experience and abilities to extract damage-sensitive features for specific SHM applications.
 Consequently, a data-driven technique for SHM applications has emerged in the form of deep learning (DL) end-to-end methods in recent years, with the process of feature engineering and classification done automatically.
 
-%Due to rapid advancements in computer hardware and software, big data, and cloud-based computations, deep learning (DL) techniques in many SHM disciplines have gained increased attention in recent years~\cite{Azimi}.
-%For SHM of civil engineering structures, many DL-based approaches were used for damage detection and localization~\cite{Cha2018}, corrosion detection~\cite{Atha2018}, and concrete crack detection~\cite{Dung2019}.
 
 Several DL approaches for guided wave-based damage identification and localization are discussed in the following.
 For damage detection in curved composite panels, Chetwynd et al.~\cite{Chetwynd2008} developed a multi-layer perceptron MLP network,
-%A force applicator with a circular tip loaded with a mass was used to simulate the damage.
-%A PZT transducer array was also used to generate and detect Lamb waves as they propagated through the panel.
-%In addition, for each Lamb wave response, a novelty index was calculated and compared to specific threshold values.
-%As a result, if the index exceeds the threshold, it indicates that the structure has a defect.
-%The generated novelty indices were sent into the MLP network, 
 which performed two tasks: classification and regression.
 The classification network was created to identify three convex parts of the panel and determining whether or not it was damaged.
 The regression network, on the other hand, can identify the specific area of the damage.
