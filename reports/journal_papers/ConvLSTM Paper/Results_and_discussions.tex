@@ -13,18 +13,18 @@
 	\subsection{Numerical cases}
 	In the first numerical case, the delamination is located at the upper left corner, as shown in Fig.~\ref{fig:num_GT_391}, representing its ground truth (GT).
 	This case is considered difficult due to edge wave reflections that have similar patterns as delamination reflection.
-	Figures~\ref{fig:Convlstm_num_391}, and~\ref{fig:AE_num_391} show the predicted RMS image of all intermediate predictions (damage map) with respect to Model-I, and~ II, respectively.
-	Figures~\ref{fig:Convlstm_binary_RMS_391} and~\ref{fig:AE_binary_RMS_391} show the binary RMS of damage maps with respect to Model-I, and~II, respectively.
+	Figures~\ref{fig:Convlstm_num_391}, and~\ref{fig:AE_num_391} show the predicted RMS images of all intermediate predictions (damage maps) with respect to Model-I, and Model-II, respectively.
+	Figures~\ref{fig:Convlstm_binary_RMS_391} and~\ref{fig:AE_binary_RMS_391} show the binary RMS of damage maps with respect to Model-I, and Model-II, respectively.
 	
 	For the second numerical case, the delamination is located at the upper centre of the plate, as shown in Fig.~\ref{fig:num_GT_462}, representing the GT.
 	This case is also considered difficult due to the waves reflected from the edge have similar patterns to those reflected from the delamination.
-	Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show the damage maps predicted with respect to Model-I, and~II, respectively.
-	Figures~\ref{fig:Convlstm_binary_RMS_462} and~\ref{fig:AE_binary_RMS_462} show the binary RMS of damage maps with respect to Model-I, and~II, respectively.
+	Figures~\ref{fig:Convlstm_num_462}, and~\ref{fig:AE_num_462} show the damage maps predicted with respect to Model-I, and Model-II, respectively.
+	Figures~\ref{fig:Convlstm_binary_RMS_462} and~\ref{fig:AE_binary_RMS_462} show the binary RMS of damage maps with respect to Model-I, and Model-II, respectively.
 	
 	
 	In the third case, the delamination is located in the upper left corner but a little farther from the edges, as shown in Fig.~\ref{fig:num_GT_453}, representing the GT. 
-	Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted damage maps with respect to Model-I, and~II, respectively.
-	Figures~\ref{fig:Convlstm_binary_RMS_453} and~\ref{fig:AE_binary_RMS_453} show the binary RMS of damage maps with respect to Model-I, and~II, respectively.
+	Figures~\ref{fig:Convlstm_num_453}, and \ref{fig:AE_num_453} show the predicted damage maps with respect to Model-I, and Model-II, respectively.
+	Figures~\ref{fig:Convlstm_binary_RMS_453} and~\ref{fig:AE_binary_RMS_453} show the binary RMS of damage maps with respect to Model-I, and Model-II, respectively.
 	
 	% Numerical cases
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,7 +41,7 @@
 		\begin{subfigure}[b]{0.48\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{RMS_Ijjeh_num_case_391.png}
-			\caption{Model~II}
+			\caption{Model-II}
 			\label{fig:AE_num_391}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -57,7 +57,7 @@
 		\begin{subfigure}[b]{0.48\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{RMS_Ijjeh_num_case_462.png}
-			\caption{Model~II}
+			\caption{Model-II}
 			\label{fig:AE_num_462}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,11 +73,11 @@
 		\begin{subfigure}[b]{0.48\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{RMS_Ijjeh_num_case_453.png}
-			\caption{Model~II}
+			\caption{Model-II}
 			\label{fig:AE_num_453}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\caption{predicted damage maps for numerical data (Figures: (a), (c), and (e) correspond to model-I. 
+		\caption{Predicted damage maps for numerical data (Figures: (a), (c), and (e) correspond to model-I. 
 			Figures: (b), (d) and (f) correspond to Model-II).}
 		\label{fig:num_case}
 	\end{figure} 
@@ -103,7 +103,7 @@
 		\begin{subfigure}[b]{0.32\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{Binary_RMS_Ijjeh_num_case391_.png}
-			\caption{Model~II, IoU\(=0.74\)}
+			\caption{Model-II, IoU\(=0.74\)}
 			\label{fig:AE_binary_RMS_391}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,7 +126,7 @@
 		\begin{subfigure}[b]{0.32\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{Binary_RMS_Ijjeh_num_case462_.png}
-			\caption{Model~II, IoU\(=0.76\)}
+			\caption{Model-II, IoU\(=0.76\)}
 			\label{fig:AE_binary_RMS_462}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -149,15 +149,15 @@
 		\begin{subfigure}[b]{0.32\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{Binary_RMS_Ijjeh_num_case453_.png}
-			\caption{Model~II, IoU\(=0.88\)}
+			\caption{Model-II, IoU\(=0.88\)}
 			\label{fig:AE_binary_RMS_453}
 		\end{subfigure}
-		\caption{Binary RMS predictions regarding Model~I and~II}
+		\caption{Binary RMS predictions regarding Model-I and Model-II}
 		\label{fig:RMS_num_cases}
 	\end{figure}
 	
 	The developed DL models are able to identify the delamination with high accuracy and almost no noise, as seen in all predicted damage maps.
-	Table~\ref{tab:num_cases} presents the evaluation metrics for Model-I and~II, respectively, regarding the numerical cases shown in Fig.~\ref{fig:RMS_num_cases}.
+	Table~\ref{tab:num_cases} presents the evaluation metrics for Model-I and Model-II, respectively, regarding the numerical cases shown in Fig.~\ref{fig:RMS_num_cases}.
 	Table~\ref{tab:num_cases} gathers the actual delamination area \(A\), predicted delamination area \(\hat{A}\), intersection over union IoU and percentage area error \(\epsilon\) with respect to each case. 
 	The performance of the Model-II is slightly better than the Model-I for the selected delamination scenarios.
 	Furthermore, all delamination cases should be considered for evaluation so the mean values of the proposed metrics were calculated next.
@@ -165,8 +165,8 @@
 	As shown in Table~\ref{tab:meanIoU_vs_input}, Model-I and Model-II are from the current work, and take as input animations of the full wavefields, whereas the rest of the models are from our previous works~\cite{Ijjeh2021, Ijjeh2022} and take as input RMS images.
 %	It can be concluded that the models that take animations as an input surpass the models that take only the RMS images as input. 
 	Moreover, Model-II has a higher \(\overline{\textup{IoU}}\) compared to Model-I (\(0.80\) versus \(0.74\)).
-	Furthermore, the mean percentage area error \(\overline{\epsilon}\) was calculated for 95 numerical cases and it was equal to \(4.95 \%\) and \(8.78\%\) for Model-I and~Model-II, respectively.
-	In summary, on average, Model-II has better accuracy of delamination identification than Model-I.
+	Furthermore, the mean percentage area error \(\overline{\epsilon}\) was calculated for 95 numerical cases and it was equal to \(4.95 \%\) and \(5.6\%\) for Model-I and~Model-II, respectively.
+	In summary, on average, Model-II has better accuracy of delamination identification than Model-I and previously developed models.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{table}[ht!]
 		\caption{Evaluation metrics of the three numerical cases}
@@ -314,7 +314,7 @@
 	
 	Figures~\ref{fig:RMS_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_CFRP_Teflon_3o_ijjeh} show the RMS images (damage maps) for the experimental case of single delamination predicted by Model-I and Model-II, respectively.
 	Additionally, to separate undamaged and damaged classes from the RMS images, a binary threshold was applied as shown in Figs.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_saeed} and~\ref{fig:RMS_threshold_CFRP_Teflon_3o_ijjeh} for Model-I and Model-II, respectively. 
-	The calculated IoU values for the case of single delamination are \(IoU=0.43\) and \(IoU=0.41\) for Model-I and Model-II, respectively.
+	The calculated IoU values for the case of single delamination are \(\textup{IoU}=0.43\) and \(\textup{IoU}=0.41\) for Model-I and Model-II, respectively.
 	
 	% RMS predictions
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -361,8 +361,8 @@
 		\label{fig:RMS_threshold_CFRP_Teflon_3o_images}
 	\end{figure} 
 	
-	Table~\ref{tab:single_case} presents the evaluation metrics for Model-I and~II, receptively, regarding the experimental case of single delamination shown in Fig.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_images}.
-	As shown in Table~\ref{tab:single_case}, the actual \(A\) and predicted areas \(\hat{A}\) of delaminations were computed in [mm\textsuperscript{2}] with respect to each case. 
+	Table~\ref{tab:single_case} presents the evaluation metrics for Model-I and Model-II, receptively, regarding the experimental case of single delamination shown in Fig.~\ref{fig:RMS_threshold_CFRP_Teflon_3o_images}.
+	As shown in Table~\ref{tab:single_case}, the actual areas \(A\) and predicted areas \(\hat{A}\) of delaminations were computed in [mm\textsuperscript{2}] with respect to each case. 
 	The percentage area error \(\epsilon\) was calculated for both models accordingly.
 	It is evident that better accuracy was obtained for Model-I because of higher IoU value and lower percentage area error than for Model-II. 
 	
@@ -419,8 +419,8 @@
 	Since SLDV measurements were conducted from the bottom surface of the plate, the GT images and the predicted outputs of the proposed models are flipped horizontally (mirrored).
 	Figures~\ref{fig:gt_specimen_2},~\ref{fig:gt_specimen_3},~\ref{fig:gt_specimen_4} show the GT image of Specimen~II,~III,~IV, respectively.
 
-	The largest delaminations in the cross-sections were assumed to be GT because the full wavefield was acquired from the bottom surface of the specimen.
-	We need to mention that such a case with stacked delaminations in the cross-section was not modeled numerically (see Specimen~\RNum{4} in Fig.~\ref{fig:plate_delam_arrangment}).
+	The largest delaminations in the cross-sections were assumed to be GT because the full wavefield was acquired from the bottom surface of the specimen (see Specimen~\RNum{4} in Fig.~\ref{fig:plate_delam_arrangment}).
+	We need to mention that such a case with stacked delaminations in the cross-section was not modeled numerically.
 	Although the models were not trained on such a scenario, the predictions were satisfactory.
 %	The predicted output of Model-I is shown in Fig.~\ref{fig:L3_S4_B_saeed} in which the highest IoU\(=0.18\) was achieved for window of frames \((235-299)\).
 %	Figure~\ref{fig:L3_S4_B_ijjeh} shows the predicted output of Model-II, in which the highest IoU\(=0.27\) was achieved for window of frames \((68-92)\).
@@ -502,7 +502,7 @@
 %	\end{figure} 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-	It is worth mentioning that we tested FCN-DenseNet, which we developed previously~\cite{Ijjeh2021} for data related to specimens II-IV. 
+	It is worth mentioning that we tested FCN-DenseNet, which we developed previously~\cite{Ijjeh2021} for data related to specimens~II-IV. 
 	However, poor results were obtained. 
 	This is attributed to the fact that RMS images are fed to FCN-DenseNet, which carries a limited amount of damage-related information. 
 	On the other hand, currently proposed methods utilise full wavefield frames, which carry more damage-reach features. 
@@ -526,21 +526,23 @@
 %	Although this frame shows complex patterns of wave reflections, the model can extract the valuable damage features and identify the delaminations accordingly.
 %	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	Figure~\ref{fig:L3_S234_B_333x333p_50kHz_5HC_IoU_centre_window} shows the calculated IoU values corresponding to predicted intermediate outputs of Model-I and Model-II regarding Specimen~II,~III, and ~IV, respectively, as we slide the window of size~\(64\) and \(24\) frames over the \(512\) full wavefield frames.
-	As mentioned earlier, Specimen~II is the most difficult case, it can be seen in Fig.~\ref{fig:L3_S2_B_333x333p_50kHz_5HC_IoU} the Model~II starts identifying the delaminations before Model~I.
+	As mentioned earlier, Specimen~II is the most difficult case.
+	As a consequence, the maximum and average values of IoU curves are lowest in Fig.~\ref{fig:L3_S2_B_333x333p_50kHz_5HC_IoU}. 
+	It can be seen in Fig.~\ref{fig:L3_S2_B_333x333p_50kHz_5HC_IoU} that the Model-II starts identifying the delaminations before Model-I.
 	The RMS images depicting the damage maps of Specimen~II are presented in Figs.~\ref{fig:RMS_L3_S2_B_saeed} and~\ref{fig:RMS_L3_S2_B_ijjeh} regarding Model-I and Model-II, respectively.
 	Figure~\ref{fig:RMS_threshold_L3_S2_B_saeed} shows the thresholded RMS image for Model-I, and the calculated IoU\(=0.00\).
-	In the damage map (Fig.~\ref{fig:RMS_L3_S2_B_saeed}) produced by Model~I, the three delaminations are visible.
+	In the damage map (Fig.~\ref{fig:RMS_L3_S2_B_saeed}) produced by Model-I, the three delaminations are visible.
 	However, when applying a binary threshold, the three identified delaminations vanish as their pixel values are below the threshold value. 
 	Figure~\ref{fig:RMS_threshold_L3_S2_B_ijjeh} shows the thresholded RMS image for Model-II, and the calculated IoU\(=0.53\).
 	
-	Figure~\ref{fig:L3_S3_B_333x333p_50kHz_5HC_shapes_} shows the calculated IoU of the intermediate outputs of Model-I and~II regarding Specimen-III.
+	Figure~\ref{fig:L3_S3_B_333x333p_50kHz_5HC_shapes_} shows the calculated IoU of the intermediate outputs of Model-I and Model-II regarding Specimen-III.
 	It is clear for Specimen-III that Model-I starts to identify the delaminations earlier than in Specimen-II, as the damage features are more evident in this case.
 	Figure~\ref{fig:RMS_threshold_L3_S3_B_saeed} shows the thresholded RMS image for Model-I, and the calculated IoU\(=0.01\).
-	Moreover, for Specimen-III, the damage map (Fig.~\ref{fig:RMS_L3_S3_B_saeed}) produced by Model~I, the three delaminations are visible.
+	Moreover, for Specimen-III, the three delaminations are visible in the damage map (Fig.~\ref{fig:RMS_L3_S3_B_saeed}) produced by Model-I.
 	However, when applying a binary threshold, almost all identified delaminations vanish as their pixel values are below the threshold value.
 	Figure~\ref{fig:RMS_threshold_L3_S2_B_ijjeh} shows the thresholded RMS image for Model-II, and the calculated IoU\(=0.64\).
 	
-	Figure~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} shows the calculated IoU of the intermediate outputs of Model-I and~II regarding Specimen-IV.
+	Figure~\ref{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_} shows the calculated IoU of the intermediate outputs of Model-I and Model-II regarding Specimen-IV.
 	For Specimen-IV, the delaminations are closer to the bottom surface of the plate where the SLDV measurements were conducted.
 	Hence, it is expected that both models will be able to identify the delaminations.
 	Figure~\ref{fig:RMS_threshold_L3_S4_B_saeed} shows the thresholded RMS image for Model-I, and the calculated IoU\(=0.56\).
@@ -576,7 +578,7 @@
 			\label{fig:L3_S4_B_333x333p_50kHz_5HC_shapes_}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\caption{IoU for a sliding window of frames for Specimen II, III and IV for Model~I and Model~II.}
+		\caption{IoU for a sliding window of frames for Specimen II, III and IV for Model-I and Model-II.}
 		\label{fig:L3_S234_B_333x333p_50kHz_5HC_IoU_centre_window}
 	\end{figure} 
 
@@ -700,8 +702,8 @@
 	\end{figure} 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	
-	Table~\ref{tab:multiple_cases} presents the evaluation metrics for Model-I and~II, receptively, regarding the experimental case of multiple delamination shown in Fig.~\ref{fig:plate_delam_arrangment}.
-	As shown in Table~\ref{tab:multiple_cases}, the actual \(A\) and predicted areas \(\hat{A}\) of delaminations were computed in [mm\textsuperscript{2}] with respect to each case. 
+	Table~\ref{tab:multiple_cases} presents the evaluation metrics for Model-I and Model-II, receptively, regarding the experimental case of multiple delamination shown in Fig.~\ref{fig:plate_delam_arrangment}.
+	As shown in Table~\ref{tab:multiple_cases}, the actual areas \(A\) and predicted areas \(\hat{A}\) of delaminations were computed in [mm\textsuperscript{2}] with respect to each case. 
 	The percentage area error \(\epsilon\) was calculated for both models accordingly.
 	
 	\begin{table}[ht]
@@ -721,14 +723,14 @@
 		\label{tab:multiple_cases}
 	\end{table}
 
-	Additionally, in Fig.~\ref{fig:comparison_all_models}, we present the predicted outputs for the experimental case of multiple delaminations (Specimen~III) regarding the adaptive wavenumber filtering presented in~\cite{Kudela2015,Radzienski2019a}, the Res-UNet model presented in~\cite{Ijjeh2022}, which is RMS-based (one-to-one), and the Model~II developed in this work, which uses animations of Lamb wave propagation (many-to-one).
+	Additionally, in Fig.~\ref{fig:comparison_all_models}, we present the predicted outputs for the experimental case of multiple delaminations (Specimen~III) regarding the adaptive wavenumber filtering presented in~\cite{Kudela2015,Radzienski2019a}, the Res-UNet model presented in~\cite{Ijjeh2022}, which is RMS-based (one-to-one), and the Model-II developed in this work, which uses animations of Lamb wave propagation (many-to-one).
 	It should be mentioned that, in the case of multiple delaminations, we have tested all the developed models presented in~\cite{Ijjeh2022}.
 	However, only the Res-UNet model could identify some damage, and the results were poor.
 	
 	Figure~\ref{fig:ERMSF} shows the damage map that represents the energy-based root mean square index of frames filtered in the wavenumber domain.
 	To eliminate low values in the damage map shown in~\ref{fig:ERMSF}, a binary threshold is applied as shown in Fig.~\ref{fig:binary_ERMSF} and the IoU\(=0.04\).
 	Figure~\ref{fig:Res_UNet} shows the predicted output of the previously developed model Res-UNet in~\cite{Ijjeh2022} with IoU=$0.03$.
-	Consequently, utilising animations of Lamb waves propagation has better outcomes for delamination identification.
+	Consequently, utilising animations of Lamb waves propagation has better outcomes for delamination identification than processing of a single image representing signal energy.
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% Adaptive wavenumber filtering vs DL method
@@ -770,7 +772,7 @@
 			\label{fig:RMS_threshold_L3_S4_B_ijjeh_compare}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\caption{Case of multiple delaminations regarding adaptive wavenumber filtering method, Res-UNet model (RMS-based), and Model~II.}
+		\caption{Damage scenario of multiple delaminations regarding adaptive wavenumber filtering method, Res-UNet model (RMS-based), and currently developed Model-II.}
 		\label{fig:comparison_all_models}
 	\end{figure} 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
