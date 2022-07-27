@@ -8,13 +8,16 @@
 	
 	To evaluate the performance of the developed models, we examined them on a numerical test-set that was unseen before.
 	The results verified their ability to identify the delaminations with high accuracy. 
-	The implemented Model-\RNum{1} showed better accuracy compared to Model-\RNum{2}.
-	Moreover, considering synthetic dataset, currently developed models surpass our previously developed models based on RMS input images.
-	Furthermore, to evaluate the generalisation capability of the models, we tested them on several experimentally measured cases of single and multiple delaminations simulated by Teflon inserts.
-	The predicted results are promising, considering the experimental case of multiple delaminations is difficult as the models were trained only on single delamination scenarios.
-	Consequently, the currently developed models showed their capability of identifying multiple delaminations at once in real-life cases.
+	When evaluated on the numerical and experimental test cases, Model-II showed better performance in comparison with Model-I.
+	For multiple delamination cases, Model-I can predict damage maps with less noise, and the identified delaminations are visible.
+	However, when a binary threshold is applied, most identified delaminations vanish as the pixel values are below the threshold.
+	Moreover, considering the synthetically generated dataset, our currently developed models surpass our previously developed models based on RMS input images.
 	
-	It should be added that by using proposed models, much better accuracy was obtained on experimental data in comparison to previously developed models.
+	Furthermore, to evaluate the generalisation capability of the models, we tested them on several experimentally measured cases of single and multiple delaminations simulated by Teflon inserts.
+	The predicted results are promising, although the experimental case of multiple delaminations is considered difficult because the models were only trained on single delamination cases. 
+	Furthermore, the present models are compared to a traditional signal processing technique (adaptive wavenumber filtering) and our previous RMS-based models. 
+	The results show that the current models (trained on animations of full wavefield) outperform the other approaches.
+	As a result, the currently developed models proved their ability to identify multiple delaminations at once in real-world scenarios.
 	
 	However, there are several limitations to the SLDV measurement technique, which is used for full wavefield acquisition.
 	The measurements constructed by using SLDV are stationary and time-consuming.
@@ -22,7 +25,6 @@
 	However, it is probable that in the future, as laser technology progresses, the process of data acquisition will be possible at an array of points instead of a single point, which will considerably decrease the measurement time.
 	It should be added, that the measurement time can also be reduced by using fewer points in the spatial grid along with the compressive sensing approach.
 	Another issue with SLDV measurements is that the laser needs access to the surface of the inspected structure, which may require partial disassembly of the structure.
-	
 	The limitation related to the developed deep learning model is that the material properties of the inspected structure have to be approximately known in order to simulate the dataset for training.
 	
 	The code for Model-I and Model-II is available at \url{https://github.com/IFFM-PAS-MISD/aidd/tree/master/src/models}.
