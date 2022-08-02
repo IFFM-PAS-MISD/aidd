@@ -146,7 +146,9 @@ ANN_model.compile(tf.keras.optimizers.Adam(lr_schedule),  # Adam(lr_schedule),
 # calling dataset func
 X, Y, s = load_dataset()
 
-checkpoint_filepath = env_path + 'temp/checkpoint/best_model_%s_%d.h5' % (s, samples)
+checkpoint_filepath = env_path + 'temp/checkpoint/PC_model_%s_%d_lr_%s_filters_%d_levels_%d_batches_%d_epochs_%d_dropout_%s_val_split_%s.h5' % (
+    s, samples, learning_rate, filter_size
+    , levels, batches, epochs, dropout, val_split)
 
 callbacks = [tf.keras.callbacks.EarlyStopping(monitor='val_loss',
                                               patience=patience_epochs,
