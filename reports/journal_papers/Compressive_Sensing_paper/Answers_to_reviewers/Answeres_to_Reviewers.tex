@@ -36,22 +36,52 @@
 	I have just some minor comments: \\ \\
 	\textcolor{Cyan}{
 		\textbf{Response:}
-	Thank you for your positive feedback.
+	We would like to thank the reviewer for his positive feedback.
     }
 	\begin{enumerate}
 		\item  It should be better clarified how the Nyquist wavelength defined in the Introduction is related to the Nyquist sampling rate used in the compression rate definition (Eq. (1)), and, in particular, how the authors from the 512x512 pixels frames have generated the 73x73 pixels frames mentioned in Equation 1.
 		\\ \\
-		\textcolor{Cyan}{
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
+			Thank you for pointing this out.
+			We have updated the manuscript as follows: \\
+			\emph{
+				The maximum permissible distance between grid points according to Nyquist theorem is calculated as in Eqn.~(\ref{eq:dx}):
+				\begin{equation}
+					d_{max}= \frac{1}{2*k_{max}} = \frac{1}{2*51.28\ [\textup{m}]} = \frac{\lambda}{2} = \frac{19.5}{2}\ \textup{[mm]}.
+					\label{eq:dx}	
+				\end{equation} 
+				where $k_{max}$ is the maximum wavenumber, and $\lambda$ is the shortest wavelength. \\				
+				On the other hand, the longest distance between grid points on uniform square grid in 2D space is along the diagonal as shown in Fig.~\ref{fig:Nyquist}.
+				Therefore, the number of Nyquist sampling points along edges of the plate is defined as:
+				\begin{align}
+					\begin{split}
+						N_x= \frac{L}{d_{max}/\sqrt{2}}, \\
+						N_y=  \frac{W}{d_{max}/\sqrt{2}},
+					\end{split}
+					\label{eq:Nyq}
+				\end{align}
+				\\
+				where $L$ is the plate length, and $W$ is the plate width.
+				\\
+				In our particular case, $L=W=500$~[mm], and number of Nyquist points $N_x= N_y= N_{Nyq} =73$.
+				\begin{figure} [!h]
+					\centering
+					\includegraphics[scale=1]{Nyquist_wavelength.png}
+					\caption{Longest distance between grid points.}
+					\label{fig:Nyquist}
+				\end{figure} 
+			}
 		}
-		\item A second comment concerning the Nyquist sampling rate is related to the discussion of the experimental results: the authors (p. 16, l. 20) wrote that "The conventional CS method is not efficient below the Nyquist sampling rate". 
-		This comment requires some additional elaboration because it seems to imply that there is no utility in using the CS at all. 
-		\\	\\
-		\textcolor{Cyan}{
-			\textbf{Response:}
+	\item A second comment concerning the Nyquist sampling rate is related to the discussion of the experimental results: the authors (p. 16, l. 20) wrote that "The conventional CS method is not efficient below the Nyquist sampling rate". 
+	This comment requires some additional elaboration because it seems to imply that there is no utility in using the CS at all. 		
+	\\	\\
+	\textcolor{Cyan}{
+		\textbf{Response:}
 		} 
-		\item Please clarify the number of pixels in the reference image of Figure 12(a). 
-		\\ \\
+	\item Please clarify the number of pixels in the reference image of Figure 12(a). 
+	\\ \\
 		\textcolor{Cyan}{
 			\textbf{Response:}}	
 		\item The proposed method seems to be very effective in recovering the wavefield on the delamination region but the Pearson CC has negative values when it is computed on the whole plate. 
@@ -63,10 +93,8 @@
 		Is it because the wavefield intensity tends to decrease due to the geometrical spreading?
 		\\ \\
 		\textcolor{Cyan}{
-		\textbf{Response:}
-}	
+		\textbf{Response:}}	
 	\end{enumerate}	
-
 	\textbf{Reviewer: 2}\\
 	This paper proposes a deep learning-based super resolution method for full wavefield reconstruction of Lamb waves from spatially sparse SLDV measurements of resolution below the Nyquist wavelength. 
 	The proposed ideas are valuable for promoting the real-time application of SLDV. 
