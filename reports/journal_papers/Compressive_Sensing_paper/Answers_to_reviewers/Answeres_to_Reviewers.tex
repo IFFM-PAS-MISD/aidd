@@ -69,89 +69,119 @@
 				\begin{figure} [!h]
 					\centering
 					\includegraphics[scale=1]{Nyquist_wavelength.png}
-					\caption{Longest distance between grid points.}
+					\caption{\textcolor{Cyan}{Longest distance between grid points.}}
 					\label{fig:Nyquist}
 				\end{figure} 
 			}
 		}
-	\item A second comment concerning the Nyquist sampling rate is related to the discussion of the experimental results: the authors (p. 16, l. 20) wrote that "The conventional CS method is not efficient below the Nyquist sampling rate". 
-	This comment requires some additional elaboration because it seems to imply that there is no utility in using the CS at all. 		
-	\\	\\
-	\textcolor{Cyan}{
-		\textbf{Response:}
+		\item A second comment concerning the Nyquist sampling rate is related to the discussion of the experimental results: the authors (p. 16, l. 20) wrote that "The conventional CS method is not efficient below the Nyquist sampling rate". 
+		This comment requires some additional elaboration because it seems to imply that there is no utility in using the CS at all. 		
+		\\	\\
+		\textcolor{Cyan}
+		{
+			\textbf{Response:}
+			Thank you for your constructive comment. \\
+			Actually, in our case, we found that when we applied the conventional CS technique to data below the Shannon–Nyquist rate, it showed poor results compared to the deep learning method, and this is our statement. 
 		} 
-	\item Please clarify the number of pixels in the reference image of Figure 12(a). 
-	\\ \\
-		\textcolor{Cyan}{
-			\textbf{Response:}}	
+		\item Please clarify the number of pixels in the reference image of Figure 12(a). 
+		\\ \\
+		\textcolor{Cyan}
+		{
+			\textbf{Response:}
+			Thank you for pointing this out. \\
+			The reference frame has a size of \((512\times512)\) pixels, and it was added to the manuscript.
+		}	
 		\item The proposed method seems to be very effective in recovering the wavefield on the delamination region but the Pearson CC has negative values when it is computed on the whole plate. 
 		How do the authors explain these discrepancies?
 		\\ \\
-		\textcolor{Cyan}{
-		\textbf{Response:}}
+		\textcolor{Cyan}
+		{
+			\textbf{Response:}
+			Thank you for your constructive comment.\\ 	
+		}
 		\item In figure 9, it can be observed a decreasing trend in the computed figure of merit (PSNR, Pearson CC). 
 		Is it because the wavefield intensity tends to decrease due to the geometrical spreading?
 		\\ \\
-		\textcolor{Cyan}{
-		\textbf{Response:}}	
-	\end{enumerate}	
-	\textbf{Reviewer: 2}\\
+		\textcolor{Cyan}
+		{
+			\textbf{Response:}
+			Thank you for pointing this out. \\
+			We can say that as the propagated waves reflect from the boundaries of the specimen, complex patterns start to appear; therefore, it becomes hard to recover the registered data into the high-resolution frame.
+			Furthermore, the developed deep learning models were trained to recover the high-resolution frames only on a certain number of frames (128 frames) starting from the time/frame of the initial interaction with delamination.
+			However, the deep learning models can generalise in such a way as to recover those frames that we did not use during the training process.
+			Consequently, this behaviour in the evaluation metrics is expected.
+		}
+	\end{enumerate}
+	
+	\noindent\textbf{Reviewer: 2} \\ \\
 	This paper proposes a deep learning-based super resolution method for full wavefield reconstruction of Lamb waves from spatially sparse SLDV measurements of resolution below the Nyquist wavelength. 
 	The proposed ideas are valuable for promoting the real-time application of SLDV. 
 	But more efforts are needed to improve the quality of this paper. \\ \\
-	\textcolor{Cyan}{
+	\textcolor{Cyan}
+	{
 		\textbf{Response:}
-	} \\ \\
-	 The detailed comments are given as follows:
+		We would like to thank the reviewer for his efforts in reviewing our manuscript.
+	} 
+	\\ \\
+	The detailed comments are given as follows:
 	\begin{enumerate}
 		\item The focus of this paper is on deep learning super-resolution based full wavefield reconstruction of guided waves, while compressive sensing should only be a method used for comparison, but the paper seems to spend an inordinate amount of space on its principles, current state of application, etc. 
 		The paper should focus more on the newly proposed deep learning based approach, especially in the introduction section.
-			\\ \\ 
-		\textcolor{Cyan}{
-			\textbf{Response:}
+		\\ \\ 
+		\textcolor{Cyan}
+		{
+			\textbf{Response:}\\
 		}
 		\item  In section 2 please add a flowchart to summarize the proposed approach for a more visual understanding.
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 		\item The two deep learning models in this paper achieve the same function and show similar reconstruction results, so what is the significance of applying two neural network architectures instead of one in this paper? A comparison of the two models is not seen in the conclusions. 
 		This is not clearly explained in the paper. 
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 		\item In section 3.2, the experimental setup is not clearly described. 
 		The authors should add photos of the experimental setup and explain how the scanning points of the SLDV are distributed, etc.
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 		\item  Observing Figure 12, the deep learning-based reconstruction result seems to be significantly better than the one based on compressive sensing when Nf=1024. 
 		But why do their PSNR and Pearson correlation coefficients show almost opposite results in Table 2?
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 		\item  Can the authors explain why the deep learning-based super resolution approach has similar reconstruction results with the compressive sensing-based approach for the whole plate, but outperforms the latter for the region of delamination?
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 		\item From Table 2, it appears that deep learning-based super resolution approach does not perfectly outperform the compressive sensing-based approach. 
 		So the statements in the conclusions and introduction seem inappropriate.
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 		\item Is it representative enough that most of the discussion in section 3.2 is devoted to frame 110? If not, please add the analysis of the other 3 to 5 frames.
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 		\item On page 16, line 38, should Figure 12b be changed to Figure 12a?
-			\\ \\ 
-		\textcolor{Cyan}{
+		\\ \\ 
+		\textcolor{Cyan}
+		{
 			\textbf{Response:}
 		}
 	\end{enumerate}
