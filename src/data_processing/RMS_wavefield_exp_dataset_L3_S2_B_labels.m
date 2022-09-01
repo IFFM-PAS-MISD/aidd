@@ -26,11 +26,11 @@ list = {'333x333p_16_5kHz_5HC_18Vpp_x10_pzt', ...          % 1  Length = ?;Width
         '333x333p_100kHz_20HC_10Vpp_x10_pzt', ... % 5
         '333x333p_150kHz_10HC_10Vpp_x20_pzt', ... % 6
         '333x333p_200kHz_10HC_10Vpp_x20_pzt', ... % 7
-        '497x497p_100kHz_10HC_10Vpp_x25_pzt'};% 8
+        '497x497p_100kHz_10HC1_10Vpp_x25_pzt'};% 8
 % manual characterization of defects
 
-xCenter=[250,100,356];
-yCenter=[400,250,144];
+xCenter=[250,100-4,356+3];
+yCenter=[400+7,250+5,144+4];
 a=[20/2,20/2,20/2];
 b=[10/2,10/2,10/2];
 rotAngle=[0,0,0];

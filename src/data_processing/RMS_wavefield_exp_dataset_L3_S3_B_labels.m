@@ -28,8 +28,8 @@ list = {'333x333p_16_5kHz_5HC_18Vpp_x10_pzt', ...          % 1  Length = ?;Width
         '333x333p_100kHz_10HC_15Vpp_x20_pzt_no_filter'};% 6
 % manual characterization of defects
 
-xCenter=[250,100,356];
-yCenter=[400,250,144];
+xCenter=[250,100-6,356];
+yCenter=[400+8,250+7,144+1];
 a=[20/2,20/2,20/2];
 b=[10/2,10/2,10/2];
 rotAngle=[0,0,0];

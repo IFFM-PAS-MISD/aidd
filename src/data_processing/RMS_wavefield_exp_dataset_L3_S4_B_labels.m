@@ -30,8 +30,13 @@ list = {'333x333p_16_5kHz_5HC_18Vpp_x10_pzt', ...    % 1
         };
 % manual characterization of defects
 
-xCenter=[250,100,356];
-yCenter=[400,250,144];
+% xCenter=[250,100,356];
+% yCenter=[400,250,144];
+% a=[20/2,20/2,20/2];
+% b=[10/2,10/2,10/2];
+% correction because of shifted teflon inserts
+xCenter=[250,100-3,356+2];
+yCenter=[400+8,250+6,144];
 a=[20/2,20/2,20/2];
 b=[10/2,10/2,10/2];
 rotAngle=[0,0,0];
