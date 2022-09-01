@@ -2,24 +2,39 @@
 \section{Conclusions}
 \label{sec61}
 
-%% SECTION CONTENT ////////////////////////////////////////////////////////////////////////////////////
+The importance of SHM systems originated from their ability to monitor the condition of structures in real-time.
+SHM systems can be developed using data-driven methods, which require a huge amount of data that are captured by monitoring the status of a structure.
+In recent years, non-contact systems have gained attention for damage detection and localisation in SHM applications.
+Full wavefields of elastic waves propaga\-tion can be excited by a fixed piezoelectric transducer and measured using scanning laser Doppler vibrometry (SLDV).
+The main objective of this dissertation was to investigate the feasibility of utilising deep learning-based approaches for delamination identification in composite laminated structures.
+Accordingly, in this dissertation, I present for the first time the utilisation of the full wavefield of Lamb waves propagation in composite laminates along with deep learning approaches for delamination identifica\-tion. 
 
-\lipsum[1]
-
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
-\subsection{Subsubsection}
-\label{sec611}
-
-\lipsum[1]
-
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
-\subsection{Subsubsection}
-\label{sec612}
-
-\lipsum[1]
-
-%% SUBSECTION HEADER //////////////////////////////////////////////////////////////////////////////////
-\subsection{Subsubsection}
-\label{sec613}
-
-\lipsum[1]
+Full wavefields of elastic waves propagating in a composite laminate contain extensive, valuable, and complex information regarding the discontinuities in the plate, such as delamination or edges.
+Such information can be utilised to train deep learning models to perform damage identification in an end-to-end approach.
+Accordingly, with deep learning approaches, it is possible to use registered data in its raw form without the need to perform feature engineering, extraction, and classification.
+Hence, such an approach has an end-to-end structure that automatically learns and discovers the hidden features in high-dimensional input data.
+Although deep learning approaches usually require more time during training, they can still sustain rapid and faster testing compared to conventional signal processing and machine learning methods.
+\\  \\
+The main outcomes of this dissertation can be summarized as follow:
+\begin{itemize}
+	\item Developing CNN classifier models capable of performing the first levels of SHM, namely damage detection and localisation.
+	\item Developing several FCN models for image semantic segmentation capable of performing damage identification and size estimation through training on RMS images of the full wavefields.
+	Moreover, applying data augmentation techniques to the training dataset (\(475\) RMS images) such as flipping the images horizontally, vertically, and diagonally and further applying K-fold cross-validation to the training dataset have improved the performance of the developed models in their generalisation capability.
+	The results were promising, and the deep learning models surpassed the conventional technique ii.e. adaptive wavenumber filtering in detecting delaminations of different shapes, sizes and angles in the unseen numerically generated data. 
+	Additionally, the models show their ability to generali\-se by detecting the delamination in the experimentally acquired data.
+	\item Developing a novel deep learning-based method that presents an end-to-end approach that performs a many-to-one sequence prediction to detect the location, size, and shape of delamination.
+	The developed model can identify and estimate delaminations through simultaneously processing a sequence of a certain number of frames of a full wavefield.
+	Therefore, using a certain number of full wavefield frames is sufficient for delamination identification.
+	To assess its generalisation capability, the model was evaluated on various experimentally measured cases of single and multiple Teflon-insert delaminations.
+	The results were promising, and yet the experimental case of multiple delamina\-tions was difficult because the model had only been trained on scenarios with single delamination.
+	As a result, the model demonstrated its ability to detect multiple delaminations at once in real-world scenarios.
+	\item It can be concluded that the performance of the AE-ConvLSTM model, which takes animations of full wavefield as an input, surpasses that of the FCN models that take only the RMS images as input.
+	\item Despite the advantages of acquiring full wavefield by SLDV, it requires several hours of automatic measurements to improve the signal-to-noise ratio (SNR) of ultrasonic responses via averaging procedures.
+	Therefore, there is a paramount need to develop a method to speed up data acquisition while simulta\-neously maintaining the valuable and complex information content obtained from the full wavefield.
+	Consequently, a deep learning model was developed for super-resolution image reconstruction that can recover the high-resolution full wavefield frames with high accuracy from the low-resolution acquired full wavefield by SLDV.
+	To assess the feasibility of such approach, the DLSR model was compared to the traditional CS technique.
+	The results were promising, with the deep learning model outperforming the traditional technique in reconstructing the full wavefield frames for the significantly sub-sampled case (less than $1\%$ of the scan points of the full grid).
+	Furthermore, by reconstructing the full wavefield frames obtained experimentally by SLDV, DLSR model demonstrated the ability to generalize.
+	As a result, it is worth noting that using deep learning approaches for SR frame reconstruction outperforms traditional CS techniques.
+\end{itemize}
+\clearpage

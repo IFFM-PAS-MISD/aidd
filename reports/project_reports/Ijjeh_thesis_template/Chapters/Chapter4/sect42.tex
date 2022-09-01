@@ -4,7 +4,7 @@
 
 In this section, I present my initial attempt to solve the problem of delamination detection in CFRP materials by utilising CNN models for classification purposes.
 
-The developed models were trained on RMS images from the synthetically generated dataset of the propagating Lamb waves (from the top of the surface of the plate) to predict the delamination location using bounding boxes as shown in Fig.~\ref{fig:RMS_14}, while, Fig.~\ref{fig:label_14} shows its corresponding ground truth.
+The bounding box method was used for the classification of the location of the delamina\-tion with the input as RMS (Fig.~\ref{fig:RMS_14}) and the binary representation of the delamination shape as ground truth (label shown in Fig.~\ref{fig:label_14}).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [!ht]
 	\centering
@@ -26,12 +26,12 @@ The developed models were trained on RMS images from the synthetically generated
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Accordingly, CNN models with fully connected dense layers were developed for delamination detection in CFRP.
+Accordingly, CNN models with fully connected dense layers were developed for delamina\-tion detection in CFRP.
 Moreover, the developed models are based on supervised learning to perform a classification task, therefore for each generated case of delamination a ground truth (label) is given.
  
 \subsection{Data preprocessing}
 \label{sec421}
-In order to reduce the computation complexity for the model, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels.  
+In order to reduce the computation complexity of the model, the dataset for training the model was prepared by resizing the RMS input image to \((448\times 448)\) pixels.  
 Then, it was split into \((14\times 14)\) patches, and each patch has a size of \((32\times 32)\) pixels as shown in Fig.~\ref{fig:RMS_49patches}.
 Consequently, the preprocessed dataset has a size of \((93100\times 32\times 32 \times 1)\), where (\(93100\)) is the total number of patches for all \(475\) cases.
 
@@ -78,7 +78,7 @@ Additionally, the validation set was created as a \(20\%\) of the training set.
 
 \subsection{CNN classification models}
 \label{sec422}
-The architecture of the implemented CNN model for classification purposes is presented in Fig.~\ref{CNN_model}
+The architecture of the implemented CNN model for classification purposes is presented in Fig.~\ref{CNN_model}.
 The model takes an input patch of size \((32\times 32)\) pixels, followed by a convolutional layer that has (\(64\)) filters of size (\(3\times 3\)).
 Moreover, in the convolution operation, the padding was set to be the same,  and the activation function was Relu.
 Then, a pooling layer is applied, which has a pool filter of size (\(2\times 2\)) with a stride of (\(2\)).

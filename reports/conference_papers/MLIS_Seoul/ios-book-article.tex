@@ -1,0 +1,512 @@
+
+\documentclass{IOS-Book-Article}
+
+\usepackage{mathptmx}
+\usepackage{soul}\setuldepth{article}
+ 
+%\usepackage{times}
+%\normalfont
+%\usepackage[T1]{fontenc}
+%\usepackage[mtplusscr,mtbold]{mathtime}
+%
+\def\hb{\hbox to 10.7 cm{}}
+
+\begin{document}
+
+\pagestyle{headings}
+\def\thepage{}
+
+\begin{frontmatter}              % The preamble begins here.
+
+
+%\pretitle{Pretitle}
+\title{Convolutional LSTM for delamination imaging in composite laminates}
+
+\markboth{}{July 2022\hb}
+%\subtitle{Subtitle}
+
+\author[A]{
+	\fnms{Pawe{\l}} \snm{Kudela}%
+\thanks{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland; E-mail: pk@imp.gda.pl}
+},
+\author[B]{\fnms{Saeed} \snm{Ullah}}
+and
+\author[B]{\fnms{Abdalraheem} \snm{Ijjeh}}
+
+\runningauthor{P. Kudela et al.}
+\address[A]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
+\address[B]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
+
+\begin{abstract}
+
+\end{abstract}
+
+\begin{keyword}
+	Lamb waves \sep delamination identification \sep semantic 
+	segmentation \sep deep learning \sep ConvLSTM.
+\end{keyword}
+\end{frontmatter}
+\markboth{July 2022\hb}{July 2022\hb}
+%\thispagestyle{empty}
+%\pagestyle{empty}
+
+\section{Introduction}
+The applications of composite materials are becoming more prevalent in many 
+industries such as automotive, maritime, wind energy structures, aerospace and 
+many more.
+The interest in these materials is rapidly growing due to their strength, 
+lightweight, stiffness, energy-efficient fabrication, good corrosion 
+resistance, and other various desired characteristics~\cite{Giurgiutiu2015}. 
+However, these materials undergo different kinds of defects in their life-cycle.
+The common types of defects that occur in these materials are matrix cracking, 
+fiber breakage, debonding, and delamination.
+Among these defects, delamination is the most dangerous kind of defect because 
+it can grow inside plies of composite laminate and affect the mechanical 
+properties and structural integrity of composite 
+materials~\cite{Giurgiutiu2015}\cite{Sridharan2008}.
+Therefore, it is very important to detect delamination at a very early stage 
+for the safe functionality of these materials. 
+Detection of delamination is very difficult for conventional visual inspection 
+techniques because it occurs inside the structures which is invisible from the 
+outer surfaces~\cite{Mei2019}.
+
+Numerous analytical and experimental approaches have been implemented in order 
+to better understand the mechanics and mechanisms of delamination in composite 
+materials~\cite{Jih1993}\cite{Sohn2011}\cite{Khan2018}.
+Among different delamination identification techniques, guided Lamb waves have 
+recently received considerable attention and has proven as an effective and 
+reliable tool for the identification of delamination in composite structures.
+Guided Lamb waves can travel long distance without much attenuation in plate 
+like structures and are highly sensitive to defects along with the propagation 
+path. 
+Therefore, by employing guided Lamb waves, even micro-scale defects can be 
+identified and monitored with a relatively small number of sparsely distributed 
+and low-voltage 
+transducers~\cite{Harb2016}\cite{Cawley2003}.  
+
+
+The main problem with the use of guided Lamb waves is the requirement of a 
+dense array of sensors for the identification and localisation of small 
+defects and inspection of a larger surface, which is not feasible in most of 
+the situations.
+In order to overcome this problem scanning laser Doppler vibrometry (SLDV) is 
+used.
+SLDV offers the measurements of guided Lamb waves in a dense array of points 
+over the surface of a large specimen.
+Such collection of signals is often known as full wavefield~\cite{Kudela2019}.
+Recently, full wavefield signals have been increasingly used for the 
+identification of delamination in composite materials. 
+These techniques allow to estimate the location and size of the delamination 
+effectively~\cite{Kudela2018}\cite{Girolamo2018}.   
+
+However, these full wavefield signals are quite complex and are very difficult 
+for conventional signal processing methods and classical machine learning-based 
+approaches to analyse.
+On the other hand, deep learning-based approaches have shown significant 
+performance in handling very complex and nonlinear data in various domains such 
+as computer vision, speech recognition, medical sciences, object detection and 
+many more~\cite{Deng2014}.
+
+Different researchers have implemented basic artificial neural networks (ANNs) 
+and deep learning techniques for the identification of defects in composite 
+structures by using vibration and frequency-based 
+approaches~\cite{Islam1994}\cite{Khan2019}\cite{Okafor1996}.
+However, only a few researchers have used ANNs and deep learning-based 
+approaches for damage identification in composite structures with the use of 
+guided Lamb 
+waves~\cite{Chetwynd2008}\cite{Fenza2015}\cite{Feng2019}\cite{Rautela2021}. 
+
+Chetwynd et al.~\cite{Chetwynd2008} implemented two multi-layer perceptrons 
+neural networks on stiffened curved carbon fiber reinforced polymer 
+(CFRP) for the regression and classification tasks with the use of guided Lamb 
+waves.
+Fenza et al.~\cite{Fenza2015} applied a probability ellipse-based approach and 
+basic ANNs with the use of guided Lamb waves in order to  determine the degree 
+and location of damage in composite and metallic plates. Results of both of 
+their approaches showed that guided Lamb waves have noticeable advantages in 
+the detection and localization of micro-scale defects in plate-like 
+structures. 
+
+Feng et al.~\cite{Feng2019} applied two algorithms based on the time of flight 
+with the use of guided Lamb waves in CFRP composite plates.  
+In their approach, a probability matrix is first created by employing a 
+probabilistic technique and is used for the localisation of defects in CFRP 
+composite plates and after that ANN is applied for improving the accuracy 
+of the localisation of defects.
+Rautela et al.~\cite{Rautela2021} implemented deep learning-based approach for 
+the identification of structural defects in composite structures with the use 
+of guided Lamb waves. 
+The detection of defects is performed on two datasets with the use of 
+convolutional neural networks (CNNs) and regression-based CNNs and 
+long-short-term memory (LSTM) models were applied for the localisation of 
+defects. 
+They have shown that the deep learning-based approaches surpassed the classical 
+machine-learning techniques.
+
+In this research work, we implemented a deep learning-based semantic 
+segmentation model on the full wavefield frames of propagating Lamb waves for 
+delamination identification.
+A many-to-one prediction approach was employed in the proposed deep learning 
+model.
+A sequence of full wavefield frames (animation) is inputted into the proposed 
+deep learning model.
+The proposed model is inspired by the convolutional
+long short-term memory (ConvLSTM) cells~\cite{Shi2018}.
+Further, two classes (damaged and undamaged) were identified in the pixel-wise 
+segmentation problem.
+The proposed segmentation-based ConvLSTM model is capable of providing good 
+results for the identification of delamination in composite structures.
+
+In the next section, the procedure for the acquisition of the full wavefield 
+images and the dataset on which the proposed model is applied, are 
+elaborated.
+In section~\ref{sec:section3}, recurrent neural networks (RNNs), LSTMs, and 
+ConvLSTMs are briefly introduced.
+Whereas, the proposed model is explained in section~\ref{sec:section4} and the 
+results are elaborated in section~\ref{sec:section5}, followed by conclusions 
+in section~\ref{sec:section6}.
+
+\section{Methodology}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data preprocessing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Similar to the previous work~\cite{Ijjeh2021}, 475 cases were simulated, representing Lamb wave propagation and interaction with single delamination for each case. 
+
+It should be underlined that the previous dataset contained the RMS of the full wavefield, representing wave energy spatial distribution in the form of images for each delamination case~\cite{Kudela2020d}.
+On the other hand, the currently utilised dataset contains frames of propagating waves (512 frames for each delamination scenario).
+The new dataset is available online~\cite{Kudela2021}.
+
+As mentioned earlier, the dataset contains 475 different cases of delaminations, with 512 frames per case, producing a total number of 243,\,200 frames with a frame size of \((500\times500)\)~pixels representing the geometry of the specimen of size \((500\times500)\)~mm\(^{2}\).
+Thus, using all frames in each case has high computational and memory costs.
+Frames displaying the propagation of guided waves before interaction with the delamination have no features to be extracted (see Fig.~\ref{fig:Full_wave}).
+Hence, for training, only a certain number of frames were selected from the initial occurrence of the interactions with the delamination.
+
+Figure~\ref{fig:Full_wave} shows selected frames at different time-steps of the propagating Lamb waves before and after the interaction with the damage.
+Frame \(f_{1}\) represents the initial interactions with the delamination, which was calculated using the delamination location and the velocity of the \(A0\) Lamb wave mode.
+While frame \(f_{m}\) represents the last frame in the training sequence window, \(m=24\) for the developed model which will be discussed in the next subsection.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Graphics/figure2.png}
+	\caption{Sample frames of full wave propagation.}
+	\label{fig:Full_wave}
+\end{figure}
+
+Furthermore, the dataset was divided into two sets: training and testing, with a ratio of \(80\%\) and \(20\% \) respectively.
+Moreover, a certain portion of the training set was preserved as a validation set to validate the model during the training process.
+Additionally, the dataset was normalised to a range of \((0, 1)\) to improve the convergence of the gradient descent algorithm.
+
+Additionally, for the training purposes, I have upsampled the frames (by using cubic interpolation) to \(512\times512\)~pixels to maintain the symmetrical shape during the encoding and decoding process.
+Further, the validation sets have portions of \(10\%\) and \(20\%\) regarding the training set.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure~\ref{fig:Diagram_exp_predictions} illustrates the complete procedure of obtaining intermediate predictions for the testing cases and finally calculating the RMS image, where \(f_{1}\) refers to the starting frame and \(f_{n}\) is the last frame, (\(n=512\)) in our dataset.
+Further, \(m\) refers to the number of frames in the window, hence, \(m=24\) frames for the developed model, and \(k\) represents the total number of windows.
+Accordingly, I slide the window over all input frames.
+The shift of the window is one frame at a time.
+Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to the final damage map by using the $\overline{RMS}$:
+
+\begin{equation}
+	\overline{RMS} = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
+	\label{RMS}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Graphics/figure1.png}
+	\caption{The procedure of calculating the RMS prediction image (damage map).}
+	\label{fig:Diagram_exp_predictions}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Font}
+
+The font type for running text (body text) is 10~point Times New Roman.
+There is no need to code normal type (roman text). For literal text, please use
+\texttt{type\-writer} (\verb|\texttt{}|)
+or \textsf{sans serif} (\verb|\textsf{}|). \emph{Italic} (\verb|\emph{}|)
+or \textbf{boldface} (\verb|\textbf{}|) should be used for emphasis.
+
+\subsection{General Layout}
+Use single (1.0) line spacing throughout the document. For the main
+body of the paper use the commands of the standard \LaTeX{}
+``article'' class. You can add packages or declare new \LaTeX{}
+functions if and only if there is no conflict between your packages
+and the \texttt{IOS-Book-Article}.
+
+Always give a \verb|\label| where possible and use \verb|\ref| for cross-referencing.
+
+
+\subsection{(Sub-)Section Headings}
+Use the standard \LaTeX{} commands for headings: {\small \verb|\section|, \verb|\subsection|, \verb|\subsubsection|, \verb|\paragraph|}.
+Headings will be automatically numbered.
+
+Use initial capitals in the headings, except for articles (a, an, the), coordinate
+conjunctions (and, or, nor), and prepositions, unless they appear at the beginning
+of the heading.
+
+\subsection{Footnotes and Endnotes}
+Please keep footnotes to a minimum. If they take up more space than roughly 10\% of
+the type area, list them as endnotes, before the References. Footnotes and endnotes
+should both be numbered in arabic numerals and, in the case of endnotes, preceded by
+the heading ``Endnotes''.
+
+\subsection{References}
+
+Please use the Vancouver citing \& reference system, and the National Library of 
+Medicine (NLM) style.
+
+Place citations as numbers in square brackets in the text. All publications cited in 
+the text should be presented in a list of references at the end of the manuscript. 
+List the references in the order in which they appear in the text. Some examples of 
+the NLM style:
+
+\medskip
+\noindent\ul{Journal article:}\par\noindent
+Petitti DB, Crooks VC, Buckwalter JG, Chiu V. Blood pressure levels before dementia. 
+Arch Neurol. 2005 Jan;62(1):112-6.
+
+\medskip
+\noindent\ul{Paper from a proceedings:}\par\noindent
+Rice AS, Farquhar-Smith WP, Bridges D, Brooks JW. Canabinoids and pain. In: Dostorovsky 
+JO, Carr DB, Koltzenburg M, editors. Proceedings of the 10th World Congress on Pain; 
+2002 Aug 17-22; San Diego, CA. Seattle (WA): IASP Press; c2003. p. 437-68.
+
+\medskip
+\noindent\ul{Contributed chapter in a book:}\par\noindent
+Whiteside TL, Heberman RB. Effectors of immunity and rationale for immunotherapy. In: 
+Kufe DW, Pollock RE, Weichselbaum RR, Bast RC Jr, Gansler TS, Holland JF, Frei~E~3rd, 
+editors. Cancer medicine 6. Hamilton (ON): BC Decker Inc; 2003. p. 221-8.
+
+\medskip
+\noindent\ul{Book by author(s):}\par\noindent
+Jenkins PF. Making sense of the chest x-ray: a hands-on guide. New York: Oxford 
+University Press; 2005. 194 p.
+
+\medskip
+\noindent\ul{Edited book:}\par\noindent
+Izzo JL Jr, Black HR, editors. Hypertension primer: the essentials of high blood pressure. 
+3rd ed. Philadelphia: Lippincott Williams \& Wilkins; c2003. 532 p.
+
+\medskip
+\noindent\ul{Proceedings:}\par\noindent
+Ferreira de Oliveira MJ, editor. Accessibility and quality of health services. Proceedings of 
+the 28th Meeting of the European Working Group on Operational Research Applied to Health 
+Services (ORAHS); 2002 Jul 28-Aug 2; Rio de Janeiro, Brazil. Frankfurt (Germany): Peter Lang; 
+c2004. 287 p.
+
+\section{Illustrations}
+
+\subsection{General Remarks on Illustrations}
+The text should include references to all illustrations. Refer to illustrations in the
+text as Table~1, Table~2, Figure~1, Figure~2, etc., not with the section or chapter number
+included, e.g. Table 3.2, Figure 4.3, etc. Do not use the words ``below'' or ``above''
+referring to the tables, figures, etc.
+
+Do not collect illustrations at the back of your article, but incorporate them in the
+text. Position tables and figures with at least 2 lines
+extra space between them and the running text.
+
+Illustrations should be centered on the page, except for small figures that can fit
+side by side inside the type area. Tables and figures should not have text wrapped
+alongside.
+
+Place figure captions \textit{below} the figure, table captions \textit{above} the table.
+Use bold for table/figure labels and numbers, e.g.: \textbf{Table 1.}, \textbf{Figure 2.},
+and roman for the text of the caption. Keep table and figure captions justified. Center
+short figure captions only.
+
+The minimum \textit{font size} for characters in tables is 8 points, and for lettering in other
+illustrations, 6 points.
+
+On maps and other figures where a \textit{scale} is needed, use bar scales rather than
+numerical ones of the type 1:10,000.
+
+\subsection{Quality of Illustrations}
+%Use only Type I fonts for lettering in illustrations.
+Embed the fonts used if the application provides that option.
+Ensure consistency by using similar sizes and fonts for a group of small figures.
+To add lettering to figures, it is best to use Helvetica or Arial (sans serif fonts)
+to avoid effects such as shading, outline letters, etc.
+
+ Avoid using illustrations
+taken from the Web. The resolution of images intended for viewing on a screen is
+not sufficient for the printed version of the book.
+
+If you are incorporating screen captures, keep in mind that the text may not be
+legible after reproduction.
+
+\subsection{Color Illustrations}
+Please note, that illustrations will only be printed in color if the volume editor agrees to
+pay the production costs for color printing. Color in illustrations will be retained
+in the online (ebook) edition.
+
+
+\section{Equations}
+Number equations consecutively, not section-wise. Place the numbers in parentheses at
+the right-hand margin, level with the last line of the equation. Refer to equations in the
+text as Eq. (1), Eqs. (3) and (5).
+
+\section{Fine Tuning}
+
+\subsection{Type Area}
+\textbf{Check once more that all the text and illustrations are inside the type area and
+that the type area is used to the maximum.} You may of course end a page with one
+or more blank lines to avoid `widow' headings, or at the end of a chapter.
+
+\subsection{Capitalization}
+Use initial capitals in the title and headings, except for articles (a, an, the), coordinate
+conjunctions (and, or, nor), and prepositions, unless they appear at the beginning of the
+title or heading.
+
+\subsection{Page Numbers and Running Headlines}
+You do not need to include page numbers or running headlines. These elements will be
+added by the publisher.
+
+\section{Submitting the Manuscript}
+Submit the following to the volume editor:
+
+\begin{enumerate}
+\item The main source file, and any other required files. Do not submit more than
+one version of any item.
+
+\item The source files should compile without errors with pdflatex or latex.
+
+\item Figures should be submitted in EPS, PDF, PNG or JPG format.
+
+\item A high resolution PDF file generated from the source files you submit.
+\end{enumerate}
+
+\begin{thebibliography}{8}
+	
+	\bibitem{Giurgiutiu2015}
+	Giurgiutiu, V.: Structural health monitoring of aerospace composites (2015).
+	
+	\bibitem{Sridharan2008}
+	Sridharan, S.: Delamination behaviour of composites. Elsevier (2008).
+	
+	\bibitem{Mei2019}
+	Mei, H., Migot, A., Haider, M. F., Joseph, R., Bhuiyan, M. Y., Giurgiutiu, 
+	V.: Vibration-based in-situ detection and quantification of delamination in 
+	composite plates. Sensors, \textbf{19}(7), 1734 (2019).
+	
+	\bibitem{Jih1993}
+	Jih, C. J., Sun, C. T.: Prediction of delamination in composite laminates 
+	subjected to low velocity impact. Journal of composite materials, 
+	\textbf{27}(7), 684--701 (1993).
+	
+	\bibitem{Sohn2011}
+	Sohn, H., Dutta, D., Yang, J. Y., DeSimio, M., Olson, S., Swenson, E.: 
+	Automated detection of delamination and disbond from wavefield images obtained 
+	using a scanning laser vibrometer. Smart Materials and Structures, 
+	\textbf{20}(4), 
+	045017 (2011).
+	
+	\bibitem{Khan2018}
+	Khan, A., Kim, H. S.: Assessment of delaminated smart composite laminates via 
+	system identification and supervised learning. Composite Structures, 206 
+	354--362 (2018).
+	
+	\bibitem{Harb2016}
+	Harb MS, Yuan FG.: Non-contact ultrasonic technique for Lamb wave 
+	characterization in composite plates. Ultrasonics, \textbf{64}(162--9), (2016).
+	
+	\bibitem{Cawley2003}
+	Cawley, P., Lowe, M. J. S., Alleyne, D. N., Pavlakovic, B., Wilcox, P.: 
+	Practical long range guided wave inspection-applications to pipes and rail. 
+	Mater. Eval, \textbf{61}(1), 66--74 (2003).
+	
+	\bibitem{Kudela2019}
+	Radzieński, M., Kudela, P., Marzani, A., De Marchi, L., Ostachowicz, W.: Damage 
+	identification in various types of composite plates using guided waves excited 
+	by a piezoelectric transducer and measured by a laser vibrometer. Sensors,  
+	\textbf{19}(9), 1958 (2019).
+	
+	\bibitem{Kudela2018}
+	Kudela, P., Radzienski, M., Ostachowicz, W.: Impact induced damage assessment 
+	by means of Lamb wave image processing. Mechanical Systems and Signal 
+	Processing, (102), 23--36 (2018).
+	
+	\bibitem{Girolamo2018}
+	Girolamo, D., Chang, H. Y., Yuan, F. G.: Impact damage visualization in a 
+	honeycomb composite panel through laser inspection using zero-lag 
+	cross-correlation imaging condition. Ultrasonics, (87), 152--165 (2018).
+	
+	\bibitem{Deng2014}
+	Deng, L., Yu, D.: Deep learning: methods and applications. Foundations and 
+	trends in signal processing, \textbf{7}(3–4), 197--387 (2014).
+	
+	\bibitem{Islam1994}
+	Islam, A. S., Craig, K. C.: Damage detection in composite structures using 
+	piezoelectric materials (and neural net). Smart Materials and Structures, 
+	\textbf{3}(3), 318 (1994).
+	
+	\bibitem{Khan2019}
+	Khan, A., Ko, D. K., Lim, S. C., Kim, H. S.: Structural vibration-based 
+	classification and prediction of delamination in smart composite laminates 
+	using deep learning neural network. Composites Part B: Engineering, 161, 
+	586--594 (2019).
+	
+	\bibitem{Okafor1996}
+	Okafor, A. C., Chandrashekhara, K., Jiang, Y. P.: Delamination prediction in 
+	composite beams with built-in piezoelectric devices using modal analysis and 
+	neural network. Smart materials and structures, \textbf{5}(3), 338  (1996).
+	
+	\bibitem{Chetwynd2008}
+	Chetwynd, D., Mustapha, F., Worden, K., Rongong, J. A., Pierce, S. G., 
+	Dulieu‐Barton, J. M.: Damage localisation in a stiffened composite panel. 
+	Strain, 44(4), 298--307 (2008).
+	
+	\bibitem{Fenza2015}
+	De Fenza, A., Sorrentino, A., Vitiello, P. Application of Artificial Neural 
+	Networks and Probability Ellipse methods for damage detection using Lamb waves. 
+	Composite Structures, 133, 390--403 (2015).
+	
+	\bibitem{Feng2019}
+	Feng, B., Pasadas, D. J., Ribeiro, A. L., Ramos, H. G.: Locating defects in 
+	anisotropic CFRP plates using ToF-based probability matrix and neural networks. 
+	IEEE Transactions on Instrumentation and Measurement, \textbf{68}(5), 
+	1252--1260 (2019).
+	
+	\bibitem{Rautela2021}
+	Rautela, M., Gopalakrishnan, S.: Ultrasonic guided wave based structural damage 
+	detection and localization using model assisted convolutional and recurrent 
+	neural networks. Expert Systems with Applications, 167, 114189 (2021).
+	
+	\bibitem{Shi2018}
+	Shi, X., Chen, Z., Wang, H., Yeung, D. Y., Wong, W. K., Woo, W. C.: 
+	Convolutional LSTM network: A machine learning approach for precipitation 
+	nowcasting. Advances in neural information processing systems, 28 (2015).
+	
+	\bibitem{Kudela2020}
+	Kudela, P., Moll, J., Fiborek, P.: Parallel spectral element method for guided 
+	wave based structural health monitoring. Smart Materials and Structures, 
+	\textbf{29}(9), 095010 (2020).
+	
+	\bibitem{Kudela2021}
+	Pawel, K., Abdalraheem I.: Synthetic dataset of a full wavefield
+	representing the propagation of Lamb waves and their interactions with
+	delaminations, (2021).
+	
+	\bibitem{Bengio1994}
+	Bengio, Y., Simard, P., Frasconi, P.: Learning long-term dependencies with 
+	gradient descent is difficult. IEEE transactions on neural networks, 
+	\textbf{5}(2), 157--166 (1994).
+	
+	\bibitem{Hochreiter1997}
+	Hochreiter, S., Schmidhuber, J.: Long short-term memory. Neural computation, 
+	\textbf{9}(8), 1735--1780 (1997).
+	
+	\bibitem{Graves2014}
+	Graves, A., Jaitly, N.: Towards end-to-end speech recognition with recurrent 
+	neural networks. In International conference on machine learning. pp. 
+	1764--1772. PMLR (2014, June).
+	
+	\bibitem{Cho2014}
+	Cho, K., Van Merriënboer, B., Bahdanau, D., Bengio, Y.: On the properties of 
+	neural machine translation: Encoder-decoder approaches. arXiv preprint 
+	arXiv:1409.1259  (2014).
+	
+\end{thebibliography}
+\end{document}

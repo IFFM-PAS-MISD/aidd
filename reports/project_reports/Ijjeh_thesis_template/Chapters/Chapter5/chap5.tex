@@ -5,100 +5,32 @@ In this chapter, the results and discussions regarding delamination identificati
 Accordingly, to verify the developed DL models, I evaluated them on \(95\) unseen numerical test cases and further on experimental test cases.
 Moreover, I have selected four numerical test cases to present. 
 The selected four numerical cases were chosen to represent the random distribution of delamination locations.
-%Figure~\ref{numerical_cases} shows the selected numerical test cases that are evaluated and further presented will the developed models
-%
-%\begin{figure} [ht!]
-%	\centering
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 448
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_448_500x500bottom.png}
-%		\caption{First RMS case}
-%		\label{fig:RMS_bottom_448}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_448.png}
-%		\caption{}
-%		\label{fig:GT_case_448}
-%	\end{subfigure}	
-%	\par\medskip
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 456
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_456_500x500bottom.png}
-%		\caption{Second RMS case}
-%		\label{fig:RMS_bottom_456}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_456.png}
-%		\caption{}
-%		\label{fig:GT_case_456}
-%	\end{subfigure}	
-%	\hfill
-%	\par\medskip
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 438
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_438_500x500bottom.png}
-%		\caption{Second RMS case}
-%		\label{fig:RMS_bottom_438}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_438.png}
-%		\caption{}
-%		\label{fig:GT_case_438}
-%	\end{subfigure}	
-%	\par\medskip
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%% case 397
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{subfigure}[b]{.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/RMS_flat_shell_Vz_397_500x500bottom.png}
-%		\caption{Second RMS case}
-%		\label{fig:RMS_bottom_397}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[b]{0.48\textwidth}
-%		\centering
-%		\includegraphics[width=5cm]{Figures/Chapter_5/m1_rand_single_delam_397.png}
-%		\caption{}
-%		\label{fig:GT_case_397}
-%	\end{subfigure}	
-%	\hfill
-%	\par\medskip	
-%	\caption{Four selected numerical cases}
-%	\label{numerical_cases}
-%\end{figure} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Furthermore, I have applied the super-resolution image reconstruction technique to LR full wavefield animations for both the numerical test cases and the experimental case. 
 Then, I applied the AE-ConvLSTM model to the reconstructed frames in order to identify the delamination.
 
-Accordingly, to evaluate the performance of the proposed models, the intersection over union \(IoU\) (Jaccard index) was applied as the accuracy metric.
-\(IoU\) is estimated by determining the intersection area between the ground truth and the predicted output.
+Accordingly, to evaluate the performance of the proposed models, the intersection over union IoU (Jaccard index) was applied as the accuracy metric.
+IoU is estimated by determining the intersection area between the ground truth and the predicted output.
 Furthermore, we have two output classes (damaged and undamaged). 
-The \(IoU\) was calculated for the damaged class only.
-Equation~(\ref{eqn:iou}) defines the \(IoU\) metric:
+The IoU was calculated for the damaged class only.
+The illustration of the IoU metric is presented in Fig.~\ref{fig:iou} where Eqn.~(\ref{eqn:iou}) defines the IoU metric:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.1]{Figures/Chapter_5/IoU_figure.png}
+	\end{center}
+	\caption{Intersection over union.} 
+	\label{fig:iou}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation}
-	IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y},
+	\textup{IoU}=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y},
 	\label{eqn:iou}
 \end{equation}
-where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth (label).
 
-Additionally, the percentage area error $\epsilon$ depicted in Eq.~(\ref{eqn:mean_size_error}) was utilised to evaluate the performance of the FCN models and the Autoencoder ConvLSTM model:
+Additionally, the percentage area error $\epsilon$ depicted in Eqn.~(\ref{eqn:mean_size_error}) was utilised to evaluate the performance of the FCN models and the Autoencoder ConvLSTM model:
 \begin{equation}
 	\epsilon=\frac{|A-\hat{A}|}{A} \times 100\%,
 	\label{eqn:mean_size_error}
@@ -109,9 +41,9 @@ Accordingly, the lower the value of $\epsilon$, the higher the accuracy of the i
 
 Two metrics are utilised for evaluating the DLSR model developed to perform super-resolution image reconstruction of the full wavefield.
 The first metric is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
-Equation~\ref{PSNR} depicts the mathematical representation of the PSNR:
+Equation~(\ref{PSNR}) depicts the mathematical representation of the PSNR:
 \begin{equation}
-	PSNR=20log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
+	PSNR=20\log_{10}\left(\frac{R}{\sqrt{MSE}}\right),
 	\label{PSNR}
 \end{equation}
 where \(R\) represents the maximum fluctuation value that exists in the input image, and its equal to \(255\), as I used an 8-bit unsigned integer data type.
@@ -119,13 +51,13 @@ where \(R\) represents the maximum fluctuation value that exists in the input im
 
 The second utilised metric is the Pearson correlation coefficient that measures the linear relationship between two variable matrices \textbf{\(X\)} (represents the ground truth values) and \textbf{\(Y\)} (represents the predicted values), and its value is between -1 and 1, where:
 \begin{itemize}
-	\item -1 represents a perfect negative linear correlation.
-	\item 0 represents no linear correlation.
+	\item -1 represents a perfect negative linear correlation,
+	\item 0 represents no linear correlation,
 	\item 1 represents a perfect positive linear correlation.
 \end{itemize}
 Equation~\ref{Pearson} depicts the mathematical formula to calculate Pearson CC commonly denoted as \(r_{xy}\):
 \begin{equation}
-	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
+	r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}},
 	\label{Pearson}
 \end{equation}
 where \(n\) is the number of sample points, \(x_i\), \(y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) is the mean value of the sample, analogously to \(\bar{y}\).

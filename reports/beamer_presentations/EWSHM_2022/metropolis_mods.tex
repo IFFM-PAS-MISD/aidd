@@ -1,0 +1,138 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme[progressbar=foot]{metropolis}
+\useoutertheme{metropolis}
+\useinnertheme{metropolis}
+\usefonttheme{metropolis}
+\setbeamercolor{background canvas}{bg=white}
+
+%\usecolortheme{spruce}
+
+\definecolor{myblue}{rgb}{0.19,0.55,0.91}
+\definecolor{mediumblue}{rgb}{0,0,205}
+\definecolor{darkblue}{rgb}{0,0,139}
+\definecolor{Dodgerblue}{HTML}{1E90FF}
+\definecolor{Navy}{HTML}{000080} % {rgb}{0,0,128}
+\definecolor{Aliceblue}{HTML}{F0F8FF}
+\definecolor{Lightskyblue}{HTML}{87CEFA}
+\definecolor{logoblue}{RGB}{1,67,140}
+\definecolor{Purple}{HTML}{911146}
+\definecolor{Orange}{HTML}{CF4A30}
+
+\setbeamercolor{progress bar}{bg=Lightskyblue}
+\setbeamercolor{progress bar}{ fg=logoblue} 
+\setbeamercolor{frametitle}{bg=logoblue}
+\setbeamercolor{title separator}{fg=logoblue}
+\setbeamercolor{block title}{bg=Lightskyblue!30,fg=black}
+\setbeamercolor{block body}{bg=Lightskyblue!15,fg=black}
+\setbeamercolor{alerted text}{fg=Purple}
+% notes colors
+\setbeamercolor{note page}{bg=white}
+\setbeamercolor{note title}{bg=Lightskyblue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Theme modifications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% modify progress bar linewidth
+\makeatletter
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt} 
+\setlength{\metropolis@titleseparator@linewidth}{1pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{1pt}
+
+\setbeamertemplate{progress bar in section page}{
+	\setlength{\metropolis@progressonsectionpage}{%
+		\textwidth * \ratio{\thesection pt}{\totvalue{totalsection} pt}%
+	}%
+	\begin{tikzpicture}
+		\fill[bg] (0,0) rectangle (\textwidth, 
+		\metropolis@progressonsectionpage@linewidth);
+		\fill[fg] (0,0) rectangle (\metropolis@progressonsectionpage, 
+		\metropolis@progressonsectionpage@linewidth);
+	\end{tikzpicture}%
+}
+\makeatother
+\newcounter{totalsection}
+\regtotcounter{totalsection}
+
+\AtBeginDocument{%
+	\pretocmd{\section}{\refstepcounter{totalsection}}{\typeout{Yes, prepending 
+	was successful}}{\typeout{No, prepending was not successful}}%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Bibliography mods
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{bibliography item}{\insertbiblabel} %% Remove book symbol 
+%%from references and add number in square brackets
+% kill the abominable icon (without number)
+%\setbeamertemplate{bibliography item}{}
+%\makeatletter
+%\renewcommand\@biblabel[1]{#1.} % number only
+%\makeatother
+% remove line breaks in bibliography
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Bibliography custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bibliotitlestyle}[1]{\textbf{#1}\par}
+
+\newif\ifinbiblio
+\newcounter{bibkey}
+\newenvironment{biblio}[2][long]{%
+	%\setbeamertemplate{bibliography item}{\insertbiblabel}
+	\setbeamertemplate{bibliography item}{}% without numbers
+	\setbeamerfont{bibliography item}{size=\footnotesize}
+	\setbeamerfont{bibliography entry author}{size=\footnotesize}
+	\setbeamerfont{bibliography entry title}{size=\footnotesize}
+	\setbeamerfont{bibliography entry location}{size=\footnotesize}
+	\setbeamerfont{bibliography entry note}{size=\footnotesize}
+	\ifx!#2!\else%
+	\bibliotitlestyle{#2}%
+	\fi%
+	\begin{thebibliography}{}%
+		\inbibliotrue%
+		\setbeamertemplate{bibliography entry title}[#1]%
+	}{%
+		\inbibliofalse%
+		\setbeamertemplate{bibliography item}{}%
+	\end{thebibliography}%
+}
+
+\newcommand{\biblioref}[5][short]{
+	\setbeamertemplate{bibliography entry title}[#1]
+	\stepcounter{bibkey}%
+	\ifinbiblio%
+	\bibitem{\thebibkey}%
+	#2
+	\newblock #4
+	\ifx!#5!\else\newblock {\em #5}, #3 \fi%
+	\else%
+	\begin{biblio}{}
+		\bibitem{\thebibkey}
+		#2
+		\newblock #4
+		\ifx!#5!\else\newblock {\em #5}, #3\fi
+	\end{biblio}
+	\fi
+}
+%
+%\newbibmacro*{hypercite}{%
+%	\renewcommand{\@makefntext}[1]{\noindent\normalfont##1}%
+%	\footnotetext{%
+%		\blxmkbibnote{foot}{%
+%			\printtext[labelnumberwidth]{%
+%				\printfield{prefixnumber}%
+%				\printfield{labelnumber}}%
+%			\addspace
+%			\fullcite{\thefield{entrykey}}}}}
+%
+%\DeclareCiteCommand{\hypercite}%
+%{\usebibmacro{cite:init}}
+%{\usebibmacro{hypercite}}
+%{}
+%{\usebibmacro{cite:dump}}
+%
+%% Redefine the \footfullcite command to use the reference number
+%\renewcommand{\footfullcite}[1]{\cite{#1}\hypercite{#1}}

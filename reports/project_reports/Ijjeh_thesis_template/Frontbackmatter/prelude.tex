@@ -35,28 +35,53 @@
 % Acknowledgments page
 \newcommand{\acknowledgement}
 {
-I would like to express my deepest sense of gratitude to my supervisor, Prof.~Pawe\l{} Kudela, for his guidance, encouragement, and advice from the initial stage of my Ph.D. studies till the end of helping me develop a thorough understanding of the subject and my studies.
-Also, I would like to thank him for passing me his expertise and knowledge of being a scientific researcher.
+I would like to express my deepest sense of gratitude to my supervisor, Prof.~Pawe\l{} Kudela, for his guidance, encouragement, and valuable advice on my research and writing over the whole period of my study.
+I would like to thank him for his endless support from the initial stage of my PhD studies till the end and for helping me develop a thorough understanding of the subject and my studies.
+I would also like to thank him for passing on to me his expertise and knowledge of being a scientific researcher.
 
-I would like to thank my committee members for letting my defense be a good moment of time, and for their constructive comments and suggestions.
+I would like to express my gratitude to Dr.~Maciej Radzienski for supplying the experimental data of the full wavefield measured by SLDV used in the validation of the developed methods in this thesis.
 
-My sincere thanks to my father, Dr.~Abdullah Ijjeh, for his continuous guidance, advice, and encouragement throughout my studies.
+My sincere thanks to my father, Dr.~Abdullah Ijjeh, for his continuous guidance, advice, and encouragement throughout my life.
 
 I would like to thank my mother for her endless love, trust, encouragement, and support throughout my life.
 
 I would like to thank my wife, Duaa, and my daughter, Raghad, for their consistent support and encouragement.
 
-I would like to thank my brother, Dr.~Abdalraheman Ijjeh, for his consistent advice.
+I would like to thank my brother, Dr.~Abdalraheman Ijjeh, for his consistent support and advice.
 
-And finally, I would like to thank everyone who supported me during my journey of Ph.D. studies.
+And finally, I would like to thank everyone who supported me during my journey of PhD studies.
 
 }
-
 % Abstract to be bound with thesis
 \newcommand{\abstextwithesis}
-{
-	%Basic abstract goes here. Can use paragraphs and normal \LaTeX commands.
-	...
+{	
+	Structural health monitoring (SHM) and non-destructive testing (NDT) approaches are employed to predict the structural remaining functional life via proper diagnosis and prognosis methods.
+	As a result, the purpose is to detect and characterise defects that may risk the integrity and functionality of a structure.
+	However, it is observed that the progress in the fields of SHM and NDT, which utilise elastic waves, has slowed down in recent years.
+	It may be attributed to the limitations of classic techniques of signal processing applied to a complex and challenging problem of the extraction of damage-related features from signals of propagating waves.
+	On the other hand, the accelerated progress in the field of artificial intelligence (AI) methods in recent years, mainly in deep learning and computer vision, revealed new dimensions for solving problems and offered the opportunity to be implemented and integrated with the NDT and further with SHM methods.
+	
+	The main objective of the dissertation is to develop a novel AI-driven diagnostic system for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).
+	Hence, the potential of utilising artificial intelligence-based approaches to investigate damage identification based on the propagation of Lamb waves is explored.
+	The developed AI systems adopt an end-to-end strategy capable of processing the animation of propagating Lamb waves directly into the damage map.
+	
+	Additionally, the issue of the slow data acquisition of high-resolution full wavefield imaging techniques was raised.
+	Hence, to overcome such an issue, I present a deep learning approach to recover the high-resolution frames of Lamb wave propagation and their interaction with delamination and boundaries of the structure from low-resolution measurements.
+	Consequently, such a method will speed up the data acquisition process.
+	
+	In summary, in this dissertation I will investigate the feasibility of utilising full wavefields of Lamb wave propagation in CFRP composite laminates with various deep learning-based approaches to identify delamination in composite laminates.
+	
+	Following an introductory chapter and a review of the state-of-the-art (Chapters 1-3), I am discussing my contribution to the field in Chapter 4, which consists of four parts:
+	\begin{itemize}
+		\item Development of a fully connected convolutional neural network (CNN) classifica\-tion model capable of detecting and localising delamination in a CFRP plate utilising a bounding box method.
+		\item Delamination identification using fully convolutional networks (FCN) trained on input images representing energies computed from full wavefield signals, in which the FCN models are capable of performing pixel-wise image segmentation.
+		\item Delamination identification based on the animation of the full wavefield, in which the model is capable of identifying the delamination in the CFRP plate only by utilising the full wavefield images of Lamb wave propagation.
+		\item Super-resolution image reconstruction, in which the developed deep learning model is capable of recovering the high-resolution full wavefield of Lamb wave propagation from low-resolution measurements which are below the Nyquist samp\-ling rate.
+	\end{itemize}
+	Furthermore, the developed models were verified on experimentally acquired data in CFRP specimens with single and multiple Teflon inserts representing delamination, indicating that the developed models can be used for
+	delamination detection and localisation and further their size estimation.
+	
+	The results for all developed models are presented in Chapter 5 along with a discussion followed by conclusions and a description of future work in Chapter 6.
 }
 
 % Puplications page
@@ -64,14 +89,39 @@ And finally, I would like to thank everyone who supported me during my journey o
 {
 	\textbf{Journal papers}
 	\begin{itemize}
-		\item Ijjeh, Abdalraheem A., Saeed Ullah, and Pawel Kudela. \say{Full wavefield processing by using FCN for delamination detection.} Mechanical Systems and Signal Processing 153 (2021): 107537.
-		\item Ijjeh, Abdalraheem A., and Pawel Kudela. \say{Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study.} Mechanical Systems and Signal Processing 168 (2022): 108671.
-		\item  Ullah, Saeed, Abdalraheem A. Ijjeh, and Pawel Kudela. \say{Deep learning approach for delamination identification using animation of Lamb waves.} Mechanical Systems and Signal Processing
+		\item Ijjeh, Abdalraheem A., Saeed Ullah, and Pawel Kudela. \enquote{Full wavefield processing by using FCN for delamination detection.} Mechanical Systems and Signal Processing 153 (2021): 107537.
+		\item Ijjeh, Abdalraheem A., and Pawel Kudela. \enquote{Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study.} Mechanical Systems and Signal Processing 168 (2022): 108671.
+		\item  Saeed Ullah, Ijjeh, Abdalraheem A., and Pawel Kudela. \enquote{Deep learning approach for delamination identification using animation of Lamb waves.} Structural Health Monitoring, SAGE (Under review)
+		\item Ijjeh, Abdalraheem A., Saeed Ullah, Maciej Radzienski and Pawel Kudela. \enquote{Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves.} Mechanical Systems and Signal Processing (Under review).
 	\end{itemize}
+	\par\medskip
 	\textbf{Conference papers}
 	\begin{itemize}
-		\item Ijjeh, Abdalraheem A., and Pawel Kudela. \say{Feasibility Study of Full Wavefield Processing by Using CNN for Delamination Detection.} Proceedings of the International Conference on Structural Health Monitoring of Intelligent Infrastructure, Porto, Portugal, 30 June - 2 July 2021, ISSN 2564-3738, pages \(709-713\). 
+		\item Ijjeh, A., Kudela, P. Feasibility Study of Full Wavefield Processing by Using CNN for Delamination Detection. Proceedings of the International Conference on Structural Health Monitoring of Intelligent Infrastructure, Porto, Portugal, 30 June - 2 July 2021, ISSN 2564-3738, pages \(709-713\).
+		\item Ijjeh, A., Kudela, P. (2023). Delamination Identification Using Global Convolution Networks. In: Rizzo, P., Milazzo, A. (eds) European Workshop on Structural Health Monitoring. EWSHM 2022. Lecture Notes in Civil Engineering, vol 270. Springer, Cham. https://doi.org/10.1007/978-3-031-07322-9\_5
 	\end{itemize}
+	\par\medskip
+	\textbf{Scientific monographs}
+	\begin{itemize}
+		\item Abdalraheem Ijjeh, Machine Learning for SHM: Literature Review, chapter in: Wybrane zagadnienia inżynierii mechanicznej, Praca zbiorowa pod redakcją M. Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu Maszyn Przepływowych PAN, Gdańsk, 2020, ISBN 978-83-88237-97-3.
+		\item Abdalraheem Ijjeh, Data-driven based approach for damage detection, chapter in: Wybrane zagadnienia inżynierii mechanicznej 2021, Praca zbiorowa pod redakcją M. Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu Maszyn Przepływowych PAN, Gdańsk, 2021, ISBN 978-83-66928-00-8.
+		\item Abdalraheem Ijjeh, Deep Learning based Damage Imaging
+		techniques, chapter in: Wybrane zagadnienia inżynierii mechanicznej 2022, Praca zbiorowa pod redakcją M. Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu Maszyn Przepływowych PAN, Gdańsk, 2022 (Accepted).
+	\end{itemize}
+	\par\medskip
+	\textbf{Internships during study}
+	\begin{itemize}
+		\item Erasmus+, \enquote{Wave propagation in phononic crystals}, 05/06/2022 – 10/06/2022, ISEN-JUNIA, CNRS-IEMN, Lille, France, under supervision of Dr. Marco Miniaci.
+%		\begin{itemize}
+%			\item Training on the fundamentals of phononic crystals.
+%			\item Training on the basics of the Finite Element software "COMSOL Multiphysics"
+%			\item Training on the meshing procedure of the periodic unit cells.
+%			\item Training on the parametrization of wavenumbers in the eigenvalue problems for the calculation of dispersion diagrams in the first irreducible Brillouin zone.
+%			\item Training on the computation of the dispersion diagrams by using "COMSOL Multiphysics"
+%		\end{itemize}
+		 
+	\end{itemize}
+
 }
 
 
@@ -86,15 +136,13 @@ And finally, I would like to thank everyone who supported me during my journey o
 }
 
 % Bibliography Title
-\renewcommand{\bibname}{References/Bibliography}
+\renewcommand{\bibname}{Bibliography}
 % Bibliography spacing
 \setlength\bibitemsep{1.5\itemsep}
-
 % Settings for array package
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
 % Take care of things in `mathphdthesis.sty' behind the scenes.
 % Basically just does a check of all the fields that have been activated
 % above and fills out the appropriate pages and adds them to the thesis.

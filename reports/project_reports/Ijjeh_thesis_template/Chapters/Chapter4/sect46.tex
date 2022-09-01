@@ -1,16 +1,16 @@
 %% SECTION HEADER ////////////////////////////////////////////////////////////////////////////////
 \section{Summary}
 \label{sec46}
-Full wavefield acquired by SLDV of propagating Lamb waves in a CFRP plate contains beneficial information with respect to the investigated specimen, such as the discontinuities (i.e delamination and boundaries) with which the waves interact.
-Hence, distinct patterns of wave reflection appear regarding different delamination location, size and shape.
-Such distinct patterns can be learned by deep learning methods in order to identify the delamination.
-Accordingly, a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a CFRP plate interacting with delaminations with random locations, shapes and sizes was generated.
-The developed deep learning methods offer an end-to-end approach of damage identification.
+Full wavefield acquired by SLDV of propagating Lamb waves in a CFRP plate contains beneficial information concerning the investigated specimen, such as the discontinuities (i.e., delamination and boundaries) with which the waves interact.
+Hence, distinct patterns of wave reflection appear regarding different delamination locations, sizes, and shapes.
+Such distinct patterns can be learned by deep learning methods to identify the delamination.
+Accordingly, a large dataset of 475 cases of a full wavefield of propagating Lamb waves in a CFRP plate interacting with delaminations with random locations, shapes, and sizes was generated.
+The developed deep learning methods offer an end-to-end approach to damage identification.
 The first developed model was a CNN classifier, which can localise the delamination with a bounding box around it.
 The developed CNN classifier was trained on RMS images of the full wavefield.
 The second utilised approach was pixel-wise image segmentation, in which I developed five FCN models that are capable of identifying the delamination.
 The FCN models were also trained on RMS images of the full wavefield.
 For the next developed model, I took a further step in which I directly utilised the full wavefield frames of propagating Lamb waves in an end-to-end deep learning model. 
-Finally, in the last developed model (DLSR), I attempted to reconstruct the low-resolution acquired frames of the full wavefield into the high-resolution.
+Finally, in the last developed model (DLSR), I attempted to reconstruct a high-resolution full wavefield from spatially sparse measurements.
 Accordingly, the measurement time required to obtain the full wavefield by the SLDV is reduced significantly.
 Consequently, the recovered full wavefield frames that result from the DLSR model can be utilised to identify the damage.

@@ -2,4 +2,27 @@
 \section{Summary}
 \label{sec55}
 
+The results of investigating several end-to-end DL models are presented in this chapter. 
+The developed DL models were trained on a large synthetically generated dataset representing the full wavefield of the Lamb waves propagating in a CFRP plate and their interaction with discontinuities such as delamination and the plate edges, acquired by SLDV. 
+
+The first developed DL models were trained on RMS images to perform delamination detection and localisation through bounding boxes.
+Hence, two CNN models were developed according to the RMS image resolution of $14\times14$ and $16\times16$ blocks with a size of $32\times32$ pixels, respectively.
+The CNN models were evaluated on numerical test cases, proving their ability to detect and localise delamination in previously unseen data.
+The IoU metric was applied to evaluate the obtained results.
+However, these models were not able to predict delaminations properly for the experimental test cases.
+
+The DL models for pixel-wise image segmentation were also trained on RMS images in a one-to-one scheme to perform delamination identification.
+Accordingly, five FCN models were developed: Res-UNet, VGG16 encoder-decoder, FCN-DenseNet, PSPNet, and GCN.
+The FCN models were evaluated on numerical test cases demonstrating their ability to identify delamination in previously unseen data. 
+Furthermore, the FCN models were evaluated on an experimental test case, in which the models showed their capability to generalise.
+
+The AE ConvLSTM model was trained on a many-to-one scheme, in which a number of full wavefield frames were input to the DL model to perform delamination identification.
+To evaluate the performance of the AE ConvLSTM model, I tested it on several numerical test cases, showing its ability to identify the delamination of previously unseen data.
+The AE ConvLSTM model was evaluated on several experimental test cases, indicating its capability to generalise well.
+
+The last developed DL model (DLSR) presents a remarkable way of acquiring HR wavefields with fewer measuring points to reduce acquisition time.
+The DLSR model was also numerically and experimentally evaluated. 
+It demonstrates its ability to recover HR frames from the LR frames with high accuracy, resulting in a significantly faster data acquisition process.
+
+
 

@@ -38,6 +38,8 @@
 % Set the text to flush to the bottom of each page
 %\flushbottom
 \usepackage{amssymb}
+\usepackage{csvsimple}
+
 
 % Set the odd and even left margins to be 4.5cm from paper edge.
 % Note that 4.50cm-2.54cm=1.96cm
@@ -162,7 +164,7 @@
 % URL#1: http://tex.stackexchange.com/questions/13509/biblatex-for-idiots
 % URL#2: https://www.sharelatex.com/blog/2013/07/31/getting-started-with-biblatex.html
 %\usepackage[style=authoryear,backend=biber]{biblatex}
-\usepackage[citestyle=numeric,style=numeric-comp,minbibnames=10,maxbibnames=10,defernumbers=true,maxcitenames=1,firstinits=true,backend=bibtex,sorting=none]{biblatex}
+\usepackage[citestyle=numeric,style=numeric-comp,minbibnames=10,maxbibnames=10,defernumbers=true,maxcitenames=1,firstinits=true,backend=bibtex,sorting=none, isbn=false, issn=false, doi=false, url=false]{biblatex}
 % Sort always by last name then first name
 % URL: http://tex.stackexchange.com/questions/12806/guidelines-for-customizing-biblatex-styles/13076#13076
 %\DeclareNameAlias{sortname}{last-first}
