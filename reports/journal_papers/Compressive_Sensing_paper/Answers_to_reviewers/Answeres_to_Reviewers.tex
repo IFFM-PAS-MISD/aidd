@@ -81,7 +81,9 @@
 		{
 			\textbf{Response:}
 			Thank you for your constructive comment. \\
-			Actually, in our case, we found that when we applied the conventional CS technique to data below the Shannon–Nyquist rate, it showed poor results compared to the deep learning method, and this is our statement. 
+			Actually, in our case, we found that when we applied the conventional CS technique to data below the Shannon–Nyquist rate, it showed poor results compared to the deep learning method.
+			However, for CS technique we have not used a prior knowledge about wave propagation behaviour in the frequency-wavenumber domain. 
+			If this information is available, the results of CS can be improved. We have added appropriate clarification.
 		} 
 		\item Please clarify the number of pixels in the reference image of Figure 12(a). 
 		\\ \\
@@ -98,6 +100,10 @@
 		{
 			\textbf{Response:}
 			Thank you for your constructive comment.\\ 	
+			Pearson CC is a common metric in image processing. 
+			However, for the wave propagation phenomenon, a slight shift in the wave velocity causes high changes in Pearson CC. 
+			On the other hand, qualitative image reconstruction is not affected - the wave pattern is resolved. 
+			It should be noted that a negative correlation demonstrates a connection between two images in the same way as a positive correlation coefficient, and the relative strengths are the same.
 		}
 		\item In figure 9, it can be observed a decreasing trend in the computed figure of merit (PSNR, Pearson CC). 
 		Is it because the wavefield intensity tends to decrease due to the geometrical spreading?
@@ -110,6 +116,7 @@
 			Furthermore, the developed deep learning models were trained to recover the high-resolution frames only on a certain number of frames (128 frames) starting from the time/frame of the initial interaction with delamination.
 			However, the deep learning models can generalise in such a way as to recover those frames that we did not use during the training process.
 			Consequently, this behaviour in the evaluation metrics is expected.
+			But, as pointed by the reviewer, geometric spreading could also be a factor affecting PSNR and Pearson CC.
 		}
 	\end{enumerate}
 	
@@ -137,6 +144,7 @@
 			Therefore, we focused entirely on comparing the conventional compressive sensing theory with the deep learning approach.
 			Our next planned work is to make a comparative study among various deep learning techniques.
 			Hence, it will be entirely based on presenting various deep learning techniques for full wavefield reconstruction.
+			Unfortunately, the literature in this subject is scarce so we devoted more time to give a better background of the state of the art.
 		}
 		\item  In section 2 please add a flowchart to summarize the proposed approach for a more visual understanding.
 		\\ \\ 
@@ -170,6 +178,10 @@
 		\textcolor{Cyan}
 		{
 			\textbf{Response:}
+			Thank you for your constructive comment.\\
+			PSNR for DLSR model-I is still higher than CS: jitter (15.1 vs 13.3), also Pearson CC is higher (0.46 vs 0.4) for the case of the entire plate. 
+			The results are even more in favour of DLSR for the delamination region. 
+			Therefore, we have to disagree with the reviewer.
 		}
 		\item  Can the authors explain why the deep learning-based super resolution approach has similar reconstruction results with the compressive sensing-based approach for the whole plate, but outperforms the latter for the region of delamination?
 		\\ \\ 
@@ -188,6 +200,11 @@
 		{
 			\textbf{Response:}
 			Thank you for your constructive comment. \\
+			The results should be compared for the same number of points, namely 1024. 
+			In this case, DLSR model I outperforms CS approach. 
+			The table also shows that for larger number of points, CS reconstruction improves which confirms that it was properly implemented by us.
+			For model II, indeed the PSNR value was lower than for CS. 
+			We have changed the formulation of our conclusions saying that: "DLSR lead to a slightly better reconstruction of the wavefield and it outperforms it for the reconstruction of the wavefield in the area of delamination".
 		}
 		\item Is it representative enough that most of the discussion in section 3.2 is devoted to frame 110? If not, please add the analysis of the other 3 to 5 frames.
 		\\ \\ 
