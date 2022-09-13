@@ -1,4 +1,4 @@
-\subsubsection{Model I: Residual Dense Network}
+\subsubsection{Model-I: Residual Dense Network}
 
 Residual dense network (RDN) was introduced by Zhang et al.~\cite{Zhang2018} to perform SISR.
 RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
@@ -45,6 +45,8 @@ Figure~\ref{fig:sub_pixel_layer} illustrates the process of the sub-pixel convol
 Further, it works by combining each pixel on multiple-channel feature maps into one \((r\times r)\) square area in the output image. 
 Therefore, each pixel on feature maps is equivalent to the sub-pixel on the generated output image.
 The final convolutional layer has \(1\) filter of size \((1\times 1)\), which will produce \(1\) output channel as the out HR grey image. 
+
+It should be noted that this model is quite complex and results in 12 millions of parameters.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
