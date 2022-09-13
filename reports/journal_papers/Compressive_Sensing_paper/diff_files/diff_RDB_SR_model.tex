@@ -1,0 +1,59 @@
+\subsubsection{\DIFdelbegin \DIFdel{Model I}\DIFdelend \DIFaddbegin \DIFadd{Model-I}\DIFaddend : Residual Dense Network}
+
+Residual dense network (RDN) was introduced by Zhang et al.~\cite{Zhang2018} to perform SISR.
+RDN aims to solve the issue of unexploited hierarchical features obtained from the original low-resolution (LR) images.
+Accordingly, to resolve this issue, a residual dense block (RDB) was introduced that is capable of fully exploiting all hierarchical features obtained from all convolutional layers.
+
+Figure~\ref{fig:RDB} shows the architecture of a RDB, which consists of four layers (\(L_1,\ L_2,\ L_3,\ L_4\)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{RDB.png}
+	\end{center}
+	\caption{Residual Dense Block architecture.} 
+	\label{fig:RDB}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Therefore, an RDB can extract the abundant local features through a dense network of convolutional layers, leading to local residual learning.
+The local feature fusion within each RDB is utilised to learn more useful features from the previous and current local features, thus stabilising the training process as the network depth increases.
+Consequently, RDB enables direct links from the previous RDB to all layers of the current RDB, resulting in a contiguous memory (CM) mechanism.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, the first implemented deep learning model was inspired by the RDN~\cite{Zhang2018}. 
+The model is presented in Fig.~\ref{fig:RDN}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{RDN.png}
+	\end{center}
+	\caption{Implemented Residual Dense Network architecture.} 
+	\label{fig:RDN}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The first segment in the model is the Shallow Feature Extraction Net (SFENet), which consists of two cascading convolutional layers responsible for extracting shallow features from the original LR input.
+Then, the extracted features from SFENet are transferred to the segment of RDBs in which two RDBs were utilised.
+
+The third segment is the Dense Feature Fusion (DFF), which is responsible for fusing features that include global feature fusion and global residual learning.
+The purpose of global feature fusion is to learn global hierarchical features holistically.
+Hence, DFF fully utilises all features from all the preceding segments.
+
+The last segment in the model is the Up-Sampling Net (UPNet), in which we applied the pixel shuffle technique~\cite{Shi2016}.
+Further, the pixel shuffle performs a sub-pixel convolution operation that is responsible for reshaping its input tensor by rearranging the elements \((H\times W\times C.r^2)\) to \((rH\times rW\times C)\), where \(H\) is the height, \(W\) is the width, \((C.r^2)\) is the total number of channels, and \(r\) is the up-scaling factor.
+Accordingly, the number of channels at the last layer (output from the DFF segment) must equal \(C.r^2\) for the total number of pixels to match the HR image to be obtained.
+Hence, the up-scaling factor \(r\) equals to \(16\), as our aim is to obtain an HR output image of size \((512\times 512)\) from the LR input image of size \((32\times 32)\).
+Figure~\ref{fig:sub_pixel_layer} illustrates the process of the sub-pixel convolution layer as it is made up of two steps: a general convolutional operation and pixel rearrangement. 
+Further, it works by combining each pixel on multiple-channel feature maps into one \((r\times r)\) square area in the output image. 
+Therefore, each pixel on feature maps is equivalent to the sub-pixel on the generated output image.
+The final convolutional layer has \(1\) filter of size \((1\times 1)\), which will produce \(1\) output channel as the out HR grey image\DIFaddbegin \DIFadd{. 
+}
+
+\DIFadd{It should be noted that this model is quite complex and results in 12 millions of parameters}\DIFaddend .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[scale=1.0]{sub_pixel_convolution.png}
+	\end{center}
+	\caption{Sub-pixel convolution layer.} 
+	\label{fig:sub_pixel_layer}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

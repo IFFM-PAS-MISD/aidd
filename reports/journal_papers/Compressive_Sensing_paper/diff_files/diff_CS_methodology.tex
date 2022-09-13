@@ -1,0 +1,31 @@
+\subsection{Compressive sensing theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+According to the CS theory~\cite{Candes2006}, under specific conditions, a signal $\vec{s}\in \mathbb{R}^n$ can be reconstructed from a linear combination of random measurements $\vec{y} \in \mathbb{R}^m$.
+The general under-sampling problem can be written as:
+\begin{equation}
+	\vec{y} = \bs{\Phi} \vec{s},
+\end{equation}
+where $\bs{\Phi} \in \mathbb{R}^{m\times n}$ is the measurement matrix and $m$ is the number of measurements which can be much smaller than the number of samples in the signal ($m<<n$).
+
+The signal $\vec{s}$ can be recovered from the compressed measurements $\vec{y}$, if it has sparse representation in some model basis $\bs{\Psi} \in \mathbb{R}^{n\times n}$, which can be written as:
+\begin{equation}
+	\vec{s} = \bs{\Psi} \bs{\alpha},
+\end{equation}
+where $\bs{\alpha}$ has $K$ nonzero elements ($K<m<n$) and signal $\vec{s}$ is called $K$-sparse. 
+Moreover, the measurement matrix $\bs{\Phi}$ has to be incoherent with the model basis $\bs{\Psi}$~\cite{Candes2007}.
+In practical applications, signals contain noise, hence:
+\begin{equation}
+	\vec{y} = \bs{\Phi} \bs{\Psi} \bs{\alpha} + \vec{z},
+	\label{eq:cs_with_noise}
+\end{equation}
+where $\vec{z}$ represents noise.
+The recovery problem can be solved by the basis pursuit denoising algorithm by relaxing Eq.~(\ref{eq:cs_with_noise}) and using sparsity promoting $L_1$ norm which can be written as:
+\begin{equation}
+	\min{\lVert \tilde{\bs{\alpha}} \rVert}_1 \quad \textrm{subject to} \quad {\lVert \bs{\Phi} \bs{\Psi} \tilde{\bs{\alpha}} -\vec{y} \rVert}_2 \leq \sigma ,
+\end{equation}
+where $\sigma$ is related to the noise level in the data.
+
+In particular, in this paper we employed SPGL1 algorithm~\cite{VandenBerg2019} and Fourier basis.
+
+It should be added that the subsampling is performed only in the spatial domain, because in practice during SLDV measurements the time domain sampling frequency is fixed and cannot be altered in the acquisition software. 

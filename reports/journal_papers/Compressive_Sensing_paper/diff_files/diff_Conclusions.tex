@@ -1,0 +1,15 @@
+\section{Conclusions}
+\label{conclusion}
+In this paper, we \DIFdelbegin \DIFdel{demonstrated }\DIFdelend \DIFaddbegin \DIFadd{demonstrate }\DIFaddend two super-resolution deep learning techniques to reconstruct the HR full wavefield of propagating guided waves.
+\DIFaddbegin \DIFadd{The motivation for using two deep learning models was to check the feasibility of different deep learning architectures for our research task. 
+Hence, Model-I is computationally complex as it is composed of a large number of trainable parameters that use a Residual Dense Network (RDN) architecture, in which it is composed of many residual dense blocks (RDB). 
+On the other hand, Model-II is less complex than Model-I as it is composed of 16 cascaded layers of convolutional neural networks (CNNs).
+}\DIFaddend Accordingly, a large synthetic dataset was generated, resembling the full wavefields acquired by an SLDV.
+In DLSR models, the utilised compression rate was \(19.2\%\)\ of the Nyquist sampling rate.
+To see the feasibility of such a study, we have compared the DLSR models with the conventional CS technique. 
+The results were promising, and the deep learning models surpassed the conventional technique in reconstructing the full wavefield frames for heavily sub-sampled \DIFdelbegin \DIFdel{case}\DIFdelend \DIFaddbegin \DIFadd{cases}\DIFaddend .
+Additionally, DLSR models showed their ability to generalise by reconstructing the full wavefield frames acquired experimentally by SLDV.
+\DIFdelbegin \DIFdel{Consequently, we can conclude that adopting deep learning techniques for SR frame reconstruction can outperform conventional CStechniques}\DIFdelend \DIFaddbegin \DIFadd{It has been found that the accuracy of the developed DLSR models is similar.
+Consequently, DLSR leads to a slightly better reconstruction of the wavefield than CS, and it outperforms it for the reconstruction of the wavefield in the area of delamination}\DIFaddend .
+Furthermore, deep learning techniques for SR can highly enhance the speed of data acquisition by SLDV.
+

@@ -1,0 +1,67 @@
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Guided waves, in particular Lamb waves, are often utilised for structural health monitoring (SHM) as well as non-destructive testing (NDT).
+In the former case, usually, an array of transducers is used for point-wise measurements.
+These are usually piezoelectric transducers that can work as actuators and sensors, i.e., in active guided wave-based SHM.
+It should be noted that round-robin actuator-sensor measurements can be conducted very fast, so nearly online monitoring of a structure is possible.
+
+Recently, a lot of research on the application of scanning laser Doppler vibrometer (SLDV) for NDT has been reported~\cite{Flynn2013,Kudela2015, Kudela2018d, Segers2021, Segers2022}. 
+In this method, either a piezoelectric transducer or pulse laser is used for guided wave excitation while the measurements are taken by SLDV at one point on the surface of an inspected structure.
+The process is repeated for other points automatically in a scanning fashion until the full wavefield of Lamb waves is acquired.
+
+Full wavefield measurements are taken on a very dense grid of points in opposite to the sparsely measured signals by sensors.
+Hence, deliver much more useful data from which information about damage can be extracted in comparison to signals measured by an array of transducers.
+On the other hand, SLDV measurements take much more time than measurements conducted by an array of transducers.
+It makes the SLDV approach unsuitable for SHM, in which continuous monitoring is required.
+But it is very capable for offline NDT applications.
+
+One can imagine that in a future matrix of laser heads instead of a single laser head used nowadays will be developed to reduce SLDV measurement time.
+Alternatively, compressive sensing (CS) and/or deep learning super-resolution (DLSR) can be applied.
+It means that SLDV measurements can be taken on a low-resolution grid of points, and then the full wavefield can be reconstructed at high-resolution.
+
+CS was originally proposed in the field of statistics~\cite{Candes2006,Donoho2006} and used for efficient acquisition and reconstruction of signals and images.
+It assumes that a signal or an image can be represented in a sparse form in another domain with appropriate bases (Fourier, cosine, wavelet).
+On such bases, many coefficients are close or equal to zero.
+The sparsity can be exploited to recover a signal or image from fewer samples than required by the Nyquist–Shannon sampling theorem.
+However, there is no unique solution for the estimation of unmeasured data.
+Therefore, optimisation methods for solving under-determined systems of linear equations that promote sparsity are applied~\cite{Chen1998,VanEwoutBerg2008,VandenBerg2019}.
+Moreover, a suitable sampling strategy is required.
+
+Since then, CS has found applications in medical imaging~\cite{Lustig2007}, communication systems~\cite{Gao2018}, and seismology~\cite{Herrmann2012}.
+It is also considered in the field of guided waves and ultrasonic signal processing~\cite{Harley2013,Mesnil2016,Perelli2012,Perelli2015,DiIanni2015,KeshmiriEsfandabadi2018,Chang2020}
+
+Harley and Mura~\cite{Harley2013} utilised a general model for Lamb waves propagating in a plate structure (without defects) and $L_1$ optimisation strategies to recover their frequency-wavenumber representation. 
+They applied sparse recovery by basis pursuit and sparse wavenumber synthesis.
+They used a limited number of transducers and achieved a good correlation between the true and estimated responses across a wide range of frequencies.
+Mesnil and Ruzzene~\cite{Mesnil2016} were focused on the reconstruction of a wavefield that includes the interaction of Lamb waves with delamination.
+Similar to previous studies, analytic solutions were utilised to create a compressive sensing matrix.
+However, the limitation of these methods is that dispersion curves of Lamb waves propagating in the analysed plate have to be known a priori.
+
+Perelli et al.~\cite{Perelli2012} incorporated the warped frequency transform into a compressive sensing framework for improved damage localisation.
+The wavelet packet transform and frequency warping was used in~\cite{Perelli2015} to generate a sparse decomposition of the acquired dispersive signal.
+
+Di Ianni et al.~\cite{DiIanni2015} investigated various bases in compressive sensing to reduce the acquisition time of SLDV measurements.
+Similarly, a damage detection and localisation technique based on a compressive sensing algorithm was presented in~\cite{KeshmiriEsfandabadi2018}.
+The authors have shown that the acquisition time can be reduced significantly without losing detection accuracy.
+
+Another application of compressive sensing was reported in~\cite{Chang2020}. 
+The authors used signals registered by an array of sensors for tomography of corrosion.
+They investigated the reconstruction success rate depending on the number of actuator-sensor paths.
+
+The group of DLSR methods is applied mostly to images~\cite{Dahl2017,Zhang2018,Wang2019} and videos~\cite{Zhang2017,Yan2019}.
+Image super-resolution (SR) is the process of recovering high-resolution images from low-resolution images.
+A similar approach can be used in videos, where data is treated as a sequence of images.
+Notable applications are medical imaging, satellite imaging, surveillance and security, and astronomical imaging, amongst others.
+Also, deep learning super sampling developed by Nvidia and FidelityFX super-resolution developed by AMD were adopted for video games~\cite{Claypool2006}.
+Mostly supervised techniques are employed, which benefit from recent advancements in deep learning methods ranging from enhanced convolutional neural networks (CNN)~\cite{Zhang2017}, through an extension of PixelCNN~\cite{Dahl2017} to generative adversarial networks (GANs)~\cite{Wang2019}, to name a few.
+Nevertheless, so far neither of these methods has been applied to the wavefields of propagating Lamb waves.
+The exception is an enhancement of wavefields as the second step of SR \DIFdelbegin \DIFdel{followed }\DIFdelend \DIFaddbegin \DIFadd{preceded }\DIFaddend by classic CS~\cite{Park2017a,KeshmiriEsfandabadi2020}.
+
+We propose a framework for full wavefield reconstruction of propagating Lamb waves from spatially sparse SLDV measurements of resolution below the Nyquist wavelength $\lambda_N$. 
+The Nyquist wavelength is the shortest spatial wavelength that can be accurately recovered from a wavefield by sequential observations with spacing $\Delta x$ which is defined as $\lambda_N = 2 \Delta x$. 
+
+For the first time, an end-to-end approach for the SR problem is used in which a deep learning neural network is trained on a synthetic dataset and tested on experimental data acquired by SLDV.
+It means that the approach is solely based on DLSR.
+It is different from methods presented in the literature which utilize CS theory~\cite{Harley2013, KeshmiriEsfandabadi2018} or CS theory in conjunction with super-resolution convolutional neural networks for wavefield image enhancement~\cite{Park2017a, KeshmiriEsfandabadi2020}.
+The efficacy of the developed framework is presented and compared with the conventional CS approach.
+The performance of the proposed technique is validated by an experiment performed on a plate made of carbon fibre reinforced polymer (CFRP) with embedded Teflon inserts simulating delaminations.
