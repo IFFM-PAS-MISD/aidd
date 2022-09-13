@@ -202,9 +202,10 @@
 		{
 			\textbf{Response:}
 			Thank you for your constructive comment.\\
-			PSNR for DLSR model-I is still higher than CS: jitter (15.1 vs 13.3), also Pearson CC is higher (0.46 vs 0.4) for the case of the entire plate. 
+			PSNR for DLSR model-I is still higher than CS: jitter (15.1 vs 13.3) for the case of the entire plate. 
 			The results are even more in favour of DLSR for the delamination region. 
 			Therefore, we have to disagree with the reviewer.
+			We also apologise for the mistake in Table 2 regarding the PSNR value of Model-II which should be 13.3, meaning that it is on par with CS method.
 		}
 		\item  Can the authors explain why the deep learning-based super resolution approach has similar reconstruction results with the compressive sensing-based approach for the whole plate, but outperforms the latter for the region of delamination?
 		\\ \\ 
@@ -224,10 +225,9 @@
 			\textbf{Response:}
 			Thank you for your constructive comment. \\
 			The results should be compared for the same number of points, namely 1024. 
-			In this case, DLSR model I outperforms CS approach. 
-			The table also shows that for larger number of points, CS reconstruction improves which confirms that it was properly implemented by us.
-			For model II, indeed the PSNR value was lower than for CS. 
-			We have changed the formulation of our conclusions saying that: "DLSR lead to a slightly better reconstruction of the wavefield and it outperforms it for the reconstruction of the wavefield in the area of delamination".
+			In this case, DLSR model I outperforms CS approach and Model-II is on par with the CS method (Again, we also apologise for the mistake in Table 2 regarding the PSNR value of Model-II, which should be 13.3). 
+			The table also shows that for a larger number of points, CS reconstruction improves, which confirms that it was properly implemented by us.  
+			We have changed the formulation of our conclusions saying that: "DLSR lead to a slightly better reconstruction of the wavefield than CS and it outperforms it for the reconstruction of the wavefield in the area of delamination".
 		}
 		\item Is it representative enough that most of the discussion in section 3.2 is devoted to frame 110? If not, please add the analysis of the other 3 to 5 frames.
 		\\ \\ 
