@@ -1,0 +1,317 @@
+\documentclass[11pt,a2paper]{report}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{dirtytalk}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
+%% my added packages
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+%\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
+%\usepackage{breqn}
+\usepackage{multirow}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\begin{document}
+	
+	\noindent We appreciate the time and effort that the reviewers have dedicated to provide valuable feedback on our manuscript. 
+	We would like to thank the reviewers for constructive comments which helped us to improve the manuscript. 
+	We have incorporated changes to reflect the suggestions provided by the reviewers. 
+	We have highlighted the changes in a separate differential PDF document. The additional text is in the blue print. 
+	The removed text is in red. \\ \\
+	Here is a point-by-point response to the reviewers’ comments and concerns.
+	\\ \\
+	\textbf{Reviewer \# 1}: \\
+	In this paper, authors proposed two end-to-end deep learning-based models 
+	of many-to-one sequence prediction to perform pixel-wise image 
+	segmentation. Extensive experiments verified the effectiveness and 
+	efficiency of the proposed method. This paper investigates an interesting 
+	problem, and the structure is relative good. However, minor revisions are 
+	needed before the acceptance.
+	
+	\textcolor{Cyan}{
+	\newline\textbf{Response:}
+	Thank you for your positive feedback.
+    }
+	\begin{enumerate}
+		\item It seems in the proposed framework, most components (e.g., 
+		ConvLSTM) are well-studied by others. Therefore, what is the main novel 
+		contribution of this work when adapting the well-studied techniques to 
+		this work.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+		---------------.
+		}
+		
+		\item Can this work be applied to other detection waves besides the 
+		mentioned Lamb waves?
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			---------------.
+		}
+		\item For the evaluation, the dataset/algorithm choosing reasons, the 
+		detailed platform configurations and the discussion on other untested 
+		datasets should be introduced in the revised paper.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			---------------.
+		}
+	
+			\item Please add a notation table to explain all used math symbols 
+			for easy understanding.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}	
+
+			\item Please go through the paper carefully and double check 
+			whether the right template are used. Correct some typos and 
+			formatting issues (e.g., in Figure 7"Model I" $\to$ "Model-I"?).
+
+    \textcolor{Cyan}{
+	\textbf{Response:}
+	---------------.
+}
+
+			\item Some references lack the necessary information (e.g., [10]), 
+			please provide all information according to the right template.
+
+\textcolor{Cyan}{
+	\textbf{Response:}
+	---------------.
+}
+
+			\item Make the References more comprehensive, besides delamination 
+			identification, some other promising scenarios (e.g., Big data, 
+			other IoT systems) can be covered in this work. If the above 
+			related work can be discussed, it can strongly improve the research 
+			significance. For the improvement, the following papers can be 
+			considered to make the references more comprehensive.
+			\newline
+			\newline
+			\newline
+			J. Wang, Y. Zou, P. Lei, et al. Research on Recurrent Neural 
+			Network Based Crack Opening Prediction of Concrete Dam. Journal of 
+			Internet Technology, 2020, 21(4):1151-1160
+			\newline
+			\newline
+			Bin Pu, Kenli Li, Shengli Li, Ningbo Zhu: Automatic Fetal 
+			Ultrasound Standard Plane Recognition Based on Deep Learning and 
+			IIoT. IEEE Trans. Ind. Informatics 17(11): 7771-7780 (2021)
+			\newline
+			\newline
+			Dun Cao, Kai Zeng, Jin Wang, Pradip Kumar Sharma, Xiaomin Ma, and 
+			Yonghe Liu, BERT-based Deep Spatial-Temporal Network for Taxi 
+			Demand 
+			Prediction. IEEE Transactions on Intelligent Transportation 
+			Systems, 2021, DOI:10.1109/TITS.2021.3122114
+			\newline
+			\newline
+			Cen Chen, Kenli Li, Sin G. Teo, Xiaofeng Zou, Keqin Li, Zeng Zeng: 
+			Citywide Traffic Flow Prediction Based on Multiple Gated 
+			Spatio-temporal Convolutional Neural Networks. ACM Trans. Knowl. 
+			Discov. Data 14(4): 42:1-42:23 (2020)
+			\newline
+			\newline
+			J. Wang, Y. Yang, T. Wang, R. Sherratt, J. Zhang. Big Data Service 
+			Architecture: A Survey. Journal of Internet Technology, 2020, 
+			21(2): 393-405
+			\newline
+			\newline
+			Jianguo Chen, Kenli Li, Kashif Bilal, Xu Zhou, Keqin Li, Philip S. 
+			Yu: A Bi-layered Parallel Training Architecture for Large-Scale 
+			Convolutional Neural Networks. IEEE Trans. Parallel Distributed 
+			Syst. 30(5): 965-976 (2019)
+			\newline
+			\newline
+			J. Zhang, S. Zhong, T. Wang, H.-C. Chao, J. Wang. Blockchain-Based 
+			Systems and Applications: A Survey. Journal of Internet Technology, 
+			2020, 21(1): 1-14
+			\newline
+			\newline
+			Om, K., Boukoros, S., Nugaliyadde, A., McGill, T., Dixon, M., 
+			Koutsakis, P., \& Wong, K. W., "Modelling email traffic workloads 
+			with RNN and LSTM models." Human-centric Computing and Information 
+			Sciences, vol. 10, article no. 39, 2020. 
+			\url{https://doi.org/10.1186/s13673-020-00242-w}
+			
+
+\textcolor{Cyan}{
+	\textbf{Response:}
+	---------------.
+}	
+\end{enumerate}	
+	
+\newpage 
+\textbf{Reviewer \# 2}:
+\newline The authors proposed a ConvLSTM-based DL method to detect delamination 
+using Lamb waves, which extends its application fields. The animation derived 
+from SLDV coincides with the target objects of ConvLSTM network. Two models are 
+presented and are adequately verified by numerical and experimental cases. 
+Moreover, the whole essay is well-organized and well-written. In a word, it is 
+an interesting and valuable work. Therefore, I would recommend acceptance of 
+this submission after a minor revision. Below are some suggestions that can be 
+considered for the authors to further improve the manuscript.
+
+\textcolor{Cyan}{
+	\newline\textbf{Response:}
+	---------------.
+}
+\begin{enumerate}
+	\item Without the support of SLDV, can this method work well? As SLDV is 
+	not suitable for in-situ case and it is expensive for most guys.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}
+	
+	\item The ConvLSTM was firstly presented by Shi in 2015. The relevant study 
+	about ConvLSTM and its application in other areas are not mentioned in 
+	Introduction section. Please make a more comprehensive literature research.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}
+	\item Page 6, Why the coordinates of the center of delamination is 
+	restricted to [0mm,240mm] and [260mm,500mm], rather than [0mm,500mm] and 
+	[0mm,500mm], which is the same as the size of specimen plate?
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}
+	
+	\item Page 8, "k represents the total number of windows", while in Eq (1), 
+	N the total number of windows. Please keep the notation consistent.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}	
+	
+	\item Fig.5b shows the architecture of Model-2, but not detailed enough. It 
+	is suggested to mark every level of encoder, bottleneck and decoder parts.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}
+	
+	\item Page 18, Line 6, small mistake, 500 × 500 mm2.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}	
+
+	\item In experiment case with single delamination there are 256 frames in 
+	total, while the others are 512 frames. Is there any difference or 
+	requirements regarding the number of test frames?
+
+\textcolor{Cyan}{
+	\textbf{Response:}
+	---------------.
+}
+
+	\item Why m=64 for Model-\RNum{1}, which is larger than Model-\RNum{2}, 
+	m=24?
+
+\textcolor{Cyan}{
+	\textbf{Response:}
+	---------------.
+}
+
+	\item According to the manuscript, my understanding about the procedure is 
+	as follows: In the training stage, only a certain number of frames that are 
+	connected with delamination were selected as input, while in test stage all 
+	the frames are included in the calculation by shifting the window. And 
+	every intermediate prediction map corresponds with a window. Am I right? If 
+	so, it might be more understandable if some intermediate prediction maps 
+	are displayed in the results section.
+
+\textcolor{Cyan}{
+	\textbf{Response:}
+	---------------.
+}
+
+	\item Table 2 compares the IoU among 5 models. It is also advised to show 
+	the predicted damage maps of FCN-DenseNet and GCN with the RMS images as 
+	input.
+
+\textcolor{Cyan}{
+	\textbf{Response:}
+	---------------.
+}
+
+\end{enumerate}	
+
+\newpage 
+\textbf{Reviewer \# 3}:
+\newline This paper proposed an end-to-end scheme deep learning-based approach 
+for delamination identification in composite laminates, and authors tested the 
+method on several experimentally measured cases of single and multiple 
+delaminations simulated by Teﬂon inserts. The reviewer has the following 
+suggestions for the authors to consider:
+
+\textcolor{Cyan}{
+	\newline\textbf{Response:}
+	Thank you for your positive feedback.
+}
+\begin{enumerate}
+	\item The reviewer believes that the limitations of this paper include the 
+	following two points, which limit the scope of application of this paper: 
+	1. Lamb wave detection, 2. The tested material. The first is that Lamb wave 
+	detection is fundamentally different from other forms of ultrasound (such 
+	as SH), and the complex dispersion characteristics of Lamb waves are not 
+	discussed in this paper; secondly, changes in the tested material will 
+	cause the entire model to become unusable, that is, The scope of 
+	application of the proposed method is relatively narrow.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}
+	
+	\item What are the advantages and disadvantages of the proposed model 
+	compared to RMS-based models? Since SLDV is stationary and time-consuming, 
+	this means that it can only be used offline and cannot be used for online 
+	monitoring.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}
+	\item Figure 8 needs more explanation, besides, "when a binary threshold is 
+	applied, most identifed delaminations vanish as the pixel values are below 
+	the threshold." Would an adjustable threshold perform better?
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}
+	
+	\item Taking Fig. 7 as an example, the meaning of the colors needs to be 
+	supplemented.
+	
+	\textcolor{Cyan}{
+		\textbf{Response:}
+		---------------.
+	}	
+	
+\end{enumerate}	
+
+\end{document}
