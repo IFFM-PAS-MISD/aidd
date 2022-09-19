@@ -274,7 +274,7 @@
 	The third place, depicted in the green circle shown in Fig.~\ref{fig:CFRP_teflon_3o_shapes_} represents a window centered at frame 218 corresponding to the interaction of guided waves reflected from the edges with the delamination.
 	As we can see, the value of IoU increases again as the valuable feature patterns regarding delamination start to appear again.
 	
-%	The intermediate predicted outputs of Model-I and Model-II for windows centered at frame 84 (the dark blue star), frame 141 (pink pentagon), and frame 218 (the green circle) are shown in Fig.~\ref{fig:CFRP_Teflon_3o_predictions}.
+	The intermediate predicted outputs of Model-I and Model-II for windows centered at frame 84 (the dark blue star), frame 141 (pink pentagon), and frame 218 (the green circle) are shown in Fig.~\ref{fig:CFRP_teflon_3o_intermediate}.
 	Apart from correctly identified delamination, some noise is obtained near edges of the specimen.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% IoU ouput values with a sliding window
@@ -297,7 +297,17 @@
 			\label{fig:CFRP_teflon_3o_shapes_}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\caption{IoU for the sliding window of frames (Teflon insert-single delamination).}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\par\medskip
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{subfigure}[b]{1\textwidth}
+			\centering
+			\includegraphics[scale=.9]{CFRP_teflon_3o_Centre_predictions.png}
+			\caption{Predictions of models I and II at different window places.} 
+			\label{fig:CFRP_teflon_3o_intermediate}
+		\end{subfigure}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\caption{IoU for the sliding window of frames (Teflon insert-single delamination), and the intermediate predictions}
 		\label{fig:CFRP_Teflon_3o_IoU_centre_window}
 	\end{figure} 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
