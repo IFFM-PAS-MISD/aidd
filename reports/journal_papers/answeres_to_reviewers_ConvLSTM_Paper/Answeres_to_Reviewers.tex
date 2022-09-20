@@ -31,33 +31,54 @@
 	\\ \\
 	\textbf{Reviewer \# 1}: \\
 	In this paper, authors proposed two end-to-end deep learning-based models 
-	of many-to-one sequence prediction to perform pixel-wise image 
-	segmentation. Extensive experiments verified the effectiveness and 
-	efficiency of the proposed method. This paper investigates an interesting 
-	problem, and the structure is relative good. However, minor revisions are 
-	needed before the acceptance.
+	of many-to-one sequence prediction to perform pixel-wise image segmentation.
+	Extensive experiments verified the effectiveness and efficiency of the 
+	proposed method.
+	This paper investigates an interesting problem, and the structure is 
+	relative good. However, minor revisions are needed before the acceptance.
 	
 	\textcolor{Cyan}{
 	\newline\textbf{Response:}
-	Thank you for your positive feedback.
+	We would like to thank the reviewer for his positive feedback.
     }
 	\begin{enumerate}
 		\item It seems in the proposed framework, most components (e.g., 
-		ConvLSTM) are well-studied by others. Therefore, what is the main novel 
-		contribution of this work when adapting the well-studied techniques to 
-		this work.
+		ConvLSTM) are well-studied by others.
+		Therefore, what is the main novel contribution of this work when 
+		adapting the well-studied techniques to this work.
 		
 		\textcolor{Cyan}{
 			\textbf{Response:}
-		---------------.
-		}
+		Thank you for this important question.
+		The main novel contribution of this work is the generation of a large 
+		synthetic dataset of full wavefields, which resembles the data acquired 
+		from SLDV in a real-world scenario. 
+		As acquiring the data from SLDV is very expensive, time-consuming, and 
+		unfeasible, therefore a large dataset of full wavefields is simulated 
+		in this work and the dataset is made publicly available. 
+		\newline The other novelty in this work is the employment of 
+		deep-learning models directly on sequences of full wavefields 
+		(animations), without the need for a baseline wavefield.
+		Previously, the researchers have to apply some intermediary steps on 
+		full wavefields such as (RMS) before feeding the data into a 
+		deep-learning model for producing one-to-one sequences for each 
+		delamination case, which is usually time-consuming, and cumbersome.
+		In this work, we have proposed a technique in which applying such 
+		intermediary step of applying RMS is omitted.
+		Furthermore, we have also compared the results obtained from our 
+		approach (without using RMS) with the results obtained from the 
+		deep-learning models which use RMS.}
 		
 		\item Can this work be applied to other detection waves besides the 
 		mentioned Lamb waves?
 		
 		\textcolor{Cyan}{
 			\textbf{Response:}
-			---------------.
+			Thank you for this constructive comment.
+			Yes, this work can be enhanced to other detection waves besides the 
+			Lamb waves by providing such data to our proposed model and 
+			training the proposed model with the required dataset on which the 
+			detection needs to be performed.
 		}
 		\item For the evaluation, the dataset/algorithm choosing reasons, the 
 		detailed platform configurations and the discussion on other untested 
@@ -82,7 +103,11 @@
 
     \textcolor{Cyan}{
 	\textbf{Response:}
-	---------------.
+	Thank you for your constructive suggestion.
+	We have reviewed the paper carefully, and double checked the template of 
+	the paper.
+	We have also corrected typos and formatting issues in the updated version 
+	of the paper.
 }
 
 			\item Some references lack the necessary information (e.g., [10]), 
@@ -90,15 +115,17 @@
 
 \textcolor{Cyan}{
 	\textbf{Response:}
-	---------------.
+	Thank you for pointing this out.
+	We have double checked all the references, and references [3, 10] have been 
+	removed from the updated version of the paper.
 }
 
 			\item Make the References more comprehensive, besides delamination 
 			identification, some other promising scenarios (e.g., Big data, 
-			other IoT systems) can be covered in this work. If the above 
-			related work can be discussed, it can strongly improve the research 
-			significance. For the improvement, the following papers can be 
-			considered to make the references more comprehensive.
+			other IoT systems) can be covered in this work.
+			If the above related work can be discussed, it can strongly improve 
+			the research significance. For the improvement, the following 
+			papers can be considered to make the references more comprehensive.
 			\newline
 			\newline
 			\newline
@@ -157,13 +184,16 @@
 \newpage 
 \textbf{Reviewer \# 2}:
 \newline The authors proposed a ConvLSTM-based DL method to detect delamination 
-using Lamb waves, which extends its application fields. The animation derived 
-from SLDV coincides with the target objects of ConvLSTM network. Two models are 
-presented and are adequately verified by numerical and experimental cases. 
-Moreover, the whole essay is well-organized and well-written. In a word, it is 
-an interesting and valuable work. Therefore, I would recommend acceptance of 
-this submission after a minor revision. Below are some suggestions that can be 
-considered for the authors to further improve the manuscript.
+using Lamb waves, which extends its application fields.
+The animation derived from SLDV coincides with the target objects of ConvLSTM 
+network. 
+Two models are presented and are adequately verified by numerical and 
+experimental cases. 
+Moreover, the whole essay is well-organized and well-written.
+In a word, it is an interesting and valuable work. Therefore, I would recommend 
+acceptance of this submission after a minor revision. Below are some 
+suggestions that can be considered for the authors to further improve the 
+manuscript.
 
 \textcolor{Cyan}{
 	\newline\textbf{Response:}
@@ -178,9 +208,10 @@ considered for the authors to further improve the manuscript.
 		---------------.
 	}
 	
-	\item The ConvLSTM was firstly presented by Shi in 2015. The relevant study 
-	about ConvLSTM and its application in other areas are not mentioned in 
-	Introduction section. Please make a more comprehensive literature research.
+	\item The ConvLSTM was firstly presented by Shi in 2015.
+	The relevant study about ConvLSTM and its application in other areas are 
+	not mentioned in Introduction section.
+	Please make a more comprehensive literature research.
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
@@ -197,15 +228,17 @@ considered for the authors to further improve the manuscript.
 	}
 	
 	\item Page 8, "k represents the total number of windows", while in Eq (1), 
-	N the total number of windows. Please keep the notation consistent.
+	N the total number of windows.
+	Please keep the notation consistent.
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		N is the number of all samples/frames in a single delamination scenario.
 	}	
 	
-	\item Fig.5b shows the architecture of Model-2, but not detailed enough. It 
-	is suggested to mark every level of encoder, bottleneck and decoder parts.
+	\item Fig.5b shows the architecture of Model-2, but not detailed enough.
+	It is suggested to mark every level of encoder, bottleneck and decoder 
+	parts.
 	
 	\textcolor{Cyan}{
 		\textbf{Response:} \\
@@ -221,8 +254,8 @@ considered for the authors to further improve the manuscript.
 	}	
 
 	\item In experiment case with single delamination there are 256 frames in 
-	total, while the others are 512 frames. Is there any difference or 
-	requirements regarding the number of test frames?
+	total, while the others are 512 frames.
+	Is there any difference or requirements regarding the number of test frames?
 
 \textcolor{Cyan}{
 	\textbf{Response:}
@@ -240,10 +273,10 @@ considered for the authors to further improve the manuscript.
 	\item According to the manuscript, my understanding about the procedure is 
 	as follows: In the training stage, only a certain number of frames that are 
 	connected with delamination were selected as input, while in test stage all 
-	the frames are included in the calculation by shifting the window. And 
-	every intermediate prediction map corresponds with a window. Am I right? If 
-	so, it might be more understandable if some intermediate prediction maps 
-	are displayed in the results section.
+	the frames are included in the calculation by shifting the window.
+	And every intermediate prediction map corresponds with a window. 
+	Am I right? If so, it might be more understandable if some intermediate 
+	prediction maps are displayed in the results section.
 
 \textcolor{Cyan}{
 	\textbf{Response:} \\
@@ -272,8 +305,8 @@ considered for the authors to further improve the manuscript.
 \newline This paper proposed an end-to-end scheme deep learning-based approach 
 for delamination identification in composite laminates, and authors tested the 
 method on several experimentally measured cases of single and multiple 
-delaminations simulated by Teﬂon inserts. The reviewer has the following 
-suggestions for the authors to consider:
+delaminations simulated by Teﬂon inserts.
+The reviewer has the following suggestions for the authors to consider:
 
 \textcolor{Cyan}{
 	\newline\textbf{Response:}
