@@ -94,7 +94,7 @@
 			2. Test set $20\%$ (95 scenarios).
 			It is important to note that we trained the developed models only on the training set portion and not on the test set, which is only utilised for evaluating the models.
 			Hence, the test set portion is considered unseen before the models during the evaluation phase.
-			Also, the experimentally acquired data is considered unseen to the developed models because during the training phase, only the training set was utilised.
+			Also, the experimentally acquired data is considered unseen by the developed models because, during the training phase, only the training set was utilised.
 		}
 	
 			\item Please add a notation table to explain all used math symbols 
@@ -356,13 +356,28 @@ manuscript.
 	Additionally, we added Figure 10c to present the intermediate predictions at a different group of frames.
 }
 
-	\item Table 2 compares the IoU among 5 models. It is also advised to show 
+	\item Table 2 compares the IoU among 5 models. 
+	It is also advised to show 
 	the predicted damage maps of FCN-DenseNet and GCN with the RMS images as 
 	input.
 
-\textcolor{Cyan}{
+\textcolor{Cyan}
+{
 	\textbf{Response:}
-	---------------.
+	Thank you for your constructive comment.\\
+	\begin{table}[ht!]
+		\centering
+		\begin{tabular}{lccc}
+			\toprule
+			& \multicolumn{3}{l}{Numerical case number} \\
+			& \(1^{st}\) & \(2^{nd}\) & \(3^{rd}\) \\ 
+			\midrule
+			FCN-DenseNet[46] & 0.56 & 0.58 & 0.75 \\
+			GCN[46]          & 0.64 & 0.71 & 0.94 \\ 
+			\bottomrule
+		\end{tabular}
+	\caption{IoU metric of the three numerical cases with respect to model FCN-DenseNet[46] and GCN[46]}
+	\end{table}
 }
 
 \end{enumerate}	
