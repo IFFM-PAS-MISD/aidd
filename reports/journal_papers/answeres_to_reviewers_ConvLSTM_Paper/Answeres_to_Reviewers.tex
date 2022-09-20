@@ -98,7 +98,7 @@
 	We are sorry but we cannot fully agree with the reviewer because the RNNs, 
 	LSTMs, ConvLSTM has a wide range of literature, which can be checked from 
 	there. 
-	We have briefly introduced all these contents in our paper and all 
+	We have briefly introduced all these topics in our paper and all 
 	the symbols are described in the text.
     And other math symbols used in the paper such as in the dataset section and 
     results and discussion section are very simple and described well in the 
@@ -219,7 +219,12 @@ manuscript.
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		Thank you for this important question.
+		Yes, this method can work well without the support of SLDV, as 
+		mentioned in the paper that these full wavefields of Lamb waves can be 
+		acquired via the employment of a very dense array of transducers.
+		Therefore, if SLDV is not available such techniques can be applied for 
+		acquiring the Lamb waves-based data.  
 	}
 	
 	\item The ConvLSTM was firstly presented by Shi in 2015.
@@ -229,7 +234,23 @@ manuscript.
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		Thank you for pointing this out.
+		We did not introduce ConvLSTM well in the Introduction section of the 
+		paper. 
+		Therefore, we are not adding any literature/applications of ConvLSTM in 
+		the Introduction section of the paper.
+		However, the relevant study about ConvLSTM and its applications in 
+		other areas have been added as the following text to section 2.2 
+		Introduction to RNNs, LSTM, and ConvLSTM:
+		\newline"Recently, ConvLSTM has become very popular and is increasingly 
+		being used in various domains for capturing spatio-temporal features 
+		such as traffic flow prediction in intelligent transportation 
+		system [\textcolor{red}{61}], surveillance-based 
+		systems [\textcolor{red}{62}], remaining useful life prediction of 
+		rolling bearings [\textcolor{red}{63}], crop yield 
+		forecasting [\textcolor{red}{64}], action recognition and anomaly 
+		detection in videos [\textcolor{red}{65, 66}], and many more image 
+		processing and computer vision-related applications."
 	}
 	\item Page 6, Why the coordinates of the center of delamination is 
 	restricted to [0mm,240mm] and [260mm,500mm], rather than [0mm,500mm] and 
@@ -247,7 +268,16 @@ manuscript.
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		N is the number of all samples/frames in a single delamination scenario.
+		Thank your for your constructive comment. 
+		We double checked the paper and all the notations.
+		All the notations are consistent now in the updated version of the 
+		paper. 
+		Furthermore, \(N\) is the number of all samples/frames in a single 
+		delamination scenario not the total number of windows.
+		This information has also been added to the modified version of the 
+		paper as:
+		"where \(N\) represents the total number of samples in a single 
+		delamination case:"
 	}	
 	
 	\item Fig.5b shows the architecture of Model-2, but not detailed enough.
@@ -264,7 +294,9 @@ manuscript.
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		Thank you for pointing this out.
+		We have made the required correction in the updated version of the 
+		paper.
 	}	
 
 	\item In experiment case with single delamination there are 256 frames in 
@@ -276,12 +308,25 @@ manuscript.
 	---------------.
 }
 
-	\item Why m=64 for Model-\RNum{1}, which is larger than Model-\RNum{2}, 
-	m=24?
+	\item Why \(m\)=64 for Model-\RNum{1}, which is larger than Model-\RNum{2}, 
+	\(m\)=24?
 
 \textcolor{Cyan}{
 	\textbf{Response:}
-	---------------.
+	Thank you for your constructive question.
+	The selection of the value of \(m\) for these two models was based on how 
+	much data can each model handle at a time and how the model's complexity 
+	affects its capability of predicting the damage size, location, and shape, 
+	and how the models would generalise with experimentally acquired data. 
+	Therefore, model-I is considered simple and requires less parameters as it 
+	is not deep, however, it requires much more data in order to identify 
+	delaminations. 
+	On the contrary, model-II is much more complex and it is considered a very 
+	deep model as it has many layers at the encoder, consequently, this implies 
+	that this model requires much more parameters due to its complexity and 
+	requires less data for the identification of delaminations.
+	Therefore, we assigned \(m\) = 64 for model-I in order to acquire more data 
+	and, \(m\) = 24 for model-II in order to provide less data to model-II.
 }
 
 	\item According to the manuscript, my understanding about the procedure is 
@@ -348,7 +393,33 @@ The reviewer has the following suggestions for the authors to consider:
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		Thank you for your constructive comment.
+		The advantages of the proposed model compared to RMS-based models is 
+		that proposed model can be employed on the sequences (animations) of 
+		full wavefields, which contains very rich information regarding the 
+		damage, the damage can be easily identified with the use of the 
+		proposed method. 
+		However, in the case of RMS-based models only one image can be 
+		generated for a single damage case.
+		Therefore, it cannot identify the damage very well as compared to the 
+		proposed model.  
+		\newline Regarding the second comment, we agree with the reviewer that 
+		SLDV is 
+		still stationary, time-consuming and can only be used offline and 
+		cannot be used for online monitoring.
+		We have also added the following text in the conclusion section of our 
+		paper:
+		\newline "However, there are several limitations to the SLDV measurement
+		technique, which is used for full wavefield acquisition. The 
+		measurements constructed by using SLDV are stationary and 
+		time-consuming. 
+		Therefore, the proposed technique is more appropriate for NDT than SHM. 
+		However, it is probable that in the future, as laser technology 
+		progresses, the process of data acquisition will be possible at an 
+		array of points instead of a single point, which will considerably 
+		decrease the measurement time. It should be added, that the measurement
+		time can also be reduced by using fewer points in the spatial grid 
+		along with the compressive sensing approach."
 	}
 	\item Figure 8 needs more explanation, besides, "when a binary threshold is 
 	applied, most identifed delaminations vanish as the pixel values are below 

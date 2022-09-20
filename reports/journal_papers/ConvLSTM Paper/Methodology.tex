@@ -70,7 +70,9 @@
 	Further, \(m\) refers to the number of frames in the window, hence, \(m=64\) frames for Model-\RNum{1} and \(m=24\) frames for Model~\RNum{2}, and \(k\) represents the total number of windows.
 	Accordingly, we slide the window over all input frames.
 	The shift of the window is one frame at a time.
-	Deep learning model predictions \(\hat{Y_k}\) are obtained for each window and combined to final damage map by using the RMS:
+	Deep learning model predictions \(\hat{Y_k}\) are obtained for each window 
+	and combined to final damage map by using the RMS, where \(N\) represents 
+	the total number of samples in a single delamination case:
 	
 	\begin{equation}
 		RMS = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
