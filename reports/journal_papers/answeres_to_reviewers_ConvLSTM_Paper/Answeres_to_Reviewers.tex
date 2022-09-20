@@ -87,6 +87,14 @@
 		\textcolor{Cyan}{
 			\textbf{Response:\\}
 			Thank you for your constructive comment. \\
+			We have evaluated the developed models on a synthetic test set and experimentally acquired data.
+			We selected the test set randomly for the evaluation process from the complete dataset (475 different scenarios).
+			Furthermore, we split the complete dataset into two sets: 
+			1. Training set $80\%$ (380 scenarios). 
+			2. Test set $20\%$ (95 scenarios).
+			It is important to note that we trained the developed models only on the training set portion and not on the test set, which is only utilised for evaluating the models.
+			Hence, the test set portion is considered unseen before the models during the evaluation phase.
+			Also, the experimentally acquired data is considered unseen to the developed models because during the training phase, only the training set was utilised.
 		}
 	
 			\item Please add a notation table to explain all used math symbols 
@@ -304,9 +312,9 @@ manuscript.
 	Is there any difference or requirements regarding the number of test frames?
 
 \textcolor{Cyan}{
-	\textbf{Response:}
-	---------------.
-}
+	\textbf{Response:} \\
+	Thank you for pointing this out. \\
+	}
 
 	\item Why \(m\)=64 for Model-\RNum{1}, which is larger than Model-\RNum{2}, 
 	\(m\)=24?
