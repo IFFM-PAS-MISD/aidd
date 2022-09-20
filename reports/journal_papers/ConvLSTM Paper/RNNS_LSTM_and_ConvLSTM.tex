@@ -109,7 +109,10 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	where \(W_{f}, W_{i}, W_{c}\) and \(W_{o}\) have shared learnable weights across time.
 	
-	Recently, LSTMs have been widely used for large-scale learning of language translation models, speech recognition systems, chatbots, forecasting stock markets, text data analysis, and many more~\cite{graves2014towards, cho2014properties}. 
+	Recently, LSTMs have been widely used for large-scale learning of language 
+	translation models, speech recognition systems, chatbots, forecasting stock 
+	markets, email traffic prediction, text data analysis, and many 
+	more~\cite{graves2014towards, cho2014properties, om2020modelling}. 
 	However, LSTMs are inefficient at capturing spatial information by themselves when the time series inputs are consecutive images.
 	Hence, the ConvLSTM unit was introduced by Shi et al.~\cite{xingjian2015convolutional} to solve such a problem.
 	For ConvLSTM, the convolution operations are applied both at the input-to-state transition and at the state-to-state transitions.  
