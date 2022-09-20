@@ -18,11 +18,12 @@
 \usepackage{geometry}
 %\usepackage{showframe} %This line can be used to clearly show the new margins
 
-\newgeometry{vmargin={20mm}, hmargin={30mm,30mm}}
+\newgeometry{vmargin={25mm}, hmargin={30mm,30mm}}
 %\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
 %\usepackage{breqn}
 \usepackage{multirow}
 \newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\graphicspath{{figures/}}
 
 \begin{document}
 	
@@ -381,7 +382,15 @@ manuscript.
 			\bottomrule
 		\end{tabular}
 	\caption{IoU metric of the three numerical cases with respect to model FCN-DenseNet[46] and GCN[46]}
+	\label{num_cases}
 	\end{table}
+Table~\ref{num_cases} presents the IoU values for the three numerical test cases presented in the manuscript.
+Compared to Table 2 presented in the manuscript, the damage maps predicted by previously developed models: FCN-DenseNet[46] and GCN[46], show lower IoU values except for the third numerical test case (the simplest case).
+Figure~\ref{fig:RMS_num_cases} presents damage maps predicted by FCN-DenseNet[46] and GCN[46] models.
+The RMS input images in Figs.~\ref{fig:num_GT_391},~\ref{fig:num_GT_462} and~\ref{fig:Convlstm_binary_RMS_453}, respectively.
+Figures~\ref{fig:Convlstm_binary_RMS_391},~\ref{fig:Convlstm_binary_RMS_462} and~\ref{fig:Convlstm_binary_RMS_453} show the damage maps predicted by FCN-DenseNet[46] model.
+Figures~\ref{fig:num_GT_391},~\ref{fig:num_GT_462} and~\ref{fig:num_GT_453} show the damage maps predicted by GCN[46] model.
+In our opinion, we would like not to add Fig.~\ref{fig:RMS_num_cases} in the revised paper, as we believe it may not add extra info to readers, as readers may refer to [45, 46].
 }
 	\begin{figure}[ht!]
 		\centering
