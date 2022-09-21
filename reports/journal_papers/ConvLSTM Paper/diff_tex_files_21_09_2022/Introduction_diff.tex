@@ -1,0 +1,147 @@
+\section{Introduction:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{sloppypar}
+	Nowadays, composite materials are extensively used for achieving the desired performance in a wide range of industries, such as wind turbines, aerospace, marine, automotive, and many more.
+	This vast usage of composite materials is due to their numerous advantages, 
+	such as high strength, lightweight, low cost, higher stiffness-to-mass 
+	ratio compared to metals, and effective corrosion 
+	resistance~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{giurgiutiu2015structural, stoik2010nondestructive, poudel2015comparison}}\hskip0pt%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{giurgiutiu2015structural, stoik2010nondestructive}}\hskip0pt%DIFAUXCMD
+}\DIFaddend .
+	However, these materials are prone to various kinds of defects such as 
+	cracks, fiber breakage, debonding, and 
+	delamination~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{poudel2015comparison, talreja2012damage}}\hskip0pt%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{talreja2012damage}}\hskip0pt%DIFAUXCMD
+}\DIFaddend .
+	Among these defects, delamination is one of the most hazardous forms of defects in composite materials. 
+	Delamination reduces the life of these structures and can lead to catastrophic failures if not detected at an early stage~\cite{talreja2012damage, wisnom2012role}.
+	Therefore, for the safe operation of structures, it is crucial to identify the delamination effectively.
+
+	The detection of delamination in composite materials is very challenging for traditional visual inspection techniques because it occurs between plies of composite laminate and is invisible from external surfaces~\cite{staszewski2009health, tuo2019damage}. 
+	Therefore, different types of nondestructive testing (NDT) and structural health monitoring (SHM) techniques have been proposed for delamination identification in composite structures.
+	Among various damage identification techniques, ultrasonic guided waves are widely known as one of the most promising techniques for the quantitative identification of defects in composite structures.
+	The widespread applications of these waves are due to their higher sensitivity 
+	to small defects, propagation with low attenuation, and potential to monitor 
+	large areas with low-voltage and only a small number of sparsely distributed 
+	transducers~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Barthorpe2020, Ihn2008, Cantero-Chinchilla2020}}\hskip0pt%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Barthorpe2020, Ihn2008}}\hskip0pt%DIFAUXCMD
+}\DIFaddend . 
+
+	However, using a smaller number of transducers is not suitable for acquiring high-quality resolution damage maps and assessment of damage size.
+	On the other hand, the employment of a very dense array of transducers is also not feasible in most situations. 
+	To alleviate such problems, a scanning laser Doppler vibrometer (SLDV) is employed.
+	SLDV is capable of measuring guided waves in a highly dense grid of points over the surface of a large specimen.
+	This collection of signals is known as full wavefield~\cite{Radzienski2019a}. 
+	In recent years, full wavefield signals have been used for the detection and localisation of defects in composite
+	structures~\cite{Radzienski2019a, Girolamo2018a, kudela2018impact,  rogge2013characterization}.
+	Damage identification techniques employing full wavefield signals are capable of effectively estimating not only the location but also the size of damage~\cite{Girolamo2018a, kudela2018impact}.
+	Full wavefields provide valuable information regarding the interaction of guided Lamb waves with potential defects.
+	However, these full wavefields are very complex.
+	Analysing such wavefields is very difficult for conventional physics or classical machine learning-based models.
+
+	Deep learning, which emerged from the artificial neural network (ANN), on 
+	the other hand, is capable of handling such complex and nonlinear data and 
+	has shown very promising results in different domains such as computer 
+	vision, object detection, speech recognition, remote sensing, medical 
+	sciences, and many others~\cite{mohanty2016using, zhang2020well, 
+	pashaei2020review}.
+	\DIFdelbegin \DIFdel{In recent years, }\DIFdelend \DIFaddbegin \DIFadd{There are many factors that led to this significant rise of deep learning 
+	techniques such as the availability of large quantities of data, improved 
+	accuracy, scaling effectively with the data, and lower computational 
+	costs~\mbox{%DIFAUXCMD
+\cite{pu2021automatic, wang2020big}}\hskip0pt%DIFAUXCMD
+.
+	Recently, }\DIFaddend deep learning has shown significant improvements in image 
+	segmentation due to the advancement of deep convolutional neural networks 
+	(CNNs).
+
+	Image segmentation is a fundamental component in numerous visual recognition
+	systems. In the last few years, image segmentation has widely been
+	employed in autonomous driving~\cite{ros2016synthia, li2018real}, medical applications~\cite{taghanaki2021deep}, agriculture sciences~\cite{milioto2018real}, augmented reality~\cite{miksik2015semantic} and many more. 
+	The purpose of image segmentation is to partition images or video frames into multiple objects or segments~\cite{szeliski2010computer}.
+	It can be expressed as a pixel-level classification problem with semantic labels, which is known as semantic segmentation, or partitioning the images into individual objects, which is called instance segmentation~\cite{szeliski2010computer, minaee2021image}. 
+	Semantic segmentation functions on pixel-wise labeling with a set of object categories for an image. 
+	Therefore, it is generally a more difficult task than image classification, which only predicts a single label for the entire image~\cite{minaee2021image}.
+	Furthermore, semantic image segmentation not only depends on the semantics in the question but also on the problem that needs to be addressed~\cite{ghosh2019understanding}.
+
+	Deep learning-based systems intend to derive hierarchical representations from the input data via constructing deep neural networks with multiple layers of non-linear transformations.
+	In deep learning architectures, the output of one layer acts as the input to the next subsequent layer.
+	The stacking composition of many layers enables the model to learn complex patterns from raw input data.
+	Therefore, these systems do not need extensive human labour and knowledge for hand-crafted feature design~\cite{Zhao2019b}. %Yuan2020
+
+	Deep learning techniques have extensively been utilised for the inspection 
+	and maintenance of civil infrastructures~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{cha2017deep, Lin2017a, Liu2019} }\hskip0pt%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{cha2017deep, Lin2017a, 
+	Liu2019, wang2020research} }\hskip0pt%DIFAUXCMD
+}\DIFaddend and rotating 
+	machinery~\cite{janssens2016convolutional, Jia2016a} and have shown very 
+	promising results.
+	Furthermore, different researchers have used basic ANN and deep learning architectures for damage detection in composite structures by employing vibration, thermography, and frequency-based approaches~\cite{chakraborty2005artificial, Khan2019a, luo2019temporal, bang2020defect}. 
+	Many researchers have applied ANN and deep learning-based approaches for damage detection in composite structures by utilising guided Lamb waves~\cite{Su2004a, chetwynd2008damage, de2015application, feng2019locating, mardanshahi2020detection, qian2020application, Tabian2019, rautela2021ultrasonic}.
+
+	Su et al.~\cite{Su2004a} developed a Lamb wave-based delamination identification technique in composite structures with the use of wavelet transform, multi-layer feed-forward ANN architecture, and intelligent signal processing and pattern recognition (ISPPR).
+	They used ISPPR for the extraction and digitisation of spectrographic characteristics of simulated Lamb waves in the time-frequency domain, which is known as digital damage fingerprints (DDF).
+	The DDF was used for constructing a damage parameter database (DPD). 
+	The DPD is then employed offline for training the neural network.
+	They reported that they achieved excellent quantitative diagnosis results for different damage parameters such as the presence, location, orientation, and geometry of defects.
+
+	Chetwynd et al.~\cite{chetwynd2008damage} applied two multilayer perceptron (MLP) neural networks for the classification and regression tasks of damage identification in a stiffened curved carbon fiber reinforced polymer (CFRP) investigated using Lamb waves.
+	For the classification of damaged and undamaged regions of the panel, the MLP classifier was applied, whereas the MLP regressor was used for evaluating the accurate location of the damage on the panel. 
+	They achieved good results with both the MLP classifier and the regressor.
+	De Fenza et al.~\cite{de2015application} employed ANN and probability ellipse techniques for the identification of defects in aluminum and composite plates with the use of Lamb waves.
+	Both of their ANN and probability ellipse techniques were based on the damage index, which was assessed by examining the variations in the Lamb waves acquired before and after the damage in each analysed path.
+	The results from both methods proved that Lamb waves have prominent advantages in the localisation and detection of different kinds of defects in plate-like structures.
+
+	Feng et al.~\cite{feng2019locating} presented two algorithms based on time of flight (ToF) for scattered Lamb waves in CFRP composite plates.
+	Their first algorithm is a probabilistic approach that constructs a probability matrix. 
+	The probability matrix is used for the localisation of delamination, while their second algorithm is based on ANN, which is applied for enhancing the accuracy of defect localisation.
+	Mardanshahi et al.~\cite{mardanshahi2020detection} applied support vector machines (SVM), linear vector quantization (LVQ), and MLP neural networks for the classification of crack density in composite structures by using Lamb wave-based data.
+	They concluded that the SVM outperformed other neural networks in their research work.
+	Qian et al.~\cite{qian2020application} developed a Lamb wave-based quantitative damage detection technique for CFRP composite structures with the use of ANN.
+	They used two damage indices (amplitude and phase) as inputs to their ANN model, and the output of the ANN model was represented as the length and width of the damaged area.
+	Their approach showed robust behaviour in the prediction of damage sizes and is also able to provide potential applications for quantitative damage evaluation in composite structures.
+
+	Tabian et al.~\cite{Tabian2019} developed a CNN-based approach for the detection and characterisation of impacts in complex composite structures.
+	They first transferred the acquired guided wave-based data to 2D images, and then they applied two different CNNs to those images.
+	One CNN in their approach was applied for impact localisation, and a separate CNN was implemented for impact categorisation (energy level estimation).
+	Rautela et al.~\cite{rautela2021ultrasonic} developed a model-assisted deep learning approach for the detection and localisation of structural defects with the use of ultrasonic guided waves in aerospace grade isotropic and composite structures. 
+	They applied their combined damage detection and localisation approach to two different datasets: the time-history dataset and the time-frequency dataset. 
+	The detection of defects is performed on both datasets with the use of CNNs, and the localisation of defects is performed with the use of regression-based CNNs and long-short-term memory (LSTM) models. 
+	They showed that the deep learning-based predictions surpassed the conventional machine learning approaches.
+
+	Furthermore, Melville et al.~\cite{Melville2018} applied a classical machine learning algorithm, SVM, and deep learning techniques for damage detection on the full wavefield signals of ultrasonic guided wave images.
+	They acquired the full wavefield data through piezoelectric actuators and a laser Doppler vibrometer on thin metal plates.
+	Furthermore, they showed that the deep learning methods achieved better damage prediction results as compared to the SVM-based methods.
+
+	In our previous research work~\cite{Ijjeh2021}, we developed a deep learning-based semantic segmentation model with a fully convolutional neural network (FCN) to identify delamination in CFRP.
+	The full wavefield frames were numerically generated to resemble measurements acquired by SLDV.
+	Each wavefield corresponded to one delamination scenario.
+	Next, the root mean square (RMS) technique was applied to the full wavefield data along the time axis, giving one image per delamination scenario.
+	Consequently, the developed deep neural network models were trained on a one-to-one prediction scheme (RMS image to damage map).
+	The predicted damage map consisted of two classes: undamaged and damaged, indicating the location, size, and shape of the delamination.
+
+	In this work, we took a further step in which the full wavefield frames of propagating Lamb waves were directly utilised in an end-to-end
+	deep learning model.
+	It means that the mid-step consisting of the calculation of RMS has been omitted.
+	Accordingly, a many-to-one prediction scheme (many input frames to damage map) was used in the proposed deep learning models.
+	In other words, a sequence of full wavefield frames (animation) is fed into the proposed deep learning models.
+	These models are inspired by convolutional long-short-term memory (ConvLSTM) architectures and tailored to the particular problem of delamination identification.
+	\DIFdelbegin \DIFdel{As in }\DIFdelend \DIFaddbegin \DIFadd{Similar to }\DIFaddend our previous research work~\cite{Ijjeh2021, Ijjeh2022}, two 
+	classes (damaged and undamaged) were defined in the pixel-wise segmentation 
+	problem.
+
+	To the best of our knowledge, it is the first implementation of deep neural networks utilising Lamb wave propagation animations for damage imaging with semantic segmentation. 
+	The proposed models showed excellent capabilities to identify the delamination in the numerically generated dataset.
+	Moreover, the developed models can generalise so that they could be used for delamination identification in real-world scenarios.
+	This is confirmed through the experiment on CFRP plates with single and multiple delaminations.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{sloppypar}
+
