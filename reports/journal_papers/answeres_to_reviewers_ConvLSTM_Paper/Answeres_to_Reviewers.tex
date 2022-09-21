@@ -67,7 +67,7 @@
 		Previously, the researchers have to apply some intermediary steps on 
 		full wavefields such as (RMS) before feeding the data into a 
 		deep-learning model for producing one-to-one sequences for each 
-		delamination case, which is usually time-consuming, and cumbersome.
+		delamination case, which leads to less accurate damage imaging.
 		In this work, we have proposed a technique in which applying such 
 		intermediary step of applying RMS is omitted.
 		Furthermore, we have also compared the results obtained from our 
@@ -100,6 +100,7 @@
 			It is important to note that we trained the developed models only on the training set portion and not on the test set, which is only utilised for evaluating the models.
 			Hence, the test set portion is considered unseen before the models during the evaluation phase.
 			Also, the experimentally acquired data is considered unseen by the developed models because, during the training phase, only the training set was utilised.
+			Unfortunately, we cannot use other datasets of this type because such datasets are not available.
 		}
 	
 			\item Please add a notation table to explain all used math symbols 
@@ -107,10 +108,8 @@
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-	Thank you for your suggestion.
-	We are sorry but we cannot fully agree with the reviewer because the RNNs, 
-	LSTMs, ConvLSTM has a wide range of literature, which can be checked from 
-	there. 
+	Thank you for your suggestion. However, we think that the maths notation used for description
+	of the RNNs, LSTMs, ConvLSTM is standard and widely used in the literature.
 	We have briefly introduced all these topics in our paper and all 
 	the symbols are described in the text.
     And other math symbols used in the paper such as in the dataset section and 
@@ -236,8 +235,9 @@ manuscript.
 		Yes, this method can work well without the support of SLDV, as 
 		mentioned in the paper that these full wavefields of Lamb waves can be 
 		acquired via the employment of a very dense array of transducers.
+		The other option is to used air-coupled transducer attached to motorized arm for automatic sensing.
 		Therefore, if SLDV is not available such techniques can be applied for 
-		acquiring the Lamb waves-based data.  
+		acquiring the Lamb wave-based data.  
 	}
 	
 	\item The ConvLSTM was firstly presented by Shi in 2015.
@@ -318,7 +318,9 @@ manuscript.
 
 \textcolor{Cyan}{
 	\textbf{Response:} \\
-	Thank you for pointing this out. \\
+	Thank you for pointing this out. 
+	The lower number of frames in the experimental case with one delamination is because this experiment was conducted few years back and we wanted to utilize that data. Now, we usually acquire 512 frames so that the resulting file is not excessively large and easy for post processing by eg. 3D FFT. In general, the most important aspect is to acquire  long enough signals so that guided waves propagate at least to the most distant edge of the structure.
+	\\
 	}
 
 	\item Why \(m\)=64 for Model-\RNum{1}, which is larger than Model-\RNum{2}, 
@@ -501,7 +503,8 @@ The reviewer has the following suggestions for the authors to consider:
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		Thank you for your comment. We understand your concern, and we agree that the method posses some limitations. The ConvLSTM model was trained only on one type of material (CFRP) and is most suitable for damage imaging in structures made of such materials. However, the dataset can be extended to other materials e.g. GFRP and the ConvLSTM model can be retrained. Then the ConvLSTM model should be able to generalize. The same applies for different types of defects.\\
+		The models are fed by the full wavefield data (animations) which represents out-of-plane displacements or velocities for direct measurements by SLDV on the surface of the inspected structure. Due to this fact, all dispersion characteristics are already embedded into the data. It is irrelevant if there are more modes propagating (e.g. SH0, A1, S1) since the ConvLSTM model performs feature extraction without the need for handcrafting features.
 	}
 	
 	\item What are the advantages and disadvantages of the proposed model 
@@ -545,7 +548,9 @@ The reviewer has the following suggestions for the authors to consider:
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		Thank you for your constructive comment.\\
+		Since sigmoid function is used for predicting final outputs, it is the best to apply fixed threshold at 0.5. Moreover, this guarantee consistent comparison of results obtained by various deep learning models (in our case Model-I and Model-II).\\
+		For other signal processing methods such as adaptive wavenumber filtering, adjustable threshold could perform better.
 	}
 	
 	\item Taking Fig. 7 as an example, the meaning of the colors needs to be 
@@ -553,7 +558,9 @@ The reviewer has the following suggestions for the authors to consider:
 	
 	\textcolor{Cyan}{
 		\textbf{Response:}
-		---------------.
+		Thank you for your constructive comment.\\
+		The following explanation was added:\\
+		"The colour scale range from 0 to 1 corresponds to sigmoid output and can be interpreted as a probability of delamination occurrence."
 	}	
 	
 \end{enumerate}	

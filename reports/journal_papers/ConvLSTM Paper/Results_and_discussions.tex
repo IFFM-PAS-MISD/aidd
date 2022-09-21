@@ -14,6 +14,7 @@
 	In the first numerical case, the delamination is located at the upper left corner, as shown in Fig.~\ref{fig:num_GT_391}, representing its ground truth (GT).
 	This case is considered difficult due to edge wave reflections that have similar patterns as delamination reflection.
 	Figures~\ref{fig:Convlstm_num_391}, and~\ref{fig:AE_num_391} show the predicted RMS images of all intermediate predictions (damage maps) with respect to Model-I, and Model-II, respectively.
+	The colour scale range from 0 to 1 corresponds to sigmoid output and can be interpreted as a probability of delamination occurrence.
 	Figures~\ref{fig:Convlstm_binary_RMS_391} and~\ref{fig:AE_binary_RMS_391} show the binary RMS of damage maps with respect to Model-I, and Model-II, respectively.
 	
 	For the second numerical case, the delamination is located at the upper centre of the plate, as shown in Fig.~\ref{fig:num_GT_462}, representing the GT.
@@ -152,7 +153,7 @@
 			\caption{Model-II, IoU\(=0.88\)}
 			\label{fig:AE_binary_RMS_453}
 		\end{subfigure}
-		\caption{Binary RMS predictions regarding Model-I and Model-II}
+		\caption{Binary RMS predictions regarding Model-I and Model-II.}
 		\label{fig:RMS_num_cases}
 	\end{figure}
 	
@@ -169,7 +170,7 @@
 	In summary, on average, Model-II has better accuracy of delamination identification than Model-I and previously developed models.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{table}[ht!]
-		\caption{Evaluation metrics of the three numerical cases}
+		\caption{Evaluation metrics of the three numerical cases.}
 		\begin{tabular}{cccccccc}
 			\toprule
 			\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II} \\ \cmidrule(lr){3-5} \cmidrule(lr){6-8} 
@@ -185,7 +186,7 @@
 
 	\begin{table}[ht!]
 		\centering
-		\caption{Mean intersection over union $\overline{\textup{IoU}}$ for numerical cases with respect to the input of the model}
+		\caption{Mean intersection over union $\overline{\textup{IoU}}$ for numerical cases with respect to the input of the model.}
 		\begin{tabular}{llc}
 			\toprule
 			Input & Model & $\overline{\textup{IoU}}$ \\ 
@@ -309,7 +310,7 @@
 			\label{fig:CFRP_teflon_3o_intermediate}
 		\end{subfigure}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\caption{IoU for the sliding window of frames (Teflon insert-single delamination), and the intermediate predictions}
+		\caption{IoU for the sliding window of frames (Teflon insert-single delamination), and the intermediate predictions.}
 		\label{fig:CFRP_Teflon_3o_IoU_centre_window}
 	\end{figure} 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -383,7 +384,7 @@
 	\begin{table}[ht]
 		\setlength{\tabcolsep}{3pt} %% default is 6pt
 		
-		\caption{Evaluation metrics for experimental case of single delamination}
+		\caption{Evaluation metrics for experimental case of single delamination.}
 		\begin{tabular}{cccccccc}
 			\toprule
 			\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Experimental \\ case\end{tabular}} & \multirow{2}{*}{\(A\) [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ 
@@ -721,7 +722,7 @@
 	\begin{table}[ht]
 		\centering
 		\setlength{\tabcolsep}{4pt} %% default is 6pt
-		\caption{Evaluation metrics for experimental case of single delamination}
+		\caption{Evaluation metrics for experimental case of single delamination.}
 		\begin{tabular}{cccccccc}
 			\toprule
 			\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Specimen \\ \end{tabular}} & \multirow{2}{*}{\(A\) [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Model-I} & \multicolumn{3}{c}{Model-II}  \\ 
