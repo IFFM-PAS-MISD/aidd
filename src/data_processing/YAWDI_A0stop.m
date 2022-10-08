@@ -6,9 +6,6 @@ load project_paths projectroot src_path;
 %overwrite=false;
 overwrite=true;
 interim_figs=true;
-A0mode_filter=false; % true - A0 pass band filter is applied, false - algorithm on unfiltered data (fast) 
-% unfiltered means that A0 pass band filter in frequency-wavenumber domain is not applied
-% the filenames will be preceded by term: 'unfiltered_'
 % retrieve model name based on running file and folder
 currentFile = mfilename('fullpath');
 [pathstr,name,ext] = fileparts( currentFile );
@@ -43,6 +40,7 @@ Nx = 512;   % number of points after interpolation in X direction
 Ny = 512;   % number of points after interpolation in Y direction
 Nmed = 3;   % median filtering window size e.g. Nmed = 2 gives 2 by 2 points window size
 selected_frames=200:280; % selected frames for Hilbert transform
+selected_frames2= 100:450; % selected frames for RMS of A0 stop band filtered wavefield
 N = 1024;% for zero padding
 
 %% input for mask
@@ -67,7 +65,7 @@ processed_data_path = fullfile( projectroot, 'data','processed','num', filesep )
 % full field measurements
 list = {'4_chirp','Data50','Data75','Data100','Data150'};
 freq_list =[50,75,100,150]; % frequency list in kHz according to files above
-if(A0mode_filter)
+
 if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     % load chirp signal
     disp('loading chirp signal');
@@ -199,7 +197,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
 
                 set(gcf,'PaperPositionMode','auto');
                 drawnow;
-                processed_filename = ['KXKYF_chirp_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+                processed_filename = ['A0stop_KXKYF_chirp_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
                 print([figure_output_path,processed_filename],'-dpng', '-r600'); 
         end
     end
@@ -330,7 +328,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
 
         set(gcf,'PaperPositionMode','auto');
         drawnow;
-        processed_filename = ['Thickness_sensitivities']; % filename of processed .mat data
+        processed_filename = ['A0stop_Thickness_sensitivities']; % filename of processed .mat data
         print([figure_output_path,processed_filename],'-dpng', '-r600'); 
     end
     save([dataset_output_path,filesep,'thickness_sensitivities'],'thickness','thickness_sensitivities');
@@ -427,6 +425,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     cart_mask_A0(isnan(cart_mask_A0))=0;
     cart_mask_A0(:,:,length(f_vec))=0;
     cart_mask_A0(:,:,length(f_vec)+1)=0;
+    cart_mask_A0=1-cart_mask_A0;
     save([dataset_output_path,filesep,'cart_mask_A0'],'cart_mask_A0','kx_vec','ky_vec','f_vec','-v7.3');
     % figure;
     % surf(reshape(Vq,n1,m1));shading interp; 
@@ -545,24 +544,23 @@ if(interim_figs)
 
         set(gcf,'PaperPositionMode','auto');
         drawnow;
-        processed_filename = ['mask_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+        processed_filename = ['A0stop_mask_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
         print([figure_output_path,processed_filename],'-dpng', '-r600'); 
     end
 end
 close all;
-end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Yet another wavenumber damage imaging (YAWDI)
 disp('Yet another wavenumber damage imaging (YAWDI)');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Thickness_map_avg = zeros(Nx,Ny); % for average thickness map over frequencies
-
+RMS_A0stop_avg = zeros(Nx,Ny); 
 folder  = raw_data_path;
 nFile   = length(test_case);
 success = false(1, nFile);
 for k = test_case
     filename = list{k};
-    processed_filename = ['RMS_wavenumbers_selected_',filename]; 
+    processed_filename = ['A0stop_RMS_wavenumbers_selected_',filename]; 
     % check if already exist
     if(overwrite||(~overwrite && ~exist([figure_output_path,processed_filename,'.png'], 'file')))
        
@@ -583,21 +581,18 @@ for k = test_case
             %nx=512;ny=512;nft=512;
             %% PROCESS DATA
             fprintf('Processing:\n%s\n',filename);
-            if(A0mode_filter)
-                disp('3D FFT filtering - A0 mode separation');
-                disp('Transform to wavenumber-wavenumber-frequency domain');
-                [KXKYF,kx_vec,ky_vec,f_vec] = spatial_to_wavenumber_wavefield_full(Data,Length,Width,time); % full size data (-kx:+kx,-ky:+ky,-f:+f)
-                clear Data;
-                KXKYF_A0 = KXKYF.*cart_mask_A0;
-                % inverse Fourier transform for pure A0 wavefield
-                Data = ifftn(ifftshift(KXKYF_A0),'symmetric'); % wavefield A0
-                Data = Data(1:nx,1:ny,1:nft);
-            end
+            disp('3D FFT filtering - A0 mode separation');
+            disp('Transform to wavenumber-wavenumber-frequency domain');
+            [KXKYF,kx_vec,ky_vec,f_vec] = spatial_to_wavenumber_wavefield_full(Data,Length,Width,time); % full size data (-kx:+kx,-ky:+ky,-f:+f)
+            clear Data;
+            KXKYF_A0 = KXKYF.*cart_mask_A0;
+            % inverse Fourier transform for pure A0 wavefield
+            Data = ifftn(ifftshift(KXKYF_A0),'symmetric'); % wavefield A0
+            Data = Data(1:nx,1:ny,1:nft);
             %% plot intermediate results for checking masks
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %% KX-KY-F slices
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            if(A0mode_filter)
             if(interim_figs)
                 if(radians_flag) 
                     [mkx,mky,mf] = meshgrid(kx_vec,ky_vec,f_vec/1e3);
@@ -612,7 +607,7 @@ for k = test_case
                 maxf = 300;
                 xslice1 = []; yslice1 = []; zslice1 = freq_slice;
                 xslice2 = 0; yslice2 = 0; zslice2 = [];
-              
+
                 figure;
                 t=tiledlayout(2,1);
                 %t.TileSpacing = 'tight';
@@ -701,7 +696,7 @@ for k = test_case
 
                 set(gcf,'PaperPositionMode','auto');
                 drawnow;
-                processed_filename = ['KXKYF_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+                processed_filename = ['A0stop_KXKYF_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
                 print([figure_output_path,processed_filename],'-dpng', '-r600'); 
                 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -795,10 +790,8 @@ for k = test_case
 
                 set(gcf,'PaperPositionMode','auto');
                 drawnow;
-                processed_filename = ['KXKYF_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+                processed_filename = ['A0stop_KXKYF_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
                 print([figure_output_path,processed_filename],'-dpng', '-r600'); 
-               
-            end
             end
             %% cylindrical coordinate  
             %[Data_polar,number_of_points,radius] =
@@ -1021,11 +1014,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['RMS_wavenumbers_selected_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfiltered_RMS_wavenumbers_selected_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_RMS_wavenumbers_selected_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Mean wavenumbers
@@ -1083,11 +1072,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Mean_wavenumbers_selected_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfiltered_Mean_wavenumbers_selected_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_Mean_wavenumbers_selected_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Mean wavenumbers smoothed
@@ -1145,11 +1130,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Mean_wavenumbers_selected_smooth_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfiltered_Mean_wavenumbers_selected_smooth_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_Mean_wavenumbers_selected_smooth_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % RMS amplitude
@@ -1174,11 +1155,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['RMS_amplitude_selected_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfiltered_RMS_amplitude_selected_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_RMS_amplitude_selected_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600');
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Mean amplitude
@@ -1203,11 +1180,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Mean_amplitude_selected_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfilteredMean_amplitude_selected_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_Mean_amplitude_selected_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1237,11 +1210,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['RMS_wavenumbers_refined_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfilteredRMS_wavenumbers_refined_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_RMS_wavenumbers_refined_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Mean wavenumbers
@@ -1305,11 +1274,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Mean_wavenumbers_refined_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfilteredMean_wavenumbers_refined_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_Mean_wavenumbers_refined_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Mean wavenumbers smoothed
@@ -1367,11 +1332,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Mean_wavenumbers_refined_smooth_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfilteredMean_wavenumbers_refined_smooth_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_Mean_wavenumbers_refined_smooth_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % RMS amplitude
@@ -1396,7 +1357,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            processed_filename = ['RMS_amplitude_refined_',filename]; % filename of processed .mat data
+            processed_filename = ['A0stop_RMS_amplitude_refined_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600');
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Mean amplitude
@@ -1421,11 +1382,7 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Mean_amplitude_refined_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfilteredMean_amplitude_refined_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_Mean_amplitude_refined_',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %close all;
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1472,11 +1429,32 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Thickness_map_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfiltered_Thickness_map_',filename]; % filename of processed .mat data
-            end
+            processed_filename = ['A0stop_Thickness_map_',filename]; % filename of processed .mat data
+            print([figure_output_path,processed_filename],'-dpng', '-r600');
+            
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %% RMS of A0 stop band filtered wavefield
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            RMS_A0stop = sqrt(sum(Data(:,:,selected_frames2).^2,3))./length(selected_frames2);
+            RMS_A0stop_avg = RMS_A0stop_avg + RMS_A0stop/length(freq_list);
+            figure;
+            surf(XI,YI,RMS_A0stop);shading interp; view(2); colorbar; colormap((Cmap));       
+            %Smax=max(max(Thickness_map));Smin=min(min(Thickness_map));
+            set(gcf,'Renderer','zbuffer');
+            xlim([-0.25 0.25]);
+            ylim([-0.25, 0.25]);
+            set(gca,'Fontsize',10);
+            axis square;
+            set(gcf,'color','white');set(gca,'TickDir','out');
+            %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+            set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+            set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+            % remove unnecessary white space
+            set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+            set(gcf,'PaperPositionMode','auto');
+            drawnow;
+            processed_filename = ['A0stop_RMS_A0stop',filename]; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600');
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %% END OF PROCESSING
@@ -1507,14 +1485,32 @@ set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
 
 set(gcf,'PaperPositionMode','auto');
 drawnow;
-if(A0mode_filter)
-    processed_filename = ['Thickness_map_avg_',filename]; % filename of processed .mat data
-else
-    processed_filename = ['unfilteredThickness_map_avg_',filename]; % filename of processed .mat data
-end
+processed_filename = ['A0stop_Thickness_map_avg']; % filename of processed .mat data
+print([figure_output_path,processed_filename],'-dpng', '-r600');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+figure;
+surf(XI,YI,RMS_A0stop_avg);shading interp; view(2); colorbar; colormap((Cmap));       
+%Smax=max(max(Thickness_map));Smin=min(min(Thickness_map));
+set(gcf,'Renderer','zbuffer');
+xlim([-0.25 0.25]);
+ylim([-0.25, 0.25]);
+set(gca,'Fontsize',10);
+axis square;
+set(gcf,'color','white');set(gca,'TickDir','out');
+%set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+% remove unnecessary white space
+set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+set(gcf,'PaperPositionMode','auto');
+drawnow;
+processed_filename = ['A0stop_RMS_A0stop_avg']; % filename of processed .mat data
 print([figure_output_path,processed_filename],'-dpng', '-r600');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% End of Yet another wavenumber damage imaging (YAWDI)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 toc
   
