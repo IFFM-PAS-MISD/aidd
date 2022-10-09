@@ -1,3 +1,20 @@
+%% Yet Another Wavenumber Damage Imaging (YAWDI)
+% variant with A0 mode pass band filter 
+% (better for phase tracking and thickness mapping)
+% Algorithms needs at least two matrices as an input:
+% 1. chirp wavefield
+% 2. wavefield pass-banded around frequency fc
+% Dimensions of matrices should be 512x512x512
+% which corresponds to spatial dimensions (x,y) and time (t)
+% Other inputs:
+% time vector as "time" variable
+% Plate dimensions as "WL" variable (two-element column vector)
+
+% Author: Pawel Kudela, D.Sc., Ph.D., Eng. 
+% Institute of Fluid Flow Machinery Polish Academy of Sciences 
+% Mechanics of Intelligent Structures Department 
+% email address: pk@imp.gda.pl 
+% Website: https://www.imp.gda.pl/en/research-centres/o4/o4z1/people/ 
 clear all;close all;   warning off;clc;
 tic
 load project_paths projectroot src_path;
@@ -5,7 +22,7 @@ load project_paths projectroot src_path;
 % allow overwriting existing results if true
 %overwrite=false;
 overwrite=true;
-interim_figs=true;
+interim_figs=false;
 A0mode_filter=false; % true - A0 pass band filter is applied, false - algorithm on unfiltered data (fast) 
 % unfiltered means that A0 pass band filter in frequency-wavenumber domain is not applied
 % the filenames will be preceded by term: 'unfiltered_'
@@ -20,7 +37,8 @@ dataset_output_path = prepare_data_processing_paths('processed','num',modelname)
 figure_output_path = prepare_figure_paths(modelname);
 
 radians_flag = false; % if true units of wanumbers [rad/m] if false [1/m]
-test_case=[2:5]; % select file numbers for processing
+test_case=[2:5]; % select file numbers for processing (starting from 2, chirp should be excluded)
+
 scaling_factor=0.5;
 %% input for figures
 Cmap = jet(256); 
@@ -28,6 +46,30 @@ Cmap2 = turbo;
 caxis_cut = 0.8;
 fig_width =6; % figure widht in cm
 fig_height=6; % figure height in cm
+damage_outline=true;
+%% Damage outline - ellipse
+%    N - numer of points in adjacent grid, integer
+%    xCenter -  delamination x coordinate 
+%    yCenter -  delamination y coordinate 
+%    rotAngle - delamination rotation angle [0:180), Units: deg
+%    a - semi-major axis
+%    b - semi-minor axis
+rotAngle=90;
+xCenter = 0.125;
+yCenter = 0.125;
+b=2/3*0.03792835351/2;
+a=2/3*0.05689253027/2;
+alpha=rotAngle*pi/180;
+te=linspace(-pi,pi,50);
+x=a*cos(te);
+y=b*sin(te);
+R  = [cos(alpha) -sin(alpha); ...
+      sin(alpha)  cos(alpha)];
+rCoords = R*[x ; y];   
+xr = rCoords(1,:)';      
+yr = rCoords(2,:)';     
+delam1= [xr+xCenter-0.25,yr+yCenter-0.25];
+%plot(delam1(:,1),delam1(:,2),'k:','LineWidth',0.5); axis square; xlim([0 0.5]);ylim([0 0.5]);
 %% Input for signal processing
 base_thickness = 2; % [mm] reference thicknes of the plate
 WL = [0.5 0.5];
@@ -224,74 +266,139 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     % figure;surf(Xk,Yk,abs(Zk)');shading interp;view(2);
 
     %figure;surf(abs(squeeze(KXKYF_polar_smooth(:,:,280))));shading interp; view(2);
-    % ridge picking
-    % frequency range 5-150 kHz
-    f_start = 5000;
-    f_end = 150000;
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% ridge picking
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % frequency range 15-130 kHz
+    f_start = 15000;
+    f_end = 130000;
     [~,f_start_ind] = min(abs(f_vec-f_start));
     [~,f_end_ind] = min(abs(f_vec-f_end));
-    Ind = zeros(f_end_ind - f_start_ind+1,1);
+    Ind = zeros(f_end_ind - f_start_ind+1,length(beta)/2);
     k_vec = linspace(0,k_radius,n2);
-    k_A0 = zeros(length(beta),length(f_vec));
+    k_A0_smooth = zeros(length(beta),length(f_vec));
+    k_A0_f_selected = zeros(length(beta)/2,f_end_ind-f_start_ind+1);
     n_outliers = round(0.1*(f_end_ind - f_start_ind+1)); % number of data points to remove
-
-    % coefficient range for fitting a curve of the form Y=a*X^b
-    a=[0.3:0.01:0.6]; 
-    b=[0.4:0.01:0.6];
+    weighting = linspace(1,20,n2); % promote higher wavenumbers - for better extraction of A0 mode
+    
     disp('Extracting A0 mode');
-    for n_angle = 1:length(beta)
-        [n_angle,length(beta)]
-        n_freq = f_start_ind;
-        c=1;
-        [~,I] = max(abs(squeeze(KXKYF_polar(n_angle,:,n_freq))));
-        Ind(c) = I;
-        for n_freq = f_start_ind+1:f_end_ind
-            c=c+1;
-            [~,I] = max(abs(squeeze(KXKYF_polar(n_angle,:,n_freq))));
-            Ind(c) =I;
-        end
-        k_new=movmean(k_vec(Ind),4);
-        % remove outliers
-        [p2]=polyfit([f_vec(f_start_ind:f_end_ind)],[k_new(1:end)],2);
-        yfit2 = polyval(p2,f_vec(f_start_ind:f_end_ind));
-        [kd]=abs(yfit2-k_new);
-        [~,J]=sort(kd,'ascend');
-        correct_data_ind=(sort(J(1:end-n_outliers)));
-        k_new = k_new(correct_data_ind);
-        % fit a curve
-        RMS_temp=1e12;
-        for j1=1:length(a)
-            for j2=1:length(b)
-                Y = a(j1).*f_vec(f_start_ind+correct_data_ind).^b(j2);
-                RMS=sum(sqrt((Y-k_new).^2));
-                if(RMS<RMS_temp) 
-                    RMS_temp = RMS;
-                    a_selected = a(j1);
-                    b_selected = b(j2);
+    
+    %figure;hold on
+     c=0;
+    for n_freq = f_start_ind:f_end_ind
+       c=c+1;
+        for n_angle = 1:length(beta)/2 % 0:pi
+            [kmax1,J1]=max(weighting.*abs(squeeze(KXKYF_polar(n_angle,:,n_freq))));
+            [kmax2,J2]=max(weighting.*abs(squeeze(KXKYF_polar(n_angle+length(beta)/2,:,n_freq))));
+%             cumsum1 = cumsum(abs(squeeze(KXKYF_polar(n_angle,:,n_freq))));
+%             cumsum2 = cumsum(abs(squeeze(KXKYF_polar(n_angle+length(beta)/2,:,n_freq)))); % pi:2pi
+%             cd1 = diff(cumsum1)/(k_vec(2)-k_vec(1));
+%             cd2 = diff(cumsum2)/(k_vec(2)-k_vec(1));   
+%             [cdmax1,I1] = max(cd1);
+%             [cdmax2,I2] = max(cd2); % pi:2pi
+%             I1=I1+1;
+%             I2=I2+1;
+            
+            if(abs(J1-J2)< 8 ) 
+                Ind(c,n_angle)=ceil((J1+J2)/2);
+            else
+                if(J1 > J2) % symmetrization (pick higher amplitude)
+                    Ind(c,n_angle)=J1;
+                    %plot(J1,cd1(J1),'bo');
+                else
+                    Ind(c,n_angle)=J2;
+                    %plot(J2,cd2(J2),'ro');
                 end
             end
         end
-        Y = a_selected.*f_vec.^b_selected;   
-        k_A0(n_angle,:) = Y;
-
     end
-    k_A0_smooth = movmean([k_A0;k_A0(1:50,:)],50,1); % wrap around data for improved smoothing
-    k_A0_smooth = k_A0_smooth(1:length(beta),:);
-    clear k_A0;
+
+    c=0;
+    for n_freq = f_start_ind:f_end_ind
+       c=c+1;    
+        % fit polynomial
+        [p3]=polyfit( beta(1:length(beta)/2)'*pi/180,k_vec(Ind(c,:)),8);
+        yfit3 = polyval(p3,beta(1:length(beta)/2)'*pi/180);
+
+        % remove outliers
+        n_outliers = round(0.2*(length(yfit3))); % number of data points to remove
+        [kd]=abs(yfit3'-k_vec(Ind(c,:)));
+        [~,J]=sort(kd,'ascend');
+        correct_data_ind=(sort(J(1:end-n_outliers)));
+
+        % interpolation second pass
+        [p4]=polyfit( beta(correct_data_ind)'*pi/180,k_vec(Ind(c,correct_data_ind)),8);
+        yfit4 = polyval(p4,beta(1:length(beta)/2)'*pi/180);
+        k_A0_f_selected(:,c) = yfit4;
+       
+%         figure;
+%         polarplot(beta(1:length(beta)/2)'*pi/180,k_vec(Ind(81,:)),'ko');
+%         hold on;
+%         polarplot(beta(1:length(beta)/2)'*pi/180,yfit3,'r');
+%         polarplot(beta(correct_data_ind)'*pi/180,k_vec(Ind(81,correct_data_ind)),'gx');
+%         polarplot(beta(1:length(beta)/2)'*pi/180,yfit4,'c');
+        
+    end
+%     k_A0_smooth = movmean([k_A0;k_A0(1:50,:)],50,1); % wrap around data for improved smoothing
+%     k_A0_smooth = k_A0_smooth(1:length(beta),:);
+%     figure;polarplot(beta(1:length(beta)/2)'*pi/180,k_A0_f_selected(:,92));
+%     hold on;
+%     polarplot(beta(1:length(beta)/2)'*pi/180,k_A0_f_selected(:,80),'r');
+%     polarplot(beta(1:length(beta)/2)'*pi/180,k_A0_f_selected(:,70),'g');
+%     polarplot(beta(1:length(beta)/2)'*pi/180,k_A0_f_selected(:,50),'c');
+%     polarplot(beta(1:length(beta)/2)'*pi/180,k_A0_f_selected(:,5),'m');
+%     polarplot(beta(1:length(beta)/2)'*pi/180,k_A0_f_selected(:,1),'k');
+    
+    %%%%%%%%%%%%%%%
+    for n_angle = 1:length(beta)/2 % 0:pi
+        % fit a curve
+        [p5]=polyfit(f_vec(f_start_ind:f_end_ind),k_A0_f_selected(n_angle,:),2);
+        yfit5 = polyval(p5,f_vec(f_start_ind:f_end_ind));
+        [p6]=polyfit(f_vec(f_end_ind-20:f_end_ind),yfit5(end-20:end),1);
+        yfit6 = polyval(p6,f_vec(f_end_ind-20:f_end_ind));
+        %vq = interp1([0,f_vec(f_start_ind:f_end_ind)],[0,yfit5] ,f_vec,'spline','extrap');
+        vq = interp1([0,f_vec(f_start_ind:f_end_ind)],[0,yfit5(1:end-20),yfit6(end-19:end)],f_vec,'spline','extrap');
+        k_A0_smooth(n_angle,:) = vq; 
+    end
+    % symmetry
+    k_A0_smooth(length(beta)/2+1:length(beta),:) = k_A0_smooth(1:length(beta)/2,:);
+%     figure;
+%     polarplot(beta(1:length(beta))'*pi/180,k_A0_smooth(:,f_start_ind+81));
+%     hold on;
+%     polarplot(beta(1:length(beta)/2)'*pi/180,k_A0_smooth_f_selected(:,81));
+%     figure;
+%     plot(f_vec/1e3,k_A0_smooth(100,:))
+%     hold on;
+%     plot(f_vec(f_start_ind:f_end_ind)/1e3,k_A0_f_selected(100,:),'r');
+%     figure;
+%     for i=1:4:50
+%     xx = k_A0_f_selected(:,i).* cos(beta(1:length(beta)/2)'*pi/180); 
+%     yy = k_A0_f_selected(:,i).* sin(beta(1:length(beta)/2)*pi/180)';
+%     plot3(xx,yy,repmat(f_vec(f_start_ind+i)/1e3,[length(beta)/2 1]),'ko'); hold on;
+%     axis equal;
+%     end
+%     hold on;
+%     for i=1:4:50
+%     xx = k_A0_smooth(1:length(beta)/2,f_start_ind+i).* cos(beta(1:length(beta)/2)'*pi/180); 
+%     yy = k_A0_smooth(1:length(beta)/2,f_start_ind+i).* sin(beta(1:length(beta)/2)*pi/180)';
+%     plot3(xx,yy,repmat(f_vec(f_start_ind+i)/1e3,[length(beta)/2 1]),'rd'); hold on;
+%     axis equal;
+%     end
+    clear k_A0_f_selected;
     clear KXKYF_polar;
-    % figure;
-    % for n_angle = 1:length(beta)
-    %     plot(f_vec/1e3,k_A0_smooth(n_angle,:),'r');hold on;
-    % end
-    % figure;
-    % for j = 1:length(f_vec)
-    %     plot3( k_A0_smooth(:,j).*cos(beta'*pi/180),k_A0_smooth(:,j).*sin(beta'*pi/180), repmat(f_vec(j),[length(beta),1]),'r.'); hold on;
-    % end
-    % figure;
-    % for j = 1:length(f_vec)
-    %     plot3( k_A0_smooth(1:10:end,j).*cos(beta(1:10:end)'*pi/180),k_A0_smooth(1:10:end,j).*sin(beta(1:10:end)'*pi/180), repmat(f_vec(j),[length(beta(1:10:end)),1]),'r.'); hold on;
-    % end
-    % figure;surf(k_A0_smooth);shading interp;
+%     figure;
+%     for n_angle = 1:length(beta)
+%         plot(f_vec/1e3,k_A0_smooth(n_angle,:),'r');hold on;
+%     end
+%     figure;
+%     for j = 1:length(f_vec)
+%         plot3( k_A0_smooth(:,j).*cos(beta'*pi/180),k_A0_smooth(:,j).*sin(beta'*pi/180), repmat(f_vec(j),[length(beta),1]),'r.'); hold on;
+%     end
+%     figure;
+%     for j = 1:length(f_vec)
+%         plot3( k_A0_smooth(1:10:end,j).*cos(beta(1:10:end)'*pi/180),k_A0_smooth(1:10:end,j).*sin(beta(1:10:end)'*pi/180), repmat(f_vec(j),[length(beta(1:10:end)),1]),'r.'); hold on;
+%     end
+%     figure;surf(k_A0_smooth);shading interp;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% thickness sensitivity curves
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -810,7 +917,8 @@ for k = test_case
 %             load('Data_polar');
             [number_of_angles,number_of_points,number_of_time_steps]=size(Data_polar);
             %% spatial signal at selected angle and time
-            N = 2^nextpow2(number_of_points);
+            %N = 2^nextpow2(number_of_points);
+            N = number_of_points;
             wavenumbers = zeros(number_of_angles,N-1,length(selected_frames));
             Amplitude = zeros(number_of_angles,N,length(selected_frames));
             
@@ -830,8 +938,8 @@ for k = test_case
             Windowing_mask=zeros(number_of_angles,number_of_points);
             for n_angle=1:number_of_angles
                 Windowing_mask(n_angle,1:usable_sig_length(n_angle)) = 1;      
-                Windowing_mask(n_angle,1:11) = Hn(1:11);
-                Windowing_mask(n_angle,usable_sig_length(n_angle)-10:usable_sig_length(n_angle)) = Hn(11:21);
+                Windowing_mask(n_angle,1:11) = Hn(1:11); % smooth out begining of the signal
+%                 Windowing_mask(n_angle,usable_sig_length(n_angle)-10:usable_sig_length(n_angle)) = Hn(11:21);
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %% main algorithm
@@ -848,6 +956,7 @@ for k = test_case
                 amplitude_by_angle = zeros(number_of_angles,N);
                 s = zeros(number_of_angles,N);
                 s(:,1:number_of_points) = squeeze(Data_polar(:,1:number_of_points,frame)).*Windowing_mask;
+                %s(:,1:number_of_points) = squeeze(Data_polar(:,1:number_of_points,frame));
                 parfor n_angle=1:number_of_angles
  
                     % FFT-domain Hilbert transform of the input signal 's':
@@ -867,13 +976,13 @@ for k = test_case
                     [p]=polyfit(xr(20:round(nx/2)),unwrapped_phase(20:round(nx/2)),1);
                     yfit = polyval(p,xr);
                     unwrapped_phase_flat = unwrapped_phase-yfit;
-                    %unwrapped_phase_flat_smooth = movmean(unwrapped_phase_flat,10);
-                    unwrapped_phase_flat_smooth1 = movmean(unwrapped_phase_flat(1:nx),10);
-                    unwrapped_phase_flat_smooth2 = movmean(unwrapped_phase_flat(nx+1-40:end),40); % larger window at the end
-                    dh=unwrapped_phase_flat_smooth2(19)-unwrapped_phase_flat_smooth1(nx-20);
-                    unwrapped_phase_flat_smooth = [unwrapped_phase_flat_smooth1(1:nx-20),unwrapped_phase_flat_smooth2(19:end-2)-dh];
-                    % smoothing second pass
-                    unwrapped_phase_flat_smooth = movmean(unwrapped_phase_flat_smooth,10);
+%                    unwrapped_phase_flat_smooth = movmean(unwrapped_phase_flat,10);
+                        unwrapped_phase_flat_smooth1 = movmean(unwrapped_phase_flat(1:nx),10);
+                        unwrapped_phase_flat_smooth2 = movmean(unwrapped_phase_flat(nx+1-40:end),40); % larger window at the end
+                        dh=unwrapped_phase_flat_smooth2(19)-unwrapped_phase_flat_smooth1(nx-20);
+                        unwrapped_phase_flat_smooth = [unwrapped_phase_flat_smooth1(1:nx-20),unwrapped_phase_flat_smooth2(19:end-2)-dh];
+                        % smoothing second pass
+                        unwrapped_phase_flat_smooth = movmean(unwrapped_phase_flat_smooth,10);
                     
                     hd = diff(unwrapped_phase_flat_smooth+yfit)/dr; % first derivative
                     wavenumbers_by_angle(n_angle,:) = movmean(hd,5); % unwrapped phase
@@ -1008,6 +1117,8 @@ for k = test_case
             ylim([-0.25, 0.25]);
             set(gca,'Fontsize',10);
             axis square;
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);  
             %caxis([Smin,Smax]); 
             %caxis([0 70]); 
@@ -1070,6 +1181,8 @@ for k = test_case
                     end
             end
             axis square;
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);    
             %caxis([Smin,Smax]);  
             %caxis([0 500]); 
@@ -1132,6 +1245,8 @@ for k = test_case
                     end
             end
             axis square;
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);    
             %caxis([Smin,Smax]);  
             %caxis([0 500]); 
@@ -1162,7 +1277,9 @@ for k = test_case
             ylim([-0.25, 0.25]);
             set(gca,'Fontsize',10);
             axis square;
-            caxis([caxis_cut*Smin,caxis_cut*Smax]);    
+            caxis([caxis_cut*Smin,caxis_cut*Smax]);  
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([0 7e-4]); 
             %title(['RMS amplitude']);
             set(gcf,'color','white');set(gca,'TickDir','out');
@@ -1191,7 +1308,9 @@ for k = test_case
             ylim([-0.25, 0.25]);
             set(gca,'Fontsize',10);
             axis square;
-            caxis([caxis_cut*Smin,caxis_cut*Smax]);    
+            caxis([caxis_cut*Smin,caxis_cut*Smax]); 
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([0 4.5e-3]); 
             %title(['Mean amplitude']);
             set(gcf,'color','white');set(gca,'TickDir','out');
@@ -1224,6 +1343,8 @@ for k = test_case
             ylim([-0.25, 0.25]);
             set(gca,'Fontsize',10);
             axis square;
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);  
             %caxis([Smin,Smax]); 
             %caxis([0 70]); 
@@ -1291,6 +1412,8 @@ for k = test_case
                     end
             end
             axis square;
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             set(gca,'Fontsize',10);
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);    
             %caxis([Smin,Smax]);  
@@ -1354,6 +1477,8 @@ for k = test_case
                     end
             end
             axis square;
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);    
             %caxis([Smin,Smax]);  
             %caxis([0 500]); 
@@ -1384,7 +1509,9 @@ for k = test_case
             ylim([-0.25, 0.25]);
             set(gca,'Fontsize',10);
             axis square;
-            caxis([caxis_cut*Smin,caxis_cut*Smax]);    
+            caxis([caxis_cut*Smin,caxis_cut*Smax]);  
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([0 7e-4]); 
             %title(['RMS amplitude']);
             set(gcf,'color','white');set(gca,'TickDir','out');
@@ -1409,7 +1536,9 @@ for k = test_case
             ylim([-0.25, 0.25]);
             set(gca,'Fontsize',10);
             axis square;
-            caxis([caxis_cut*Smin,caxis_cut*Smax]);    
+            caxis([caxis_cut*Smin,caxis_cut*Smax]);   
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
             %caxis([0 4.5e-3]); 
             %title(['Mean amplitude']);
             set(gcf,'color','white');set(gca,'TickDir','out');
@@ -1431,53 +1560,54 @@ for k = test_case
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %% wavenumber to thickness scaling
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            Thickness_map = zeros(Nx,Ny);
-            phi = atan2(YI,XI)*180/pi; % range -180:+180
-            J=find(phi<0) ;
-            temp=phi(J);
-            phi(J) = 360 + temp; % change range to 0:360
-            dbeta1 = 360/(m1-1); 
-            beta1 = (dbeta1:dbeta1:(m1)*dbeta1)-dbeta1;
-            for i=1:Ny
-                for j=1:Nx
-                    [~,I] = min(abs(phi(i,j)-beta1));
-                    if(Mean_wavenumbers_refined_smooth(i,j)<min(thickness_sensitivities(I,:,k-1)))
-                        Thickness_map(i,j) = 6;
-                    else
-                        [~,J] = min( abs( thickness_sensitivities(I,:,k-1)-Mean_wavenumbers_refined_smooth(i,j) ) );
-                        Thickness_map(i,j) = thickness(J);
-                        %Thickness_map(i,j)=interp1(squeeze(thickness_sensitivities(I,:,k-1)),thickness,Mean_wavenumbers_refined_smooth(i,j),'linear','extrap');
-                
+            if(A0mode_filter)
+                [m1,~,~] = size(thickness_sensitivities);
+                Thickness_map = zeros(Nx,Ny);
+                phi = atan2(YI,XI)*180/pi; % range -180:+180
+                J=find(phi<0) ;
+                temp=phi(J);
+                phi(J) = 360 + temp; % change range to 0:360
+                dbeta1 = 360/(m1-1); 
+                beta1 = (dbeta1:dbeta1:(m1)*dbeta1)-dbeta1;
+                for i=1:Ny
+                    for j=1:Nx
+                        [~,I] = min(abs(phi(i,j)-beta1));
+                        if(Mean_wavenumbers_refined_smooth(i,j)<min(thickness_sensitivities(I,:,k-1)))
+                            Thickness_map(i,j) = 6;
+                        else
+                            [~,J] = min( abs( thickness_sensitivities(I,:,k-1)-Mean_wavenumbers_refined_smooth(i,j) ) );
+                            Thickness_map(i,j) = thickness(J);
+                            %Thickness_map(i,j)=interp1(squeeze(thickness_sensitivities(I,:,k-1)),thickness,Mean_wavenumbers_refined_smooth(i,j),'linear','extrap');
+
+                        end
                     end
                 end
+                Thickness_map_avg = Thickness_map_avg + Thickness_map/length(freq_list);
+                figure;
+                surf(XI,YI,Thickness_map);shading interp; view(2); colorbar; colormap(flipud(Cmap));       
+                %Smax=max(max(Thickness_map));Smin=min(min(Thickness_map));
+                set(gcf,'Renderer','zbuffer');
+                xlim([-0.25 0.25]);
+                ylim([-0.25, 0.25]);
+                set(gca,'Fontsize',10);
+                axis square;
+                hold on;
+                if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(4,[length(delam1),1]),'k:','LineWidth',0.5); end
+                caxis([0 4]);    
+                %caxis([0 4.5e-3]); 
+                %title(['Mean amplitude']);
+                set(gcf,'color','white');set(gca,'TickDir','out');
+                %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+                set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+                set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+                % remove unnecessary white space
+                set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+                set(gcf,'PaperPositionMode','auto');
+                drawnow;       
+                processed_filename = ['Thickness_map_',filename]; % filename of processed .mat data     
+                print([figure_output_path,processed_filename],'-dpng', '-r600');
             end
-            Thickness_map_avg = Thickness_map_avg + Thickness_map/length(freq_list);
-            figure;
-            surf(XI,YI,Thickness_map);shading interp; view(2); colorbar; colormap(flipud(Cmap));       
-            %Smax=max(max(Thickness_map));Smin=min(min(Thickness_map));
-            set(gcf,'Renderer','zbuffer');
-            xlim([-0.25 0.25]);
-            ylim([-0.25, 0.25]);
-            set(gca,'Fontsize',10);
-            axis square;
-            caxis([0 4]);    
-            %caxis([0 4.5e-3]); 
-            %title(['Mean amplitude']);
-            set(gcf,'color','white');set(gca,'TickDir','out');
-            %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
-            set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
-            set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
-            % remove unnecessary white space
-            set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-            
-            set(gcf,'PaperPositionMode','auto');
-            drawnow;
-            if(A0mode_filter)
-                processed_filename = ['Thickness_map_',filename]; % filename of processed .mat data
-            else
-                processed_filename = ['unfiltered_Thickness_map_',filename]; % filename of processed .mat data
-            end
-            print([figure_output_path,processed_filename],'-dpng', '-r600');
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename);
@@ -1487,32 +1617,33 @@ for k = test_case
         fprintf('Filename: \n%s \nalready exist\n', processed_filename);
     end
 end
-figure;
-surf(XI,YI,Thickness_map_avg);shading interp; view(2); colorbar; colormap(flipud(Cmap));       
-%Smax=max(max(Thickness_map));Smin=min(min(Thickness_map));
-set(gcf,'Renderer','zbuffer');
-xlim([-0.25 0.25]);
-ylim([-0.25, 0.25]);
-set(gca,'Fontsize',10);
-axis square;
-caxis([0 4]);    
-%caxis([0 4.5e-3]); 
-%title(['Mean amplitude']);
-set(gcf,'color','white');set(gca,'TickDir','out');
-%set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
-set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
-set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
-% remove unnecessary white space
-set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-
-set(gcf,'PaperPositionMode','auto');
-drawnow;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if(A0mode_filter)
+    figure;
+    surf(XI,YI,Thickness_map_avg);shading interp; view(2); colorbar; colormap(flipud(Cmap));       
+    %Smax=max(max(Thickness_map));Smin=min(min(Thickness_map));
+    set(gcf,'Renderer','zbuffer');
+    xlim([-0.25 0.25]);
+    ylim([-0.25, 0.25]);
+    set(gca,'Fontsize',10);
+    axis square;
+    hold on;
+    if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(4,[length(delam1),1]),'k:','LineWidth',0.5); end
+    caxis([0 4]);    
+    %caxis([0 4.5e-3]); 
+    %title(['Mean amplitude']);
+    set(gcf,'color','white');set(gca,'TickDir','out');
+    %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+    set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+    set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+    set(gcf,'PaperPositionMode','auto');
+    drawnow;
     processed_filename = ['Thickness_map_avg_',filename]; % filename of processed .mat data
-else
-    processed_filename = ['unfilteredThickness_map_avg_',filename]; % filename of processed .mat data
+    print([figure_output_path,processed_filename],'-dpng', '-r600');
 end
-print([figure_output_path,processed_filename],'-dpng', '-r600');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% End of Yet another wavenumber damage imaging (YAWDI)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
