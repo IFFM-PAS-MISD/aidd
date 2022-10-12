@@ -159,8 +159,8 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
                 t.Padding = 'tight';
                 % Top plot
                 ax1 = nexttile;
-                h = slice(ax1,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice2,yslice2,zslice2);
-                set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                h1 = slice(ax1,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice2,yslice2,zslice2);
+                set(h1,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
                 hold on;
                 %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
                 ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -170,8 +170,8 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
                 set(gca,'FontName','Times');
                 grid(ax1,'off');
                 view(3);
-                lightangle(-45,45)
-                lightangle(-45,45)
+                lightangle(ax1,-45,45)
+                lightangle(ax1,-45,45)
                 colormap(Cmap2);
                 %colormap turbo;
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
@@ -193,8 +193,8 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
                 
                 % bottom plot
                 ax2 = nexttile;
-                h = slice(ax2,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice1,yslice1,zslice1);
-                set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                h2 = slice(ax2,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice1,yslice1,zslice1);
+                set(h2,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
                 hold on;
                 %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
                 ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -206,8 +206,8 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
                 
                 colormap(Cmap2);
                 %colormap turbo;
-                lightangle(-45,45)
-                lightangle(-45,45)
+                lightangle(ax2,-45,45)
+                lightangle(ax2,-45,45)
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
                 line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
                 line([-maxkx  maxkx],[ maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
@@ -575,9 +575,9 @@ if(interim_figs)
         % Top plot
         ax1 = nexttile;
 
-        h = slice(ax1,mkx,mky,mf,cart_mask_A0(:,:,end/2+1:end),xslice2,yslice2,zslice2);
+        h1 = slice(ax1,mkx,mky,mf,cart_mask_A0(:,:,end/2+1:end),xslice2,yslice2,zslice2);
 
-        set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+        set(h1,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
         hold on;
         %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
         ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -587,8 +587,8 @@ if(interim_figs)
         set(gca,'FontName','Times');
         grid(ax1,'off');
         view(3);
-        lightangle(-45,45)
-        lightangle(-45,45)
+        lightangle(ax1,-45,45)
+        lightangle(ax1,-45,45)
         colormap (gray)
         line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
         line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
@@ -607,9 +607,9 @@ if(interim_figs)
         % bottom plot
         ax2 = nexttile;
 
-        h = slice(ax2,mkx,mky,mf,cart_mask_A0(:,:,end/2+1:end),xslice1,yslice1,zslice1);
+        h2 = slice(ax2,mkx,mky,mf,cart_mask_A0(:,:,end/2+1:end),xslice1,yslice1,zslice1);
 
-        set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+        set(h2,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
         hold on;
         %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
         ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -619,8 +619,8 @@ if(interim_figs)
         set(gca,'FontName','Times');
 
         view(3);
-        lightangle(-45,45)
-        lightangle(-45,45)
+%         lightangle(-45,45)
+%         lightangle(-45,45)
         colormap (gray)
         line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
         line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
@@ -727,8 +727,8 @@ for k = test_case
                 t.Padding = 'tight';
                 % Top plot
                 ax1 = nexttile;
-                h = slice(ax1,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice2,yslice2,zslice2);
-                set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                h1 = slice(ax1,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice2,yslice2,zslice2);
+                set(h1,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
                 hold on;
                 %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
                 ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -738,8 +738,8 @@ for k = test_case
                 set(gca,'FontName','Times');
                 grid(ax1,'off');
                 view(3);
-                lightangle(-45,45)
-                lightangle(-45,45)
+                lightangle(ax1,-45,45)
+                lightangle(ax1,-45,45)
                 colormap(Cmap2);
                 %colormap turbo;
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
@@ -760,8 +760,8 @@ for k = test_case
                 
                 % bottom plot
                 ax2 = nexttile;
-                h = slice(ax2,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice1,yslice1,zslice1);
-                set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                h2 = slice(ax2,mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice1,yslice1,zslice1);
+                set(h2,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
                 hold on;
                 %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
                 ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -773,8 +773,8 @@ for k = test_case
                 
                 colormap(Cmap2);
                 %colormap turbo;
-                lightangle(-45,45)
-                lightangle(-45,45)
+                lightangle(ax2,-45,45)
+                lightangle(ax2,-45,45)
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
                 line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
                 line([-maxkx  maxkx],[ maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
@@ -824,8 +824,8 @@ for k = test_case
                 t.Padding = 'tight';
                 % Top plot
                 ax1 = nexttile;
-                h = slice(ax1,mkx,mky,mf,abs(KXKYF_A0(:,:,end/2+1:end)),xslice2,yslice2,zslice2);
-                set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                h1 = slice(ax1,mkx,mky,mf,abs(KXKYF_A0(:,:,end/2+1:end)),xslice2,yslice2,zslice2);
+                set(h1,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
                 hold on;
                 %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
                 ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -835,8 +835,8 @@ for k = test_case
                 set(gca,'FontName','Times');
                 grid(ax1,'off');
                 view(3);
-                lightangle(-45,45)
-                lightangle(-45,45)
+                lightangle(ax1,-45,45)
+                lightangle(ax1,-45,45)
                 colormap(Cmap2);
                 %colormap turbo;
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
@@ -856,8 +856,8 @@ for k = test_case
                 caxis([0 0.6*Smax]);
                 % bottom plot
                 ax2 = nexttile;
-                h = slice(ax2,mkx,mky,mf,abs(KXKYF_A0(:,:,end/2+1:end)),xslice1,yslice1,zslice1);
-                set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                h2 = slice(ax2,mkx,mky,mf,abs(KXKYF_A0(:,:,end/2+1:end)),xslice1,yslice1,zslice1);
+                set(h2,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
                 hold on;
                 %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
                 ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
@@ -869,8 +869,8 @@ for k = test_case
                 
                 colormap(Cmap2);
                 %colormap turbo;
-                lightangle(-45,45)
-                lightangle(-45,45)
+                lightangle(ax2,-45,45)
+                lightangle(ax2,-45,45)
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
                 line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
                 line([-maxkx  maxkx],[ maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
@@ -1523,7 +1523,11 @@ for k = test_case
             
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            processed_filename = ['RMS_amplitude_refined_',filename]; % filename of processed .mat data
+            if(A0mode_filter)
+                processed_filename = ['RMS_amplitude_refined_',filename]; % filename of processed .mat data
+            else
+                processed_filename = ['unfiltered_RMS_amplitude_refined_',filename]; % filename of processed .mat data
+            end
             print([figure_output_path,processed_filename],'-dpng', '-r600');
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % Mean amplitude
@@ -1641,7 +1645,7 @@ if(A0mode_filter)
 
     set(gcf,'PaperPositionMode','auto');
     drawnow;
-    processed_filename = ['Thickness_map_avg_',filename]; % filename of processed .mat data
+    processed_filename = ['Thickness_map_avg']; % filename of processed .mat data
     print([figure_output_path,processed_filename],'-dpng', '-r600');
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
