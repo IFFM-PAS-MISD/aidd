@@ -34,13 +34,13 @@ test_case=[2:4]; % select file numbers for processing (starting from 2, chirp sh
 % allow overwriting existing results if true
 %overwrite=false;
 overwrite=true;
-interim_figs=false;
-A0mode_filter=false; % true - A0 pass band filter is applied, false - algorithm on unfiltered data (fast)
+interim_figs=true;
+A0mode_filter=true; % true - A0 pass band filter is applied, false - algorithm on unfiltered data (fast)
 % unfiltered means that A0 pass band filter in frequency-wavenumber domain is not applied
 % the filenames will be preceded by term: 'unfiltered_'
 % retrieve model name based on running file and folder
-freq_filter=false; % apply additional frequency band pass filter 
-fband = 20e3; % frequency band width [Hz]
+freq_filter=true; % apply additional frequency band pass filter 
+fband = 40e3; % frequency band width [Hz]
 
 currentFile = mfilename('fullpath');
 [pathstr,name,ext] = fileparts( currentFile );
@@ -101,12 +101,9 @@ if(radians_flag)
     mask_width_A0_1=200/2; % half wavenumber band width [rad/m]
     mask_width_A0_2=300/2;
 else
-%     mask_width_A0_1=80; % wavenumber band width [1/m]
-%     mask_width_A0_2=80;
-    mask_width_A0_1=30; % wavenumber band width [1/m]
-    mask_width_A0_2=30; % wavenumber band width [1/m] at higher frequencies
+    mask_width_A0_1=20; % wavenumber band width [1/m]
+    mask_width_A0_2=20; % wavenumber band width [1/m] at higher frequencies
 end
-offset = 50; % offset of wavenumbers from center of A0 mode towards positive wavenumbers [1/m]
 % input for ridge picking algorithm for A0 mode extraction
 % frequency range 15-110 kHz
 f_start = 15000; % [Hz]
@@ -252,7 +249,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
 
                 set(gcf,'PaperPositionMode','auto');
                 drawnow;
-                processed_filename = [specimen_name,'_KXKYF_chirp_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_KXKYF_chirp_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
                 print([figure_output_path,processed_filename],'-dpng', '-r600'); 
         end
     end
@@ -462,7 +459,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
 
         set(gcf,'PaperPositionMode','auto');
         drawnow;
-        processed_filename = [specimen_name,'_Thickness_sensitivities']; % filename of processed .mat data
+        processed_filename = [specimen_name,'stop_Thickness_sensitivities']; % filename of processed .mat data
         print([figure_output_path,processed_filename],'-dpng', '-r600'); 
     end
     save([dataset_output_path,filesep,'thickness_sensitivities'],'thickness','thickness_sensitivities');
@@ -476,14 +473,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     mask_width = [linspace(0,mask_width_A0_1,5),linspace(mask_width_A0_1,mask_width_A0_2,length(f_vec)-5)];
       wavenumber_lower_bound = (k_A0_smooth' - 0.5*repmat(mask_width',1,length(beta)))'; 
       wavenumber_upper_bound = (k_A0_smooth' + 0.5*repmat(mask_width',1,length(beta)))';
-%       wavenumber_lower_bound = (k_A0_smooth' - 0.4*repmat(mask_width',1,length(beta)))'; 
-%       wavenumber_upper_bound = (k_A0_smooth' + 0.6*repmat(mask_width',1,length(beta)))';
-%     wavenumber_lower_bound = (k_A0_smooth' - 0.2*repmat(mask_width',1,length(beta)))'; 
-%     wavenumber_upper_bound = (k_A0_smooth' + 0.8*repmat(mask_width',1,length(beta)))';
-%     wavenumber_lower_bound = (k_A0_smooth' - 0.1*repmat(mask_width',1,length(beta)))'; 
-%     wavenumber_upper_bound = (k_A0_smooth' + 0.9*repmat(mask_width',1,length(beta)))';
-%     wavenumber_lower_bound = (k_A0_smooth' - 0.05*repmat(mask_width',1,length(beta)))'; 
-%     wavenumber_upper_bound = (k_A0_smooth' + 0.95*repmat(mask_width',1,length(beta)))';
+
      
     if(interim_figs)
         figure;
@@ -501,13 +491,13 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
             J4=(ka<=wavenumber_upper_bound(n_angle,n_freq));
             J=J3.*J4;
             ind = find(J);
-            %polar_mask_A0(n_angle,ind,n_freq) = hann(length(ind));
+            polar_mask_A0(n_angle,ind,n_freq) = hann(length(ind));
             % variant 2
-            polar_mask_A0(n_angle,ind,n_freq) = 1;
-            polar_mask_A0(n_angle,ind(end):ind(end)+offset,n_freq) = 1;
-            h41=hann(41);
-            polar_mask_A0(n_angle,ind(1):ind(1)+20,n_freq) = h41(1:21);
-            polar_mask_A0(n_angle,ind(end)+offset:ind(end)+offset+20,n_freq) = h41(21:41);
+%             polar_mask_A0(n_angle,ind,n_freq) = 1;
+%             polar_mask_A0(n_angle,ind(end):ind(end)+offset,n_freq) = 1;
+%             h41=hann(41);
+%             polar_mask_A0(n_angle,ind(1):ind(1)+20,n_freq) = h41(1:21);
+%             polar_mask_A0(n_angle,ind(end)+offset:ind(end)+offset+20,n_freq) = h41(21:41);
             clear ind;
         end
     end
@@ -574,6 +564,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     cart_mask_A0(isnan(cart_mask_A0))=0;
     cart_mask_A0(:,:,length(f_vec))=0;
     cart_mask_A0(:,:,length(f_vec)+1)=0;
+    cart_mask_A0 = 1 - cart_mask_A0;
     f_vec_mask = f_vec;
     save([dataset_output_path,filesep,'cart_mask_A0'],'cart_mask_A0','kx_vec','ky_vec','f_vec_mask','k_A0_smooth','beta','-v7.3');
     % figure;
@@ -594,7 +585,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     % maxky = 1000/(2*pi);
     maxkx = 200;
     maxky = 200;
-    maxf = 300;
+    maxf = 350;
     if(interim_figs)
         for f = 1:length(freq_list)
 
@@ -703,7 +694,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
 
             set(gcf,'PaperPositionMode','auto');
             drawnow;
-            processed_filename = [specimen_name,'_mask_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+            processed_filename = [specimen_name,'stop_mask_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
         end
     end
@@ -727,7 +718,7 @@ nFile   = length(test_case);
 success = false(1, nFile);
 for k = test_case
     filename = list{k};
-    processed_filename = [specimen_name,'_RMS_wavenumbers_selected_',filename]; 
+    processed_filename = [specimen_name,'stop_RMS_wavenumbers_selected_',filename]; 
     % check if already exist
     if(overwrite||(~overwrite && ~exist([figure_output_path,processed_filename,'.png'], 'file')))
        
@@ -775,7 +766,7 @@ for k = test_case
                 end
                 if(freq_filter)
                 % frequency mask
-                    f0=freq_list(k-1)*1e3;
+                    f0=3*freq_list(k-1)*1e3;
                     
                     [~,f0_ind]=min(abs(f0-f_vec));
                     [~,fl_ind]=min(abs(f0-fband/2-f_vec));
@@ -788,8 +779,10 @@ for k = test_case
                     
                     KXKYF_A0 = KXKYF_A0.*freq_mask;
                 end
-                
-                
+                Kmax = max(max(max(abs(KXKYF_A0))));
+                % additional threshold
+                Thresholded_ind = find(abs(KXKYF_A0)/Kmax>0.3);
+                KXKYF_A0(Thresholded_ind) = 0;
                 % inverse Fourier transform for pure A0 wavefield
                 Data = ifftn(ifftshift(KXKYF_A0),'symmetric'); % wavefield A0
                 Data = Data(1:nx,1:ny,1:nft);
@@ -810,7 +803,7 @@ for k = test_case
                 % maxky = 1000/(2*pi);
                 maxkx = 200;
                 maxky = 200;
-                maxf = 300;
+                maxf = 350;
                 xslice1 = []; yslice1 = []; zslice1 = freq_slice;
                 xslice2 = 0; yslice2 = 0; zslice2 = [];
               
@@ -915,7 +908,7 @@ for k = test_case
 
                 set(gcf,'PaperPositionMode','auto');
                 drawnow;
-                processed_filename = [specimen_name,'_KXKYF_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_KXKYF_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
                 print([figure_output_path,processed_filename],'-dpng', '-r600'); 
                 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1021,9 +1014,116 @@ for k = test_case
 
                 set(gcf,'PaperPositionMode','auto');
                 drawnow;
-                processed_filename = [specimen_name,'_KXKYF_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_KXKYF_A0_',num2str(freq_slice),'_kHz']; % filename of processed .mat data
                 print([figure_output_path,processed_filename],'-dpng', '-r600'); 
                
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                %% KX-KY-F slices with applied mask 3rd harmonic
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                if(freq_slice == 50)
+                    xslice1 = []; yslice1 = []; zslice1 = 3*freq_slice;
+                    xslice2 = 0; yslice2 = 0; zslice2 = [];
+
+                    figure;
+                    t=tiledlayout(2,1);
+                    %t.TileSpacing = 'tight';
+                    t.TileSpacing = 'none';
+                    t.Padding = 'tight';
+                    % Top plot
+                    ax1 = nexttile;
+                    h1 = slice(ax1,mkx,mky,mf,abs(KXKYF_A0(:,:,end/2+1:end)),xslice2,yslice2,zslice2);
+                    set(h1,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                    hold on;
+                    %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
+                    ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
+                    xlabel({'$k_x$ [1/m]'},'Rotation', 15,'Fontsize',10,'interpreter','latex');
+                    zlabel({'$f$ [kHz]'},'Fontsize',10,'interpreter','latex')
+                    set(gca,'Fontsize',8,'linewidth',1);
+                    set(gca,'FontName','Times');
+                    grid(ax1,'off');
+                    view(3);
+                    lightangle(ax1,-45,45)
+                    lightangle(ax1,-45,45)
+                    colormap(Cmap2);
+                    %colormap turbo;
+                    line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
+                    line([-maxkx -maxkx],[-maxky  maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                    line([-maxkx  maxkx],[ maxky  maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                    line([ maxkx  maxkx],[ maxky -maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                    line([ maxkx -maxkx],[-maxky -maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                    hold on;
+                    kx = -k_A0_smooth(round(length(beta)/2)+1,:);      
+                    plot3(kx,zeros(length(kx),1),f_vec_mask/1e3,'c:','LineWidth',0.5); 
+
+                    [~ ,beta_ind] = min(abs(beta - 270));
+                    ky = -k_A0_smooth(beta_ind,:);      
+                    plot3(zeros(length(ky),1),ky,f_vec_mask/1e3,'c:','LineWidth',0.5);
+                    xlim([-maxkx maxkx])
+                    ylim([-maxky maxky])
+                    zlim([0 maxf])
+                    box on; ax = gca; ax.BoxStyle = 'full';
+                    %view(-20,20)
+                    %view(-40,15)
+                    view(-30,50)
+                    Smax=max(max(max(abs(KXKYF_A0(3:end,3:end,end/2+10:end)))));
+                    %caxis([0 0.7*Smax]);
+                    caxis([0 0.6*Smax]);
+                    % bottom plot
+                    ax2 = nexttile;
+                    h2 = slice(ax2,mkx,mky,mf,abs(KXKYF_A0(:,:,end/2+1:end)),xslice1,yslice1,zslice1);
+                    set(h2,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+                    hold on;
+                    %ylabel({'$k_y$ [1/m]'},'Rotation',-37,'Fontsize',10,'interpreter','latex');% for 8cm figure
+                    ylabel({'$k_y$ [1/m]'},'Rotation',-38,'Fontsize',10,'interpreter','latex');% for 7.5cm figure
+                    xlabel({'$k_x$ [1/m]'},'Rotation', 15,'Fontsize',10,'interpreter','latex');
+                    zlabel({'$f$ [kHz]'},'Fontsize',10,'interpreter','latex')
+                    set(gca,'Fontsize',8,'linewidth',1);
+                    set(gca,'FontName','Times');
+                    view(3);
+
+                    colormap(Cmap2);
+                    %colormap turbo;
+                    lightangle(ax2,-45,45)
+                    lightangle(ax2,-45,45)
+                    line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
+                    line([-maxkx -maxkx],[-maxky  maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                    line([-maxkx  maxkx],[ maxky  maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                    line([ maxkx  maxkx],[ maxky -maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                    line([ maxkx -maxkx],[-maxky -maxky],[3*freq_slice,3*freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
+                     [~,f_ind]=min(abs(f_vec_mask/1e3 - freq_slice));
+                    hold on;
+                    xx = k_A0_smooth(:,f_ind).* cos(beta'*pi/180); 
+                    yy = k_A0_smooth(:,f_ind).* sin(beta'*pi/180);
+                    plot3(xx,yy,repmat(3*freq_slice,[length(xx) 1]),'c:','LineWidth',0.5); 
+                    xlim([-maxkx maxkx])
+                    ylim([-maxky maxky])
+                    zlim([3*freq_slice-0.01*3*freq_slice 3*freq_slice+0.01*3*freq_slice]);
+                    % box off; ax = gca; ax.BoxStyle = 'full';
+                    %axis on;
+                    axis off;
+                    grid(ax2,'off');
+                    %title([num2str(freq_slice),' kHz'],'Fontsize',10,'interpreter','latex');
+                    text(-maxkx,maxky,3*freq_slice+0.01*3*freq_slice,[num2str(3*freq_slice),' kHz'],'HorizontalAlignment','left','Fontsize',10,'interpreter','latex');
+                    %view(-20,20)
+                    %view(-40,50)
+                    view(-30,50)
+                    [~,I]=min(abs(3*freq_slice-f_vec/1e3));
+                    Smax=max(max(max(abs(KXKYF_A0(3:end,3:end,end/2+I)))));
+                    %caxis([0 0.7*Smax]);
+                    caxis([0 0.6*Smax]);
+                    set(gcf,'color','white');set(gca,'TickDir','out');
+                    %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+                    set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+                    %set(gcf, 'Units','centimeters', 'Position',[10 10 8 10]);
+                    set(gcf, 'Units','centimeters', 'Position',[10 10 7.5 10]);
+                    % remove unnecessary white space
+                    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+                    set(gcf,'PaperPositionMode','auto');
+                    drawnow;
+                    processed_filename = [specimen_name,'stop_KXKYF_A03_',num2str(3*freq_slice),'_kHz']; % filename of processed .mat data
+                    print([figure_output_path,processed_filename],'-dpng', '-r600');
+                end
             end
             end
             %% cylindrical coordinate  
@@ -1063,6 +1163,9 @@ for k = test_case
             % Numerical approximation of the Hilbert transform in the FFT domain:
             W = (-floor(N/2):ceil(N/2)-1)/N; % wavenumber coordinates normalized to interval -0.5:0.5
             H = ifftshift(  -1i * sign(W)  ); % sampled Fourier response
+            Amp_mask = ones(length(R),1);
+            h161=hann(161);
+            Amp_mask(1:81) = h161(1:81);
             c=0;
             for frame = selected_frames{k-1}
                 [frame]
@@ -1118,7 +1221,7 @@ for k = test_case
                 wavenumbers_by_angle_smoothed = movmean(wavenumbers_by_angle,10,1,'omitnan');
                 amplitude_by_angle_smoothed = movmean(amplitude_by_angle,3,1);
                 for n_angle=1:number_of_angles
-                    Amplitude(n_angle,:,c) = amplitude_by_angle_smoothed(n_angle,:);    
+                    Amplitude(n_angle,:,c) = amplitude_by_angle_smoothed(n_angle,:).*Amp_mask';    
                     wavenumbers(n_angle,:,c)  = wavenumbers_by_angle_smoothed(n_angle,:); 
                 end
             end
@@ -1193,6 +1296,8 @@ for k = test_case
             Mean_wavenumbers_selected = mean(wavenumbers,3,'omitnan');
             % check if we still have NaNs and replace by mean
             Mean_wavenumbers_selected(isnan(Mean_wavenumbers_selected))=mean(Mean_wavenumbers_selected,'all','omitnan');
+            % remove center of amplitude
+            
             RMS_amplitude_selected = sqrt(sum(Amplitude.^2,3))/length(selected_frames{k-1});
             Mean_amplitude_selected = mean(Amplitude,3);
             
@@ -1240,9 +1345,9 @@ for k = test_case
             set(gcf,'PaperPositionMode','auto');
             drawnow;
             if(A0mode_filter)
-                processed_filename = [specimen_name,'_RMS_wavenumbers_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_RMS_wavenumbers_selected_',filename]; % filename of processed .mat data
             else
-                processed_filename = [specimen_name,'_unfiltered_RMS_wavenumbers_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_unfiltered_RMS_wavenumbers_selected_',filename]; % filename of processed .mat data
             end
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1304,9 +1409,9 @@ for k = test_case
             set(gcf,'PaperPositionMode','auto');
             drawnow;
             if(A0mode_filter)
-                processed_filename = [specimen_name,'_Mean_wavenumbers_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_Mean_wavenumbers_selected_',filename]; % filename of processed .mat data
             else
-                processed_filename = [specimen_name,'_unfiltered_Mean_wavenumbers_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_unfiltered_Mean_wavenumbers_selected_',filename]; % filename of processed .mat data
             end
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1368,9 +1473,9 @@ for k = test_case
             set(gcf,'PaperPositionMode','auto');
             drawnow;
             if(A0mode_filter)
-                processed_filename = [specimen_name,'_Mean_wavenumbers_selected_smooth_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_Mean_wavenumbers_selected_smooth_',filename]; % filename of processed .mat data
             else
-                processed_filename = [specimen_name,'_unfiltered_Mean_wavenumbers_selected_smooth_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_unfiltered_Mean_wavenumbers_selected_smooth_',filename]; % filename of processed .mat data
             end
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1399,9 +1504,9 @@ for k = test_case
             set(gcf,'PaperPositionMode','auto');
             drawnow;
             if(A0mode_filter)
-                processed_filename = [specimen_name,'_RMS_amplitude_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_RMS_amplitude_selected_',filename]; % filename of processed .mat data
             else
-                processed_filename = [specimen_name,'_unfiltered_RMS_amplitude_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_unfiltered_RMS_amplitude_selected_',filename]; % filename of processed .mat data
             end
             print([figure_output_path,processed_filename],'-dpng', '-r600');
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1430,9 +1535,9 @@ for k = test_case
             set(gcf,'PaperPositionMode','auto');
             drawnow;
             if(A0mode_filter)
-                processed_filename = [specimen_name,'_Mean_amplitude_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_Mean_amplitude_selected_',filename]; % filename of processed .mat data
             else
-                processed_filename = [specimen_name,'_unfilteredMean_amplitude_selected_',filename]; % filename of processed .mat data
+                processed_filename = [specimen_name,'stop_unfilteredMean_amplitude_selected_',filename]; % filename of processed .mat data
             end
             print([figure_output_path,processed_filename],'-dpng', '-r600'); 
             
@@ -1487,9 +1592,38 @@ for k = test_case
 
                 set(fgh,'PaperPositionMode','auto');
                 drawnow;       
-                processed_filename = [specimen_name,'_Thickness_map_',filename]; % filename of processed .mat data     
+                processed_filename = [specimen_name,'stop_Thickness_map_',filename]; % filename of processed .mat data     
                 print([figure_output_path,processed_filename],'-dpng', '-r600');
             end
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %% RMS of A0 stop band filtered wavefield
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
+            RMS_A0stop = sqrt(sum(Data(:,:,selected_frames{k-1}).^2,3))./length(selected_frames);
+            
+            figure;
+            surf(XI,YI,RMS_A0stop);shading interp; view(2); colorbar; colormap((Cmap));       
+            Smax=max(max(RMS_A0stop));Smin=0;
+            set(gcf,'Renderer','zbuffer');
+            xlim([-0.25 0.25]);
+            ylim([-0.25, 0.25]);
+            set(gca,'Fontsize',10);
+            axis square;
+            hold on;
+            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
+            
+            set(gcf,'color','white');set(gca,'TickDir','out');
+            %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+            set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+            set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+            % remove unnecessary white space
+            set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+            set(gcf,'PaperPositionMode','auto');
+            drawnow;
+            processed_filename = ['A0stop_RMS_A0stop_',filename]; % filename of processed .mat data
+            print([figure_output_path,processed_filename],'-dpng', '-r600');
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename);
@@ -1525,7 +1659,7 @@ if(A0mode_filter)
 
     set(gcf,'PaperPositionMode','auto');
     drawnow;
-    processed_filename = [specimen_name,'_Thickness_map_avg']; % filename of processed .mat data
+    processed_filename = [specimen_name,'stop_Thickness_map_avg']; % filename of processed .mat data
     print([figure_output_path,processed_filename],'-dpng', '-r600');
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

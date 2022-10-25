@@ -16,31 +16,29 @@
 % email address: pk@imp.gda.pl 
 % Website: https://www.imp.gda.pl/en/research-centres/o4/o4z1/people/ 
 
-%L3_S4_B laminate 3, specimen 4 from AIDD project
-% plain-weave laminate, 6 teflon inserts of elliptic shape in the 
-% in stacked configuration (3 locations x 2 delaminations through thickness)
+% Laminat_7_GFRP_Tomka, 2mm thick
+
 
 clear all;close all;   warning off;clc;
 tic
 load project_paths projectroot src_path;
 %%
-specimen_name='L3_S4_B';
+specimen_name='Laminat_7_GFRP_Tomka';
 % full field measurements
-% list = {'chirp_interp','Data50','Data75','Data100','Data150'};
-list = {'chirp_interp','Data50_packet_interp','Data75_packet_interp','Data100_packet_interp'};
-freq_list =[50,75,100]; % frequency list in kHz according to files above (max 4 frequencies)
-test_case=[2:4]; % select file numbers for processing (starting from 2, chirp should be excluded)
+list = {'chirp_interp','Data50_packet_interp','Data100_packet_interp'};
+freq_list =[50,100]; % frequency list in kHz according to files above (max 4 frequencies)
+test_case=[2:3]; % select file numbers for processing (starting from 2, chirp should be excluded)
 %% Prepare output directories
 % allow overwriting existing results if true
 %overwrite=false;
 overwrite=true;
-interim_figs=false;
-A0mode_filter=false; % true - A0 pass band filter is applied, false - algorithm on unfiltered data (fast)
+interim_figs=true;
+A0mode_filter=true; % true - A0 pass band filter is applied, false - algorithm on unfiltered data (fast)
 % unfiltered means that A0 pass band filter in frequency-wavenumber domain is not applied
 % the filenames will be preceded by term: 'unfiltered_'
 % retrieve model name based on running file and folder
-freq_filter=false; % apply additional frequency band pass filter 
-fband = 20e3; % frequency band width [Hz]
+freq_filter=true; % apply additional frequency band pass filter 
+fband = 40e3; % frequency band width [Hz]
 
 currentFile = mfilename('fullpath');
 [pathstr,name,ext] = fileparts( currentFile );
@@ -86,14 +84,12 @@ yr = rCoords(2,:)';
 delam1= [xr+xCenter-0.25,yr+yCenter-0.25];
 %plot(delam1(:,1),delam1(:,2),'k:','LineWidth',0.5); axis square; xlim([0 0.5]);ylim([0 0.5]);
 %% Input for signal processing
-base_thickness = 3.9; % [mm] reference thicknes of the plate
+base_thickness = 2; % [mm] reference thicknes of the plate
 %% Processing parameters
 Nx = 512;   % number of points after interpolation in X direction
 Ny = 512;   % number of points after interpolation in Y direction
 Nmed = 3;   % median filtering window size e.g. Nmed = 2 gives 2 by 2 points window size
-%selected_frames={240:2:440,240:2:440,240:2:420,240:2:400}; % selected frames for Hilbert transform
-%selected_frames={40:2:120,80:2:300,80:2:300,240:2:400}; % selected frames for Hilbert transform
-selected_frames={40:120,80:300,80:300,240:400}; % selected frames for Hilbert transform
+selected_frames={40:140,80:300,80:260,80:260}; % selected frames for Hilbert transform
 N = 1024;% for zero padding
 
 %% input for mask
@@ -103,21 +99,21 @@ if(radians_flag)
 else
 %     mask_width_A0_1=80; % wavenumber band width [1/m]
 %     mask_width_A0_2=80;
-    mask_width_A0_1=30; % wavenumber band width [1/m]
-    mask_width_A0_2=30; % wavenumber band width [1/m] at higher frequencies
+    mask_width_A0_1=40; % wavenumber band width [1/m]
+    mask_width_A0_2=40; % wavenumber band width [1/m] at higher frequencies
 end
-offset = 50; % offset of wavenumbers from center of A0 mode towards positive wavenumbers [1/m]
+offset = 80; % offset of wavenumbers from center of A0 mode towards positive wavenumbers [1/m]
 % input for ridge picking algorithm for A0 mode extraction
 % frequency range 15-110 kHz
 f_start = 15000; % [Hz]
-f_end = 130000;  % [Hz]
+f_end = 110000;  % [Hz]
 w = 40; % weight for linear wavenumber amplification (to avoid S0 mode contribution) w~20...100
 % w = 20; %for 4mm thick CFRP
 % w = 40; % 
 %%
 % create path to the experimental raw data folder
 
-raw_data_path = ['/pkudela_odroid_laser/aidd/data/raw/exp/',specimen_name,'/'];
+raw_data_path = ['/pkudela_odroid_laser/',specimen_name,'/'];
 
 if(A0mode_filter)
 if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
@@ -146,7 +142,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% KX-KY-F slices
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %{
+    %%{
     if(interim_figs)
         if(radians_flag)   
             [mkx,mky,mf] = meshgrid(kx_vec,ky_vec,f_vec/1e3);
@@ -1475,7 +1471,7 @@ for k = test_case
                 hold on;
                 if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(4,[length(delam1),1]),'k:','LineWidth',0.5); end
                 %caxis([0 5]);   
-                caxis([Smin 5]); 
+                caxis([Smin 3]); 
                 %caxis([0 4.5e-3]); 
                 %title(['Mean amplitude']);
                 set(fgh,'color','white');set(gca,'TickDir','out');
@@ -1513,7 +1509,7 @@ if(A0mode_filter)
     hold on;
     if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(4,[length(delam1),1]),'k:','LineWidth',0.5); end
     %caxis([0 5]); 
-    caxis([Smin 5]); 
+    caxis([Smin 3]); 
     %caxis([0 4.5e-3]); 
     %title(['Mean amplitude']);
     set(gcf,'color','white');set(gca,'TickDir','out');

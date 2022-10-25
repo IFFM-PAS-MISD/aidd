@@ -76,13 +76,6 @@ delam1= [xr+xCenter-0.25,yr+yCenter-0.25];
 %% Input for signal processing
 base_thickness = 3.9; % [mm] reference thicknes of the plate
 WL = [0.5 0.5];
-%mask_thr = 5;% percentage of points removed by filter mask, should be in range 0.5 - 5 
-%mask_thr = 1;
-%mask_thr = 0.5;
-mask_thr = 0.7;
-%PLT = 0.5;% if PLT = 0 do no create plots; 0<PLT<=0.5 only ERMSF plot ;0.5<PLT<=1 - RMS plots;  1<PLT - all plots
-PLT = 0.6;
-%threshold = 0.0018; % threshold for binarization
 %% Processing parameters
 Nx = 512;   % number of points after interpolation in X direction
 Ny = 512;   % number of points after interpolation in Y direction
@@ -99,6 +92,13 @@ else
     mask_width_A0_1=200/2/(2*pi); % half wavenumber band width
     mask_width_A0_2=300/2/(2*pi);
 end
+% input for ridge picking algorithm for A0 mode extraction
+% frequency range 15-130 kHz
+f_start = 15000; % [Hz]
+f_end = 130000;  % [Hz]
+w = 20; % weight for linear wavenumber amplification (to avoid S0 mode contribution) w~20...100
+% w = 20; %for 4mm thick CFRP
+% w = 40; % 
 %%
 % create path to the experimental raw data folder
 
@@ -273,9 +273,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% ridge picking
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % frequency range 15-130 kHz
-    f_start = 15000;
-    f_end = 130000;
+    
     [~,f_start_ind] = min(abs(f_vec-f_start));
     [~,f_end_ind] = min(abs(f_vec-f_end));
     Ind = zeros(f_end_ind - f_start_ind+1,length(beta)/2);
@@ -283,7 +281,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     k_A0_smooth = zeros(length(beta),length(f_vec));
     k_A0_f_selected = zeros(length(beta)/2,f_end_ind-f_start_ind+1);
     n_outliers = round(0.1*(f_end_ind - f_start_ind+1)); % number of data points to remove
-    weighting = linspace(1,20,n2); % promote higher wavenumbers - for better extraction of A0 mode
+    weighting = linspace(1,w,n2); % promote higher wavenumbers - for better extraction of A0 mode
     
     disp('Extracting A0 mode');
     
