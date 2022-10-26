@@ -1,0 +1,397 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+%\PassOptionsToPackage{draft}{graphicx}
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}}
+%\includeonlyframes{frame1,frame2,frame3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{eso-pic} 
+\usepackage{wrapfig}
+\usepackage{animate,media9,movie15}
+\usepackage{subfig}
+
+\usepackage{multimedia}
+\usepackage[draft]{graphicx}
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+\usepackage{caption}
+
+\captionsetup[figure]{labelformat=empty}%
+\graphicspath{{figures/}}
+\usefonttheme{structurebold}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Convolutional LSTM for delamination imaging in composite laminates}
+\subtitle{MLIS 2022, Seoul, South Korea}
+
+\author{\textbf{Prof. Paweł Kudela\\ PhD candidate Abdalraheem Ijjeh }}
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery \\ 
+	Polish Academy of Sciences \\ 
+	\vspace{-1.5cm}
+	\flushright 
+	\includegraphics[width=6cm]{imp_logo.png}}
+
+
+\begin{document}
+	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame1]{Outlines}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Composite laminates}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Delamination in composite laminates}
+
+\begin{frame}{Defects of composite laminates}
+	\small		
+	Composite laminates can have different types of damage such as: \\
+	\textbf{Cracks, fibre breakage, debonding, and \textcolor{blue}{delamination}.} \\ 
+	\begin{minipage}[c]{.40\textwidth}	
+		
+		\begin{itemize}
+			\footnotesize	
+			\item Delamination is a critical failure mechanism in laminated fibre-reinforced polymer matrix composites.
+			\item Delamination is one of the most hazardous forms of the defects. 
+			It leads to very catastrophic failures if not detected at early stages.
+		\end{itemize}
+	
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.50\textwidth}
+		\subfloat{\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}}
+	\end{minipage}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Damage detection in composite laminates}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conventional approaches}
+	Conventional structural damage detection methods involve two processes:
+	\begin{itemize}
+		\item \textbf{Feature extraction}
+		\item \textbf{Feature classification}
+	\end{itemize}
+	\subfloat{\includegraphics[width=.95\textwidth]{conventional_ML.png}}
+		Drawbacks of Conventional methods:
+	\begin{itemize}
+		\item Requires a great amount of human labor and computational effort.
+		\item Demands a high amount of experience of the practitioner.
+		\item Inefficient with big data which requires a complex computation of damage features.  
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
+\begin{frame}{End-to-end approach}
+	\centering
+	\textbf{End-to-end approach} 
+	\par\medskip
+	\subfloat{\includegraphics[width=.95\textwidth]{DL_approach.png}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Computer vision}
+%\setcounter{subfigure}{0}
+%\begin{frame}{Computer vision}
+%	\begin{minipage}[c]{0.30\textwidth}
+%		Computer vision is a field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
+%	\end{minipage}
+%	\hfill
+%	\begin{minipage}[c]{0.65\textwidth}
+%		\begin{figure}
+%			\centering
+%			\includegraphics[width=1\textwidth]{computer_vision_tasks.png}
+%		\end{figure}
+%	\end{minipage}
+%\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Synthetic Dataset generation}
+\subsection{Dataset description}
+\setcounter{subfigure}{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dataset description}
+	\centering
+	\begin{minipage}[c]{0.35\textwidth}
+		\begin{itemize}
+			\justifying
+			\item 475 cases.
+			\item Delamination has a different shape, size and location for each case.
+			\item CFRP is made of 8-layers.
+			\item Delamination was modelled between the 3rd and 4th layer.			
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.6\textwidth}
+		\begin{figure}
+			\centering			
+			\subfloat[Delamination orientation \label{fig:1}]{\includegraphics[width=0.52\textwidth]{figure1.png}}\qquad
+			\subfloat[all cases overlapped \label{fig:2}]{\includegraphics[width=0.35\textwidth]{figure_overlap.png}}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+\section{Methodology}
+\subsection{Developed DL model}
+\setcounter{subfigure}{0}
+\begin{frame}{Sample frames of full wave propagation}
+	\begin{figure}
+		\begin{minipage}[l]{0.3\textwidth}
+			\normalsize
+			\begin{itemize}
+				\item The dataset is divided into training set (80\%) and testing sets (20\%).
+				\item Each case contains 512 frames.
+				\item \textcolor{blue}{Many-to-one} scheme for image segmentation is used.
+				\item 24 consecutive frames starting from the initial interaction with the damage are used for training.
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}[l]{0.65\textwidth}
+			\centering	
+			\subfloat{\includegraphics[width=.8\textwidth]{figure2.png}} \\	
+			\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,width=2cm]{32}{figures/gif_figs/7_output/flat_shell_Vz_7_500x500bottom-}{1}{512}}\qquad
+			\subfloat[Training sample of 24 frames]{\animategraphics[autoplay,loop,width=2cm]{16}{figures/gif_figs/7_output/flat_shell_Vz_7_500x500bottom-}{86}{109}}\qquad
+			\subfloat[Ground truth (label) \label{fig:5}]{\includegraphics[width=2cm]{m1_rand_single_delam_7.png}}
+		\end{minipage}
+	\end{figure}
+\end{frame}
+\setcounter{subfigure}{0}
+\begin{frame}{DL model procedure}
+	\begin{minipage}[l]{0.35\textwidth}
+		The complete procedure of obtaining intermediate predictions for
+		the test cases and finally calculating the RMS image (Damage map). \\
+		\begin{equation*}
+			RMS = \sqrt{\frac{1}{N}\sum_{k=1}^{N}\hat{Y_k}^2}.	
+			\label{RMS}
+		\end{equation*}
+	\end{minipage}
+	\begin{minipage}[l]{0.6\textwidth}
+		\begin{figure}
+			\centering
+			\subfloat{\includegraphics[width=.95\textwidth]{figure3.png}}\qquad
+		\end{figure}
+	\end{minipage}	
+\end{frame}
+\setcounterpageref{subfigure}{0}
+\begin{frame}{LSTM and ConvLSTM units}
+	\begin{minipage}[l]{0.55\textwidth}
+		\begin{itemize}
+			\item Long short-term memory unit cell (LSTM) can keep information related to long-term dependencies. 
+			\item LSTM is inefficient at capturing spatial information when the time series inputs are consecutive images.
+			\item \textcolor{blue}{ConvLSTM} is a combination of a convolution operation and an LSTM cell that was introduced to solve such a problem.. 
+			\item \textcolor{blue}{ConvLSTM} can capture the time-correlated and spatial features in a series of consecutive images.
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[l]{0.4\textwidth}
+		\begin{figure}
+			\centering
+			\subfloat[LSTM]{\includegraphics[scale=0.5]{figure4a.png}} \\
+			\subfloat[ConvLSTM]{\includegraphics[scale=0.7]{figure4b.png}}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
+\begin{frame}{Architecture of the developed ConvLSTM model}
+	\begin{minipage}[l]{0.6\textwidth}
+		Autoencoder technique (AE) is well-known for extracting spatial features.
+		AE consists of three parts: 
+		\begin{itemize}
+			\item \textcolor{blue}{(Encoder)}: learns how to reduce the input dimensions and compress the input data into an encoded representation.
+			\item \textcolor{blue}{(Bottleneck)}: is the lowest level of dimensions
+			of the input data (latent space).
+			\item \textcolor{blue}{(Decoder)}: learns how to restore the original dimensions of the input.		
+		\end{itemize}
+	 \textcolor{blue}{Time distributed layer}
+	 is introduced to the model to distribute the input frames into the AE layers in order to process them independently.
+ 	\end{minipage}
+	\begin{minipage}[l]{0.35\textwidth}
+		\begin{figure}
+			\subfloat{\includegraphics[scale=1.1]{figure5b.png}}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+\setcounter{subfigure}{0}
+\begin{frame}{Evaluation metrics for delamination identification}
+	\begin{minipage}[c]{0.45\textwidth}
+		For evaluating delamination identification
+		\begin{itemize}
+			\item Intersection over Union (IoU): %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{equation*}
+				\textup{IoU}=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y},
+				\label{eqn:iou}
+			\end{equation*}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\end{itemize}
+	\end{minipage}
+	\fill
+	\begin{minipage}[c]{0.45\textwidth}
+		\begin{figure}
+			\subfloat{\includegraphics[width=1\textwidth]{IoU_figure.png}}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+
+\section{Numerical test cases}
+\setcounter{subfigure}{0}
+\begin{frame}{First test case}
+	\begin{figure}
+		\centering
+		\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
+		\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_381.png}}\quad
+		\subfloat[Binary RMS, IoU= 0.88]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case381_.png}}\quad
+		\end{figure}	
+\end{frame}
+
+\setcounter{subfigure}{0}
+\begin{frame}{Second test case}
+	\begin{figure}
+		\centering
+			\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/385_output/output_385-}{1}{512}}\quad
+		\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_385.png}}\quad
+		\subfloat[Binary RMS, IoU= 0.58]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case385_.png}}
+	\end{figure}
+\end{frame}
+
+\setcounter{subfigure}{0}
+\begin{frame}{Third test case}
+	\begin{figure}
+		\centering
+		\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/394_output/output_394-}{1}{512}}\quad
+		\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_394.png}}\quad
+		\subfloat[Binary RMS, IoU= 0.8]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case394_.png}}
+	\end{figure}
+\end{frame}
+
+\section{Experimental test case}
+\setcounter{subfigure}{0}
+\begin{frame}{Experimental setup}
+	\begin{minipage}[t]{0.55\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=.9\textwidth]{wibrometr-laserowy-1d_small-description.png}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[t]{0.4\textwidth}
+		\begin{enumerate}
+			\item Waveform generator
+			\item Power amplifier	
+			\item Specimen
+			\item SLDV head
+			\item DAQ
+		\end{enumerate}
+	\end{minipage}
+\end{frame}
+
+\setcounter{subfigure}{0}
+\begin{frame}{Delamination arrangement}
+	\begin{minipage}[c]{0.4\textwidth}
+		\begin{itemize}
+			\item Teflon inserts with a thickness of \(250\ \mu\)m were used to simulate the delaminations.
+			\item The average thickness of the specimen was \(3.9 \pm 0.1\) mm.
+			\item The delaminations were located at the same distance, equal to \(150\) mm from the centre of the plate.
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[c]{0.55\textwidth}
+		\centering
+		\includegraphics[width=.7\textwidth]{figures/figure11.png}
+	\end{minipage}
+\end{frame}
+
+\setcounter{subfigure}{0}
+\begin{frame}{Experimental case: Specimen~III}
+		\begin{figure}
+		\centering
+		\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}\quad
+%		\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/Intermediate_specimen_3/Intermediate_specimen_3-}{0}{487}}\quad
+		\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4cm,keepaspectratio]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}\quad
+		\subfloat[Binary RMS, IoU= 0.64]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
+	\end{figure}
+\end{frame}
+
+
+\section{Conclusions}
+\begin{frame}{Conclusions}
+	\begin{itemize}
+		\item Full wavefields of elastic waves propagating in a composite laminate contain extensive, valuable, and complex information regarding the discontinuities in the plate, such as delamination or edges.
+		\item Such information can be utilised to train deep learning models
+		to perform damage identification in an {\textbf{End-to-End}} approach.
+		\item With deep learning based approaches, it is possible to use registered data in its raw form without the need to perform feature engineering, extraction, and classification.
+		\item The developed DL model requires more time during training, it can still sustain rapid and faster testing compared to conventional signal processing and machine learning methods.
+		\item The developed model shows its ability to generalise by detecting the delamination in the unseen test cases (numerical and experimental).
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setbeamercolor{palette primary}{fg=blue, bg=white}
+\begin{frame}[standout]
+	\textbf{Acknowledgment} \\ 
+	The research work was funded by the Polish National Science Center under grant agreement no. 2018/31/B/ST8/00454.
+\end{frame}
+
+\begin{frame}[standout]
+  Thank you for your listening!\\ \vspace{12pt}
+  Questions?\\ \vspace{12pt}
+  \url{pk@imp.gda.pl}\\
+  \url{aijjeh@imp.gda.pl}
+\end{frame}
+}
+\note{Thank you for listening}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
