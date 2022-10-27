@@ -56,7 +56,7 @@
 % 
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-
+\definecolor{bleudefrance}{rgb}{0.19, 0.55, 0.91}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Title page options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -76,6 +76,7 @@
 	\flushright 
 	\includegraphics[width=6cm]{imp_logo.png}}
 
+\setbeamercolor{alerted text}{fg=bleudefrance}
 
 \begin{document}
 	
@@ -98,20 +99,19 @@
 \begin{frame}{Defects of composite laminates}
 	\small		
 	Composite laminates can have different types of damage such as: \\
-	\textbf{Cracks, fibre breakage, debonding, and \textcolor{blue}{delamination}.} \\ 
-	\begin{minipage}[c]{.40\textwidth}	
-		
+	\textbf{\uncover<2->{Cracks, }\uncover<3->{fibre breakage,}\uncover<4->{debonding,}\uncover<5->{and \textcolor{blue}{delamination.}}} \\ 
+	\begin{minipage}[c]{.40\textwidth}
 		\begin{itemize}
 			\footnotesize	
-			\item Delamination is a critical failure mechanism in laminated fibre-reinforced polymer matrix composites.
+			\alt<6->{\item Delamination is a critical failure mechanism in laminated fibre-reinforced polymer matrix composites.}{\item \textcolor{gray}{Delamination is a critical failure mechanism in laminated fibre-reinforced polymer matrix composites.}}
+			\onslide<7->
 			\item Delamination is one of the most hazardous forms of the defects. 
 			It leads to very catastrophic failures if not detected at early stages.
 		\end{itemize}
-	
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{0.50\textwidth}
-		\subfloat{\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}}
+		\onslide\subfloat{\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}}
 	\end{minipage}
 \end{frame}
 
@@ -120,16 +120,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Conventional approaches}
 	Conventional structural damage detection methods involve two processes:
-	\begin{itemize}
+	\begin{itemize}[<alert@+>]
 		\item \textbf{Feature extraction}
 		\item \textbf{Feature classification}
 	\end{itemize}
 	\subfloat{\includegraphics[width=.95\textwidth]{conventional_ML.png}}
-		Drawbacks of Conventional methods:
-	\begin{itemize}
+	Drawbacks of Conventional methods:
+	\begin{itemize}[<alert@+>]
 		\item Requires a great amount of human labor and computational effort.
 		\item Demands a high amount of experience of the practitioner.
-		\item Inefficient with big data which requires a complex computation of damage features.  
+		\item Inefficient with big data which requires a complex computation of damage features.
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -165,7 +165,7 @@
 \begin{frame}{Dataset description}
 	\centering
 	\begin{minipage}[c]{0.35\textwidth}
-		\begin{itemize}
+		\begin{itemize}[<alert@+>]
 			\justifying
 			\item 475 cases.
 			\item Delamination has a different shape, size and location for each case.
@@ -190,7 +190,7 @@
 	\begin{figure}
 		\begin{minipage}[l]{0.3\textwidth}
 			\normalsize
-			\begin{itemize}
+			\begin{itemize}[<alert@+>]
 				\item The dataset is divided into training set (80\%) and testing sets (20\%).
 				\item Each case contains 512 frames.
 				\item \textcolor{blue}{Many-to-one} scheme for image segmentation is used.
@@ -226,7 +226,7 @@
 \setcounterpageref{subfigure}{0}
 \begin{frame}{LSTM and ConvLSTM units}
 	\begin{minipage}[l]{0.55\textwidth}
-		\begin{itemize}
+		\begin{itemize}[<alert@+>]
 			\item Long short-term memory unit cell (LSTM) can keep information related to long-term dependencies. 
 			\item LSTM is inefficient at capturing spatial information when the time series inputs are consecutive images.
 			\item \textcolor{blue}{ConvLSTM} is a combination of a convolution operation and an LSTM cell that was introduced to solve such a problem.. 
@@ -327,7 +327,7 @@
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.4\textwidth}
-		\begin{enumerate}
+		\begin{enumerate}[<alert@+>]
 			\item Waveform generator
 			\item Power amplifier	
 			\item Specimen
@@ -340,7 +340,7 @@
 \setcounter{subfigure}{0}
 \begin{frame}{Delamination arrangement}
 	\begin{minipage}[c]{0.4\textwidth}
-		\begin{itemize}
+		\begin{itemize}[<alert@+>]
 			\item Teflon inserts with a thickness of \(250\ \mu\)m were used to simulate the delaminations.
 			\item The average thickness of the specimen was \(3.9 \pm 0.1\) mm.
 			\item The delaminations were located at the same distance, equal to \(150\) mm from the centre of the plate.
@@ -366,7 +366,7 @@
 
 \section{Conclusions}
 \begin{frame}{Conclusions}
-	\begin{itemize}
+	\begin{itemize}[<alert@+>]
 		\item Full wavefields of elastic waves propagating in a composite laminate contain extensive, valuable, and complex information regarding the discontinuities in the plate, such as delamination or edges.
 		\item Such information can be utilised to train deep learning models
 		to perform damage identification in an {\textbf{End-to-End}} approach.
