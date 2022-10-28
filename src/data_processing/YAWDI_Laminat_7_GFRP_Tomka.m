@@ -4,7 +4,7 @@
 % Algorithms needs at least two matrices as an input:
 % 1. chirp wavefield
 % 2. wavefield pass-banded around frequency fc
-% Dimensions of matrices should be 512x512x512
+% Dimensions of matrices should be 512x512xm512
 % which corresponds to spatial dimensions (x,y) and time (t)
 % Other inputs:
 % time vector as "time" variable
@@ -22,12 +22,15 @@
 clear all;close all;   warning off;clc;
 tic
 load project_paths projectroot src_path;
-%%
+%% Input for signal processing
+base_thickness = 2; % [mm] reference thickness of the plate
 specimen_name='Laminat_7_GFRP_Tomka';
 % full field measurements
-list = {'chirp_interp','Data50_packet_interp','Data100_packet_interp'};
-freq_list =[50,100]; % frequency list in kHz according to files above (max 4 frequencies)
-test_case=[2:3]; % select file numbers for processing (starting from 2, chirp should be excluded)
+list = {'chirp_interp','Data50_packet_interp','Data75_packet_interp','Data100_packet_interp','Data200_packet_interp'};
+freq_list =[50,75,100,200]; % frequency list in kHz according to files above (max 4 frequencies)
+test_case=[2:5]; % select file numbers for processing (starting from 2, chirp should be excluded)
+amp_threshold = [0.2,0.18,0.15,0.1]; % amplitude threshold
+selected_frames={40:140,80:300,80:260,100:400}; % selected frames for Hilbert transform
 %% Prepare output directories
 % allow overwriting existing results if true
 %overwrite=false;
@@ -52,14 +55,14 @@ figure_output_path = prepare_figure_paths(modelname);
 radians_flag = false; % if true units of wanumbers [rad/m] if false [1/m]
 
 
-scaling_factor=0.5;
+scaling_factor=1;
 %% input for figures
 Cmap = jet(256); 
 Cmap2 = turbo; 
 caxis_cut = 0.8;
 fig_width =6; % figure widht in cm
 fig_height=6; % figure height in cm
-damage_outline=false;
+damage_outline=true;
 %% Damage outline - ellipse
 %    N - numer of points in adjacent grid, integer
 %    xCenter -  delamination x coordinate 
@@ -67,11 +70,12 @@ damage_outline=false;
 %    rotAngle - delamination rotation angle [0:180), Units: deg
 %    a - semi-major axis
 %    b - semi-minor axis
-rotAngle=90;
-xCenter = 0.125;
-yCenter = 0.125;
-b=2/3*0.03792835351/2;
-a=2/3*0.05689253027/2;
+% delam 1 (ellipse)
+rotAngle=0;
+xCenter = -0.125;
+yCenter = 0.001;
+b=0.02/2;
+a=0.03/2;
 alpha=rotAngle*pi/180;
 te=linspace(-pi,pi,50);
 x=a*cos(te);
@@ -81,15 +85,46 @@ R  = [cos(alpha) -sin(alpha); ...
 rCoords = R*[x ; y];   
 xr = rCoords(1,:)';      
 yr = rCoords(2,:)';     
-delam1= [xr+xCenter-0.25,yr+yCenter-0.25];
+delam1= [xr+xCenter,yr+yCenter];
+% delam 2 (circle)
+rotAngle=0;
+xCenter = 0.00245;
+yCenter = -0.125;
+b=0.02/2;
+a=0.02/2;
+alpha=rotAngle*pi/180;
+te=linspace(-pi,pi,50);
+x=a*cos(te);
+y=b*sin(te);
+R  = [cos(alpha) -sin(alpha); ...
+      sin(alpha)  cos(alpha)];
+rCoords = R*[x ; y];   
+xr = rCoords(1,:)';      
+yr = rCoords(2,:)';     
+delam2= [xr+xCenter,yr+yCenter];
+% delam 3 (square)
+a=0.02;
+b=0.02;
+xCenter = 0.126;
+yCenter = -0.0015;
+x = [xCenter-a/2;xCenter+a/2;xCenter+a/2;xCenter-a/2;xCenter-a/2];
+y = [yCenter-b/2;yCenter-b/2;yCenter+b/2;yCenter+b/2;yCenter-b/2];
+delam3=[x,y];
+% delam 4 (rectangle)
+a=0.03;
+b=0.02;
+xCenter = 0.001;
+yCenter = 0.126;
+x = [xCenter-a/2;xCenter+a/2;xCenter+a/2;xCenter-a/2;xCenter-a/2];
+y = [yCenter-b/2;yCenter-b/2;yCenter+b/2;yCenter+b/2;yCenter-b/2];
+delam4=[x,y];
 %plot(delam1(:,1),delam1(:,2),'k:','LineWidth',0.5); axis square; xlim([0 0.5]);ylim([0 0.5]);
-%% Input for signal processing
-base_thickness = 2; % [mm] reference thicknes of the plate
+
 %% Processing parameters
 Nx = 512;   % number of points after interpolation in X direction
 Ny = 512;   % number of points after interpolation in Y direction
 Nmed = 3;   % median filtering window size e.g. Nmed = 2 gives 2 by 2 points window size
-selected_frames={40:140,80:300,80:260,80:260}; % selected frames for Hilbert transform
+
 N = 1024;% for zero padding
 
 %% input for mask
@@ -127,7 +162,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     Length=WL(2);
 
     disp('Transform to wavenumber-wavenumber-frequency domain');
-    [KXKYF,kx_vec,ky_vec,f_vec] = spatial_to_wavenumber_wavefield_full(Data,Length,Width,time); % full size data (-kx:+kx,-ky:+ky,-f:+f)
+    [KXKYF,kx_vec,ky_vec,f_vec] = spatial_to_wavenumber_wavefield_full2(Data,Length,Width,time); % full size data (-kx:+kx,-ky:+ky,-f:+f)
     [m1,n1,nft1] = size(KXKYF);
     % filter 3D wavefield for mode separation (A0 mode extraction)
     [kx_grid,ky_grid]=ndgrid(kx_vec,ky_vec);
@@ -151,8 +186,10 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
         end
         % maxkx = 1000/(2*pi);
         % maxky = 1000/(2*pi);
-        maxkx = 200;
-        maxky = 200;
+%         maxkx = 200;
+%         maxky = 200;
+        maxkx = 400;
+        maxky = 400;
         maxf = 300;
  
         for f = 1:length(freq_list)
@@ -446,7 +483,7 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
         
         xlabel('h [mm]','FontSize',10,'FontName','Times New Roman');
         ylabel('k [1/m]','FontSize',10,'FontName','Times New Roman');
-        
+        ylim([0 500]);
         set(gca,'FontSize',10);
         set(gcf,'color','white');set(gca,'TickDir','out');
         %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
@@ -588,8 +625,10 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
     end
     % maxkx = 1000/(2*pi);
     % maxky = 1000/(2*pi);
-    maxkx = 200;
-    maxky = 200;
+%     maxkx = 200;
+%     maxky = 200;
+    maxkx = 400;
+    maxky = 400;
     maxf = 300;
     if(interim_figs)
         for f = 1:length(freq_list)
@@ -749,7 +788,7 @@ for k = test_case
             if(A0mode_filter)
                 disp('3D FFT filtering - A0 mode separation');
                 disp('Transform to wavenumber-wavenumber-frequency domain');
-                [KXKYF,kx_vec,ky_vec,f_vec] = spatial_to_wavenumber_wavefield_full(Data,Length,Width,time); % full size data (-kx:+kx,-ky:+ky,-f:+f)
+                [KXKYF,kx_vec,ky_vec,f_vec] = spatial_to_wavenumber_wavefield_full2(Data,Length,Width,time); % full size data (-kx:+kx,-ky:+ky,-f:+f)
                 clear Data;
                 
                 [mx,my,mf] = size(KXKYF);
@@ -760,7 +799,7 @@ for k = test_case
                     cart_mask_A0_new = zeros(mx,my,mf);
                     for i=1:mx
                         for j=1:my
-                            cart_mask_A0_new(i,j,length(f_vec)+1:end)=interp1(f_vec_mask',squeeze(cart_mask_A0(i,j,length(f_vec_mask)+1:end)),f_vec');
+                            cart_mask_A0_new(i,j,length(f_vec)+1:end)=interp1(f_vec_mask',squeeze(cart_mask_A0(i,j,length(f_vec_mask)+1:end)),f_vec','linear','extrap');
                         end
                     end           
                     cart_mask_A0_new(:,:,1:length(f_vec)) = flip(cart_mask_A0_new(:,:,length(f_vec)+1:end),3); % flip for neagative frequencies
@@ -804,8 +843,10 @@ for k = test_case
                 freq_slice = freq_list(k-1); % [kHz]
                 % maxkx = 1000/(2*pi);
                 % maxky = 1000/(2*pi);
-                maxkx = 200;
-                maxky = 200;
+%                 maxkx = 200;
+%                 maxky = 200;
+                maxkx = 400;
+                maxky = 400;
                 maxf = 300;
                 xslice1 = []; yslice1 = []; zslice1 = freq_slice;
                 xslice2 = 0; yslice2 = 0; zslice2 = [];
@@ -1068,8 +1109,8 @@ for k = test_case
                 s = zeros(number_of_angles,N);
                 s(:,1:number_of_points) = squeeze(Data_polar(:,1:number_of_points,frame)).*Windowing_mask;
                 %s(:,1:number_of_points) = squeeze(Data_polar(:,1:number_of_points,frame));
-                parfor n_angle=1:number_of_angles
- 
+                %parfor n_angle=1:number_of_angles
+                for n_angle=1:number_of_angles
                     % FFT-domain Hilbert transform of the input signal 's':
                     hilb = real(ifft(  fft(s(n_angle,:)) .* H  )); 
                     
@@ -1098,8 +1139,8 @@ for k = test_case
                     hd = diff(unwrapped_phase_flat_smooth+yfit)/dr; % first derivative
                     % insert nan for phase (wavenumbers) at zero amplitude
                     amp_norm=amp/max(amp);
-                    amp_threshold = 0.2;
-                    Inan=find(amp_norm<amp_threshold);
+                    
+                    Inan=find(amp_norm<amp_threshold(k-1));
                     if(~isempty(Inan))
                         if(Inan(end) == length(amp)) % check if we are in the range of diff which is one point shorter
                             Inan(end) = [];
@@ -1189,6 +1230,7 @@ for k = test_case
             Mean_wavenumbers_selected = mean(wavenumbers,3,'omitnan');
             % check if we still have NaNs and replace by mean
             Mean_wavenumbers_selected(isnan(Mean_wavenumbers_selected))=mean(Mean_wavenumbers_selected,'all','omitnan');
+            
             RMS_amplitude_selected = sqrt(sum(Amplitude.^2,3))/length(selected_frames{k-1});
             Mean_amplitude_selected = mean(Amplitude,3);
             
@@ -1203,7 +1245,8 @@ for k = test_case
             Data_cart=F(XI,YI);Data_cart(isnan(Data_cart))=0;
             %figure;surf(XI,YI,Data_cart);shading interp;view(2);xlim([-0.25,0.25]);ylim([-0.25 0.25]);axis square;
             %Mean_wavenumbers_selected_smooth = medfilt2(Data_cart,[16,16]);
-            Mean_wavenumbers_selected_smooth = medfilt2(Data_cart,[8,8]);
+            %Mean_wavenumbers_selected_smooth = medfilt2(Data_cart,[8,8]);
+            Mean_wavenumbers_selected_smooth = Data_cart; % no median filter
             %figure;surf(XI,YI,Mean_wavenumbers_selected_smooth);shading interp;view(2);xlim([-0.25,0.25]);ylim([-0.25 0.25]);axis square;
            
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1221,7 +1264,12 @@ for k = test_case
             set(gca,'Fontsize',10);
             axis square;
             hold on;
-            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
+            if(damage_outline) 
+                plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); 
+                plot3(delam2(:,1),delam2(:,2),repmat(Smax,[length(delam2),1]),'k:','LineWidth',0.5); 
+                plot3(delam3(:,1),delam3(:,2),repmat(Smax,[length(delam3),1]),'k:','LineWidth',0.5); 
+                plot3(delam4(:,1),delam4(:,2),repmat(Smax,[length(delam4),1]),'k:','LineWidth',0.5); 
+            end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);  
             %caxis([Smin,Smax]); 
             %caxis([0 70]); 
@@ -1285,7 +1333,12 @@ for k = test_case
 %             end
             axis square;
             hold on;
-            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
+            if(damage_outline) 
+                plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); 
+                plot3(delam2(:,1),delam2(:,2),repmat(Smax,[length(delam2),1]),'k:','LineWidth',0.5); 
+                plot3(delam3(:,1),delam3(:,2),repmat(Smax,[length(delam3),1]),'k:','LineWidth',0.5); 
+                plot3(delam4(:,1),delam4(:,2),repmat(Smax,[length(delam4),1]),'k:','LineWidth',0.5); 
+            end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);    
             %caxis([Smin,Smax]);  
             %caxis([0 500]); 
@@ -1349,7 +1402,12 @@ for k = test_case
 %             end
             axis square;
             hold on;
-            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
+            if(damage_outline) 
+                plot3(delam1(:,1),delam1(:,2),repmat(Smax,[length(delam1),1]),'k:','LineWidth',0.5); 
+                plot3(delam2(:,1),delam2(:,2),repmat(Smax,[length(delam2),1]),'k:','LineWidth',0.5); 
+                plot3(delam3(:,1),delam3(:,2),repmat(Smax,[length(delam3),1]),'k:','LineWidth',0.5); 
+                plot3(delam4(:,1),delam4(:,2),repmat(Smax,[length(delam4),1]),'k:','LineWidth',0.5);
+            end
             %caxis([caxis_cut*Smin,caxis_cut*Smax]);    
             %caxis([Smin,Smax]);  
             %caxis([0 500]); 
@@ -1382,7 +1440,12 @@ for k = test_case
             axis square;
             caxis([caxis_cut*Smin,caxis_cut*Smax]);  
             hold on;
-            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
+            if(damage_outline) 
+                plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); 
+                plot3(delam2(:,1),delam2(:,2),repmat(caxis_cut*Smax,[length(delam2),1]),'k:','LineWidth',0.5); 
+                plot3(delam3(:,1),delam3(:,2),repmat(caxis_cut*Smax,[length(delam3),1]),'k:','LineWidth',0.5); 
+                plot3(delam4(:,1),delam4(:,2),repmat(caxis_cut*Smax,[length(delam4),1]),'k:','LineWidth',0.5);
+            end
             %caxis([0 7e-4]); 
             %title(['RMS amplitude']);
             set(gcf,'color','white');set(gca,'TickDir','out');
@@ -1413,7 +1476,12 @@ for k = test_case
             axis square;
             caxis([caxis_cut*Smin,caxis_cut*Smax]); 
             hold on;
-            if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); end
+            if(damage_outline) 
+                plot3(delam1(:,1),delam1(:,2),repmat(caxis_cut*Smax,[length(delam1),1]),'k:','LineWidth',0.5); 
+                plot3(delam2(:,1),delam2(:,2),repmat(caxis_cut*Smax,[length(delam2),1]),'k:','LineWidth',0.5); 
+                plot3(delam3(:,1),delam3(:,2),repmat(caxis_cut*Smax,[length(delam3),1]),'k:','LineWidth',0.5); 
+                plot3(delam4(:,1),delam4(:,2),repmat(caxis_cut*Smax,[length(delam4),1]),'k:','LineWidth',0.5); 
+            end
             %caxis([0 4.5e-3]); 
             %title(['Mean amplitude']);
             set(gcf,'color','white');set(gca,'TickDir','out');
@@ -1449,7 +1517,7 @@ for k = test_case
                     for j=1:Nx
                         [~,I] = min(abs(phi(i,j)-beta1));
                         if(Mean_wavenumbers_selected_smooth(i,j)<min(thickness_sensitivities(I,:,k-1)))
-                            Thickness_map(i,j) = 6;
+                            Thickness_map(i,j) = 1.5*base_thickness;
                         else
 %                             [~,J] = min( abs( thickness_sensitivities(I,:,k-1)-Mean_wavenumbers_selected_smooth(i,j) ) );
 %                             Thickness_map(i,j) = thickness(J);
@@ -1469,9 +1537,15 @@ for k = test_case
                 set(gca,'Fontsize',10);
                 axis square;
                 hold on;
-                if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(4,[length(delam1),1]),'k:','LineWidth',0.5); end
+                if(damage_outline) 
+                    plot3(delam1(:,1),delam1(:,2),repmat(1.5*base_thickness,[length(delam1),1]),'k:','LineWidth',0.5); 
+                    plot3(delam2(:,1),delam2(:,2),repmat(1.5*base_thickness,[length(delam2),1]),'k:','LineWidth',0.5); 
+                    plot3(delam3(:,1),delam3(:,2),repmat(1.5*base_thickness,[length(delam3),1]),'k:','LineWidth',0.5); 
+                    plot3(delam4(:,1),delam4(:,2),repmat(1.5*base_thickness,[length(delam4),1]),'k:','LineWidth',0.5); 
+                end
                 %caxis([0 5]);   
-                caxis([Smin 3]); 
+                %caxis([Smin 3]); 
+                caxis([0.5*base_thickness 1.5*base_thickness]);
                 %caxis([0 4.5e-3]); 
                 %title(['Mean amplitude']);
                 set(fgh,'color','white');set(gca,'TickDir','out');
@@ -1484,6 +1558,39 @@ for k = test_case
                 set(fgh,'PaperPositionMode','auto');
                 drawnow;       
                 processed_filename = [specimen_name,'_Thickness_map_',filename]; % filename of processed .mat data     
+                print([figure_output_path,processed_filename],'-dpng', '-r600');
+                
+                fgh2=figure;
+                axh2 = axes('Parent',fgh2);
+                surf(XI,YI,Thickness_map);shading interp; view(2); colorbar; colormap(flipud(Cmap));       
+                Smax=max(max(Thickness_map));Smin=min(min(Thickness_map));
+                set(fgh2,'Renderer','zbuffer');
+                xlim([-0.25 0.25]);
+                ylim([-0.25, 0.25]);
+                set(gca,'Fontsize',10);
+                axis square;
+                hold on;
+                if(damage_outline) 
+                    plot3(delam1(:,1),delam1(:,2),repmat(1.1*base_thickness,[length(delam1),1]),'k:','LineWidth',0.5); 
+                    plot3(delam2(:,1),delam2(:,2),repmat(1.1*base_thickness,[length(delam2),1]),'k:','LineWidth',0.5); 
+                    plot3(delam3(:,1),delam3(:,2),repmat(1.1*base_thickness,[length(delam3),1]),'k:','LineWidth',0.5); 
+                    plot3(delam4(:,1),delam4(:,2),repmat(1.1*base_thickness,[length(delam4),1]),'k:','LineWidth',0.5); 
+                end
+                %caxis([0 5]);   
+                %caxis([Smin 3]); 
+                caxis([0.5*base_thickness 1.1*base_thickness]);
+                %caxis([0 4.5e-3]); 
+                %title(['Mean amplitude']);
+                set(fgh2,'color','white');set(gca,'TickDir','out');
+                
+                set(axh2, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+                set(fgh2, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+                % remove unnecessary white space
+                set(axh2,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+                set(fgh2,'PaperPositionMode','auto');
+                drawnow;       
+                processed_filename = [specimen_name,'_Thickness_map2_',filename]; % filename of processed .mat data     
                 print([figure_output_path,processed_filename],'-dpng', '-r600');
             end
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1507,9 +1614,15 @@ if(A0mode_filter)
     set(gca,'Fontsize',10);
     axis square;
     hold on;
-    if(damage_outline) plot3(delam1(:,1),delam1(:,2),repmat(4,[length(delam1),1]),'k:','LineWidth',0.5); end
+    if(damage_outline) 
+        plot3(delam1(:,1),delam1(:,2),repmat(1.5*base_thickness,[length(delam1),1]),'k:','LineWidth',0.5); 
+        plot3(delam2(:,1),delam2(:,2),repmat(1.5*base_thickness,[length(delam2),1]),'k:','LineWidth',0.5); 
+        plot3(delam3(:,1),delam3(:,2),repmat(1.5*base_thickness,[length(delam3),1]),'k:','LineWidth',0.5); 
+        plot3(delam4(:,1),delam4(:,2),repmat(1.5*base_thickness,[length(delam4),1]),'k:','LineWidth',0.5);
+    end
     %caxis([0 5]); 
-    caxis([Smin 3]); 
+    %caxis([Smin 3]); 
+    caxis([0.5*base_thickness 1.5*base_thickness]);
     %caxis([0 4.5e-3]); 
     %title(['Mean amplitude']);
     set(gcf,'color','white');set(gca,'TickDir','out');
@@ -1522,6 +1635,37 @@ if(A0mode_filter)
     set(gcf,'PaperPositionMode','auto');
     drawnow;
     processed_filename = [specimen_name,'_Thickness_map_avg']; % filename of processed .mat data
+    print([figure_output_path,processed_filename],'-dpng', '-r600');
+    figure;
+    surf(XI,YI,Thickness_map_avg);shading interp; view(2); colorbar; colormap(flipud(Cmap));       
+    Smax=max(max(Thickness_map_avg));Smin=min(min(Thickness_map_avg));
+    set(gcf,'Renderer','zbuffer');
+    xlim([-0.25 0.25]);
+    ylim([-0.25, 0.25]);
+    set(gca,'Fontsize',10);
+    axis square;
+    hold on;
+    if(damage_outline) 
+        plot3(delam1(:,1),delam1(:,2),repmat(1.1*base_thickness,[length(delam1),1]),'k:','LineWidth',0.5); 
+        plot3(delam2(:,1),delam2(:,2),repmat(1.1*base_thickness,[length(delam2),1]),'k:','LineWidth',0.5); 
+        plot3(delam3(:,1),delam3(:,2),repmat(1.1*base_thickness,[length(delam3),1]),'k:','LineWidth',0.5); 
+        plot3(delam4(:,1),delam4(:,2),repmat(1.1*base_thickness,[length(delam4),1]),'k:','LineWidth',0.5);
+    end
+    %caxis([0 5]); 
+    %caxis([Smin 3]); 
+    caxis([0.5*base_thickness 1.1*base_thickness]);
+    %caxis([0 4.5e-3]); 
+    %title(['Mean amplitude']);
+    set(gcf,'color','white');set(gca,'TickDir','out');
+    %set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+    set(gca, 'OuterPosition',[0 0 1. 1.]); % figure without axis and white border
+    set(gcf, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+
+    set(gcf,'PaperPositionMode','auto');
+    drawnow;
+    processed_filename = [specimen_name,'_Thickness_map_avg2']; % filename of processed .mat data
     print([figure_output_path,processed_filename],'-dpng', '-r600');
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
