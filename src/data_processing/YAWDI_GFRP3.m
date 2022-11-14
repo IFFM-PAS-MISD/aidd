@@ -760,7 +760,7 @@ for k = test_case
                     cart_mask_A0_new = zeros(mx,my,mf);
                     for i=1:mx
                         for j=1:my
-                            cart_mask_A0_new(i,j,length(f_vec)+1:end)=interp1(f_vec_mask',squeeze(cart_mask_A0(i,j,length(f_vec_mask)+1:end)),f_vec');
+                            cart_mask_A0_new(i,j,length(f_vec)+1:end)=interp1(f_vec_mask',squeeze(cart_mask_A0(i,j,length(f_vec_mask)+1:end)),f_vec','linear','extrap');
                         end
                     end           
                     cart_mask_A0_new(:,:,1:length(f_vec)) = flip(cart_mask_A0_new(:,:,length(f_vec)+1:end),3); % flip for neagative frequencies

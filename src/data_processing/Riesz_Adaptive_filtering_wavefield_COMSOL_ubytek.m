@@ -17,7 +17,7 @@ figure_output_path = prepare_figure_paths(modelname);
 %image_label_path=fullfile(projectroot,'data','interim','exp',filesep);
 image_label_path='/pkudela_odroid_sensors/aidd/data/interim/exp/new_exp/';
 
-test_case=[4]; % select file numbers for processing
+test_case=[2,5]; % select file numbers for processing
 
 %% input for figures
 Cmap = jet(256); 
@@ -38,7 +38,8 @@ PLT = 0.6;
 Nx = 500;   % number of points after interpolation in X direction
 Ny = 500;   % number of points after interpolation in Y direction
 Nmed = 3;   % median filtering window size e.g. Nmed = 2 gives 2 by 2 points window size
-selected_frames=200:275; % selected frames for Riesz transform
+%selected_frames=200:275; % selected frames for Riesz transform
+selected_frames=200; % selected frames for Riesz transform
 %selected_frames=288:512; % selected frames for Riesz transform
 %%
 % create path to the experimental raw data folder
@@ -80,6 +81,38 @@ for k = test_case
             %% Adaptive filtering
             [FilterMask,RMSF,ERMSF,WRMSF] = AdaptiveFilteringMask(Data,time,WL,mask_thr,PLT);
              ReverseFilterMask = -1*(FilterMask - 1);
+             M=nx;N=ny;
+             [W1grid,W2grid] = ndgrid(  (-floor(M/2):ceil(M/2)-1)/M  ,...
+                   (-floor(N/2):ceil(N/2)-1)/N  );
+
+            % ----------------------------------------------------------------- %
+            % Isotropic linear-phase band-pass 2d filter in the FFT domain.
+            % ----------------------------------------------------------------- %
+
+            % Define 4 frequency bounds:
+            tmp = 2*pi/min(M,N); % amount of radians for one Fourier discrete coordinate
+            % a1 = 1.4*tmp;  % Gain=0 in freqs [0;a1]
+            % a2 = 8.0*tmp;  % Gain rises from freqs   a1 to a2
+            % a3 = 16*tmp;   % Gain=1 from frequencies a2 to a3
+            % a4 = 32*tmp;   % Gain falls from 1 to 0 in freqs [a3;a4]
+            a1 =  1*tmp;  % Gain=0 in freqs [0;a1]
+            a2 =  8.8*tmp;  % Gain rises from freqs   a1 to a2
+            a3 = 512*tmp;   % Gain=1 from frequencies a2 to a3
+            a4 = 512*tmp;   % Gain falls from 1 to 0 in freqs [a3;a4]
+            % The frequency response is 0 in [0;a1], rises in [a1,a2] up to 1 in [a2;a3]
+            %                                 and falls in [a3;a4] down to 0 in [a4;Inf]
+            % Radial frequency coordinate (in radians):
+            RHO  = ifftshift(  2*pi*sqrt( W1grid.^2 + W2grid.^2 )  );
+            mask = RHO; % init frequency response
+            mask(RHO<=a1) = 0;
+            idx = RHO>a1 & RHO<a2;
+            mask(idx) = 0.5 + 0.5*sin(  -(pi/2) + pi*(RHO(idx)-a1)/(a2-a1)  );
+            mask(RHO>=a2 & RHO<=a3) = 1;
+            idx = RHO>a3 & RHO<a4;
+            mask(idx) = sin(  (pi/2)*(  1  -  (RHO(idx)-a3)/(a4-a3)  )  );
+            mask(RHO>=a4) = 0;
+            mask=fftshift(mask);
+            
             %% Median filtering
 %             if Nmed > 1      
 %                  for frame = 1:nft
@@ -147,11 +180,12 @@ for k = test_case
             
             %SP = fft2(squeeze(Data(:,:,frame))); % input image FFT
             SP = fftshift(fft2(squeeze(Data(:,:,frame)))); % input image FFT
-            %prim = real(ifft2( SP .* mask )); % bandpass filtering
-            %prim = real(ifft2( SP )); %
-            prim = Data(:,:,frame);
+            prim = real(ifft2( ifftshift(SP .* mask ))); % bandpass filtering
+            %prim = real(ifft2( ifftshift( SP))); % bandpass filtering
+           
+            %prim = Data(:,:,frame);
             %riz = ifft2( SP .* RZ ); % Riesz transform
-            riz = ifft2(ifftshift( SP .* RZ )); % Riesz transform
+            riz = ifft2(ifftshift( SP .*mask.* imag(RZ) )); % Riesz transform
 
             riz1 = real(riz);  % Riesz x-component
             riz2 = imag(riz);  % Riesz y-component
@@ -162,7 +196,9 @@ for k = test_case
             %amp2 = sqrt(prim.^2+riz1.^2+riz2.^2); % another definition for amplitude (the same results)
             
             %phz = angle(prim + 1i*rizN);
-            phz = angle(prim + rizN);
+            phz = angle(prim + 1i*sign(riz1)*rizN);
+            h = abs(phz);
+            h(h>pi/2)=pi-h(h>pi/2);
             phz2 = -sign(riz1).*atan2(rizN,prim);
 
             % rescale to [-pi:pi];
@@ -179,6 +215,8 @@ for k = test_case
             % phase unwrap
             %res_img = unwrap_phase(phz_scaled);
             res_img = unwrap_phase(2*phz-pi);
+            res_img = unwrap_phase(4*h);
+            res_img = unwrap_phase(abs(phz));
             res_img2 = unwrap_phase(phz2);
             % ----------------------------------------------------------------- %
             % Generate illustrations of the result.
@@ -196,7 +234,8 @@ for k = test_case
 %             surf(sqrt(px.^2+py.^2));shading interp;axis square;view(2);
 %             figure;
 %             imshow(  1-amp/max(amp(:))  );
-               surf(amp);shading interp;  axis square;view(2);drawnow;
+               %surf(amp);shading interp;  axis square;view(2);drawnow;
+               surf(phz);shading interp;  axis square;view(2);drawnow;
                
                A=A+amp.^2;
                A1 = A1.*amp;
@@ -215,7 +254,7 @@ for k = test_case
 %             surf(sqrt(px.^2+py.^2));shading interp;axis square;view(2);
 %[FilterMask2,RMSF2,ERMSF2,WRMSF2] = AdaptiveReverseFilteringMask(A_all,time(selected_frames),WL,mask_thr,PLT);
            
- 
+ return;
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Adaptive filtering mask + Riesz
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -459,4 +498,4 @@ for k = test_case
 end
 
 
-
+  

@@ -250,8 +250,8 @@ if(~exist([dataset_output_path,filesep,'cart_mask_A0.mat'], 'file'))
                 
                 colormap(Cmap2);
                 %colormap turbo;
-                lightangle(ax2,-45,45)
-                lightangle(ax2,-45,45)
+%                 lightangle(ax2,-45,45)
+%                 lightangle(ax2,-45,45)
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
                 line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
                 line([-maxkx  maxkx],[ maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
@@ -911,8 +911,8 @@ for k = test_case
                 
                 colormap(Cmap2);
                 %colormap turbo;
-                lightangle(ax2,-45,45)
-                lightangle(ax2,-45,45)
+%                 lightangle(ax2,-45,45)
+%                 lightangle(ax2,-45,45)
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
                 line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
                 line([-maxkx  maxkx],[ maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
@@ -1020,8 +1020,8 @@ for k = test_case
                 
                 colormap(Cmap2);
                 %colormap turbo;
-                lightangle(ax2,-45,45)
-                lightangle(ax2,-45,45)
+%                 lightangle(ax2,-45,45)
+%                 lightangle(ax2,-45,45)
                 line([0,0],[0,0],[0,max(f_vec)],'Color','y','LineWidth',1);
                 line([-maxkx -maxkx],[-maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
                 line([-maxkx  maxkx],[ maxky  maxky],[freq_slice,freq_slice],'Color','r','LineWidth',1,'LineStyle','--');
