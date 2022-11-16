@@ -1,0 +1,89 @@
+\documentclass[11pt,a2paper]{report}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{dirtytalk}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
+%% my added packages
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+\usepackage{geometry}
+%\usepackage{showframe} %This line can be used to clearly show the new margins
+
+\newgeometry{vmargin={25mm}, hmargin={30mm,30mm}}
+%\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
+%\usepackage{breqn}
+\usepackage{multirow}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\graphicspath{{figures/}}
+
+\begin{document}
+	
+	\noindent I appreciate the time and effort that Prof. Luca De Marchi has dedicated to providing valuable feedback on my PhD thesis. 
+	I would like to thank Prof. Luca De Marchi for his constructive comments, which will help me to improve my PhD defence presentation. 
+
+	\noindent Here is a point-by-point response to the reviewer’s comments and concerns.
+	\\ \\
+	\textbf{Minor recommendations}: \\
+	\textcolor{Cyan}{
+		\newline\textbf{Response:}
+	First of all I would like to thank Prof. Luca De Marchi for his positive feedback regarding my PhD thesis.
+	}
+	\begin{enumerate}
+		\item In the Table of Contents, the title of Chapter 2 has to be corrected
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			\\
+			Thank your for pointing this out. \\
+			The word \enquote{art} was missed from the chapter title. The corrected title is \enquote{State of the art for SHM}
+			}				
+		\item In Section 3.2.3, I suggest to check this sentence “the future events are also used to
+		predict the output”. I suppose that the correct sentence should be “the past events are
+		also used to predict the output”.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:\\}
+			Thank you for pointing this out. \\
+			What I would like to say is that a feedforward neural network assumes that the inputs and the outputs are independent of each other, so there is no feedback from the outputs to the inputs.
+			However, this is not the case with recurrent neural networks (RNNs) \emph{(the many-to-one approach was utilised specifically for this work, in which the inputs are frames of full wavefield that are spatially and temporally correlated)}, in which the outputs of RNNs depend not only on the prior events within the sequence but also on the future events, which can be beneficial in predicting the output of a given sequence.
+		}
+		
+		\item Please clarify if the specimens used in the multiple delamination experiments (page 94)
+		are different with respect to the ones used in the other experiments and in the simulations (16 vs 8 layers?).
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			Thank you for your constructive comment. \\
+			The specimen used in the single delamination experiment is a CFRP plate consisting of 16 layers of plain weave fabric (GG204P-IMP503 prepregs) of areal density \(204\frac{g}{m^2}\), and the average thickness was \(3.5\) mm.
+			The CFRP specimens used in the multiple delamination experiments consist of 16 layers of plain weave fabric (GG205P-IMP503Z-HT prepregs)of areal density \(205\frac{g}{m^2}\), with an average thickness of \(3.9 \pm 0.1\) mm. 
+			The average thickness of the specimen of a single delamination is slightly smaller than the average thickness of the specimen of multiple delaminations due to the differences in areal densities for each one (\(204\frac{g}{m^2}\) and \(205\frac{g}{m^2}\), respectively).
+			In the synthetically generated dataset, it was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm.
+			For the synthetically generated dataset, it was assumed that the composite laminate has eight layers with a total thickness of 3.9 mm and a stacking sequence of \([0/90]_4\).		
+			\\ \\	
+			It is important to note that the shortest wavelengths of \(A_0\) Lamb wave mode in the numerical and experimental cases are approximately similar (\(21.2\) mm for numerical simulations and \(19.5\) mm for experimental measurements), which results in similar behaviour of the propagating guided waves.
+			It could be concluded that the predicted outputs for the numerical (8 layers CFRP) and experimental cases (16 layers CFRP) proves that the developed deep learning models can generalise on previously unseen data (specimens of single and multiple delaminations) and identify the delaminations with reasonable accuracies.
+		}	
+		
+		\item In Section 6.2, I suspect that there are missing words ([xxx]) in this sentence: “Another
+		issue that can be investigated is [xxx] when recovering an HR frame […]
+		
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			 Thank you for your constructive comment. \\
+			 The sentence is:\\
+			 \enquote{Another issue that can be further explored and investigated is when recovering an HR frame from an LR frame acquired with a very compressed number of scanning points(below Nyquist sampling rate).}
+			 \\
+			 I would like to say that in my present work for recovering the HR frames of the full wavefield the compression ratio (CR) was $19.2\%$, and the generated LR frames have size of \((32\times32)\) points, which is below the Nyquist sampling rate of a 2D frame.
+			 Accordingly, this work can be further investigated by enhancing the DLSR model to recover HR frames from LR frames with more compressed data points ($CR<19.2\%$) of the Nyquist sampling rate, and the LR frames of size \((n\times n)\) points, where \(n <32\) pixels.
+		 }
+		\end{enumerate}
+\end{document}
