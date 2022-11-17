@@ -47,7 +47,9 @@
 			\textbf{Response:}
 			\\
 			Thank you for your constructive comment.
-			\\		
+			\\
+			During the writing phase of the dissertation, I thought about adding a list of abbreviations.
+			However, I believed that the nomenclature section was superfluous because there aren't many equations.
 		}
 		\item Note regarding the sentence on page 46; "Accordingly, to obtain satisfactory results, I used the trial and error approach to tune the hyperparameters of the developed models." 
 		Since the selection of hyperparameters is sometimes critical to the results' quality, it would be good to expand on this information.		
@@ -71,7 +73,9 @@
 		\textcolor{Cyan}{
 			\textbf{Response:}\\
 			Thank you for your constructive comment. \\
-			Rule of mixture and homogenization
+			CFRP parameters assumed for numerical modelling were established by the homogenization method and the rule of mixtures. 
+			The volume fraction of reinforcing fibres was adjusted so that numerically calculated waveform patterns were similar to the experimental data.
+			Nevertheless, some discrepancies still remained: the wavelengths were 21.2 mm and 19.5 mm for the numerical model and SLDV measurements, respectively
 			}	
 		
 		\item Page 47, please explain why it was decided to assume that delamination occurs only between the third and fourth layers and is not distributed randomly between them.
@@ -93,6 +97,14 @@
 		\textcolor{Cyan}{
 			\textbf{Response:} \\
 			Thank you for your constructive comment. \\
+			Yes there is a typo in the equation, it is \(k=1\) not \(k-1\).
+			Below is the correct formula:
+			%%%%%%%%%%%%%%%
+			\begin{equation}
+				\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2}, 
+				\label{eqn:rms} 
+			\end{equation}
+			%%%%%%%%%%%%%%%
 		}		
 	
 		\item Note to 4.2.1, regarding the division of data into teaching and testing sets. 
@@ -133,6 +145,7 @@
 		\textcolor{Cyan}{
 			\textbf{Response:} \\
 			Thank you for your constructive comment. \\
+			When evaluating the developed DL models on experimentally acquired data that had noise, they showed their capability to generalise, and they were able to detect and identify the delamination.	
 		}
 		
 		\item Question regarding paragraph 4.5.1 Please explain how frame f1 is
@@ -145,10 +158,10 @@
 			The total time of propagation was converted into \(512\) frames of animated Lamb waves.
 %			Accordingly, the required time for each frame equals to \(\frac{0.75ms}{512}\) which is about \(1.465\times 10^-4\) s.
 			The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
-			The (x, y) coordinates of the center of the delaminations are known for the numerically generated dataset.
+			The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset.
 			Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
-			As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagated wave to reach the center of the delamination. 
-			When we know the time of interaction \(t_i\) with the delamination, we can approximately convert it to the frame number \(f_n\) as depicted in the below equations:		
+			As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
+			When we know the time of interaction \(t_i\) with the delamination, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
 				\begin{gather*}
 					t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
 					\\
