@@ -2,7 +2,7 @@
 %\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
 \documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
 %\graphicspath{{../../figures/}}
-\graphicspath{{figures/}}
+\graphicspath{{figures/}{figures/figs/longitudinal-wave-png/}}}
 %\includeonlyframes{frame1,frame2,frame3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -280,57 +280,202 @@
 \section{SHM/NDE}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Structural Health Monitoring (SHM)}
-	\subfloat{\includegraphics[width=.95\textwidth]{SHM_system.png}}
+	\begin{figure}
+		\subfloat{\includegraphics[width=.9\textwidth]{SHM_system.png}}
+	\end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{Non Destructive Evaluations (NDEs)}
-	\begin{minipage}[c]{0.3\textwidth}
-		\textbf{Visual inspections, eddy current, dye penetration, acrostic emission, \colorbox{yellow}{\textcolor{blue}{ultrasonic testing}} \& \textcolor{blue}{guided wave testing}.}
+	\begin{minipage}[c]{0.32\textwidth}
+	\textbf{Visual inspections, eddy current, dye penetration, acrostic emission, \colorbox{yellow}{\textcolor{blue}{ultrasonic testing}} (Local NDEs) \& \textcolor{blue}{guided wave testing}(Global NDEs).}
 	\end{minipage}
-	\hfill
-	\begin{minipage}[c]{0.3\textwidth}
-		\subfloat{\includegraphics[width=.97\textwidth]{local_ultrasonic.png}}
-	\end{minipage}	
-	\hfill
-	\begin{minipage}[c]{0.35\textwidth}
+	\only<2->{
+	\begin{minipage}[c]{0.33\textwidth}
+		\subfloat{\includegraphics[width=0.95\textwidth]{local_ultrasonic.png}}	
+	\end{minipage}}
+	\only<3->{
+	\begin{minipage}[c]{0.32\textwidth}
 		\begin{itemize}
 			\item Labor intensive
 			\item Time consuming
 			\item Need professional and experienced personnel
 			\item May require the disassembly of complex structures
 		\end{itemize}
-	Local NDEs are not practical and do not fit for SHM
-	\end{minipage}
+	\only<4->{
+	\textcolor{red}{Local NDEs are not practical and do not fit for SHM}}
+	\end{minipage}}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Guided waves}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ultrasonic testing vs guided wave testing}
-	\begin{itemize}
-		\item \textcolor{red}{Bulk waves} exist in infinite homogeneous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
-		These waves can be decomposed into infinite plane waves propagating along arbitrary direction within the solid. 
-		\item \textcolor{red}{Guided waves} are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
-	\end{itemize}
-	\begin{minipage}[c]{.45\textwidth}
-		\textbf{Ultrasonic waves}
-		\begin{itemize}
-			\item Frequency range: 2~MHz - 200~MHz
-			\item Wavelength \(\lambda<<h\ thickness\)
-			\item shorter wavelengths
-		\end{itemize}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[c]{.48\textwidth}
-		\textbf{Guided waves}
-		\begin{itemize}
-			\item Typical frequency range: 10~kHz - 1~MHz
-			\item Wavelength \(\lambda>>h\ thickness\)
-			\item longer wavelengths
-		\end{itemize}
-	\end{minipage}		
+	\alert{Bulk waves} exist in infinite homogenous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
+	These waves can be decomposed into infinite plane waves propagating along arbitrary direction within the solid.
+	
+	\alert{Guided waves} are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
+	\vspace{5mm}
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\textbf{Ultrasonic waves}	
+			\begin{itemize}
+				\item Frequency range: 2 MHz - 200 MHz
+				\item Wavelength \(\lambda << h\) thickness 
+				\item shorter wavelengths
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\textbf{Guided waves}	
+			\begin{itemize}
+				\item Typical frequency range: 10 kHz - 1 MHz
+				\item Wavelength \(\lambda > h\) thickness 
+				\item longer wavelengths
+			\end{itemize}
+		\end{column}
+	\end{columns}			
 \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Elastic wave propagation types depending on particle motion:
+	\begin{itemize}
+		\item  \alert{The longitudinal wave} is a compressional wave in which the particle motion is in the same direction as the propagation of the wave
+		\item \alert{The shear wave} is a wave motion in which the particle motion is perpendicular to the direction of the propagation
+		\item \alert{Surface (Rayleigh) waves} have an elliptical particle motion and travel across the surface of a material. Their velocity is approximately 90\% of the shear wave velocity of the material and their depth of penetration is approximately equal to one
+		wavelength
+		\item \alert{Plate (Lamb) waves} have a complex vibration occurring in materials where thickness is less than the wavelength of elastic wave introduced into it.
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\animategraphics[controls,autoplay,loop,width=0.5\textwidth]{5}{figs/longitudinal-wave-png/frame}{1}{74}
+		\caption{\alert{Longitudinal wave}  - plane pressure pulse wave (source: wikipedia)}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{figs/Fig_1_1.jpg}
+		\caption{\alert{Shear horizontal wave} }
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{figs/Fig_1_3.jpg}
+		\caption{\alert{Rayleigh waves} }
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Waves used in non-destructive testing}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{figs/Fig_1_4.jpg}
+		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love }
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+\subsection{Lamb waves}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lamb waves}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Lamb waves}	
+		Lamb waves are plane waves propagating in thin plates.\\
+		Shear vertical waves in conjunction with longitudinal P waves interacts with plate surfaces resulting in complex wave mechanism which leads to creation of Lamb waves.
+	\end{alertblock}
+	Horace Lamb discovered these type of waves in 1917.
+	He derived theory and dispersion relations.
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\centering
+			symmetric modes
+			\begin{equation*}
+				\frac{\tan(q h)}{\tan(p h)} = -\frac{4 k^2 p q}{\left(q^2 - k^2\right)^2}
+			\end{equation*}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\centering
+			antisymmetric modes
+			\begin{equation*}
+				\frac{\tan(q h)}{\tan(p h)} = -\frac{\left(q^2 - k^2\right)^2}{4 k^2 p q}
+			\end{equation*}
+		\end{column}
+	\end{columns}
+	
+	\centering
+	\(q=q(\omega,k), \quad p=p(\omega,k) \)
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lamb waves modes}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.9\textwidth]{figs/Fig_1_5.jpg}
+				\caption{Fundamental symmetric, S0, \alert{Lamb wave} mode }	
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.9\textwidth]{figs/Fig_1_6.jpg}
+				\caption{Fundamental antisymmetric, A0, \alert{Lamb wave} mode }
+			\end{figure}
+		\end{column}
+		\only<2->{
+		\begin{column}{0.37\textwidth}
+			\begin{itemize}
+				\item Travel within guides for long distances
+				\item Can propagate in complex structures
+				\item High speeds in metals and composites
+				\item can be automated using software
+			\end{itemize}
+		\only<3->{
+		\textcolor{green}{Lamb waves are a promising global NDE solution for SHM}}
+		\end{column}
+	}
+	\end{columns}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Dispersion curves of Lamb waves}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure}
+		\only<1>{
+			\includegraphics[width=0.8\textwidth]{/figs/Fig_1_12.png}	
+		}
+		\only<2>{
+			\includegraphics[width=0.8\textwidth]{/figs/Fig_1_13.png}	
+		}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+	
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Issues with conventional NDT approaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Conventional approaches}
@@ -339,8 +484,10 @@
 		\item \textbf{Feature extraction}
 		\item \textbf{Feature classification}
 	\end{itemize}
-	\subfloat{\includegraphics[width=.95\textwidth]{conventional_ML.png}}
-		Drawbacks of Conventional methods:
+	\begin{figure}
+		\subfloat{\includegraphics[width=.95\textwidth]{conventional_ML.png}}
+	\end{figure}	
+	Drawbacks of Conventional methods:
 	\begin{itemize}
 		\item Requires a great amount of human labor and computational effort.
 		\item Demands a high amount of experience of the practitioner.
@@ -360,7 +507,10 @@
 		\end{itemize}
 	\end{minipage}
 	\hfill
-	\begin{minipage}[c]{.65\textwidth}		\subfloat{\includegraphics[width=.9\textwidth]{compsite_laminates.png}}	
+	\begin{minipage}[c]{.65\textwidth}
+		\begin{figure}
+			\subfloat{\includegraphics[width=.9\textwidth]{compsite_laminates.png}}	
+		\end{figure}				
 	\end{minipage}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -401,7 +551,9 @@
 	\end{minipage}
 	\hfill
 	\begin{minipage}[c]{0.50\textwidth}
-		\subfloat{\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}}
+		\begin{figure}
+			\subfloat{\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}}
+		\end{figure}
 	\end{minipage}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -454,7 +606,7 @@
 	\begin{minipage}[c]{0.55\textwidth}
 		\begin{figure}
 			\centering
-			\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{10}{figures/gif_figs/gpu/gpu_-}{0}{34}}
+			\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{10}{gif_figs/gpu/gpu_-}{0}{34}}
 		\end{figure}
 	\tiny
 	(source: https://www.techbooky.com/)
@@ -696,10 +848,10 @@ The RMS is defined as:
 			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\end{itemize}
 	\end{minipage}
-\fill
+	\fill
 	\begin{minipage}[c]{0.45\textwidth}
 		\begin{figure}
-			\subfloat{\includegraphics[width=1\textwidth]{IoU_figure.png}}
+			\subfloat{\includegraphics[width=1.0\textwidth]{IoU_figure.png}}
 		\end{figure}
 	\end{minipage}
 \end{frame}
