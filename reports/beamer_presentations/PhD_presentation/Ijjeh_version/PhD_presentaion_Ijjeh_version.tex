@@ -23,8 +23,10 @@
 \usepackage{wrapfig}
 \usepackage{animate,media9,movie15}
 \usepackage{subfig}
-
+\usepackage{fancybox}
 \usepackage{multimedia}
+\usepackage{dashbox}
+\usepackage{tcolorbox}
 %\usepackage{FiraSans}
 
 %\usepackage{comment}
@@ -276,6 +278,74 @@
 	In the third section, the objectives of the project will be presented. \\
 	Then I will talk about the Dataset generation in the fourth section. \\
 	Finally, in the last section, I am going to talk about deep learning techniques for delamination identification.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Composite laminates}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Composite laminates}
+\begin{frame}{What are Composite Laminates?}
+	\begin{minipage}[c]{.3\textwidth}
+		\small
+		\begin{itemize}
+			%			\item Composite laminates are usually composed of plies with different directions.
+			\item A \textcolor{blue}{ply} is made up of unidirectional continuous \textcolor{blue}{Fibres} held together by a \textcolor{blue}{Polymer matrix such as Epoxy resin} .			
+			\item The lay-up of the plies depends on the anticipated loading of the structure where the laminate will be used.
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{.65\textwidth}
+		\begin{figure}
+			\subfloat{\includegraphics[width=.95\textwidth]{compsite_laminates.png}}	
+		\end{figure}				
+	\end{minipage}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Advantages \& applications}
+	\begin{minipage}[c]{.45\textwidth}
+		Some of the favorable characteristics of utilising composite laminates:
+		\begin{itemize}
+			\only<2->{\item \alert{High impact damage resistance}}
+			\only<3->{\item \alert{Light weight}}
+			\only<4->{\item \alert{High strength-to-weight ratio}}
+			\only<5->{\item \alert{Low density}}
+			\only<6->{\item \alert{resistance to fatigue and corrosion}}			
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\only<7->{
+	\begin{minipage}[c]{.45\textwidth}
+		Some applications of Composite laminates:
+		\begin{itemize}
+			\item \alert{Aerospace structures}
+			\item \alert{Automotive}
+			\item \alert{Wind turbines}
+			\item \alert{Pipes and tanks}
+		\end{itemize}
+	\end{minipage}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Defects in composite laminates}
+	\small
+	Composite laminates can have different types of damage such as: \\
+	\textbf{Cracks, fibre breakage, debonding, and \textcolor{blue}{delamination}.} \\ 
+	\begin{minipage}[c]{.40\textwidth}
+		\begin{itemize}
+			\footnotesize
+			\item Delamination is a critical failure mechanism in laminated fibre-reinforced polymer matrix composites.
+			\item Delamination is one of the most hazardous forms of the defects. 
+			It leads to very catastrophic failures if not detected at early stages.
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{0.50\textwidth}
+		\begin{figure}
+			\subfloat{\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{SHM/NDE}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -288,7 +358,8 @@
 
 \begin{frame}{Non Destructive Evaluations (NDEs)}
 	\begin{minipage}[c]{0.32\textwidth}
-	\textbf{Visual inspections, eddy current, dye penetration, acrostic emission, \colorbox{yellow}{\textcolor{blue}{ultrasonic testing}} (Local NDEs) \& \textcolor{blue}{guided wave testing}(Global NDEs).}
+	\textbf{Visual inspections, eddy current, dye penetration, acrostic emission,\colorbox{yellow}{\textcolor{blue}{ultrasonic testing}} \colorbox{yellow}{\textcolor{blue}{(local NDEs)}} \& \textcolor{blue}{guided wave testing (global NDEs)}}.
+				
 	\end{minipage}
 	\only<2->{
 	\begin{minipage}[c]{0.33\textwidth}
@@ -444,12 +515,12 @@
 		\only<2->{
 		\begin{column}{0.37\textwidth}
 			\begin{itemize}
-				\item Travel within guides for long distances
-				\item Can propagate in complex structures
-				\item High speeds in metals and composites
-				\item can be automated using software
+				\only<2->{\item Travel within guides for long distances}
+				\only<3->{\item Can propagate in complex structures}
+				\only<4->{\item High speeds in metals and composites}
+				\only<5->{\item can be automated using software}				
 			\end{itemize}
-		\only<3->{
+		\only<6->{
 		\textcolor{green}{Lamb waves are a promising global NDE solution for SHM}}
 		\end{column}
 	}
@@ -476,90 +547,39 @@
 	
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Issues with conventional NDT approaches}
+\section{Damage detection approaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Conventional approaches}
 	Conventional structural damage detection methods involve two processes:
 	\begin{itemize}
-		\item \textbf{Feature extraction}
-		\item \textbf{Feature classification}
+		\item \alert{\textbf{Feature extraction}} \(\rightarrow\) includes signals preprocessing (signal denoising and averaging), then extracting \textbf{damage indexes (DIs)}.
+		\item \alert{\textbf{Feature classification}}.
 	\end{itemize}
 	\begin{figure}
-		\subfloat{\includegraphics[width=.95\textwidth]{conventional_ML.png}}
+		\subfloat{\includegraphics[width=.8\textwidth]{conventional_ML.png}}
 	\end{figure}	
-	Drawbacks of Conventional methods:
+	\textbf{Drawbacks of Conventional methods:}
 	\begin{itemize}
-		\item Requires a great amount of human labor and computational effort.
-		\item Demands a high amount of experience of the practitioner.
-		\item Inefficient with big data which requires a complex computation of damage features. 
+		\item \alert<2>{Requires a great amount of human labor and computational effort.}
+		\item \alert<3>{Demands a high amount of experience of the practitioner.}
+		\item \alert<4>{Inefficient with big data which requires a complex computation of damage features.} 
 		\end{itemize}
 \end{frame}
-\section{Composite laminates}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Composite laminates}
-\begin{frame}{What are Composite Laminates?}
-	\begin{minipage}[c]{.3\textwidth}
-		\small
-		\begin{itemize}
-			%			\item Composite laminates are usually composed of plies with different directions.
-			\item A \textcolor{blue}{ply} is made up of unidirectional continuous \textcolor{blue}{Fibres} held together by a \textcolor{blue}{Polymer matrix such as Epoxy resin} .			
-			\item The lay-up of the plies depends on the anticipated loading of the structure where the laminate will be used.
-		\end{itemize}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[c]{.65\textwidth}
-		\begin{figure}
-			\subfloat{\includegraphics[width=.9\textwidth]{compsite_laminates.png}}	
-		\end{figure}				
-	\end{minipage}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Advantages \& applications}
-	\begin{minipage}[c]{.45\textwidth}
-		Some of the favorable characteristics of utilising composite laminates:
-		\begin{itemize}
-			\item High impact damage resistance
-			\item Light weight
-			\item High strength-to-weight ratio
-			\item Low density 
-			\item resistance to fatigue and corrosion 
-		\end{itemize}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[c]{.45\textwidth}
-		Some applications of Composite laminates:
-		\begin{itemize}
-			\item Aerospace structures
-			\item Automotive
-			\item Wind turbines
-			\item Pipes and tanks
-		\end{itemize}
-	\end{minipage}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Defects in composite laminates}
-	\small
-	Composite laminates can have different types of damage such as: \\
-	\textbf{Cracks, fibre breakage, debonding, and \textcolor{blue}{delamination}.} \\ 
-	\begin{minipage}[c]{.40\textwidth}
-		\begin{itemize}
-			\footnotesize
-			\item Delamination is a critical failure mechanism in laminated fibre-reinforced polymer matrix composites.
-			\item Delamination is one of the most hazardous forms of the defects. 
-			It leads to very catastrophic failures if not detected at early stages.
-		\end{itemize}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[c]{0.50\textwidth}
-		\begin{figure}
-			\subfloat{\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}}
-		\end{figure}
-	\end{minipage}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Objectives}
+\begin{frame}{Deep learning approach}
+	\textbf{Deep learning (DL) technologies are in accelerating growth due to:}
+	\begin{itemize}
+			\item \alert<1>{Exponential development in computer hardware/software industries.}
+			\item \alert<2>{Machine learning algorithms.}
+			\item \alert<3>{Era of Big data.}
+	\end{itemize}	
+	With \textbf{DL}, feature extraction and classification are done \alert{\textbf{automatically}} without human intervention in an \alert{\textbf{End-to-end}} scheme.
+	\par\medskip
+	\subfloat{\includegraphics[width=.95\textwidth]{DL_approach.png}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Work Objectives}
 \begin{frame}{Objectives}
 	\begin{itemize}
 		\item \textbf{To develop \textcolor{blue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
@@ -572,58 +592,52 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setcounter{subfigure}{0}
-\section{Artificial intelligence, machine learning, and deep learning}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{What is deep learning?}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.85\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
-	\end{figure}
-	\tiny
-	(source: https://www.ingeniovirtual.com/)
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Why deep learning?}
-	\centering
-	\textbf{End-to-end approach} 
-	\par\medskip
-	\subfloat{\includegraphics[width=.95\textheight]{DL_approach.png}}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setcounter{subfigure}{0}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Deep learning, why now?}
-	\begin{minipage}[c]{0.4\textwidth}
-		AI technologies are in accelerating growth due to:
-		\begin{itemize}
-			\item Exponential development in computer hardware industries
-			 (e.g. CPUs, GPUs, FPGAs, TPUs and ASICs)
-			\item Era of Big data.
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}[c]{0.55\textwidth}
-		\begin{figure}
-			\centering
-			\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{10}{gif_figs/gpu/gpu_-}{0}{34}}
-		\end{figure}
-	\tiny
-	(source: https://www.techbooky.com/)
-	\end{minipage}
-	
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setcounter{subfigure}{0}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Common learning strategies}
-	\centering
-	\begin{figure}
-		\includegraphics[width=0.9\textwidth]{learning.png}
-	\end{figure}
-	\tiny
-	(source: https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)
-\end{frame}
+%\setcounter{subfigure}{0}
+%\section{Artificial intelligence, machine learning, and deep learning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{What is deep learning?}
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=0.85\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
+%	\end{figure}
+%	\tiny
+%	(source: https://www.ingeniovirtual.com/)
+%\end{frame}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{subfigure}{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Deep learning, why now?}
+%	\begin{minipage}[c]{0.4\textwidth}
+%		AI technologies are in accelerating growth due to:
+%		\begin{itemize}
+%			\item Exponential development in computer hardware industries
+%			 (e.g. CPUs, GPUs, FPGAs, TPUs and ASICs)
+%			\item Era of Big data.
+%		\end{itemize}
+%	\end{minipage}
+%	\begin{minipage}[c]{0.55\textwidth}
+%		\begin{figure}
+%			\centering
+%			\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{10}{gif_figs/gpu/gpu_-}{0}{34}}
+%		\end{figure}
+%	\tiny
+%	(source: https://www.techbooky.com/)
+%	\end{minipage}
+%	
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{subfigure}{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Common learning strategies}
+%	\centering
+%	\begin{figure}
+%		\includegraphics[width=0.9\textwidth]{learning.png}
+%	\end{figure}
+%	\tiny
+%	(source: https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)
+%\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Synthetic dataset generation}
 
@@ -673,7 +687,7 @@
 The RMS is defined as:
 %%%%%%%%%%%%%%%
 \begin{equation}
-	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k-1}^{N}s(x,y,t_k)^2}, 
+	\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2}, 
 	\label{eqn:rms} 
 \end{equation}
 \end{frame}
