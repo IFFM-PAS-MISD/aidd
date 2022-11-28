@@ -1,8 +1,8 @@
 %\PassOptionsToPackage{draft}{graphicx}
 %\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
-\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
+\documentclass[10pt,aspectratio=169,dvipsnames]{beamer} % aspect ratio 16:9
 %\graphicspath{{../../figures/}}
-\graphicspath{{figures/}{figures/figs/longitudinal-wave-png/}{figures/gif_figs/}}}
+
 %\includeonlyframes{frame1,frame2,frame3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,6 +29,11 @@
 \usepackage{tcolorbox}
 \usepackage{dashbox}
 \usepackage{multicol}
+\usepackage{tikz}
+
+\usepackage{subfig}
+
+\usepackage{xcolor}
 
 %\usepackage{FiraSans}
 
@@ -46,8 +51,9 @@
 %\nobibliography*
 \usepackage{caption}%
 
-\captionsetup[figure]{labelformat=empty}%
 \graphicspath{{figures/}}
+
+\captionsetup[figure]{labelformat=empty}%
 \usefonttheme{structurebold}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metropolis theme custom modification file
@@ -72,6 +78,16 @@
 % 
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
+\newenvironment{elaboration}{%
+	\par
+	\begin{tikzpicture}
+		\node[rectangle,minimum width=0.9\textwidth] (m)
+		\bgroup\begin{minipage}{0.85\textwidth}%}{%
+		\end{minipage}\egroup;
+		\draw[dashed] (m.south west) rectangle (m.north east);
+	\end{tikzpicture}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -82,7 +98,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES}
 %\subtitle{In preparation for a Ph.D. defence}
-\author{\textbf{D.Sc. Ph.D. Eng. Paweł Kudela}}
+\author{\textbf{D.Sc. Ph.D. Eng. Paweł Kudela} \and \\ \textbf{Ph.D. candidate Eng. Abdalraheem Ijjeh }
+}
 % logo align to Institute 
 \institute{Institute of Fluid Flow Machinery \\ 
 	Polish Academy of Sciences \\ 
@@ -310,25 +327,23 @@
 	\begin{minipage}[c]{.45\textwidth}
 		Some of the favorable characteristics of utilising composite laminates:
 		\begin{itemize}
-			\only<2->{\item \alert{High impact damage resistance}}
-			\only<3->{\item \alert{Light weight}}
-			\only<4->{\item \alert{High strength-to-weight ratio}}
-			\only<5->{\item \alert{Low density}}
-			\only<6->{\item \alert{resistance to fatigue and corrosion}}			
+			\only<2->{\item \textcolor{PineGreen}{High impact damage resistance}}
+			\only<3->{\item \textcolor{PineGreen}{Light weight}}
+			\only<4->{\item \textcolor{PineGreen}{High strength-to-weight ratio}}
+			\only<5->{\item \textcolor{PineGreen}{Low density}}
+			\only<6->{\item \textcolor{PineGreen}{resistance to fatigue and corrosion}}			
 		\end{itemize}
 	\end{minipage}
 	\hfill
-	\only<7->{
-	\begin{minipage}[c]{.45\textwidth}
+	\only<7->{\begin{minipage}[c]{.45\textwidth}
 		Some applications of Composite laminates:
 		\begin{itemize}
-			\item \alert{Aerospace structures}
-			\item \alert{Automotive}
-			\item \alert{Wind turbines}
-			\item \alert{Pipes and tanks}
+			\item \textcolor{PineGreen}{Aerospace structures}
+			\item \textcolor{PineGreen}{Automotive}
+			\item \textcolor{PineGreen}{Wind turbines}
+			\item \textcolor{PineGreen}{Pipes and tanks}
 		\end{itemize}
-	\end{minipage}
-}
+	\end{minipage}}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Defects in composite laminates}
@@ -363,31 +378,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Non Destructive Evaluations (NDEs)}
-	\begin{minipage}[c]{0.32\textwidth}	
-	\begin{itemize}
-		\item \textbf{Visual inspection}
-		\item \textbf{Eddy current}
-		\item \textbf{Dye penetration}
-		\item \textbf{Acoustic emission}
-		\item \textbf{\colorbox{yellow}{\textcolor{blue}{Ultrasonic testing}}}
-		\item \textbf{\textcolor{blue}{Guided wave testing (global NDEs)}}
-	\end{itemize}
+
+	\begin{minipage}{0.32\textwidth}	
+		\begin{itemize}
+			\item \textbf{Visual inspection}
+			\item \textbf{Eddy current}
+			\item \textbf{Dye penetration}
+			\item \textbf{Acoustic emission}
+			\item \textbf{\colorbox{yellow}{\textcolor{RoyalBlue}{Ultrasonic testing}} \colorbox{yellow}{\textcolor{RoyalBlue}{(local NDEs)}}}
+			\item <5->\textbf{\textcolor{RoyalBlue}{\colorbox{yellow}{Guided wave testing} \colorbox{yellow}{(global NDEs)}}}
+		\end{itemize}
 	\end{minipage}
 	\only<2->{
-	\begin{minipage}[c]{0.33\textwidth}
-		\subfloat{\includegraphics[width=0.95\textwidth]{local_ultrasonic.png}}	
+		\begin{minipage}{0.33\textwidth}
+			\subfloat{\includegraphics[width=0.95\textwidth]{local_ultrasonic.png}}	
 	\end{minipage}}
-	\only<3->{
-	\begin{minipage}[c]{0.32\textwidth}
-		\begin{itemize}
-			\item[$\times$] \alert{Labor intensive}
-			\item[$\times$] \alert{Time consuming}
-			\item[$\times$] \alert{Need professional and experienced personnel}
-			\item[$\times$] \alert{May require the disassembly of complex structures}
-		\end{itemize}
-	\only<4->{
-	\textcolor{red}{Local NDEs are not practical and do not fit for SHM}}
+	\only<3->{\begin{minipage}{0.32\textwidth}
+			\begin{itemize}
+				\item[$\times$] \alert{Labor intensive}
+				\item[$\times$] \alert{Time consuming}
+				\item[$\times$] \alert{Need professional and experienced personnel}
+				\item[$\times$] \alert{May require the disassembly of complex structures}
+			\end{itemize}
+			\only<4->{\textcolor{BrickRed}{Local NDEs are not practical and do not fit for SHM}}
 	\end{minipage}}
+
+	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Guided waves}
@@ -430,81 +446,66 @@
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}
-		\subfloat[\alert{Longitudinal wave} - plane pressure pulse wave]{\animategraphics[autoplay,loop, controls,width=0.5\textwidth]{10}{figures/gif_figs/Longitudinal_wave/Longitudinal_wave-}{0}{35}}\qquad			
+		\subfloat{\animategraphics[autoplay,loop, controls,width=0.5\textwidth]{10}{figures/gif_figs/Longitudinal_wave/Longitudinal_wave-}{0}{35}}
+		\caption{\alert{Longitudinal wave} - plane pressure pulse wave}
 	\end{figure}
 \tiny 
 (source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]
-		\begin{column}{0.47\textwidth}
+		\begin{column}{0.5\textwidth}
 			\centering
 			\begin{figure}
-				\subfloat[\alert{Shear horizontal wave}]{\animategraphics[autoplay,loop, controls,width=0.9\textwidth]{10}{figures/gif_figs/SH_shear_wave/SH_shear-}{0}{39}}\qquad			
+				\subfloat{\animategraphics[autoplay,loop, controls,width=0.95\textwidth]{10}{figures/gif_figs/SH_shear_wave/SH_shear-}{0}{39}}
+				\caption{\alert{Shear horizontal wave}}
 			\end{figure}			
 		\end{column}
-		\begin{column}{0.47\textwidth}
+		\begin{column}{0.5\textwidth}
 			\centering
 			\begin{figure}
-				\subfloat[\alert{Shear vertical wave}]{\animategraphics[autoplay,loop, controls,width=0.9\textwidth]{10}{figures/gif_figs/SV_shear_wave/SV_shear-}{0}{39}}\qquad			
+				\subfloat{\animategraphics[autoplay,loop, controls,width=0.95\textwidth]{10}{figures/gif_figs/SV_shear_wave/SV_shear-}{0}{39}}
+				\caption{\alert{Shear vertical wave}}
 			\end{figure}			
 		\end{column}	
 	\end{columns}
-%	\begin{figure}
-%		\includegraphics[width=0.5\textwidth]{figs/Fig_1_1.jpg}
-%		\caption{\alert{Shear horizontal wave} }
-%	\end{figure}
 \tiny 
 (source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-	
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}
 		\centering
-		\subfloat[\alert{Rayleigh waves}]{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{15}{figures/gif_figs/Raileigh_wave/Raileigh_wave-}{0}{67}}\qquad			
+		\subfloat{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{15}{figures/gif_figs/Raileigh_wave/Raileigh_wave-}{0}{67}}
+		\caption{\alert{Rayleigh waves}}		
 	\end{figure}			
-%	\begin{figure}
-%		\includegraphics[width=0.5\textwidth]{figs/Fig_1_3.jpg}
-%		\caption{\alert{Rayleigh waves} }
-%	\end{figure}
 \tiny 
 (source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-	
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}			
 		\centering
-		\subfloat[\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love]{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{20}{figures/gif_figs/love_wave/love_wave-}{0}{107}}\qquad			
+		\subfloat{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{20}{figures/gif_figs/love_wave/love_wave-}{0}{107}}
+		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love}		
 	\end{figure}			
-%	\begin{figure}
-%		\includegraphics[width=0.5\textwidth]{figs/Fig_1_4.jpg}
-%		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love }
-%	\end{figure}
 \tiny 
 (source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-	
-}
-% \subsection{Lamb waves}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
 \begin{frame}{Lamb waves}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Lamb waves}	
@@ -528,40 +529,38 @@
 				\frac{\tan(q h)}{\tan(p h)} = -\frac{\left(q^2 - k^2\right)^2}{4 k^2 p q}
 			\end{equation*}
 		\end{column}	
-	\end{columns}
-	
+	\end{columns}	
 	\centering
 	\(q=q(\omega,k), \quad p=p(\omega,k) \)
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-	
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{subfigure}{0}
 \begin{frame}{Lamb waves modes}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]
 		\begin{column}{0.3\textwidth}
 			\centering
 			\begin{figure}
-				\subfloat[Fundamental symmetric, S0, \alert{Lamb wave} mode (in-plane motion)]{\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/S0_mode/S0_mode-}{0}{67}}\qquad
+				\subfloat{\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/S0_mode/S0_mode-}{0}{67}}
+				\caption{Fundamental symmetric, S0, \alert{Lamb wave} mode (in-plane motion)}
 			\end{figure}
 		\end{column}
 		\begin{column}{0.3\textwidth}
 			\centering
 			\begin{figure}
-				\subfloat[Fundamental antisymmetric, A0, \alert{Lamb wave} mode (out-of-plane motion)]{\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/A0_mode/A0_mode-}{0}{67}}\qquad			
+				\subfloat{\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/A0_mode/A0_mode-}{0}{67}}
+				\caption{Fundamental antisymmetric, A0, \alert{Lamb wave} mode (out-of-plane motion)}
 				\end{figure}
 		\end{column}
 		\only<2->{
 			\begin{column}{0.37\textwidth}
 				\begin{itemize}
-					\only<2->{\item Travel within guides for long distances}
-					\only<3->{\item Can propagate in complex structures}
-					\only<4->{\item High speeds in metals and composites}
-					\only<5->{\item can be automated using software}
+					\only<2->{\item \textcolor{RoyalBlue}{Travel within guides for long distances}}
+					\only<3->{\item \textcolor{RoyalBlue}{Can propagate in complex structures}}
+					\only<4->{\item \textcolor{RoyalBlue}{High speeds in metals and composites}}
+					\only<5->{\item \textcolor{RoyalBlue}{Can be automated using software}}
 				\end{itemize}
-			\only<6->{\textcolor{green}{Lamb waves are a promising global NDE solution for SHM}}
+			\only<6->{\textcolor{OliveGreen}{Lamb waves are a promising global NDE solution for SHM}}
 		\end{column}}
 	\end{columns}	
 \tiny 
@@ -580,10 +579,6 @@
 		}
 	\end{figure}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-	
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Damage detection approaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -598,9 +593,9 @@
 	\end{figure}	
 	\textbf{Drawbacks of Conventional methods:}
 	\begin{itemize}
-		\item[$\times$] \alert<2->{Requires a great amount of human labor and computational effort.}
-		\item[$\times$] \alert<3->{Demands a high amount of experience of the practitioner.}
-		\item[$\times$] \alert<4->{Inefficient with big data which requires a complex computation of damage features.} 
+		\item[$\times$] <2-> \textcolor{BrickRed}{Requires a great amount of human labor and computational effort.}
+		\item[$\times$] <2->\textcolor{BrickRed}{Demands a high amount of experience of the practitioner.}
+		\item[$\times$] <2->\textcolor{BrickRed}{Inefficient with big data which requires a complex computation of damage features.} 
 		\end{itemize}
 \end{frame}
 
@@ -608,9 +603,9 @@
 \begin{frame}{Deep learning approach}
 	\textbf{Deep learning (DL) technologies are in accelerating growth due to:}
 	\begin{itemize}
-			\item \alert<1>{Exponential development in computer hardware/software industries.}
-			\item \alert<2>{Machine learning algorithms.}
-			\item \alert<3>{Era of Big data.}
+			\item <1->\textcolor{NavyBlue}{Exponential development in computer hardware/software industries.}
+			\item <2->\textcolor{NavyBlue}{Machine learning algorithms.}
+			\item <3->\textcolor{NavyBlue}{Era of Big data.}
 	\end{itemize}	
 	With \textbf{DL}, feature extraction and classification are done \alert{\textbf{automatically}} without human intervention in an \alert{\textbf{End-to-end}} scheme.
 	\par\medskip
@@ -822,6 +817,9 @@ The RMS is defined as:
 	\end{minipage}
 \end{frame}
 
+\setcounter{subfigure}{0}
+\subsection{RMS based models}
+
 \begin{frame}{Residual UNet}
 	\begin{figure}
 		\centering
@@ -972,29 +970,51 @@ The RMS is defined as:
 	\end{table}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{subfigure}{0}
+\subsection{Full wavefield frames based model}
+\begin{frame}{Autoencoder ConvLSTM}
+	\begin{columns}[T]		
+		\begin{column}{0.5\textwidth}
+			\only<1>{
+			\begin{figure}[c]
+				\centering
+				\subfloat{\includegraphics[width=.8\textwidth]{figure2.png}}
+				\caption{Sample frames of full wave propagation.}
+			\end{figure}}
+			\only<2->{
+			\begin{figure}[c]
+					\centering
+					\subfloat{\includegraphics[height=.6\textheight]{figure3.png}}
+					\caption{The procedure of calculating the RMS prediction image (damage map).}
+				\end{figure}}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\begin{figure}
+				\centering
+				\subfloat{\includegraphics[width=.8\textheight]{figure5b.png}}
+				\caption{Autoencoder ConvLSTM model}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
+
 \setcounter{subfigure}{0}
 \begin{frame}{Numerical test cases animation of Lamb waves}
-	\begin{minipage}[t]{.3\textwidth}
-	\begin{figure}
-		\centering
-		\includegraphics[width=.8\textwidth]{figure5b.png}
-	\end{figure}
-	\end{minipage}
-	\begin{minipage}[t]{.65\textwidth}
 		\begin{figure}
-			\subfloat[\(1^{st}\) case.]{\animategraphics[autoplay,loop,width=.3\textwidth]{6}{figures/gif_figs/397_convLSTM/397_convLSTM-}{0}{23}}
-			,
-			\subfloat[\(2^{nd}\) case.]{\animategraphics[autoplay,loop,width=.3\textwidth]{6}{figures/gif_figs/438_convLSTM/438_convLSTM-}{0}{23}}
-			,
-			\subfloat[\(3^{rd}\) case.]{\animategraphics[autoplay,loop,width=.3\textwidth]{6}{figures/gif_figs/456_convLSTM/456_convLSTM-}{0}{23}}
+			\subfloat[\(1^{st}\) case.]{\animategraphics[autoplay,loop,width=.2\textwidth]{6}{figures/gif_figs/397_convLSTM/397_convLSTM-}{0}{23}}
+			\quad
+			\subfloat[\(2^{nd}\) case.]{\animategraphics[autoplay,loop,width=.2\textwidth]{6}{figures/gif_figs/438_convLSTM/438_convLSTM-}{0}{23}}
+			\quad
+			\subfloat[\(3^{rd}\) case.]{\animategraphics[autoplay,loop,width=.2\textwidth]{6}{figures/gif_figs/456_convLSTM/456_convLSTM-}{0}{23}}
 			\\
-			\subfloat[Prediction]{\includegraphics[width=.3\textwidth]{figures/predicted_397.png}}
-			,
-			\subfloat[Prediction]{\includegraphics[width=.3\textwidth]{figures/predicted_438.png}}
-			,
-			\subfloat[Prediction]{\includegraphics[width=.3\textwidth]{figures/predicted_456.png}}
+			\subfloat[Prediction]{\includegraphics[width=.2\textwidth]{figures/predicted_397.png}}
+			\quad
+			\subfloat[Prediction]{\includegraphics[width=.2\textwidth]{figures/predicted_438.png}}
+			\quad
+			\subfloat[Prediction]{\includegraphics[width=.2\textwidth]{figures/predicted_456.png}}
 		\end{figure}	
-	\end{minipage}
 \end{frame}
 
 \subsection{Experimental case}
@@ -1055,94 +1075,86 @@ The RMS is defined as:
 
 \setcounter{subfigure}{0}
 \begin{frame}{Experimental results full wavefield based}
-	\begin{minipage}[ct]{0.5\textwidth}
-	\begin{figure}
 		\centering
-		\includegraphics[width=.95\textwidth]{figure3.png}
-	\end{figure}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[t]{0.4\textwidth}
-		\centering
-		\subfloat{\animategraphics[autoplay,loop,width=.40\textwidth]{12}{figures/gif_figs/exp/exp-}{0}{447}} 
-		\par\medskip
-		\subfloat{\includegraphics[width=.95\textwidth]{exp_rms_thresholded.png}}\qquad
+		\subfloat{\animategraphics[autoplay,loop,width=.245\textwidth]{12}{figures/gif_figs/exp/exp-}{0}{447}} 
+		\qquad
+		\subfloat{\includegraphics[width=.6\textwidth]{exp_rms_thresholded.png}}
+		
 		IoU= $0.23$, $\epsilon=10.16\%$
-	\end{minipage}
 \end{frame}
 
-\subsection{Super-resolution image reconstruction}
-\setcounter{subfigure}{0}
-\begin{frame}{Super-resolution image reconstruction}
-\textbf{Single image Super-Resolution (SISR) aims to generate a visually pleasing high-resolution image from its de-graded low-resolution measurement.}
-\begin{figure}
-	\centering
-	\subfloat[listentry][LR]{\includegraphics[width=.2\textwidth]{LR_case_1_frame_1.png}}\qquad
-	\subfloat[listentry][HR]{\includegraphics[width=.2\textwidth]{SR_case_1_frame_1.png}}\qquad
-\end{figure}
-\textbf{DLSR model was developed to recover the high-resolution full wavefield
-	frames with satisfying accuracy from the low-resolution measurement (below Nyquist sampling rate) acquired by SLDV}
-\tiny
-\begin{itemize}
-	\item Ijjeh, Abdalraheem A., Saeed Ullah, Maciej Radzienski and Pawel Kudela. “Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves.”
-	Mechanical Systems and Signal Processing (Under review).
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Evaluation metrics for SR model}
-	For evaluating the reconstructed full wavefield
-	\begin{itemize}
-		\item Peak signal-to-noise ratio (PSNR):
-		\begin{equation*}
-			PSNR=20\log_{10}\left(\frac{R}{\sqrt{MSE}}\right),
-			\label{PSNR}
-		\end{equation*}
-		\item Pearson correlation coefficient:
-		\begin{equation*}
-			r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}},
-			\label{Pearson}
-		\end{equation*}
-	\end{itemize}
-\end{frame}
-
-\setcounter{subfigure}{0}
-\begin{frame}{Numerical test cases at certain frames}
-	\begin{figure}
-		\centering
-		\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_397_frame_127_full_frame_GT.png}}\qquad
-		\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_397_frame_127_full_frame_pred.png}}\qquad
-		\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_397_frame_127_delamination_GT.png}}\qquad
-		\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_397_frame_127_delamination_pred.png}}\qquad
-		\\
-		\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_438_frame_154_full_frame_GT.png}}\qquad
-		\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_438_frame_154_full_frame_pred.png}}\qquad
-		\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_438_frame_154_delamination_GT.png}}\qquad
-		\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_438_frame_154_delamination_pred.png}}\qquad
-		\\				
-		\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_456_frame_159_full_frame_GT.png}}\qquad
-		\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_456_frame_159_full_frame_pred.png}}\qquad
-		\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_456_frame_159_delamination_GT.png}}\qquad
-		\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_456_frame_159_delamination_pred.png}}\qquad
-	\end{figure}
-\end{frame}
-
-\setcounter{subfigure}{0}
-\begin{frame}{Experimental test case at certain frame}
-	\footnotesize
-	Low-resolution measurements (Input): \(32\times32=1024\) points.\\
-	High-resolution (Output): \(512\times512=262144\) points.
-	\begin{figure}
-		\centering
-		\subfloat[HR ref]{\includegraphics[width=.16\textwidth]{figure10a.png}}\qquad
-		\subfloat[Compressive Sensing]{\includegraphics[width=.16\textwidth]{figure10b.png}}\qquad
-		\subfloat[SR $f_n$]{\includegraphics[width=.16\textwidth]{figure10e.png}}\qquad
-		\\
-		\subfloat[Ref]{\includegraphics[width=.16\textwidth]{figure11a.png}}\qquad
-		\subfloat[Compressive Sensing]{\includegraphics[width=.16\textwidth]{figure11b.png}}\qquad
-		\subfloat[Pred]{\includegraphics[width=.16\textwidth]{figure11e.png}}\qquad
-	\end{figure}
-\end{frame}
-
+%\section{Super-resolution image reconstruction}
+%\setcounter{subfigure}{0}
+%\begin{frame}{Super-resolution image reconstruction}
+%\textbf{Single image Super-Resolution (SISR) aims to generate a visually pleasing high-resolution image from its de-graded low-resolution measurement.}
+%\begin{figure}
+%	\centering
+%	\subfloat[listentry][LR]{\includegraphics[width=.2\textwidth]{LR_case_1_frame_1.png}}\qquad
+%	\subfloat[listentry][HR]{\includegraphics[width=.2\textwidth]{SR_case_1_frame_1.png}}\qquad
+%\end{figure}
+%\textbf{DLSR model was developed to recover the high-resolution full wavefield
+%	frames with satisfying accuracy from the low-resolution measurement (below Nyquist sampling rate) acquired by SLDV}
+%\tiny
+%\begin{itemize}
+%	\item Ijjeh, Abdalraheem A., Saeed Ullah, Maciej Radzienski and Pawel Kudela. “Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves.”
+%	Mechanical Systems and Signal Processing (Under review).
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Evaluation metrics for SR model}
+%	For evaluating the reconstructed full wavefield
+%	\begin{itemize}
+%		\item Peak signal-to-noise ratio (PSNR):
+%		\begin{equation*}
+%			PSNR=20\log_{10}\left(\frac{R}{\sqrt{MSE}}\right),
+%			\label{PSNR}
+%		\end{equation*}
+%		\item Pearson correlation coefficient:
+%		\begin{equation*}
+%			r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}},
+%			\label{Pearson}
+%		\end{equation*}
+%	\end{itemize}
+%\end{frame}
+%
+%\setcounter{subfigure}{0}
+%\begin{frame}{Numerical test cases at certain frames}
+%	\begin{figure}
+%		\centering
+%		\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_397_frame_127_full_frame_GT.png}}\qquad
+%		\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_397_frame_127_full_frame_pred.png}}\qquad
+%		\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_397_frame_127_delamination_GT.png}}\qquad
+%		\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_397_frame_127_delamination_pred.png}}\qquad
+%		\\
+%		\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_438_frame_154_full_frame_GT.png}}\qquad
+%		\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_438_frame_154_full_frame_pred.png}}\qquad
+%		\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_438_frame_154_delamination_GT.png}}\qquad
+%		\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_438_frame_154_delamination_pred.png}}\qquad
+%		\\				
+%		\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_456_frame_159_full_frame_GT.png}}\qquad
+%		\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_456_frame_159_full_frame_pred.png}}\qquad
+%		\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_456_frame_159_delamination_GT.png}}\qquad
+%		\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_456_frame_159_delamination_pred.png}}\qquad
+%	\end{figure}
+%\end{frame}
+%
+%\setcounter{subfigure}{0}
+%\begin{frame}{Experimental test case at certain frame}
+%	\footnotesize
+%	Low-resolution measurements (Input): \(32\times32=1024\) points.\\
+%	High-resolution (Output): \(512\times512=262144\) points.
+%	\begin{figure}
+%		\centering
+%		\subfloat[HR ref]{\includegraphics[width=.16\textwidth]{figure10a.png}}\qquad
+%		\subfloat[Compressive Sensing]{\includegraphics[width=.16\textwidth]{figure10b.png}}\qquad
+%		\subfloat[SR $f_n$]{\includegraphics[width=.16\textwidth]{figure10e.png}}\qquad
+%		\\
+%		\subfloat[Ref]{\includegraphics[width=.16\textwidth]{figure11a.png}}\qquad
+%		\subfloat[Compressive Sensing]{\includegraphics[width=.16\textwidth]{figure11b.png}}\qquad
+%		\subfloat[Pred]{\includegraphics[width=.16\textwidth]{figure11e.png}}\qquad
+%	\end{figure}
+%\end{frame}
+\section{Conclusions}
 \begin{frame}{Conclusions}
 	\footnotesize
 	\begin{itemize}
@@ -1152,8 +1164,8 @@ The RMS is defined as:
 		\item With deep	learning approaches, it is possible to use registered data in its raw form without the need to perform feature engineering, extraction, and classification. 
 		Hence, such an approach has an end-to-end structure that automatically learns and discovers the hidden features in high-dimensional input data.
 		\item Deep learning approaches surpass the conventional signal processing techniques.
-		\item The DLSR model can recover the high-resolution full wavefield
-		frames with high accuracy from the low-resolution acquired full wavefield by SLDV.
+%		\item The DLSR model can recover the high-resolution full wavefield
+%		frames with high accuracy from the low-resolution acquired full wavefield by SLDV.
 		
 	\end{itemize}
 \end{frame}
@@ -1161,18 +1173,19 @@ The RMS is defined as:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=blue, bg=white}
 \begin{frame}[standout]
- Thank you for your listening!\\ \vspace{12pt}
- Questions?\\ \vspace{12pt}
- \url{aijjeh@imp.gda.pl}
+	Thank you for your listening!\\ \vspace{12pt}
+	Questions?\\ \vspace{12pt}
+	\url{pk@imp.gda.pl} 
+	\par\medskip
+	\url{aijjeh@imp.gda.pl}
+	
  
 \par\medskip
 \par\medskip
-
- \footnotesize
- The research work was funded by the Polish National Science Center under grant agreement no. 2018/31/B/ST8/00454.
+\footnotesize
+The research work was funded by the Polish National Science Center under grant agreement no. 2018/31/B/ST8/00454.
 \end{frame}
 }
-\note{Than you for listening, and I am }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % END OF SLIDES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
