@@ -2,7 +2,7 @@
 %\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
 \documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
 %\graphicspath{{../../figures/}}
-\graphicspath{{figures/}{figures/figs/longitudinal-wave-png/}}}
+\graphicspath{{figures/}{figures/figs/longitudinal-wave-png/}{figures/gif_figs/}}}
 %\includeonlyframes{frame1,frame2,frame3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,6 +27,9 @@
 \usepackage{multimedia}
 \usepackage{dashbox}
 \usepackage{tcolorbox}
+\usepackage{dashbox}
+\usepackage{multicol}
+
 %\usepackage{FiraSans}
 
 %\usepackage{comment}
@@ -78,8 +81,8 @@
 % option 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES}
-\subtitle{In preparation for a Ph.D. defence}
-\author{\textbf{Abdalraheem Ijjeh\\Supervisor: D.Sc. Ph.D. Eng. Paweł Kudela}}
+%\subtitle{In preparation for a Ph.D. defence}
+\author{\textbf{D.Sc. Ph.D. Eng. Paweł Kudela}}
 % logo align to Institute 
 \institute{Institute of Fluid Flow Machinery \\ 
 	Polish Academy of Sciences \\ 
@@ -256,20 +259,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\tikzexternalize % activate!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{document}
-	
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
 
+\begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \maketitle
-\note{
-	Welcome and thank you for joining me here at this remote presentation event. At the beginning I want to introduce my self, my name is Abdalrheem Ijjeh, a PhD student at the Institute of Fluid flow machinery, Polish academy of sciences, supervised by professor Pawel Kudela. Today I am going to briefly present my PhD project entitled by Feasibility studies of artificial intelligence-driven diagnostics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SLIDES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame1]{Outlines}
-	\fontsize{6pt}{8pt}\selectfont
-	\setbeamertemplate{section in toc}[sections numbered]
-	\tableofcontents
+	\begin{multicols}{2}
+%		\fontsize{6pt}{8pt}\selectfont
+		\setbeamertemplate{section in toc}[sections numbered]
+		\setbeamertemplate{subsection in toc}[subsections numbered]
+		\tableofcontents
+	\end{multicols}
+	
 \end{frame}
 \note{
 	The presentation will be as follow: 
@@ -282,7 +288,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Composite laminates}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Composite laminates}
+%\subsection{Composite laminates}
 \begin{frame}{What are Composite Laminates?}
 	\begin{minipage}[c]{.3\textwidth}
 		\small
@@ -328,7 +334,7 @@
 \begin{frame}{Defects in composite laminates}
 	\small
 	Composite laminates can have different types of damage such as: \\
-	\textbf{Cracks, fibre breakage, debonding, and \textcolor{blue}{delamination}.} \\ 
+	\textbf{Cracks, fibre breakage, debonding, and \colorbox{yellow}{\textcolor{blue}{delamination}}.} \\ 
 	\begin{minipage}[c]{.40\textwidth}
 		\begin{itemize}
 			\footnotesize
@@ -357,9 +363,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Non Destructive Evaluations (NDEs)}
-	\begin{minipage}[c]{0.32\textwidth}
-	\textbf{Visual inspections, eddy current, dye penetration, acrostic emission,\colorbox{yellow}{\textcolor{blue}{ultrasonic testing}} \colorbox{yellow}{\textcolor{blue}{(local NDEs)}} \& \textcolor{blue}{guided wave testing (global NDEs)}}.
-				
+	\begin{minipage}[c]{0.32\textwidth}	
+	\begin{itemize}
+		\item \textbf{Visual inspection}
+		\item \textbf{Eddy current}
+		\item \textbf{Dye penetration}
+		\item \textbf{Acoustic emission}
+		\item \textbf{\colorbox{yellow}{\textcolor{blue}{Ultrasonic testing}}}
+		\item \textbf{\textcolor{blue}{Guided wave testing (global NDEs)}}
+	\end{itemize}
 	\end{minipage}
 	\only<2->{
 	\begin{minipage}[c]{0.33\textwidth}
@@ -368,10 +380,10 @@
 	\only<3->{
 	\begin{minipage}[c]{0.32\textwidth}
 		\begin{itemize}
-			\item Labor intensive
-			\item Time consuming
-			\item Need professional and experienced personnel
-			\item May require the disassembly of complex structures
+			\item[$\times$] \alert{Labor intensive}
+			\item[$\times$] \alert{Time consuming}
+			\item[$\times$] \alert{Need professional and experienced personnel}
+			\item[$\times$] \alert{May require the disassembly of complex structures}
 		\end{itemize}
 	\only<4->{
 	\textcolor{red}{Local NDEs are not practical and do not fit for SHM}}
@@ -381,7 +393,7 @@
 \section{Guided waves}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ultrasonic testing vs guided wave testing}
-	\alert{Bulk waves} exist in infinite homogenous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
+	\alert{Bulk waves} exist in infinite homogeneous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
 	These waves can be decomposed into infinite plane waves propagating along arbitrary direction within the solid.
 	
 	\alert{Guided waves} are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
@@ -421,18 +433,35 @@
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}
-		\animategraphics[controls,autoplay,loop,width=0.5\textwidth]{5}{figs/longitudinal-wave-png/frame}{1}{74}
-		\caption{\alert{Longitudinal wave}  - plane pressure pulse wave (source: wikipedia)}
+		\subfloat[\alert{Longitudinal wave} - plane pressure pulse wave]{\animategraphics[autoplay,loop, controls,width=0.5\textwidth]{10}{figures/gif_figs/Longitudinal_wave/Longitudinal_wave-}{0}{35}}\qquad			
 	\end{figure}
+\tiny 
+(source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure}
-		\includegraphics[width=0.5\textwidth]{figs/Fig_1_1.jpg}
-		\caption{\alert{Shear horizontal wave} }
-	\end{figure}
+	\begin{columns}[T]
+		\begin{column}{0.47\textwidth}
+			\centering
+			\begin{figure}
+				\subfloat[\alert{Shear horizontal wave}]{\animategraphics[autoplay,loop, controls,width=0.9\textwidth]{10}{figures/gif_figs/SH_shear_wave/SH_shear-}{0}{39}}\qquad			
+			\end{figure}			
+		\end{column}
+		\begin{column}{0.47\textwidth}
+			\centering
+			\begin{figure}
+				\subfloat[\alert{Shear vertical wave}]{\animategraphics[autoplay,loop, controls,width=0.9\textwidth]{10}{figures/gif_figs/SV_shear_wave/SV_shear-}{0}{39}}\qquad			
+			\end{figure}			
+		\end{column}	
+	\end{columns}
+%	\begin{figure}
+%		\includegraphics[width=0.5\textwidth]{figs/Fig_1_1.jpg}
+%		\caption{\alert{Shear horizontal wave} }
+%	\end{figure}
+\tiny 
+(source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
@@ -442,9 +471,15 @@
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}
-		\includegraphics[width=0.5\textwidth]{figs/Fig_1_3.jpg}
-		\caption{\alert{Rayleigh waves} }
-	\end{figure}
+		\centering
+		\subfloat[\alert{Rayleigh waves}]{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{15}{figures/gif_figs/Raileigh_wave/Raileigh_wave-}{0}{67}}\qquad			
+	\end{figure}			
+%	\begin{figure}
+%		\includegraphics[width=0.5\textwidth]{figs/Fig_1_3.jpg}
+%		\caption{\alert{Rayleigh waves} }
+%	\end{figure}
+\tiny 
+(source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
@@ -453,16 +488,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Waves used in non-destructive testing}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure}
-		\includegraphics[width=0.5\textwidth]{figs/Fig_1_4.jpg}
-		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love }
-	\end{figure}
+	\begin{figure}			
+		\centering
+		\subfloat[\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love]{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{20}{figures/gif_figs/love_wave/love_wave-}{0}{107}}\qquad			
+	\end{figure}			
+%	\begin{figure}
+%		\includegraphics[width=0.5\textwidth]{figs/Fig_1_4.jpg}
+%		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love }
+%	\end{figure}
+\tiny 
+(source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
 	
 }
-\subsection{Lamb waves}
+% \subsection{Lamb waves}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Lamb waves}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -486,7 +527,7 @@
 			\begin{equation*}
 				\frac{\tan(q h)}{\tan(p h)} = -\frac{\left(q^2 - k^2\right)^2}{4 k^2 p q}
 			\end{equation*}
-		\end{column}
+		\end{column}	
 	\end{columns}
 	
 	\centering
@@ -501,36 +542,33 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{columns}[T]
 		\begin{column}{0.3\textwidth}
+			\centering
 			\begin{figure}
-				\includegraphics[width=0.9\textwidth]{figs/Fig_1_5.jpg}
-				\caption{Fundamental symmetric, S0, \alert{Lamb wave} mode }	
+				\subfloat[Fundamental symmetric, S0, \alert{Lamb wave} mode (in-plane motion)]{\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/S0_mode/S0_mode-}{0}{67}}\qquad
 			\end{figure}
 		\end{column}
 		\begin{column}{0.3\textwidth}
+			\centering
 			\begin{figure}
-				\includegraphics[width=0.9\textwidth]{figs/Fig_1_6.jpg}
-				\caption{Fundamental antisymmetric, A0, \alert{Lamb wave} mode }
-			\end{figure}
+				\subfloat[Fundamental antisymmetric, A0, \alert{Lamb wave} mode (out-of-plane motion)]{\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/A0_mode/A0_mode-}{0}{67}}\qquad			
+				\end{figure}
 		\end{column}
 		\only<2->{
-		\begin{column}{0.37\textwidth}
-			\begin{itemize}
-				\only<2->{\item Travel within guides for long distances}
-				\only<3->{\item Can propagate in complex structures}
-				\only<4->{\item High speeds in metals and composites}
-				\only<5->{\item can be automated using software}				
-			\end{itemize}
-		\only<6->{
-		\textcolor{green}{Lamb waves are a promising global NDE solution for SHM}}
-		\end{column}
-	}
+			\begin{column}{0.37\textwidth}
+				\begin{itemize}
+					\only<2->{\item Travel within guides for long distances}
+					\only<3->{\item Can propagate in complex structures}
+					\only<4->{\item High speeds in metals and composites}
+					\only<5->{\item can be automated using software}
+				\end{itemize}
+			\only<6->{\textcolor{green}{Lamb waves are a promising global NDE solution for SHM}}
+		\end{column}}
 	\end{columns}	
+\tiny 
+(source: https://nojigon.webs.upv.es/index.php)
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%
-\note{
-	
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{Dispersion curves of Lamb waves}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure}
@@ -560,9 +598,9 @@
 	\end{figure}	
 	\textbf{Drawbacks of Conventional methods:}
 	\begin{itemize}
-		\item \alert<2>{Requires a great amount of human labor and computational effort.}
-		\item \alert<3>{Demands a high amount of experience of the practitioner.}
-		\item \alert<4>{Inefficient with big data which requires a complex computation of damage features.} 
+		\item[$\times$] \alert<2->{Requires a great amount of human labor and computational effort.}
+		\item[$\times$] \alert<3->{Demands a high amount of experience of the practitioner.}
+		\item[$\times$] \alert<4->{Inefficient with big data which requires a complex computation of damage features.} 
 		\end{itemize}
 \end{frame}
 
@@ -579,12 +617,11 @@
 	\subfloat{\includegraphics[width=.95\textwidth]{DL_approach.png}}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Work Objectives}
+\section{Objectives}
 \begin{frame}{Objectives}
-	\begin{itemize}
-		\item \textbf{To develop \textcolor{blue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
-		\item \textbf{To address the issue of \textcolor{blue}{slow data acquisition} of high-resolution full wavefields of Lamb wave propagation.}
-	\end{itemize}
+		\textbf{To develop \textcolor{blue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
+		\\
+%		\item \textbf{To address the issue of \textcolor{blue}{slow data acquisition} of high-resolution full wavefields of Lamb wave propagation.}
 	\begin{alertblock}{Thesis}
 		It is possible to use an end-to-end approach in which DNN 
 		processes the animation of propagating waves (input) directly into a damage map (output).
@@ -643,8 +680,8 @@
 
 \setcounter{subfigure}{0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Synthetic Dataset of propagating Lamb waves}
-\setcounter{subfigure}{0}
+%\subsection{Synthetic Dataset of propagating Lamb waves}
+%\setcounter{subfigure}{0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Dataset description}
 	\centering
@@ -779,7 +816,7 @@ The RMS is defined as:
 		\end{itemize}
 	\tiny
 	\begin{itemize}
-		\item Ullah S, Ijjeh AA, Kudela P. Deep learning approach for delamination identification using animation of Lamb waves. (submitted / under review)
+		\item Ullah, S., Ijjeh, A. A., \& Kudela, P. (2023). Deep learning approach for delamination identification using animation of Lamb waves. Engineering Applications of Artificial Intelligence, 117, 105520.
 	\end{itemize}
 	
 	\end{minipage}
@@ -887,7 +924,7 @@ The RMS is defined as:
 %
 %\end{frame}
 
-\subsection{Numerical test cases}
+\subsection{Numerical test cases (GCN model)}
 \setcounter{subfigure}{0}
 \begin{frame}{Numerical test cases RMS based models}
 	\begin{minipage}[c]{0.32\textwidth}
