@@ -729,7 +729,7 @@
 		\begin{columns}[T]
 			\begin{column}[c]{0.30\textwidth}
 				\justifying
-				Computer vision is a field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
+				\alert{\textbf{Computer vision} is a field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs.} 
 			\end{column}
 			\hfill
 			\begin{column}[c]{0.65\textwidth}
@@ -744,33 +744,22 @@
 	\subsection{Semantic segmentation}
 	\begin{frame}{Image semantic segmentation}
 		\begin{columns}[T]
-			\begin{column}[t]{0.35\textwidth}
+			\begin{column}[c]{0.35\textwidth}
 				\medskip
 				Segmentation schemes can be developed:
 				\medskip
 				\begin{enumerate}
-					\item \textbf{One-to-one \\(RMS based approach)} 
+					\item \alert{\textbf{One-to-one \\(RMS based approach)}} 
 					\medskip
-					\item \textbf{Many-to-one \\(Full wavefield frames)}
+					\item \alert\{textbf{Many-to-one \\(Full wavefield frames)}\}
 				\end{enumerate}
 			\end{column}
-			\begin{column}[t]{0.32\textwidth}
+			\begin{column}[c]{0.62\textwidth}
 				\begin{figure}
-					\includegraphics[height=.3\textheight]{RMS_flat_shell_Vz_381_500x500bottom.png}
-					\caption{Single input}			
-				\end{figure}
-				\begin{figure}
-					\animategraphics[autoplay,loop,height=.3\textheight]{4}{figures/gif_figs/381_output/flat_shell_Vz_381_500x500bottom-}{85}{113}
-					\caption{Full wavefield frames}
-				\end{figure}
-			\end{column}
-			\begin{column}[t]{0.32\textwidth}
-				\begin{figure}
-					\includegraphics[height=.3\textheight]{GCN_381.png}			\caption{Single output}
-				\end{figure}
-				\begin{figure}
-					\includegraphics[height=.3\textheight]{GCN_381.png}
-					\caption{Single output}
+					\subfloat[Single input]{\includegraphics[height=.35\textheight]{RMS_flat_shell_Vz_381_500x500bottom.png}}\qquad
+					\subfloat[Single output]{\includegraphics[height=.35\textheight]{GCN_381.png}}\qquad
+					\subfloat[Full wavefield frames]{\animategraphics[autoplay,loop,height=.35\textheight]{4}{figures/gif_figs/381_output/flat_shell_Vz_381_500x500bottom-}{85}{113}}\qquad
+					\subfloat[Single output]{\includegraphics[height=.35\textheight]{GCN_381.png}}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -1142,67 +1131,58 @@
 		
 		\setcounter{subfigure}{0}
 		\begin{frame}{Numerical test cases at certain frames}
-			\begin{figure}
-				\centering
-				\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_397_frame_127_full_frame_GT.png}}\qquad
-				\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_397_frame_127_full_frame_pred.png}}\qquad
-				\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_397_frame_127_delamination_GT.png}}\qquad
-				\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_397_frame_127_delamination_pred.png}}\qquad
-				\\
-				\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_438_frame_154_full_frame_GT.png}}\qquad
-				\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_438_frame_154_full_frame_pred.png}}\qquad
-				\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_438_frame_154_delamination_GT.png}}\qquad
-				\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_438_frame_154_delamination_pred.png}}\qquad
-				\\				
-				\subfloat[listentry][HR ref]{\includegraphics[width=.13\textwidth]{output_456_frame_159_full_frame_GT.png}}\qquad
-				\subfloat[listentry][SR $f_n$]{\includegraphics[width=.13\textwidth]{output_456_frame_159_full_frame_pred.png}}\qquad
-				\subfloat[listentry][Ref]{\includegraphics[width=.13\textwidth]{output_456_frame_159_delamination_GT.png}}\qquad
-				\subfloat[listentry][Pred]{\includegraphics[width=.13\textwidth]{output_456_frame_159_delamination_pred.png}}\qquad
-			\end{figure}
+			\begin{columns}[T]
+				\begin{column}[c]{0.25\textwidth}
+%					\begin{figure}
+%						\subfloat[]{}
+%						\\
+%						\subfloat[]{}
+%						\\
+%						\subfloat[]{}
+%					\end{figure}
+				\end{column}
+				\begin{column}[c]{0.7\textwidth}
+					\begin{figure}
+						\centering
+						\subfloat[listentry][HR ref]{\includegraphics[height=.2\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
+						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.2\textheight]{output_397_frame_127_full_frame_pred.png}}\quad
+						\subfloat[listentry][Ref]{\includegraphics[height=.2\textheight]{output_397_frame_127_delamination_GT.png}}\quad
+						\subfloat[listentry][Pred]{\includegraphics[height=.2\textheight]{output_397_frame_127_delamination_pred.png}}\quad
+						\\
+						\subfloat[listentry][HR ref]{\includegraphics[height=.2\textheight]{output_438_frame_154_full_frame_GT.png}}\quad
+						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.2\textheight]{output_438_frame_154_full_frame_pred.png}}\quad
+						\subfloat[listentry][Ref]{\includegraphics[height=.2\textheight]{output_438_frame_154_delamination_GT.png}}\quad
+						\subfloat[listentry][Pred]{\includegraphics[height=.2\textheight]{output_438_frame_154_delamination_pred.png}}\quad
+						\\				
+						\subfloat[listentry][HR ref]{\includegraphics[height=.2\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
+						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.2\textheight]{output_456_frame_159_full_frame_pred.png}}\quad
+						\subfloat[listentry][Ref]{\includegraphics[height=.2\textheight]{output_456_frame_159_delamination_GT.png}}\quad
+						\subfloat[listentry][Pred]{\includegraphics[height=.2\textheight]{output_456_frame_159_delamination_pred.png}}\quad
+					\end{figure}
+				\end{column}
+			\end{columns}
 		\end{frame}
 		
 		\setcounter{subfigure}{0}
 		\begin{frame}{Experimental test case at certain frame}
-			\footnotesize
-			Low-resolution measurements (Input): \(32\times32=1024\) points.\\
-			High-resolution (Output): \(512\times512=262144\) points.
+			Low-resolution measurements (Input): \(32\times32=1024\) points. (Nf = 110.)\\
+			High-resolution (Output): \(512\times512=262144\) points (Nf = 110.).
 			\begin{columns}[T]
-				\begin{column}[c]{0.32\textwidth}
-					\begin{figure}
-						\centering
-						\includegraphics[height=.25\textheight]{figure10a.png}
-						\caption{HR ref}
-					\end{figure}
-					\begin{figure}
-						\centering
-						\includegraphics[height=.25\textheight]{figure11a.png}
-						\caption{Ref}
+				\begin{column}[c]{0.3\textwidth}
+					\begin{figure}						
+						\subfloat[LR input]{						\includegraphics[height=.5\textheight,angle=-180]{frame_110_32x32p_50kHz_5HC_14Vpp_x10.png}}
 					\end{figure}
 				\end{column}
-				\begin{column}[c]{0.32\textwidth}
+				\begin{column}[c]{0.66\textwidth}
 					\begin{figure}
-						\centering
-						\includegraphics[height=.25\textheight]{figure10b.png}
-						\caption{Compressive Sensing}
+						\subfloat[HR ref]{\includegraphics[height=.27\textheight]{figure10a.png}}\quad
+						\subfloat[Compressive Sensing]{\includegraphics[height=.27\textheight]{figure10b.png}}\quad
+						\subfloat[SR]{\includegraphics[height=.27\textheight]{figure10e.png}}\quad
+						\subfloat[Ref]{\includegraphics[height=.27\textheight]{figure11a.png}}\quad
+						\subfloat[Compressive Sensing]{\includegraphics[height=.27\textheight]{figure11b.png}}\quad
+						\subfloat[Pred]{\includegraphics[height=.27\textheight]{figure11e.png}}\quad
 					\end{figure}
-					\begin{figure}
-						\centering
-						\includegraphics[height=.25\textheight]{figure11b.png}
-						\caption{Compressive Sensing}
-					\end{figure}
-				\end{column}
-				\begin{column}[c]{0.32\textwidth}
-					\begin{figure}
-						\centering
-						\includegraphics[height=.25\textheight]{figure10e.png}
-						\caption{SR $f_n$}
-					\end{figure}
-					\begin{figure}
-						\centering
-						\includegraphics[height=.25\textheight]{figure11e.png}
-						\caption{Pred}
-					\end{figure}
-				\end{column}
+				\end{column}				
 			\end{columns}
 		\end{frame}
 		\section{Conclusions}
