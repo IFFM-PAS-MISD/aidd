@@ -1098,21 +1098,29 @@
 			IoU= $0.23$ and $\epsilon=10.16\%$  for the thresholded damage map.
 		\end{frame}
 		
-		\section{Super-resolution image reconstruction}
 		\setcounter{subfigure}{0}
+		\section{Super-resolution image reconstruction}
 		\begin{frame}{Super-resolution image reconstruction}
-			\textbf{Single image Super-Resolution (SISR) aims to generate a visually pleasing high-resolution image from its de-graded low-resolution measurement.}
-			\begin{figure}
-				\centering
-				\subfloat[listentry][LR]{\includegraphics[width=.2\textwidth]{LR_case_1_frame_1.png}}\qquad
-				\subfloat[listentry][HR]{\includegraphics[width=.2\textwidth]{SR_case_1_frame_1.png}}
-			\end{figure}
-			\textbf{DLSR model was developed to recover the high-resolution full wavefield frames with satisfying accuracy from the low-resolution measurement (below Nyquist sampling rate) acquired by SLDV.}
-			\tiny
+			\begin{columns}[T]
+				\begin{column}[c]{0.45\textwidth}
+					\justifying
+					\only<1>{\alert{Single image Super-Resolution (SISR)} aims to generate a visually pleasing high-resolution image from its de-graded low-resolution measurement.}
 
-			\noindent Ijjeh, Abdalraheem, Saeed Ullah, Maciej Radzienski, and Pawel Kudela. \alert{"Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves."} Mechanical Systems and Signal Processing 186 (2023): 109878.
+					\only<2>{DLSR model was developed to recover the high-resolution full wavefield frames with satisfying accuracy from the low-resolution measurement (below Nyquist sampling rate) acquired by SLDV.}
+					
+					\tiny
+					\only<2>{
+						\bigskip 
+						Ijjeh, Abdalraheem, Saeed Ullah, Maciej Radzienski, and Pawel Kudela. \alert{"Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves."} Mechanical Systems and Signal Processing 186 (2023): 109878.}
+				\end{column}
+				\begin{column}[c]{0.5\textwidth}
+					\begin{figure}
+						\subfloat{\includegraphics[width=0.8\textwidth]{superresolution_flowchart.png}}
+					\end{figure}
+				\end{column}
+			\end{columns}
 		\end{frame}
-		
+				
 		\begin{frame}{Evaluation metrics for SR model}
 			For evaluating the reconstructed full wavefield
 			\begin{itemize}
@@ -1162,7 +1170,14 @@
 				\end{column}
 			\end{columns}
 		\end{frame}
-		
+	
+		\begin{frame}{Experimental setup}
+			\begin{figure}
+				\centering
+				\includegraphics[height=0.8\textheight]{Set_up_CS.png}
+			\end{figure}
+		\end{frame}
+	
 		\setcounter{subfigure}{0}
 		\begin{frame}{Experimental test case at certain frame}
 			Low-resolution measurements (Input): \(32\times32=1024\) points. (Nf = 110.)\\
@@ -1176,10 +1191,10 @@
 				\begin{column}[c]{0.66\textwidth}
 					\begin{figure}
 						\subfloat[HR ref]{\includegraphics[height=.27\textheight]{figure10a.png}}\quad
-						\subfloat[Compressive Sensing]{\includegraphics[height=.27\textheight]{figure10b.png}}\quad
+						\subfloat[CS]{\includegraphics[height=.27\textheight]{figure10b.png}}\quad
 						\subfloat[SR]{\includegraphics[height=.27\textheight]{figure10e.png}}\quad
 						\subfloat[Ref]{\includegraphics[height=.27\textheight]{figure11a.png}}\quad
-						\subfloat[Compressive Sensing]{\includegraphics[height=.27\textheight]{figure11b.png}}\quad
+						\subfloat[CS]{\includegraphics[height=.27\textheight]{figure11b.png}}\quad
 						\subfloat[Pred]{\includegraphics[height=.27\textheight]{figure11e.png}}\quad
 					\end{figure}
 				\end{column}				
