@@ -1152,20 +1152,26 @@
 				\begin{column}[c]{0.7\textwidth}
 					\begin{figure}
 						\centering
-						\subfloat[listentry][HR ref]{\includegraphics[height=.2\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
-						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.2\textheight]{output_397_frame_127_full_frame_pred.png}}\quad
-						\subfloat[listentry][Ref]{\includegraphics[height=.2\textheight]{output_397_frame_127_delamination_GT.png}}\quad
-						\subfloat[listentry][Pred]{\includegraphics[height=.2\textheight]{output_397_frame_127_delamination_pred.png}}\quad
-						\\
-						\subfloat[listentry][HR ref]{\includegraphics[height=.2\textheight]{output_438_frame_154_full_frame_GT.png}}\quad
-						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.2\textheight]{output_438_frame_154_full_frame_pred.png}}\quad
-						\subfloat[listentry][Ref]{\includegraphics[height=.2\textheight]{output_438_frame_154_delamination_GT.png}}\quad
-						\subfloat[listentry][Pred]{\includegraphics[height=.2\textheight]{output_438_frame_154_delamination_pred.png}}\quad
-						\\				
-						\subfloat[listentry][HR ref]{\includegraphics[height=.2\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
-						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.2\textheight]{output_456_frame_159_full_frame_pred.png}}\quad
-						\subfloat[listentry][Ref]{\includegraphics[height=.2\textheight]{output_456_frame_159_delamination_GT.png}}\quad
-						\subfloat[listentry][Pred]{\includegraphics[height=.2\textheight]{output_456_frame_159_delamination_pred.png}}\quad
+						\only<1>{
+							\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
+							\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_pred.png}}
+							\\
+							\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_GT.png}}\quad
+							\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_pred.png}}}
+					
+						\only<2>{
+							\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_GT.png}}\quad
+							\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_pred.png}}
+							\\
+							\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_GT.png}}\quad	
+							\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_pred.png}}}
+
+						\only<3>{
+							\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
+							\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_pred.png}}
+							\\
+							\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_GT.png}}\quad
+							\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_pred.png}}}
 					\end{figure}
 				\end{column}
 			\end{columns}
