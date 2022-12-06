@@ -19,7 +19,7 @@
 \usepackage{float}
 \usepackage{eso-pic} 
 \usepackage{wrapfig}
-\usepackage{animate,media9,movie15}
+\usepackage{animate,media9}
 \usepackage{subfig}
 \usepackage{fancybox}
 %\usepackage{multimedia}
@@ -28,6 +28,7 @@
 \usepackage{multicol}
 \usepackage{xcolor}
 \usepackage[document]{ragged2e}
+\usepackage{caption}
 
 %\usepackage{FiraSans}
 
@@ -742,22 +743,21 @@
 	\subsection{Semantic segmentation}
 	\begin{frame}{Image semantic segmentation}
 		\begin{columns}[T]
-			\begin{column}[c]{0.35\textwidth}
-				\medskip
-				Segmentation schemes can be developed:
-				\medskip
-				\begin{enumerate}
-					\item \alert{\textbf{One-to-one \\(RMS based approach)}} 
-					\medskip
-					\item \alert\{textbf{Many-to-one \\(Full wavefield frames)}\}
-				\end{enumerate}
-			\end{column}
-			\begin{column}[c]{0.62\textwidth}
+			\begin{column}[c]{0.48\textwidth}		
+				\centering		
+				\textbf{One-to-one (RMS based approach)}
 				\begin{figure}
-					\subfloat[Single input]{\includegraphics[height=.35\textheight]{RMS_flat_shell_Vz_381_500x500bottom.png}}\qquad
-					\subfloat[Single output]{\includegraphics[height=.35\textheight]{GCN_381.png}}\qquad
-					\subfloat[Full wavefield frames]{\animategraphics[autoplay,loop,height=.35\textheight]{4}{figures/gif_figs/381_output/flat_shell_Vz_381_500x500bottom-}{85}{113}}\qquad
-					\subfloat[Single output]{\includegraphics[height=.35\textheight]{GCN_381.png}}
+					\subfloat[Single input]{\includegraphics[width=.45\textwidth]{RMS_flat_shell_Vz_381_500x500bottom.png}}\quad
+					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
+				\end{figure}
+			\end{column}
+			\begin{column}[c]{0.48\textwidth}
+				\centering
+				\textbf{Many-to-one (Full wavefield frames)}
+				\centering
+				\begin{figure}				
+					\subfloat[Full wavefield]{\animategraphics[autoplay,loop,width=.45\textwidth]{4}{figures/gif_figs/381_output/output_381-}{85}{113}}\quad
+					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -1008,7 +1008,7 @@
 					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
 					\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_381.png}}\quad
 					\subfloat[Binary RMS, IoU= 0.88]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case381_.png}}\quad
-			\end{figure}}
+				\end{figure}}
 			\setcounter{subfigure}{0}
 			\only<2>{
 				\textbf{Second test case}
@@ -1049,21 +1049,23 @@
 				\end{column}
 			\end{columns}
 		\end{frame}
-		\begin{frame}{Delamination arrangement}
+	
+		\begin{frame}{Single delamination arrangement}
 			\begin{minipage}[c]{0.4\textwidth}
 				\begin{itemize}[<alert@+>]
-					\item Teflon inserts with a thickness of \(250\ \mu\)m were used to simulate the delaminations.
-					\item The average thickness of the specimen was \(3.9 \pm 0.1\) mm.
-					\item The delaminations were located at the same distance, equal to \(150\) mm from the centre of the plate.
+					\item 
+					\item 
+					\item 
 				\end{itemize}
 			\end{minipage}
 			\begin{minipage}[c]{0.55\textwidth}
 				\centering
-				\includegraphics[width=.7\textwidth]{plate_single_delam_arrangement_large_fonts.png}
+				\includegraphics[width=.7\textwidth]{plate_single_delam_arrangement_large_fonts.jpg}
 			\end{minipage}
 		\end{frame}
+	
 		\setcounter{subfigure}{0}
-		\begin{frame}{Experimental results RMS based}
+		\begin{frame}{Experimental results RMS based (Single delamination)}
 			\centering
 			\begin{figure}
 				\subfloat[ERMS \& label]{\includegraphics[width=.18\textwidth]{ERMS_with_label.png}}\qquad
@@ -1098,8 +1100,19 @@
 			\end{table}
 		\end{frame}
 		
+		\begin{frame}{Experimental results full wavefield based (Single delamination)}
+			\begin{figure}
+				\centering
+				\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm]{32}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
+				\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
+				\subfloat[RMS of all intermediate predictions]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_updated_results_.png}}\quad
+				\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_CFRP_teflon_3o__375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_.png}}
+			\end{figure}
+			IoU= $0.41$ and $\epsilon=71.56\%$  for the thresholded damage map.
+		\end{frame}
+		
 		\setcounter{subfigure}{0}
-		\begin{frame}{Delamination arrangement}
+		\begin{frame}{Multiple delamination arrangement}
 			\begin{minipage}[c]{0.4\textwidth}
 				\begin{itemize}[<alert@+>]
 					\item Teflon inserts with a thickness of \(250\ \mu\)m were used to simulate the delaminations.
@@ -1116,12 +1129,11 @@
 		\setcounter{subfigure}{0}	
 		\begin{frame}{Experimental results full wavefield based}
 			\begin{figure}
-%				\centering
-%				\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}\quad
-%				\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/Intermediate_specimen_3/Intermediate_specimen_3-}{0}{487}}
-%				\\				
-				\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4cm,keepaspectratio]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}\quad
-				\subfloat[Binary RMS]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
+				\centering
+				\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}\quad
+				\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/Intermediate_specimen_3/Intermediate_specimen_3-}{0}{487}}\quad
+				\subfloat[RMS of all intermediate predictions]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}\quad
+				\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
 			\end{figure}
 			IoU= $0.64$ and $\epsilon=1.69\%$  for the thresholded damage map.
 		\end{frame}
@@ -1143,7 +1155,7 @@
 				\end{column}
 				\begin{column}[c]{0.55\textwidth}
 					\begin{figure}
-						\subfloat{\includegraphics[width=0.8\textwidth]{superresolution_flowchart.png}}
+						\subfloat{\includegraphics[width=0.8\textwidth]{superresolution_flowchart.jpg}}
 					\end{figure}
 				\end{column}
 			\end{columns}
