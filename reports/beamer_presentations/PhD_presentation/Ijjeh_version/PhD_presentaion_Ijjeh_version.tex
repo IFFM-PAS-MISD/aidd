@@ -283,25 +283,25 @@
 	\section{Composite laminates}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%\subsection{Composite laminates}
-	\begin{frame}{What are Composite Laminates?}
-		\begin{columns}[T]
-			\begin{column}[c]{.3\textwidth}
-				\small
-				\begin{itemize}
-					\justifying
-					%			\item Composite laminates are usually composed of plies with different directions.
-					\item A \textcolor{blue}{ply} is made up of unidirectional continuous \textcolor{blue}{Fibres} held together by a \textcolor{blue}{Polymer matrix such as Epoxy resin} .			
-					\item The lay-up of the plies depends on the anticipated loading of the structure where the laminate will be used.
-				\end{itemize}
-			\end{column}
-			\hfill
-			\begin{column}[c]{.65\textwidth}
-				\begin{figure}
-					\includegraphics[width=.95\textwidth]{compsite_laminates.png}
-				\end{figure}
-			\end{column}
-		\end{columns}
-	\end{frame}
+%	\begin{frame}{What are Composite Laminates?}
+%		\begin{columns}[T]
+%			\begin{column}[c]{.3\textwidth}
+%				\small
+%				\begin{itemize}
+%					\justifying
+%					%			\item Composite laminates are usually composed of plies with different directions.
+%					\item A \textcolor{blue}{ply} is made up of unidirectional continuous \textcolor{blue}{Fibres} held together by a \textcolor{blue}{Polymer matrix such as Epoxy resin} .			
+%					\item The lay-up of the plies depends on the anticipated loading of the structure where the laminate will be used.
+%				\end{itemize}
+%			\end{column}
+%			\hfill
+%			\begin{column}[c]{.65\textwidth}
+%				\begin{figure}
+%					\includegraphics[width=.95\textwidth]{compsite_laminates.png}
+%				\end{figure}
+%			\end{column}
+%		\end{columns}
+%	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Advantages \& applications}
 		\begin{columns}[T]
@@ -817,7 +817,27 @@
 			\end{column}
 		\end{columns}
 	\end{frame}
-	
+
+	\setcounter{subfigure}{0}
+	\begin{frame}{What is behind encoder-decoder?}
+		\begin{columns}[T]
+			\begin{column}[t]{.35\textwidth}
+				\begin{itemize}
+					\item \alert{Encoder} learns to extract the features.
+					\item \alert{Latent space} has condensed feature maps.
+					\item \alert{Decoder} learns to locate the features learned by the encoder.
+				\end{itemize}	
+			\end{column}
+			\hfill
+			\begin{column}[t]{.6\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[width=.95\textwidth]{nn_encoder_decoder.png}
+				\end{figure}	
+			\end{column}
+		\end{columns}			
+	\end{frame}
+
 	\setcounter{subfigure}{0}
 	\subsection{RMS based models}
 	
