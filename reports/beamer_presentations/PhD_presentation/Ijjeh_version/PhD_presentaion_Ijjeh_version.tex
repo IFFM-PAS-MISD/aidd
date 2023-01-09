@@ -279,8 +279,21 @@
 			\tableofcontents
 		\end{multicols}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Composite laminates}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Objectives}
+	\begin{frame}{Objectives}
+		\textbf{To develop \textcolor{blue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
+		\vfil
+		\textbf{To address the issue of \textcolor{blue}{slow data acquisition} of high-resolution full wavefields of Lamb wave propagation.}
+		\begin{alertblock}{Thesis}
+			It is possible to use an end-to-end approach in which DNN 
+			processes the animation of propagating waves (input) directly into a damage map (output).
+		\end{alertblock}
+	\end{frame}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{SHM/NDE}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%\subsection{Composite laminates}
 %	\begin{frame}{What are Composite Laminates?}
@@ -303,7 +316,7 @@
 %		\end{columns}
 %	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Advantages \& applications}
+	\begin{frame}{Composite laminates advantages \& applications}
 		\begin{columns}[T]
 			\begin{column}[t]{.45\textwidth}
 				\textbf{Some of the favorable characteristics of utilising composite laminates:}
@@ -350,7 +363,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{SHM/NDE}
+%	\section{SHM/NDE}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Structural Health Monitoring (SHM)}
 		\begin{figure}
@@ -359,28 +372,28 @@
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-	\begin{frame}{Non Destructive Evaluations (NDEs)}
+	\begin{frame}{Non Destructive Testing}
 		\begin{columns}[T]
-			\only<1>{
-				\begin{column}[c]{0.32\textwidth}	
-					\begin{itemize}
-						\item \textbf{Visual inspection}
-						\item \textbf{Eddy current}
-						\item \textbf{Dye penetration}
-						\item \textbf{Acoustic emission}
-						\item \alert{\textbf{Ultrasonic testing}} \alert{\textbf{(local NDEs)}}
-						\item \alert{\textbf{Guided wave testing (global NDEs)}}
-					\end{itemize}
-			\end{column}}
-			\only<2->{
-				\begin{column}[c]{0.32\textwidth}
+%			\only<1>{
+%				\begin{column}[c]{0.32\textwidth}	
+%					\begin{itemize}
+%						\item \textbf{Visual inspection}
+%						\item \textbf{Eddy current}
+%						\item \textbf{Dye penetration}
+%						\item \textbf{Acoustic emission}
+%						\item \alert{\textbf{Ultrasonic testing}} \alert{\textbf{(local NDEs)}}
+%						\item \alert{\textbf{Guided wave testing (global NDEs)}}
+%					\end{itemize}
+%			\end{column}}
+			\only<1->{
+			\begin{column}[c]{0.32\textwidth}
 					\begin{itemize}
 						\item[$\times$] \alert{Labor intensive}
 						\item[$\times$] \alert{Time consuming}
 						\item[$\times$] \alert{Need professional and experienced personnel}
 						\item[$\times$] \alert{May require the disassembly of complex structures}
 					\end{itemize}
-					\alert{\textbf{Local NDEs are not practical and do not fit for SHM}}
+%					\alert{\textbf{Local NDEs are not practical and do not fit for SHM}}
 			\end{column}}
 			\begin{column}[c]{0.65\textwidth}				
 				\textbf{Ultrasonic testing} \hspace{50pt} \textbf{Guided wave testing}
@@ -598,18 +611,7 @@
 			\includegraphics[width=.95\textwidth]{DL_approach.png}
 		\end{figure}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Objectives}
-	\begin{frame}{Objectives}
-		\textbf{To develop \textcolor{blue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
-		\vfil
-		\textbf{To address the issue of \textcolor{blue}{slow data acquisition} of high-resolution full wavefields of Lamb wave propagation.}
-		\begin{alertblock}{Thesis}
-			It is possible to use an end-to-end approach in which DNN 
-			processes the animation of propagating waves (input) directly into a damage map (output).
-		\end{alertblock}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%
 	%\setcounter{subfigure}{0}
 	%\section{Artificial intelligence, machine learning, and deep learning}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -657,6 +659,52 @@
 	%	(source: https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)
 	%\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{DL-based approaches for damage detection and localisation}
+	\setcounter{subfigure}{0}
+	\begin{frame}{What is computer vision?}
+		\begin{columns}[T]
+			\begin{column}[c]{0.30\textwidth}
+				\justifying
+				\alert {\textbf{Computer vision}} is a field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
+			\end{column}
+			\hfill
+			\begin{column}[c]{0.65\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[width=1\textwidth]{computer_vision_tasks.png}
+				\end{figure}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Convolution operation (Feature extractor)}
+		\begin{figure}[t]
+			\centering
+			\subfloat[Full wavefield]{\animategraphics[autoplay,loop,height =0.90\textheight]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}}\quad
+		\end{figure}
+	\end{frame}
+
+	\setcounter{subfigure}{0}
+	\begin{frame}{Encoder-decoder (Autoencoder)}
+		\begin{columns}[T]
+			\begin{column}[t]{.35\textwidth}
+				\begin{itemize}
+					\item \alert{Encoder} learns to extract the features.
+					\item \alert{Latent space} has condensed feature maps.
+					\item \alert{Decoder} learns to locate the features learned by the encoder.
+				\end{itemize}	
+			\end{column}
+			\hfill
+			\begin{column}[t]{.6\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[width=1\textwidth]{nn_encoder_decoder.png}
+				\end{figure}	
+			\end{column}
+		\end{columns}			
+	\end{frame}
 	\setcounter{subfigure}{0}
 	\section{Synthetic dataset generation}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -670,28 +718,28 @@
 					\begin{itemize}
 						\only<1>
 						{\item 475 delamination scenarios
-						\item Delamination size min 10 mm, max  40 mm
-						\item \textbf{3-months of computing}}
+							\item Delamination size min 10 mm, max  40 mm
+							\item \textbf{3-months of computing}}
 						\only<2>{\item \alert{Delamination geometrical size} (ellipse minor and major axis) randomly selected from [10 mm, 40 mm].}
 						\only<3>{\item \alert{Delamination angle} randomly selected from the interval $[0^\circ,180^\circ]$}
 						\only<4>{\item \alert{Coordinates of the centre of delamination \((x_{c},y_{c})\)} randomly selected from the interval [0 mm, 250 mm - $\delta$] and [250 mm + $\delta$, 500 mm], where $\delta$ = 10 mm.}
 						\only<5>{\item Delamination was modelled between the 3rd and 4th layer
-						\item CFRP is made of 8-layers}
+							\item CFRP is made of 8-layers}
 					\end{itemize}
 			\end{column}}
 			\only<1-4>{\begin{column}[c]{0.48\textwidth}
-				\begin{figure}					
-					\centering
-					\only<1>{\subfloat[All random delaminations]{\includegraphics[width=0.7\textwidth]{figure_overlap.png}}}
-					\only<2-4>{\subfloat[Delamination orientation]{\includegraphics[width=0.90\textwidth]{figure1.png}}}
-				\end{figure}
+					\begin{figure}					
+						\centering
+						\only<1>{\subfloat[All random delaminations]{\includegraphics[width=0.7\textwidth]{figure_overlap.png}}}
+						\only<2-4>{\subfloat[Delamination orientation]{\includegraphics[width=0.90\textwidth]{figure1.png}}}
+					\end{figure}
 			\end{column}}
 			\only<5>{\begin{column}[c]{0.48\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=0.8\textwidth]{delamination_placement.png}
-					\caption{Delamination placement}
-				\end{figure}
+					\begin{figure}
+						\centering
+						\includegraphics[width=0.8\textwidth]{delamination_placement.png}
+						\caption{Delamination placement}
+					\end{figure}
 			\end{column}}
 		\end{columns}
 	\end{frame}
@@ -728,48 +776,31 @@
 			\label{eqn:rms} 
 		\end{equation}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{DL-based approaches for damage detection and localisation}
 	\setcounter{subfigure}{0}
-	\begin{frame}{What is computer vision?}
+	\section{Semantic segmentation}
+	\begin{frame}{Semantic segmentation}
 		\begin{columns}[T]
-			\begin{column}[c]{0.30\textwidth}
-				\justifying
-				\alert{\textbf{Computer vision} is a field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs.} 
-			\end{column}
-			\hfill
-			\begin{column}[c]{0.65\textwidth}
+			\begin{column}[c]{0.47\textwidth}
+				\centering
+				\textbf{One-to-one \\image-based approach (RMS)} 
 				\begin{figure}
 					\centering
-					\includegraphics[width=1\textwidth]{computer_vision_tasks.png}
+					\subfloat[Single input (image)]{\includegraphics[width=.45\textwidth]{RMS_flat_shell_Vz_381_500x500bottom.png}}\quad
+					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
 				\end{figure}
 			\end{column}
-		\end{columns}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Semantic segmentation}
-	\begin{frame}{Image semantic segmentation}
-		\begin{columns}[T]
-			\begin{column}[c]{0.48\textwidth}		
-				\centering		
-				\textbf{One-to-one (RMS based approach)}
+			\hfill
+			\begin{column}[c]{0.47\textwidth}
+				\centering
+				\textbf{Many-to-one \\animation-based approach}
 				\begin{figure}
-					\subfloat[Single input]{\includegraphics[width=.45\textwidth]{RMS_flat_shell_Vz_381_500x500bottom.png}}\quad
+					\centering
+					\subfloat[Multiple frames animation]{\animategraphics[autoplay,loop,width=.45\textwidth]{4}{figures/gif_figs/381_output/output_381-}{85}{113}}\quad
 					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
 				\end{figure}
-			\end{column}
-			\begin{column}[c]{0.48\textwidth}
-				\centering
-				\textbf{Many-to-one (Full wavefield frames)}
-				\centering
-				\begin{figure}				
-					\subfloat[Full wavefield]{\animategraphics[autoplay,loop,width=.45\textwidth]{4}{figures/gif_figs/381_output/output_381-}{85}{113}}\quad
-					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
-				\end{figure}
-			\end{column}
-		\end{columns}
-	\end{frame}
-	
+			\end{column}	
+		\end{columns}		
+	\end{frame}	
 	\subsection{Developed DL models}
 	%\begin{frame}{Common deep learning architectures}
 	%	
@@ -816,31 +847,10 @@
 				\biblioref{Ullah, S., Ijjeh, A. A., Kudela, P.}{2023}{Deep learning approach for delamination identification using animation of Lamb waves}{Engineering Applications of Artificial Intelligence, 117, 105520}
 			\end{column}
 		\end{columns}
-	\end{frame}
+	\end{frame}	
 
 	\setcounter{subfigure}{0}
-	\begin{frame}{What is behind encoder-decoder?}
-		\begin{columns}[T]
-			\begin{column}[t]{.35\textwidth}
-				\begin{itemize}
-					\item \alert{Encoder} learns to extract the features.
-					\item \alert{Latent space} has condensed feature maps.
-					\item \alert{Decoder} learns to locate the features learned by the encoder.
-				\end{itemize}	
-			\end{column}
-			\hfill
-			\begin{column}[t]{.6\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=.95\textwidth]{nn_encoder_decoder.png}
-				\end{figure}	
-			\end{column}
-		\end{columns}			
-	\end{frame}
-
-	\setcounter{subfigure}{0}
-	\subsection{RMS based models}
-	
+	\subsection{Developed RMS based models}	
 	\begin{frame}{Residual UNet}
 		\begin{figure}
 			\centering
@@ -972,15 +982,16 @@
 			\end{columns}
 		\end{frame}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\section{Numerical test cases}
+		\section{Evaluation of the developed models}
+		\subsection{Numerical test cases}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\begin{frame}{Numerical test cases RMS based models (GCN model)}
 			\begin{columns}[T]
 				\begin{column}[c]{0.32\textwidth}
 					\begin{figure}[c]
 						\centering
-						\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/397/intermediate_output-}{0}{82}
-						\caption{\(1^{st}\) numerical case.}
+						\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/456/intermediate_output-}{0}{82}
+						\caption{\(1^{st}\) numerical case, IoU=0.71}
 					\end{figure}
 				\end{column}
 				\hfill
@@ -988,37 +999,84 @@
 					\begin{figure}[c]
 						\centering
 						\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/438/intermediate_output-}{0}{82}
-						\caption{\(2^{nd}\) numerical case.}
+						\caption{\(2^{nd}\) numerical case, IoU=0.72}
 					\end{figure}
 				\end{column}
 				\hfill
 				\begin{column}[c]{0.32\textwidth}
 					\begin{figure}[c]
 						\centering
-						\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/456/intermediate_output-}{0}{82}
-						\caption{\(3^{rd}\) numerical case.}
-					\end{figure}
+						\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/397/intermediate_output-}{0}{82}
+						\caption{\(3^{rd}\) numerical case, IoU=0.86}
+					\end{figure}					
 				\end{column}
 			\end{columns}
 		\end{frame}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\begin{frame}{RMS based: Analysis of numerical cases}
-			\begin{table}[ht!]
-				\centering
-				\caption{Analysis of numerical cases.}
-				\label{tab:table_all_numerical_cases}	
-				\begin{tabular}{lcc}
-					\toprule
-					Model & mean \(IoU\) & max \(IoU\) \\ 
-					\midrule 
-					Res-UNet & \(0.66\) & \(0.89\) \\ 
-					VGG16 encoder-decoder & \(0.57\) & \(0.84\) \\ 
-					FCN-DenseNet & \(0.68\) & \(0.92\) \\ 
-					PSPNet & \(0.55\) & \(0.91\) \\ 
-					GCN & \(0.76\) & \(0.93\) \\ 
-					\bottomrule
-				\end{tabular}
-			\end{table}
+			\begin{columns}[T]
+				\tiny
+				\begin{column}[c]{0.48\textwidth}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					\begin{table}[ht!]
+						\centering
+						\caption{Evaluation metrics of the three numerical cases.}
+						\label{tab:RMS_num_cases}
+						\begin{tabular}{cccccc}
+							\toprule[1.5pt]
+							\multirow{2}{*}{Model} & \multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+							\cmidrule(lr){4-6} & & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+							\midrule
+							\multirow{3}{*}{Res-UNet} 							
+							& 1 & 257 & \multicolumn{1}{c}{0.45} & \multicolumn{1}{c}{143} & \(44.36\%\) \\ 
+							& 2 & 105 & \multicolumn{1}{c}{0.67} & \multicolumn{1}{c}{88} & \(16.19\%\) \\ 
+							& 3 & 537 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{478} & \(10.99\%\) \\ 
+							\midrule
+							\multirow{3}{*}{VGG16 encoder-decoder} 
+							& 1 & 257 & \multicolumn{1}{c}{0.69} & \multicolumn{1}{c}{203} & \(21.01\%\) \\ 
+							& 2 & 105 & \multicolumn{1}{c}{0.75} & \multicolumn{1}{c}{117} & \(11.43\%\) \\ 
+							& 3 & 537 & \multicolumn{1}{c}{0.65} & \multicolumn{1}{c}{385} & \(28.31\%\) \\ 
+							\midrule
+							\multirow{3}{*}{FCN-DenseNet} 
+							& 1 & 257 & \multicolumn{1}{c}{0.52} & \multicolumn{1}{c}{505} & \(96.50\%\) \\ 
+							& 2 & 105 & \multicolumn{1}{c}{0.66} & \multicolumn{1}{c}{118} & \(12.38\%\) \\ 
+							& 3 & 537 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{815} & \(51.77\%\) \\ 
+							\midrule
+							\multirow{3}{*}{PSPNet} 
+							& 1 & 257 & \multicolumn{1}{c}{0.00} & \multicolumn{1}{c}{0} & \(-\%\) \\ 
+							& 2 & 105 & \multicolumn{1}{c}{0.44} & \multicolumn{1}{c}{156} & \(48.57\%\) \\ 
+							& 3 & 537 & \multicolumn{1}{c}{0.77} & \multicolumn{1}{c}{610} & \(13.59\%\) \\ 
+							\midrule
+							\multirow{3}{*}{GCN} 
+							& 1 & 257 & \multicolumn{1}{c}{0.71} & \multicolumn{1}{c}{215} & \(16.34\%\) \\ 
+							& 2 & 105 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{177} & \(68.57\%\) \\ 
+							& 3 & 537 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{523} & \(2.61\%\) \\ 
+							\bottomrule[1.5pt]
+						\end{tabular}	
+					\end{table}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+				\end{column}
+			\hfill
+			\begin{column}[c]{0.48\textwidth}
+				\begin{table}[ht!]
+					\centering
+					\caption{Analysis of numerical cases.}
+					\label{tab:table_all_numerical_cases}	
+					\begin{tabular}{lcc}
+						\toprule[1.5pt]
+						Model & mean IoU & max IoU \\ 
+						\midrule 
+						Res-UNet & \(0.66\) & \(0.89\) \\ 
+						VGG16 encoder-decoder & \(0.57\) & \(0.84\) \\ 
+						FCN-DenseNet & \(0.68\) & \(0.92\) \\ 
+						PSPNet & \(0.55\) & \(0.91\) \\ 
+						GCN & \(0.76\) & \(0.93\) \\ 
+						\bottomrule[1.5pt]
+					\end{tabular}
+				\end{table}
+			\end{column}
+			\end{columns}
+			
 		\end{frame}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\begin{frame}{Numerical test cases animation of Lamb waves}
@@ -1050,8 +1108,27 @@
 					\subfloat[Binary RMS, IoU= 0.8]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case394_.png}}
 			\end{figure}}
 		\end{frame}
+	
+		\begin{frame}{Animation based: Analysis of numerical cases}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{table}[!h]
+				\centering
+				\caption{Evaluation metrics of the three numerical cases.}
+				\begin{tabular}{ccccc}
+					\toprule
+					\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+					\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+					\midrule
+					1 & 763 & \multicolumn{1}{c}{0.88} & \multicolumn{1}{c}{735} & \(3.67\%\) \\ 
+					2 & 388 & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{248} & \(36.08\%\) \\ 
+					3 & 297 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{280} & \(5.72\%\) \\ 					
+					\bottomrule
+				\end{tabular}	
+				\label{tab:num_cases}
+			\end{table}			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\end{frame}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\section{Experimental case}
+		\subsection{Experimental cases}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\begin{frame}[t]{Composite specimen}
 			\begin{columns}[T]
@@ -1329,6 +1406,28 @@
 				\end{column}
 			\end{columns}
 		\end{frame}
+	
+		\begin{frame}{Analysis of numerical cases}
+			\begin{table}[!h]
+				\centering \footnotesize
+				\caption{Quality metrics for the DLSR model for three numerical test cases calculated at frames $N_f$ per case.}	
+				\begin{tabular}{lccccc}
+					\toprule
+					& & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+					\cmidrule(lr){3-4} \cmidrule(lr){5-6}
+					Case & $N_f$ & PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+					\midrule
+					\multirow{3}{*}{}  & 127  & 42.95 & 0.999 & 33.02 & 0.993 \\					
+					\midrule
+					\multirow{3}{*}{}  & 154 & 47.00 & 0.998 & 38.52 & 0.995 
+					\\
+					\midrule					
+					\multirow{3}{*}{}  & 159 & 48.60 & 0.998 & 46.67 & 0.998 \\					
+					\bottomrule
+				\end{tabular}
+				\label{tab:num_DLSR_results}
+			\end{table}			
+		\end{frame}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\begin{frame}{Experimental setup}
 			\begin{figure}
@@ -1342,22 +1441,51 @@
 			Low-resolution measurements (Input): \(32\times32=1024\) points. (Nf = 110.)\\
 			High-resolution (Output): \(512\times512=262144\) points (Nf = 110.).
 			\begin{columns}[T]
-				\begin{column}[c]{0.3\textwidth}
+				\begin{column}[c]{0.19\textwidth}
 					\begin{figure}						
-						\subfloat[LR input]{						\includegraphics[height=.5\textheight]{frame110_32x32.png}}
+						\subfloat[LR input]{						\includegraphics[width=1\textwidth]{frame110_32x32.png}}
 					\end{figure}
 				\end{column}
-				\begin{column}[c]{0.66\textwidth}
-					\begin{figure}
-						\subfloat[HR ref]{\includegraphics[height=.27\textheight]{figure10a.png}}\quad
-						\subfloat[CS]{\includegraphics[height=.27\textheight]{figure10b.png}}\quad
-						\subfloat[SR]{\includegraphics[height=.27\textheight]{figure10e.png}}\quad
-						\subfloat[Ref]{\includegraphics[height=.27\textheight]{figure11a.png}}\quad
-						\subfloat[CS]{\includegraphics[height=.27\textheight]{figure11b.png}}\quad
-						\subfloat[Pred]{\includegraphics[height=.27\textheight]{figure11e.png}}\quad
+				\begin{column}[c]{0.8\textwidth}
+					\begin{figure}[ht!]
+						\subfloat[HR ref]{\includegraphics[height=.22\textheight]{figure10a.png}}\quad
+						\subfloat[CS: 1024 points]{\includegraphics[height=.22\textheight]{figure10b.png}}\quad
+						\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure10c.png}}\quad
+						\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure10d.png}}\quad
+						\subfloat[SR]{\includegraphics[height=.22\textheight]{figure10e.png}}\quad
+						
+						\subfloat[Ref]{\includegraphics[height=.22\textheight]{figure11a.png}}\quad
+						\subfloat[CS: 1024 points]{\includegraphics[height=.22\textheight]{figure11b.png}}\quad
+						\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure11c.png}}\quad
+						\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure11d.png}}\quad
+						\subfloat[Pred]{\includegraphics[height=.22\textheight]{figure11e.png}}\quad
 					\end{figure}
 				\end{column}				
 			\end{columns}
+		\end{frame}
+
+		\begin{frame}{Analysis of experimental case}
+			\begin{table}[!ht]
+				\renewcommand{\arraystretch}{1.3}
+				\centering \footnotesize
+				\caption{Quality metrics for tested methods for various number of points $N_p$ and corresponding compression ratios CR calculated for the frame no $N_f=110$.}	
+				\begin{tabular}{lrrrcrc} 
+					\toprule
+					& & & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+					\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+					Method & $N_p$ & CR [\%] & PSNR & PEARSON CC& PSNR & PEARSON CC \\
+					\midrule
+					\csvreader
+					[table head=\toprule,
+					late after line=\\ 
+					]{table_metrics.csv}{
+						1=\one, 2=\two, 3=\three, 4=\four, 5=\five, 6=\six, 7=\seven
+					}%
+					{\one & \two & \three & \four & \five & \six & \seven }%	
+					\bottomrule
+				\end{tabular}	
+				\label{tab:csv_results}
+			\end{table}
 		\end{frame}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\section{Conclusions}
