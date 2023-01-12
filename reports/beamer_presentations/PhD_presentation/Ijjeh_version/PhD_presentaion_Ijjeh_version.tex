@@ -78,7 +78,7 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
 %\usepackage{pgfpages}
-%\setbeameroption{show notes}
+\setbeameroption{show notes}
 %\setbeameroption{show notes on second screen=left}
 \setbeamertemplate{note page}{\insertnote}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -99,173 +99,7 @@
 	\vspace{-1.5cm}
 	\flushright 
 	\includegraphics[width=6cm]{imp_logo.png}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% option 2 - authors in one line
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\title{My fancy title}
-%	\subtitle{Lamb-opt}
-%	\author{\textbf{Paweł Kudela}\textsuperscript{2}, Maciej 
-	%	Radzieński\textsuperscript{2}, Wiesław Ostachowicz\textsuperscript{2}, 
-	%	Zhibo Yang\textsuperscript{1} }
-%	 logo align to Institute 
-%	\institute{\textsuperscript{1}Xi'an Jiaotong University \\ 
-	%	\textsuperscript{2}Institute of Fluid Flow Machinery\\ \hspace*{1pt} Polish 
-	%	Academy of Sciences \\ \vspace{-1.5cm}\flushright 	
-	%	\includegraphics[width=6cm]{imp_logo.png}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% option 3 - multilogo vertical
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%\title{My fancy title}
-%%\subtitle{Lamb-opt}
-%%	\author{\textbf{Paweł Kudela}\inst{1}, Maciej Radzieński\inst{1}, Wiesław Ostachowicz\inst{1}, Zhibo Yang\inst{2} }
-%%	 logo under Institute 
-%%	\institute%
-%%	{ 
-	%%		\inst{1}%
-	%%		Institute of Fluid Flow Machinery\\ \hspace*{1pt} Polish Academy of Sciences \\ \includegraphics[height=0.85cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps} \\
-	%%		\and
-	%%		\inst{2}%
-	%%	 Xi'an Jiaotong University \\ \includegraphics[height=0.85cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_box.eps}
-	%% }
-% end od option 3
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% option 4 - 3 Institutes and logos horizontal centered
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\title{My fancy title}
-%\subtitle{Lamb-opt }
-%\author{\textbf{Paweł Kudela}\textsuperscript{1}, Maciej Radzieński\textsuperscript{1}, Marco Miniaci\textsuperscript{2}, Zhibo Yang\textsuperscript{3} }
-%
-%\institute{ 
-	%\begin{columns}[T,onlytextwidth]
-	%	\column{0.39\textwidth}
-	%	\begin{center}
-		%		\textsuperscript{1}Institute of Fluid Flow Machinery\\ \hspace*{3pt}Polish Academy of Sciences
-		%	\end{center}
-	%	\column{0.3\textwidth}
-	%	\begin{center}
-		%		\textsuperscript{2}Zurich University
-		%	\end{center}
-	%	\column{0.3\textwidth}
-	%	\begin{center}
-		%		\textsuperscript{3}Xi'an Jiaotong University
-		%	\end{center}
-	%\end{columns}
-	%\vspace{6pt}
-	%% logos 
-	%\begin{columns}[b,onlytextwidth]
-	%	\column{0.39\textwidth}
-	%		\centering 
-	%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}
-	%	\column{0.3\textwidth}
-	%		\centering 
-	%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_box.eps}
-	%	\column{0.3\textwidth}
-	%		\centering 
-	%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_box2.eps}
-	%\end{columns}
-	%}
-%\makeatletter
-%\setbeamertemplate{title page}{
-	%	\begin{column}[b][\paperheight]{\textwidth}
-		%		\centering % <-- Center here
-		%		\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
-		%		\vfill%
-		%		\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
-		%		\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
-		%		\usebeamertemplate*{title separator}
-		%		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
-		%		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
-		%		\ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
-		%		\vfill
-		%		\vspace*{1mm}
-		%	\end{column}
-	%}
-%
-%\setbeamertemplate{title}{
-	%	% \raggedright% % <-- Comment here
-	%	\linespread{1.0}%
-	%	\inserttitle%
-	%	\par%
-	%	\vspace*{0.5em}
-	%}
-%\setbeamertemplate{subtitle}{
-	%	% \raggedright% % <-- Comment here
-	%	\insertsubtitle%
-	%	\par%
-	%	\vspace*{0.5em}
-	%}
-%\makeatother
-% end of option 4
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% option 5 - 2 Institutes and logos horizontal centered
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\title{My fancy title}
-%\subtitle{Lamb-opt }
-%\author{\textbf{Paweł Kudela}\textsuperscript{1}, Maciej Radzieński\textsuperscript{1}, Marco Miniaci\textsuperscript{2}}
-%
-%\institute{ 
-	%	\begin{columns}[T,onlytextwidth]
-		%		\column{0.5\textwidth}
-		%			\centering
-		%			\textsuperscript{1}Institute of Fluid Flow Machinery\\ \hspace*{3pt}Polish Academy of Sciences
-		%		\column{0.5\textwidth}
-		%			\centering
-		%			\textsuperscript{2}Zurich University
-		%	\end{columns}
-	%	\vspace{6pt}
-	%	% logos 
-	%	\begin{columns}[b,onlytextwidth]
-		%		\column{0.5\textwidth}
-		%		\centering 
-		%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}
-		%		\column{0.5\textwidth}
-		%		\centering 
-		%		\includegraphics[scale=0.9,height=0.85cm,keepaspectratio]{//odroid-sensors/sensors/MISD_shared/logo/logo_box.eps}
-		%	\end{columns}
-	%}
-%\makeatletter
-%\setbeamertemplate{title page}{
-	%	\begin{column}[b][\paperheight]{\textwidth}
-		%		\centering % <-- Center here
-		%		\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
-		%		\vfill%
-		%		\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
-		%		\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
-		%		\usebeamertemplate*{title separator}
-		%		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
-		%		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
-		%		\ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
-		%		\vfill
-		%		\vspace*{1mm}
-		%	\end{column}
-	%}
-%
-%\setbeamertemplate{title}{
-	%	% \raggedright% % <-- Comment here
-	%	\linespread{1.0}%
-	%	\inserttitle%
-	%	\par%
-	%	\vspace*{0.5em}
-	%}
-%\setbeamertemplate{subtitle}{
-	%	% \raggedright% % <-- Comment here
-	%	\insertsubtitle%
-	%	\par%
-	%	\vspace*{0.5em}
-	%}
-%\makeatother
-% end of option 5
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% End of title page options
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% logo option - alternative manual insertion by modification of coordinates in \put()
-%\titlegraphic{%
-	%	%\vspace{\logoadheight}
-	%	\begin{picture}(0,0)
-		%	\put(305,-185){\makebox(0,0)[rb]{\includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}}
-		%	\end{picture}}
-%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\tikzexternalize % activate!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -276,7 +110,19 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\maketitle
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{I would like to thank you all for attending my doctoral defence}
+	\note{
+		First of all, let me introduce my self; my name is Abdalraheem Ijjeh.
+		I am PhD candidate at the institute of fluid flow machinery, Polish academy of sciences.
+		My supervisor is Professor Pawl Kudela.
+		
+		The title of my PhD thesis is FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES.
+		
+		Thank you all for you attending my PhD defence presentation.
+		
+		Let's start.
+		
+		
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% SLIDES
@@ -290,7 +136,18 @@
 		\end{multicols}
 	\end{frame}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{}
+	\note{The presentation will be as follows: 
+		In the first section, I will talk about the motivations behind this research. 
+		Then I will state my objectives in the second section.
+		In sections 3, 4 I will give a brief introduction to structural health monitoring and NDT approaches,and guided Lamb waves.
+		In section 5, I will present the conventional approach vs deep learning approach for damage detection.
+		Section 6, will be an introduction to supervised deep learning approach and how it works in general.
+		The generation of the synthetic dataset which used for training will be presented in section 7.
+		In section 8, I will present the developed deep learning models for damage identification.
+		The evaluation of the developed models will be presented in section 9.
+		The super-resolution deep learning model developed for fast data acquisition will be presented in section 10.
+		Finally, the conclusions will be presented in section 11.
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Motivation}
 	\begin{frame}{Defects in composite laminates}
@@ -314,7 +171,19 @@
 		\end{columns}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		Composite laminates have a wide range of applications in various industries, due to their characteristics such as high strength, low density, resistance to fatigue and corrosion among other characteristics.
+		
+		However, defects such as cracks, fiber breakage, and debonding can occur in composite laminates. 
+		
+		In particular, laminated composite materials are more sensitive to damage in the form of delamination due to weak transverse tensile and interlaminar shear strengths.
+		
+		Delamination can alter the compression strength of composite laminate, and gradually affect the composite to encounter failure by buckling.
+		
+		Delaminations can seriously decrease the performance of composite structures, accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
+		
+		
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Objectives}
 	\begin{frame}{Objectives}
@@ -327,67 +196,48 @@
 		\end{alertblock}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		The main objective of this work is to develop an artificial intelligence (AI)-driven diagnostic system to detect delamination in composite laminates.
+		Accordingly, I explored the concept of the end-to-end approach by utilizing animations of Lamb wave propagation in a plate interacting with discontinuities such as damage and edges, with an artificial intelligence-based approach to to detect and identify delamination.
+		
+		My second objective is to address the issue of slow data acquisition of
+		high-resolution full wavefields of Lamb wave propagation by SLDV. 		
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{SHM/NDE}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\subsection{Composite laminates}
-%	\begin{frame}{What are Composite Laminates?}
-%		\begin{columns}[T]
-%			\begin{column}[c]{.3\textwidth}
-%				\small
-%				\begin{itemize}
-%					\justifying
-%					%			\item Composite laminates are usually composed of plies with different directions.
-%					\item A \textcolor{blue}{ply} is made up of unidirectional continuous \textcolor{blue}{Fibres} held together by a \textcolor{blue}{Polymer matrix such as Epoxy resin} .			
-%					\item The lay-up of the plies depends on the anticipated loading of the structure where the laminate will be used.
-%				\end{itemize}
-%			\end{column}
-%			\hfill
-%			\begin{column}[c]{.65\textwidth}
-%				\begin{figure}
-%					\includegraphics[width=.95\textwidth]{compsite_laminates.png}
-%				\end{figure}
-%			\end{column}
-%		\end{columns}
-%	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\section{SHM/NDE}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Structural Health Monitoring (SHM)}
 		\begin{figure}
 			\includegraphics[height=.8\textheight]{SHM_system.png}
 		\end{figure}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		Structural health monitoring is about monitoring a structure periodically or continuously to assess its technical conditions.
+		So, the idea is to place integrated sensors on the structure to continuously monitor the structure to assess its conditions.
+		In this way, structural health monitoring somehow mimics the human nervous system, which can give us real-time readings and detect any abnormal event.
+		Consequently, this is the ultimate aim of SHM: to monitor in real-time in a way that can detect damage early so we can perform preventive measures to protect the structure.
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Non Destructive Testing}
+	\begin{frame}{Non Destructive Evaluations (NDEs)}
 		\begin{columns}[T]
-%			\only<1>{
-%				\begin{column}[c]{0.32\textwidth}	
-%					\begin{itemize}
-%						\item \textbf{Visual inspection}
-%						\item \textbf{Eddy current}
-%						\item \textbf{Dye penetration}
-%						\item \textbf{Acoustic emission}
-%						\item \alert{\textbf{Ultrasonic testing}} \alert{\textbf{(local NDEs)}}
-%						\item \alert{\textbf{Guided wave testing (global NDEs)}}
-%					\end{itemize}
-%			\end{column}}
-			\only<1->{
-			\begin{column}[c]{0.32\textwidth}
-					\begin{itemize}
-						\item[$\times$] \alert{Labor intensive}
-						\item[$\times$] \alert{Time consuming}
-						\item[$\times$] \alert{Need professional and experienced personnel}
-						\item[$\times$] \alert{May require the disassembly of complex structures}
-					\end{itemize}
-%					\alert{\textbf{Local NDEs are not practical and do not fit for SHM}}
-			\end{column}}
-			\begin{column}[c]{0.65\textwidth}				
+			\begin{column}[c]{0.38\textwidth}
+				\textbf{Ultrasonic waves}	
+				\begin{itemize}
+					\item Frequency range: 2 MHz - 200 MHz
+					\item Wavelength \(\lambda << h\) thickness 
+					\item shorter wavelengths
+				\end{itemize}
+				
+				\textbf{Guided waves}	
+				\begin{itemize}
+					\item Typical frequency range: \\ 10 kHz - 1 MHz
+					\item Wavelength \(\lambda > h\) thickness 
+					\item longer wavelengths
+				\end{itemize}
+				
+			\end{column}
+			\begin{column}[c]{0.6\textwidth}				
 				\textbf{Ultrasonic testing} \hspace{50pt} \textbf{Guided wave testing}
 				\begin{figure}
 					\includegraphics[width=0.95\textwidth]{local_ultrasonic.png}
@@ -395,33 +245,48 @@
 			\end{column}		
 		\end{columns}	
 	\end{frame}
-	\begin{frame}{Ultrasonic testing vs guided wave testing}
-		\alert{Bulk waves} exist in infinite homogeneous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
-		These waves can be decomposed into infinite plane waves propagating along arbitrary direction within the solid.
+	\note{
+		There are a number of conventional methods that were used for long time in the industry for damage inspection such as:Visual inspection, Eddy current, Dye penetration, Acoustic emission and local Ultrasonic testing.
+		\\
+		For the local ultrasonic testing, the ultrasonic waves are in range of (2 MHz- 200 MHz) and their wavelength is way smaller than the thickness of structure.
 		
-		\alert{Guided waves} are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
-		\vspace{5mm}
-		\begin{columns}[T]
-			\begin{column}{0.5\textwidth}
-				\textbf{Ultrasonic waves}	
-				\begin{itemize}
-					\item Frequency range: 2 MHz - 200 MHz
-					\item Wavelength \(\lambda << h\) thickness 
-					\item shorter wavelengths
-				\end{itemize}
-			\end{column}
-			\begin{column}{0.5\textwidth}
-				\textbf{Guided waves}	
-				\begin{itemize}
-					\item Typical frequency range: 10 kHz - 1 MHz
-					\item Wavelength \(\lambda > h\) thickness 
-					\item longer wavelengths
-				\end{itemize}
-			\end{column}
-		\end{columns}			
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+		There are different methods for ultrasonic testing such as:
+		Pulse echo in which we have a probe that generates ultrasonic waves  that propagate through the thickness of structure, then the reflected waves from the bottom surface are captured by the same probe.
+		
+		The other ultrasonic method is called through-transmission method.
+		In which there are two probes one for transmitting on one side and second one for receiving on the other side.
+		Hence these methods are local it has some disadvantages:
+		Labor intensive, Time consuming, Need professional and experienced personnel, May require the disassembly of complex structures.
+		
+		On the other hand, guided wave testing are a promising global NDE solution for SHM.
+		The typical frequency range of Guided waves is 10 KHz to 1 MHz, and their wavelength is larger than the thickness of the investigated structure.
+		
+		Guided waves can be generated using Piezoelectric actuator and registered by an array of Piezoelectric sensors. 
+		Or, the propagation of guided Lamb waves can be registered using scanning laser Doppler vibrometer to produce a full wavefield scan.
+		 
+
+ 	}
+	
+%	\begin{frame}{Ultrasonic testing vs guided wave testing}
+%%		\alert{Bulk waves} exist in infinite homogeneous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
+%%		These waves can be decomposed into infinite plane waves propagating along arbitrary direction within the solid.
+%%		
+%%		\alert{Guided waves} are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
+%%		\vspace{5mm}
+%		\begin{columns}[T]
+%			\begin{column}{0.5\textwidth}
+%				
+%			\end{column}
+%			\begin{column}{0.5\textwidth}
+%				
+%			\end{column}
+%		\end{columns}			
+%	\end{frame}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\note{
+%		Guided waves are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
+%		
+%	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Guided waves}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -533,13 +398,20 @@
 			\centering
 			c_L=\sqrt{\frac{2\mu (1-\nu)}{\rho(1-2\nu)}},\ c_S=\sqrt{\frac{\mu}{\rho}}
 		\end{gather*}
-			
-		
-%		\(p^2 = \frac{\omega^2}{c_{L}^2}-k^2,\ q^2 = \frac{\omega^2}{c_{S}^2}-k^2,\ k = \frac{2\pi}{\lambda},\ f=\frac{\omega}{2\pi} \newline
-%		c_L=\sqrt{\frac{2\mu (1-\nu)}{\rho(1-2\nu)}},\ c_S=\sqrt{\frac{\mu}{\rho}} \)
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		Lamb waves are a subset of guided waves that propagate between two parallel surfaces such as in shell and plate structures discovered by Horace Lamb in 1917.
+		
+		Lamb waves can be separated into symmetric modes and antisymmetric modes in terms of the surface particle motion with regard to the mid-plane which are described in Rayleigh-Lamb equations:
+		
+		
+		where $h$ is the half-thickness of the plate, $k$ is the wavenumber, $\omega$ is the angular frequency, and $\lambda$ is the wavelength. 
+		\(cL\) and \(cS\) are the velocities of longitudinal and transverse
+		waves, respectively.
+		
+		where \(\rho\) is the density, \(\mu\) is the shear modulus, and \(\nu\) is Poisson's ratio of the medium.
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Lamb waves modes}
@@ -565,7 +437,7 @@
 						\item \textcolor{blue}{Travel within guides for long distances}
 						\item \textcolor{blue}{Can propagate in complex structures}
 						\item \textcolor{blue}{High speeds in metals and composites}
-						\item \textcolor{blue}{Can be automated using software}
+%						\item \textcolor{blue}{Can be automated using software}
 					\end{itemize}
 					\textbf{Lamb waves are a promising global NDE solution for SHM}
 			\end{column}
@@ -574,7 +446,21 @@
 		(source: https://nojigon.webs.upv.es/index.php)
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		the animation on the left shows the fundamental symmetric \(S_0\) mode of Lamb wave.
+		In which, we can see the in-plane motion of the particles.
+		Whereas the second animation shows the fundamental antisymmetric \(A_0\)
+		mode of Lamb wave.
+		In which, we can see the out-of-plane motion of the particles.
+		
+		Furthermore, Lamb wave has some good characteristics that make it a promising solution for SHM as it:\\
+		1. Can travel within guides for long distances. \\
+		2. Can propagate in complex structures. \\
+		3. Has high speed in metals and composites.\\ 
+
+		
+		
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 %	\begin{frame}{Dispersion curves of Lamb waves}
@@ -1735,6 +1621,29 @@
 			\end{column}
 		\end{columns}
 	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}[standout]{What are Composite Laminates?}
+		\begin{columns}[T]
+			\begin{column}[c]{.9\textwidth}
+				\small
+				\begin{itemize}
+					\justifying
+					%			\item Composite laminates are usually composed of plies with different directions.
+					\item A \textcolor{blue}{ply} is made up of unidirectional continuous \textcolor{blue}{Fibres} held together by a \textcolor{blue}{Polymer matrix such as Epoxy resin} .			
+					\item The lay-up of the plies depends on the anticipated loading of the structure where the laminate will be used.
+				\end{itemize}
+			\end{column}
+%			\hfill
+%			\begin{column}[c]{.65\textwidth}
+%				\begin{figure}
+%					\includegraphics[width=.95\textwidth]{compsite_laminates.png}
+%				\end{figure}
+%			\end{column}
+		\end{columns}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		% END OF SLIDES
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
