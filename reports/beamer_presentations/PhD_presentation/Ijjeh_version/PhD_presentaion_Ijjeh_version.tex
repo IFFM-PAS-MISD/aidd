@@ -632,11 +632,20 @@
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
+		We now reach an important concept, which is computer vision. 
+		So, computer vision is a subcategory of AI that enables computers to obtain meaningful information from visual inputs.
+		Hence, computer vision can have three levels of tasks: 
+		The first task is to be able to perform a classification for the whole input and predict one output.
 		
+		The second task is to be able to classify as well as locate the object that we are looking for. 
+		
+		The ultimate level of computer vision is to perform Pixel-wise segmentation (or semantic segmentation), in which each pixel in the input image is classified into its corresponding class.			
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Convolution operation (Feature extractor)}
-		\noindent Convolution in DL is a cross-correlation operation \alert{(sliding dot product)}. \\
+	\begin{frame}{Convolution Neural Networks (CNNs)}
+		\noindent Convolutional Neural Network (CNN) is one of the most utilised architectures in DL for image processing as they can \alert{recognise complex patterns} of images by performing \alert{convolution operations}.
+		
+		Convolution in DL is a cross-correlation operation \alert{(sliding dot product)}. \\
 		The kernel weights \alert{(learnable weights)} are updated during training phase.
 		\begin{figure}[t]
 			\centering
@@ -644,7 +653,21 @@
 		\end{figure}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		Convolutional Neural Network (CNN) is a powerful deep learning architecture for image processing because it can \alert{extract complex feature patterns} from images using \alert{convolution operations}.
+		
+		The convolution operation for image processing is essentially a cross-correlation operation, also known as a sliding dot product or sliding inner-product.
+		
+		
+		The kernel slides over an input image of performing a convolution operation.
+		The output of the convolution operation is a feature map.
+		
+		Consequently, kernels learn to detect different types of edges
+		(vertical, horizontal, and diagonal edges), colour intensities, etc.	
+		
+		Typically, when we train a CNN model, the kernel weights are initialised randomly.
+		Accordingly, during the backpropagation process, all learnable parameters (kernel weights) are updated. 				
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Encoder-decoder (Autoencoder)}
@@ -666,15 +689,16 @@
 		\end{columns}			
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		
+		The encoder-decoder is well known deep learning architecture used for tasks such as computer vision.
+		The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations. 
+		While the decoder is responsible for upsampling the condensed feature maps at the latent space to the original input shape.		
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\section{Synthetic dataset generation}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\subsection{Synthetic Dataset of propagating Lamb waves}
-	%\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{The time domain spectral element method}
 	\begin{columns}[T]
 		\begin{column}{0.47\textwidth}
