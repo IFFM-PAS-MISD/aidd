@@ -501,7 +501,18 @@
 		\end{figure}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		In this slide, I present a comparison between conventional machine learning approach of damage detection compared to a deep learning approach.
+		
+		In the conventional approaches two processes must be performed the first is to extract the useful features from the registered data then to use a proper classification technique.
+		
+		This approach has several drawback:
+		first, it requires a great amount of human labor and computational effort
+		secondly, it demands a high amount of experience of the practitioner.
+		and lastly when dealing with big data it tends to be Inefficient as  it requires a complex computation of damage features extraction and classification.
+		
+		On the other hand, deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification by themselves without human intervention in an end-to-end approach. 
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	%%%%
@@ -570,7 +581,7 @@
 %	\end{frame}
 
 	\setcounter{subfigure}{0}
-	\begin{frame}{Supervised deep learning}
+	\begin{frame}{Optimization and Deep Learning}
 		\begin{columns}[T]
 			\begin{column}[t]{.4\textwidth}
 				\begin{itemize}
@@ -588,7 +599,22 @@
 		\end{columns}		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		Deep learning can be categorized into three main categories 
+		supervised approach, unsupervised approach, and the reinforcement approach.
+		
+		In this work, I utilised the supervised approach, which means that the input data is labeled.
+		Accordingly, the idea of a supervised learning is to learn a model how to map the inputs to the outputs.
+		
+		Initially, when we start training deep learning model, all learnable parameters such as weights and biases start with random values of some fixed values.
+		These learnable parameters are updated during the training phase.
+		Now, in the forward pass we feed the data into the model and it flows through the layers until we get the predicted output.
+		Here, we need an objective loss function to to estimate the loss (error) between the predicted output and the ground truth.
+
+		A well-known optimization algorithm is the gradient descent, which aims to reduce the loss at each step to reach the global minimum value by calculating the gradient then is push back the calculated gradients across all the neurons in a technique called backpropagation.
+		
+		Accordingly, all learnable parameters are updated, which leads to minimizing the loss value.
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Computer vision}
@@ -607,7 +633,9 @@
 		\end{columns}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Convolution operation (Feature extractor)}
 		\noindent Convolution in DL is a cross-correlation operation \alert{(sliding dot product)}. \\
@@ -760,7 +788,14 @@
 		\end{columns}		
 	\end{frame}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		The novelty of this work consists of applying for the first time a full wavefield dataset
+		of elastic wave propagation (a numerically generated dataset) as an input to various
+		supervised deep neural networks, which is capable of identifying damage. Accordingly,
+		two main approaches were adopted:
+		1. One-to-one approach
+		2. Many-to-one approach
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\subsection{Developed DL models}
 	%\begin{frame}{Common deep learning architectures}
