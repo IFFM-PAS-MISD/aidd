@@ -1601,7 +1601,7 @@
 			\begin{column}[c]{0.35\textwidth}
 				\justifying	
 				\small	
-				DLSR model aims to speed up the data acquisition process for SLDV by recovering HR full wavefield frames with satisfying accuracy from the LR measurement (below Nyquist sampling rate) SLDV.				
+				Deep learning model for superresulution image reconstruction aims to speed up the data acquisition process for SLDV by recovering HR full wavefield frames with satisfying accuracy from the LR measurement that is below Nyquist sampling rate.				
 			\end{column}
 			\begin{column}[c]{0.6\textwidth}
 				\begin{figure}
@@ -1611,7 +1611,13 @@
 		\end{columns}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		Scanning laser Doppler vibrometer is a popular tool for the acquisition of the full wavefield of propagating guided waves, in particular Lamb waves.
+		
+		However, the process of acquiring the full wavefield of guided waves is time-consuming. 
+		
+		One possible solution to tackle this problem is to acquire the Lamb waves in a low-resolution form and then apply a deep learning-based super-resolution approach to that low-resolution form of full wavefield data in order to retrieve the high resolution form.
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Evaluation metrics for SR model}
 		For evaluating the reconstructed full wavefield
@@ -1629,86 +1635,183 @@
 		\end{itemize}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		In order to evaluate the developed model, I used to metrics:
+		\begin{itemize}
+			\item The first one is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
+			This equation depicts the mathematical representation of PSNR, where R is the maximum fluctuation value in the input image, and MSE is the mean squared error between the actual and predicted output.
+			
+			\item The second metric is the Pearson correlation coefficient (Pearson CC), which measures the linear relationship between two
+			variable sets \(X\) (represents the ground truth values) and \(Y\) (represents the predicted values) as shown in the below equation.
+			
+			where \(n\) is the number of sample points,\(x_i, y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) and \(\bar{y}\) are the mean values of the sample and the prediction.
+		\end{itemize}
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Numerical test cases at certain frames}
-		\begin{columns}[T]
-			\begin{column}[c]{0.25\textwidth}
-				\centering
+		\begin{columns}[T]				
+			\begin{column}[c]{0.5\textwidth}
+%				\centering
 				\only<1>{\textbf{First test case}}
 				\only<2>{\textbf{Second test case}}
 				\only<3>{\textbf{Third test case}}
 				\begin{figure}
 					\centering
-					\only<1>{\subfloat[LR input, $f_n=127$]{\includegraphics[height=.45\textheight]{LR_397_frame_127_input.png}}}
-					
-					\only<2>{\subfloat[LR input, $f_n=154$]{\includegraphics[height=.45\textheight]{LR_438_frame_154_input.png}}}
-					
-					\only<3>{\subfloat[LR input, $f_n=159$]{\includegraphics[height=.45\textheight]{LR_456_frame_159_input.png}}}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					\only<1>{
+						\begin{figure}
+							\includegraphics[height=.45\textheight]{LR_397_frame_127_input.png}
+							\caption{LR input, $f_n=127$}
+						\end{figure}						
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\begin{table}[!h]
+							\centering 
+							\footnotesize
+							\begin{tabular}{cccc}
+								\toprule
+								\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+								\cmidrule(lr){1-2} \cmidrule(lr){3-4}
+								PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+								\midrule
+								42.95 & 0.999 & 33.02 & 0.993  \\					
+								\bottomrule
+							\end{tabular}
+						\end{table}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					\only<2>{
+						\begin{figure}
+							\includegraphics[height=.45\textheight]{LR_438_frame_154_input.png}
+							\caption{LR input, $f_n=154$}
+						\end{figure}
+						
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\begin{table}[!h]
+							\centering 
+							\footnotesize
+							\begin{tabular}{cccc}
+								\toprule
+								\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+								\cmidrule(lr){1-2} \cmidrule(lr){3-4}
+								PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+								\midrule
+								47.00 & 0.998 & 38.52 & 0.995 \\					
+								\bottomrule
+							\end{tabular}
+							\label{tab:num_DLSR_results_2}
+						\end{table}	
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					\only<3>{
+						\begin{figure}
+							\includegraphics[height=.45\textheight]{LR_456_frame_159_input.png}
+							\caption{LR input, $f_n=159$}
+						\end{figure}
+						
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\begin{table}[!h]
+							\centering 
+							\footnotesize	
+							\begin{tabular}{cccc}
+								\toprule
+								\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+								\cmidrule(lr){1-2} \cmidrule(lr){3-4}
+								PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+								\midrule
+								48.60 & 0.998 & 46.67 & 0.998 \\					
+								\bottomrule
+							\end{tabular}
+						\end{table}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				\end{figure}
 			\end{column}
-			\begin{column}[c]{0.7\textwidth}
-				\only<1>{
-				\begin{figure}
-					\centering
-					\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
-					\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_pred.png}}
-					\\
-					\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_GT.png}}\quad
-					\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_pred.png}}
-				\end{figure}}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[c]{0.5\textwidth}
+				\only<1>{	
+					\setcounter{subfigure}{0}				
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					\begin{figure}
+						\centering
+						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
+						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_pred.png}}
+						\\
+						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_GT.png}}\quad
+						\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_pred.png}}
+					\end{figure}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				}
+			
 				\only<2>{
-				\begin{figure}
-					\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_GT.png}}\quad
-					\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_pred.png}}
-					\\
-					\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_GT.png}}\quad	
-					\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_pred.png}}
-				\end{figure}}
-				\only<3>{
-				\begin{figure}
-					\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
-					\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_pred.png}}
-					\\
-					\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_GT.png}}\quad
-					\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_pred.png}}
-				\end{figure}}
+					\setcounter{subfigure}{0}					
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					\begin{figure}
+						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_GT.png}}\quad
+						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_pred.png}}
+						\\
+						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_GT.png}}\quad	
+						\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_pred.png}}
+					\end{figure}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				}
+				\only<3>{	
+					\setcounter{subfigure}{0}				
+					\begin{figure}
+						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
+						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_pred.png}}
+						\\
+						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_GT.png}}\quad
+						\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_pred.png}}
+					\end{figure}
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				}
 			\end{column}
 		\end{columns}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{Analysis of numerical cases}
-		\begin{table}[!h]
-			\centering \footnotesize
-			\caption{Quality metrics for the DLSR model for three numerical test cases calculated at frames $N_f$ per case.}	
-			\begin{tabular}{lccccc}
-				\toprule[1.5pt]
-				& & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
-				\cmidrule(lr){3-4} \cmidrule(lr){5-6}
-				Case & $N_f$ & PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
-				\midrule
-				1  & 127  & 42.95 & 0.999 & 33.02 & 0.993 \\					
-				\midrule
-				2  & 154 & 47.00 & 0.998 & 38.52 & 0.995 
-				\\
-				\midrule					
-				3  & 159 & 48.60 & 0.998 & 46.67 & 0.998 \\					
-				\bottomrule[1.5pt]
-			\end{tabular}
-			\label{tab:num_DLSR_results}
-		\end{table}			
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{note text}
+	\note{
+		In the following I will the results of the reconstruction of HR frames for three numerical test cases.
+		
+		In all test cases, I used the first frame which shows the initial interaction with delamination.
+		
+		In first test case, figure a shows the low-resolution measurements at the frame number 127.
+		
+		
+	}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\setcounter{subfigure}{0}
+%	\begin{frame}{Analysis of numerical cases}
+%		\begin{table}[!h]
+%			\centering \footnotesize
+%			\caption{Quality metrics for the DLSR model for three numerical test cases calculated at frames $N_f$ per case.}	
+%			\begin{tabular}{lccccc}
+%				\toprule[1.5pt]
+%				& & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+%				\cmidrule(lr){3-4} \cmidrule(lr){5-6}
+%				Case & $N_f$ & PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+%				\midrule
+%				1  & 127  & 42.95 & 0.999 & 33.02 & 0.993 \\					
+%				\midrule
+%				2  & 154 & 47.00 & 0.998 & 38.52 & 0.995 
+%				\\
+%				\midrule					
+%				3  & 159 & 48.60 & 0.998 & 46.67 & 0.998 \\					
+%				\bottomrule[1.5pt]
+%			\end{tabular}
+%			\label{tab:num_DLSR_results}
+%		\end{table}			
+%	\end{frame}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\note{note text}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\begin{frame}{Experimental setup}
 			\begin{figure}
 				\centering
-				\includegraphics[height=0.8\textheight]{sensors_fig4_setup.png}
+				\includegraphics[height=0.8\textheight]{Set_up_CS.png}
 			\end{figure}
 		\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1786,8 +1889,7 @@
 	\end{frame}		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Publications}
-		\vspace{10pt}
-		\begin{tiny}			
+		\begin{tiny}					
 			\begin{columns}[T]
 				\begin{column}[t]{0.48\textwidth}
 					\underline{\textbf{Journals}}
@@ -1812,7 +1914,7 @@
 						Proceedings of the International Conference on Structural Health Monitoring of Intelligent
 						Infrastructure, Porto, Portugal, 30 June -2 July 2021, ISSN 2564-3738, pages 709-713.
 					\end{itemize}		
-					\underline{\textbf{Scientific monographs}}
+					\underline{\textbf{Scientific monographs}}					
 					\begin{itemize}
 						\item {Abdalraheem Ijjeh}, Deep Learning based Damage Imaging techniques, chapter in: Wybrane zagadnienia
 						inżynierii mechanicznej, Praca zbiorowa pod redakcja M. Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
