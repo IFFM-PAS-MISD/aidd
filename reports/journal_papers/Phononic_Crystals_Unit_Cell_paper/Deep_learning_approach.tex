@@ -1,0 +1,120 @@
+
+%% 
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+%% SP 2008/03/01
+
+\documentclass[preprint,9pt]{elsarticle}
+
+
+%% Use the option review to obtain double line spacing
+%documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%%\documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
+%% my added packages
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+\usepackage{natbib}
+
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+
+%\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
+%\usepackage{breqn}
+\usepackage{multirow}
+%\usepackage{cite}
+%\usepackage[style=numeric-comp]{biblatex}
+\usepackage[dvipsnames]{xcolor}
+
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+\newcommand{\ud}{\mathrm{d}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\veca}[2]{\mathbf{#1}{#2}}
+\renewcommand{\bm}[1]{\mathbf{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% limits underneath
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\graphicspath{{figures/}}
+
+%
+%\graphicspath{ {Graphics/Figures/} }
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+\journal{Mechanical Systems and Signal Processing}
+
+
+\begin{document}
+	\section{dataset preprocessing}
+	The dataset contains \(9\,000\) samples of unit cells that are classified into three equal subsets of size \(3\,000\) samples each.
+	Figure~\ref{fig:subsets} represents three sample shapes of unit cells~\ref{fig:subset_1},~\ref{fig:subset_2} and~\ref{fig:subset_3} from the three subsets, respectively.
+	\begin{figure}[ht!]
+		\centering
+		\subfloat[\label{fig:subset_1}]{\includegraphics[width=0.30\textwidth]{PC_label_1001.png}}
+		\quad
+		\subfloat[\label{fig:subset_2}]{\includegraphics[width=0.30\textwidth]{PC_label_4001.png}}
+		\quad
+		\subfloat[\label{fig:subset_3}]{\includegraphics[width=0.30\textwidth]{PC_label_8001.png}}
+		\caption{Samples of unit cell shapes come from the three subsets.}
+		\label{fig:subsets}
+	\end{figure}
+	
+	The unit cell has a shape of \((\textup{512}\times \textup{512})\) pixel points.
+	The shape of the unit cell is diagonally symmetrical.
+	Consequently, to reduce the complexity of the computation, we used only the upper left quarter of the unit cell shape of size \((256\times 256)\) pixel points for developing the deep learning model, as shown in Fig.~\ref{fig:upper_right_quater}. 
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.35\textwidth]{upper_left_quarter.png}
+		\caption{Unit cell shape (Upper left quarter)}
+		\label{fig:upper_right_quater} 
+	\end{figure}
+	
+	The total size of the dataset is \((9000, 256, 256, 1)\)
+	 
+	\section{deep learning model}
+\end{document}
