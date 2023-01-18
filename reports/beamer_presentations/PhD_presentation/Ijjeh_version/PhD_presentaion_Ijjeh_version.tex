@@ -13,7 +13,7 @@
 \usepackage[scale=2]{ccicons}
 \usepackage{pgfplots}
 \usepackage{xspace}
-\usepackage{amsmath}
+%\usepackage{amsmath}
 \usepackage{totcount}
 \usepackage{tikz}
 \usepackage{bm}
@@ -32,6 +32,8 @@
 \usepackage[document]{ragged2e}
 \usepackage{caption}
 \usepackage{comment}
+\usepackage{mathtools}% Loads amsmath
+
 %\usepackage[export]{adjustbox}
 %\usepackage{background}
 %\backgroundsetup{contents=preliminary,placement=bottom,color=blue}
@@ -1610,32 +1612,56 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Compressive sensing theory}
-		Compressive sensing is a signal processing technique for efficiently acquiring and reconstructing a signal, by finding solutions to underdetermined linear systems. 
-				
-		There are two conditions under which recovery is possible.
-		\begin{itemize}
-			\item Sparsity.
-			\item Incoherence.
-		\end{itemize}
-		
-		The sparsity of a signal can be exploited to recover a signal or image from far fewer samples than required by the Nyquist–Shannon sampling theorem. 
-		
+		\tiny
+		\begin{columns}[T]
+			\begin{column}[t]{0.48\textwidth}
+				\justifying
+				Compressed sensing (CS) theory $\rightarrow$ any natural signal (\(x\)), e.g. (sounds, images, $\dots$) \alert{can be recovered using considerably fewer measurements than standard methods}.
+				\\
+				CS relies on two principles:
+				\begin{itemize}
+					\item \alert{Sparsity}: which relates to the signal of interest.
+					\begin{equation*}
+						x=\Psi s,
+					\end{equation*}
+					where \(\Psi\) is the universal basis (in this work, Fourier domain was applied), \(s\) is a sparse vector of coefficients  (\alert{most of the coefficients are equal or close to zero}).
+					\item \alert{Incoherence}: which relates to the sensing modality.
+					\begin{gather*}
+						y=Cx, \\
+						y=C\Psi s,
+					\end{gather*}
+					where \(y\) is the measurements in \alert{Low-Resolution (LR)} (below the Nyquist sampling rate),
+					\(C\) is the mask matrix applied to the \(x\).\\
+					This system of equations is \alert{underdetermined}.
+					\\
+					$C$ and \(\Psi\) matrices must be incoherent \alert{(smallest correlation between any two elements in $C$ and $\Psi$)}
+				\end{itemize}		
+			\end{column}			
+			\begin{column}[t]{0.48\textwidth}
+				\justifying
+				\alert{The goal is to find sparsest \(s\) vector} that solve the underdetermined system of equation.
+				\\ This is an optimization problem:				
+				\begin{equation}
+					\min{\lVert {\bs{s}} \rVert}_1 \quad \textrm{subject to} \quad {\lVert \bs{C} \bs{\Psi} \bs{s} -y \rVert}_2 \leq \sigma ,
+				\end{equation}
+				where $\sigma$ is related to the noise level in the data.
+				\begin{figure}[ht!]
+					\subfloat[\centering \small Random mask (3000 points)]{\includegraphics[width=0.40\textwidth]{random_mask_3000.png}}\quad
+					\subfloat[\centering \small Jitter mask (3000 points)]{\includegraphics[width=0.40\textwidth]{jitter_mask_3000.png}}					
+				\end{figure}										
+			\end{column}		
+		\end{columns}						
 	\end{frame}
 	\note{
-		Compressive sensing is a signal processing technique for efficiently acquiring and reconstructing a signal, by finding solutions to underdetermined (there are fewer equations than unknowns) linear systems. 
+		The theory of compressed sensing (CS) states that natural signals, such as sounds and images, can be recovered using considerably fewer samples or measurements than standard methods.
 				
-		There are two conditions under which recovery is possible.
+		CS relies on two principles:
 		\begin{itemize}
-			\item Sparsity, which requires the signal to be sparse in some domain many coefficients are close or equal to zero.
-
-			\item Incoherence, which is applied through the isometric property, which is sufficient for sparse signals.
-		\end{itemize}
-	
-		The sparsity of a signal can be exploited to recover a signal or image from far fewer samples than required by the Nyquist–Shannon sampling theorem. 
+			\item Sparsity: which relates to the signal of interest.
+			\item Incoherence: which relates to the sensing modality
+		\end{itemize}		
 		
-		However, there is no unique solution for the estimation of unmeasured data.
-		
-		In particular, in this paper we employed SPGL1 algorithm (A solver for large-scale sparse reconstruction) and Fourier basis.
+		In particular, in this work SPGL1 algorithm (A solver for large-scale sparse reconstruction) was utilised and Fourier basis for \(\psi\).
 		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
