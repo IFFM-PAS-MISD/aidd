@@ -1652,16 +1652,30 @@
 			\end{column}		
 		\end{columns}						
 	\end{frame}
-	\note{
-		The theory of compressed sensing (CS) states that natural signals, such as sounds and images, can be recovered using considerably fewer samples or measurements than standard methods.
-				
-		CS relies on two principles:
+	\note
+	{	
+		\tiny
+		The theory of compressed sensing (CS) states that natural signals (such as sounds and images) can be recovered using considerably fewer samples or measurements (below the Nyquist sampling rate) than standard methods.
+		
+		Now, CS relies on two essential conditions: 	
 		\begin{itemize}
-			\item Sparsity: which relates to the signal of interest.
-			\item Incoherence: which relates to the sensing modality
+			\item The first one is Sparsity: which means that(\alert{most of the coefficients in vector \(s\) are equal or close to zero}).
+			$\Psi$ represent a universal basis such as Fourier, cosine or wavelet domains.
+			In this work the Fourier domain was applied. 
+			\item The second one is that the measuring mask C matrix must be incoherent with \(\Psi\) matrix, which means the correlation between any two elements in C and $\Psi$ matrices is small.
 		\end{itemize}		
 		
-		In particular, in this work SPGL1 algorithm (A solver for large-scale sparse reconstruction) was utilised and Fourier basis for \(\psi\).
+		regarding to this equation: 
+		\begin{equation}
+			y = \bs{C}\bs{\Psi}\bs{s}
+		\end{equation}
+		There are an infinite number of solutions for the sparse vector (s) that can solve the y vector.
+		
+		However, we need to find the sparsest s vector.
+		
+		Therefore, it is an optimization problem that can be solved by minimizing the \(L_1\) norm of s such that \(L_2\) norm \(\bs{C}\bs{\Psi}\bs{s}\)-\(\bs{y}\) equals zero, or some noise $\sigma$.
+		
+		Now that we have this sparsest vector (s), we can use the inverse Fourier transform to recover the high-resolution signal.		
 		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
