@@ -81,7 +81,7 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
 %\usepackage{pgfpages}
-\setbeameroption{show notes}
+%\setbeameroption{show notes}
 %\setbeameroption{show notes on second screen=left}
 %\setbeamertemplate{note page}{\insertnote}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -117,8 +117,8 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		My name is Abdalraheem Ijjeh.
-		I am a PhD candidate at the Institute of Fluid Flow Machinery, Polish Academy of Sciences.
-		Supervised by Professor Pawl Kudela.		
+		I am a PhD candidate at the Institute of Fluid Flow Machinery, Polish Academy of Sciences.		
+		Supervised by Professor Pawe{l} Kudela.		
 		The title of my PhD thesis is FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES.		
 		Thank you all for you attending my PhD defence presentation. 
 	}
@@ -176,9 +176,7 @@
 		However, defects such as cracks, fibre breakage, and debonding can occur in composite laminates. 
 		
 		In particular, laminated composite materials are more sensitive to damage in the form of delamination due to weak transverse tensile and interlaminar shear strengths.
-		
-		Delamination can alter the compression strength of composite laminate and gradually affect the composite to encounter failure by buckling.
-		
+			
 		Delaminations can seriously decrease the performance of composite structures.
 		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.		
 	}
@@ -431,7 +429,7 @@
 					\begin{itemize}
 						\item \textcolor{blue}{Travel within guides for long distances}
 						\item \textcolor{blue}{Can propagate in complex structures}
-						\item \textcolor{blue}{High speeds in metals and composites}
+%						\item \textcolor{blue}{High speeds in metals and composites}
 %						\item \textcolor{blue}{Can be automated using software}
 					\end{itemize}
 					\textbf{Lamb waves are a promising global NDE solution for SHM}
@@ -469,7 +467,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Damage detection approaches}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Conventional vs deep learning approach}
+	\begin{frame}{Conventional machine learning v.s. deep learning approaches}
 		Conventional methods involve two processes:
 		\alert{\textbf{Feature extraction and classification}}
 %		\begin{itemize}
@@ -2154,6 +2152,24 @@
 		\end{columns}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Initial frame interaction}
+		\begin{itemize}
+			\item The total wave propagation time was set to \(0.75\) ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
+			\item The total time of propagation was converted into \(512\) frames of animated Lamb waves.
+			\item The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
+			\item The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset. 
+			Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
+			\item As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
+		\end{itemize}
+
+		When the time of interaction \(t_i\) with the delamination is know, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
+		\begin{gather*}
+			t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
+			\\
+			f_n = \frac{t_i}{0.75ms} \times 512
+		\end{gather*}			
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Animation based: Analysis of numerical cases}
 		The mean IoU for all 95 test cases is 0.80, and the \(mean\ \epsilon\) is \(5.6\%\)
 		\begin{table}[!h]
@@ -2177,6 +2193,15 @@
 		\begin{figure}
 			\includegraphics[width=0.7\textwidth]{sensors_fig4_setup.png}
 		\end{figure}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}[t]{Conventional signal processing and wavefield imaging}
+		\begin{figure}
+			\includegraphics[width=0.7\textwidth]{figs2/sensors_fig1_algorithm.png}
+		\end{figure}
+		\biblioref{M. Radzienski, P. Kudela, A. Marzani, L. de Marchi, W. Ostachowicz}{2019}{ Damage Identification in Various Types of Composite Plates Using Guided Waves Excited by a Piezoelectric Transducer and Measured by a Laser Vibrometer}{Sensors, 19, 1958}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
