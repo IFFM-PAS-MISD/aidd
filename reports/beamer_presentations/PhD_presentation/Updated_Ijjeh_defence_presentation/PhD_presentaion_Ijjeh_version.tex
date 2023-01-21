@@ -127,12 +127,9 @@
 	% SLIDES
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[label=frame1]{Outlines}
-		\begin{multicols}{2}
-			%		\fontsize{6pt}{8pt}\selectfont
 			\setbeamertemplate{section in toc}[sections numbered]
 			\setbeamertemplate{subsection in toc}[subsections numbered]
 			\tableofcontents
-		\end{multicols}
 	\end{frame}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{The presentation will be as follows: 
@@ -148,22 +145,26 @@
 		Finally, the conclusions will be presented in section 12.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Work novelty}
-	\subsection{Motivations}
+	\section{Introduction}
 	\begin{frame}{Motivations}
-		\small
-		Composite laminates can have different types of damage such as: \\
-		\textbf{Cracks, fibre breakage, debonding, and \alert{delamination}}.
 		\begin{columns}[T]
-			\begin{column}[c]{.45\textwidth}
-				\begin{figure}
+			\begin{column}[t]{.5\textwidth}
+				\begin{figure}[c]
 					\centering
-					\subfloat{\includegraphics[width=0.8\textwidth]{Composite_advantages.png}}
+					\includegraphics[width=0.8\textwidth]{Composite_advantages.png}					
+				\end{figure}			
+				\begin{figure}[c]
+					\includegraphics[width=0.65\textwidth]{delaminated_plate1.jpg}
 				\end{figure}
+				\begin{small}
+					\justifying
+					\noindent \alert{Delamination detection} in its early stages can significantly help avoiding catastrophic structural collapses.
+				\end{small}				
 			\end{column}
-			\begin{column}[c]{0.50\textwidth}
-				\begin{figure}
-					\includegraphics[width=.95\textwidth]{delaminated_plate1.jpg}
+			\begin{column}[t]{0.5\textwidth}
+				\begin{figure}[c]
+					\includegraphics[width=0.85\textwidth]{Crashes.png}
+%					\caption{Catastrophic failures}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -180,8 +181,8 @@
 		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Objectives}
-	\begin{frame}{Objectives}
+%	\subsection{Objectives (1)}
+	\begin{frame}{Objectives (1)}
 		\textbf{To develop \textcolor{logoblue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
 		\vfil
 		\textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
@@ -199,8 +200,8 @@
 		My second objective is to address the issue of slow data acquisition of high-resolution full wavefields of Lamb wave propagation by SLDV. 		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Contributions}
-	\begin{frame}{Contributions}
+%	\subsection{Objective (2)}
+	\begin{frame}{Objective (2)}
 		\begin{columns}[T]
 			\begin{column}[c]{0.95\textwidth}
 				\begin{figure}
@@ -527,37 +528,76 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{DL-based approaches for damage identification}
+	\section{Deep learning approach: An Overview}		
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Conventional machine learning v.s. deep learning approaches}
-		Conventional methods involve two processes:
-		\alert{\textbf{Feature extraction and classification}}
-		\begin{figure}
-			\centering
-			\includegraphics[width=.95\textwidth]{conventional_ML.png}
-		\end{figure}	
-		Deep learning offers an \alert{\textbf{end-to-end}} approach: \alert{\textbf{Automatic}} feature extraction and classification.
-		\begin{figure}
-			\includegraphics[width=.95\textwidth]{DL_approach.png}
-		\end{figure}
+	\begin{frame}{Convolution Neural Networks (CNNs)}
+		\begin{itemize}
+			\item \alert{Convolutional Neural Network} (CNN) is a powerful feature extracting tool.
+			\item Features are extracted by applying convolution operations \alert{(sliding dot product)}.
+		\end{itemize}
+		\begin{columns}[T]
+			\begin{column}[t]{0.6\textwidth}
+				\begin{figure}[t]
+					\centering
+					\animategraphics[autoplay,loop,width =0.95\textwidth]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}
+				\end{figure}
+			\end{column}
+			\begin{column}[t]{0.4\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[width=0.9\textwidth]{cnn.png}
+				\end{figure}
+			\end{column}			
+		\end{columns}
+		
+		The kernel weights are updated during training phase.
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this slide, I present a comparison between conventional machine learning and deep learning approaches to damage detection.
+		Convolutional Neural Network (CNN) is a powerful deep learning architecture for image processing because it can extract complex feature patterns from images using convolution operations.
 		
-		In the conventional approaches, two processes must be performed: 
-		The first is to extract the useful features from the registered data and then use a proper classification technique.
+		The convolution operation for image processing is essentially a cross-correlation operation, also known as a sliding dot product or sliding inner product.
 		
-		This approach has several drawbacks:
-		First, it requires a great amount of human labor and computational effort
-		Secondly, it demands a high amount of experience from the practitioner.
-		And lastly, when dealing with big data, it tends to be Inefficient as it requires a complex computation of damage features extraction and classification.
+		The kernel slides over an input image of performing a convolution operation.
+		The output of the convolution operation is a feature map.
 		
-		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification by themselves without human intervention in an end-to-end approach. 
+		Consequently, kernels learn to detect different types of edges
+		(vertical, horizontal, and diagonal edges), colour intensities, etc.	
+		
+		During the backpropagation process, all kernel weights are updated. 				
 	}
-	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Encoder-decoder (Autoencoder)}
+		\begin{columns}[T]
+			\begin{column}[t]{.35\textwidth}
+				\begin{itemize}
+					\item \alert{Encoder} learns to extract features.
+					\item \alert{Latent space} has condensed feature maps.
+					\item \alert{Decoder} learns to locate the features learned by the encoder.
+				\end{itemize}	
+			\end{column}
+			\hfill
+			\begin{column}[t]{.6\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[width=1\textwidth]{nn_encoder_decoder.png}
+				\end{figure}	
+			\end{column}
+		\end{columns}			
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		The encoder-decoder is a well-known architecture used for tasks such as computer vision.
+		The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations. 
+		The decoder is responsible for upsampling the condensed feature maps in the latent space to the original input shape.		
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Computer vision}
 		\begin{columns}[T]
 			\begin{column}[c]{0.27\textwidth}
@@ -587,76 +627,40 @@
 		The ultimate level of computer vision is to perform Pixel-wise segmentation (or semantic segmentation), in which each pixel in the input image is classified into its corresponding class.	
 		
 		I am using pixel wise image segmentation in my PhD work.
-				
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Convolution Neural Networks (CNNs)}
-		\begin{itemize}
-			\item \alert{Convolutional Neural Network} (CNN) is a powerful feature extracting tool.
-			\item Features are extracted by applying convolution operations \alert{(sliding dot product)}.
-		\end{itemize}
-		\begin{columns}[T]
-			\begin{column}[t]{0.48\textwidth}
-				\begin{figure}[t]
-					\centering
-					\animategraphics[autoplay,loop,width =0.95\textwidth]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}
-				\end{figure}
-			\end{column}
-			\begin{column}[t]{0.48\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=0.9\textwidth]{cnn.png}
-				\end{figure}
-			\end{column}			
-		\end{columns}
 		
-		The kernel weights are updated during training phase.
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		Convolutional Neural Network (CNN) is a powerful deep learning architecture for image processing because it can extract complex feature patterns from images using convolution operations.
-		
-		The convolution operation for image processing is essentially a cross-correlation operation, also known as a sliding dot product or sliding inner product.
-		
-		The kernel slides over an input image of performing a convolution operation.
-		The output of the convolution operation is a feature map.
-		
-		Consequently, kernels learn to detect different types of edges
-		(vertical, horizontal, and diagonal edges), colour intensities, etc.	
-		
-%		Typically, when we train a CNN model, the kernel weights are initialised randomly.
-		
-		During the backpropagation process, all kernel weights are updated. 				
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\begin{frame}{Encoder-decoder (Autoencoder)}
-		\begin{columns}[T]
-			\begin{column}[t]{.35\textwidth}
-				\begin{itemize}
-					\item \alert{Encoder} learns to extract features.
-					\item \alert{Latent space} has condensed feature maps.
-					\item \alert{Decoder} learns to locate the features learned by the encoder.
-				\end{itemize}	
-			\end{column}
-			\hfill
-			\begin{column}[t]{.6\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=1\textwidth]{nn_encoder_decoder.png}
-				\end{figure}	
-			\end{column}
-		\end{columns}			
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Conventional machine learning v.s. deep learning approaches}
+		Conventional methods involve two processes:
+		\alert{\textbf{Feature extraction and classification}}
+		\begin{figure}
+			\centering
+			\includegraphics[width=.95\textwidth]{conventional_ML.png}
+		\end{figure}	
+		Deep learning offers an \alert{\textbf{end-to-end}} approach: \alert{\textbf{Automatic}} feature extraction and classification.
+		\begin{figure}
+			\includegraphics[width=.95\textwidth]{DL_approach.png}
+		\end{figure}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The encoder-decoder is a well-known architecture used for tasks such as computer vision.
-		The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations. 
-		The decoder is responsible for upsampling the condensed feature maps in the latent space to the original input shape.		
+		In this slide, I present a comparison between conventional machine learning and deep learning approaches to damage detection.
+		
+		In the conventional approaches, two processes must be performed: 
+		The first is to extract the useful features from the registered data and then use a proper classification technique.
+		
+		This approach has several drawbacks:
+		First, it requires a great amount of human labor and computational effort
+		Secondly, it demands a high amount of experience from the practitioner.
+		And lastly, when dealing with big data, it tends to be Inefficient as it requires a complex computation of damage features extraction and classification.
+		
+		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification by themselves without human intervention in an end-to-end approach. 
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\section{Synthetic dataset generation}		
 	\setcounter{subfigure}{0}
-	\section{Synthetic dataset generation}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{The time domain spectral element method}
 	\begin{columns}[T]
@@ -694,7 +698,7 @@
 						\item 475 delamination scenarios
 						\item CFRP is made of 8-layers
 						\item Delamination modelled between the 3rd and 4th layer
-						\item Delamination size min 10 mm, max  40 mm
+						\item Delamination size min 10 mm, max 40 mm
 						\item \textbf{3-months of computing}
 					\end{itemize}
 			\end{column}
@@ -763,7 +767,7 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\section{Semantic segmentation}
+	\section{Part I: Delamination identification}
 	\begin{frame}{Semantic segmentation}
 		\begin{columns}[T]
 			\begin{column}[c]{0.47\textwidth}
@@ -854,101 +858,67 @@
 		All developed models were published in these articles.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Developed RMS based models}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\subsection{Developed RMS based models}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{VGG16 encoder-decoder}
+	\begin{frame}{Developed RMS based models}
 		\begin{figure}
-			\centering
-			\includegraphics[width=.6\textwidth]{figure5.png}
+			\includegraphics[width=0.95\textwidth]{Developed_rms_models.png}
 		\end{figure}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		For the VGG16 encoder-decoder model, the residual connections (skip connections) were added between the encoder and decoder levels to maintain the spatial and contextual information.
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Residual UNet}
-		\begin{figure}
-			\centering
-			\includegraphics[width=.6\textwidth]{figure4.png}
-		\end{figure}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		Residual UNet, also applies encoder-decoder approach,
-		But the residual connections (skip connections) were added at two levels:
-		\begin{itemize}
-			\item at each step of the encoder and the decoder
-			\item between the encoder and decoder levels.
-		\end{itemize}
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{FCN-DenseNet}
-		\begin{columns}[T]
-			\begin{column}[c]{0.48\textwidth}
-				\begin{figure}[h!]
-					\includegraphics[height=.8\textheight]{FCN_dense_net.png}
-					\caption{FCN-DenseNet architecture.} 
-					\label{fcn}
-				\end{figure}
-			\end{column}
-			\hfill
-			\begin{column}[c]{0.48\textwidth}
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.5\textwidth,angle=-90]{figure6.png}
-					\caption{Dense block architecture.} 
-				\end{figure}
-			\end{column}
-		\end{columns}
-	\end{frame}
+	\setcounter{subfigure}{0}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		FCN-DenseNet applies an encoder-decoder scheme with skip connections between the encoder and the decoder paths.
 		The main component in FCN-DenseNet is the dense block. 
 		The dense block is constructed from a varying number of convolutional layers. 
-		The purpose of the dense block is to concatenate feature maps of a layer with its output to emphasise spatial details information.
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\begin{frame}{Pyramid Scene Parsing Network}
-		\begin{figure} [h!]
-			\centering
-			\includegraphics[height=.7\textheight]{figure7.png}
-			\caption{PSPNet architecture.} 
-		\end{figure}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
+		The purpose of the dense block is to concatenate feature maps of a layer with its output to emphasize spatial details information.
+		
 		The idea of PSPNet is to provide adequate global contextual information for pixel-level scene parsing by concatenating the local and global features together. 
 		Hence, a spatial pyramid pooling module was introduced to perform four different pooling levels with four different pool sizes. 
-		In this way, the pyramid pooling module can capture contextual features at different scales.	
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\begin{frame}{Global Convolution Network}
-		\begin{columns}[T]
-			\begin{column}[c]{0.55\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=.9\textwidth]{figure8.png}
-					\caption{GCN architecture.} 
-				\end{figure}	
-			\end{column}
-			\begin{column}[c]{0.45\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=.9\textwidth]{figure9.png}
-					\caption{(a) Residual block, (b) GCN block, (c) Boundary Refinement.} 
-				\end{figure}	
-			\end{column}
-		\end{columns}
-	\end{frame}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
+		In this way, the pyramid pooling module can capture contextual features at different scales.
+		
 		GCN addresses the importance of having large kernels at the convolution operations for both localization and classification tasks for semantic segmentation.
+		
+		
 	}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	
+%	\begin{frame}{Pyramid Scene Parsing Network}
+%		\begin{figure} [h!]
+%			\centering
+%			\includegraphics[height=.7\textheight]{figure7.png}
+%			\caption{PSPNet architecture.} 
+%		\end{figure}
+%	\end{frame}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\note{
+%			
+%	}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\begin{frame}{Global Convolution Network}
+%		\begin{columns}[T]
+%			\begin{column}[c]{0.55\textwidth}
+%				\begin{figure}
+%					\centering
+%					\includegraphics[width=.9\textwidth]{figure8.png}
+%					\caption{GCN architecture.} 
+%				\end{figure}	
+%			\end{column}
+%			\begin{column}[c]{0.45\textwidth}
+%				\begin{figure}
+%					\centering
+%					\includegraphics[width=.9\textwidth]{figure9.png}
+%					\caption{(a) Residual block, (b) GCN block, (c) Boundary Refinement.} 
+%				\end{figure}	
+%			\end{column}
+%		\end{columns}
+%	\end{frame}	
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\note{
+%	
+%	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -969,28 +939,19 @@
 			
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	\subsection{Full wavefield frames based model}
+	\section*{Full wavefield frames based model}
 	\begin{frame}{Autoencoder ConvLSTM}
 		\begin{columns}[T]		
-			\begin{column}[c]{0.5\textwidth}
-				\only<1>{
-					\begin{figure}[c]
+			\begin{column}[c]{0.48\textwidth}
+				\begin{figure}
 						\centering
-						\subfloat{\includegraphics[width=.8\textwidth]{figure2.png}}
-						\caption{Sample frames of full wave propagation.}
-				\end{figure}}
-				\only<2->{
-					\begin{figure}[c]
-						\centering
-						\subfloat{\includegraphics[height=.6\textheight]{figure3.png}}
-						\caption{The procedure of calculating the RMS prediction image (damage map).}
-					\end{figure}}
-				\end{column}
-			\begin{column}[c]{0.45\textwidth}
+						\subfloat{\includegraphics[height=.8\textheight]{figure3.png}}
+				\end{figure}
+			\end{column}
+			\begin{column}[c]{0.48\textwidth}
 				\begin{figure}
 					\centering
-					\subfloat{\includegraphics[width=.8\textheight]{figure5b.png}}
-					\caption{Autoencoder ConvLSTM model}
+					\subfloat{\includegraphics[height=.8\textheight]{figure5b.png}}			
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -1047,8 +1008,8 @@
 		The second metric is the percentage area error \(\epsilon\), which calculates the percentage of the difference between actual and predicted areas to the actual area size. 
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Evaluation: Numerical cases}
-%	\subsection{Numerical test cases}
+	\section*{Evaluation: Numerical cases}
+%	\subsection{Numerical test cases*}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Numerical test cases RMS based models (GCN model)}
 		\begin{columns}[T]
@@ -1232,14 +1193,14 @@
 %		 The table gathers the actual delamination area, predicted delamination area, intersection over union IoU, and percentage area error \(\epsilon\) to each case.
 %	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Evaluation: Experimental cases}
+	\section*{Evaluation: Experimental cases}
 	\begin{frame}[t]{Composite specimen}
 		\begin{columns}[T]
 			\column{0.7\textwidth}
 			{\small
 				\begin{itemize}
 					\item 16 layers set at the same angle \\
-					\item carbon: Prepreg GG 205  P (fibres Toray FT 300 - 3K 200 tex), $E=230$ GPa
+					\item carbon: Prepreg GG 205 P (fibres Toray FT 300 - 3K 200 tex), $E=230$ GPa
 					\item epoxy resin: IMP503Z-HT by Impregnatex Compositi 
 					\item dimensions: 500$\times$500$\times$3.9 mm\\
 					\item density: 1522.4~kg/m\textsuperscript{3}
@@ -1258,12 +1219,12 @@
 			\begin{tabular}{cccccc} 
 				%\hline
 				\toprule[1.5pt]
-				\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }  \\ 
+				\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }\\ 
 				%	\hline \hline
 				\cmidrule(lr){1-4} \cmidrule(lr){5-6} 
 				fill & warp & fill gap& warp gap& fill & warp\\
 				%\hline
-				$a_f$ &$a_w$& $g_f$  & $g_w$  & $h_f$& $h_w$ \\ 
+				$a_f$ &$a_w$& $g_f$ & $g_w$ & $h_f$& $h_w$ \\ 
 				%\hline
 				%\midrule
 				\cmidrule(lr){1-2} \cmidrule(lr){3-4} \cmidrule(lr){5-6}
@@ -1316,7 +1277,7 @@
 		I would like to mention that the specimens on the left were brought specifically to my PhD project.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}[t]{SLDV measurements: laboratory}
+	\begin{frame}[t]{SLDV measurements: Setup}
 		\begin{columns}[T]
 			\column{0.5\textwidth}
 			\begin{figure}
@@ -1429,7 +1390,7 @@
 			\label{tab:rms_exp_case}
 			\begin{tabular}{lc}
 				\toprule[1.5pt]
-				Model & IoU  	\\			
+				Model & IoU	\\			
 				\midrule
 				Res-UNet & 0.58 \\ 
 				VGG16 encoder-decoder & 0.62 \\ 
@@ -1530,17 +1491,17 @@
 				\end{figure}
 			\end{column}				
 		\end{columns}	
-		IoU= $0.64$ and $\epsilon=1.69\%$  for the thresholded damage map (Binary RMS).		
+		IoU= $0.64$ and $\epsilon=1.69\%$ for the thresholded damage map (Binary RMS).		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		This slide presents the predicted results using the autoencoder ConvLSTM model compared to conventional signal processing adaptive wavenumber filtering regarding the multiple delamination case.
 		
-		Animation (a)  shows the full wavefield measured by SLDV of 512 frames
+		Animation (a) shows the full wavefield measured by SLDV of 512 frames
 		
 		Figure (b) shows the damage map resulting from applying adaptive wavenumber filtering and figure (c) shows its binary output with IoU = 0.04
 		
-		Animation (d)  shows all intermediate predictions with the deep learning model
+		Animation (d) shows all intermediate predictions with the deep learning model
 		
 		Figure (e) shows the RMS of all intermediate predictions and figure (f) shows the binary RMS with IoU = 0.64
 		
@@ -1548,7 +1509,7 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\section{Super-resolution image reconstruction}
+	\section{Part II: Super-resolution image reconstruction}
 	\begin{frame}{Super-resolution image reconstruction}
 		\begin{columns}[T]
 			\begin{column}[c]{0.35\textwidth}
@@ -1586,7 +1547,7 @@
 					\begin{equation*}
 						x=\Psi s,
 					\end{equation*}
-					where \(\Psi\) is the universal basis (in this work, Fourier domain was applied), \(s\) is a sparse vector of coefficients  (\alert{most of the coefficients are equal or close to zero}).
+					where \(\Psi\) is the universal basis (in this work, Fourier domain was applied), \(s\) is a sparse vector of coefficients (\alert{most of the coefficients are equal or close to zero}).
 					\item \alert{Incoherence}: which relates to the sensing modality.
 					\begin{gather*}
 						y=Cx, \\
@@ -1697,7 +1658,7 @@
 								\cmidrule(lr){1-2} \cmidrule(lr){3-4}
 								PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
 								\midrule
-								42.95 & 0.999 & 33.02 & 0.993  \\					
+								42.95 & 0.999 & 33.02 & 0.993 \\					
 								\bottomrule
 							\end{tabular}
 						\end{table}
@@ -1818,7 +1779,7 @@
 		Figure a shows the actual HR frame, and figure b shows the predicted SR frame. 
 		The PSNR value is 48.6
 		
-		Figure c shows the HR sub-frame at the delamination region,  figure d shows the SR prediction at the delamination region, and the PSNR is 46.67.		
+		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 46.67.		
 	}
 %	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\setcounter{subfigure}{0}
@@ -1886,14 +1847,14 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		\tiny
-		In this slide, I present an experimental test case, in which the Low-resolution input data was registered by an SLDV at a uniform gird of  \(32\times 32\) points.
+		In this slide, I present an experimental test case, in which the Low-resolution input data was registered by an SLDV at a uniform gird of \(32\times 32\) points.
 		The LR input frame corresponds to the initial interaction with the delamination at frame number 110.
 		
 		Additionally, the conventional compressive sensing technique was applied as a reference with a various number of points used for the reconstruction of the wavefield. 
 		
 		Moreover, two types of masks (sub-sampling schemes) for the construction of measurement matrix were tested, namely random mask and jitter mask.
 		
-		Figure a shows the actual HR reference frame, and figures c, d, and e  show reconstructed HR frames with the CS method at \(N_p = 1024\), \(N_p = 3000\) and \(N_p = 4000\) points, respectively. 
+		Figure a shows the actual HR reference frame, and figures c, d, and e show reconstructed HR frames with the CS method at \(N_p = 1024\), \(N_p = 3000\) and \(N_p = 4000\) points, respectively. 
 		
 		As expected, when decreasing the \(N_p\) measuring points, the CS method is not able to recover HR frames accurately. 
 		
@@ -1935,13 +1896,12 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The following table presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and the DLSR model for various numbers of points and the corresponding compression ratios CR. 
-		Metrics were calculated for frame number 110 on the whole plate and delamination region, respectively.  
+		Metrics were calculated for frame number 110 on the whole plate and delamination region, respectively. 
 		It should be underlined, that for the number of points = 1024 points, the CS recovery algorithm behaves poorly at the delamination region, whereas the DLSR model is still able to achieve high PSNR and Pearson CC values.	
 		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Conclusions}
+	\section{Conclusions and future works}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Conclusions}
 		\footnotesize
@@ -1955,23 +1915,33 @@
 		\end{itemize}
 	\end{frame}		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Future works}
+				
+	\end{frame}		
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Publications}
 		\vspace{5pt}
+		\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+		\addtolength{\leftmargini}{\labelsep}
 		\begin{tiny}					
 			\begin{columns}[T]
 				\begin{column}[t]{0.48\textwidth}
-					\underline{\textbf{Journals}}
+					\underline{\textbf{Journal articles}}
 					\begin{itemize}
 						\justifying
-						\item Ijjeh, A., Ullah, S., Radzienski, M. and Kudela, P., 2023. Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves. \textbf{\textit{Mechanical Systems and Signal Processing}}, 186, p.109878.
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ijjeh, A., Ullah, S., Radzienski, M. and Kudela, P., 2023. Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves. \textbf{\textit{Mechanical Systems and Signal Processing}}, 186, p.109878.						
 						\textbf{[200 points]/[IF:8.934]}
-						\item Ullah, S., Ijjeh, A.A. and Kudela, P., 2023. Deep learning approach for delamination identification using animation of Lamb waves. 
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ullah, S., Ijjeh, A.A. and Kudela, P., 2023. Deep learning approach for delamination identification using animation of Lamb waves. 						
 						\textbf{\textit{Engineering Applications of Artificial Intelligence}}, 117, p.105520.		
 						\textbf{[140 points]/[IF:7.802]}
-						\item Ijjeh, A.A. and Kudela, P., 2022. Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study. \textbf{\textit{Mechanical Systems and Signal Processing}}, 168, p.108671.
-						\textbf{[200 points]/[IF:8.934]}
-						\item Ijjeh, A.A., Ullah, S. and Kudela, P., 2021. Full wavefield processing by using FCN for delamination detection. \textit{Mechanical Systems and Signal Processing, 153,} p.107537.		
-						\textbf{[200 points]/[IF:8.934]}			
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ijjeh, A.A. and Kudela, P., 2022. Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study. \textbf{\textit{Mechanical Systems and Signal Processing}}, 168, p.108671. \textbf{[200 points]/[IF:8.934]}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ijjeh, A.A., Ullah, S. and Kudela, P., 2021. Full wavefield processing by using FCN for delamination detection. \textbf{\textit{Mechanical Systems and Signal Processing}}, 153, p.107537.		
+						\textbf{[200 points]/[IF:8.934]}	
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\end{itemize}					
 				\end{column}
 				\begin{column}[t]{0.48\textwidth}
@@ -2005,8 +1975,9 @@
 			\end{columns}
 		\end{tiny}
 	\end{frame}	
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	{
 		\setbeamercolor{palette primary}{fg=blue, bg=white}
 		\begin{frame}[standout]
@@ -2021,320 +1992,5 @@
 			The research work was funded by the Polish National Science Center under grant agreement no. 2018/31/B/ST8/00454.
 		\end{frame}
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section*{Backup slides}
-	\addtocounter{section}{1}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{Optimization and Deep Learning}
-		\begin{columns}[T]
-			\begin{column}[t]{.4\textwidth}
-				\begin{itemize}
-					\item \alert{Labeled data} $\rightarrow$ (input data has labels/ground truths)
-					\item \alert{Loss function} $\rightarrow$ measures error between predicted and the ground truth values
-					\item \alert{Learnable parameters} $\rightarrow$ updated during the backpropagation step (optimization e.g. Gradient descent )					
-				\end{itemize}
-			\end{column}
-			\begin{column}[t]{.55\textwidth}
-				\begin{figure}[t]
-					\centering
-					\animategraphics[autoplay,loop,width =1.0\textwidth]{1}{figures/gif_figs/BP/png/BP_technique_}{0}{14}
-				\end{figure}
-			\end{column}
-		\end{columns}		
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{			
-		In this work, I used the supervised approach, which means that the input data is labelled.
-		
-		Accordingly, the idea of supervised learning is to learn a model of how to map the inputs to the outputs.
-		
-		Initially, when we start training the deep learning model, all learnable parameters, such as weights and biases, start with random values.
-		These learnable parameters are updated during the training phase.
-		Now, in the forward pass, we feed the data into the model, and it flows through the layers until we get the predicted output.
-		Here, we need an objective loss function to estimate the loss (error) between the predicted output and the ground truth.
-		
-		A well-known optimization algorithm is a gradient descent, which aims to reduce the loss at each step to reach the global minimum value by calculating the gradient and then pushing back the calculated gradients across all the neurons in a technique called backpropagation.
-		
-		Accordingly, all learnable parameters are updated, which leads to minimizing the loss value.
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Dataset}
-		\footnotesize	
-		\begin{itemize}
-			\item The input signal was a five-cycle Hann window modulated sinusoidal tone burst. 
-			\item The carrier frequency was assumed to be 50 kHz. 
-			\item The total wave propagation time was set to 0.75 ms so that the guided wave could propagate to the plate edges and back to the actuator twice. 
-			\item The number of time integration steps was 150000, which was selected for the stability of the central difference scheme.
-			\item The material was a typical cross-ply CFRP laminate. 
-			\item The stacking sequence \([0/90]_4\) was used in the model. 
-			\item The properties of a single ply were as follows [GPa]: \(C_{11}=52.55,\ C_{12}=6.51,\ C_{22}=51.83,\ C_{44}=2.93,\ C_{55}=2.92,\ C_{66}=3.81\). 
-			\item The assumed mass density was 1522.4 kg/\(m^3\). 
-			\item These properties were selected so that wave front patterns and wavelengths simulated numerically are similar to the wavefields measured by the SLDV on CFRP specimens used later on for testing the developed methods for delamination identification. 
-			\item The shortest wavelength of the propagating A0 Lamb wave mode was 21.2 mm for numerical simulations and 19.5 mm for experimental measurements, respectively.
-		\end{itemize}		
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Rule of mixture and homogenization}	
-		\footnotesize		
-		\noindent Composite materials have their micro-structure designed in terms of their macroscopic constituents, e.g., fibers in a homogeneous matrix material. 
-		By controlling the choice of fibres, their volume fraction, and alignment, the mechanical properties may be tailored to meet specific design requirements.
-		\begin{columns}[T]				
-			\begin{column}{0.45\textwidth}
-				Diagram (a) shows a 'uniaxial fibre-reinforced composite material," and (b) shows how the stress on the composite is carried by the fibres and the matrix. 
-				In normal situations, the fibre has a larger Young's modulus than the matrix, and for the continuous fibres shown, where the strain is the same in the matrix and the fibre, the fibre stress is higher than the matrix stress.
-			\end{column}
-			\begin{column}{0.45\textwidth}
-				\begin{figure}
-					\includegraphics[width=0.8\textwidth]{rule_of_mixture.png}
-					\caption{From: McMahon and Graham, :"The Bicycle and the Walkman," Merion (1992)}
-				\end{figure}
-			\end{column}
-		\end{columns}
-		The Young's modulus of the composite is given by the 'rule of mixtures' i.e. \(E_C = E_F V_F + E_MV_M\), also \((V_M + V_F) = 1\) or \(V_M = (1 - V_F )\). 
-		The elastic modulus along the fibre direction can be controlled by selecting the volume fraction of the fibres.		
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{RMS based: Analysis of numerical cases}
-		\begin{columns}[T]
-			\tiny
-			\begin{column}[t]{0.48\textwidth}
-				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-				\begin{table}
-				\caption{Evaluation metrics of the three numerical cases.}
-				\label{tab:RMS_num_cases}
-				\begin{tabular}{cccccc}
-					\toprule[1.5pt]
-					\multirow{2}{*}{Model} & \multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
-					\cmidrule(lr){4-6} & & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
-					\midrule
-					\multirow{3}{*}{Res-UNet} 							
-					& 1 & 257 & \multicolumn{1}{c}{0.45} & \multicolumn{1}{c}{143} & \(44.36\%\) \\ 
-					& 2 & 105 & \multicolumn{1}{c}{0.67} & \multicolumn{1}{c}{88} & \(16.19\%\) \\ 
-					& 3 & 537 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{478} & \(10.99\%\) \\ 
-					\midrule
-					\multirow{3}{*}{VGG16 encoder-decoder} 
-					& 1 & 257 & \multicolumn{1}{c}{0.69} & \multicolumn{1}{c}{203} & \(21.01\%\) \\ 
-					& 2 & 105 & \multicolumn{1}{c}{0.75} & \multicolumn{1}{c}{117} & \(11.43\%\) \\ 
-					& 3 & 537 & \multicolumn{1}{c}{0.65} & \multicolumn{1}{c}{385} & \(28.31\%\) \\ 
-					\midrule
-					\multirow{3}{*}{FCN-DenseNet} 
-					& 1 & 257 & \multicolumn{1}{c}{0.52} & \multicolumn{1}{c}{505} & \(96.50\%\) \\ 
-					& 2 & 105 & \multicolumn{1}{c}{0.66} & \multicolumn{1}{c}{118} & \(12.38\%\) \\ 
-					& 3 & 537 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{815} & \(51.77\%\) \\ 
-					\midrule
-					\multirow{3}{*}{PSPNet} 
-					& 1 & 257 & \multicolumn{1}{c}{0.00} & \multicolumn{1}{c}{0} & \(-\%\) \\ 
-					& 2 & 105 & \multicolumn{1}{c}{0.44} & \multicolumn{1}{c}{156} & \(48.57\%\) \\ 
-					& 3 & 537 & \multicolumn{1}{c}{0.77} & \multicolumn{1}{c}{610} & \(13.59\%\) \\ 
-					\midrule
-					\multirow{3}{*}{GCN} 
-					& 1 & 257 & \multicolumn{1}{c}{0.71} & \multicolumn{1}{c}{215} & \(16.34\%\) \\ 
-					& 2 & 105 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{177} & \(68.57\%\) \\ 
-					& 3 & 537 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{523} & \(2.61\%\) \\ 
-					\bottomrule[1.5pt]
-				\end{tabular}	
-			\end{table}
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-			\end{column}
-			\begin{column}[t]{0.48\textwidth}
-				\begin{table}
-					\caption{Analysis of numerical cases.}
-					\label{tab:table_all_numerical_cases_backup}	
-					\begin{tabular}{lcc}
-						\toprule[1.5pt]
-						Model & mean IoU & max IoU \\ 
-						\midrule 
-						Res-UNet & \(0.66\) & \(0.89\) \\ 
-						VGG16 encoder-decoder & \(0.57\) & \(0.84\) \\ 
-						FCN-DenseNet & \(0.68\) & \(0.92\) \\ 
-						PSPNet & \(0.55\) & \(0.91\) \\ 
-						GCN & \(0.76\) & \(0.93\) \\ 
-						\bottomrule[1.5pt]
-					\end{tabular}
-				\end{table}
-			\end{column}
-		\end{columns}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Initial frame interaction}
-		\begin{itemize}
-			\item The total wave propagation time was set to \(0.75\) ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
-			\item The total time of propagation was converted into \(512\) frames of animated Lamb waves.
-			\item The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
-			\item The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset. 
-			Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
-			\item As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
-		\end{itemize}
-
-		When the time of interaction \(t_i\) with the delamination is know, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
-		\begin{gather*}
-			t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
-			\\
-			f_n = \frac{t_i}{0.75ms} \times 512
-		\end{gather*}			
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Animation based: Analysis of numerical cases}
-		The mean IoU for all 95 test cases is 0.80, and the \(mean\ \epsilon\) is \(5.6\%\)
-		\begin{table}[!h]
-			\centering
-			\caption{Evaluation metrics of the three numerical cases.}
-			\begin{tabular}{ccccc}
-				\toprule[1.5pt]
-				\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
-				\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
-				\midrule
-				1 & 763 & \multicolumn{1}{c}{0.88} & \multicolumn{1}{c}{735} & \(3.67\%\) \\ 
-				2 & 388 & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{248} & \(36.08\%\) \\ 
-				3 & 297 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{280} & \(5.72\%\) \\			 					
-				\bottomrule[1.5pt]
-			\end{tabular}	
-			\label{tab:num_cases_}
-		\end{table}			
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{SLDV measurements: setup}
-		\begin{figure}
-			\includegraphics[width=0.7\textwidth]{sensors_fig4_setup.png}
-		\end{figure}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}[t]{Conventional signal processing and wavefield imaging}
-		\begin{figure}
-			\includegraphics[width=0.7\textwidth]{figs2/sensors_fig1_algorithm.png}
-		\end{figure}
-		\biblioref{M. Radzienski, P. Kudela, A. Marzani, L. de Marchi, W. Ostachowicz}{2019}{ Damage Identification in Various Types of Composite Plates Using Guided Waves Excited by a Piezoelectric Transducer and Measured by a Laser Vibrometer}{Sensors, 19, 1958}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{RMS based: Analysis of experimental case}
-%		\begin{table}[!ht]
-%			\centering
-%			\caption{Evaluation metrics of the experimental case.}
-%			\label{tab:rms_exp_case__}
-%			\begin{tabular}{lc}
-%				\toprule[1.5pt]
-%				Model & IoU  	\\			
-%				\midrule
-%				Res-UNet & 0.58 \\ 
-%				VGG16 encoder-decoder & 0.62 \\ 
-%				FCN-DenseNet & 0.54 \\ 
-%				PSPNet & 0.49 \\ 
-%				GCN & 0.72\\ 
-%				\bottomrule[1.5pt]
-%			\end{tabular}		
-%		\end{table}
-		\begin{table}[!ht]
-			\centering
-			\caption{Evaluation metrics of the experimental case.}
-			\label{tab:rms_exp_case_}
-			\begin{tabular}{l@{\ }cccc}
-				\toprule
-				\multicolumn{1}{l}{Model} & \multicolumn{1}{c}{A [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Predicted output} \\ 
-				\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ \midrule
-				Res-UNet & \multicolumn{1}{c}{\multirow{5}{*}{210}} & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{323}  & \(53.8\%\) \\ 
-				VGG16 encoder-decoder &  & \multicolumn{1}{c}{0.62} & \multicolumn{1}{c}{320} & \(52.4\%\) 
-				\\ 
-				FCN-DenseNet &  & \multicolumn{1}{c}{0.54} & \multicolumn{1}{c}{386} & \(83.8\%\) \\ 
-				PSPNet &  & \multicolumn{1}{c}{0.49} & \multicolumn{1}{c}{580} & \(176.2\%\) 
-				\\ 
-				GCN &  & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{309} & \(47.1\%\) 
-				\\ 
-				\bottomrule
-			\end{tabular}		
-		\end{table}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{Experimental results full wavefield based (Single delamination)}
-		\begin{figure}[ht!]
-			\centering
-			\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm]{32}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
-			\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
-			\subfloat[RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_updated_results_.png}}\quad
-			\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_CFRP_teflon_3o__375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_.png}}
-		\end{figure}
-		IoU= $0.41$ for the thresholded damage map and $\epsilon=71.56\%$  
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Compressive sensing theory}
-		\tiny
-		A signal $\vec{s}\in \mathbb{R}^n$ can be reconstructed from a linear combination of random measurements $\vec{y} \in \mathbb{R}^m$.
-		The general under-sampling problem can be written as:
-		\begin{equation}
-			\vec{y} = \bs{\Phi} \vec{s},
-		\end{equation}
-		where $\bs{\Phi} \in \mathbb{R}^{m\times n}$ is the measurement matrix and $m$ is the number of measurements which can be much smaller than the number of samples in the signal ($m<<n$).
-		
-		The signal $\vec{s}$ can be recovered from the compressed measurements $\vec{y}$, if it has sparse representation in some model basis $\bs{\Psi} \in \mathbb{R}^{n\times n}$, which can be written as:
-		\begin{equation}
-			\vec{s} = \bs{\Psi} \bs{\alpha},
-		\end{equation}
-		where $\bs{\alpha}$ has $K$ nonzero elements ($K<m<n$) and signal $\vec{s}$ is called $K$-sparse. 
-		Moreover, the measurement matrix $\bs{\Phi}$ has to be incoherent with the model basis $\bs{\Psi}$.
-		In practical applications, signals contain noise, hence:
-		\begin{equation}
-			\vec{y} = \bs{\Phi} \bs{\Psi} \bs{\alpha} + \vec{z},
-			\label{eq:cs_with_noise}
-		\end{equation}
-		where $\vec{z}$ represents noise.
-		The recovery problem can be solved by the basis pursuit denoising algorithm by relaxing Eq.~(\ref{eq:cs_with_noise}) and using sparsity promoting $L_1$ norm which can be written as:
-		\begin{equation}
-			\min{\lVert \tilde{\bs{\alpha}} \rVert}_1 \quad \textrm{subject to} \quad {\lVert \bs{\Phi} \bs{\Psi} \tilde{\bs{\alpha}} -\vec{y} \rVert}_2 \leq \sigma ,
-		\end{equation}
-		where $\sigma$ is related to the noise level in the data.
-		
-		In particular, in this paper we employed SPGL1 and Fourier basis.
-		
-		It should be added that the subsampling is performed only in the spatial domain, because in practice during SLDV measurements the time domain sampling frequency is fixed and cannot be altered in the acquisition software. 	
-	\end{frame}
-	
-	\begin{frame}{Compression rate}
-		\begin{columns}[T]
-			\begin{column}[t]{0.48\textwidth}
-				\tiny
-				The maximum permissible distance between grid points according to Nyquist theorem is calculated as in Eqn.~(\ref{eq:dx}):
-				\begin{equation}
-					d_{max}= \frac{1}{2*k_{max}} = \frac{1}{2*51.28\ [\textup{m}]} = \frac{\lambda}{2} = \frac{19.5}{2}\ \textup{[mm]}.
-					\label{eq:dx}	
-				\end{equation} 
-				where $k_{max}$ is the maximum wavenumber, and $\lambda$ is the shortest wavelength.
-				
-				On the other hand, the longest distance between grid points on uniform square grid in 2D space is along the diagonal as shown in Figure below.
-				Therefore, the number of Nyquist sampling points along edges of the plate is defined as:
-				\begin{align}
-					\begin{split}
-						N_x= \frac{L}{d_{max}/\sqrt{2}}, \\
-						N_y=  \frac{W}{d_{max}/\sqrt{2}},
-					\end{split}
-					\label{eq:Nyq}
-				\end{align}
-				where $L$ is the plate length, and $W$ is the plate width.
-				
-				In our particular case, $L=W=500$~[mm], and number of Nyquist points $N_x= N_y= N_{Nyq} =73$.				
-			\end{column}
-			\begin{column}[t]{0.48\textwidth}
-				\tiny
-				\begin{figure} [!h]
-					\centering
-					\includegraphics[width=0.75\textwidth]{Nyquist_wavelength.png}
-					\caption{Longest distance between grid points.}
-				\end{figure}
-				
-				In this work, we have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
-				Hence, we have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(19.2\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
-				\begin{equation}
-					CR = \frac{(Low-resolution\ dimension)^2}{(Nyquist\ sampling\ rate)^2} = \frac{(32\times32)}{(73\times73)}=19.2\%
-					\label{CR}
-				\end{equation}			
-			\end{column}
-		\end{columns}	
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	 END OF SLIDES
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\end{document}
