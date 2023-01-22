@@ -81,6 +81,8 @@
 % 
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
 %\usepackage{pgfpages}
 %\setbeameroption{show notes}
 %\setbeameroption{show notes on second screen=left}
@@ -772,6 +774,73 @@
 		The ground truth label that represents the delamination location and shape is shown on the right.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Development environment}
+	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Utilised Tools}
+		All developed DL models were \alert{hard-coded in-house} \\
+		\alert{(Tailored specifically to meet tasks requirements)} 
+		\begin{itemize}			
+			\item \alert{Python} language (versions: 3.7 - 3.9)			
+			\item \alert{TensorFlow} platform (versions: 2.0 - 2.6)
+			\item \alert{Keras} (deep learning API over TensorFlow) (versions: 2.0 - 2.6)
+			\item \alert{GPUs}: RTX2080 /8GB, Tesla V100 /32 GB
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Data preprocessing \& Hyperparameters tuning}	
+		\begin{columns}[T]
+			\begin{column}[t]{0.6\textwidth}
+				\begin{table}[]
+					\centering
+					\resizebox{1\textwidth}{!}{%
+						\begin{tabular}{lccc}
+							\toprule[1.5pt]
+							& \multicolumn{2}{c}{Delamination identification} & \multirow{2}{*}{Super-resolution image reconstruction} \\ \cmidrule(lr){2-3}
+							& RMS image based & Full wavefield based &  \\ \midrule 
+							Dataset normalisation & \checkmark  & \checkmark & \checkmark \\
+							Dataset Augmentation & \checkmark &  &  \\
+							Cross validation & \checkmark &  &  \\ 
+							\bottomrule[1.5pt]
+						\end{tabular}%
+					}
+				\end{table}
+				\begin{table}
+					\centering
+					\resizebox{.6\textwidth}{!}{%
+					\begin{tabular}{ccc}
+						\toprule[1.5pt]
+						Training set & Testing set & Validation set \\
+						\midrule
+						$80\%$ & $20\%$ & $20\%$ out of training set \\
+						\bottomrule[1.5pt]
+					\end{tabular}}
+				\end{table}
+				\begin{itemize}
+					\item Trail and error and manual search was utilised for tuning the hyperparameters.
+					\item Early stopping technique was applied to prevent overfitting. 
+				\end{itemize}
+			\end{column}
+			\begin{column}[t]{0.4\textwidth}
+				\begin{table}
+					\centering
+					\begin{tabular}{lc}
+						\toprule[1.5pt]
+						Hyperparameter & \\
+						\midrule
+						Learning rate & \\
+						Momentum & \\
+						Dropout rate & \\
+						Batch size & \\
+						Epochs & \\
+						Optimisation technique &\\
+						Objective loss function & \\
+						\bottomrule[1.5pt]
+					\end{tabular}
+				\end{table}
+			\end{column}
+		\end{columns}	
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part I: Delamination identification}
 	\begin{frame}{Semantic segmentation}
 		\begin{columns}[T]
@@ -889,48 +958,7 @@
 		
 		
 	}
-	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Development environment: Tools}
-		All developed DL models were \alert{hard-coded (in-house)} \\
-		\alert{(Tailored specifically to meet the task requirements)} 
-		\begin{itemize}			
-			\item \alert{Python} language (Versions: 3.7 - 3.9)			
-			\item \alert{TensorFlow} platform (versions: 2.0 - 2.6)
-			\item \alert{Keras} (deep learning API over TensorFlow) (versions: 2.0 - 2.6)
-		\end{itemize}
-	\end{frame}
-	\begin{frame}{Development environment: Data preprocessing}	
-		\begin{columns}[T]
-			\begin{column}[t]{0.48\textwidth}
-				\begin{enumerate}			
-					\item Data normalisation.
-					\item Data augmentation.
-					\item Applying cross-validation.
-					\item Dataset was divided into two portions: \(80\%\) training set and	\(20\%\) testing set. 
-					Additionally, the validation set was created as a \(20\%\) of the training set.			
-					\end{enumerate}
-			\end{column}
-			\begin{column}[t]{0.48\textwidth}
-				Hyperparameters such as:
-				\begin{enumerate}
-					\item Learning rate
-					\item Momentum
-					\item Optimisation technique (SGD, Adam, RMSProp, $\dots$)
-					\item Drop rate
-					\item Batch size
-					\item Number of Epochs
-					\item Objective loss function (MSE, BCE, CCE, $\dots$)
-				\end{enumerate} 
-			Trail and error and manual search was utilised for tuning the hyperparameters	
-			\end{column}
-		
-		\end{columns}	
-	
-		
-			
-	\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	
 %	\begin{frame}{Pyramid Scene Parsing Network}
