@@ -126,9 +126,9 @@
 		Thank you all for you attending my PhD defence presentation. 
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% SLIDES
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[label=frame1]{Outlines}
 			\setbeamertemplate{section in toc}[sections numbered]
 			\setbeamertemplate{subsection in toc}[subsections numbered]
@@ -151,23 +151,22 @@
 	\section{Introduction}
 	\begin{frame}{Motivations}
 		\begin{columns}[T]
-			\begin{column}[t]{.5\textwidth}
-				\begin{figure}[c]
+			\begin{column}[t]{.4\textwidth}
+				\begin{figure}[t]
 					\centering
-					\includegraphics[width=0.8\textwidth]{Composite_advantages.png}					
+					\includegraphics[width=.9\textwidth]{Composite_advantages.png}					
 				\end{figure}			
-				\begin{figure}[c]
-					\includegraphics[width=0.65\textwidth]{delaminated_plate1.jpg}
+				\begin{figure}[t]
+					\includegraphics[width=.90\textwidth]{delaminated_plate1.jpg}
 				\end{figure}
 				\begin{small}
 					\justifying
 					\noindent \alert{Delamination detection} in its early stages can significantly help avoiding catastrophic structural collapses.
 				\end{small}				
 			\end{column}
-			\begin{column}[t]{0.5\textwidth}
-				\begin{figure}[c]
-					\includegraphics[width=0.85\textwidth]{Crashes.png}
-%					\caption{Catastrophic failures}
+			\begin{column}[t]{0.6\textwidth}
+				\begin{figure}[t]
+					\includegraphics[width=0.7\textwidth]{Crashes.png}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -184,8 +183,7 @@
 		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\subsection{Objectives (1)}
-	\begin{frame}{Objectives (1)}
+	\begin{frame}{Objectives}
 		\textbf{To develop \textcolor{logoblue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
 		\vfil
 		\textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
@@ -203,8 +201,7 @@
 		My second objective is to address the issue of slow data acquisition of high-resolution full wavefields of Lamb wave propagation by SLDV. 		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\subsection{Objective (2)}
-	\begin{frame}{Objective (2)}
+	\begin{frame}{Contribution and novelty}
 		\begin{columns}[T]
 			\begin{column}[c]{0.95\textwidth}
 				\begin{figure}
@@ -214,323 +211,120 @@
 			\end{column}
 		\end{columns}		
 	\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\section{Non Destructive Testing (NDTs)}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{frame}{Structural Health Monitoring (SHM)}
-%		\begin{figure}
-%			\includegraphics[height=.8\textheight]{SHM_system.png}
-%		\end{figure}
-%	\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\note{
-%		Structural health monitoring is about monitoring a structure periodically or continuously to evaluate its technical conditions.
-%		
-%		As a result, the SHM aims to place integrated sensors on the structure to continuously monitor its condition.
-%		
-%		In this way, structural health monitoring mimics the human nervous system, which can provide us with real-time readings and detect any abnormal events.
-%		
-%		Accordingly, this is the ultimate aim of SHM: to monitor in real-time in a way that can detect damage early so we can perform preventive measures to protect the structure.
-%	}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{frame}{Ultrasonic testing (UT)} 
-%		\begin{columns}[T]
-%			\begin{column}[c]{0.38\textwidth}
-%				\textbf{Ultrasonic waves}	
-%				\begin{itemize}
-%					\item Frequency range: 2 MHz - 200 MHz
-%					\item Wavelength \(\lambda << h\) thickness 
-%					\item shorter wavelengths
-%				\end{itemize}
-%				
-%				\textbf{Guided waves}	
-%				\begin{itemize}
-%					\item Typical frequency range: \\ 10 kHz - 1 MHz
-%					\item Wavelength \(\lambda > h\) thickness 
-%					\item longer wavelengths
-%				\end{itemize}
-%				
-%			\end{column}
-%			\begin{column}[c]{0.6\textwidth}				
-%				\textbf{Ultrasonic testing} \hspace{50pt} \textbf{Guided wave testing}
-%				\begin{figure}
-%					\includegraphics[width=0.95\textwidth]{local_ultrasonic.png}
-%				\end{figure}
-%			\end{column}		
-%		\end{columns}	
-%	\end{frame}
-%	\note{
-%		\tiny
-%		Many conventional methods have been used for a long time in the industry for damage inspection, such as visual inspection, Eddy current, dye penetration, acoustic emission, and local ultrasonic testing.
-%		For the local ultrasonic testing, the frequency is in the range of 2 MHz–200 MHz, and the wavelength is way smaller than the thickness of the structure.
-%		There are different methods for ultrasonic testing, such as:
-%		pulse echo, in which we have a probe that generates ultrasonic waves that propagate through the thickness of a structure, and then the reflected waves from the bottom surface are captured by the same probe.
-%		The other ultrasonic method is called the "through-transmission method."
-%		There are two probes: one for transmitting on one side and the other for receiving on the other side.
-%		As a result, these methods are local, but they have some drawbacks:
-%		Labor-intensive, time-consuming, professional, and experienced personnel are required; complex structures may need to be disassembled.
-%		On the other hand, guided wave testing is a promising global NDE solution for SHM.
-%		The typical frequency range of guided waves is 10 kHz to 1 MHz, and their wavelength is larger than the thickness of the investigated structure.
-%		Guided waves can be generated using a piezoelectric actuator and registered by an array of piezoelectric sensors. 
-%		Alternatively, the propagation of guided Lamb waves can be registered using a scanning laser Doppler vibrometer to produce a full wavefield scan.		 
-% 	}
-%	
-%%	\begin{frame}{Ultrasonic testing vs guided wave testing}
-%%%		\alert{Bulk waves} exist in infinite homogeneous bodies and propagate indefinitely without being interrupted by boundaries or interfaces. 
-%%%		These waves can be decomposed into infinite plane waves propagating along arbitrary direction within the solid.
-%%%		
-%%%		\alert{Guided waves} are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
-%%%		\vspace{5mm}
-%%		\begin{columns}[T]
-%%			\begin{column}{0.5\textwidth}
-%%				
-%%			\end{column}
-%%			\begin{column}{0.5\textwidth}
-%%				
-%%			\end{column}
-%%		\end{columns}			
-%%	\end{frame}
-%%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%	\note{
-%%		Guided waves are those waves that require a boundary for their existence, such as surface waves, Lamb waves, and interface waves.
-%%		
-%%	}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\section{Guided waves}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%\begin{frame}{Waves used in non-destructive testing}
-%	%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%	Elastic wave propagation types depending on particle motion:
-%	%	\begin{itemize}
-%		%		\item \alert{The longitudinal wave} is a compressional wave in which the particle motion is in the same direction as the propagation of the wave
-%		%		\item \alert{The shear wave} is a wave motion in which the particle motion is perpendicular to the direction of the propagation
-%		%		\item \alert{Surface (Rayleigh) waves} have an elliptical particle motion and travel across the surface of a material. Their velocity is approximately 90\% of the shear wave velocity of the material and their depth of penetration is approximately equal to one
-%		%		wavelength
-%		%		\item \alert{Plate (Lamb) waves} have a complex vibration occurring in materials where thickness is less than the wavelength of elastic wave introduced into it.
-%		%	\end{itemize}
-%	%\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%\setcounter{subfigure}{0}
-%	%\begin{frame}{Waves used in non-destructive testing}
-%	%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%	\begin{figure}
-%		%		\subfloat{\animategraphics[autoplay,loop, controls,width=0.5\textwidth]{10}{figures/gif_figs/Longitudinal_wave/Longitudinal_wave-}{0}{35}}
-%		%		\caption{\alert{Longitudinal wave} - plane pressure pulse wave}
-%		%	\end{figure}
-%	%\tiny 
-%	%(source: https://nojigon.webs.upv.es/index.php)
-%	%\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%\setcounter{subfigure}{0}
-%	%\begin{frame}{Waves used in non-destructive testing}
-%	%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%	\begin{columns}[T]
-%		%		\begin{column}{0.5\textwidth}
-%			%			\centering
-%			%			\begin{figure}
-%				%				\subfloat{\animategraphics[autoplay,loop, controls,width=0.95\textwidth]{10}{figures/gif_figs/SH_shear_wave/SH_shear-}{0}{39}}
-%				%				\caption{\alert{Shear horizontal wave}}
-%				%			\end{figure}			
-%			%		\end{column}
-%		%		\begin{column}{0.5\textwidth}
-%			%			\centering
-%			%			\begin{figure}
-%				%				\subfloat{\animategraphics[autoplay,loop, controls,width=0.95\textwidth]{10}{figures/gif_figs/SV_shear_wave/SV_shear-}{0}{39}}
-%				%				\caption{\alert{Shear vertical wave}}
-%				%			\end{figure}			
-%			%		\end{column}	
-%		%	\end{columns}
-%	%\tiny 
-%	%(source: https://nojigon.webs.upv.es/index.php)
-%	%\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%\setcounter{subfigure}{0}
-%	%\begin{frame}{Waves used in non-destructive testing}
-%	%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%	\begin{figure}
-%		%		\centering
-%		%		\subfloat{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{15}{figures/gif_figs/Raileigh_wave/Raileigh_wave-}{0}{67}}
-%		%		\caption{\alert{Rayleigh waves}}		
-%		%	\end{figure}			
-%	%\tiny 
-%	%(source: https://nojigon.webs.upv.es/index.php)
-%	%\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%\setcounter{subfigure}{0}
-%	%\begin{frame}{Waves used in non-destructive testing}
-%	%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	%	\begin{figure}			
-%		%		\centering
-%		%		\subfloat{\animategraphics[autoplay,loop, controls,height=0.65\textheight]{20}{figures/gif_figs/love_wave/love_wave-}{0}{107}}
-%		%		\caption{\alert{Love waves} (surface seismic waves) named after Augustus Edward Hough Love}		
-%		%	\end{figure}			
-%	%\tiny 
-%	%(source: https://nojigon.webs.upv.es/index.php)
-%	%\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\setcounter{subfigure}{0}
-%	\begin{frame}{Lamb waves}
-%		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		\begin{alertblock}{Lamb waves}	
-%			Lamb waves are plane waves propagating in thin plates.\\
-%			Shear vertical waves in conjunction with longitudinal P waves interacts with plate surfaces resulting in complex wave mechanism which leads to creation of Lamb waves.
-%		\end{alertblock}
-%%		Horace Lamb discovered these type of waves in 1917.
-%%		He derived theory and dispersion relations.
-%		\begin{columns}[T]
-%			\begin{column}{0.5\textwidth}
-%				\centering
-%				symmetric modes
-%				\begin{equation*}
-%					\frac{\tan(q h)}{\tan(p h)} = -\frac{4 k^2 p q}{\left(q^2 - k^2\right)^2}
-%				\end{equation*}
-%			\end{column}
-%			\begin{column}{0.5\textwidth}
-%				\centering
-%				antisymmetric modes
-%				\begin{equation*}
-%					\frac{\tan(q h)}{\tan(p h)} = -\frac{\left(q^2 - k^2\right)^2}{4 k^2 p q}
-%				\end{equation*}
-%			\end{column}	
-%		\end{columns}	
-%		\centering
-%%		\(q=q(\omega,k), \quad p=p(\omega,k) \)
-%		\begin{gather*}
-%			\centering
-%			p^2 = \frac{\omega^2}{c_{L}^2}-k^2,\ q^2 = \frac{\omega^2}{c_{S}^2}-k^2,\ k = \frac{2\pi}{\lambda},\ f=\frac{\omega}{2\pi}
-%		\end{gather*}
-%		\newline
-%		\begin{gather*}
-%			\centering
-%			c_L=\sqrt{\frac{2\mu (1-\nu)}{\rho(1-2\nu)}},\ c_S=\sqrt{\frac{\mu}{\rho}}
-%		\end{gather*}
-%	\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\note{
-%		Lamb waves are a subset of guided waves that propagate between two parallel surfaces, such as in shell and plate structures discovered by Horace Lamb in 1917.
-%		
-%		Lamb waves can be separated into symmetric modes and antisymmetric modes in terms of the surface particle motion to the mid-plane, which are described in characteristic Lamb wave equations:
-%		
-%		
-%		where $h$ is the half-thickness of the plate, $k$ is the wavenumber, $\omega$ is the angular frequency, and $\lambda$ is the wavelength. 
-%		\(cL\) and \(cS\) are the velocities of longitudinal and transverse
-%		waves, respectively.
-%		
-%		where \(\rho\) is the density, \(\mu\) is the shear modulus, and \(\nu\) is Poisson's ratio of the medium.
-%	}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\setcounter{subfigure}{0}
-%	\begin{frame}{Lamb waves modes}
-%		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		\begin{columns}[T]
-%			\begin{column}{0.3\textwidth}
-%				\centering
-%				\begin{figure}
-%					\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/S0_mode/S0_mode-}{0}{67}
-%					\caption{Fundamental symmetric, S0, \alert{Lamb wave} mode (in-plane motion)}
-%				\end{figure}
-%			\end{column}
-%			\begin{column}{0.3\textwidth}
-%				\centering
-%				\begin{figure}
-%					\animategraphics[autoplay,loop,width=1\textwidth]{10}{figures/gif_figs/A0_mode/A0_mode-}{0}{67}
-%					\caption{Fundamental antisymmetric, A0, \alert{Lamb wave} mode (out-of-plane motion)}
-%				\end{figure}
-%			\end{column}
-%			\hfill
-%			\begin{column}{0.37\textwidth}
-%					\begin{itemize}
-%						\item \textcolor{blue}{Travel within guides for long distances}
-%						\item \textcolor{blue}{Can propagate in complex structures}
-%%						\item \textcolor{blue}{High speeds in metals and composites}
-%%						\item \textcolor{blue}{Can be automated using software}
-%					\end{itemize}
-%					\textbf{Lamb waves are a promising global NDE solution for SHM}
-%			\end{column}
-%		\end{columns}	
-%		\tiny 
-%		(source: https://nojigon.webs.upv.es/index.php)
-%	\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\note{
-%		The animation on the left shows the fundamental symmetric \(S_0\) mode of the Lamb wave.
-%		
-%		We can see the in-plane motion of the particles.
-%		Whereas the second animation shows the fundamental antisymmetric \(A_0\) mode of the Lamb wave.
-%		We can see the out-of-plane motion of the particles.
-%		
-%		Furthermore, Lamb wave has some good characteristics that make it a promising solution for SHM as it:\\
-%		1. Can travel within guides for long distances. \\
-%		2. Can propagate in complex structures. \\
-%		3. Has high speed in metals and composites.\\ 	
-%	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-%	\begin{frame}{Dispersion curves of Lamb waves}
-%		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		\begin{figure}
-%			\only<1>{
-%				\includegraphics[width=0.8\textwidth]{/figs/Fig_1_12.png}	
-%			}
-%			\only<2>{
-%				\includegraphics[width=0.8\textwidth]{/figs/Fig_1_13.png}	
-%			}
-%		\end{figure}
-%	\end{frame}
+	\begin{frame}[t]{Composite specimen}
+		\begin{columns}[T]
+			\column{0.7\textwidth}
+			{\small
+				\begin{itemize}
+					\item 16 layers set at the same angle \\
+					\item carbon: Prepreg GG 205 P (fibres Toray FT 300 - 3K 200 tex), $E=230$ GPa
+					\item epoxy resin: IMP503Z-HT by Impregnatex Compositi 
+					\item dimensions: 500$\times$500$\times$3.9 mm\\
+					\item density: 1522.4~kg/m\textsuperscript{3}
+				\end{itemize}
+			}
+			\column{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.6\textwidth]{weave-1.jpg}
+				\caption{Plain weave fabric}
+			\end{figure}
+		\end{columns}
+		\begin{table}[h]
+			\renewcommand{\arraystretch}{1.1}
+			\centering \footnotesize
+			\caption{Geometry of a plain weave fabric reinforced composite [mm]}
+			\begin{tabular}{cccccc} 
+				%\hline
+				\toprule[1.5pt]
+				\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }\\ 
+				%	\hline \hline
+				\cmidrule(lr){1-4} \cmidrule(lr){5-6} 
+				fill & warp & fill gap& warp gap& fill & warp\\
+				%\hline
+				$a_f$ &$a_w$& $g_f$ & $g_w$ & $h_f$& $h_w$ \\ 
+				%\hline
+				%\midrule
+				\cmidrule(lr){1-2} \cmidrule(lr){3-4} \cmidrule(lr){5-6}
+				1.92 &2.0& 0.05& 0.05 & 0.121875 & 0.121875 \\
+				%\hline 
+				\bottomrule[1.5pt] 
+			\end{tabular} 
+			\label{tab:weave_geo}
+		\end{table}
+	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	%%%%
-	%\setcounter{subfigure}{0}
-	%\section{Artificial intelligence, machine learning, and deep learning}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\begin{frame}{What is deep learning?}
-	%	\begin{figure}
-		%		\centering
-		%		\includegraphics[width=0.85\textwidth]{AI_vs_ML_vs_Deep_Learning.png}
-		%	\end{figure}
-	%	\tiny
-	%	(source: https://www.ingeniovirtual.com/)
-	%\end{frame}
-	%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\begin{frame}{Deep learning, why now?}
-	%	\begin{column}[c]{0.4\textwidth}
-		%		AI technologies are in accelerating growth due to:
-		%		\begin{itemize}
-			%			\item Exponential development in computer hardware industries
-			%			 (e.g. CPUs, GPUs, FPGAs, TPUs and ASICs)
-			%			\item Era of Big data.
-			%		\end{itemize}
-		%	\end{column}
-	%	\begin{column}[c]{0.55\textwidth}
-		%		\begin{figure}
-			%			\centering
-			%			\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{10}{gif_figs/gpu/gpu_-}{0}{34}}
-			%		\end{figure}
-		%	\tiny
-		%	(source: https://www.techbooky.com/)
-		%	\end{column}
-	%	
-	%\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\begin{frame}{Common learning strategies}
-	%	\centering
-	%	\begin{figure}
-		%		\includegraphics[width=0.9\textwidth]{learning.png}
-		%	\end{figure}
-	%	\tiny
-	%	(source: https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)
-	%\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		The composite laminates used for experimental evaluation were composed of 16 layers set at the same angle of plain weave fabric with the following characteristics:
+		
+		Table 3 shows the fill and warp strands for the plain weave fabric reinforced composite in [mm].
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}[t]{Specimens with defects}
+		\vspace{-0.5cm}
+		\begin{columns}[T]
+			\column{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.36]{plate_multi_delam_arrangement_large_fonts.png}
+			\end{figure}
+			\column{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.36]{plate_single_delam_arrangement_large_fonts.png}
+			\end{figure}
+		\end{columns}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{	
+		\footnotesize
+		In this slide, I present the specifications of the specimens used for evaluating the developed deep-learning models.
+		
+		Specimens with multiple delaminations are shown on the left.
+		
+		In Specimen II, three large artificial delaminations of elliptic shape were inserted in the upper thickness quarter of the plate between the 4th and the 5th layer. 
+		The delaminations were located at the same distance, equal to 150 mm from the centre of the plate. 
+		
+		In specimen III, delaminations were inserted in the middle of the cross-section of the plate between the 8th layer and the 9th layer.
+		For Specimen IV, three small delaminations were inserted in the upper quarter of the cross-section of the plate, and three large delaminations were inserted at the lower quarter of the cross-section of the plate between the 12th layer and 13th layer. 
+		
+		The fifth specimen on the right has a single delamination. 
+		The delamination between layers of the fabric was created artificially by a Teflon insert of a thickness 250 \(\mu\)m. 
+		The Teflon of a square shape was inserted during specimen manufacturing, so its shape and location are known.
+		
+		Furthermore, all SLDV measurements were conducted from the bottom surface of the plate.
+		
+		I would like to mention that the specimens on the left were brought specifically to my PhD project.
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}[t]{SLDV measurements: Setup}
+		\begin{columns}[T]
+			\column{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.8\textwidth]{wibrometr-laserowy-1d_small-description.png}
+			\end{figure}
+			\column{0.5\textwidth}
+			\begin{enumerate}
+				\item Signal generator: TTI 1241 
+				\item Amplifier: Piezo Systems EPA-104-230 $\pm$200 Vp
+				\item Specimen
+				\item Scanning head: Polytec PSV-400
+				\item DAQ system: Polytec
+			\end{enumerate}
+		\end{columns}
+		{\small
+			Measurements were taken on a uniform grid of \textbf{333$\times$333 points}.\\
+			Excitation in the form of Hann windowed sine signal of carrier frequency \textbf{50 kHz} was applied to piezoelectric transducer.}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		This slide shows the experimental setup at the laboratory for the SLDV measurements.
+		
+		The Piezoelectric transducer is placed on the other side of the plate towards the wall.
+		
+		The measurements were taken on a uniform grid of \(333\times 333\) points from the bottom surface of the plate.
+		
+		The excitation in the form of a Hann windowed sine signal of carrier frequency 50 kHz was applied to the PZT. 
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Deep learning approach: An Overview}		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
@@ -667,27 +461,30 @@
 		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification by themselves without human intervention in an end-to-end approach. 
 	}
 	
-	\section{Synthetic dataset generation}		
+	
+	\section{Development environment}
 	\setcounter{subfigure}{0}
+%	\section{Synthetic dataset generation}		
+%	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{The time domain spectral element method}
-	\begin{columns}[T]
-		\begin{column}{0.47\textwidth}
-			\begin{itemize}
-				\item Mindlin-Reissner plate theory
-				\item Splitting elements and nodes at delamination
-				\item GMSH software was used for meshing quads then converted to spectral elements
-			\end{itemize}	
-			\begin{figure}
-				\subfloat{\includegraphics[width=0.9\textwidth]{shell.png}}	
-			\end{figure}
-		\end{column}
-		\begin{column}{0.47\textwidth}	
-			\begin{figure}
-				\animategraphics[controls,autoplay,loop,width=0.9\textwidth]{1}{/gif_figs/mesh/m1_rand_single_delam_}{1}{20}
-			\end{figure}	
-		\end{column}
-	\end{columns}	
+	\begin{frame}{Synthetic dataset generation}
+		\begin{columns}[T]
+			\begin{column}{0.47\textwidth}
+				\begin{itemize}
+					\item Mindlin-Reissner plate theory
+					\item Splitting elements and nodes at delamination
+					\item GMSH software was used for meshing quads then converted to spectral elements
+				\end{itemize}	
+				\begin{figure}
+					\subfloat{\includegraphics[width=0.9\textwidth]{shell.png}}	
+				\end{figure}
+			\end{column}
+			\begin{column}{0.47\textwidth}	
+				\begin{figure}
+					\animategraphics[controls,autoplay,loop,width=0.9\textwidth]{1}{/gif_figs/mesh/m1_rand_single_delam_}{1}{20}
+				\end{figure}	
+			\end{column}
+		\end{columns}	
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -702,13 +499,13 @@
 	\begin{frame}{Dataset description}
 		\begin{columns}[T]
 			\begin{column}[t]{0.35\textwidth}
-					\begin{itemize}
-						\item 475 delamination scenarios
-						\item CFRP is made of 8-layers
-						\item Delamination modelled between the 3rd and 4th layer
-						\item Delamination size min 10 mm, max 40 mm
-						\item \textbf{3-months of computing}
-					\end{itemize}
+				\begin{itemize}
+					\item 475 delamination scenarios
+					\item CFRP is made of 8-layers
+					\item Delamination modelled between the 3rd and 4th layer
+					\item Delamination size min 10 mm, max 40 mm
+					\item \textbf{3-months of computing}
+				\end{itemize}
 			\end{column}
 			\begin{column}[t]{0.2\textwidth}
 				\begin{figure}[t]
@@ -717,10 +514,10 @@
 				\end{figure}
 			\end{column}
 			\begin{column}[t]{0.45\textwidth}
-					\begin{figure}[t]					
-						\centering						
-						\subfloat[Delamination orientation]{\includegraphics[width=0.95\textwidth]{figure1.png}}					
-					\end{figure}
+				\begin{figure}[t]					
+					\centering						
+					\subfloat[Delamination orientation]{\includegraphics[width=0.95\textwidth]{figure1.png}}					
+				\end{figure}
 			\end{column}
 		\end{columns}
 	\end{frame}
@@ -762,7 +559,7 @@
 			\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2} 
 			\label{eqn:rms} 
 		\end{equation*}
-	\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time step.
+		\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time step.
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -774,23 +571,20 @@
 		The ground truth label that represents the delamination location and shape is shown on the right.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Development environment}
-	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Utilised Tools}
-		All developed DL models were \alert{hard-coded in-house} \\
+	\begin{frame}{Utilised Tools for DL models}
+		All developed DL models were \alert{coded in-house} \\
 		\alert{(Tailored specifically to meet tasks requirements)} 
 		\begin{itemize}			
 			\item \alert{Python} language (versions: 3.7 - 3.9)			
 			\item \alert{TensorFlow} platform (versions: 2.0 - 2.6)
 			\item \alert{Keras} (deep learning API over TensorFlow) (versions: 2.0 - 2.6)
-			\item \alert{GPUs}: RTX2080 /8GB, Tesla V100 /32 GB
+			\item \alert{GPUs}: NVIDIA RTX2080 /8GB, NVIDIA Tesla V100 /32 GB
 		\end{itemize}
 	\end{frame}
 	\begin{frame}{Data preprocessing \& Hyperparameters tuning}	
 		\begin{columns}[T]
-			\begin{column}[t]{0.6\textwidth}
-				\begin{table}[]
+			\begin{column}[t]{0.7\textwidth}
+				\begin{table}[t]
 					\centering
 					\resizebox{1\textwidth}{!}{%
 						\begin{tabular}{lccc}
@@ -806,7 +600,7 @@
 				\end{table}
 				\begin{table}
 					\centering
-					\resizebox{.6\textwidth}{!}{%
+					\resizebox{.5\textwidth}{!}{%
 					\begin{tabular}{ccc}
 						\toprule[1.5pt]
 						Training set & Testing set & Validation set \\
@@ -820,22 +614,23 @@
 					\item Early stopping technique was applied to prevent overfitting. 
 				\end{itemize}
 			\end{column}
-			\begin{column}[t]{0.4\textwidth}
-				\begin{table}
+			\begin{column}[t]{0.3\textwidth}
+				\begin{table}[t]
 					\centering
+					\resizebox{.65\textwidth}{!}{
 					\begin{tabular}{lc}
 						\toprule[1.5pt]
-						Hyperparameter & \\
+						\multicolumn{2}{c}{Hyperparameters}  \\
 						\midrule
 						Learning rate & \\
 						Momentum & \\
 						Dropout rate & \\
 						Batch size & \\
 						Epochs & \\
-						Optimisation technique &\\
+						Optimisation technique & \\
 						Objective loss function & \\
 						\bottomrule[1.5pt]
-					\end{tabular}
+					\end{tabular}}
 				\end{table}
 			\end{column}
 		\end{columns}	
@@ -1259,120 +1054,7 @@
 %		 The table gathers the actual delamination area, predicted delamination area, intersection over union IoU, and percentage area error \(\epsilon\) to each case.
 %	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section*{Evaluation: Experimental cases}
-	\begin{frame}[t]{Composite specimen}
-		\begin{columns}[T]
-			\column{0.7\textwidth}
-			{\small
-				\begin{itemize}
-					\item 16 layers set at the same angle \\
-					\item carbon: Prepreg GG 205 P (fibres Toray FT 300 - 3K 200 tex), $E=230$ GPa
-					\item epoxy resin: IMP503Z-HT by Impregnatex Compositi 
-					\item dimensions: 500$\times$500$\times$3.9 mm\\
-					\item density: 1522.4~kg/m\textsuperscript{3}
-				\end{itemize}
-			}
-			\column{0.3\textwidth}
-			\begin{figure}
-				\includegraphics[width=0.6\textwidth]{weave-1.jpg}
-				\caption{Plain weave fabric}
-			\end{figure}
-		\end{columns}
-		\begin{table}[h]
-			\renewcommand{\arraystretch}{1.1}
-			\centering \footnotesize
-			\caption{Geometry of a plain weave fabric reinforced composite [mm]}
-			\begin{tabular}{cccccc} 
-				%\hline
-				\toprule[1.5pt]
-				\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }\\ 
-				%	\hline \hline
-				\cmidrule(lr){1-4} \cmidrule(lr){5-6} 
-				fill & warp & fill gap& warp gap& fill & warp\\
-				%\hline
-				$a_f$ &$a_w$& $g_f$ & $g_w$ & $h_f$& $h_w$ \\ 
-				%\hline
-				%\midrule
-				\cmidrule(lr){1-2} \cmidrule(lr){3-4} \cmidrule(lr){5-6}
-				1.92 &2.0& 0.05& 0.05 & 0.121875 & 0.121875 \\
-				%\hline 
-				\bottomrule[1.5pt] 
-			\end{tabular} 
-		\label{tab:weave_geo}
-		\end{table}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		The composite laminates used for experimental evaluation were composed of 16 layers set at the same angle of plain weave fabric with the following characteristics:
-		
-		Table 3 shows the fill and warp strands for the plain weave fabric reinforced composite in [mm].
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}[t]{Specimens with defects}
-		\vspace{-0.5cm}
-		\begin{columns}[T]
-			\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[scale=0.36]{plate_multi_delam_arrangement_large_fonts.png}
-			\end{figure}
-			\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[scale=0.36]{plate_single_delam_arrangement_large_fonts.png}
-			\end{figure}
-		\end{columns}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{	
-		\footnotesize
-		In this slide, I present the specifications of the specimens used for evaluating the developed deep-learning models.
-		
-		Specimens with multiple delaminations are shown on the left.
-		
-		In Specimen II, three large artificial delaminations of elliptic shape were inserted in the upper thickness quarter of the plate between the 4th and the 5th layer. 
-		The delaminations were located at the same distance, equal to 150 mm from the centre of the plate. 
-		
-		In specimen III, delaminations were inserted in the middle of the cross-section of the plate between the 8th layer and the 9th layer.
-		For Specimen IV, three small delaminations were inserted in the upper quarter of the cross-section of the plate, and three large delaminations were inserted at the lower quarter of the cross-section of the plate between the 12th layer and 13th layer. 
-		
-		The fifth specimen on the right has a single delamination. 
-		The delamination between layers of the fabric was created artificially by a Teflon insert of a thickness 250 \(\mu\)m. 
-		The Teflon of a square shape was inserted during specimen manufacturing, so its shape and location are known.
-		
-		Furthermore, all SLDV measurements were conducted from the bottom surface of the plate.
-		
-		I would like to mention that the specimens on the left were brought specifically to my PhD project.
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}[t]{SLDV measurements: Setup}
-		\begin{columns}[T]
-			\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[width=0.8\textwidth]{wibrometr-laserowy-1d_small-description.png}
-			\end{figure}
-			\column{0.5\textwidth}
-			\begin{enumerate}
-				\item Signal generator: TTI 1241 
-				\item Amplifier: Piezo Systems EPA-104-230 $\pm$200 Vp
-				\item Specimen
-				\item Scanning head: Polytec PSV-400
-				\item DAQ system: Polytec
-			\end{enumerate}
-		\end{columns}
-		{\small
-		Measurements were taken on a uniform grid of \textbf{333$\times$333 points}.\\
-			Excitation in the form of Hann windowed sine signal of carrier frequency \textbf{50 kHz} was applied to piezoelectric transducer.}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		This slide shows the experimental setup at the laboratory for the SLDV measurements.
-		
-		The Piezoelectric transducer is placed on the other side of the plate towards the wall.
-		
-		The measurements were taken on a uniform grid of \(333\times 333\) points from the bottom surface of the plate.
-		
-		The excitation in the form of a Hann windowed sine signal of carrier frequency 50 kHz was applied to the PZT. 
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Evaluation: Experimental cases}	
 		
 %		\begin{frame}{Experimental setup}
 %			\begin{columns}[T]
@@ -1575,20 +1257,34 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part II: Super-resolution image reconstruction}
 	\begin{frame}{Super-resolution image reconstruction}
 		\begin{columns}[T]
-			\begin{column}[c]{0.35\textwidth}
-				\justifying	
-				\small	
-				Deep learning model for superresulution image reconstruction aims to speed up the data acquisition process for SLDV by recovering HR full wavefield frames with satisfying accuracy from the LR measurement that is below Nyquist sampling rate.				
+			\begin{column}[t]{0.6\textwidth}
+				\begin{alertblock}{Thesis}
+					\footnotesize
+					\justifying
+					It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans  from a low-resolution (LR).
+				\end{alertblock}						
+				\begin{exampleblock}{Compressive sensing (CS) theory}
+					\footnotesize
+					\justifying
+					Any natural signal (\(x\)), e.g. (sounds, images) can be recovered using considerably fewer measurements (\(y\)) than standard methods.
+					\begin{figure}
+						\centering
+						\includegraphics[width=.6\textwidth]{matrix_mask.png}
+					\end{figure}
+				\end{exampleblock}	
+						
 			\end{column}
-			\begin{column}[c]{0.6\textwidth}
-				\begin{figure}
-					\subfloat{\includegraphics[width=0.95\textwidth]{superresolution_flowchart.jpeg}}
+			\begin{column}[t]{0.4\textwidth}
+				\begin{figure}[ht!]
+					\centering
+					\subfloat{\includegraphics[width=1\textwidth]{superresolution_flowchart.png}}
 				\end{figure}
 			\end{column}
-		\end{columns}
+		\end{columns}		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -1598,75 +1294,7 @@
 		
 		One possible solution to tackle this problem is to acquire the Lamb waves in a low-resolution form and then apply a deep learning-based super-resolution approach to that low-resolution frame of full wavefield data to retrieve the high-resolution frame.
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{Compressive sensing theory}
-		\tiny
-		\begin{columns}[T]
-			\begin{column}[t]{0.48\textwidth}
-				\justifying
-				Compressed sensing (CS) theory $\rightarrow$ any natural signal (\(x\)), e.g. (sounds, images, $\dots$) \alert{can be recovered using considerably fewer measurements than standard methods}.
-				\\
-				CS relies on two principles:
-				\begin{itemize}
-					\item \alert{Sparsity}: which relates to the signal of interest.
-					\begin{equation*}
-						x=\Psi s,
-					\end{equation*}
-					where \(\Psi\) is the universal basis (in this work, Fourier domain was applied), \(s\) is a sparse vector of coefficients (\alert{most of the coefficients are equal or close to zero}).
-					\item \alert{Incoherence}: which relates to the sensing modality.
-					\begin{gather*}
-						y=Cx, \\
-						y=C\Psi s,
-					\end{gather*}
-					where \(y\) is the measurements in \alert{Low-Resolution (LR)} (below the Nyquist sampling rate),
-					\(C\) is the mask matrix applied to the \(x\).\\
-					This system of equations is \alert{underdetermined}.
-					\\
-					$C$ and \(\Psi\) matrices must be incoherent \alert{(smallest correlation between any two elements in $C$ and $\Psi$)}
-				\end{itemize}		
-			\end{column}			
-			\begin{column}[t]{0.48\textwidth}
-				\justifying
-				\alert{The goal is to find sparsest \(s\) vector} that solve the underdetermined system of equation.
-				\\ This is an optimization problem:				
-				\begin{equation}
-					\min{\lVert {\bs{s}} \rVert}_1 \quad \textrm{subject to} \quad {\lVert \bs{C} \bs{\Psi} \bs{s} -y \rVert}_2 \leq \sigma ,
-				\end{equation}
-				where $\sigma$ is related to the noise level in the data.
-				\begin{figure}[ht!]
-					\subfloat[\centering \small Random mask (3000 points)]{\includegraphics[width=0.40\textwidth]{random_mask_3000.png}}\quad
-					\subfloat[\centering \small Jitter mask (3000 points)]{\includegraphics[width=0.40\textwidth]{jitter_mask_3000.png}}					
-				\end{figure}										
-			\end{column}		
-		\end{columns}						
-	\end{frame}
-	\note
-	{	
-		\tiny
-		The theory of compressed sensing (CS) states that natural signals (such as sounds and images) can be recovered using considerably fewer samples or measurements (below the Nyquist sampling rate) than standard methods.
-		
-		Now, CS relies on two essential conditions: 	
-		\begin{itemize}
-			\item The first one is Sparsity: which means that(\alert{most of the coefficients in vector \(s\) are equal or close to zero}).
-			$\Psi$ represent a universal basis such as Fourier, cosine or wavelet domains.
-			In this work the Fourier domain was applied. 
-			\item The second one is that the measuring mask C matrix must be incoherent with \(\Psi\) matrix, which means the correlation between any two elements in C and $\Psi$ matrices is small.
-		\end{itemize}		
-		
-		regarding to this equation: 
-		\begin{equation}
-			y = \bs{C}\bs{\Psi}\bs{s}
-		\end{equation}
-		There are an infinite number of solutions for the sparse vector (s) that can solve the y vector.
-		
-		However, we need to find the sparsest s vector.
-		
-		Therefore, it is an optimization problem that can be solved by minimizing the \(L_1\) norm of s such that \(L_2\) norm \(\bs{C}\bs{\Psi}\bs{s}\)-\(\bs{y}\) equals zero, or some noise $\sigma$.
-		
-		Now that we have this sparsest vector (s), we can use the inverse Fourier transform to recover the high-resolution signal.		
-		
-	}
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Evaluation metrics for SR model}
@@ -1675,12 +1303,12 @@
 			\item Peak signal-to-noise ratio (PSNR):
 			\begin{equation*}
 				PSNR=20\log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
-				\label{PSNR}
+				\label{PSNR_}
 			\end{equation*}
 			\item Pearson correlation coefficient:
 			\begin{equation*}
 				r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
-				\label{Pearson}
+				\label{Pearson_}
 			\end{equation*}
 		\end{itemize}
 	\end{frame}
@@ -1750,7 +1378,7 @@
 								47.00 & 0.998 & 38.52 & 0.995 \\					
 								\bottomrule
 							\end{tabular}
-							\label{tab:num_DLSR_results_2}
+							\label{tab:num_DLSR_results_2_}
 						\end{table}	
 						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					}
@@ -1883,29 +1511,32 @@
 %	\note{This }
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\begin{frame}{Experimental test case}
-		Low-resolution measurements (Input): \(32\times32=1024\) points. (Nf = 110.)\\
-		High-resolution (Output): \(512\times512=262144\) points (Nf = 110.).
+	\begin{frame}{Experimental test case}		
 		\begin{columns}[T]
-			\begin{column}[c]{0.19\textwidth}
-				\begin{figure}						
+			\begin{column}[c]{0.25\textwidth}
+				\footnotesize
+				LR measurements (Input): \(32\times32=1024\) points. \\
+				HR (Output): \(512\times512=262144\) points.
+				\begin{figure}	
+					\centering					
 					\includegraphics[width=1\textwidth]{frame110_32x32.png}
-					\caption{LR input}
+					\caption{LR input \((N_f = 110)\)}
 				\end{figure}
 			\end{column}
-			\begin{column}[c]{0.8\textwidth}
-				\begin{figure}[ht!]
-					\subfloat[HR ref]{\includegraphics[height=.22\textheight]{figure10a.png}}\quad
-					\subfloat[CS: 1024 points]{\includegraphics[height=.22\textheight]{figure10b.png}}\quad
-					\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure10c.png}}\quad
-					\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure10d.png}}\quad
-					\subfloat[DLSR]{\includegraphics[height=.22\textheight]{figure10e.png}}\quad
+			\begin{column}[c]{0.75\textwidth}
+				\begin{figure}[]
+					\centering
+					\subfloat[HR ref]{\includegraphics[height=.3\textheight]{figure10a.png}}\quad
+					\subfloat[CS: 1024 points]{\includegraphics[height=.3\textheight]{figure10b.png}}\quad
+%					\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure10c.png}}\quad
+%					\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure10d.png}}\quad
+					\subfloat[DLSR]{\includegraphics[height=.3\textheight]{figure10e.png}}\quad
 					
-					\subfloat[Ref]{\includegraphics[height=.22\textheight]{figure11a.png}}\quad
-					\subfloat[CS: 1024 points]{\includegraphics[height=.22\textheight]{figure11b.png}}\quad
-					\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure11c.png}}\quad
-					\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure11d.png}}\quad
-					\subfloat[DLSR]{\includegraphics[height=.22\textheight]{figure11e.png}}\quad
+					\subfloat[Ref]{\includegraphics[height=.3\textheight]{figure11a.png}}\quad
+					\subfloat[CS: 1024 points]{\includegraphics[height=.3\textheight]{figure11b.png}}\quad
+%					\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure11c.png}}\quad
+%					\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure11d.png}}\quad
+					\subfloat[DLSR]{\includegraphics[height=.3\textheight]{figure11e.png}}\quad
 				\end{figure}
 			\end{column}				
 		\end{columns}
@@ -1956,7 +1587,7 @@
 				{\one & \two & \three & \four & \five & \six & \seven }%	
 				\bottomrule[1.5pt]
 			\end{tabular}	
-			\label{tab:csv_results}
+			\label{tab:csv_results_}
 		\end{table}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
