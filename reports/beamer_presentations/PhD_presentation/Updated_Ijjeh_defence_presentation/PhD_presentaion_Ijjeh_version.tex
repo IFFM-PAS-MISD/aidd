@@ -1098,7 +1098,6 @@
 				Adaptive wavenumber filtering (AWF) \alert{(Conventional signal processing)}.
 				\begin{small}
 					\biblioref{Kudela P, Radzienski M, Ostachowicz W.}{2018}{Impact induced damage assessment by means of Lamb wave image processing}{Mechanical Systems and Signal Processing,102:23-36}						
-%					\biblioref{Kudela, P., Radzieński, M. and Ostachowicz, W.}{2015}{ Identification of cracks in thin-walled structures by means of wavenumber filtering}{Mechanical Systems and Signal Processing, 50, pp.456-466}					.
 				\end{small}
 			\end{column}
 			\hfill
@@ -1205,41 +1204,45 @@
 	\setcounter{subfigure}{0}	
 	\begin{frame}{Experimental results full wavefield based (Multiple delaminations)}
 		\begin{columns}[T]
-			\begin{column}[t]{0.24\textwidth}
-				\begin{figure}[ht!]
-					\centering
-					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=0.25\textheight]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}
-				\end{figure}
+			\begin{column}[t]{0.2\textwidth}
+				\begin{alertblock}{Full wavefield}
+					\begin{figure}[t]
+						\centering
+						\subfloat[512 frames]{\animategraphics[autoplay,loop,height=0.25\textheight]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}
+					\end{figure}
+				\end{alertblock}				
 			\end{column}	
 %			\quad				
-			\begin{column}[t]{0.24\textwidth}
-				\begin{figure}
-					\centering
-					\subfloat[AWF]{\includegraphics[height=0.25\textheight]{figures/mul/figure17a.png}}
-					\\
-					\centering
-					\subfloat[Binary AWF, IoU$=0.04$]{\includegraphics[height=0.25\textheight]{figures/mul/figure17b.png}}								
-				\end{figure}
+			\begin{column}[t]{0.4\textwidth}				
+				\begin{exampleblock}{Adaptive wavenumber filtering}
+					\footnotesize
+					\justifying
+					IoU$=0.04$
+					\begin{figure}[t]
+						\centering
+						\subfloat[]{\includegraphics[height=0.25\textheight]{figures/mul/figure17a.png}}
+						\quad
+						\centering
+						\subfloat[]{\includegraphics[height=0.25\textheight]{figures/mul/figure17b.png}}								
+					\end{figure}
+				\end{exampleblock}	
 			\end{column}
-			\begin{column}[t]{0.24\textwidth}
-				\begin{figure}
-					\centering
-					\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=0.25\textheight]{24}{figures/gif_figs/Intermediate_specimen_3/Intermediate_specimen_3-}{0}{487}}
-				\end{figure}
-			\end{column}
-%			\quad
-			\begin{column}[t]{0.24\textwidth}
-				\begin{figure}
-%					\hspace{5pt}
-					\centering
-					\subfloat[RMS]{\includegraphics[height=0.25\textheight,keepaspectratio]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}
-					\\
-					\centering
-					\subfloat[Binary RMS]{\includegraphics[height=0.25\textheight,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
-				\end{figure}
+			\begin{column}[t]{0.4\textwidth}				
+				\begin{block}{DL approach}	
+					\footnotesize
+					\justifying
+					 IoU= $0.64$ and $\epsilon=1.69\%$				
+					\begin{figure}[c]
+						\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=0.25\textheight]{24}{figures/gif_figs/Intermediate_specimen_3/Intermediate_specimen_3-}{0}{487}}
+						\\
+						\subfloat[]{\includegraphics[width=0.8\textwidth,keepaspectratio]{figures/RMS_BInary_RMS.png}}
+%						\quad						
+%						\subfloat[Binary RMS]{\includegraphics[height=0.25\textheight,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
+					\end{figure}
+				\end{block}				
 			\end{column}				
 		\end{columns}	
-		IoU= $0.64$ and $\epsilon=1.69\%$ for the thresholded damage map (Binary RMS).		
+		 (Binary RMS).		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
