@@ -156,22 +156,20 @@
 	\section{Introduction}
 	\begin{frame}{Motivations}
 		\begin{columns}[T]
-			\begin{column}[t]{.5\textwidth}
+			\begin{column}[t]{.55\textwidth}
 				\begin{figure}[t]
 					\centering
-					\includegraphics[width=.85\textwidth]{Composite_advantages.png}					
-				\end{figure}			
-				\begin{figure}[t]
-					\includegraphics[width=.75\textwidth]{delaminated_plate1.jpg}
+					\subfloat{\includegraphics[width=.7\textwidth]{Composite_advantages.png}}					
+					\\
+					\subfloat{\includegraphics[width=.6\textwidth]{delaminated_plate1.jpg}}
 				\end{figure}
-				\begin{small}
-					\justifying
-					\noindent \alert{Delamination detection} in its early stages can significantly help avoiding catastrophic structural collapses.
-				\end{small}				
+				\begin{tcolorbox}
+					\justifying\noindent\footnotesize\alert{Delamination detection} in its early stages can significantly help avoiding catastrophic events.
+				\end{tcolorbox}				
 			\end{column}
-			\begin{column}[t]{0.5\textwidth}
+			\begin{column}[t]{0.45\textwidth}
 				\begin{figure}[t]
-					\includegraphics[width=0.9\textwidth]{Crashes.png}
+					\includegraphics[width=1\textwidth]{Crashes.png}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -185,17 +183,22 @@
 		In particular, laminated composite materials are more sensitive to damage in the form of delamination due to weak transverse tensile and interlaminar shear strengths.
 			
 		Delaminations can seriously decrease the performance of composite structures.
-		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.		
-	}
+		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Objectives}
-		\textbf{To develop \textcolor{logoblue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
-		\vfil
-		\textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
-		\begin{alertblock}{Thesis}
-			It is possible to use an end-to-end approach in which DNN 
-			processes the animation of propagating waves (input) directly into a damage map (output).
-		\end{alertblock}
+		\begin{itemize}
+			\item \textbf{To develop \textcolor{logoblue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
+			\item \textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
+		\end{itemize}
+		\begin{tcolorbox}
+			\begin{alertblock}{Thesis}
+				It is possible to use an end-to-end approach in which DNN 
+				processes the animation of propagating waves (input) directly into a damage map (output).
+			\end{alertblock}
+			\begin{alertblock}{Thesis}
+				It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans  from a low-resolution (LR).
+			\end{alertblock}
+		\end{tcolorbox}		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -203,8 +206,7 @@
 		
 		Therefore, I investigated the possibility of embracing the end-to-end approach by using animations of Lamb wave propagation in a plate interacting with discontinuities such as damage and edges with an artificial intelligence-based approach to detect and identify delaminations.
 		
-		My second objective is to address the issue of slow data acquisition of high-resolution full wavefields of Lamb wave propagation by SLDV. 		
-	}
+		My second objective is to address the issue of slow data acquisition of high-resolution full wavefields of Lamb wave propagation by SLDV.}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Contribution and novelty}
 		\begin{columns}[T]
@@ -216,6 +218,39 @@
 			\end{column}
 		\end{columns}		
 	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Experimental measurements}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}[t]{SLDV measurements: Setup}
+		\begin{columns}[T]
+			\column{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.8\textwidth]{wibrometr-laserowy-1d_small-description.png}
+			\end{figure}
+			\column{0.5\textwidth}
+			\begin{enumerate}
+				\item Signal generator: TTI 1241 
+				\item Amplifier: Piezo Systems EPA-104-230 $\pm$200 Vp
+				\item Specimen
+				\item Scanning head: Polytec PSV-400
+				\item DAQ system: Polytec
+			\end{enumerate}
+		\end{columns}
+		{\small
+			Measurements were taken on a uniform grid of \textbf{333$\times$333 points}.\\
+			Excitation in the form of Hann windowed sine signal of carrier frequency \textbf{50 kHz} was applied to piezoelectric transducer.}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		This slide shows the experimental setup at the laboratory for the SLDV measurements.
+		
+		The Piezoelectric transducer is placed on the other side of the plate towards the wall.
+		
+		The measurements were taken on a uniform grid of \(333\times 333\) points from the bottom surface of the plate.
+		
+		The excitation in the form of a Hann windowed sine signal of carrier frequency 50 kHz was applied to the PZT. 
+	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[t]{Composite specimen}
 		\begin{columns}[T]
@@ -297,39 +332,10 @@
 		
 		Furthermore, all SLDV measurements were conducted from the bottom surface of the plate.
 		
-		I would like to mention that the specimens on the left were brought specifically to my PhD project.
-	}
+		I would like to mention that the specimens on the left were brought specifically to my PhD project.}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}[t]{SLDV measurements: Setup}
-		\begin{columns}[T]
-			\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[width=0.8\textwidth]{wibrometr-laserowy-1d_small-description.png}
-			\end{figure}
-			\column{0.5\textwidth}
-			\begin{enumerate}
-				\item Signal generator: TTI 1241 
-				\item Amplifier: Piezo Systems EPA-104-230 $\pm$200 Vp
-				\item Specimen
-				\item Scanning head: Polytec PSV-400
-				\item DAQ system: Polytec
-			\end{enumerate}
-		\end{columns}
-		{\small
-			Measurements were taken on a uniform grid of \textbf{333$\times$333 points}.\\
-			Excitation in the form of Hann windowed sine signal of carrier frequency \textbf{50 kHz} was applied to piezoelectric transducer.}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		This slide shows the experimental setup at the laboratory for the SLDV measurements.
-		
-		The Piezoelectric transducer is placed on the other side of the plate towards the wall.
-		
-		The measurements were taken on a uniform grid of \(333\times 333\) points from the bottom surface of the plate.
-		
-		The excitation in the form of a Hann windowed sine signal of carrier frequency 50 kHz was applied to the PZT. 
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section*{Synthetic dataset generation}
+	\setcounter{subfigure}{0}	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Synthetic dataset generation}
 		\begin{columns}[T]
 			\begin{column}{0.47\textwidth}
@@ -1266,21 +1272,23 @@
 	\begin{frame}{Super-resolution image reconstruction}
 		\begin{columns}[T]
 			\begin{column}[t]{0.6\textwidth}
-				\begin{alertblock}{Thesis}
+				\begin{alertblock}{Deep learning super-resolution model (DLSR)}
 					\footnotesize
 					\justifying
-					It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans  from a low-resolution (LR).
+					\begin{itemize}
+						\item Registering HR full wavefield with an SLDV is a time-consuming process.
+						\item DLSR model aims to recover to recover HR full wavefield scans  from a LR measurements (below the Nyquist-Shannon sampling rate).
+					\end{itemize} 
 				\end{alertblock}						
 				\begin{exampleblock}{Compressive sensing (CS) theory}
 					\footnotesize
 					\justifying
 					Any natural signal (\(x\)), e.g. (sounds, images) can be recovered using considerably fewer measurements (\(y\)) than standard methods.
-					\begin{figure}
+					\begin{figure}[ht!]
 						\centering
-						\includegraphics[width=.6\textwidth]{matrix_mask.png}
+						\includegraphics[width=.47\textwidth]{matrix_mask.png}
 					\end{figure}
-				\end{exampleblock}	
-						
+				\end{exampleblock}							
 			\end{column}
 			\begin{column}[t]{0.4\textwidth}
 				\begin{figure}[ht!]
@@ -1586,14 +1594,16 @@
 				\item Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.
 				\item The DLSR model can recover the HR measurements from LR measurements with high accuracy.
 			\end{itemize}
+		\begin{tcolorbox}
 			\textbf{According to my research study, investigations and results, I can confirm my original thesis:}
-			\begin{alertblock}{Thesis}
+			\begin{alertblock}{Thesis: 1}
 				It is possible to use an end-to-end approach in which DNN 
 				processes the animation of propagating waves (input) directly into a damage map (output).
 			\end{alertblock}
-			\begin{alertblock}{Thesis}
+			\begin{alertblock}{Thesis: 2}
 				It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans  from a low-resolution (LR).
-			\end{alertblock}	
+			\end{alertblock}
+		\end{tcolorbox}				
 		\end{footnotesize}			
 	\end{frame}		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
