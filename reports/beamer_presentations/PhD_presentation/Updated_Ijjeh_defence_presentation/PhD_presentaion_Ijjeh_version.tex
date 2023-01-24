@@ -30,11 +30,16 @@
 \usepackage{multirow}
 \usepackage{xcolor}
 \usepackage[document]{ragged2e}
-\usepackage{caption}
+\usepackage[labelformat=empty]{caption}
 \usepackage{comment}
 \usepackage{mathtools}% Loads amsmath
+
 \usepackage{efbox,graphicx}
+
 \efboxsetup{linecolor=Lightskyblue,linewidth=2pt}
+%\usepackage[font=footnotesize,labelfont=bf]{caption}
+%\captionsetup[figure]{font=small}
+
 %\usepackage[export]{adjustbox}
 %\usepackage{background}
 %\backgroundsetup{contents=preliminary,placement=bottom,color=blue}
@@ -151,22 +156,22 @@
 	\section{Introduction}
 	\begin{frame}{Motivations}
 		\begin{columns}[T]
-			\begin{column}[t]{.4\textwidth}
+			\begin{column}[t]{.5\textwidth}
 				\begin{figure}[t]
 					\centering
-					\includegraphics[width=.9\textwidth]{Composite_advantages.png}					
+					\includegraphics[width=.85\textwidth]{Composite_advantages.png}					
 				\end{figure}			
 				\begin{figure}[t]
-					\includegraphics[width=.90\textwidth]{delaminated_plate1.jpg}
+					\includegraphics[width=.75\textwidth]{delaminated_plate1.jpg}
 				\end{figure}
 				\begin{small}
 					\justifying
 					\noindent \alert{Delamination detection} in its early stages can significantly help avoiding catastrophic structural collapses.
 				\end{small}				
 			\end{column}
-			\begin{column}[t]{0.6\textwidth}
+			\begin{column}[t]{0.5\textwidth}
 				\begin{figure}[t]
-					\includegraphics[width=0.7\textwidth]{Crashes.png}
+					\includegraphics[width=0.9\textwidth]{Crashes.png}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -325,7 +330,117 @@
 		The excitation in the form of a Hann windowed sine signal of carrier frequency 50 kHz was applied to the PZT. 
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Deep learning approach: An Overview}		
+	\begin{frame}{Synthetic dataset generation}
+		\begin{columns}[T]
+			\begin{column}{0.47\textwidth}
+				\begin{itemize}
+					\item Mindlin-Reissner plate theory
+					\item Splitting elements and nodes at delamination
+					\item GMSH software was used for meshing quads then converted to spectral elements
+				\end{itemize}	
+				\begin{figure}
+					\subfloat{\includegraphics[width=0.9\textwidth]{shell.png}}	
+				\end{figure}
+			\end{column}
+			\begin{column}{0.47\textwidth}	
+				\begin{figure}
+					\animategraphics[controls,autoplay,loop,width=0.9\textwidth]{1}{/gif_figs/mesh/m1_rand_single_delam_}{1}{20}
+				\end{figure}	
+			\end{column}
+		\end{columns}	
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		To train the supervised deep learning models, a synthetic dataset of propagating waves in carbon fibre-reinforced composite plates was computed by applying the Mindlin-Reissner plate theory and using the parallel implementation of the time domain spectral element method.
+		
+		For each case, single delamination was modeled by using the method of splitting nodes between appropriate spectral elements.
+		
+		Essentially, the dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric (PZT) excitation at the centre of the plate.		 
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	\begin{frame}{Dataset description}
+		\begin{columns}[T]
+			\begin{column}[t]{0.35\textwidth}
+				\begin{itemize}
+					\item 475 delamination scenarios
+					\item CFRP is made of 8-layers
+					\item Delamination modelled between the 3rd and 4th layer
+					\item Delamination size min 10 mm, max 40 mm
+					\item \textbf{3-months of computing}
+				\end{itemize}
+			\end{column}
+			\begin{column}[t]{0.2\textwidth}
+				\begin{figure}[t]
+					\centering
+					\captionsetup{justification=centering}				
+					\subfloat[Delamination placement]{\includegraphics[width=0.95\textwidth]{delamination_placement.png}}
+				\end{figure}
+			\end{column}
+			\begin{column}[t]{0.45\textwidth}
+				\begin{figure}[t]					
+					\centering	
+					\captionsetup{justification=centering}						
+					\subfloat[Delamination orientation]{\includegraphics[width=0.95\textwidth]{figure1.png}}					
+				\end{figure}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		The synthetically generated dataset has 475 delamination cases.
+		It was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm. 
+		The delamination was modeled between the third and fourth layers.
+		The delamination geometrical size major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
+		The computation of the dataset took about three months.
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	\begin{frame}{Training Sample case}
+		\begin{columns}[T]
+			\begin{column}[c]{.32\textwidth}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}					
+					\animategraphics[autoplay,loop,width=0.85 \textwidth]{16}{figures/gif_figs/7_output/flat_shell_Vz_7_500x500bottom-}{1}{512}
+					\caption{Full wavefield $s(x,y,t_k)$}
+				\end{figure}
+			\end{column}
+			\begin{column}[c]{.32\textwidth}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}					
+					\includegraphics[width=0.85 \textwidth]{RMS_flat_shell_Vz_7_500x500bottom.png}
+					\caption{RMS image $\hat{s}(x,y)$}
+				\end{figure}
+			\end{column}
+			\begin{column}[c]{.32\textwidth}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}			
+					\includegraphics[width=0.85 \textwidth]{m1_rand_single_delam_7.png}
+					\caption{Ground truth (label)}
+				\end{figure}
+			\end{column}
+		\end{columns}
+		\begin{equation*}
+			\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2} 
+			\label{eqn:rms} 
+		\end{equation*}
+		\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time step.
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		In this slide, I present a training scenario.
+		The animation on the left represents the full wavefield frames, where x and y are the point coordinates, and tk is the time step.
+		
+		The output of applying the root mean square formula to the full wavefield is shown in the middle figure.
+		
+		The ground truth label that represents the delamination location and shape is shown on the right.
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Deep learning approach: An~Overview}		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -466,111 +581,7 @@
 	\setcounter{subfigure}{0}
 %	\section{Synthetic dataset generation}		
 %	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Synthetic dataset generation}
-		\begin{columns}[T]
-			\begin{column}{0.47\textwidth}
-				\begin{itemize}
-					\item Mindlin-Reissner plate theory
-					\item Splitting elements and nodes at delamination
-					\item GMSH software was used for meshing quads then converted to spectral elements
-				\end{itemize}	
-				\begin{figure}
-					\subfloat{\includegraphics[width=0.9\textwidth]{shell.png}}	
-				\end{figure}
-			\end{column}
-			\begin{column}{0.47\textwidth}	
-				\begin{figure}
-					\animategraphics[controls,autoplay,loop,width=0.9\textwidth]{1}{/gif_figs/mesh/m1_rand_single_delam_}{1}{20}
-				\end{figure}	
-			\end{column}
-		\end{columns}	
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		To train the supervised deep learning models, a synthetic dataset of propagating waves in carbon fibre-reinforced composite plates was computed by applying the Mindlin-Reissner plate theory and using the parallel implementation of the time domain spectral element method.
-		
-		For each case, single delamination was modeled by using the method of splitting nodes between appropriate spectral elements.
-		
-		Essentially, the dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric (PZT) excitation at the centre of the plate.		 
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{Dataset description}
-		\begin{columns}[T]
-			\begin{column}[t]{0.35\textwidth}
-				\begin{itemize}
-					\item 475 delamination scenarios
-					\item CFRP is made of 8-layers
-					\item Delamination modelled between the 3rd and 4th layer
-					\item Delamination size min 10 mm, max 40 mm
-					\item \textbf{3-months of computing}
-				\end{itemize}
-			\end{column}
-			\begin{column}[t]{0.2\textwidth}
-				\begin{figure}[t]
-					\centering
-					\subfloat[Delamination placement]{\includegraphics[width=0.95\textwidth]{delamination_placement.png}}
-				\end{figure}
-			\end{column}
-			\begin{column}[t]{0.45\textwidth}
-				\begin{figure}[t]					
-					\centering						
-					\subfloat[Delamination orientation]{\includegraphics[width=0.95\textwidth]{figure1.png}}					
-				\end{figure}
-			\end{column}
-		\end{columns}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		The synthetically generated dataset has 475 delamination cases.
-		It was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm. 
-		The delamination was modeled between the third and fourth layers.
-		The delamination geometrical size major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
-		The computation of the dataset took about three months.
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{Training Sample case}
-		\begin{columns}[T]
-			\begin{column}[c]{.32\textwidth}
-				\begin{figure}
-					\centering
-					\animategraphics[autoplay,loop,width=0.85 \textwidth]{16}{figures/gif_figs/7_output/flat_shell_Vz_7_500x500bottom-}{1}{512}
-					\caption{Full wavefield $s(x,y,t_k)$}
-				\end{figure}
-			\end{column}
-			\begin{column}[c]{.32\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=0.85 \textwidth]{RMS_flat_shell_Vz_7_500x500bottom.png}
-					\caption{RMS image $\hat{s}(x,y)$}
-				\end{figure}
-			\end{column}
-			\begin{column}[c]{.32\textwidth}
-				\begin{figure}
-					\centering
-					\includegraphics[width=0.85 \textwidth]{m1_rand_single_delam_7.png}
-					\caption{Ground truth (label)}
-				\end{figure}
-			\end{column}
-		\end{columns}
-		\begin{equation*}
-			\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2} 
-			\label{eqn:rms} 
-		\end{equation*}
-		\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time step.
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		In this slide, I present a training scenario.
-		The animation on the left represents the full wavefield frames, where x and y are the point coordinates, and tk is the time step.
-		
-		The output of applying the root mean square formula to the full wavefield is shown in the middle figure.
-		
-		The ground truth label that represents the delamination location and shape is shown on the right.
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
 	\begin{frame}{Utilised Tools for DL models}
 		All developed DL models were \alert{coded in-house} \\
 		\alert{(Tailored specifically to meet tasks requirements)} 
@@ -582,25 +593,36 @@
 		\end{itemize}
 	\end{frame}
 	\begin{frame}{Data preprocessing \& Hyperparameters tuning}	
-		\begin{columns}[T]
-			\begin{column}[t]{0.7\textwidth}
 				\begin{table}[t]
 					\centering
 					\resizebox{1\textwidth}{!}{%
 						\begin{tabular}{lccc}
 							\toprule[1.5pt]
-							& \multicolumn{2}{c}{Delamination identification} & \multirow{2}{*}{Super-resolution image reconstruction} \\ \cmidrule(lr){2-3}
+							\multirow{2}{*}{\textbf{Applied techniques}}& \multicolumn{2}{c}{\textbf{Delamination identification}} & \multirow{2}{*}{\textbf{Super-resolution image reconstruction}} \\ \cmidrule(lr){2-3}
 							& RMS image based & Full wavefield based &  \\ \midrule 
 							Dataset normalisation & \checkmark  & \checkmark & \checkmark \\
 							Dataset Augmentation & \checkmark &  &  \\
 							Cross validation & \checkmark &  &  \\ 
+							Early stoppling & \checkmark & \checkmark & \checkmark \\ 
+							Hyperparameter tuning & \checkmark & \checkmark & \checkmark \\ 
+							Regularization & \checkmark & \checkmark & \checkmark \\ 
 							\bottomrule[1.5pt]
-						\end{tabular}%
+						\end{tabular}
 					}
+				\begin{table}[t]
+					\centering
+					\resizebox{1\textwidth}{!}{%
+					\begin{tabular}{l|c|c|c|c|c|c|c}
+						\toprule[1.5pt]
+						\textbf{Hyperparameters} & Learning rate & Momentum &
+						Dropout rate & Batch size & Epochs & 			Optimisation technique & Objective loss function \\						
+						\bottomrule[1.5pt]
+					\end{tabular}}
+				\end{table}
 				\end{table}
 				\begin{table}
 					\centering
-					\resizebox{.5\textwidth}{!}{%
+					\resizebox{.4\textwidth}{!}{%
 					\begin{tabular}{ccc}
 						\toprule[1.5pt]
 						Training set & Testing set & Validation set \\
@@ -608,32 +630,7 @@
 						$80\%$ & $20\%$ & $20\%$ out of training set \\
 						\bottomrule[1.5pt]
 					\end{tabular}}
-				\end{table}
-				\begin{itemize}
-					\item Trail and error and manual search was utilised for tuning the hyperparameters.
-					\item Early stopping technique was applied to prevent overfitting. 
-				\end{itemize}
-			\end{column}
-			\begin{column}[t]{0.3\textwidth}
-				\begin{table}[t]
-					\centering
-					\resizebox{.65\textwidth}{!}{
-					\begin{tabular}{lc}
-						\toprule[1.5pt]
-						\multicolumn{2}{c}{Hyperparameters}  \\
-						\midrule
-						Learning rate & \\
-						Momentum & \\
-						Dropout rate & \\
-						Batch size & \\
-						Epochs & \\
-						Optimisation technique & \\
-						Objective loss function & \\
-						\bottomrule[1.5pt]
-					\end{tabular}}
-				\end{table}
-			\end{column}
-		\end{columns}	
+				\end{table}					
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part I: Delamination identification}
@@ -644,6 +641,7 @@
 				\textbf{One-to-one \\image-based approach (RMS)} 
 				\begin{figure}
 					\centering
+					\captionsetup{justification=centering}				
 					\subfloat[Single input (image)]{\includegraphics[width=.45\textwidth]{RMS_flat_shell_Vz_381_500x500bottom.png}}\quad
 					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
 				\end{figure}
@@ -654,6 +652,7 @@
 				\textbf{Many-to-one \\animation-based approach}
 				\begin{figure}
 					\centering
+					\captionsetup{justification=centering}					
 					\subfloat[Multiple frames animation]{\animategraphics[autoplay,loop,width=.45\textwidth]{4}{figures/gif_figs/381_output/output_381-}{85}{113}}\quad
 					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
 				\end{figure}
@@ -696,22 +695,23 @@
 	\begin{frame}{Developed model for delamination identification}
 		\begin{columns}[T]
 			\begin{column}[t]{0.45\textwidth}
-				\textbf{RMS based models: }
-				\medskip
-				\begin{itemize}
-					\item VGG 16 encoder-decoder
-					\item Res-UNet					
-					\item FCN-DenseNet
-					\item PSPNet
-					\item GCN
-				\end{itemize}				
+				\begin{block}{RMS based models}
+					\begin{itemize}
+						\item VGG 16 encoder-decoder
+						\item Res-UNet					
+						\item FCN-DenseNet
+						\item PSPNet
+						\item GCN
+					\end{itemize}				
+				\end{block}
 			\end{column}
 			\hfill
 			\begin{column}[t]{.45\textwidth}
-				\textbf{Full wavefield frames based model:}
-				\begin{itemize}
-					\item Autoencoder ConvLSTM
-				\end{itemize}				
+				\begin{block}{Full wavefield frames based model}					
+					\begin{itemize}
+						\item Autoencoder ConvLSTM
+					\end{itemize}									
+				\end{block}
 			\end{column}
 		\end{columns}
 	\end{frame}	
@@ -877,6 +877,8 @@
 			\begin{column}[c]{0.32\textwidth}
 				\begin{figure}[c]
 					\centering
+					\captionsetup{justification=centering}
+					
 					\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/456/intermediate_output-}{0}{82}
 					\caption{\(1^{st}\) numerical case, IoU=0.71}
 				\end{figure}
@@ -885,6 +887,7 @@
 			\begin{column}[c]{0.32\textwidth}
 				\begin{figure}[c]
 					\centering
+					\captionsetup{justification=centering}					
 					\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/438/intermediate_output-}{0}{82}
 					\caption{\(2^{nd}\) numerical case, IoU=0.72}
 				\end{figure}
@@ -893,6 +896,8 @@
 			\begin{column}[c]{0.32\textwidth}
 				\begin{figure}[c]
 					\centering
+					\captionsetup{justification=centering}
+					
 					\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/397/intermediate_output-}{0}{82}
 					\caption{\(3^{rd}\) numerical case, IoU=0.86}
 				\end{figure}					
@@ -969,7 +974,7 @@
 					VGG16 encoder-decoder & \(0.57\) & \(0.84\) \\ 
 					FCN-DenseNet & \(0.68\) & \(0.92\) \\ 
 					PSPNet & \(0.55\) & \(0.91\) \\ 
-					GCN & \(0.76\) & \(0.93\) \\ 
+					GCN & \textbf{\(0.76\)} & \textbf{\(0.93\)} \\ 
 					\bottomrule[1.5pt]
 				\end{tabular}
 			\end{table}
@@ -986,31 +991,37 @@
 	\begin{frame}{Numerical test cases animation of Lamb waves}
 		\setcounter{subfigure}{0}
 		\only<1>{
-			\textbf{First test case}
-			\begin{figure}
-				\centering
-				\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
-				\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_381.png}}\quad
-				\subfloat[Binary RMS, IoU= 0.88]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case381_.png}}\quad
-			\end{figure}}
+			\begin{alertblock}{First test case}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}
+					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
+					\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_381.png}}\quad
+					\subfloat[Binary RMS, IoU= 0.88]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case381_.png}}\quad
+				\end{figure}
+			\end{alertblock}}
 		\setcounter{subfigure}{0}
 		\only<2>{
-		\textbf{Second test case}
-		\begin{figure}
-			\centering
-			\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/385_output/output_385-}{1}{512}}\quad
-			\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_385.png}}\quad
-			\subfloat[Binary RMS, IoU= 0.58]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case385_.png}}
-		\end{figure}}
+			\begin{alertblock}{Second test case}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}
+					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/385_output/output_385-}{1}{512}}\quad
+					\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_385.png}}\quad
+					\subfloat[Binary RMS, IoU= 0.58]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case385_.png}}
+				\end{figure}
+			\end{alertblock}}
 		\setcounter{subfigure}{0}
 		\only<3>{
-		\textbf{Third test case}
-		\begin{figure}
-			\centering
-			\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/394_output/output_394-}{1}{512}}\quad
-			\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_394.png}}\quad
-			\subfloat[Binary RMS, IoU= 0.8]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case394_.png}}
-		\end{figure}}
+			\begin{alertblock}{Third test case}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}
+					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/394_output/output_394-}{1}{512}}\quad
+					\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_394.png}}\quad
+					\subfloat[Binary RMS, IoU= 0.8]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case394_.png}}
+				\end{figure}
+			\end{alertblock}}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -1055,61 +1066,44 @@
 %	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Evaluation: Experimental cases}	
-		
-%		\begin{frame}{Experimental setup}
-%			\begin{columns}[T]
-%				\begin{column}[t]{0.55\textwidth}
-%					\begin{figure}
-%						\centering
-%						\includegraphics[width=.9\textwidth]{wibrometr-laserowy-1d_small-description.png}
-%					\end{figure}
-%				\end{column}
-%				\begin{column}[t]{0.4\textwidth}
-%					\begin{enumerate}
-%						\item Waveform generator
-%						\item Power amplifier	
-%						\item Specimen
-%						\item SLDV head
-%						\item DAQ
-%					\end{enumerate}
-%				\end{column}
-%			\end{columns}
-%		\end{frame}
-	
-%		\begin{frame}{Single delamination arrangement}
-%			\begin{minipage}[c]{0.4\textwidth}
-%				\begin{itemize}[<alert@+>]
-%					\item 
-%					\item 
-%					\item 
-%				\end{itemize}
-%			\end{minipage}
-%			\begin{minipage}[c]{0.55\textwidth}
-%				\centering
-%				\includegraphics[width=.7\textwidth]{plate_single_delam_arrangement_large_fonts.jpg}
-%			\end{minipage}
-%		\end{frame}
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{Experimental results RMS based (Single delamination)}
+	\setcounter{subfigure}{0}		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Experimental results RMS image-based (Single delamination)}
 		\begin{columns}[T]
-			\begin{column}[c]{0.28\textwidth}
-				\small
-				Adaptive wavenumber filtering (AWF) \alert{(Conventional signal processing)}.
-				\begin{small}
-					\biblioref{Kudela P, Radzienski M, Ostachowicz W.}{2018}{Impact induced damage assessment by means of Lamb wave image processing}{Mechanical Systems and Signal Processing,102:23-36}						
-				\end{small}
-			\end{column}
-			\hfill
-			\begin{column}[c]{0.7\textwidth}
-				\centering
+			\begin{column}[t]{.25\textwidth}
 				\begin{figure}[ht!]
-					\subfloat[ERMS \& label]{\includegraphics[width=.27\textwidth]{ERMS_with_label.png}}\quad
-					\subfloat[AWF]{\includegraphics[width=.27\textwidth]{ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}}\quad
-					\subfloat[Binary AWF: IoU=$0.401$]{\includegraphics[width=.27\textwidth]{Binary_ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}}\quad
-					\subfloat[GCN: IoU\(=0.723\)]{\includegraphics[width=.27\textwidth]{Fig_GCN_7.png}}\quad
-					\subfloat[FCN-DenseNet: IoU=$0.54$]{\includegraphics[width=.27\textwidth]{Fig_FCN_DenseNet_7.png}}\qquad
-				\end{figure} 
+					\centering
+					\captionsetup{justification=centering}
+					\includegraphics[height=.35\textheight]{ERMS_with_label.png}
+					\caption{ERMS \& label}
+				\end{figure}
+				\justifying
+				\tiny
+				Kudela, P., Radzienski, M. and Ostachowicz, W., 2018. \textbf{Impact induced damage assessment by means of Lamb wave image processing}. \textit{Mechanical Systems and Signal Processing}, 102, pp.23-36.
+			\end{column}
+			\begin{column}[t]{0.5\textwidth}
+				\begin{block}{Adaptive wavenumber filtering}
+					\centering
+					\footnotesize
+					IoU=$0.401$
+					\begin{figure}[ht!]
+						\centering
+						\captionsetup{justification=centering}
+						\subfloat{\includegraphics[height=.35\textheight]{ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}}
+						\quad
+						\subfloat{\includegraphics[height=.35\textheight]{Binary_ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}}
+					\end{figure}
+				\end{block}					
+			\end{column}		
+			\begin{column}[t]{0.25\textwidth}
+				\begin{alertblock}{DL approach: GCN}
+					\centering
+					\footnotesize
+					IoU\(=0.723\)
+					\begin{figure}[ht!]	
+						\centering				
+						\subfloat{\includegraphics[height=.35\textheight]{Fig_GCN_7.png}}
+					\end{figure} 	
+				\end{alertblock}				
 			\end{column}
 		\end{columns}	
 	\end{frame}
@@ -1178,15 +1172,18 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\begin{frame}{Experimental results full wavefield based (Single delamination)}
-		\begin{figure}[ht!]
-			\centering
-			\subfloat[Full wavefield (256 frames)]{\animategraphics[autoplay,loop,height=3cm]{32}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
-			\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
-			\subfloat[RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_updated_results_.png}}\quad
-			\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_CFRP_teflon_3o__375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_.png}}
-		\end{figure}
-		IoU= $0.41$ for the thresholded damage map.% and $\epsilon=71.56\%$ 
+	\begin{frame}{Experimental results full wavefield based (Single delamination)}		
+		\begin{alertblock}{DL approach}
+			IoU= $0.41$% and $\epsilon=71.56\%$ 
+			\begin{figure}[ht!]
+				\centering
+				\subfloat[Input]{\animategraphics[autoplay,loop,height=3cm]{32}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
+				\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
+				\subfloat[RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_updated_results_.png}}\quad
+				\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_CFRP_teflon_3o__375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_.png}}
+			\end{figure}			
+		\end{alertblock}
+		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -1205,44 +1202,48 @@
 	\begin{frame}{Experimental results full wavefield based (Multiple delaminations)}
 		\begin{columns}[T]
 			\begin{column}[t]{0.2\textwidth}
-				\begin{alertblock}{Full wavefield}
 					\begin{figure}[t]
-						\centering
-						\subfloat[512 frames]{\animategraphics[autoplay,loop,height=0.25\textheight]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}
+						\centering						
+						\animategraphics[autoplay,loop,height=0.30\textheight]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}
+						\caption{Input}
 					\end{figure}
-				\end{alertblock}				
 			\end{column}	
 %			\quad				
 			\begin{column}[t]{0.4\textwidth}				
-				\begin{exampleblock}{Adaptive wavenumber filtering}
+%				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%				% Change standard block colors				
+%				% 1- Block title (background and text)
+%				\setbeamercolor{block title}{bg=cyan, fg=white}				
+%				% 2- Block body (background)
+%				\setbeamercolor{block body}{bg=cyan!10}
+%				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\begin{block}{Adaptive wavenumber filtering}
 					\footnotesize
 					\justifying
 					IoU$=0.04$
-					\begin{figure}[t]
+					\begin{figure}[ht!]
 						\centering
-						\subfloat[]{\includegraphics[height=0.25\textheight]{figures/mul/figure17a.png}}
+						\subfloat{\includegraphics[height=0.33\textheight]{figures/mul/figure17a.png}}
 						\quad
 						\centering
-						\subfloat[]{\includegraphics[height=0.25\textheight]{figures/mul/figure17b.png}}								
+						\subfloat{\includegraphics[height=0.33\textheight]{figures/mul/figure17b.png}}								
 					\end{figure}
-				\end{exampleblock}	
+				\end{block}	
 			\end{column}
 			\begin{column}[t]{0.4\textwidth}				
-				\begin{block}{DL approach}	
+				\begin{alertblock}{DL approach}
 					\footnotesize
 					\justifying
-					 IoU= $0.64$ and $\epsilon=1.69\%$				
-					\begin{figure}[c]
-						\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=0.25\textheight]{24}{figures/gif_figs/Intermediate_specimen_3/Intermediate_specimen_3-}{0}{487}}
-						\\
-						\subfloat[]{\includegraphics[width=0.8\textwidth,keepaspectratio]{figures/RMS_BInary_RMS.png}}
-%						\quad						
-%						\subfloat[Binary RMS]{\includegraphics[height=0.25\textheight,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
+					 IoU= $0.64$		
+					\begin{figure}[ht!]
+						\centering
+						\subfloat{\includegraphics[height=0.33\textheight,keepaspectratio]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}
+						\quad
+						\subfloat{\includegraphics[height=0.33\textheight,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
 					\end{figure}
-				\end{block}				
+				\end{alertblock}				
 			\end{column}				
 		\end{columns}	
-		 (Binary RMS).		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -1332,82 +1333,78 @@
 	\setcounter{subfigure}{0}
 	\begin{frame}{Numerical test cases at certain frames}
 		\begin{columns}[T]				
-			\begin{column}[c]{0.5\textwidth}
-%				\centering
-				\only<1>{\textbf{First test case}}
-				\only<2>{\textbf{Second test case}}
-				\only<3>{\textbf{Third test case}}
+			\begin{column}[c]{0.5\textwidth}				
 				\begin{figure}
 					\centering
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\only<1>{
-						\begin{figure}
-							\includegraphics[height=.45\textheight]{LR_397_frame_127_input.png}
-							\caption{LR input, $f_n=127$}
-						\end{figure}						
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-						\begin{table}[!h]
-							\centering 
-							\footnotesize
-							\begin{tabular}{cccc}
-								\toprule
-								\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
-								\cmidrule(lr){1-2} \cmidrule(lr){3-4}
-								PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
-								\midrule
-								42.95 & 0.999 & 33.02 & 0.993 \\					
-								\bottomrule
-							\end{tabular}
-						\end{table}
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-					}
+						\begin{alertblock}{First test case}
+							\begin{figure}
+								\includegraphics[height=.35\textheight]{LR_397_frame_127_input.png}
+								\caption{LR input, $f_n=127$}
+							\end{figure}						
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+							\begin{table}[!h]
+								\centering 
+								\footnotesize
+								\begin{tabular}{cccc}
+									\toprule
+									\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+									\cmidrule(lr){1-2} \cmidrule(lr){3-4}
+									PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+									\midrule
+									42.95 & 0.999 & 33.02 & 0.993 \\					
+									\bottomrule
+								\end{tabular}
+							\end{table}
+						\end{alertblock}}
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\only<2>{
-						\begin{figure}
-							\includegraphics[height=.45\textheight]{LR_438_frame_154_input.png}
-							\caption{LR input, $f_n=154$}
-						\end{figure}
-						
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-						\begin{table}[!h]
-							\centering 
-							\footnotesize
-							\begin{tabular}{cccc}
-								\toprule
-								\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
-								\cmidrule(lr){1-2} \cmidrule(lr){3-4}
-								PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
-								\midrule
-								47.00 & 0.998 & 38.52 & 0.995 \\					
-								\bottomrule
-							\end{tabular}
-							\label{tab:num_DLSR_results_2_}
-						\end{table}	
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-					}
+						\begin{alertblock}{Second test case}
+							\begin{figure}
+								\includegraphics[height=.35\textheight]{LR_438_frame_154_input.png}
+								\caption{LR input, $f_n=154$}
+							\end{figure}							
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+							\begin{table}[!h]
+								\centering 
+								\footnotesize
+								\begin{tabular}{cccc}
+									\toprule
+									\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+									\cmidrule(lr){1-2} \cmidrule(lr){3-4}
+									PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+									\midrule
+									47.00 & 0.998 & 38.52 & 0.995 \\					
+									\bottomrule
+								\end{tabular}
+								\label{tab:num_DLSR_results_2_}
+							\end{table}	
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\end{alertblock}}
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\only<3>{
-						\begin{figure}
-							\includegraphics[height=.45\textheight]{LR_456_frame_159_input.png}
-							\caption{LR input, $f_n=159$}
-						\end{figure}
-						
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-						\begin{table}[!h]
-							\centering 
-							\footnotesize	
-							\begin{tabular}{cccc}
-								\toprule
-								\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
-								\cmidrule(lr){1-2} \cmidrule(lr){3-4}
-								PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
-								\midrule
-								48.60 & 0.998 & 46.67 & 0.998 \\					
-								\bottomrule
-							\end{tabular}
-						\end{table}
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-					}
+						\begin{alertblock}{Third test case}
+							\begin{figure}
+								\includegraphics[height=.35\textheight]{LR_456_frame_159_input.png}
+								\caption{LR input, $f_n=159$}
+							\end{figure}
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+							\begin{table}[!h]
+								\centering 
+								\footnotesize	
+								\begin{tabular}{cccc}
+									\toprule
+									\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+									\cmidrule(lr){1-2} \cmidrule(lr){3-4}
+									PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+									\midrule
+									48.60 & 0.998 & 46.67 & 0.998 \\					
+									\bottomrule
+								\end{tabular}
+							\end{table}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+						\end{alertblock}}
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				\end{figure}
 			\end{column}
@@ -1419,37 +1416,30 @@
 					\begin{figure}
 						\centering
 						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
-						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_pred.png}}
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_pred.png}}
 						\\
 						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_GT.png}}\quad
-						\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_pred.png}}
-					\end{figure}
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-				}
-			
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_pred.png}}
+					\end{figure}}			
 				\only<2>{
 					\setcounter{subfigure}{0}					
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\begin{figure}
 						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_GT.png}}\quad
-						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_pred.png}}
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_pred.png}}
 						\\
 						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_GT.png}}\quad	
-						\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_pred.png}}
-					\end{figure}
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-				}
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_pred.png}}
+					\end{figure}}
 				\only<3>{	
 					\setcounter{subfigure}{0}				
 					\begin{figure}
 						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
-						\subfloat[listentry][SR $f_n$]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_pred.png}}
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_pred.png}}
 						\\
 						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_GT.png}}\quad
-						\subfloat[listentry][Pred]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_pred.png}}
-					\end{figure}
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-				}
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_pred.png}}
+					\end{figure}}
 			\end{column}
 		\end{columns}
 	\end{frame}
@@ -1478,69 +1468,54 @@
 		
 		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 46.67.		
 	}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\setcounter{subfigure}{0}
-%	\begin{frame}{Analysis of numerical cases}
-%		\begin{table}[!h]
-%			\centering \footnotesize
-%			\caption{Quality metrics for the DLSR model for three numerical test cases calculated at frames $N_f$ per case.}	
-%			\begin{tabular}{lccccc}
-%				\toprule[1.5pt]
-%				& & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
-%				\cmidrule(lr){3-4} \cmidrule(lr){5-6}
-%				Case & $N_f$ & PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
-%				\midrule
-%				1 & 127 & 42.95 & 0.999 & 33.02 & 0.993 \\					
-%				\midrule
-%				2 & 154 & 47.00 & 0.998 & 38.52 & 0.995 
-%				\\
-%				\midrule					
-%				3 & 159 & 48.60 & 0.998 & 46.67 & 0.998 \\					
-%				\bottomrule[1.5pt]
-%			\end{tabular}
-%			\label{tab:num_DLSR_results}
-%		\end{table}			
-%	\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\note{note text}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		\begin{frame}{Experimental setup}
-%			\begin{figure}
-%				\centering
-%				\includegraphics[height=0.8\textheight]{Set_up_CS.png}
-%			\end{figure}
-%		\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\note{This }
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Experimental test case}		
 		\begin{columns}[T]
-			\begin{column}[c]{0.25\textwidth}
-				\footnotesize
-				LR measurements (Input): \(32\times32=1024\) points. \\
-				HR (Output): \(512\times512=262144\) points.
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{0.25\textwidth}				
 				\begin{figure}	
 					\centering					
 					\includegraphics[width=1\textwidth]{frame110_32x32.png}
-					\caption{LR input \((N_f = 110)\)}
+%					\caption{LR input \((N_f = 110)\)}
 				\end{figure}
+				\footnotesize
+				LR measurements (Input): \(32\times32=1024\)p. \\
+				HR (Output): \(512\times512=262144\)p.
 			\end{column}
-			\begin{column}[c]{0.75\textwidth}
-				\begin{figure}[]
-					\centering
-					\subfloat[HR ref]{\includegraphics[height=.3\textheight]{figure10a.png}}\quad
-					\subfloat[CS: 1024 points]{\includegraphics[height=.3\textheight]{figure10b.png}}\quad
-%					\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure10c.png}}\quad
-%					\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure10d.png}}\quad
-					\subfloat[DLSR]{\includegraphics[height=.3\textheight]{figure10e.png}}\quad
-					
-					\subfloat[Ref]{\includegraphics[height=.3\textheight]{figure11a.png}}\quad
-					\subfloat[CS: 1024 points]{\includegraphics[height=.3\textheight]{figure11b.png}}\quad
-%					\subfloat[CS: 3000 points]{\includegraphics[height=.22\textheight]{figure11c.png}}\quad
-%					\subfloat[CS: 4000 points]{\includegraphics[height=.22\textheight]{figure11d.png}}\quad
-					\subfloat[DLSR]{\includegraphics[height=.3\textheight]{figure11e.png}}\quad
-				\end{figure}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{.25\textwidth}
+				\begin{block}{HR label}
+				    \begin{figure}
+				    	\centering
+				    	\subfloat{\includegraphics[width=0.75\textwidth]{figure10a.png}}
+				    	\vfill
+				    	\subfloat{\includegraphics[width=0.75\textwidth]{figure11a.png}}
+				    \end{figure}
+				\end{block}
+			\end{column}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{.25\textwidth}
+				\begin{block}{CS: 1024p}
+					\begin{figure}
+						\centering
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure10b.png}}
+						\vfill						
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure11b.png}}
+					\end{figure}
+				\end{block}				
+			\end{column}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{.25\textwidth}
+				\begin{alertblock}{DLSR}
+					\begin{figure}
+						\centering
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure10e.png}}
+						\vfill			
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure11e.png}}\quad
+					\end{figure}
+				\end{alertblock}				
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\end{column}				
 		\end{columns}
 	\end{frame}
@@ -1603,27 +1578,23 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions and future works}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Conclusions}
+	\begin{frame}{Conclusions}		
 		\begin{footnotesize}
-			\begin{alertblock}{Conclusion 1:}
-				Full wavefields contain rich damage-related information
+			\begin{itemize}
+				\item Full wavefields contain rich damage-related information, which can be utilised to train deep learning models to perform damage identification.
+				\item Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.				
+				\item Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.
+				\item The DLSR model can recover the HR measurements from LR measurements with high accuracy.
+			\end{itemize}
+			\textbf{According to my research study, investigations and results, I can confirm my original thesis:}
+			\begin{alertblock}{Thesis}
+				It is possible to use an end-to-end approach in which DNN 
+				processes the animation of propagating waves (input) directly into a damage map (output).
 			\end{alertblock}
-			\begin{alertblock}{Conclusion 2:}
-				Full wavefields can be utilised to train deep learning models to perform damage identification in an end-to-end approach
-			\end{alertblock}
-			\begin{alertblock}{Conclusion 3:}
-				Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields
-			\end{alertblock}
-			\begin{alertblock}{Conclusion 4:}
-				Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training
-			\end{alertblock}
-			\begin{alertblock}{Conclusion 5:}
-				Deep learning approaches surpass the conventional signal processing techniques
-			\end{alertblock}
-			\begin{alertblock}{Conclusion 6}
-				The DLSR model can speed up the process of data acquisition by SLDV (from LR measurements to HR measurements).
-			\end{alertblock}
-		\end{footnotesize}		
+			\begin{alertblock}{Thesis}
+				It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans  from a low-resolution (LR).
+			\end{alertblock}	
+		\end{footnotesize}			
 	\end{frame}		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Future works}
