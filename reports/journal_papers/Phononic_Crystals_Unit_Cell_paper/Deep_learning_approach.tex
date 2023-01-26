@@ -62,6 +62,7 @@
 %\usepackage{cite}
 %\usepackage[style=numeric-comp]{biblatex}
 \usepackage[dvipsnames]{xcolor}
+\usepackage[document]{ragged2e}
 
 % matrix command 
 \newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
@@ -90,31 +91,17 @@
 
 
 \begin{document}
-	\section{dataset preprocessing}
-	The dataset contains \(9\,000\) samples of unit cells that are classified into three equal subsets of size \(3\,000\) samples each.
-	Figure~\ref{fig:subsets} represents three sample shapes of unit cells~\ref{fig:subset_1},~\ref{fig:subset_2} and~\ref{fig:subset_3} from the three subsets, respectively.
-	\begin{figure}[ht!]
-		\centering
-		\subfloat[\label{fig:subset_1}]{\includegraphics[width=0.30\textwidth]{PC_label_1001.png}}
-		\quad
-		\subfloat[\label{fig:subset_2}]{\includegraphics[width=0.30\textwidth]{PC_label_4001.png}}
-		\quad
-		\subfloat[\label{fig:subset_3}]{\includegraphics[width=0.30\textwidth]{PC_label_8001.png}}
-		\caption{Samples of unit cell shapes come from the three subsets.}
-		\label{fig:subsets}
-	\end{figure}
-	
-	The unit cell has a shape of \((\textup{512}\times \textup{512})\) pixel points.
-	The shape of the unit cell is diagonally symmetrical.
-	Consequently, to reduce the complexity of the computation, we used only the upper left quarter of the unit cell shape of size \((256\times 256)\) pixel points for developing the deep learning model, as shown in Fig.~\ref{fig:upper_right_quater}. 
-	\begin{figure}[ht!]
-		\centering
-		\includegraphics[width=.35\textwidth]{upper_left_quarter.png}
-		\caption{Unit cell shape (Upper left quarter)}
-		\label{fig:upper_right_quater} 
-	\end{figure}
-	
-	The total size of the dataset is \((9000, 256, 256, 1)\)
-	 
-	\section{deep learning model}
+	\justifying	
+	\noindent
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{deep_learning_model}
+
+
+%\clearpage	
+%\appendix
+\section*{Acknowledgments}
+
+
+\bibliography{biblography}
+\bibliographystyle{unsrt}
 \end{document}
