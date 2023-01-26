@@ -192,6 +192,20 @@
 		The elastic modulus along the fibre direction can be controlled by selecting the volume fraction of the fibres.		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Mindlin-Reissner plate theory}
+		\begin{footnotesize}
+			\begin{itemize}
+				\item The Mindlin-Reissner plate theory is a mathematical model used to analyze the behavior of thin plates under various types of loading conditions. 
+				\item The theory is an extension of the Kirchhoff-Love plate theory, which is typically used for plates that are much thicker than those considered in the Mindlin-Reissner theory.
+				\item The Mindlin-Reissner theory accounts for the shear deformation of a plate, which is the deformation caused by forces that are parallel to the surface of the plate. 
+				\item The theory also accounts for the rotational effects of the loading conditions on the plate. 
+				\item It uses a set of partial differential equations, known as the Mindlin-Reissner equations, to describe the behavior of the plate.
+				\item The Mindlin-Reissner plate theory is widely used in various fields such as aerospace, civil engineering, and mechanical engineering. 
+				\item It is used to model the behavior of thin structures like aircraft wings, solar panels and other similar structures. 
+				\item It also helps in understanding the behavior of plate-like structures such as composite laminates, sandwich structures and smart materials.
+			\end{itemize}
+		\end{footnotesize}		
+	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{RMS based: Analysis of numerical cases}
 		\begin{columns}[T]
@@ -256,21 +270,23 @@
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Initial frame interaction}
-		\begin{itemize}
-			\item The total wave propagation time was set to \(0.75\) ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
-			\item The total time of propagation was converted into \(512\) frames of animated Lamb waves.
-			\item The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
-			\item The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset. 
-			Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
-			\item As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
-		\end{itemize}
-		
-		When the time of interaction \(t_i\) with the delamination is know, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
-		\begin{gather*}
-			t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
-			\\
-			f_n = \frac{t_i}{0.75ms} \times 512
-		\end{gather*}			
+		\begin{footnotesize}
+			\begin{itemize}
+				\item The total wave propagation time was set to \(0.75\) ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
+				\item The total time of propagation was converted into \(512\) frames of animated Lamb waves.
+				\item The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
+				\item The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset. 
+				Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
+				\item As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
+			\end{itemize}
+			
+			When the time of interaction \(t_i\) with the delamination is know, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
+			\begin{gather*}
+				t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
+				\\
+				f_n = \frac{t_i}{0.75ms} \times 512
+			\end{gather*}
+		\end{footnotesize}					
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Animation based: Analysis of numerical cases}
@@ -309,41 +325,30 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{RMS based: Analysis of experimental case}
+		\begin{columns}[T]
+			\begin{column}[t]{0.9\textwidth}
+				\centering
 				\begin{table}[!ht]
 					\centering
 					\caption{Evaluation metrics of the experimental case.}
-					\label{tab:rms_exp_case__}
-					\begin{tabular}{lc}
-						\toprule[1.5pt]
-						Model & IoU  	\\			
-						\midrule
-						Res-UNet & 0.58 \\ 
-						VGG16 encoder-decoder & 0.62 \\ 
-						FCN-DenseNet & 0.54 \\ 
-						PSPNet & 0.49 \\ 
-						GCN & 0.72\\ 
-						\bottomrule[1.5pt]
+					\label{tab:rms_exp_case_}
+					\begin{tabular}{l@{\ }cccc}
+						\toprule
+						\multicolumn{1}{l}{Model} & \multicolumn{1}{c}{A [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Predicted output} \\ 
+						\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ \midrule
+						Res-UNet & \multicolumn{1}{c}{\multirow{5}{*}{210}} & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{323}  & \(53.8\%\) \\ 
+						VGG16 encoder-decoder &  & \multicolumn{1}{c}{0.62} & \multicolumn{1}{c}{320} & \(52.4\%\) 
+						\\ 
+						FCN-DenseNet &  & \multicolumn{1}{c}{0.54} & \multicolumn{1}{c}{386} & \(83.8\%\) \\ 
+						PSPNet &  & \multicolumn{1}{c}{0.49} & \multicolumn{1}{c}{580} & \(176.2\%\) 
+						\\ 
+						GCN &  & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{309} & \(47.1\%\) 
+						\\ 
+						\bottomrule
 					\end{tabular}		
 				\end{table}
-		\begin{table}[!ht]
-			\centering
-			\caption{Evaluation metrics of the experimental case.}
-			\label{tab:rms_exp_case_}
-			\begin{tabular}{l@{\ }cccc}
-				\toprule
-				\multicolumn{1}{l}{Model} & \multicolumn{1}{c}{A [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Predicted output} \\ 
-				\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ \midrule
-				Res-UNet & \multicolumn{1}{c}{\multirow{5}{*}{210}} & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{323}  & \(53.8\%\) \\ 
-				VGG16 encoder-decoder &  & \multicolumn{1}{c}{0.62} & \multicolumn{1}{c}{320} & \(52.4\%\) 
-				\\ 
-				FCN-DenseNet &  & \multicolumn{1}{c}{0.54} & \multicolumn{1}{c}{386} & \(83.8\%\) \\ 
-				PSPNet &  & \multicolumn{1}{c}{0.49} & \multicolumn{1}{c}{580} & \(176.2\%\) 
-				\\ 
-				GCN &  & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{309} & \(47.1\%\) 
-				\\ 
-				\bottomrule
-			\end{tabular}		
-		\end{table}
+			\end{column}
+		\end{columns}			
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
@@ -429,8 +434,8 @@
 	}
 	\begin{frame}{Compression rate}
 		\begin{columns}[T]
+			\tiny
 			\begin{column}[t]{0.48\textwidth}
-				\tiny
 				The maximum permissible distance between grid points according to Nyquist theorem is calculated as in Eqn.~(\ref{eq:dx}):
 				\begin{equation}
 					d_{max}= \frac{1}{2*k_{max}} = \frac{1}{2*51.28\ [\textup{m}]} = \frac{\lambda}{2} = \frac{19.5}{2}\ \textup{[mm]}.
@@ -452,10 +457,9 @@
 				In our particular case, $L=W=500$~[mm], and number of Nyquist points $N_x= N_y= N_{Nyq} =73$.				
 			\end{column}
 			\begin{column}[t]{0.48\textwidth}
-				\tiny
-				\begin{figure} [!h]
+				\begin{figure}[t]
 					\centering
-					\includegraphics[width=0.75\textwidth]{Nyquist_wavelength.png}
+					\includegraphics[height=0.3\textheight]{Nyquist_wavelength.png}
 					\caption{Longest distance between grid points.}
 				\end{figure}
 				
