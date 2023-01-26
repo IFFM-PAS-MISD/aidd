@@ -21,14 +21,19 @@
 \definecolor{logoblue}{RGB}{1,67,140}
 \definecolor{Purple}{HTML}{911146}
 \definecolor{Orange}{HTML}{CF4A30}
+\definecolor{aliceblue}{rgb}{0.94, 0.97, 1.0}
 
 \setbeamercolor{progress bar}{bg=Lightskyblue}
-\setbeamercolor{progress bar}{ fg=logoblue} 
+\setbeamercolor{progress bar}{fg=logoblue} 
 \setbeamercolor{frametitle}{bg=logoblue}
 \setbeamercolor{title separator}{fg=logoblue}
 \setbeamercolor{block title}{bg=Lightskyblue!30,fg=black}
 \setbeamercolor{block body}{bg=Lightskyblue!15,fg=black}
 \setbeamercolor{alerted text}{fg=Purple}
+
+\setbeamerfont{block title}{size={\centering}}
+
+
 % notes colors
 \setbeamercolor{note page}{bg=white}
 \setbeamercolor{note title}{bg=Lightskyblue}
@@ -83,11 +88,11 @@
 \newenvironment{biblio}[2][long]{%
 	%\setbeamertemplate{bibliography item}{\insertbiblabel}
 	\setbeamertemplate{bibliography item}{}% without numbers
-	\setbeamerfont{bibliography item}{size=\footnotesize}
-	\setbeamerfont{bibliography entry author}{size=\footnotesize}
-	\setbeamerfont{bibliography entry title}{size=\footnotesize}
-	\setbeamerfont{bibliography entry location}{size=\footnotesize}
-	\setbeamerfont{bibliography entry note}{size=\footnotesize}
+	\setbeamerfont{bibliography item}{size=\tiny}
+	\setbeamerfont{bibliography entry author}{size=\tiny}
+	\setbeamerfont{bibliography entry title}{size=\tiny}
+	\setbeamerfont{bibliography entry location}{size=\tiny}
+	\setbeamerfont{bibliography entry note}{size=\tiny}
 	\ifx!#2!\else%
 	\bibliotitlestyle{#2}%
 	\fi%

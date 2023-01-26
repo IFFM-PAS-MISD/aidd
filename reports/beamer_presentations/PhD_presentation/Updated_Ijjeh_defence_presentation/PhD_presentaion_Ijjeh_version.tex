@@ -171,6 +171,7 @@
 				\begin{figure}[t]
 					\includegraphics[width=1\textwidth]{Crashes.png}
 				\end{figure}
+			\tiny {source: https://www.structuresinsider.com/post/the-difference-between-buckling-compression-shear}
 			\end{column}
 		\end{columns}
 	\end{frame}
@@ -186,10 +187,12 @@
 		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Objectives}
-		\begin{itemize}
-			\item \textbf{To develop \textcolor{logoblue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
-			\item \textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
-		\end{itemize}
+		\begin{footnotesize}
+			\begin{itemize}
+				\item \textbf{To develop \textcolor{logoblue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
+				\item \textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
+			\end{itemize}
+		\end{footnotesize}		
 		\begin{tcolorbox}
 			\begin{alertblock}{Thesis}
 				It is possible to use an end-to-end approach in which DNN 
@@ -340,7 +343,7 @@
 		\begin{columns}[T]
 			\begin{column}{0.47\textwidth}
 				\begin{itemize}
-					\item Mindlin-Reissner plate theory
+%					\item Mindlin-Reissner plate theory
 					\item Splitting elements and nodes at delamination
 					\item GMSH software was used for meshing quads then converted to spectral elements
 				\end{itemize}	
@@ -433,6 +436,7 @@
 			\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2} 
 			\label{eqn:rms} 
 		\end{equation*}
+		\footnotesize
 		\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time step.
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -452,7 +456,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Convolution Neural Networks (CNNs)}
 		\begin{itemize}
-			\item \alert{Convolutional Neural Network} (CNN) is a powerful feature extracting tool.
+			\item \alert{Convolutional Neural Network} (CNN) is a powerful feature extraction tool.
 			\item Features are extracted by applying convolution operations \alert{(sliding dot product)}.
 		\end{itemize}
 		\begin{columns}[T]
@@ -491,14 +495,14 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Encoder-decoder (Autoencoder)}
 		\begin{columns}[T]
-			\begin{column}[t]{.35\textwidth}
+			\begin{column}[t]{.4\textwidth}
 				\begin{itemize}
 					\item \alert{Encoder} learns to extract features.
 					\item \alert{Latent space} has condensed feature maps.
 					\item \alert{Decoder} learns to locate the features learned by the encoder.
 				\end{itemize}	
 			\end{column}
-			\hfill
+			\quad
 			\begin{column}[t]{.6\textwidth}
 				\begin{figure}
 					\centering
@@ -883,8 +887,7 @@
 			\begin{column}[c]{0.32\textwidth}
 				\begin{figure}[c]
 					\centering
-					\captionsetup{justification=centering}
-					
+					\captionsetup{justification=centering}					
 					\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/456/intermediate_output-}{0}{82}
 					\caption{\(1^{st}\) numerical case, IoU=0.71}
 				\end{figure}
@@ -1073,7 +1076,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Evaluation: Experimental cases}	
 	\setcounter{subfigure}{0}		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Experimental results RMS image-based (Single delamination)}
+	\begin{frame}{Experimental results: RMS image-based (Single delamination)}
 		\begin{columns}[T]
 			\begin{column}[t]{.25\textwidth}
 				\begin{figure}[ht!]
@@ -1178,7 +1181,7 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\begin{frame}{Experimental results full wavefield based (Single delamination)}		
+	\begin{frame}{Experimental results: Full wavefield based (Single delamination)}		
 		\begin{alertblock}{DL approach}
 			IoU= $0.41$% and $\epsilon=71.56\%$ 
 			\begin{figure}[ht!]
@@ -1205,48 +1208,38 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}	
-	\begin{frame}{Experimental results full wavefield based (Multiple delaminations)}
+	\begin{frame}{Experimental results: Full wavefield based (Multiple delaminations)}
 		\begin{columns}[T]
-			\begin{column}[t]{0.2\textwidth}
-					\begin{figure}[t]
+			\begin{column}[t]{0.20\textwidth}
+				\begin{block}{Input}
+					\footnotesize Full wavefield					
+					\begin{figure}[ht!]	
 						\centering						
-						\animategraphics[autoplay,loop,height=0.30\textheight]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}
-						\caption{Input}
+						\subfloat{\animategraphics[autoplay,loop,height=0.32\textheight]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}
 					\end{figure}
-			\end{column}	
-%			\quad				
-			\begin{column}[t]{0.4\textwidth}				
-%				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%				% Change standard block colors				
-%				% 1- Block title (background and text)
-%				\setbeamercolor{block title}{bg=cyan, fg=white}				
-%				% 2- Block body (background)
-%				\setbeamercolor{block body}{bg=cyan!10}
-%				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\end{block}				
+			\end{column}
+			\begin{column}[t]{0.40\textwidth}				
 				\begin{block}{Adaptive wavenumber filtering}
-					\footnotesize
-					\justifying
-					IoU$=0.04$
-					\begin{figure}[ht!]
+					\footnotesize IoU$=0.04$					
+					\begin{figure}[ht!]	
 						\centering
-						\subfloat{\includegraphics[height=0.33\textheight]{figures/mul/figure17a.png}}
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/mul/figure17a.png}}
 						\quad
 						\centering
-						\subfloat{\includegraphics[height=0.33\textheight]{figures/mul/figure17b.png}}								
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/mul/figure17b.png}}								
 					\end{figure}
 				\end{block}	
 			\end{column}
-			\begin{column}[t]{0.4\textwidth}				
-				\begin{alertblock}{DL approach}
-					\footnotesize
-					\justifying
-					 IoU= $0.64$		
-					\begin{figure}[ht!]
+			\begin{column}[t]{0.40\textwidth}				
+				\begin{alertblock}{DL approach}	
+					\footnotesize IoU= $0.64$						
+					\begin{figure}[ht!]	
 						\centering
-						\subfloat{\includegraphics[height=0.33\textheight,keepaspectratio]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}
 						\quad
-						\subfloat{\includegraphics[height=0.33\textheight,keepaspectratio]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}
-					\end{figure}
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}						
+					\end{figure}				
 				\end{alertblock}				
 			\end{column}				
 		\end{columns}	
@@ -1272,28 +1265,30 @@
 	\begin{frame}{Super-resolution image reconstruction}
 		\begin{columns}[T]
 			\begin{column}[t]{0.6\textwidth}
-				\begin{alertblock}{Deep learning super-resolution model (DLSR)}
-					\footnotesize
-					\justifying
-					\begin{itemize}
-						\item Registering HR full wavefield with an SLDV is a time-consuming process.
-						\item DLSR model aims to recover to recover HR full wavefield scans  from a LR measurements (below the Nyquist-Shannon sampling rate).
-					\end{itemize} 
+				\begin{alertblock}{Deep learning super-resolution model (DLSR)}					
+					\begin{footnotesize}
+						\justifying
+						\begin{itemize}
+							\item Registering HR full wavefield with an SLDV is a time-consuming process.
+							\item DLSR model aims to recover HR full wavefield scans from a LR measurements (below the Nyquist-Shannon sampling rate).
+						\end{itemize} 
+					\end{footnotesize}					
 				\end{alertblock}						
 				\begin{exampleblock}{Compressive sensing (CS) theory}
 					\footnotesize
 					\justifying
 					Any natural signal (\(x\)), e.g. (sounds, images) can be recovered using considerably fewer measurements (\(y\)) than standard methods.
-					\begin{figure}[ht!]
+					\vfill
+%					\begin{figure}[ht!]
 					\centering
-					\includegraphics[width=.47\textwidth]{matrix_mask.png}
-					\end{figure}
+					\subfloat{\includegraphics[width=.45\textwidth]{matrix_mask.png}}
+%					\end{figure}
 				\end{exampleblock}							
 			\end{column}
 			\begin{column}[t]{0.4\textwidth}
 				\begin{figure}[ht!]
 					\centering
-					\subfloat{\includegraphics[width=1\textwidth]{superresolution_flowchart.png}}
+					\includegraphics[width=1\textwidth]{superresolution_flowchart.png}
 				\end{figure}
 			\end{column}
 		\end{columns}		
@@ -1309,8 +1304,8 @@
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\begin{frame}{Evaluation metrics for SR model}
-		For evaluating the reconstructed full wavefield
+	\begin{frame}{Evaluation metrics for DLSR model}
+		For evaluating the reconstructed HR full wavefield
 		\begin{itemize}
 			\item Peak signal-to-noise ratio (PSNR):
 			\begin{equation*}
@@ -1339,7 +1334,7 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	\begin{frame}{Numerical test cases at certain frames}
+	\begin{frame}{Numerical test cases}
 		\begin{columns}[T]				
 			\begin{column}[c]{0.5\textwidth}				
 				\begin{figure}
@@ -1588,12 +1583,13 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Conclusions}		
 		\begin{footnotesize}
-			\begin{itemize}
-				\item Full wavefields contain rich damage-related information, which can be utilised to train deep learning models to perform damage identification.
-				\item Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.				
-				\item Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.
-				\item The DLSR model can recover the HR measurements from LR measurements with high accuracy.
-			\end{itemize}
+				\begin{itemize}
+					\item Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.				
+					\item Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.
+					\item Deep learning approaches surpass conventional approaches for delamination identification.
+					\item Deep learning models can be generalised to other types of defects and materials.
+					\item The DLSR model can recover the HR measurements from LR measurements with high accuracy.
+				\end{itemize}
 		\begin{tcolorbox}
 			\textbf{According to my research study, investigations and results, I can confirm my original thesis:}
 			\begin{alertblock}{Thesis: 1}
