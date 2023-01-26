@@ -157,7 +157,7 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Dataset}
-		\footnotesize	
+		\justifying\footnotesize	
 		\begin{itemize}
 			\item The input signal was a five-cycle Hann window modulated sinusoidal tone burst. 
 			\item The carrier frequency was assumed to be 50 kHz. 
@@ -173,7 +173,7 @@
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Rule of mixture and homogenization}	
-		\footnotesize		
+		\justifying\footnotesize
 		\noindent Composite materials have their micro-structure designed in terms of their macroscopic constituents, e.g., fibers in a homogeneous matrix material. 
 		By controlling the choice of fibres, their volume fraction, and alignment, the mechanical properties may be tailored to meet specific design requirements.
 		\begin{columns}[T]				
@@ -191,6 +191,75 @@
 		The Young's modulus of the composite is given by the 'rule of mixtures' i.e. \(E_C = E_F V_F + E_MV_M\), also \((V_M + V_F) = 1\) or \(V_M = (1 - V_F )\). 
 		The elastic modulus along the fibre direction can be controlled by selecting the volume fraction of the fibres.		
 	\end{frame}
+	\begin{frame}{Rule of mixture}
+		\justifying\footnotesize
+		The rule of mixtures is a method used to approximate the properties of composite materials, specifically laminates made of different layers or "plies" of material. It is based on the assumption that the properties of the composite can be approximated as a weighted average of the properties of the individual plies.
+		
+		The rule of mixtures can be applied to various properties of composite laminates, such as Young's modulus (a measure of stiffness), Poisson's ratio (a measure of how a material expands or contracts in different directions), and thermal expansion coefficient (a measure of how a material expands or contracts with changes in temperature).
+		
+		For example, the rule of mixtures for Young's modulus of a laminate can be expressed as:
+		\begin{gather*}
+			E_c = (V_1 * E_1) + (V_2 * E_2) + ... + (V_n * E_n)
+		\end{gather*}
+		
+		Where:
+		\(E_c\) = Young's modulus of the composite laminate, \(V_i\) = volume fraction of the ith ply in the laminate, \(E_i\) = Young's modulus of the ith ply
+		
+		The volume fraction of each ply is simply the thickness of that ply divided by the total thickness of the laminate.
+		
+		It is worth noting that the rule of mixtures is only an approximation and not always accurate. More advanced models and methods, such as the laminated plate theory or the finite element method, are often used to more accurately predict the properties of composite laminates, especially in cases where the laminates are subjected to complex loading conditions.	
+	\end{frame}
+	\begin{frame}{Lamb waves}
+		\begin{footnotesize}
+			Lamb waves are a type of elastic wave that can propagate through thin plates and layered structures. They are named after the British mathematician and physicist Sir Horace Lamb, who first described them in the early 20th century.
+			
+			The characteristic equations of Lamb waves describe the dispersion relationship, which relates the wave's frequency to its wavenumber and the properties of the plate or structure through which it is propagating. These equations are typically derived by solving the equations of motion for the plate or structure, taking into account the boundary conditions and material properties.
+			
+			There are two main types of Lamb waves: the symmetric (S0) mode and the antisymmetric (A0) mode. The S0 mode has no displacement component in the direction perpendicular to the plate, while the A0 mode does have such a component.
+			
+			The characteristic equations for Lamb waves are generally quite complex and are specific to the type of plate or structure being considered. However, in simple cases, the equations can be approximated using simpler models such as the plate equations for a thin plate, or the wave equation for a homogeneous isotropic plate.
+			
+			It is important to note that Lamb wave characteristic equations are used not only in Nondestructive testing but also in many other fields such as aerospace, civil engineering, mechanical engineering, and materials science.
+		\end{footnotesize}
+	\end{frame}
+	\begin{frame}{Prepreg}
+		\justifying\footnotesize
+		Prepreg is a composite material made of a reinforcement material, such as carbon fiber or glass fibers, pre-impregnated with a thermo-setting resin, such as epoxy or polyester. 
+		The reinforcement material is impregnated with the resin in a controlled manner, and then rolled or folded in order to control the thickness and to make it easier to handle. 
+		The material is then cured at high temperature and pressure to form a solid composite structure. 
+		Prepregs are commonly used in aerospace, automotive, and sports equipment applications because of their high strength-to-weight ratio and excellent fatigue resistance.			
+	\end{frame}
+	\begin{frame}{Prepreg GG204 P}
+		\justifying\footnotesize
+		GG204 P is a specific type of prepreg material manufactured by Hexcel Corporation. 
+		It is made of a carbon fiber reinforcement pre-impregnated with an epoxy resin. 
+		GG204 P is a high-performance material that is known for its excellent mechanical properties, high temperature resistance and good processability. 
+		Some of the specific properties of GG204 P include:
+		
+		High strength and modulus.
+		Low coefficient of thermal expansion.
+		High temperature resistance.
+		Excellent fatigue resistance.
+		Good environmental resistance.
+		Good processability.
+		
+		It is used in aerospace and industrial applications, such as in the manufacturing of aircraft and spacecraft structures, wind turbine blades, sporting goods, and more.
+	\end{frame}
+	\begin{frame}{Prepreg GG205 P}
+		\justifying\footnotesize
+		GG205 P is a specific type of prepreg material manufactured by Hexcel Corporation. 
+		It is made of a carbon fiber reinforcement pre-impregnated with an epoxy resin. 
+		It is a high-performance material that is known for its excellent mechanical properties and high temperature resistance. 
+		Some of the specific properties of GG205 P include:
+		
+		High strength and modulus.
+		Low coefficient of thermal expansion.
+		High temperature resistance.
+		Excellent fatigue resistance.
+		Good environmental resistance.
+		
+		It is used in aerospace and industrial applications, such as in the manufacturing of aircraft and spacecraft structures, wind turbine blades, and more.
+	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Mindlin-Reissner plate theory}
 		\begin{footnotesize}
@@ -205,6 +274,27 @@
 				\item It also helps in understanding the behavior of plate-like structures such as composite laminates, sandwich structures and smart materials.
 			\end{itemize}
 		\end{footnotesize}		
+	\end{frame}
+	\begin{frame}{Spectral element method}
+		\noindent\footnotesize
+		The spectral element method (SEM) is a numerical method used to solve partial differential equations (PDEs) in engineering and physics. 
+		It is a variation of the finite element method (FEM) that uses high-order polynomial shape functions to approximate the solution of the PDEs.
+		
+		One of the main advantages of the SEM is that it can achieve high accuracy with relatively few elements, compared to traditional FEM.
+		This is because it uses high-order polynomials to approximate the solution, which allows for a more accurate representation of the solution without the need for a large number of elements.
+		
+		The SEM can be used to solve a wide range of PDEs, including those that govern the behavior of linear and nonlinear elasticity, fluid dynamics, and heat transfer.
+		
+		The SEM is also well suited for solving PDEs in complex geometries and problems with singularities, and it is also very well suited for solving highly oscillatory problems such as wave propagation, scattering, and eigenvalue problems.
+		
+		It is implemented by discretizing the domain into a number of elements, then within each element, a high-order polynomial is used to approximate the solution. 
+		The polynomials are chosen to be orthogonal with respect to the chosen weighting function. 
+		The SEM uses a global-local approach, where the global problem is transformed into a set of local problems, which are then solved independently. The solution of the global problem is obtained by assembling the local solutions.
+		
+		SEM is a powerful tool for solving PDEs, but it is computationally intensive. Therefore, it is typically implemented on high-performance computers and parallel processing systems.
+	\end{frame}
+	\begin{frame}{GMSH}
+		GMSH is a 3D finite element mesh generator and post-processor for numerical simulation in engineering and science. It is open-source software and can be used to create complex geometries and mesh them with a variety of element types, including tetrahedral, hexahedral, and triangular elements. GMSH also includes a built-in CAD engine and supports a wide range of file formats for both geometry and mesh input and output. It runs on Windows, Linux, and macOS, and can be used for a wide range of applications such as computational fluid dynamics, structural mechanics, and more. It is widely used in academia and industry due to its flexibility and powerful features.
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{RMS based: Analysis of numerical cases}
@@ -432,6 +522,27 @@
 		Now that we have this sparsest vector (s), we can use the inverse Fourier transform to recover the high-resolution signal.		
 		
 	}
+	\begin{frame}{PSNR}
+		The peak signal-to-noise ratio (PSNR) is a measure of the quality of a reconstructed image compared to the original image. 
+		It is defined as the ratio of the maximum possible power of a signal to the power of corrupting noise that affects the fidelity of its representation. 
+		The PSNR is most commonly used in image and video compression, and is defined as: 
+		\begin{equation}
+			PSNR = 10log10(MAX^2 / MSE) 
+		\end{equation}
+		
+		where MAX is the maximum possible pixel value (usually 255 for 8-bit images) and MSE is the mean squared error between the original and reconstructed images.
+		A higher PSNR value indicates that the reconstructed image is of higher quality.
+	\end{frame}
+	\begin{frame}{Pearson CC}
+		The Pearson correlation coefficient (also known as Pearson's r) is a measure of the linear correlation between two variables. 
+		It ranges from -1 to 1, where a value of 1 indicates a perfect positive linear correlation (i.e. an increase in one variable is always associated with an increase in the other variable), a value of -1 indicates a perfect negative linear correlation (i.e. an increase in one variable is always associated with a decrease in the other variable), and a value of 0 indicates no correlation.
+		
+		To calculate the Pearson correlation coefficient, one typically first standardizes the variables (i.e. converts them to have mean 0 and standard deviation 1), then computes the dot product of the two standardized variables. 
+		The resulting value is the Pearson correlation coefficient.
+		
+		It is a commonly used statistical measure for evaluating linear relationships between two continuous variables. 
+		It is sensitive only to linear relationship between variables and does not capture non-linear relationship.
+	\end{frame}
 	\begin{frame}{Compression rate}
 		\begin{columns}[T]
 			\tiny
