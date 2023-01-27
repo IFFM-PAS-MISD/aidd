@@ -59,6 +59,10 @@
 %\nobibliography*
 \usepackage{caption}%
 
+
+%\usepackage{etoolbox}
+%\apptocmd{\frame}{}{\justifying}{} 
+
 \graphicspath{{figures/}}
 
 \captionsetup[figure]{labelformat=empty}%
@@ -95,20 +99,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \date{\today}
-\date{}
+\date{February 10, 2023}
+%\date{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % option 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES}
+\justifying\title{FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES}
 %\subtitle{In preparation for a Ph.D. defence}
-\author{\textbf{Ph.D. candidate, Eng. Abdalraheem A. Ijjeh } 
+\author{\textbf{Ph.D. candidate: Eng. Abdalraheem A. Ijjeh } 
 	\and \\ 
-	\textbf{Supervisor: D.Sc. Ph.D. Eng. Paweł Kudela}
-} 
+	\textbf{Supervisor: D.Sc. Ph.D. Eng. Paweł Kudela}} 
 % logo align to Institute 
 \institute{Institute of Fluid Flow Machinery \\ 
 	Polish Academy of Sciences \\ 
+	Gdansk, Poland \\
 	\vspace{-1.5cm}
 	\flushright 
 	\includegraphics[width=6cm]{imp_logo.png}}
@@ -122,7 +126,7 @@
 \begin{document}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\maketitle
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		My name is Abdalraheem Ijjeh.
 		I am a PhD candidate at the Institute of Fluid Flow Machinery, Polish Academy of Sciences.		
@@ -130,10 +134,10 @@
 		The title of my PhD thesis is FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES.		
 		Thank you all for you attending my PhD defence presentation. 
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% SLIDES
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[label=frame1]{Outlines}
 			\setbeamertemplate{section in toc}[sections numbered]
 			\setbeamertemplate{subsection in toc}[subsections numbered]
@@ -188,18 +192,21 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Objectives}
 		\begin{footnotesize}
+			\justifying
 			\begin{itemize}
-				\item \textbf{To develop \textcolor{logoblue}{a novel AI-driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
+				\item \textbf{To develop \textcolor{logoblue}{a novel artificial intelligence (AI) driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
 				\item \textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
 			\end{itemize}
 		\end{footnotesize}		
-		\begin{tcolorbox}
+		\begin{tcolorbox}			
 			\begin{alertblock}{Thesis}
-				It is possible to use an end-to-end approach in which DNN 
+				\justifying
+				It is possible to use an end-to-end approach in which a deep neural network (DNN) 
 				processes the animation of propagating waves (input) directly into a damage map (output).
 			\end{alertblock}
 			\begin{alertblock}{Thesis}
-				It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans  from a low-resolution (LR).
+				\justifying
+				It is possible to speed up the data acquisition process by SLDV by employing an~appropriate DL approach to recover high-resolution (HR) full wavefield scans from a~low-resolution (LR).
 			\end{alertblock}
 		\end{tcolorbox}		
 	\end{frame}
@@ -340,18 +347,19 @@
 	\section*{Synthetic dataset generation}
 	\setcounter{subfigure}{0}	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Synthetic dataset generation}
-		\begin{columns}[T]
-			\begin{column}{0.47\textwidth}
+		\begin{columns}[T]			
+			\begin{column}{0.55\textwidth}
+				\justifying
 				\begin{itemize}
 %					\item Mindlin-Reissner plate theory
-					\item Splitting elements and nodes at delamination
-					\item GMSH software was used for meshing quads then converted to spectral elements
+					\item Splitting elements and nodes at delamination.
+					\item GMSH software was used for meshing quads then converted to spectral elements.
 				\end{itemize}	
 				\begin{figure}
-					\subfloat{\includegraphics[width=0.9\textwidth]{shell.png}}	
+					\subfloat{\includegraphics[width=0.8\textwidth]{shell.png}}	
 				\end{figure}
 			\end{column}
-			\begin{column}{0.47\textwidth}	
+			\begin{column}{0.45\textwidth}	
 				\begin{figure}
 					\animategraphics[controls,autoplay,loop,width=0.9\textwidth]{1}{/gif_figs/mesh/m1_rand_single_delam_}{1}{20}
 				\end{figure}	
@@ -371,12 +379,13 @@
 	\begin{frame}{Dataset description}
 		\begin{columns}[T]
 			\begin{column}[t]{0.35\textwidth}
+				\justifying
 				\begin{itemize}
-					\item 475 delamination scenarios
-					\item CFRP is made of 8-layers
-					\item Delamination modelled between the 3rd and 4th layer
-					\item Delamination size min 10 mm, max 40 mm
-					\item \textbf{3-months of computing}
+					\item 475 delamination scenarios.
+					\item CFRP is made of 8-layers.
+					\item Delamination modelled between the \(3^{rd}\) and \(4^{th}\) layers.
+					\item Delamination size min 10~mm, max 40~mm.
+					\item \textbf{3-months of computing}.
 				\end{itemize}
 			\end{column}
 			\begin{column}[t]{0.2\textwidth}
@@ -389,7 +398,7 @@
 			\begin{column}[t]{0.45\textwidth}
 				\begin{figure}[t]					
 					\centering	
-					\captionsetup{justification=centering}						
+					\captionsetup{justification=centering}				
 					\subfloat[Delamination orientation]{\includegraphics[width=0.95\textwidth]{figure1.png}}					
 				\end{figure}
 			\end{column}
@@ -460,18 +469,22 @@
 			\item Features are extracted by applying convolution operations \alert{(sliding dot product)}.
 		\end{itemize}
 		\begin{columns}[T]
-			\begin{column}[t]{0.6\textwidth}
+			\begin{column}[t]{0.58\textwidth}
 				\begin{figure}[ht!]
 					\centering		
 					\caption{Convolution operation}			
-					\efbox{\animategraphics[autoplay,loop,width =0.90\textwidth]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}}					
+					\efbox{
+						\animategraphics[autoplay,loop,width =0.95\textwidth]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}
+					}					
 				\end{figure}
 			\end{column}
-			\begin{column}[t]{0.4\textwidth}
+			\begin{column}[t]{0.38\textwidth}
 				\begin{figure}[ht!]
 					\centering
 					\caption{CNN architecture}
-					\efbox{\includegraphics[width=0.90\textwidth]{cnn.png}}
+					\efbox{
+						\includegraphics[width=0.95\textwidth]{cnn.png}
+					}
 				\end{figure}
 			\end{column}			
 		\end{columns}
@@ -493,17 +506,18 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Encoder-decoder (Autoencoder)}
+	\begin{frame}{Encoder-decoder architecture}
 		\begin{columns}[T]
-			\begin{column}[t]{.4\textwidth}
+			\begin{column}[t]{.45\textwidth}
+				\justifying
 				\begin{itemize}
-					\item \alert{Encoder} learns to extract features.
-					\item \alert{Latent space} has condensed feature maps.
-					\item \alert{Decoder} learns to locate the features learned by the encoder.
+					\item \alert{Encoder}: extracts features.
+					\item \alert{Latent space}: condensed feature maps.
+					\item \alert{Decoder}: locates the features.
 				\end{itemize}	
 			\end{column}
 			\quad
-			\begin{column}[t]{.6\textwidth}
+			\begin{column}[t]{.55\textwidth}
 				\begin{figure}
 					\centering
 					\includegraphics[width=1\textwidth]{nn_encoder_decoder.png}
@@ -524,7 +538,7 @@
 		\begin{columns}[T]
 			\begin{column}[c]{0.27\textwidth}
 				\justifying
-				\alert {\textbf{Computer vision}} is a field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
+				\alert {\textbf{Computer vision}} is a~field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
 			\end{column}
 			\quad
 			\begin{column}[c]{0.7\textwidth}
@@ -559,9 +573,9 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Conventional machine learning v.s. deep learning approaches}
+	\begin{frame}{Conventional machine learning vs. deep learning approaches}
 		Conventional methods involve two processes:
-		\alert{\textbf{Feature extraction and classification}}
+		\alert{\textbf{Feature extraction and classification.}}
 		\begin{figure}
 			\centering
 			\includegraphics[width=.95\textwidth]{conventional_ML.png}
@@ -596,9 +610,9 @@
 		All developed DL models were \alert{coded in-house} \\
 		\alert{(Tailored specifically to meet tasks requirements)} 
 		\begin{itemize}			
-			\item \alert{Python} language (versions: 3.7 - 3.9)			
-			\item \alert{TensorFlow} platform (versions: 2.0 - 2.6)
-			\item \alert{Keras} (deep learning API over TensorFlow) (versions: 2.0 - 2.6)
+			\item \alert{Python}: versions: 3.7 - 3.9
+			\item \alert{TensorFlow} platform: versions: 2.0 - 2.6
+			\item \alert{Keras} (deep learning API over TensorFlow): versions: 2.0 - 2.6
 			\item \alert{GPUs}: NVIDIA RTX2080 /8GB, NVIDIA Tesla V100 /32 GB
 		\end{itemize}
 	\end{frame}
@@ -609,10 +623,10 @@
 						\begin{tabular}{lccc}
 							\toprule[1.5pt]
 							\multirow{2}{*}{\textbf{Applied techniques}}& \multicolumn{2}{c}{\textbf{Delamination identification}} & \multirow{2}{*}{\textbf{Super-resolution image reconstruction}} \\ \cmidrule(lr){2-3}
-							& RMS image based & Full wavefield based &  \\ \midrule 
-							Dataset normalisation & \checkmark  & \checkmark & \checkmark \\
-							Dataset Augmentation & \checkmark &  &  \\
-							Cross validation & \checkmark &  &  \\ 
+							& RMS image based & Full wavefield based & \\ \midrule 
+							Dataset normalisation & \checkmark & \checkmark & \checkmark \\
+							Dataset augmentation & \checkmark & & \\
+							Cross validation & \checkmark & & \\ 
 							Early stoppling & \checkmark & \checkmark & \checkmark \\ 
 							Hyperparameter tuning & \checkmark & \checkmark & \checkmark \\ 
 							Regularization & \checkmark & \checkmark & \checkmark \\ 
@@ -663,7 +677,7 @@
 				\begin{figure}
 					\centering
 					\captionsetup{justification=centering}					
-					\subfloat[Multiple frames animation]{\animategraphics[autoplay,loop,width=.45\textwidth]{4}{figures/gif_figs/381_output/output_381-}{85}{113}}\quad
+					\subfloat[Multiple frames (animation)]{\animategraphics[autoplay,loop,width=.45\textwidth]{4}{figures/gif_figs/381_output/output_381-}{85}{113}}\quad
 					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
 				\end{figure}
 			\end{column}	
@@ -1268,9 +1282,11 @@
 				\begin{alertblock}{Deep learning super-resolution model (DLSR)}					
 					\begin{footnotesize}
 						\justifying
+						\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+						\addtolength{\leftmargini}{\labelsep}
 						\begin{itemize}
-							\item Registering HR full wavefield with an SLDV is a time-consuming process.
-							\item DLSR model aims to recover HR full wavefield scans from a LR measurements (below the Nyquist-Shannon sampling rate).
+							\item Registering HR full wavefield with an SLDV is a~time-consuming process.
+							\item DLSR model aims to recover HR full wavefield scans from a~LR measurements (below the Nyquist-Shannon sampling rate).
 						\end{itemize} 
 					\end{footnotesize}					
 				\end{alertblock}						
@@ -1279,10 +1295,10 @@
 					\justifying
 					Any natural signal (\(x\)), e.g. (sounds, images) can be recovered using considerably fewer measurements (\(y\)) than standard methods.
 					\vfill
-%					\begin{figure}[ht!]
+					\begin{figure}[ht!]
 					\centering
-					\subfloat{\includegraphics[width=.45\textwidth]{matrix_mask.png}}
-%					\end{figure}
+					\includegraphics[width=.45\textwidth]{matrix_mask.png}
+					\end{figure}
 				\end{exampleblock}							
 			\end{column}
 			\begin{column}[t]{0.4\textwidth}
@@ -1305,21 +1321,21 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Evaluation metrics for DLSR model}
-		For evaluating the reconstructed HR full wavefield
+		For evaluating the reconstructed HR full wavefield:
 		\begin{itemize}
 			\item Peak signal-to-noise ratio (PSNR):
 			\begin{equation*}
 				PSNR=20\log_{10}\left(\frac{R}{\sqrt{MSE}}\right)
 				\label{PSNR_}
-			\end{equation*}
-			\item Pearson correlation coefficient:
+			\end{equation*}			
+			\item Pearson correlation coefficient (also known as Pearson's r):
 			\begin{equation*}
 				r_{xy} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}
 				\label{Pearson_}
 			\end{equation*}
 		\end{itemize}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		To evaluate the developed model, I used two metrics:
 		\begin{itemize}
@@ -1489,12 +1505,12 @@
 			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{column}[t]{.25\textwidth}
 				\begin{block}{HR label}
-				    \begin{figure}
-				    	\centering
-				    	\subfloat{\includegraphics[width=0.75\textwidth]{figure10a.png}}
-				    	\vfill
-				    	\subfloat{\includegraphics[width=0.75\textwidth]{figure11a.png}}
-				    \end{figure}
+				 \begin{figure}
+				 	\centering
+				 	\subfloat{\includegraphics[width=0.75\textwidth]{figure10a.png}}
+				 	\vfill
+				 	\subfloat{\includegraphics[width=0.75\textwidth]{figure11a.png}}
+				 \end{figure}
 				\end{block}
 			\end{column}
 			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1552,7 +1568,7 @@
 		\begin{table}[!ht]
 			\renewcommand{\arraystretch}{1.3}
 			\centering \footnotesize
-			\caption{Quality metrics for tested methods for the frame no $N_f=110$.}	
+			\caption{Quality metrics for tested methods for the frame no. $N_f=110$.}	
 			\begin{tabular}{lrrrcrc} 
 				\toprule[1.5pt]
 				& & & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
@@ -1583,6 +1599,9 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Conclusions}		
 		\begin{footnotesize}
+			\begin{justify}
+				\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+				\addtolength{\leftmargini}{\labelsep}
 				\begin{itemize}
 					\item Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.				
 					\item Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.
@@ -1590,15 +1609,18 @@
 					\item Deep learning models can be generalised to other types of defects and materials.
 					\item The DLSR model can recover the HR measurements from LR measurements with high accuracy.
 				\end{itemize}
+			\end{justify}				
 		\begin{tcolorbox}
-			\textbf{According to my research study, investigations and results, I can confirm my original thesis:}
-			\begin{alertblock}{Thesis: 1}
-				It is possible to use an end-to-end approach in which DNN 
-				processes the animation of propagating waves (input) directly into a damage map (output).
-			\end{alertblock}
-			\begin{alertblock}{Thesis: 2}
-				It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans  from a low-resolution (LR).
-			\end{alertblock}
+			\begin{justify}
+				\textbf{According to my research study, investigations and results, I can confirm my original thesis:}
+				\begin{alertblock}{Thesis: 1}
+					It is possible to use an end-to-end approach in which DNN 
+					processes the animation of propagating waves (input) directly into a damage map (output).
+				\end{alertblock}
+				\begin{alertblock}{Thesis: 2}
+					It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans from a low-resolution (LR).
+				\end{alertblock}
+			\end{justify}			
 		\end{tcolorbox}				
 		\end{footnotesize}			
 	\end{frame}		
@@ -1615,7 +1637,7 @@
 			\end{column}
 			\begin{column}[t]{0.49\textwidth}
 				\centering
-				\textbf{\underline{COMSOL v.s surrogate DL model predictions}}
+				\textbf{\underline{COMSOL vs. surrogate DL model predictions}}
 				\begin{figure}
 					\centering
 					\efbox{\includegraphics[width=1\textwidth]{plot_1029_4672_10425_KF_DL_FEM_BG_triple_tile.png}}							
@@ -1636,16 +1658,16 @@
 						\justifying
 						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\item Ijjeh, A., Ullah, S., Radzienski, M. and Kudela, P., 2023. Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves. \textbf{\textit{Mechanical Systems and Signal Processing}}, 186, p.109878.						
-						\textbf{[200 points]/[IF:8.934]}
+						\textbf{[200~points]/[IF:8.934]}
 						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\item Ullah, S., Ijjeh, A.A. and Kudela, P., 2023. Deep learning approach for delamination identification using animation of Lamb waves. 						
 						\textbf{\textit{Engineering Applications of Artificial Intelligence}}, 117, p.105520.		
-						\textbf{[140 points]/[IF:7.802]}
+						\textbf{[140~points]/[IF:7.802]}
 						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-						\item Ijjeh, A.A. and Kudela, P., 2022. Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study. \textbf{\textit{Mechanical Systems and Signal Processing}}, 168, p.108671. \textbf{[200 points]/[IF:8.934]}
+						\item Ijjeh, A.A. and Kudela, P., 2022. Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study. \textbf{\textit{Mechanical Systems and Signal Processing}}, 168, p.108671. \textbf{[200~points]/[IF:8.934]}
 						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\item Ijjeh, A.A., Ullah, S. and Kudela, P., 2021. Full wavefield processing by using FCN for delamination detection. \textbf{\textit{Mechanical Systems and Signal Processing}}, 153, p.107537.		
-						\textbf{[200 points]/[IF:8.934]}	
+						\textbf{[200~points]/[IF:8.934]}	
 						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\end{enumerate}					
 				\end{column}
@@ -1654,26 +1676,24 @@
 					\begin{enumerate}
 						\justifying
 						\item {Ijjeh, A.}, Kudela, P. Convolutional LSTM for delamination imaging in composite laminates. 
-						The 4th International Conference on Machine Learning and Intelligent Systems (MLIS 2022), November 8th-11th, 2022, Seoul, Republic of Korea.
-						\item {Ijjeh, A.}, Kudela, P. (2023). Delamination Identification Using Global Convolution Networks. In: Rizzo,
-						P., Milazzo, A. (eds) European Workshop on Structural Health Monitoring. EWSHM 2022. Lecture Notes
-						in Civil Engineering, vol 270. Springer, Cham. https://doi.org/10.1007/978-3-031-07322-9 5.		
-						\item {Ijjeh, A.}, Kudela, P. Feasibility Study of Full Wavefield Processing by Using CNN for Delamination
-						Detection. 
+						The 4th International Conference on Machine Learning and Intelligent Systems (MLIS 2022), November \(8^{th}\) - \(11^{th}\), 2022, Seoul, Republic of Korea.
+						\item Ijjeh, A. and Kudela, P., 2022, June. Delamination Identification Using Global Convolution Networks. 
+						In European Workshop on Structural Health Monitoring: EWSHM 2022-Volume 3 (pp. 521-529). Cham: Springer International Publishing.		
+						\item {Ijjeh, A.}, Kudela, P. Feasibility Study of Full Wavefield Processing by Using CNN for Delamination Detection. 
 						Proceedings of the International Conference on Structural Health Monitoring of Intelligent
-						Infrastructure, Porto, Portugal, 30 June -2 July 2021, ISSN 2564-3738, pages 709-713.
+						Infrastructure, June \(30^{th}\) - July \(2^{nd}\), 2021, Porto, Portugal, ISSN 2564-3738, pages 709-713.
 					\end{enumerate}		
 					\underline{\textbf{Chapters}}					
 					\begin{enumerate}
 						\justifying
 						\item {Abdalraheem Ijjeh}, Deep Learning based Damage Imaging techniques, chapter in: Wybrane zagadnienia
-						inżynierii mechanicznej, Praca zbiorowa pod redakcja M. Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
+						inżynierii mechanicznej, Praca zbiorowa pod redakcja M.~Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
 						Maszyn Przepływowych PAN, Gdańsk, 2022, ISBN: 978-83-66928-09-1.
 						\item {Abdalraheem Ijjeh}, Data-driven based approach for damage detection, chapter in: Wybrane zagadnienia
-						inżynierii mechanicznej, Praca zbiorowa pod redakcja M. Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
+						inżynierii mechanicznej, Praca zbiorowa pod redakcja M.~Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
 						Maszyn Przepływowych PAN, Gdańsk, 2021, ISBN: 978-83-66928-00-8.				
 						\item {Abdalraheem Ijjeh}, Machine Learning for SHM: Literature Review, chapter in: Wybrane zagadnienia
-						inżynierii mechanicznej, Praca zbiorowa pod redakcja M. Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
+						inżynierii mechanicznej, Praca zbiorowa pod redakcja M.~Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
 						Maszyn Przepływowych PAN, Gdańsk, 2020, ISBN: 978-83-88237-97-3.
 					\end{enumerate}
 				\end{column}		
