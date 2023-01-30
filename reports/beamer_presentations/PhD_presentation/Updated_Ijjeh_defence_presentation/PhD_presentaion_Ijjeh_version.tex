@@ -143,20 +143,16 @@
 			\setbeamertemplate{subsection in toc}[subsections numbered]
 			\tableofcontents
 	\end{frame}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{The presentation will be as follows: 
-		In the first section, I will briefly talk about the motivations behind this research.	
-		Then I will state my objectives in the second section. 
-		In sections three and four, I will talk briefly about nondestructive testing methods, and guided waves. 
-		In section five, I will present the conventional approach v.s. the deep learning approach for damage detection. 
-		Section six will be an introduction to the supervised deep learning approach and how it works in general. 
-		The generation of the synthetic dataset used for training will be presented in section seven. 
-		In section 8, I will present the developed deep-learning models for damage identification. 
-		The evaluation of the developed models will be presented in sections nine and ten.
-		The super-resolution deep learning model developed for fast data acquisition will be presented in section 11. 
-		Finally, the conclusions will be presented in section 12.
+		In the introduction section, I will briefly introduce the motivations, objectives, contributions, and novelty of my work.
+		Section two will be an overview of the deep learning approach
+		In sections three and three, I will briefly talk about the development environment for deep learning models.
+		Section 4 will introduce my work on delamination identification with deep learning approaches.
+		In Section 5, I will present the second part of my work, which is on super-resolution image reconstruction for the full wavefield of Lamb waves. 
+		The conclusions and future work will be presented in section 6.
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Introduction}
 	\begin{frame}{Motivations}
 		\begin{columns}[T]
@@ -179,17 +175,20 @@
 			\end{column}
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		Composite laminates have a wide range of applications in various industries due to their characteristics, such as high strength, low density, and resistance to fatigue and corrosion, among others.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{
+		Composite laminates have a wide range of applications in various industries due to their good characteristics, such as:
+		high strength, low density, light weight, and resistance to fatigue and corrosion, among others.
 		
-		However, defects such as cracks, fibre breakage, and debonding can occur in composite laminates. 
+		However, composite laminates may encounter some defects, such as cracks, fibre breakage, and debonding.
 		
 		In particular, laminated composite materials are more sensitive to damage in the form of delamination due to weak transverse tensile and interlaminar shear strengths.
 			
 		Delaminations can seriously decrease the performance of composite structures.
-		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		Accordingly, delamination detection in its early stages can significantly help to avoid catastrophic structural collapses.
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Objectives}
 		\begin{footnotesize}
 			\justifying
@@ -206,18 +205,21 @@
 			\end{alertblock}
 			\begin{alertblock}{Thesis}
 				\justifying
-				It is possible to speed up the data acquisition process by SLDV by employing an~appropriate DL approach to recover high-resolution (HR) full wavefield scans from a~low-resolution (LR).
+				It is possible to speed up the data acquisition process by SLDV by employing an~appropriate deep learning (DL) approach to recover high-resolution (HR) full wavefield scans from a~low-resolution (LR).
 			\end{alertblock}
 		\end{tcolorbox}		
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		The main objective of this work is to develop an artificial intelligence-based diagnostic system for the detection of delaminations in composite laminates.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{
+		I have two primary objectives in my work:
+		The primary objective of this work is to develop a diagnostic tool based on artificial intelligence for delamination detection in composite laminates.
 		
-		Therefore, I investigated the possibility of embracing the end-to-end approach by using animations of Lamb wave propagation in a plate interacting with discontinuities such as damage and edges with an artificial intelligence-based approach to detect and identify delaminations.
+		My second objective is to address the issue of slow data acquisition of high-resolution full wavefields of Lamb wave propagation by SLDV.
 		
-		My second objective is to address the issue of slow data acquisition of high-resolution full wavefields of Lamb wave propagation by SLDV.}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		Accordingly, I have two theses to confirm:
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Contribution and novelty}
 		\begin{columns}[T]
 			\begin{column}[c]{0.95\textwidth}
@@ -228,10 +230,18 @@
 			\end{column}
 		\end{columns}		
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{
+		I can say that the novelty of my work resides in applying for the first time a full wavefield dataset of elastic wave propagation (a numerically generated dataset) as an input to various supervised deep neural networks, which is capable of identifying damage in an end-to-end approach. 
+		Additionally, to demonstrate the feasibility of my models, I have compared them with adaptive wavenumber filtering (a conventional signal processing technique for damage imaging).
+		
+		Furthermore, I have developed a deep learning model to perform an end-to-end superresolution technique regarding elastic wave propagation and their interaction with the damage and the specimen boundaries.
+		Also, I compared my model for superresolution image reconstruction with a well-known technique, the compressive sensing theory.		
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Experimental measurements}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[t]{SLDV measurements: Setup}
 		\begin{columns}[T]
 			\column{0.5\textwidth}
@@ -251,17 +261,17 @@
 			Measurements were taken on a uniform grid of \textbf{333$\times$333 points}.\\
 			Excitation in the form of Hann windowed sine signal of carrier frequency \textbf{50 kHz} was applied to piezoelectric transducer.}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		This slide shows the experimental setup at the laboratory for the SLDV measurements.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{
+		Here, I present the experimental setup at the laboratory for the SLDV measurements for specimens with artificial damage that will be used to evaluate my developed models.
 		
 		The Piezoelectric transducer is placed on the other side of the plate towards the wall.
-		
-		The measurements were taken on a uniform grid of \(333\times 333\) points from the bottom surface of the plate.
-		
 		The excitation in the form of a Hann windowed sine signal of carrier frequency 50 kHz was applied to the PZT. 
+		
+		The measurements were taken on a uniform grid of \(333\times 333\) points from the bottom surface of the plate.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[t]{Composite specimen}
 		\begin{columns}[T]
 			\column{0.7\textwidth}
@@ -303,49 +313,54 @@
 			\label{tab:weave_geo}
 		\end{table}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The composite laminates used for experimental evaluation were composed of 16 layers set at the same angle of plain weave fabric with the following characteristics:
+		The specimens of composite laminates used for experimental evaluation are composed of 16 layers set at the same angle of plain weave fabric with the following characteristics:
 		
 		Table 3 shows the fill and warp strands for the plain weave fabric reinforced composite in [mm].
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[t]{Specimens with defects}
 		\vspace{-0.5cm}
 		\begin{columns}[T]
 			\column{0.5\textwidth}
+			\only<1>{
 			\begin{figure}
-				\includegraphics[scale=0.36]{plate_multi_delam_arrangement_large_fonts.png}
-			\end{figure}
+				\includegraphics[width=0.85\textwidth]{plate_multi_delam_arrangement_large_fonts.png}
+			\end{figure}}
+			\only<2>{				
+				\begin{figure}
+					\efbox
+					{
+						\includegraphics[width=0.85\textwidth]{plate_multi_delam_arrangement_large_fonts.png}
+					}
+					\caption{\footnotesize These specimens were specifically brought to my PhD project.}
+				\end{figure}}
 			\column{0.5\textwidth}
 			\begin{figure}
-				\includegraphics[scale=0.36]{plate_single_delam_arrangement_large_fonts.png}
+				\includegraphics[width=0.75\textwidth]{plate_single_delam_arrangement_large_fonts.png}
 			\end{figure}
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{	
 		\footnotesize
-		In this slide, I present the specifications of the specimens used for evaluating the developed deep-learning models.
+		In this slide, I the specifications of the specimens used for evaluating the developed deep-learning models are presented.
 		
 		Specimens with multiple delaminations are shown on the left.
+		In which there are three specimen with multiple delamination were located at the same distance, equal to 150 mm from the centre of the plate. placed at different thickness of the plate. 
 		
-		In Specimen II, three large artificial delaminations of elliptic shape were inserted in the upper thickness quarter of the plate between the 4th and the 5th layer. 
-		The delaminations were located at the same distance, equal to 150 mm from the centre of the plate. 
+		The specification of the specimen with a single delamination is shown on the right. 
 		
-		In specimen III, delaminations were inserted in the middle of the cross-section of the plate between the 8th layer and the 9th layer.
-		For Specimen IV, three small delaminations were inserted in the upper quarter of the cross-section of the plate, and three large delaminations were inserted at the lower quarter of the cross-section of the plate between the 12th layer and 13th layer. 
-		
-		The fifth specimen on the right has a single delamination. 
-		The delamination between layers of the fabric was created artificially by a Teflon insert of a thickness 250 \(\mu\)m. 
-		The Teflon of a square shape was inserted during specimen manufacturing, so its shape and location are known.
 		
 		Furthermore, all SLDV measurements were conducted from the bottom surface of the plate.
 		
-		I would like to mention that the specimens on the left were brought specifically to my PhD project.}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		I would like to mention that the specimens on the left were brought specifically to my PhD project.
+	}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Synthetic dataset generation}
-	\setcounter{subfigure}{0}	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Synthetic dataset generation}
 		\begin{columns}[T]			
 			\begin{column}{0.55\textwidth}
@@ -366,7 +381,7 @@
 			\end{column}
 		\end{columns}	
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		To train the supervised deep learning models, a synthetic dataset of propagating waves in carbon fibre-reinforced composite plates was computed by applying the Mindlin-Reissner plate theory and using the parallel implementation of the time domain spectral element method.
 		
@@ -374,7 +389,7 @@
 		
 		Essentially, the dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric (PZT) excitation at the centre of the plate.		 
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Dataset description}
 		\begin{columns}[T]
@@ -404,7 +419,7 @@
 			\end{column}
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The synthetically generated dataset has 475 delamination cases.
 		It was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm. 
@@ -412,7 +427,7 @@
 		The delamination geometrical size major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
 		The computation of the dataset took about three months.
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Training Sample case}
 		\begin{columns}[T]
@@ -448,7 +463,7 @@
 		\footnotesize
 		\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time step.
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		In this slide, I present a training scenario.
 		The animation on the left represents the full wavefield frames, where x and y are the point coordinates, and tk is the time step.
@@ -457,12 +472,12 @@
 		
 		The ground truth label that represents the delamination location and shape is shown on the right.
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Deep learning approach: An~Overview}		
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Convolution Neural Networks (CNNs)}
 		\begin{itemize}
 			\item \alert{Convolutional Neural Network} (CNN) is a powerful feature extraction tool.
@@ -489,7 +504,7 @@
 			\end{column}			
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		Convolutional Neural Network (CNN) is a powerful deep learning architecture for image processing because it can extract complex feature patterns from images using convolution operations.
 		
@@ -503,9 +518,9 @@
 		
 		During the backpropagation process, all kernel weights are updated. 				
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Encoder-decoder architecture}
 		\begin{columns}[T]
 			\begin{column}[t]{.45\textwidth}
@@ -525,15 +540,15 @@
 			\end{column}
 		\end{columns}			
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The encoder-decoder is a well-known architecture used for tasks such as computer vision.
 		The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations. 
 		The decoder is responsible for upsampling the condensed feature maps in the latent space to the original input shape.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Computer vision}
 		\begin{columns}[T]
 			\begin{column}[c]{0.27\textwidth}
@@ -549,12 +564,12 @@
 				\only<2>{\begin{figure}
 						\centering
 						\efbox{\includegraphics[width=1\textwidth]{computer_vision_tasks.png}}					
-				\end{figure}}												
+				\end{figure}}											
 			\end{column}
 		\end{columns}
 	\only<2>{\textbf{In my work, I went with the hardest task \alert{(Pixel-wise image segmentation)}.}}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		We now reach an essential concept: computer vision. 
 		Computer vision is a subcategory of artificial intelligence that enables computers to obtain meaningful information from visual inputs.
@@ -570,9 +585,9 @@
 		I am using pixel wise image segmentation in my PhD work.
 		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Conventional machine learning vs. deep learning approaches}
 		Conventional methods involve two processes:
 		\alert{\textbf{Feature extraction and classification.}}
@@ -585,7 +600,7 @@
 			\includegraphics[width=.95\textwidth]{DL_approach.png}
 		\end{figure}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		In this slide, I present a comparison between conventional machine learning and deep learning approaches to damage detection.
 		
@@ -599,13 +614,10 @@
 		
 		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification by themselves without human intervention in an end-to-end approach. 
 	}
-	
-	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Development environment}
 	\setcounter{subfigure}{0}
-%	\section{Synthetic dataset generation}		
-%	\setcounter{subfigure}{0}
-	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	\begin{frame}{Utilised Tools for DL models}
 		All developed DL models were \alert{coded in-house} \\
 		\alert{(Tailored specifically to meet tasks requirements)} 
@@ -656,7 +668,7 @@
 					\end{tabular}}
 				\end{table}					
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part I: Delamination identification}
 	\begin{frame}{Semantic segmentation}
 		\begin{columns}[T]
@@ -683,7 +695,7 @@
 			\end{column}	
 		\end{columns}		
 	\end{frame}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The novelty of this work consists of applying for the first time a full wavefield dataset of elastic wave propagation as an input to various supervised deep-learning models that are capable of identifying damage by classifying each output pixel as healthy or damaged. 
 		
@@ -693,7 +705,7 @@
 			\item Many-to-one approach (takes animation of Lamb waves propagation as a sequence of frames and produces one output as damage map).
 		\end{itemize}	
 		}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\subsection{Developed DL models}
 	%\begin{frame}{Common deep learning architectures}
 	%	
@@ -715,7 +727,7 @@
 		%	\end{column}
 	%\end{frame}
 	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Developed model for delamination identification}
 		\begin{columns}[T]
 			\begin{column}[t]{0.45\textwidth}
@@ -739,7 +751,7 @@
 			\end{column}
 		\end{columns}
 	\end{frame}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		Deep learning models for delamination identification were developed based on their inputs.
 		
@@ -751,18 +763,18 @@
 		
 		All developed models were published in these articles.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Developed RMS based models}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Developed RMS based models}
 		\begin{figure}
 			\includegraphics[width=0.95\textwidth]{Developed_rms_models.png}
 		\end{figure}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		FCN-DenseNet applies an encoder-decoder scheme with skip connections between the encoder and the decoder paths.
 		The main component in FCN-DenseNet is the dense block. 
@@ -777,8 +789,7 @@
 		
 		
 	}
-
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	
 %	\begin{frame}{Pyramid Scene Parsing Network}
 %		\begin{figure} [h!]
@@ -787,11 +798,11 @@
 %			\caption{PSPNet architecture.} 
 %		\end{figure}
 %	\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\note{
 %			
 %	}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\begin{frame}{Global Convolution Network}
 %		\begin{columns}[T]
 %			\begin{column}[c]{0.55\textwidth}
@@ -810,12 +821,10 @@
 %			\end{column}
 %		\end{columns}
 %	\end{frame}	
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\note{
 %	
-%	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+%	}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%\setcounter{subfigure}{0}
 	%\begin{frame}{RMS based models}
@@ -831,9 +840,9 @@
 			%	\end{column}
 		%
 		%\end{frame}
-			
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Full wavefield frames based model}
 	\begin{frame}{Autoencoder ConvLSTM}
 		\begin{figure}[ht!]
@@ -841,7 +850,7 @@
 			\includegraphics[width=1\textwidth]{figure3.png}
 		\end{figure}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The autoencoder ConvLSTM was trained on a sequence of consecutive full wavefield frames.
 		
@@ -858,7 +867,7 @@
 		
 		Then, an RMS of all the intermediate predictions is calculated to produce a damage map.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Evaluation metrics for delamination identification}
 		\begin{columns}[T]
 			\begin{column}[c]{0.45\textwidth}
@@ -884,7 +893,7 @@
 			\end{column}
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		To evaluate all developed models for delamination identification, two metrics were used:
 		
@@ -892,7 +901,7 @@
 		
 		The second metric is the percentage area error \(\epsilon\), which calculates the percentage of the difference between actual and predicted areas to the actual area size. 
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Evaluation: Numerical cases}
 %	\subsection{Numerical test cases*}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -927,7 +936,7 @@
 			\end{column}
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		In this section, the numerical and experimental evaluation of the developed models for delamination identification will be presented.
 		
@@ -939,7 +948,7 @@
 		
 		It's important to notice that GCN can identify the delamination with high accuracy and almost no noise.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{RMS based: Analysis of numerical cases}
 		\begin{columns}[T]
 %				\tiny
@@ -981,9 +990,9 @@
 %							\bottomrule[1.5pt]
 %						\end{tabular}	
 %					\end{table}
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-%				\end{column}
-%			\hfill
+	 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \end{column}
+%		\hfill
 		\begin{column}[c]{0.9\textwidth}
 			\begin{table}[ht!]
 				\centering
@@ -1004,13 +1013,13 @@
 		\end{column}
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The table presents the mean and maximum values calculated for the previously unseen numerical test set for all RMS-based models. 
 		It also shows that all models have a relatively high value, indicating their ability to detect and localize the delamination.
 		However, the best performance was achieved by the GCN model.
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Numerical test cases animation of Lamb waves}
 		\setcounter{subfigure}{0}
 		\only<1>{
@@ -1046,7 +1055,7 @@
 				\end{figure}
 			\end{alertblock}}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		In the following three slides, I will present three numerical test cases evaluated with the autoencoder ConvLSTM model, which takes animations of full wavefields.
 		
@@ -1062,7 +1071,7 @@
 		
 		Also, we can notice see how clean all the predictions are.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\begin{frame}{Animation based: Analysis of numerical cases}
 %		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		\begin{table}[!h]
@@ -1087,9 +1096,9 @@
 %		 
 %		 The table gathers the actual delamination area, predicted delamination area, intersection over union IoU, and percentage area error \(\epsilon\) to each case.
 %	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Evaluation: Experimental cases}	
-	\setcounter{subfigure}{0}		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Experimental results: RMS image-based (Single delamination)}
 		\begin{columns}[T]
 			\begin{column}[t]{.25\textwidth}
@@ -1130,7 +1139,7 @@
 			\end{column}
 		\end{columns}	
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		This slide shows the experimental results of a specimen with a single delamination regarding the RMS-based models, GCN, and FCN-DenseNet.
 		
@@ -1145,7 +1154,7 @@
 		
 		As shown, the deep learning models surpasses the conventional signal processing approach.
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{RMS based: Analysis of experimental case}
 		\begin{table}[!ht]
@@ -1184,7 +1193,7 @@
 %				\end{tabular}		
 %			\end{table}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The table shows the IoU values for all developed RMS based models for the single delamination specimen.
 		
@@ -1193,7 +1202,7 @@
 %		As shown, the models are capable of precise detection and localisation of the delamination. 
 %		We can see that the models can identify the delamination with almost free noise indicating the models are capable of generalising and detecting the delamination on previously unseen data. 
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Experimental results: Full wavefield based (Single delamination)}		
 		\begin{alertblock}{DL approach}
@@ -1208,7 +1217,7 @@
 		\end{alertblock}
 		
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		In this slide, I present the predicted results using the autoencoder ConvLSTM model regarding the single delamination case.
 		
@@ -1220,7 +1229,7 @@
 		
 		And finally, Figure (d) shows the binary RMS with IoU= 0.41		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}	
 	\begin{frame}{Experimental results: Full wavefield based (Multiple delaminations)}
 		\begin{columns}[T]
@@ -1258,7 +1267,7 @@
 			\end{column}				
 		\end{columns}	
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		This slide presents the predicted results using the autoencoder ConvLSTM model compared to conventional signal processing adaptive wavenumber filtering regarding the multiple delamination case.
 		
@@ -1272,9 +1281,9 @@
 		
 		It can be concluded that utilising animations of Lamb waves propagation has better outcomes for delamination identification than the processing of a single image representing signal energy or RMS.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part II: Super-resolution image reconstruction}
 	\begin{frame}{Super-resolution image reconstruction}
 		\begin{columns}[T]
@@ -1309,7 +1318,7 @@
 			\end{column}
 		\end{columns}		
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		Scanning laser Doppler vibrometer is a popular tool for the acquisition of the full wavefield of propagating guided waves, in particular Lamb waves.
 		
@@ -1318,7 +1327,7 @@
 		One possible solution to tackle this problem is to acquire the Lamb waves in a low-resolution form and then apply a deep learning-based super-resolution approach to that low-resolution frame of full wavefield data to retrieve the high-resolution frame.
 	}
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Evaluation metrics for DLSR model}
 		For evaluating the reconstructed HR full wavefield:
@@ -1336,7 +1345,8 @@
 		\end{itemize}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
+	\note
+	{
 		To evaluate the developed model, I used two metrics:
 		\begin{itemize}
 			\item The first one is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
@@ -1348,21 +1358,21 @@
 %			Where \(n\) is the number of sample points,\(x_i, y_i\) are the individual value points representing the ground truth and predicted values, respectively, and \(\bar{x}\) and \(\bar{y}\) are the mean values of the sample and the prediction.
 		\end{itemize}
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Numerical test cases}
 		\begin{columns}[T]				
 			\begin{column}[c]{0.5\textwidth}				
 				\begin{figure}
 					\centering
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\only<1>{
 						\begin{alertblock}{First test case}
 							\begin{figure}
 								\includegraphics[height=.35\textheight]{LR_397_frame_127_input.png}
 								\caption{LR input, $f_n=127$}
 							\end{figure}						
-							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 							\begin{table}[!h]
 								\centering 
 								\footnotesize
@@ -1377,14 +1387,14 @@
 								\end{tabular}
 							\end{table}
 						\end{alertblock}}
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\only<2>{
 						\begin{alertblock}{Second test case}
 							\begin{figure}
 								\includegraphics[height=.35\textheight]{LR_438_frame_154_input.png}
 								\caption{LR input, $f_n=154$}
 							\end{figure}							
-							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 							\begin{table}[!h]
 								\centering 
 								\footnotesize
@@ -1399,16 +1409,16 @@
 								\end{tabular}
 								\label{tab:num_DLSR_results_2_}
 							\end{table}	
-							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\end{alertblock}}
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\only<3>{
 						\begin{alertblock}{Third test case}
 							\begin{figure}
 								\includegraphics[height=.35\textheight]{LR_456_frame_159_input.png}
 								\caption{LR input, $f_n=159$}
 							\end{figure}
-							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 							\begin{table}[!h]
 								\centering 
 								\footnotesize	
@@ -1422,16 +1432,16 @@
 									\bottomrule
 								\end{tabular}
 							\end{table}
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\end{alertblock}}
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				\end{figure}
 			\end{column}
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{column}[c]{0.5\textwidth}
 				\only<1>{	
 					\setcounter{subfigure}{0}				
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\begin{figure}
 						\centering
 						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
@@ -1442,7 +1452,7 @@
 					\end{figure}}			
 				\only<2>{
 					\setcounter{subfigure}{0}					
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\begin{figure}
 						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_GT.png}}\quad
 						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_438_frame_154_full_frame_pred.png}}
@@ -1462,8 +1472,9 @@
 			\end{column}
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{
 		\tiny
 		In the following, the results of the reconstruction of HR frames for three numerical test cases will be presented.
 		
@@ -1487,11 +1498,11 @@
 		
 		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 46.67.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Experimental test case}		
 		\begin{columns}[T]
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{column}[t]{0.25\textwidth}				
 				\begin{figure}	
 					\centering					
@@ -1502,7 +1513,7 @@
 				LR measurements (Input): \(32\times32=1024\)p. \\
 				HR (Output): \(512\times512=262144\)p.
 			\end{column}
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{column}[t]{.25\textwidth}
 				\begin{block}{HR label}
 				 \begin{figure}
@@ -1513,7 +1524,7 @@
 				 \end{figure}
 				\end{block}
 			\end{column}
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{column}[t]{.25\textwidth}
 				\begin{block}{CS: 1024p}
 					\begin{figure}
@@ -1524,7 +1535,7 @@
 					\end{figure}
 				\end{block}				
 			\end{column}
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{column}[t]{.25\textwidth}
 				\begin{alertblock}{DLSR}
 					\begin{figure}
@@ -1534,11 +1545,11 @@
 						\subfloat{\includegraphics[width=0.75\textwidth]{figure11e.png}}\quad
 					\end{figure}
 				\end{alertblock}				
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\end{column}				
 		\end{columns}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		\tiny
 		In this slide, I present an experimental test case, in which the Low-resolution input data was registered by an SLDV at a uniform gird of \(32\times 32\) points.
@@ -1563,7 +1574,7 @@
 		Figure k shows the recovery of the reflected waves using the DLSR model.
 		The recovered reflected waves from damage is visible, and can be easily recognised, which indicates that the DLSR approach can be more efficient than the conventional CS method.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Analysis of experimental case}
 		\begin{table}[!ht]
 			\renewcommand{\arraystretch}{1.3}
@@ -1587,7 +1598,7 @@
 			\label{tab:csv_results_}
 		\end{table}
 	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The following table presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and the DLSR model for various numbers of points and the corresponding compression ratios CR. 
 		Metrics were calculated for frame number 110 on the whole plate and delamination region, respectively. 
@@ -1656,19 +1667,19 @@
 					\underline{\textbf{Journal articles}}
 					\begin{enumerate}
 						\justifying
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\item Ijjeh, A., Ullah, S., Radzienski, M. and Kudela, P., 2023. Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves. \textbf{\textit{Mechanical Systems and Signal Processing}}, 186, p.109878.						
 						\textbf{[200~points]/[IF:8.934]}
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\item Ullah, S., Ijjeh, A.A. and Kudela, P., 2023. Deep learning approach for delamination identification using animation of Lamb waves. 						
 						\textbf{\textit{Engineering Applications of Artificial Intelligence}}, 117, p.105520.		
 						\textbf{[140~points]/[IF:7.802]}
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\item Ijjeh, A.A. and Kudela, P., 2022. Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study. \textbf{\textit{Mechanical Systems and Signal Processing}}, 168, p.108671. \textbf{[200~points]/[IF:8.934]}
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\item Ijjeh, A.A., Ullah, S. and Kudela, P., 2021. Full wavefield processing by using FCN for delamination detection. \textbf{\textit{Mechanical Systems and Signal Processing}}, 153, p.107537.		
 						\textbf{[200~points]/[IF:8.934]}	
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\end{enumerate}					
 				\end{column}
 				\begin{column}[t]{0.48\textwidth}
@@ -1700,16 +1711,14 @@
 			\end{columns}
 		\end{tiny}
 	\end{frame}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	{
 		\setbeamercolor{palette primary}{fg=blue, bg=white}
 		\begin{frame}[standout]
 			Thank you for your listening!\\ \vspace{12pt}
 			Questions?\\ \vspace{12pt}
-%			\url{pk@imp.gda.pl} 
-%			\par\medskip
 			\url{aijjeh@imp.gda.pl}
 			\par\medskip
 			\par\medskip
