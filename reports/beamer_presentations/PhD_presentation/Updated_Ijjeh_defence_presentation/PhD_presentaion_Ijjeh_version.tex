@@ -456,8 +456,51 @@ a	\end{frame}
 		The figure on the right is the ground truth label of the delamination in white showing its location, size and shape.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Deep learning approach: An~Overview}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Deep learning approach: An~Overview}		
+	\setcounter{subfigure}{0}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Computer vision}
+		\begin{columns}[T]
+			\begin{column}[c]{0.27\textwidth}
+				\justifying
+				\alert {\textbf{Computer vision}} is a~field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
+			\end{column}
+			\quad
+			\begin{column}[c]{0.7\textwidth}
+				\only<1>{\begin{figure}
+						\centering
+						\efbox{\includegraphics[width=1\textwidth]{computer_vision_tasks_1.png}}					
+				\end{figure}}
+				\only<2>{\begin{figure}
+						\centering
+						\efbox{\includegraphics[width=1\textwidth]{computer_vision_tasks_2.png}}					
+				\end{figure}}											
+			\end{column}
+		\end{columns}
+		\only<2>{\begin{tcolorbox}
+		\noindent\textbf{I went with the hardest task: 
+			\\ 
+			\alert{ Delamination identification (Pixel-wise image segmentation)}}
+		\end{tcolorbox}}
+		
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		We now reach an essential concept that is computer vision. 
+		which is a subfield of artificial intelligence that enables computer systems to obtain meaningful information from the visual inputs.
+		
+		Computer vision has three main hierarchical levels of tasks: 
+		
+		The first level performs a classification or detection for the whole input and predicts one output.
+		
+		The second level is the localisation of the object that we are looking for. 
+		
+		The ultimate level of computer vision is to perform Pixel-wise image segmentation, in which each pixel in the input image is classified into its proper class.	
+		
+		I am using pixel wise image segmentation in my PhD work for delamination identification.
+		
+	}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -486,24 +529,22 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		Convolutional Neural Network (CNN) is a powerful deep learning architecture for image processing because it can extract complex feature patterns from images using convolution operations.
+		Convolutional Neural Network (CNN) is a powerful deep learning architecture for mainly used with image processing as it can extract complex feature patterns from its inputs using the convolution operation.
 		
-		The convolution operation for image processing is essentially a cross-correlation operation, also known as a sliding dot product or sliding inner product.
+		The convolution operation in image processing is essentially a cross-correlation operation, also known as a sliding dot product.
 		
-		The kernel slides over an input image of performing a convolution operation.
+		The kernel slides over an input image to extract features.
 		The output of the convolution operation is a feature map.
 		
 		Consequently, kernels learn to detect different types of edges
-		(vertical, horizontal, and diagonal edges), colour intensities, etc.	
-		
-		During the backpropagation process, all kernel weights are updated. 				
-	}
+		(vertical, horizontal, and diagonal edges), colour intensities, etc.
+	}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Encoder-decoder architecture}
 		\begin{columns}[T]
-			\begin{column}[t]{.45\textwidth}
+			\begin{column}[c]{.40\textwidth}
 				\justifying
 				\begin{itemize}
 					\item \alert{Encoder}: extracts features.
@@ -511,59 +552,20 @@ a	\end{frame}
 					\item \alert{Decoder}: locates the features.
 				\end{itemize}	
 			\end{column}
-			\quad
-			\begin{column}[t]{.55\textwidth}
+			\begin{column}[c]{.6\textwidth}
 				\begin{figure}
 					\centering
-					\includegraphics[width=1\textwidth]{nn_encoder_decoder.png}
+					\caption{\textbf{Encoder-decoder architecture}}
+					\efbox{\includegraphics[width=1\textwidth]{nn_encoder_decoder.png}}
 				\end{figure}	
 			\end{column}
 		\end{columns}			
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The encoder-decoder is a well-known architecture used for tasks such as computer vision.
+		The encoder-decoder in deep learning is a well-known architecture used for tasks such as computer vision.
 		The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations. 
 		The decoder is responsible for upsampling the condensed feature maps in the latent space to the original input shape.		
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Computer vision}
-		\begin{columns}[T]
-			\begin{column}[c]{0.27\textwidth}
-				\justifying
-				\alert {\textbf{Computer vision}} is a~field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
-			\end{column}
-			\quad
-			\begin{column}[c]{0.7\textwidth}
-				\only<1>{\begin{figure}
-					\centering
-					\efbox{\includegraphics[width=1\textwidth]{computer_vision_tasks_1.png}}					
-				\end{figure}}
-				\only<2>{\begin{figure}
-						\centering
-						\efbox{\includegraphics[width=1\textwidth]{computer_vision_tasks.png}}					
-				\end{figure}}											
-			\end{column}
-		\end{columns}
-	\only<2>{\textbf{In my work, I went with the hardest task \alert{(Pixel-wise image segmentation)}.}}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		We now reach an essential concept: computer vision. 
-		Computer vision is a subcategory of artificial intelligence that enables computers to obtain meaningful information from visual inputs.
-		
-		Computer vision has three hierarchical levels: 
-		
-		The first level performs a classification for the whole input and predicts one output.
-		
-		The second level classifies and locates the object that we are looking for. 
-		
-		The ultimate level of computer vision is to perform Pixel-wise segmentation (or semantic segmentation), in which each pixel in the input image is classified into its corresponding class.	
-		
-		I am using pixel wise image segmentation in my PhD work.
-		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
@@ -582,15 +584,13 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this slide, I present a comparison between conventional machine learning and deep learning approaches to damage detection.
+		In this slide, I present a comparison between conventional machine learning and deep learning approaches utilised for damage detection.
 		
-		In the conventional approaches, two processes must be performed: 
-		The first is to extract the useful features from the registered data and then use a proper classification technique.
+		In the conventional approaches, two processes must be performed by the practitioner: 
+		The first is to extract the useful features from the registered data then to use a proper classification technique in order to get a prediction.
 		
-		This approach has several drawbacks:
-		First, it requires a great amount of human labor and computational effort
-		Secondly, it demands a high amount of experience from the practitioner.
-		And lastly, when dealing with big data, it tends to be Inefficient as it requires a complex computation of damage features extraction and classification.
+		This approach has several drawbacks such as: 
+		it requires a great amount of human labor and computational effort and it demands a high amount of experience from the practitioner.
 		
 		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification by themselves without human intervention in an end-to-end approach. 
 	}
@@ -612,9 +612,10 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		It is important to note that I coded all my deep-learning models in-house.
+		First of all, it is important to note that I have coded all my deep-learning models in-house.
 		
-		To do so, I have utilised these tools:		
+		
+		To do so, I have utilised following tools:		
 		(Python, TensorFlow platform, Keras API) under Pycharm IDE, which is open-source.
 		Training a deep learning model has computational complexity.
 		Therefore, I utilised these GPUs: 
