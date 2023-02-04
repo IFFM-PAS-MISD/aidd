@@ -155,6 +155,30 @@
 		
 		Accordingly, all learnable parameters are updated, which leads to minimizing the loss value.
 	}
+	\begin{frame}
+		5-cycle Hann-windowed sinusoid:
+		\begin{itemize}
+			\item Narrow-enough band (frequency content)
+			\item central frequency with good energy
+			\item not too short to have less energy and broader band
+			\item not too long to complicate the signal superposition
+			\item useful to identify peak locations  velocities / TOFs
+		\end{itemize}
+				
+		More cycles:
+		\begin{itemize}
+			\item more energy
+			\item narrower bandwidth
+			\item useful for nonlinear analysis (frequency domain)
+		\end{itemize}
+		
+		CHIRP or single-pulse signals:
+		\begin{itemize}
+			\item broadband excitation (broad frequency range)
+			\item good for dispersion analysis
+		\end{itemize}
+		Frequency content can be checked using fast Fourier transform (FFT)
+	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Dataset}
 		\justifying\footnotesize	
@@ -276,7 +300,7 @@
 		\end{footnotesize}		
 	\end{frame}
 	\begin{frame}{Spectral element method}
-		\noindent\footnotesize
+		\noindent\tiny
 		The spectral element method (SEM) is a numerical method used to solve partial differential equations (PDEs) in engineering and physics. 
 		It is a variation of the finite element method (FEM) that uses high-order polynomial shape functions to approximate the solution of the PDEs.
 		
@@ -411,6 +435,31 @@
 			\includegraphics[width=0.7\textwidth]{figs2/sensors_fig1_algorithm.png}
 		\end{figure}
 		\biblioref{M. Radzienski, P. Kudela, A. Marzani, L. de Marchi, W. Ostachowicz}{2019}{ Damage Identification in Various Types of Composite Plates Using Guided Waves Excited by a Piezoelectric Transducer and Measured by a Laser Vibrometer}{Sensors, 19, 1958}
+	\end{frame}
+
+	\begin{frame}{Composite specimen}
+		\begin{table}[h]
+			\renewcommand{\arraystretch}{1.1}
+			\centering \footnotesize
+			\caption{Geometry of a plain weave fabric reinforced composite [mm]}
+			\begin{tabular}{cccccc} 
+				%\hline
+				\toprule[1.5pt]
+				\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }\\ 
+				%	\hline \hline
+				\cmidrule(lr){1-4} \cmidrule(lr){5-6} 
+				fill & warp & fill gap& warp gap& fill & warp\\
+				%\hline
+				$a_f$ &$a_w$& $g_f$ & $g_w$ & $h_f$& $h_w$ \\ 
+				%\hline
+				%\midrule
+				\cmidrule(lr){1-2} \cmidrule(lr){3-4} \cmidrule(lr){5-6}
+				1.92 &2.0& 0.05& 0.05 & 0.121875 & 0.121875 \\
+				%\hline 
+				\bottomrule[1.5pt] 
+			\end{tabular} 
+			\label{tab:weave_geo}
+		\end{table}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}

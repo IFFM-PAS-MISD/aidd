@@ -36,7 +36,14 @@
 
 \usepackage{efbox,graphicx}
 
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+
+\captionsetup[figure]{labelformat=empty}%
+\usefonttheme{structurebold}
+
 \efboxsetup{linecolor=Lightskyblue,linewidth=2pt}
+
 %\usepackage[font=footnotesize,labelfont=bf]{caption}
 %\captionsetup[figure]{font=small}
 
@@ -65,8 +72,6 @@
 
 \graphicspath{{figures/}}
 
-\captionsetup[figure]{labelformat=empty}%
-\usefonttheme{structurebold}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metropolis theme custom modification file
 \input{metropolis_mods.tex}
@@ -92,9 +97,8 @@
 
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 
-%\usepackage{pgfpages}
-%\setbeameroption{show notes}
-%\setbeameroption{show notes on second screen=left}
+
+%\setbeameroption{show notes on second screen}
 %\setbeamertemplate{note page}{\insertnote}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page options
@@ -158,13 +162,13 @@
 		\begin{columns}[T]
 			\begin{column}[t]{.55\textwidth}
 				\begin{figure}[t]
-					\centering
-					\subfloat{\includegraphics[width=.7\textwidth]{Composite_advantages.png}}					
-					\\
-					\subfloat{\includegraphics[width=.6\textwidth]{delaminated_plate1.jpg}}
+%					\centering
+%					\subfloat{\includegraphics[width=.7\textwidth]{Composite_advantages.png}}					
+%					\\
+					\subfloat{\includegraphics[width=.85\textwidth]{delaminated_plate1.jpg}}
 				\end{figure}
 				\begin{tcolorbox}
-					\justifying\noindent\footnotesize\alert{Delamination detection} in its early stages can significantly help avoiding catastrophic events.
+					\justifying\noindent\alert{Delamination detection} in its early stages can significantly help avoiding catastrophic events.
 				\end{tcolorbox}				
 			\end{column}
 			\begin{column}[t]{0.45\textwidth}
@@ -190,34 +194,33 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Objectives}
-		\begin{footnotesize}
+%		\begin{footnotesize}
 			\justifying
 			\begin{itemize}
-				\item \textbf{To develop \textcolor{logoblue}{a novel artificial intelligence (AI) driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
-				\item \textbf{To address the issue of \textcolor{logoblue}{slow data acquisition} by SLDV of high-resolution full wavefields of Lamb wave propagation.}
+				\item {To develop \textcolor{logoblue}{a novel artificial intelligence (AI) driven diagnostic system} for delamination identification in composite laminates such as carbon fibre reinforced polymers (CFRP).}
+				\item {To address the issue of \textcolor{logoblue}{slow data acquisition} by by scanning laser Doppler vibrometer (SLDV) of high-resolution full wavefields of Lamb wave propagation.}
 			\end{itemize}
-		\end{footnotesize}		
+%		\end{footnotesize}		
 		\begin{tcolorbox}			
 			\begin{alertblock}{Thesis}
 				\justifying
-				It is possible to use an end-to-end approach in which a deep neural network (DNN) 
-				processes the animation of propagating waves (input) directly into a damage map (output).
+				\textbf{It is possible to use an end-to-end approach in which a deep neural network	processes the animation of propagating waves (input) directly into a damage map (output).}
 			\end{alertblock}
-			\begin{alertblock}{Thesis}
-				\justifying
-				It is possible to speed up the data acquisition process by SLDV by employing an~appropriate deep learning (DL) approach to recover high-resolution (HR) full wavefield scans from a~low-resolution (LR).
-			\end{alertblock}
+%			\begin{alertblock}{Thesis}
+%				\justifying
+%				It is possible to speed up the data acquisition process SLDV by employing an~appropriate deep learning (DL) approach to recover high-resolution (HR) full wavefield scans from a~low-resolution (LR).
+%			\end{alertblock}
 		\end{tcolorbox}		
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
 		I have two primary objectives in my work:
-		The primary objective of this work is to develop a diagnostic tool based on artificial intelligence for delamination detection in composite laminates.
+		The primary objective of this work is to an artificial intelligence driven diagnostic system for delamination identification in composite laminates.
 		
-		My second objective is to address the issue of slow data acquisition of high-resolution full wavefields of Lamb wave propagation by SLDV.
+		The second objective is to address the issue of slow data acquisition  by a scanning laser Doppler vibrometer of high-resolution full wavefields of Lamb waves propagation.
 		
-		Accordingly, I have two theses to confirm:
+		Accordingly, my thesis states that:
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Contribution and novelty}
@@ -233,11 +236,16 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		I can say that the novelty of my work resides in applying for the first time a full wavefield dataset of elastic wave propagation (a numerically generated dataset) as an input to various supervised deep neural networks, which is capable of identifying damage in an end-to-end approach. 
-		Additionally, to demonstrate the feasibility of my models, I have compared them with adaptive wavenumber filtering (a conventional signal processing technique for damage imaging).
+		Guided waves are very often utilised in non destructive testing and structural health monitoring.
+		In which a scanning laser Doppler vibrometer that is a non-contact technique dedicated to full wavefield measurements of vibration and guided wave propagation. 
+				
+		The novelty of my work is in the utilisation for the first time the full wavefield scans of guided wave propagation as an input to various deep learning modes that specifically developed for delamination identification. 
 		
-		Furthermore, I have developed a deep learning model to perform an end-to-end superresolution technique regarding elastic wave propagation and their interaction with the damage and the specimen boundaries.
-		Also, I compared my model for superresolution image reconstruction with a well-known technique, the compressive sensing theory.		
+		Additionally, to demonstrate the feasibility of my models, I have compared them with adaptive wavenumber filtering that is a conventional signal processing technique for damage imaging.
+		
+		Furthermore, to address the slow data acquisition by the scanning laser Doppler vibrometer I have developed a deep learning model to recover the high-resolution full wavefield measurements from it is low-resolution measurements.
+		
+		Additionally, I compared my model with a well-known technique, the compressive sensing.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Experimental measurements}
@@ -260,82 +268,51 @@
 		{\small
 			Measurements were taken on a uniform grid of \textbf{333$\times$333 points}.\\
 			Excitation in the form of Hann windowed sine signal of carrier frequency \textbf{50 kHz} was applied to piezoelectric transducer.}
-	\end{frame}
+a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		Here, I present the experimental setup at the laboratory for the SLDV measurements for specimens with artificial damage that will be used to evaluate my developed models.
+		In this slide, the experimental setup for the SLDV measurements is presented.
 		
-		The Piezoelectric transducer is placed on the other side of the plate towards the wall.
-		The excitation in the form of a Hann windowed sine signal of carrier frequency 50 kHz was applied to the PZT. 
+		The specimen was excited using a Piezoelectric transducer placed at the center of the plate p.
 		
-		The measurements were taken on a uniform grid of \(333\times 333\) points from the bottom surface of the plate.		
+		The measurements of guided wave propagation were acquired from the bottom surface of the plate by the scanning laser Doppler vibrometer to produce the full wavefields.	
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[t]{Composite specimen}
 		\begin{columns}[T]
-			\column{0.7\textwidth}
-			{\small
-				\begin{itemize}
-					\item 16 layers set at the same angle \\
-					\item carbon: Prepreg GG 205 P (fibres Toray FT 300 - 3K 200 tex), $E=230$ GPa
-					\item epoxy resin: IMP503Z-HT by Impregnatex Compositi 
-					\item dimensions: 500$\times$500$\times$3.9 mm\\
-					\item density: 1522.4~kg/m\textsuperscript{3}
-				\end{itemize}
-			}
-			\column{0.3\textwidth}
-			\begin{figure}
-				\includegraphics[width=0.6\textwidth]{weave-1.jpg}
-				\caption{Plain weave fabric}
-			\end{figure}
+			\begin{column}[c]{0.6\textwidth}
+					\begin{itemize}
+						\item 16 layers set at the same angle 
+						\item carbon: Prepreg GG 205 P (fibres Toray FT 300 - 3K 200 tex), $E=230$ GPa
+						\item epoxy resin: IMP503Z-HT by Impregnatex Compositi 						
+						\item density: 1522.4~kg/m\textsuperscript{3}
+						\item dimensions: 500$\times$500$\times$3.9 mm
+					\end{itemize}			
+			\end{column}
+			\begin{column}[c]{0.4\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[width=.6\textwidth]{weave-1.jpg}
+					\caption{Plain weave fabric}
+				\end{figure}
+			\end{column}			
 		\end{columns}
-		\begin{table}[h]
-			\renewcommand{\arraystretch}{1.1}
-			\centering \footnotesize
-			\caption{Geometry of a plain weave fabric reinforced composite [mm]}
-			\begin{tabular}{cccccc} 
-				%\hline
-				\toprule[1.5pt]
-				\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }\\ 
-				%	\hline \hline
-				\cmidrule(lr){1-4} \cmidrule(lr){5-6} 
-				fill & warp & fill gap& warp gap& fill & warp\\
-				%\hline
-				$a_f$ &$a_w$& $g_f$ & $g_w$ & $h_f$& $h_w$ \\ 
-				%\hline
-				%\midrule
-				\cmidrule(lr){1-2} \cmidrule(lr){3-4} \cmidrule(lr){5-6}
-				1.92 &2.0& 0.05& 0.05 & 0.121875 & 0.121875 \\
-				%\hline 
-				\bottomrule[1.5pt] 
-			\end{tabular} 
-			\label{tab:weave_geo}
-		\end{table}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The specimens of composite laminates used for experimental evaluation are composed of 16 layers set at the same angle of plain weave fabric with the following characteristics:
-		
-		Table 3 shows the fill and warp strands for the plain weave fabric reinforced composite in [mm].
+		The specimen used for experimental evaluation are carbon fibre reinforcement polymer composed of 16 layers of plain weave fabric with the following characteristics:
+
+		The specimen dimension is \(500 \times 500\)~mm with a thickness of 3.9~mm.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}[t]{Specimens with defects}
 		\vspace{-0.5cm}
 		\begin{columns}[T]
 			\column{0.5\textwidth}
-			\only<1>{
 			\begin{figure}
-				\includegraphics[width=0.85\textwidth]{plate_multi_delam_arrangement_large_fonts.png}
-			\end{figure}}
-			\only<2>{				
-				\begin{figure}
-					\efbox
-					{
-						\includegraphics[width=0.85\textwidth]{plate_multi_delam_arrangement_large_fonts.png}
-					}
-					\caption{\footnotesize These specimens were specifically brought to my PhD project.}
-				\end{figure}}
+				\includegraphics[width=0.9\textwidth]{plate_multi_delam_arrangement_large_fonts.png}
+			\end{figure}
 			\column{0.5\textwidth}
 			\begin{figure}
 				\includegraphics[width=0.75\textwidth]{plate_single_delam_arrangement_large_fonts.png}
@@ -343,20 +320,21 @@
 		\end{columns}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note
+\note
 	{	
 		\footnotesize
-		In this slide, I the specifications of the specimens used for evaluating the developed deep-learning models are presented.
+		The specifications of the specimens used for evaluating the developed deep-learning models are shown in this slide.
 		
 		Specimens with multiple delaminations are shown on the left.
-		In which there are three specimen with multiple delamination were located at the same distance, equal to 150 mm from the centre of the plate. placed at different thickness of the plate. 
+		In which there are three specimen with multiple delamination.
+		The delaminations were located at the same distance from the centre of the plate and placed at different thickness of the plate as show in the figure. 
 		
-		The specification of the specimen with a single delamination is shown on the right. 
+		The figure on the right shows the specimen with a single delamination place at the half thickness, and the total thickness of the specimen is 3.5 mm.
+		It is noteworthy to mention that this specimen has less areal density than the specimen on the left. 
+		
+		Furthermore, all measurements with SLDV were conducted from the bottom surface of the plate.
 		
 		
-		Furthermore, all SLDV measurements were conducted from the bottom surface of the plate.
-		
-		I would like to mention that the specimens on the left were brought specifically to my PhD project.
 	}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Synthetic dataset generation}
@@ -366,7 +344,8 @@
 			\begin{column}{0.55\textwidth}
 				\justifying
 				\begin{itemize}
-%					\item Mindlin-Reissner plate theory
+					\item Mindlin-Reissner plate theory.
+					\item Spectral element method (SEM).
 					\item Splitting elements and nodes at delamination.
 					\item GMSH software was used for meshing quads then converted to spectral elements.
 				\end{itemize}	
@@ -383,11 +362,16 @@
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		To train the supervised deep learning models, a synthetic dataset of propagating waves in carbon fibre-reinforced composite plates was computed by applying the Mindlin-Reissner plate theory and using the parallel implementation of the time domain spectral element method.
+		\tiny
+		To train my developed deep learning models, I need a large dataset of specimens with various delamination sizes, locations, and shapes scanned with the scanning laser Doppler vibrometer to obtain the full wave fields of guided wave propagation. 
 		
-		For each case, single delamination was modeled by using the method of splitting nodes between appropriate spectral elements.
+		However, generating such a real dataset with artificially modeled defects is very difficult, costly, and time-consuming.
 		
-		Essentially, the dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric (PZT) excitation at the centre of the plate.		 
+		Accordingly, a large synthetic dataset was generated, resembling the measurements registered by the scanning laser Doppler vibrometer at the bottom surface of the plate as a response to the piezoelectric transducer excitation at the centre of the plate.
+		
+		The synthetic dataset was generated by applying the Mindlin-Reissner theory for thin plates and the utilisation of the parallel computing of spectral element method for approximating the solution of wave propagation and their interaction with delamination. 
+		
+		The meshes on the left show the modelled delamination in green, and the piezoelectric transducer in red for each different scenario.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
@@ -421,10 +405,11 @@
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The synthetically generated dataset has 475 delamination cases.
+		The synthetically generated dataset consists of 475 delamination cases. 
 		It was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm. 
 		The delamination was modeled between the third and fourth layers.
 		The delamination geometrical size major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
+		The angle $\aleph$ ranges form \([0^{\circ}-180^{\circ}]\).
 		The computation of the dataset took about three months.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -452,7 +437,7 @@
 					\centering
 					\captionsetup{justification=centering}			
 					\includegraphics[width=0.85 \textwidth]{m1_rand_single_delam_7.png}
-					\caption{Ground truth (label)}
+					\caption{Ground truth (label) in black/white}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -461,16 +446,14 @@
 			\label{eqn:rms} 
 		\end{equation*}
 		\footnotesize
-		\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time step.
+		\(N\) is the number of sampling points equal to 512, \((x,y)\) are the point coordinates on the plate, and \(t_k\) is the time.
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this slide, I present a training scenario.
-		The animation on the left represents the full wavefield frames, where x and y are the point coordinates, and tk is the time step.
-		
+		In this slide, I present a single training scenario.
+		The animation on the left represents the full wavefield frames of guided wave propagation, where x and y are the point coordinates, and tk is the time moment.
 		The output of applying the root mean square formula to the full wavefield is shown in the middle figure.
-		
-		The ground truth label that represents the delamination location and shape is shown on the right.
+		The figure on the right is the ground truth label of the delamination in white showing its location, size and shape.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -480,26 +463,23 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Convolution Neural Networks (CNNs)}
 		\begin{itemize}
-			\item \alert{Convolutional Neural Network} (CNN) is a powerful feature extraction tool.
-			\item Features are extracted by applying convolution operations \alert{(sliding dot product)}.
+			\item \textbf{\alert{Convolutional Neural Network} (CNN)} is a powerful feature extraction tool.
+			\item Features are extracted by applying convolution operations \textbf\alert{(sliding dot product)}.
 		\end{itemize}
 		\begin{columns}[T]
 			\begin{column}[t]{0.58\textwidth}
 				\begin{figure}[ht!]
 					\centering		
-					\caption{Convolution operation}			
-					\efbox{
-						\animategraphics[autoplay,loop,width =0.95\textwidth]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}
-					}					
+					\caption{\textbf{Convolution operation}}			
+					\efbox{\animategraphics[autoplay,loop,width =1\textwidth]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}}					
 				\end{figure}
 			\end{column}
+		
 			\begin{column}[t]{0.38\textwidth}
 				\begin{figure}[ht!]
 					\centering
-					\caption{CNN architecture}
-					\efbox{
-						\includegraphics[width=0.95\textwidth]{cnn.png}
-					}
+					\caption{\textbf{CNN architecture}}
+					\efbox{\includegraphics[width=1\textwidth]{cnn.png}}
 				\end{figure}
 			\end{column}			
 		\end{columns}
@@ -588,7 +568,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Conventional machine learning vs. deep learning approaches}
+	\begin{frame}{Why deep learning?}
 		Conventional methods involve two processes:
 		\alert{\textbf{Feature extraction and classification.}}
 		\begin{figure}
@@ -621,13 +601,25 @@
 	\begin{frame}{Utilised Tools for DL models}
 		All developed DL models were \alert{coded in-house} \\
 		\alert{(Tailored specifically to meet tasks requirements)} 
-		\begin{itemize}			
+		\begin{itemize}	
+			\item \alert{Pycharm} (a dedicated Python Integrated Development Environment (IDE))		
 			\item \alert{Python}: versions: 3.7 - 3.9
 			\item \alert{TensorFlow} platform: versions: 2.0 - 2.6
 			\item \alert{Keras} (deep learning API over TensorFlow): versions: 2.0 - 2.6
 			\item \alert{GPUs}: NVIDIA RTX2080 /8GB, NVIDIA Tesla V100 /32 GB
 		\end{itemize}
 	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{
+		It is important to note that I coded all my deep-learning models in-house.
+		
+		To do so, I have utilised these tools:		
+		(Python, TensorFlow platform, Keras API) under Pycharm IDE, which is open-source.
+		Training a deep learning model has computational complexity.
+		Therefore, I utilised these GPUs: 
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Data preprocessing \& Hyperparameters tuning}	
 				\begin{table}[t]
 					\centering
@@ -669,6 +661,24 @@
 				\end{table}					
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note
+	{
+		Now, in this slide, I present the most applied techniques on the dataset during the training:
+		1. Dataset normalization in which all values are have a range between 0 and 1. \\
+		2. I have applied data augmentation to the dataset
+		(475 RMS images) by flipping the images horizontally, vertically, and diagonally.
+		As a result, the dataset size increased four times -1900 images were produced. \\
+		3. Additionally, Cross validation was applied with data augmentation. \\
+		4. In order to reduce the overfitting problem I have applied some techniques:
+		1. Early stopping,
+		2. Hyperparameter tuning (such as: )
+		3. Regularization (such as dropouts, batch normalization, adding penalties to objective function, ...)\\ 
+		Furthermore, I have splitted the dataset into three portions
+		1. Training set \(80\%\) of the dataset\\
+		2. Testing set \(20\%\) of the dataset\\
+		3. validation set \(20\%\) out of the training set.
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part I: Delamination identification}
 	\begin{frame}{Semantic segmentation}
 		\begin{columns}[T]
@@ -697,11 +707,12 @@
 	\end{frame}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The novelty of this work consists of applying for the first time a full wavefield dataset of elastic wave propagation as an input to various supervised deep-learning models that are capable of identifying damage by classifying each output pixel as healthy or damaged. 
+		In this part I will present deep learning approaches for delamination identification in composite laminates.
+		It is important to note how these models perform in an end-to-end fashion.
+		Accordingly, I have developed two approaches for delamination identification based on the inputs to the models:
 		
-		Accordingly, two main approaches were adopted:	
 		\begin{itemize}
-			\item One-to-one approach (takes one input (RMS image) and produces one output of damage map)
+			\item One-to-one approach (takes one input that is the root mean squared of the full wavefield) and produces one output of damage map)
 			\item Many-to-one approach (takes animation of Lamb waves propagation as a sequence of frames and produces one output as damage map).
 		\end{itemize}	
 		}
@@ -776,15 +787,15 @@
 	\setcounter{subfigure}{0}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
+		Both the Res-UNet and VGG16 encoder-decoders are autoencoders.
+		The main difference between them is the additional skip connections that were added to Res-Unet at the encoder and decoder levels. \\
 		FCN-DenseNet applies an encoder-decoder scheme with skip connections between the encoder and the decoder paths.
 		The main component in FCN-DenseNet is the dense block. 
 		The dense block is constructed from a varying number of convolutional layers. 
-		The purpose of the dense block is to concatenate feature maps of a layer with its output to emphasize spatial details information.
-		
+		The purpose of the dense block is to concatenate feature maps of a layer with its output to emphasize spatial details information. \\		
 		The idea of PSPNet is to provide adequate global contextual information for pixel-level scene parsing by concatenating the local and global features together. 
 		Hence, a spatial pyramid pooling module was introduced to perform four different pooling levels with four different pool sizes. 
-		In this way, the pyramid pooling module can capture contextual features at different scales.
-		
+		In this way, the pyramid pooling module can capture contextual features at different scales.\\		
 		GCN addresses the importance of having large kernels at the convolution operations for both localization and classification tasks for semantic segmentation.
 		
 		
@@ -903,7 +914,6 @@
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Evaluation: Numerical cases}
-%	\subsection{Numerical test cases*}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Numerical test cases RMS based models (GCN model)}
 		\begin{columns}[T]
@@ -949,70 +959,70 @@
 		It's important to notice that GCN can identify the delamination with high accuracy and almost no noise.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{RMS based: Analysis of numerical cases}
-		\begin{columns}[T]
-%				\tiny
-%				\begin{column}[c]{0.48\textwidth}
-%					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%					\begin{table}[ht!]
-%						\centering
-%						\caption{Evaluation metrics of the three numerical cases.}
-%						\label{tab:RMS_num_cases}
-%						\begin{tabular}{cccccc}
-%							\toprule[1.5pt]
-%							\multirow{2}{*}{Model} & \multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
-%							\cmidrule(lr){4-6} & & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
-%							\midrule
-%							\multirow{3}{*}{Res-UNet} 							
-%							& 1 & 257 & \multicolumn{1}{c}{0.45} & \multicolumn{1}{c}{143} & \(44.36\%\) \\ 
-%							& 2 & 105 & \multicolumn{1}{c}{0.67} & \multicolumn{1}{c}{88} & \(16.19\%\) \\ 
-%							& 3 & 537 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{478} & \(10.99\%\) \\ 
-%							\midrule
-%							\multirow{3}{*}{VGG16 encoder-decoder} 
-%							& 1 & 257 & \multicolumn{1}{c}{0.69} & \multicolumn{1}{c}{203} & \(21.01\%\) \\ 
-%							& 2 & 105 & \multicolumn{1}{c}{0.75} & \multicolumn{1}{c}{117} & \(11.43\%\) \\ 
-%							& 3 & 537 & \multicolumn{1}{c}{0.65} & \multicolumn{1}{c}{385} & \(28.31\%\) \\ 
-%							\midrule
-%							\multirow{3}{*}{FCN-DenseNet} 
-%							& 1 & 257 & \multicolumn{1}{c}{0.52} & \multicolumn{1}{c}{505} & \(96.50\%\) \\ 
-%							& 2 & 105 & \multicolumn{1}{c}{0.66} & \multicolumn{1}{c}{118} & \(12.38\%\) \\ 
-%							& 3 & 537 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{815} & \(51.77\%\) \\ 
-%							\midrule
-%							\multirow{3}{*}{PSPNet} 
-%							& 1 & 257 & \multicolumn{1}{c}{0.00} & \multicolumn{1}{c}{0} & \(-\%\) \\ 
-%							& 2 & 105 & \multicolumn{1}{c}{0.44} & \multicolumn{1}{c}{156} & \(48.57\%\) \\ 
-%							& 3 & 537 & \multicolumn{1}{c}{0.77} & \multicolumn{1}{c}{610} & \(13.59\%\) \\ 
-%							\midrule
-%							\multirow{3}{*}{GCN} 
-%							& 1 & 257 & \multicolumn{1}{c}{0.71} & \multicolumn{1}{c}{215} & \(16.34\%\) \\ 
-%							& 2 & 105 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{177} & \(68.57\%\) \\ 
-%							& 3 & 537 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{523} & \(2.61\%\) \\ 
-%							\bottomrule[1.5pt]
-%						\end{tabular}	
-%					\end{table}
-	 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \end{column}
-%		\hfill
-		\begin{column}[c]{0.9\textwidth}
-			\begin{table}[ht!]
-				\centering
-				\caption{Analysis of numerical cases.}
-				\label{tab:table_all_numerical_cases}	
-				\begin{tabular}{lcc}
-					\toprule[1.5pt]
-					Model & mean IoU & max IoU \\ 
-					\midrule 
-					Res-UNet & \(0.66\) & \(0.89\) \\ 
-					VGG16 encoder-decoder & \(0.57\) & \(0.84\) \\ 
-					FCN-DenseNet & \(0.68\) & \(0.92\) \\ 
-					PSPNet & \(0.55\) & \(0.91\) \\ 
-					GCN & \textbf{\(0.76\)} & \textbf{\(0.93\)} \\ 
-					\bottomrule[1.5pt]
-				\end{tabular}
-			\end{table}
-		\end{column}
-		\end{columns}
-	\end{frame}
+%	\begin{frame}{RMS based: Analysis of numerical cases}
+%		\begin{columns}[T]
+%%				\tiny
+%%				\begin{column}[c]{0.48\textwidth}
+%%					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%					\begin{table}[ht!]
+%%						\centering
+%%						\caption{Evaluation metrics of the three numerical cases.}
+%%						\label{tab:RMS_num_cases}
+%%						\begin{tabular}{cccccc}
+%%							\toprule[1.5pt]
+%%							\multirow{2}{*}{Model} & \multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+%%							\cmidrule(lr){4-6} & & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+%%							\midrule
+%%							\multirow{3}{*}{Res-UNet} 							
+%%							& 1 & 257 & \multicolumn{1}{c}{0.45} & \multicolumn{1}{c}{143} & \(44.36\%\) \\ 
+%%							& 2 & 105 & \multicolumn{1}{c}{0.67} & \multicolumn{1}{c}{88} & \(16.19\%\) \\ 
+%%							& 3 & 537 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{478} & \(10.99\%\) \\ 
+%%							\midrule
+%%							\multirow{3}{*}{VGG16 encoder-decoder} 
+%%							& 1 & 257 & \multicolumn{1}{c}{0.69} & \multicolumn{1}{c}{203} & \(21.01\%\) \\ 
+%%							& 2 & 105 & \multicolumn{1}{c}{0.75} & \multicolumn{1}{c}{117} & \(11.43\%\) \\ 
+%%							& 3 & 537 & \multicolumn{1}{c}{0.65} & \multicolumn{1}{c}{385} & \(28.31\%\) \\ 
+%%							\midrule
+%%							\multirow{3}{*}{FCN-DenseNet} 
+%%							& 1 & 257 & \multicolumn{1}{c}{0.52} & \multicolumn{1}{c}{505} & \(96.50\%\) \\ 
+%%							& 2 & 105 & \multicolumn{1}{c}{0.66} & \multicolumn{1}{c}{118} & \(12.38\%\) \\ 
+%%							& 3 & 537 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{815} & \(51.77\%\) \\ 
+%%							\midrule
+%%							\multirow{3}{*}{PSPNet} 
+%%							& 1 & 257 & \multicolumn{1}{c}{0.00} & \multicolumn{1}{c}{0} & \(-\%\) \\ 
+%%							& 2 & 105 & \multicolumn{1}{c}{0.44} & \multicolumn{1}{c}{156} & \(48.57\%\) \\ 
+%%							& 3 & 537 & \multicolumn{1}{c}{0.77} & \multicolumn{1}{c}{610} & \(13.59\%\) \\ 
+%%							\midrule
+%%							\multirow{3}{*}{GCN} 
+%%							& 1 & 257 & \multicolumn{1}{c}{0.71} & \multicolumn{1}{c}{215} & \(16.34\%\) \\ 
+%%							& 2 & 105 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{177} & \(68.57\%\) \\ 
+%%							& 3 & 537 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{523} & \(2.61\%\) \\ 
+%%							\bottomrule[1.5pt]
+%%						\end{tabular}	
+%%					\end{table}
+%	 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \end{column}
+%%		\hfill
+%		\begin{column}[c]{0.9\textwidth}
+%			\begin{table}[ht!]
+%				\centering
+%				\caption{Analysis of numerical cases.}
+%				\label{tab:table_all_numerical_cases}	
+%				\begin{tabular}{lcc}
+%					\toprule[1.5pt]
+%					Model & mean IoU & max IoU \\ 
+%					\midrule 
+%					Res-UNet & \(0.66\) & \(0.89\) \\ 
+%					VGG16 encoder-decoder & \(0.57\) & \(0.84\) \\ 
+%					FCN-DenseNet & \(0.68\) & \(0.92\) \\ 
+%					PSPNet & \(0.55\) & \(0.91\) \\ 
+%					GCN & \textbf{\(0.76\)} & \textbf{\(0.93\)} \\ 
+%					\bottomrule[1.5pt]
+%				\end{tabular}
+%			\end{table}
+%		\end{column}
+%		\end{columns}
+%	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The table presents the mean and maximum values calculated for the previously unseen numerical test set for all RMS-based models. 
@@ -1155,44 +1165,44 @@
 		As shown, the deep learning models surpasses the conventional signal processing approach.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	\begin{frame}{RMS based: Analysis of experimental case}
-		\begin{table}[!ht]
-			\centering
-			\caption{Evaluation metrics of the experimental case.}
-			\label{tab:rms_exp_case}
-			\begin{tabular}{lc}
-				\toprule[1.5pt]
-				Model & IoU	\\			
-				\midrule
-				Res-UNet & 0.58 \\ 
-				VGG16 encoder-decoder & 0.62 \\ 
-				FCN-DenseNet & 0.54 \\ 
-				PSPNet & 0.49 \\ 
-				GCN & 0.72\\ 
-				\bottomrule[1.5pt]
-			\end{tabular}		
-		\end{table}
-%			\begin{table}[!ht]
-%				\centering
-%				\caption{Evaluation metrics of the experimental case.}
-%				\label{tab:rms_exp_case}
-%				\begin{tabular}{l@{\ }cccc}
-%					\toprule
-%					\multicolumn{1}{l}{Model} & \multicolumn{1}{c}{A [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Predicted output} \\ 
-%					\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ \midrule
-%					Res-UNet & \multicolumn{1}{c}{\multirow{5}{*}{210}} & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{323} & \(53.8\%\) \\ 
-%					VGG16 encoder-decoder & & \multicolumn{1}{c}{0.62} & \multicolumn{1}{c}{320} & \(52.4\%\) 
-%					\\ 
-%					FCN-DenseNet & & \multicolumn{1}{c}{0.54} & \multicolumn{1}{c}{386} & \(83.8\%\) \\ 
-%					PSPNet & & \multicolumn{1}{c}{0.49} & \multicolumn{1}{c}{580} & \(176.2\%\) 
-%					\\ 
-%					GCN & & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{309} & \(47.1\%\) 
-%					\\ 
-%					\bottomrule
-%				\end{tabular}		
-%			\end{table}
-	\end{frame}
+%	\setcounter{subfigure}{0}
+%	\begin{frame}{RMS based: Analysis of experimental case}
+%		\begin{table}[!ht]
+%			\centering
+%			\caption{Evaluation metrics of the experimental case.}
+%			\label{tab:rms_exp_case}
+%			\begin{tabular}{lc}
+%				\toprule[1.5pt]
+%				Model & IoU	\\			
+%				\midrule
+%				Res-UNet & 0.58 \\ 
+%				VGG16 encoder-decoder & 0.62 \\ 
+%				FCN-DenseNet & 0.54 \\ 
+%				PSPNet & 0.49 \\ 
+%				GCN & 0.72\\ 
+%				\bottomrule[1.5pt]
+%			\end{tabular}		
+%		\end{table}
+%%			\begin{table}[!ht]
+%%				\centering
+%%				\caption{Evaluation metrics of the experimental case.}
+%%				\label{tab:rms_exp_case}
+%%				\begin{tabular}{l@{\ }cccc}
+%%					\toprule
+%%					\multicolumn{1}{l}{Model} & \multicolumn{1}{c}{A [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Predicted output} \\ 
+%%					\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ \midrule
+%%					Res-UNet & \multicolumn{1}{c}{\multirow{5}{*}{210}} & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{323} & \(53.8\%\) \\ 
+%%					VGG16 encoder-decoder & & \multicolumn{1}{c}{0.62} & \multicolumn{1}{c}{320} & \(52.4\%\) 
+%%					\\ 
+%%					FCN-DenseNet & & \multicolumn{1}{c}{0.54} & \multicolumn{1}{c}{386} & \(83.8\%\) \\ 
+%%					PSPNet & & \multicolumn{1}{c}{0.49} & \multicolumn{1}{c}{580} & \(176.2\%\) 
+%%					\\ 
+%%					GCN & & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{309} & \(47.1\%\) 
+%%					\\ 
+%%					\bottomrule
+%%				\end{tabular}		
+%%			\end{table}
+%	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The table shows the IoU values for all developed RMS based models for the single delamination specimen.
@@ -1366,30 +1376,30 @@
 				\begin{figure}
 					\centering
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					\only<1>{
+%						\begin{alertblock}{First test case}
+%							\begin{figure}
+%								\includegraphics[height=.35\textheight]{LR_456_frame_159_input.png}
+%								\caption{LR input, $f_n=159$}
+%							\end{figure}							
+%							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%							\begin{table}[!h]
+%								\centering 
+%								\footnotesize
+%								\begin{tabular}{cccc}
+%									\toprule
+%									\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
+%									\cmidrule(lr){1-2} \cmidrule(lr){3-4}
+%									PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
+%									\midrule
+%									42.95 & 0.999 & 33.02 & 0.993 \\					
+%									\bottomrule
+%								\end{tabular}
+%							\end{table}
+%						\end{alertblock}}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\only<1>{
 						\begin{alertblock}{First test case}
-							\begin{figure}
-								\includegraphics[height=.35\textheight]{LR_397_frame_127_input.png}
-								\caption{LR input, $f_n=127$}
-							\end{figure}						
-							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-							\begin{table}[!h]
-								\centering 
-								\footnotesize
-								\begin{tabular}{cccc}
-									\toprule
-									\multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
-									\cmidrule(lr){1-2} \cmidrule(lr){3-4}
-									PSNR & PEARSON CC & PSNR & PEARSON CC \\ 
-									\midrule
-									42.95 & 0.999 & 33.02 & 0.993 \\					
-									\bottomrule
-								\end{tabular}
-							\end{table}
-						\end{alertblock}}
-						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-					\only<2>{
-						\begin{alertblock}{Second test case}
 							\begin{figure}
 								\includegraphics[height=.35\textheight]{LR_438_frame_154_input.png}
 								\caption{LR input, $f_n=154$}
@@ -1412,12 +1422,12 @@
 							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 						\end{alertblock}}
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-					\only<3>{
-						\begin{alertblock}{Third test case}
+					\only<2>{
+						\begin{alertblock}{Second test case}
 							\begin{figure}
-								\includegraphics[height=.35\textheight]{LR_456_frame_159_input.png}
-								\caption{LR input, $f_n=159$}
-							\end{figure}
+								\includegraphics[height=.35\textheight]{LR_397_frame_127_input.png}
+								\caption{LR input, $f_n=127$}
+							\end{figure}						
 							%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 							\begin{table}[!h]
 								\centering 
@@ -1439,18 +1449,16 @@
 			\end{column}
 			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{column}[c]{0.5\textwidth}
-				\only<1>{	
-					\setcounter{subfigure}{0}				
-					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-					\begin{figure}
-						\centering
-						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
-						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_pred.png}}
-						\\
-						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_GT.png}}\quad
-						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_pred.png}}
-					\end{figure}}			
-				\only<2>{
+%				\only<1>{	
+%					\setcounter{subfigure}{0}
+%					\begin{figure}
+%						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
+%						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_pred.png}}
+%						\\
+%						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_GT.png}}\quad
+%						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_pred.png}}
+%					\end{figure}}			
+				\only<1>{
 					\setcounter{subfigure}{0}					
 					%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 					\begin{figure}
@@ -1460,14 +1468,15 @@
 						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_GT.png}}\quad	
 						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_438_frame_154_delamination_pred.png}}
 					\end{figure}}
-				\only<3>{	
-					\setcounter{subfigure}{0}				
+				\only<2>{	
+					\setcounter{subfigure}{0}
 					\begin{figure}
-						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_GT.png}}\quad
-						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_456_frame_159_full_frame_pred.png}}
+						\centering
+						\subfloat[listentry][HR ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_GT.png}}\quad
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_397_frame_127_full_frame_pred.png}}
 						\\
-						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_GT.png}}\quad
-						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_456_frame_159_delamination_pred.png}}
+						\subfloat[listentry][Ref]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_GT.png}}\quad
+						\subfloat[listentry][DLSR]{\includegraphics[height=.35\textheight]{output_397_frame_127_delamination_pred.png}}
 					\end{figure}}
 			\end{column}
 		\end{columns}
@@ -1480,11 +1489,11 @@
 		
 		In all test cases, I used the first frame, which shows the initial interaction with delamination.
 		
-		In the first test case, the figure shows the low-resolution measurements at frame number 127.
+		In the first test case, the figure shows the low-resolution measurements at frame number 159.
 		Figure a shows the actual HR frame, and figure b shows the predicted SR frame. 
-		The PSNR value is 42.95
+		The PSNR value is 48.6
 		
-		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 33.02.
+		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 46.67.					
 		
 		In the second test case, the figure shows the low-resolution measurements at frame number 154.		
 		Figure a shows the actual HR frame, and figure b shows the predicted SR frame. 
@@ -1492,11 +1501,13 @@
 		
 		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 38.52.
 		
-		In the third test case, the figure shows the low-resolution measurements at frame number 159.
+		In the third test case, the figure shows the low-resolution measurements at frame number 127.
 		Figure a shows the actual HR frame, and figure b shows the predicted SR frame. 
-		The PSNR value is 48.6
+		The PSNR value is 42.95
 		
-		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 46.67.		
+		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 33.02.
+		
+			
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
@@ -1552,14 +1563,16 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		\tiny
-		In this slide, I present an experimental test case, in which the Low-resolution input data was registered by an SLDV at a uniform gird of \(32\times 32\) points.
-		The LR input frame corresponds to the initial interaction with the delamination at frame number 110.
+		In this slide, I present an experimental test case,
+%		, in which the Low-resolution input data was registered by an SLDV at a uniform gird of \(32\times 32\) points.
+%		The LR input frame corresponds to the initial interaction with the delamination at frame number 110.
 		
 		Additionally, the conventional compressive sensing technique was applied as a reference with a various number of points used for the reconstruction of the wavefield. 
 		
-		Moreover, two types of masks (sub-sampling schemes) for the construction of measurement matrix were tested, namely random mask and jitter mask.
+%		Moreover, two types of masks (sub-sampling schemes) for the construction of measurement matrix were tested, namely random mask and jitter mask.
 		
-		Figure a shows the actual HR reference frame, and figures c, d, and e show reconstructed HR frames with the CS method at \(N_p = 1024\), \(N_p = 3000\) and \(N_p = 4000\) points, respectively. 
+		Figure a shows the actual HR reference frame, and figures c, d, and e show reconstructed HR frames with the CS method.
+%		at \(N_p = 1024\). 
 		
 		As expected, when decreasing the \(N_p\) measuring points, the CS method is not able to recover HR frames accurately. 
 		
@@ -1567,9 +1580,7 @@
 		
 		Furthermore, figure g presents the reference region of interest we are attempting to recover, which shows reflected waves from damage.
 		
-		Figures h, i, and j show a poor reconstruction of the reflected waves at \(N_p = 1024\) and \(N_ = 3000\), respectively, using the CS method.
-		
-		Figure j shows the recovery of the reflected frames at \(N_p = 4000\) using the CS method, in which the reflected waves are recognisable.
+%		Figures  show a poor reconstruction of the reflected waves at \(N_p = 1024\) using the CS method.
 		
 		Figure k shows the recovery of the reflected waves using the DLSR model.
 		The recovered reflected waves from damage is visible, and can be easily recognised, which indicates that the DLSR approach can be more efficient than the conventional CS method.		
@@ -1579,7 +1590,7 @@
 		\begin{table}[!ht]
 			\renewcommand{\arraystretch}{1.3}
 			\centering \footnotesize
-			\caption{Quality metrics for tested methods for the frame no. $N_f=110$.}	
+			\caption{Quality metrics for tested methods.}	
 			\begin{tabular}{lrrrcrc} 
 				\toprule[1.5pt]
 				& & & \multicolumn{2}{c}{plate} & \multicolumn{2}{c}{delamination} \\
@@ -1614,23 +1625,23 @@
 				\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
 				\addtolength{\leftmargini}{\labelsep}
 				\begin{itemize}
-					\item Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.				
-					\item Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.
-					\item Deep learning approaches surpass conventional approaches for delamination identification.
-					\item Deep learning models can be generalised to other types of defects and materials.
-					\item The DLSR model can recover the HR measurements from LR measurements with high accuracy.
+					\item{Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.}				
+					\item{Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.}
+					\item{Deep learning approaches surpass conventional approaches for delamination identification.}
+					\item{Deep learning models can be generalised to other types of defects and materials.}
+					\item{The DLSR model can recover the HR measurements from LR measurements with high accuracy.}
 				\end{itemize}
 			\end{justify}				
 		\begin{tcolorbox}
 			\begin{justify}
 				\textbf{According to my research study, investigations and results, I can confirm my original thesis:}
-				\begin{alertblock}{Thesis: 1}
+				\begin{alertblock}{Thesis}
 					It is possible to use an end-to-end approach in which DNN 
 					processes the animation of propagating waves (input) directly into a damage map (output).
 				\end{alertblock}
-				\begin{alertblock}{Thesis: 2}
-					It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans from a low-resolution (LR).
-				\end{alertblock}
+%				\begin{alertblock}{Thesis: 2}
+%					It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans from a low-resolution (LR).
+%				\end{alertblock}
 			\end{justify}			
 		\end{tcolorbox}				
 		\end{footnotesize}			
@@ -1643,7 +1654,7 @@
 				\textbf{\underline{Metamaterials: Dispersion diagrams}}
 				\begin{figure}
 					\centering
-					\efbox{\includegraphics[width=1\textwidth]{Surrogate_DL_model_for_PC3.png}}
+					\efbox{\includegraphics[width=1\textwidth]{Surrogate_DL_model_for_PC_Abdalraheem.png}}
 				\end{figure}
 			\end{column}
 			\begin{column}[t]{0.49\textwidth}
