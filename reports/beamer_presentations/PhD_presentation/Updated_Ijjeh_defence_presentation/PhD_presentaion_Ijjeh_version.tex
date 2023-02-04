@@ -1422,23 +1422,15 @@ a	\end{frame}
 	\note
 	{
 		\tiny
-		In the following, the results of the reconstruction of HR frames for three numerical test cases will be presented.
+		In the following, the results of the reconstruction of HR frames for two numerical test cases will be presented.				
 		
-		In all test cases, I used the first frame, which shows the initial interaction with delamination.
-		
-		In the first test case, the figure shows the low-resolution measurements at frame number 159.
-		Figure a shows the actual HR frame, and figure b shows the predicted SR frame. 
-		The PSNR value is 48.6
-		
-		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 46.67.					
-		
-		In the second test case, the figure shows the low-resolution measurements at frame number 154.		
+		In the first test case, the figure shows the low-resolution measurements at frame number 154.		
 		Figure a shows the actual HR frame, and figure b shows the predicted SR frame. 
 		The PSNR value is 47
 		
 		Figure c shows the HR sub-frame at the delamination region, figure d shows the SR prediction at the delamination region, and the PSNR is 38.52.
 		
-		In the third test case, the figure shows the low-resolution measurements at frame number 127.
+		In the second test case, the figure shows the low-resolution measurements at frame number 127.
 		Figure a shows the actual HR frame, and figure b shows the predicted SR frame. 
 		The PSNR value is 42.95
 		
@@ -1501,26 +1493,15 @@ a	\end{frame}
 	\note{
 		\tiny
 		In this slide, I present an experimental test case,
-%		, in which the Low-resolution input data was registered by an SLDV at a uniform gird of \(32\times 32\) points.
-%		The LR input frame corresponds to the initial interaction with the delamination at frame number 110.
 		
-		Additionally, the conventional compressive sensing technique was applied as a reference with a various number of points used for the reconstruction of the wavefield. 
+		The figure on the left represents an experimentally acquired full wavefield in it low resolution.	
+			
+		This Figure shows the actual HR reference frame for the whole plate and at the delamination area
 		
-%		Moreover, two types of masks (sub-sampling schemes) for the construction of measurement matrix were tested, namely random mask and jitter mask.
+		The figure in the middle represents the outputs of applying the compressive sensing technique in which it shows a poor quality of reconstruction. 
 		
-		Figure a shows the actual HR reference frame, and figures c, d, and e show reconstructed HR frames with the CS method.
-%		at \(N_p = 1024\). 
 		
-		As expected, when decreasing the \(N_p\) measuring points, the CS method is not able to recover HR frames accurately. 
-		
-		Figure f presents the reconstructed HR frame with the DLSR model. 
-		
-		Furthermore, figure g presents the reference region of interest we are attempting to recover, which shows reflected waves from damage.
-		
-%		Figures  show a poor reconstruction of the reflected waves at \(N_p = 1024\) using the CS method.
-		
-		Figure k shows the recovery of the reflected waves using the DLSR model.
-		The recovered reflected waves from damage is visible, and can be easily recognised, which indicates that the DLSR approach can be more efficient than the conventional CS method.		
+		The figure on the right presents the reconstructed HR frame with the DLSR model for the whole plate and at the delamination area as you can see the quality of reconstruction is very noticeable. 
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Analysis of experimental case}
@@ -1548,10 +1529,9 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The following table presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and the DLSR model for various numbers of points and the corresponding compression ratios CR. 
+		The following table presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and the DLSR model.
+		As we can see the DLSR model achieved the highest PSNR and Pearson CC values.
 		Metrics were calculated for frame number 110 on the whole plate and delamination region, respectively. 
-		It should be underlined, that for the number of points = 1024 points, the CS recovery algorithm behaves poorly at the delamination region, whereas the DLSR model is still able to achieve high PSNR and Pearson CC values.	
-		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions and future works}
@@ -1571,14 +1551,11 @@ a	\end{frame}
 			\end{justify}				
 		\begin{tcolorbox}
 			\begin{justify}
-				\textbf{According to my research study, investigations and results, I can confirm my original thesis:}
+				\textbf{According to my research study, investigations and results, I confirm my original thesis:}
 				\begin{alertblock}{Thesis}
 					It is possible to use an end-to-end approach in which DNN 
 					processes the animation of propagating waves (input) directly into a damage map (output).
 				\end{alertblock}
-%				\begin{alertblock}{Thesis: 2}
-%					It is possible to speed up the data acquisition process by SLDV by employing an appropriate DL approach to recover high-resolution (HR) full wavefield scans from a low-resolution (LR).
-%				\end{alertblock}
 			\end{justify}			
 		\end{tcolorbox}				
 		\end{footnotesize}			
