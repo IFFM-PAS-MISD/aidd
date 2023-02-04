@@ -664,20 +664,11 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		Now, in this slide, I present the most applied techniques on the dataset during the training:
-		1. Dataset normalization in which all values are have a range between 0 and 1. \\
-		2. I have applied data augmentation to the dataset
-		(475 RMS images) by flipping the images horizontally, vertically, and diagonally.
-		As a result, the dataset size increased four times -1900 images were produced. \\
-		3. Additionally, Cross validation was applied with data augmentation. \\
-		4. In order to reduce the overfitting problem I have applied some techniques:
-		1. Early stopping,
-		2. Hyperparameter tuning (such as: )
-		3. Regularization (such as dropouts, batch normalization, adding penalties to objective function, ...)\\ 
-		Furthermore, I have splitted the dataset into three portions
-		1. Training set \(80\%\) of the dataset\\
-		2. Testing set \(20\%\) of the dataset\\
-		3. validation set \(20\%\) out of the training set.
+		For the purpose of developing and training my deep learning models several data preprocessing were applied as shown in the top table, such as Dataset normalization, data augmentation, cross validation.
+		Additionally, to reduce the overfitting problem I have applied some techniques like Early stopping, Hyperparameter tuning and  Regularization.
+		
+		Furthermore, I have splitted the dataset into three portions as shown in the below table
+
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part I: Delamination identification}
@@ -709,7 +700,9 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		In this part I will present deep learning approaches for delamination identification in composite laminates.
+		
 		It is important to note how these models perform in an end-to-end fashion.
+		
 		Accordingly, I have developed two approaches for delamination identification based on the inputs to the models:
 		
 		\begin{itemize}
@@ -765,15 +758,11 @@ a	\end{frame}
 	\end{frame}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		Deep learning models for delamination identification were developed based on their inputs.
 		
-		The models based on the RMS images as input are:
+		The developed models based on the RMS images as input are:
 		the residual UNet, VGG16 encoder-decoder, fully convolutional dense network (FCN-DenseNet), Pyramid scene parsing network (PSPNet), and The global convolutional neural network (GCN).
 		
-		And the model based on the animation of full wavefield frames is 
-		Autoencoder ConvLSTM.
-		
-		All developed models were published in these articles.		
+		And the developed model based on the animation of full wavefield frames is Autoencoder ConvLSTM.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Developed RMS based models}	
@@ -788,70 +777,20 @@ a	\end{frame}
 	\setcounter{subfigure}{0}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		Both the Res-UNet and VGG16 encoder-decoders are autoencoders.
-		The main difference between them is the additional skip connections that were added to Res-Unet at the encoder and decoder levels. \\
-		FCN-DenseNet applies an encoder-decoder scheme with skip connections between the encoder and the decoder paths.
-		The main component in FCN-DenseNet is the dense block. 
-		The dense block is constructed from a varying number of convolutional layers. 
-		The purpose of the dense block is to concatenate feature maps of a layer with its output to emphasize spatial details information. \\		
-		The idea of PSPNet is to provide adequate global contextual information for pixel-level scene parsing by concatenating the local and global features together. 
-		Hence, a spatial pyramid pooling module was introduced to perform four different pooling levels with four different pool sizes. 
-		In this way, the pyramid pooling module can capture contextual features at different scales.\\		
-		GCN addresses the importance of having large kernels at the convolution operations for both localization and classification tasks for semantic segmentation.
+		In this slide I present the architectures of all my developed deep learning models based on RMS images for delamination identification.
 		
-		
+		For further details about these models, you can kindly return to my thesis and published papers. 
+%		Both the Res-UNet and VGG16 encoder-decoders are autoencoders.
+%		The main difference between them is the additional skip connections that were added to Res-Unet at the encoder and decoder levels. \\
+%		FCN-DenseNet applies an encoder-decoder scheme with skip connections between the encoder and the decoder paths.
+%		The main component in FCN-DenseNet is the dense block. 
+%		The dense block is constructed from a varying number of convolutional layers. 
+%		The purpose of the dense block is to concatenate feature maps of a layer with its output to emphasize spatial details information. \\		
+%		The idea of PSPNet is to provide adequate global contextual information for pixel-level scene parsing by concatenating the local and global features together. 
+%		Hence, a spatial pyramid pooling module was introduced to perform four different pooling levels with four different pool sizes. 
+%		In this way, the pyramid pooling module can capture contextual features at different scales.\\		
+%		GCN addresses the importance of having large kernels at the convolution operations for both localization and classification tasks for semantic segmentation.
 	}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	
-%	\begin{frame}{Pyramid Scene Parsing Network}
-%		\begin{figure} [h!]
-%			\centering
-%			\includegraphics[height=.7\textheight]{figure7.png}
-%			\caption{PSPNet architecture.} 
-%		\end{figure}
-%	\end{frame}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\note{
-%			
-%	}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\begin{frame}{Global Convolution Network}
-%		\begin{columns}[T]
-%			\begin{column}[c]{0.55\textwidth}
-%				\begin{figure}
-%					\centering
-%					\includegraphics[width=.9\textwidth]{figure8.png}
-%					\caption{GCN architecture.} 
-%				\end{figure}	
-%			\end{column}
-%			\begin{column}[c]{0.45\textwidth}
-%				\begin{figure}
-%					\centering
-%					\includegraphics[width=.9\textwidth]{figure9.png}
-%					\caption{(a) Residual block, (b) GCN block, (c) Boundary Refinement.} 
-%				\end{figure}	
-%			\end{column}
-%		\end{columns}
-%	\end{frame}	
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\note{
-%	
-%	}	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%\setcounter{subfigure}{0}
-	%\begin{frame}{RMS based models}
-	%	\begin{column}[c]{0.55\textwidth}
-		%		\begin{figure}
-			%			\subfloat[Res-UNet model]{\includegraphics[width=1\textwidth]{figure4.png}}
-			%		\end{figure}
-		%	\end{column}
-	%	\begin{column}[c]{0.35\textwidth}
-		%		\begin{figure}
-			%			\subfloat[Data flow \& intermediate outputs of layers \label{fig:}]{\animategraphics[autoplay, controls,width=.8\textwidth]{4}{figures/gif_figs/381__inter_pred/intermediate_output-}{0}{103}}
-			%\end{figure}
-			%	\end{column}
-		%
-		%\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -864,20 +803,17 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The autoencoder ConvLSTM was trained on a sequence of consecutive full wavefield frames.
+		The autoencoder ConvLSTM was trained on a sequence of consecutive full wavefield frames of guided wave propagation.
 		
-		Hence, for the synthetic dataset, the delamination location is known, I only utilised 24 frames after the interaction with the damage for training the model.
+		Now for training the model, as the delamination location is known, I used a certain number of frames after the interaction with the damage.
 		
 		Those selected frames containing the required features about the delamination shape and location are fed into an encoder-decoder model at once using a time-distributed layer.
 		
-		Then, the output of the decoder was forwarded into the ConvLSTM layer to learn the long-term spatiotemporal features.
+		Then, the output of the decoder was forwarded into the ConvLSTM layer used to handle time series data by learning long-term spatiotemporal features.
 		
 		
-		Now, for real-life situations where the damage location is not known, the figure on the left illustrates the complete procedure of obtaining intermediate predictions for the testing cases and finally calculating the RMS image.
-		
-		Accordingly, the window slides over all the input frames with a shift of one frame at a time.
-		
-		Then, an RMS of all the intermediate predictions is calculated to produce a damage map.		
+		For real-life situations where the damage location is not known, the whole frames of the full wavefield is tested thourgh a sliding window that produces an intermediate output at at time.
+		Then a root mean squared image representing all intermediate predictions is calculated representing the predicted damage map.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Evaluation metrics for delamination identification}
