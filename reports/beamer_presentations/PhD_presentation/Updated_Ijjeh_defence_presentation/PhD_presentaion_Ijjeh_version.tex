@@ -1,5 +1,5 @@
 %\PassOptionsToPackage{draft}{graphicx}
-\documentclass[10pt,aspectratio=169,dvipsnames]{beamer} % aspect ratio 16:9
+\documentclass[10pt,aspectratio=169,dvipsnames]{beamer} % , notes=only aspect ratio 16:9
 %\graphicspath{{../../figures/}}
 
 %\includeonlyframes{frame1,frame2,frame3}
@@ -225,7 +225,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Contribution and novelty}
 		\begin{columns}[T]
-			\begin{column}[c]{0.95\textwidth}
+			\begin{column}[c]{0.9\textwidth}
 				\begin{figure}
 					\centering
 					\includegraphics[height=.85\textheight]{full_procedure.png}	
@@ -355,7 +355,7 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		\tiny
+		\footnotesize
 		Now, to train my deep-learning models, I need a large data set of samples with different delamination sizes, locations, and shapes interacting with guided waves.
 		And, I need to obtain the full wavefields of the guided wave propagation using the scanning laser Doppler vibrometer. 
 		
@@ -402,7 +402,7 @@ a	\end{frame}
 		The synthetically generated dataset consists of 475 delamination cases. 
 		It was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm. 
 		The delamination was modeled between the third and fourth layers.
-		The delamination geometrical size major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
+		The delaminations's major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
 		The angle $\aleph$ ranges form \([0^{\circ}-180^{\circ}]\).
 		The computation of the dataset took about three months.
 	}
@@ -414,7 +414,7 @@ a	\end{frame}
 				\begin{figure}
 					\centering
 					\captionsetup{justification=centering}					
-					\animategraphics[autoplay,loop,width=0.85 \textwidth]{16}{figures/gif_figs/7_output/flat_shell_Vz_7_500x500bottom-}{1}{512}
+					\animategraphics[autoplay, loop,width=0.85 \textwidth]{12}{figures/gif_figs/7_output/tk_flat_shell_Vz_7_500x500bottom-}{1}{512}
 					\caption{Full wavefield $s(x,y,t_k)$}
 				\end{figure}
 			\end{column}
@@ -431,7 +431,7 @@ a	\end{frame}
 					\centering
 					\captionsetup{justification=centering}			
 					\includegraphics[width=0.85 \textwidth]{m1_rand_single_delam_7.png}
-					\caption{Ground truth (label) in black/white}
+					\caption{Ground truth (label)}
 				\end{figure}
 			\end{column}
 		\end{columns}
@@ -444,7 +444,7 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this slide, I present a single training scenario.
+		Here, I present a single training scenario.
 		The animation on the left represents the full wavefield frames of guided wave propagation, where x and y are the point coordinates, and tk is the time moment.
 		The output of applying the root mean square formula to the full wavefield is shown in the middle figure.
 		The figure on the right is the ground truth label of the delamination in white showing its location, size and shape.
@@ -456,11 +456,11 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Computer vision}
 		\begin{columns}[T]
-			\begin{column}[c]{0.27\textwidth}
+			\begin{column}[c]{0.3\textwidth}
 				\justifying
 				\alert {\textbf{Computer vision}} is a~field of AI that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs. 
 			\end{column}
-			\quad
+%			\quad
 			\begin{column}[c]{0.7\textwidth}
 				\only<1>{\begin{figure}
 						\centering
@@ -473,7 +473,7 @@ a	\end{frame}
 			\end{column}
 		\end{columns}
 		\only<2>{\begin{tcolorbox}
-		\noindent\textbf{I went with the hardest task: 
+		\noindent\textbf{I took the hardest task: 
 			\\ 
 			\alert{ Delamination identification (Pixel-wise image segmentation)}}
 		\end{tcolorbox}}
@@ -510,8 +510,7 @@ a	\end{frame}
 					\caption{\textbf{Convolution operation}}			
 					\efbox{\animategraphics[autoplay,loop,width =1\textwidth]{2}{figures/gif_figs/files/plot_convolution_process_}{0}{32}}					
 				\end{figure}
-			\end{column}
-		
+			\end{column}		
 			\begin{column}[t]{0.38\textwidth}
 				\begin{figure}[ht!]
 					\centering
@@ -523,14 +522,14 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		Convolutional Neural Network (CNN) is a powerful deep learning architecture for mainly used with image processing as it can extract complex feature patterns from its inputs using the convolution operation.
+		Convolutional Neural Network (CNN) is a powerful deep learning architecture for mainly used with visual inputs as it can extract complex feature patterns using the convolution operation.
 		
 		The convolution operation in image processing is essentially a cross-correlation operation, also known as a sliding dot product.
 		
-		The kernel slides over an input image to extract features.
+		The kernel also called a filter slides over an input image to extract features.
 		The output of the convolution operation is a feature map.
 		
-		Consequently, kernels learn to detect different types of edges
+		Consequently, these kernels learn to detect different types of edges
 		(vertical, horizontal, and diagonal edges), colour intensities, etc.
 	}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -578,15 +577,15 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this slide, I present a comparison between conventional machine learning and deep learning approaches utilised for damage detection.
+		In this slide, I present a comparison between the conventional machine learning and deep learning approaches utilised for damage detection.
 		
 		In the conventional approaches, two processes must be performed by the practitioner: 
-		The first is to extract the useful features from the registered data then to use a proper classification technique in order to get a prediction.
+		The first one is to extract the useful features from the registered data then to use a proper classification technique in order to get a prediction.
 		
-		This approach has several drawbacks such as: 
-		it requires a great amount of human labor and computational effort and it demands a high amount of experience from the practitioner.
+		This approach has drawbacks such as: 
+		it requires a great amount of human labor and computational effort, and it demands a high amount of experience from the practitioner.
 		
-		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification by themselves without human intervention in an end-to-end approach. 
+		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification tasks by themselves without human intervention in an end-to-end approach. 
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Development environment}
@@ -606,9 +605,8 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		First of all, it is important to note that I have coded all my deep-learning models in-house.
-		
-		
+		First of all, it is important to note that I have coded all deep-learning models in-house.
+				
 		To do so, I have utilised following tools:		
 		(Python, TensorFlow platform, Keras API) under Pycharm IDE, which is open-source.
 		Training a deep learning model has computational complexity.
@@ -658,10 +656,10 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		For the purpose of developing and training my deep learning models several data preprocessing were applied as shown in the top table, such as Dataset normalization, data augmentation, cross validation.
+		For the purpose of developing and training my deep learning models, several data preprocessing were applied as shown in the top table, such as Dataset normalization, data augmentation, cross validation.
 		Additionally, to reduce the overfitting problem I have applied some techniques like Early stopping, Hyperparameter tuning and  Regularization.
 		
-		Furthermore, I have splitted the dataset into three portions as shown in the below table
+		Furthermore, I have splitted the dataset into three portions as shown in the below table.
 
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -693,15 +691,15 @@ a	\end{frame}
 	\end{frame}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this part I will present deep learning approaches for delamination identification in composite laminates.
+		In part, I will present deep learning approaches for delamination identification in composite laminates.
 		
 		It is important to note how these models perform in an end-to-end fashion.
 		
-		Accordingly, I have developed two approaches for delamination identification based on the inputs to the models:
+		Accordingly, two approaches for delamination identification based on their inputs were adopted:
 		
 		\begin{itemize}
-			\item One-to-one approach (takes one input that is the root mean squared of the full wavefield) and produces one output of damage map)
-			\item Many-to-one approach (takes animation of Lamb waves propagation as a sequence of frames and produces one output as damage map).
+			\item the first one is the One-to-one approach (takes one input that is the root mean squared of the full wavefield) and produces one output of damage map)
+			\item the second one is the Many-to-one approach (takes animation of Lamb waves propagation as a sequence of frames and produces one output as damage map).
 		\end{itemize}	
 		}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -753,8 +751,8 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		
-		The developed models based on the RMS images as input are:
-		the residual UNet, VGG16 encoder-decoder, fully convolutional dense network (FCN-DenseNet), Pyramid scene parsing network (PSPNet), and The global convolutional neural network (GCN).
+		The developed models based on the RMS image of the full wavefield input are:
+		The residual UNet, VGG16 encoder-decoder, fully convolutional dense network (FCN-DenseNet), pyramid scene parsing network (PSPNet), and the global convolutional neural network (GCN)
 		
 		And the developed model based on the animation of full wavefield frames is Autoencoder ConvLSTM.		
 	}
@@ -771,9 +769,9 @@ a	\end{frame}
 	\setcounter{subfigure}{0}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this slide I present the architectures of all my developed deep learning models based on RMS images for delamination identification.
+		Here, I present the architectures of all the deep learning models I've created that are based on the RMS image of the full wavefield.
 		
-		For further details about these models, you can kindly return to my thesis and published papers. 
+		For further details about these models, kindly, I advise you to return to my thesis and my published papers. 
 %		Both the Res-UNet and VGG16 encoder-decoders are autoencoders.
 %		The main difference between them is the additional skip connections that were added to Res-Unet at the encoder and decoder levels. \\
 %		FCN-DenseNet applies an encoder-decoder scheme with skip connections between the encoder and the decoder paths.
@@ -797,17 +795,12 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		The autoencoder ConvLSTM was trained on a sequence of consecutive full wavefield frames of guided wave propagation.
-		
-		Now for training the model, as the delamination location is known, I used a certain number of frames after the interaction with the damage.
-		
-		Those selected frames containing the required features about the delamination shape and location are fed into an encoder-decoder model at once using a time-distributed layer.
-		
-		Then, the output of the decoder was forwarded into the ConvLSTM layer used to handle time series data by learning long-term spatiotemporal features.
-		
-		
-		For real-life situations where the damage location is not known, the whole frames of the full wavefield is tested thourgh a sliding window that produces an intermediate output at at time.
-		Then a root mean squared image representing all intermediate predictions is calculated representing the predicted damage map.		
+		In this slide, I present the autoencoder ConvLSTM model that takes a sequence of consecutive full wavefield frames of guided wave propagation as an input.
+		For training purposes, as the delamination location is known, I used a certain number of frames after the initial interaction of guided waves with the damage.
+		These selected frames, which contain the required features regarding the delamination shape and location, are fed into an encoder-decoder model at once using a time-distributed layer.
+		Then, the output of the decoder is forwarded into the ConvLSTM layer, which is used to handle time series data by learning long-term spatiotemporal features.
+		For real-life situations where the damage location is unknown,  the full wavefield is tested through a sliding window that produces an intermediate output at a time.
+		Finally, the root-mean-square formula is applied to all intermediate predictions to obtain the RMS damage map.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Evaluation metrics for delamination identification}
@@ -837,11 +830,10 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		To evaluate all developed models for delamination identification, two metrics were used:
-		
+		Now, to evaluate the developed models for delamination identification, 
+		I used two metrics:
 		The first metric is the mean intersection over union (also known as the Jaccard index), which calculates the area of intersection between actual and predicted values divided by the union of them.
-		
-		The second metric is the percentage area error \(\epsilon\), which calculates the percentage of the difference between actual and predicted areas to the actual area size. 
+		The second metric is the percentage area error \(\epsilon\), which calculates the percentage of the difference between actual and predicted areas. 
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section*{Evaluation: Numerical cases}
@@ -879,15 +871,11 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this section, the numerical and experimental evaluation of the developed models for delamination identification will be presented.
-		
-		This slide shows the three numerical test cases evaluated with the GCN model.
-		
-		For the first case, the delamination is barely visible by the naked eye, yet the model could identify the delamination with IOU= 0.71.
-		
-		For the second case, the IOU = 0.72, and for the third case, the IOU = .86.
-		
-		It's important to notice that GCN can identify the delamination with high accuracy and almost no noise.		
+	This slide shows three numerical samples tested with the GCN model.
+	For the first case, the delamination is barely visible by the naked eye, yet the model could identify the delamination with IoU = 0.71.
+	For the second case, the IOU = 0.72, and for the third case, the IOU = .86
+	Additionally, each animation shows all extracted feature maps from the RMS image input until we get the final prediction of the damage map.
+	It's important to notice that GCN can identify the delamination with high accuracy and noise free.			
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\begin{frame}{RMS based: Analysis of numerical cases}
@@ -955,11 +943,11 @@ a	\end{frame}
 %		\end{columns}
 %	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		The table presents the mean and maximum values calculated for the previously unseen numerical test set for all RMS-based models. 
-		It also shows that all models have a relatively high value, indicating their ability to detect and localize the delamination.
-		However, the best performance was achieved by the GCN model.
-	}
+%	\note{
+%		The table presents the mean and maximum values calculated for the previously unseen numerical test set for all RMS-based models. 
+%		It also shows that all models have a relatively high value, indicating their ability to detect and localize the delamination.
+%		However, the best performance was achieved by the GCN model.
+%	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Numerical test cases animation of Lamb waves}
 		\setcounter{subfigure}{0}
@@ -998,19 +986,15 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In the following three slides, I will present three numerical test cases evaluated with the autoencoder ConvLSTM model, which takes animations of full wavefields.
+		In the following three slides, I will present three numerical samples evaluated with the autoencoder ConvLSTM model.
 		
-		animation (a) shows the full wavefield of 512 frames as an input to the model.
-		Figure (b) shows the RMS damage map for all intermediate predictions.
-		Figure (c) shows the binary RMS with IoU= 0.88.
-		
-		The second case is more complex as the delamination is near the corner of the plate.
-		In this case, the IoU=0.58.
-		
+		Animation (a) shows the full wavefield of 512 frames as an input to the model.
+		Figure (b) shows the RMS damage map for all intermediate predictions,
+		and figure (c) shows the binary RMS with IoU = 0.88.
+		The second case is more complex, as the delamination is near the corner of the plate.
+		In this case, the IoU is 0.58.
 		The third case is also complex, as the delamination is located near the plate edge.
-		In this case, the IoU=0.8.
-		
-		Also, we can notice see how clean all the predictions are.		
+		In this case, the IoU is 0.8.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\begin{frame}{Animation based: Analysis of numerical cases}
@@ -1082,18 +1066,12 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		This slide shows the experimental results of a specimen with a single delamination regarding the RMS-based models, GCN, and FCN-DenseNet.
-		
-		Additionally, the deep learning models were compared with the adaptive wavenumber filtering technique for damage imaging, which is a conventional signal processing technique developed in our department.
-		
+		In this slide, I present the experimental results of a specimen with a single delamination using the RMS-based model, the GCN.
+		Additionally, I compared my developed model with the adaptive wavenumber filtering technique for damage imaging, which is a conventional signal processing technique.
 		Figure (a) shows the ERMS with a label depicting the delamination. 
-		
-		Figure (b) shows the result of applying the adaptive wavenumber filtering method, and figure (c) shows its binary output with IoU=0.401.
-		
-		Figure (d) shows the predicted damage map by the GCN model with IoU=0.723.
-		Figure (e) shows the predicted damage map by the FCN-DenseNet model with IoU=0.54
-		
-		As shown, the deep learning models surpasses the conventional signal processing approach.
+		Figure (b) shows the result of applying the adaptive wavenumber filtering method, and Figure (c) shows its binary output with IoU=0.401.
+		Figure (d) shows the predicted damage map by the GCN model with IoU = 0.723.
+		As shown, the deep learning model surpasses the conventional signal processing approach.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	\setcounter{subfigure}{0}
@@ -1134,15 +1112,15 @@ a	\end{frame}
 %%				\end{tabular}		
 %%			\end{table}
 %	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		The table shows the IoU values for all developed RMS based models for the single delamination specimen.
-		
-		Similarly to the numerical dataset, the best accuracy was achieved by using GCN.
-		
-%		As shown, the models are capable of precise detection and localisation of the delamination. 
-%		We can see that the models can identify the delamination with almost free noise indicating the models are capable of generalising and detecting the delamination on previously unseen data. 
-	}
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\note{
+%		The table shows the IoU values for all developed RMS based models for the single delamination specimen.
+%		
+%		Similarly to the numerical dataset, the best accuracy was achieved by using GCN.
+%		
+%%		As shown, the models are capable of precise detection and localisation of the delamination. 
+%%		We can see that the models can identify the delamination with almost free noise indicating the models are capable of generalising and detecting the delamination on previously unseen data. 
+%	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Experimental results: Full wavefield based (Single delamination)}		
@@ -1210,16 +1188,10 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		This slide presents the predicted results using the autoencoder ConvLSTM model compared to conventional signal processing adaptive wavenumber filtering regarding the multiple delamination case.
-		
-		Animation (a) shows the full wavefield measured by SLDV of 512 frames
-		
-		Figure (b) shows the damage map resulting from applying adaptive wavenumber filtering and figure (c) shows its binary output with IoU = 0.04
-		
-		Animation (d) shows all intermediate predictions with the deep learning model
-		
-		Figure (e) shows the RMS of all intermediate predictions and figure (f) shows the binary RMS with IoU = 0.64
-		
+		Here, I present the predicted results using the autoencoder ConvLSTM model compared to adaptive wavenumber filtering for the multiple delamination case.
+		The animation on the left shows the full wavefield measured by the SLDV of 512 frames.
+		The figure shows the damage map resulting from applying adaptive wavenumber filtering, and this figure shows its binary output with IoU = 0.04
+		Figure shows the RMS of all intermediate predictions, and figure shows the binary RMS with IoU = 0.64
 		It can be concluded that utilising animations of Lamb waves propagation has better outcomes for delamination identification than the processing of a single image representing signal energy or RMS.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1261,11 +1233,11 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		Scanning laser Doppler vibrometer is a popular tool for the acquisition of the full wavefield of propagating guided waves, in particular Lamb waves.
-		
+		As mentioned earlier, the scanning laser Doppler vibrometer is a well-known non-contact tool for the acquisition of the full wavefield of propagating guided waves.
 		However, the process of acquiring the full wavefield of guided waves is time-consuming. 
-		
-		One possible solution to tackle this problem is to acquire the Lamb waves in a low-resolution form and then apply a deep learning-based super-resolution approach to that low-resolution frame of full wavefield data to retrieve the high-resolution frame.
+		One possible solution to tackle this problem is to acquire the Lamb waves at low-resolution grid points, and then the full wavefield can be reconstructed at high resolution.
+		Furthermore, I have compared my developed model of deep learning for super-resolution with the compressive sensing technique, which states that any signal can be reconstructed from a linear combination of random measurements.
+		To acquire the low-resolution measurements, I have used two types of masks, as shown in the figure: random and jitter.
 	}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1288,7 +1260,7 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		To evaluate the developed model, I used two metrics:
+		To evaluate the developed model, I used two metrics to measure the quality of the reconstructed high-resolution full wavefield frames:
 		\begin{itemize}
 			\item The first one is the peak signal-to-noise ratio (PSNR), which refers to the maximum possible power of a signal and the power of the distorting noise that affects the quality of its representation.
 %			This equation depicts the mathematical representation of PSNR, where R is the maximum fluctuation value in the input image, and MSE is the mean squared error between the actual and predicted output.
@@ -1415,7 +1387,7 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		\tiny
+		\footnotesize
 		In the following, the results of the reconstruction of HR frames for two numerical test cases will be presented.				
 		
 		In the first test case, the figure shows the low-resolution measurements at frame number 154.		
@@ -1485,7 +1457,7 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		\tiny
+		\footnotesize
 		In this slide, I present an experimental test case,
 		
 		The figure on the left represents an experimentally acquired full wavefield in it low resolution.	
@@ -1524,8 +1496,7 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
 		The following table presents a detailed comparison of the quality metrics for CS methods with applied jitter and random masks and the DLSR model.
-		As we can see the DLSR model achieved the highest PSNR and Pearson CC values.
-		Metrics were calculated for frame number 110 on the whole plate and delamination region, respectively. 
+		As shown in the table the DLSR model achieved the highest PSNR and Pearson CC values.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions and future works}
@@ -1553,7 +1524,8 @@ a	\end{frame}
 			\end{justify}			
 		\end{tcolorbox}				
 		\end{footnotesize}			
-	\end{frame}		
+	\end{frame}			
+	\note{}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Future works}
 		\begin{columns}[T]
@@ -1574,7 +1546,8 @@ a	\end{frame}
 				\end{figure}			
 			\end{column}		
 		\end{columns}				
-	\end{frame}		
+	\end{frame}	
+	\note{}		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{frame}{Publications}
 		\vspace{5pt}
@@ -1630,6 +1603,7 @@ a	\end{frame}
 			\end{columns}
 		\end{tiny}
 	\end{frame}	
+	\note{}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1645,5 +1619,6 @@ a	\end{frame}
 			The research work was funded by the Polish National Science Center under grant agreement no. 2018/31/B/ST8/00454.
 		\end{frame}
 	}
+	\note{}	
 %	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\end{document}
