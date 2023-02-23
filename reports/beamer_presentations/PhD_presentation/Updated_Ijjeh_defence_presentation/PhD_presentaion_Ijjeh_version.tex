@@ -33,17 +33,19 @@
 \usepackage[labelformat=empty]{caption}
 \usepackage{comment}
 \usepackage{mathtools}% Loads amsmath
-
 \usepackage{efbox,graphicx}
-
 \usepackage{pgfpages}
 %\setbeameroption{show notes}
-
 \captionsetup[figure]{labelformat=empty}%
 \usefonttheme{structurebold}
-
 \efboxsetup{linecolor=Lightskyblue,linewidth=2pt}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand\tcbtitle{\ifx\tcbtitletext\@empty\else%
+	{\kvtcb@fonttitle\kvtcb@haligntitle\kvtcb@before@title
+		\leavevmode\color{tcbcol@title}\tcbtitletext\kvtcb@after@title}\fi}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usepackage[font=footnotesize,labelfont=bf]{caption}
 %\captionsetup[figure]{font=small}
 
@@ -97,7 +99,7 @@
 
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 
-
+%
 %\setbeameroption{show notes on second screen}
 %\setbeamertemplate{note page}{\insertnote}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,8 +113,7 @@
 \justifying\title{FEASIBILITY STUDY OF ARTIFICIAL INTELLIGENCE APPROACH FOR DELAMINATION IDENTIFICATION IN COMPOSITE LAMINATES}
 %\subtitle{In preparation for a Ph.D. defence}
 \author{\textbf{Ph.D. candidate: Eng. Abdalraheem A. Ijjeh } 
-	\and \\ 
-	\textbf{Supervisor: D.Sc. Ph.D. Eng. Paweł Kudela}} 
+	\and \\ \textbf{Supervisor: D.Sc. Ph.D. Eng. Paweł Kudela}} 
 % logo align to Institute 
 \institute{Institute of Fluid Flow Machinery \\ 
 	Polish Academy of Sciences \\ 
@@ -215,10 +216,9 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note
 	{
-		I have two primary objectives in my work:
-		My primary objective in this work is to develop an artificial intelligence-driven diagnostic system for delamination identification in composite laminates.
+		My main objective in this work is to develop an artificial intelligence-driven diagnostic system for delamination identification in composite laminates.
 		
-		The secondary objective is to address the issue of slow data acquisition by a scanning laser Doppler vibrometer of high-resolution full wavefields of guided wave propagation.
+		The secondary objective is to address the issue of slow data acquisition of high-resolution measurements full wavefields by a scanning laser Doppler vibrometer.
 		
 		Accordingly, my thesis states that:
 	}
@@ -241,7 +241,7 @@
 		Then, we can use a scanning laser Doppler vibrometer which is a non-contact tool, to acquire the full wavefield of guided wave propagation.
 		The novelty of my work resides in the utilisation for the first time of the full wave fields of guided wave propagation in deep learning models for delamination identification.
 		And to show the effectiveness of my developed deep learning models, I compared them with a conventional signal processing technique that is adaptive wavenumber filtering.
-		Additionally, to solve the issue of slow data acquisition by the scanning laser Doppler vibrometer, I have developed a deep learning model that can recover the high-resolution measurements of the full wavefield from low-resolution measurements.
+		Additionally, to address the issue of slow data acquisition by the scanning laser Doppler vibrometer, I have developed a deep learning model that can recover the high-resolution measurements of the full wavefield from low-resolution measurements.
 		And to show the significance of my model, I have compared it with a well know technique that is compressed sensing.				
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -322,8 +322,8 @@ a	\end{frame}
 		\footnotesize
 		The specifications of the CFRP specimens used for evaluating the developed deep-learning models are shown in this slide.
 		
-		Specimens with multiple delaminations are shown on the left.
-		In which there are three specimens with multiple delaminations located at the same distance from the centre of the plate, and placed at different thicknesses as shown in the figure. 
+		Specimens with multiple delaminations are presented on the left.
+		In which there are three specimens with multiple delaminations located at the same distance from the centre of the plate, and placed at different thicknesses. 
 		
 		The figure on the right shows the specimen with a single delamination placed at the half thickness, and the total thickness of the specimen is 3.5 mm.
 				
@@ -337,10 +337,10 @@ a	\end{frame}
 			\begin{column}{0.55\textwidth}
 				\justifying
 				\begin{itemize}
-					\item Mindlin-Reissner plate theory.
-					\item Spectral element method (SEM).
-					\item Splitting elements and nodes at delamination.
-					\item GMSH software was used for meshing quads then converted to spectral elements.
+					\item Mindlin-Reissner plate theory
+					\item Spectral element method (SEM)
+					\item Splitting elements and nodes at delamination
+					\item GMSH software was used for meshing quads then converted to spectral elements
 				\end{itemize}	
 				\begin{figure}
 					\subfloat{\includegraphics[width=0.8\textwidth]{shell.png}}	
@@ -365,7 +365,7 @@ a	\end{frame}
 		
 		The synthetic dataset was created using the Mindlin-Reissner theory for thin plate analysis and the spectral element method to approximate the solution of wave propagation and their interaction with delamination.
 		
-		The meshes on the left show the modelled delamination in green and the piezoelectric transducer in red for each scenario.
+		The animation on the left shows the generated meshes in which the  delamination is modelled in green and the piezoelectric transducer in red for each scenario.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
@@ -374,11 +374,11 @@ a	\end{frame}
 			\begin{column}[t]{0.35\textwidth}
 				\justifying
 				\begin{itemize}
-					\item 475 delamination scenarios.
-					\item CFRP is made of 8-layers.
-					\item Delamination modelled between the \(3^{rd}\) and \(4^{th}\) layers.
-					\item Delamination size min 10~mm, max 40~mm.
-					\item \textbf{3-months of computing}.
+					\item 475 delamination scenarios
+					\item CFRP is made of 8-layers
+					\item Delamination modelled between the \(3^{rd}\) and \(4^{th}\) layers
+					\item Delamination size min 10~mm, max 40~mm
+					\item \textbf{3-months of computing}
 				\end{itemize}
 			\end{column}
 			\begin{column}[t]{0.2\textwidth}
@@ -402,7 +402,7 @@ a	\end{frame}
 		The synthetically generated dataset consists of 475 delamination cases. 
 		It was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm. 
 		The delamination was modeled between the third and fourth layers.
-		The delaminations's major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
+		The delamination's major and minor axes were randomly selected from interval \([10mm,\ 40mm]\). 
 		The angle $\aleph$ ranges form \([0^{\circ}-180^{\circ}]\).
 		The computation of the dataset took about three months.
 	}
@@ -447,7 +447,7 @@ a	\end{frame}
 		Here, I present a single training scenario.
 		The animation on the left represents the full wavefield frames of guided wave propagation, where x and y are the point coordinates, and tk is the time moment.
 		The output of applying the root mean square formula to the full wavefield is shown in the middle figure.
-		The figure on the right is the ground truth label of the delamination in white showing its location, size and shape.
+		The figure on the right is the ground truth label in which the delamination represented in white showing its location, size and shape.
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Deep learning approach: An~Overview}	
@@ -473,7 +473,7 @@ a	\end{frame}
 			\end{column}
 		\end{columns}
 		\only<2>{\begin{tcolorbox}
-		\noindent\textbf{I took the hardest task: 
+		\noindent\textbf{I chose the hardest task: 
 			\\ 
 			\alert{ Delamination identification (Pixel-wise image segmentation)}}
 		\end{tcolorbox}}
@@ -526,7 +526,7 @@ a	\end{frame}
 		
 		The convolution operation in image processing is essentially a cross-correlation operation, also known as a sliding dot product.
 		
-		The kernel also called a filter slides over an input image to extract features.
+		The kernel also called a filter or the feature detector slides over an input image to extract features.
 		The output of the convolution operation is a feature map.
 		
 		Consequently, these kernels learn to detect different types of edges
@@ -535,14 +535,14 @@ a	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Encoder-decoder architecture}
+	\begin{frame}{Encoder-Decoder Architecture}
 		\begin{columns}[T]
 			\begin{column}[c]{.40\textwidth}
 				\justifying
 				\begin{itemize}
-					\item \alert{Encoder}: extracts features.
-					\item \alert{Latent space}: condensed feature maps.
-					\item \alert{Decoder}: locates the features.
+					\item \alert{Encoder}: extracts features
+					\item \alert{Latent space}: condensed feature maps
+					\item \alert{Decoder}: locates the features
 				\end{itemize}	
 			\end{column}
 			\begin{column}[c]{.6\textwidth}
@@ -560,34 +560,7 @@ a	\end{frame}
 		The encoder aims to produce compressed feature maps from the input image at various scale levels using cascaded convolutions and downsampling operations. 
 		The decoder is responsible for upsampling the condensed feature maps in the latent space to the original input shape.		
 	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{subfigure}{0}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{frame}{Why deep learning?}
-		Conventional methods involve two processes:
-		\alert{\textbf{Feature extraction and classification.}}
-		\begin{figure}
-			\centering
-			\includegraphics[width=.95\textwidth]{conventional_ML.png}
-		\end{figure}	
-		Deep learning offers an \alert{\textbf{end-to-end}} approach: \alert{\textbf{Automatic}} feature extraction and classification.
-		\begin{figure}
-			\includegraphics[width=.95\textwidth]{DL_approach.png}
-		\end{figure}
-	\end{frame}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\note{
-		In this slide, I present a comparison between the conventional machine learning and deep learning approaches utilised for damage detection.
-		
-		In the conventional approaches, two processes must be performed by the practitioner: 
-		The first one is to extract the useful features from the registered data then to use a proper classification technique in order to get a prediction.
-		
-		This approach has drawbacks such as: 
-		it requires a great amount of human labor and computational effort, and it demands a high amount of experience from the practitioner.
-		
-		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification tasks by themselves without human intervention in an end-to-end approach. 
-	}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Development environment}
 	\setcounter{subfigure}{0}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
@@ -664,7 +637,7 @@ a	\end{frame}
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Part I: Delamination identification}
-	\begin{frame}{Semantic segmentation}
+	\begin{frame}{Delamination identification approaches}
 		\begin{columns}[T]
 			\begin{column}[c]{0.47\textwidth}
 				\centering
@@ -683,7 +656,7 @@ a	\end{frame}
 				\begin{figure}
 					\centering
 					\captionsetup{justification=centering}					
-					\subfloat[Multiple frames (animation)]{\animategraphics[autoplay,loop,width=.45\textwidth]{4}{figures/gif_figs/381_output/output_381-}{85}{113}}\quad
+					\subfloat[Multiple frames (animation)]{\animategraphics[autoplay,loop,width=.45\textwidth]{16}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
 					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
 				\end{figure}
 			\end{column}	
@@ -739,10 +712,10 @@ a	\end{frame}
 				\end{block}
 			\end{column}
 			\hfill
-			\begin{column}[t]{.45\textwidth}
+			\begin{column}[t]{.50\textwidth}
 				\begin{block}{Full wavefield frames based model}					
 					\begin{itemize}
-						\item Autoencoder ConvLSTM
+						\item Autoencoder ConvLSTM (Convolutional~Long~Short-Term Memory)
 					\end{itemize}									
 				\end{block}
 			\end{column}
@@ -757,7 +730,7 @@ a	\end{frame}
 		And the developed model based on the animation of full wavefield frames is Autoencoder ConvLSTM.		
 	}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section*{Developed RMS based models}	
+	\section*{RMS based models}	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\setcounter{subfigure}{0}
 	\begin{frame}{Developed RMS based models}
@@ -795,10 +768,14 @@ a	\end{frame}
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
-		In this slide, I present the autoencoder ConvLSTM model that takes a sequence of consecutive full wavefield frames of guided wave propagation as an input.
-		For training purposes, as the delamination location is known, I used a certain number of frames after the initial interaction of guided waves with the damage.
+		Here, I present the developed autoencoder-ConvLSTM model, which takes a sequence of consecutive full wavefield frames of guided wave propagation as an input.
+		
+		To reduce the training complexity, I used a certain number of frames after the initial interaction of guided waves with the damage, as the delamination location is known.
+		
 		These selected frames, which contain the required features regarding the delamination shape and location, are fed into an encoder-decoder model at once using a time-distributed layer.
-		Then, the output of the decoder is forwarded into the ConvLSTM layer, which is used to handle time series data by learning long-term spatiotemporal features.
+		
+		Then, the output of the decoder is forwarded into the ConvLSTM layer, which handles time series data by learning long-term spatiotemporal features.
+		
 		For real-life situations where the damage location is unknown,  the full wavefield is tested through a sliding window that produces an intermediate output at a time.
 		Finally, the root-mean-square formula is applied to all intermediate predictions to obtain the RMS damage map.		
 	}
@@ -844,7 +821,7 @@ a	\end{frame}
 				\begin{figure}[c]
 					\centering
 					\captionsetup{justification=centering}					
-					\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/456/intermediate_output-}{0}{82}
+					\animategraphics[controls,width=.9\textwidth]{8}{figures/gif_figs/456/intermediate_output-}{0}{82}
 					\caption{\(1^{st}\) numerical case, IoU=0.71}
 				\end{figure}
 			\end{column}
@@ -853,7 +830,7 @@ a	\end{frame}
 				\begin{figure}[c]
 					\centering
 					\captionsetup{justification=centering}					
-					\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/438/intermediate_output-}{0}{82}
+					\animategraphics[controls,width=.9\textwidth]{8}{figures/gif_figs/438/intermediate_output-}{0}{82}
 					\caption{\(2^{nd}\) numerical case, IoU=0.72}
 				\end{figure}
 			\end{column}
@@ -863,7 +840,7 @@ a	\end{frame}
 					\centering
 					\captionsetup{justification=centering}
 					
-					\animategraphics[controls,width=.9\textwidth]{2}{figures/gif_figs/397/intermediate_output-}{0}{82}
+					\animategraphics[controls,width=.9\textwidth]{8}{figures/gif_figs/397/intermediate_output-}{0}{82}
 					\caption{\(3^{rd}\) numerical case, IoU=0.86}
 				\end{figure}					
 			\end{column}
@@ -956,9 +933,10 @@ a	\end{frame}
 				\begin{figure}
 					\centering
 					\captionsetup{justification=centering}
-					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
-					\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_381.png}}\quad
-					\subfloat[Binary RMS, IoU= 0.88]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case381_.png}}\quad
+					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{32}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
+					\subfloat[Intermediate outputs]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{31}{figures/gif_figs/Numerical_case_381/num_case_381_frame_num-}{0}{487}}\quad
+					\subfloat[RMS (damage map)]{\includegraphics[height=3.05cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_381.png}}\quad
+					\subfloat[Binary RMS, IoU= 0.88]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case381_.png}}\quad
 				\end{figure}
 			\end{alertblock}}
 		\setcounter{subfigure}{0}
@@ -967,9 +945,10 @@ a	\end{frame}
 				\begin{figure}
 					\centering
 					\captionsetup{justification=centering}
-					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/385_output/output_385-}{1}{512}}\quad
-					\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_385.png}}\quad
-					\subfloat[Binary RMS, IoU= 0.58]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case385_.png}}
+					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{32}{figures/gif_figs/385_output/output_385-}{1}{512}}\quad		
+					\subfloat[Intermediate outputs]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{31}{figures/gif_figs/Numerical_case_385/num_case_385_frame_num-}{0}{487}}\quad			
+					\subfloat[RMS (damage map)]{\includegraphics[height=3.05cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_385.png}}\quad
+					\subfloat[Binary RMS, IoU= 0.58]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case385_.png}}
 				\end{figure}
 			\end{alertblock}}
 		\setcounter{subfigure}{0}
@@ -978,9 +957,10 @@ a	\end{frame}
 				\begin{figure}
 					\centering
 					\captionsetup{justification=centering}
-					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=4cm,keepaspectratio]{32}{figures/gif_figs/394_output/output_394-}{1}{512}}\quad
-					\subfloat[RMS of all intermediate predictions]{\includegraphics[height=4.1cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_394.png}}\quad
-					\subfloat[Binary RMS, IoU= 0.8]{\includegraphics[height=4cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case394_.png}}
+					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{32}{figures/gif_figs/394_output/output_394-}{1}{512}}\quad
+					\subfloat[Intermediate outputs]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{31}{figures/gif_figs/Numerical_case_394/num_case_394_frame_num-}{0}{487}}\quad
+					\subfloat[RMS (damage map)]{\includegraphics[height=3.05cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_394.png}}\quad
+					\subfloat[Binary RMS, IoU= 0.8]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case394_.png}}
 				\end{figure}
 			\end{alertblock}}
 	\end{frame}
@@ -1128,13 +1108,12 @@ a	\end{frame}
 			IoU= $0.41$% and $\epsilon=71.56\%$ 
 			\begin{figure}[ht!]
 				\centering
-				\subfloat[Input]{\animategraphics[autoplay,loop,height=3cm]{32}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
-				\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
+				\subfloat[Input]{\animategraphics[autoplay,loop,height=3cm]{16}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
+				\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{15}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
 				\subfloat[RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_updated_results_.png}}\quad
 				\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_CFRP_teflon_3o__375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_.png}}
 			\end{figure}			
-		\end{alertblock}
-		
+		\end{alertblock}	
 	\end{frame}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\note{
@@ -1238,6 +1217,7 @@ a	\end{frame}
 		One possible solution to tackle this problem is to acquire the Lamb waves at low-resolution grid points, and then the full wavefield can be reconstructed at high resolution.
 		Furthermore, I have compared my developed model of deep learning for super-resolution with the compressive sensing technique, which states that any signal can be reconstructed from a linear combination of random measurements.
 		To acquire the low-resolution measurements, I have used two types of masks, as shown in the figure: random and jitter.
+		The low-resolution measurements are far fewer than required by the Nyquist-Shannon sampling theory.
 	}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1507,11 +1487,11 @@ a	\end{frame}
 				\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
 				\addtolength{\leftmargini}{\labelsep}
 				\begin{itemize}
-					\item{Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.}				
-					\item{Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.}
-					\item{Deep learning approaches surpass conventional approaches for delamination identification.}
+					\item{Deep learning models trained on synthetic dataset generalise well and can be applied directly to experimental wavefields.}			
+					\item{Deep learning approaches surpass conventional approaches for delamination identification.}	
+					\item{Animation-based deep learning models perform better than image-based models but are more complex and require longer time for training.}					
 					\item{Deep learning models can be generalised to other types of defects and materials.}
-					\item{The DLSR model can recover the HR measurements from LR measurements with high accuracy.}
+					\item{The DLSR model can recover the HR measurements from LR measurements with good accuracy.}
 				\end{itemize}
 			\end{justify}				
 		\begin{tcolorbox}
@@ -1610,6 +1590,7 @@ a	\end{frame}
 	{
 		\setbeamercolor{palette primary}{fg=blue, bg=white}
 		\begin{frame}[standout]
+			\centering
 			Thank you for your listening!\\ \vspace{12pt}
 			Questions?\\ \vspace{12pt}
 			\url{aijjeh@imp.gda.pl}

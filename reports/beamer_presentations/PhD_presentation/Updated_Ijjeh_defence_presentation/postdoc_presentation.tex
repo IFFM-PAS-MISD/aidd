@@ -1,0 +1,552 @@
+%\PassOptionsToPackage{draft}{graphicx}
+\documentclass[10pt,aspectratio=169,dvipsnames]{beamer} % , notes=only aspect ratio 16:9
+%\graphicspath{{../../figures/}}
+
+%\includeonlyframes{frame1,frame2,frame3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+%\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{eso-pic} 
+\usepackage{wrapfig}
+\usepackage{animate,media9}
+\usepackage{subfig}
+\usepackage{fancybox}
+%\usepackage{multimedia}
+\usepackage{dashbox}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[document]{ragged2e}
+\usepackage[labelformat=empty]{caption}
+\usepackage{comment}
+\usepackage{mathtools}% Loads amsmath
+\usepackage{efbox,graphicx}
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+\captionsetup[figure]{labelformat=empty}%
+\usefonttheme{structurebold}
+\efboxsetup{linecolor=Lightskyblue,linewidth=2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand\tcbtitle{\ifx\tcbtitletext\@empty\else%
+	{\kvtcb@fonttitle\kvtcb@haligntitle\kvtcb@before@title
+		\leavevmode\color{tcbcol@title}\tcbtitletext\kvtcb@after@title}\fi}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[font=footnotesize,labelfont=bf]{caption}
+%\captionsetup[figure]{font=small}
+
+%\usepackage[export]{adjustbox}
+%\usepackage{background}
+%\backgroundsetup{contents=preliminary,placement=bottom,color=blue}
+%\usepackage{FiraSans}
+
+%\usepackage{comment}
+%\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows} 
+
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+
+
+%\usepackage{etoolbox}
+%\apptocmd{\frame}{}{\justifying}{} 
+
+\graphicspath{{figures/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+%\usefonttheme[onlymath]{Serif} % It should be uncommented if Fira fonts in 
+%%math does not work
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%\newcommand{\matr}[1]{#1} % pure math version
+%\newcommand{\matr}[1]{\bm{#1}} % ISO complying version
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+%
+%\setbeameroption{show notes on second screen}
+%\setbeamertemplate{note page}{\insertnote}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\date{February 13, 2023}
+%\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\justifying\title{Postdoctoral position}
+%\subtitle{In preparation for a Ph.D. defence}
+\author{\textbf{Ph.D. Eng. Abdalraheem A. Ijjeh }} 
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery \\ 
+	Polish Academy of Sciences \\ 
+	Gdansk, Poland \\
+	\vspace{-1.5cm}
+	\flushright 
+	\includegraphics[width=6cm]{imp_logo.png}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+\begin{document}
+	\maketitle
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% SLIDES		
+	\begin{frame}[label=frame1]{Outlines}
+		\setbeamertemplate{section in toc}[sections numbered]
+		\setbeamertemplate{subsection in toc}[subsections numbered]
+		\tableofcontents
+	\end{frame}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{About me!}
+	\begin{frame}{Introducing myself}
+		\begin{columns}[T]
+			\footnotesize
+			\justifying
+			\begin{column}[t]{.6\textwidth}
+				\footnotesize				
+				\begin{tcolorbox}
+					{\textbf{Abdalraheem Ijjeh} was born in Irbid, Jordan in 1988.}
+				\end{tcolorbox}
+				\begin{tcolorbox}
+					\textbf{Education}
+					\begin{itemize}
+						\item 12/2019 - 02/2023	\textbf{Ph.D. in mechanical engineering}, Institute of Fluid-Flow Machinery, Polish Academy of Sciences, Gdansk, Poland.				
+						\item 09/2010 - 01/2014 \textbf{M.Sc. in Computer engineering}, Jordan University Of Science \& Technology, Jordan.				
+						\item {09/2005 - 06/2010} \textbf{B.Sc. in Computer engineering}, Yarmouk University, Jordan.
+						\item {09/2004 - 06/2005} \textbf{High school}, Model School of Yarmouk University, Jordan.
+					\end{itemize}
+				\end{tcolorbox}
+			\end{column}
+			\begin{column}[t]{0.39\textwidth}
+				\begin{tcolorbox}
+					\textbf{Skills and expertise}
+					\begin{itemize}								
+						\item Data science, big data, 
+						\item Computer vision
+						\item Parallel computing, CUDA
+						\item Python
+						\item TensorFlow, Keras
+						\item Signal processing \& Image Signal Processing							
+						\item{Linux} 
+						\item{Latex} 
+					\end{itemize}
+				\end{tcolorbox}		
+			\end{column}
+		\end{columns}
+	\end{frame}
+	\section{My Ph.D. work in brief}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{My work in short!}
+		\begin{columns}[T]
+			\begin{column}[c]{0.9\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[height=.85\textheight]{full_procedure.png}	
+				\end{figure}		
+			\end{column}
+		\end{columns}		
+	\end{frame}
+	\setcounter{subfigure}{0}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Part I: Delamination identification}
+	\begin{frame}{Delamination identification approaches}
+		\begin{columns}[T]
+			\begin{column}[c]{0.47\textwidth}
+				\centering
+				\textbf{One-to-one \\image-based approach (RMS)} 
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}				
+					\subfloat[Single input (image)]{\includegraphics[width=.45\textwidth]{RMS_flat_shell_Vz_381_500x500bottom.png}}\quad
+					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
+				\end{figure}
+			\end{column}
+			\hfill
+			\begin{column}[c]{0.47\textwidth}
+				\centering
+				\textbf{Many-to-one \\animation-based approach}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}					
+					\subfloat[Multiple frames (animation)]{\animategraphics[autoplay,loop,width=.45\textwidth]{16}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
+					\subfloat[Single output]{\includegraphics[width=.45\textwidth]{GCN_381.png}}
+				\end{figure}
+			\end{column}	
+		\end{columns}		
+	\end{frame}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Numerical test cases RMS based models (GCN model)}
+		\begin{columns}[T]
+			\begin{column}[c]{1.0\textwidth}
+				\begin{figure}[c]
+					\centering
+					\captionsetup{justification=centering}					
+					\animategraphics[controls,height=.75\textheight]{8}{figures/gif_figs/456/intermediate_output-}{0}{82}
+					\caption{IoU=0.71}
+				\end{figure}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Numerical test case animation of Lamb waves}
+		\setcounter{subfigure}{0}
+		\only<1>{
+			\begin{alertblock}{Test case}
+				\begin{figure}
+					\centering
+					\captionsetup{justification=centering}
+					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{32}{figures/gif_figs/381_output/output_381-}{1}{512}}\quad
+					\subfloat[Intermediate outputs]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{31}{figures/gif_figs/Numerical_case_381/num_case_381_frame_num-}{0}{487}}\quad
+					\subfloat[RMS (damage map)]{\includegraphics[height=3.05cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_381.png}}\quad
+					\subfloat[Binary RMS, IoU= 0.88]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case381_.png}}\quad
+				\end{figure}
+		\end{alertblock}}
+		\setcounter{subfigure}{0}
+%		\only<2>{
+%			\begin{alertblock}{Second test case}
+%				\begin{figure}
+%					\centering
+%					\captionsetup{justification=centering}
+%					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{32}{figures/gif_figs/385_output/output_385-}{1}{512}}\quad		
+%					\subfloat[Intermediate outputs]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{31}{figures/gif_figs/Numerical_case_385/num_case_385_frame_num-}{0}{487}}\quad			
+%					\subfloat[RMS (damage map)]{\includegraphics[height=3.05cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_385.png}}\quad
+%					\subfloat[Binary RMS, IoU= 0.58]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case385_.png}}
+%				\end{figure}
+%		\end{alertblock}}
+%		\setcounter{subfigure}{0}
+%		\only<3>{
+%			\begin{alertblock}{Third test case}
+%				\begin{figure}
+%					\centering
+%					\captionsetup{justification=centering}
+%					\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{32}{figures/gif_figs/394_output/output_394-}{1}{512}}\quad
+%					\subfloat[Intermediate outputs]{\animategraphics[autoplay,loop,height=3cm,keepaspectratio]{31}{figures/gif_figs/Numerical_case_394/num_case_394_frame_num-}{0}{487}}\quad
+%					\subfloat[RMS (damage map)]{\includegraphics[height=3.05cm,keepaspectratio]{figures/RMS_Ijjeh_num_case_394.png}}\quad
+%					\subfloat[Binary RMS, IoU= 0.8]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_Ijjeh_num_case394_.png}}
+%				\end{figure}
+%		\end{alertblock}}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Experimental results: RMS image-based (Single delamination)}
+		\begin{columns}[T]
+			\begin{column}[t]{.25\textwidth}
+				\begin{figure}[ht!]
+					\centering
+					\captionsetup{justification=centering}
+					\includegraphics[height=.35\textheight]{ERMS_with_label.png}
+					\caption{ERMS \& label}
+				\end{figure}
+				\justifying
+				\tiny
+				Kudela, P., Radzienski, M. and Ostachowicz, W., 2018. \textbf{Impact induced damage assessment by means of Lamb wave image processing}. \textit{Mechanical Systems and Signal Processing}, 102, pp.23-36.
+			\end{column}
+			\begin{column}[t]{0.5\textwidth}
+				\begin{block}{Adaptive wavenumber filtering}
+					\centering
+					\footnotesize
+					IoU=$0.401$
+					\begin{figure}[ht!]
+						\centering
+						\captionsetup{justification=centering}
+						\subfloat{\includegraphics[height=.35\textheight]{ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}}
+						\quad
+						\subfloat{\includegraphics[height=.35\textheight]{Binary_ERMSF_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp.png}}
+					\end{figure}
+				\end{block}					
+			\end{column}		
+			\begin{column}[t]{0.25\textwidth}
+				\begin{alertblock}{DL approach: GCN}
+					\centering
+					\footnotesize
+					IoU\(=0.723\)
+					\begin{figure}[ht!]	
+						\centering				
+						\subfloat{\includegraphics[height=.35\textheight]{Fig_GCN_7.png}}
+					\end{figure} 	
+				\end{alertblock}				
+			\end{column}
+		\end{columns}	
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	\begin{frame}{Experimental results: Full wavefield based (Single delamination)}		
+		\begin{alertblock}{DL approach}
+			IoU= $0.41$% and $\epsilon=71.56\%$ 
+			\begin{figure}[ht!]
+				\centering
+				\subfloat[Input]{\animategraphics[autoplay,loop,height=3cm]{16}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
+				\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{15}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
+				\subfloat[RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_updated_results_.png}}\quad
+				\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_CFRP_teflon_3o__375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_.png}}
+			\end{figure}			
+		\end{alertblock}	
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		In this slide, I present the predicted results using the autoencoder ConvLSTM model regarding the single delamination case.
+		
+		Animation (a) shows the full wavefield measured by SLDV with 256 frames.
+		
+		Animation (b) shows the intermediate predictions of the model. 
+		
+		Figure (c) shows the RMS of all intermediate predictions.
+		
+		And finally, Figure (d) shows the binary RMS with IoU= 0.41		
+	}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}	
+	\begin{frame}{Experimental results: Full wavefield based (Multiple delaminations)}
+		\begin{columns}[T]
+			\begin{column}[t]{0.20\textwidth}
+				\begin{block}{Input}
+					\footnotesize Full wavefield					
+					\begin{figure}[ht!]	
+						\centering						
+						\subfloat{\animategraphics[autoplay,loop,height=0.32\textheight]{32}{figures/gif_figs/input_specimen_3/specimen_3-}{1}{512}}
+					\end{figure}
+				\end{block}				
+			\end{column}
+			\begin{column}[t]{0.40\textwidth}				
+				\begin{block}{Adaptive wavenumber filtering}
+					\footnotesize IoU$=0.04$					
+					\begin{figure}[ht!]	
+						\centering
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/mul/figure17a.png}}
+						\quad
+						\centering
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/mul/figure17b.png}}								
+					\end{figure}
+				\end{block}	
+			\end{column}
+			\begin{column}[t]{0.40\textwidth}				
+				\begin{alertblock}{DL approach}	
+					\footnotesize IoU= $0.64$						
+					\begin{figure}[ht!]	
+						\centering
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/RMS_L3_S3_B_333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_updated_results_.png}}
+						\quad
+						\subfloat{\includegraphics[height=0.32\textheight]{figures/Binary_RMS_L3_S3_B__333x333p_50kHz_5HC_18Vpp_x10_pzt_Ijjeh_.png}}						
+					\end{figure}				
+				\end{alertblock}				
+			\end{column}				
+		\end{columns}	
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Part II: Super-resolution image reconstruction}
+	\begin{frame}{Super-resolution image reconstruction}
+		\begin{columns}[T]
+			\begin{column}[t]{0.6\textwidth}
+				\begin{alertblock}{Deep learning super-resolution model (DLSR)}					
+					\begin{footnotesize}
+						\justifying
+						\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+						\addtolength{\leftmargini}{\labelsep}
+						\begin{itemize}
+							\item Registering HR full wavefield with an SLDV is a~time-consuming process.
+							\item DLSR model aims to recover HR full wavefield scans from a~LR measurements (below the Nyquist-Shannon sampling rate).
+						\end{itemize} 
+					\end{footnotesize}					
+				\end{alertblock}						
+				\begin{exampleblock}{Compressive sensing (CS) theory}
+					\footnotesize
+					\justifying
+					Any natural signal (\(x\)), e.g. (sounds, images) can be recovered using considerably fewer measurements (\(y\)) than standard methods.
+					\vfill
+					\begin{figure}[ht!]
+						\centering
+						\includegraphics[width=.45\textwidth]{matrix_mask.png}
+					\end{figure}
+				\end{exampleblock}							
+			\end{column}
+			\begin{column}[t]{0.4\textwidth}
+				\begin{figure}[ht!]
+					\centering
+					\includegraphics[width=1\textwidth]{superresolution_flowchart.png}
+				\end{figure}
+			\end{column}
+		\end{columns}		
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	\begin{frame}{Experimental test case}		
+		\begin{columns}[T]
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{0.25\textwidth}				
+				\begin{figure}	
+					\centering					
+					\includegraphics[width=1\textwidth]{frame110_32x32.png}
+					%					\caption{LR input \((N_f = 110)\)}
+				\end{figure}
+				\footnotesize
+				LR measurements (Input): \(32\times32=1024\)p. \\
+				HR (Output): \(512\times512=262144\)p.
+			\end{column}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{.25\textwidth}
+				\begin{block}{HR label}
+					\begin{figure}
+						\centering
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure10a.png}}
+						\vfill
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure11a.png}}
+					\end{figure}
+				\end{block}
+			\end{column}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{.25\textwidth}
+				\begin{block}{CS: 1024p}
+					\begin{figure}
+						\centering
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure10b.png}}
+						\vfill						
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure11b.png}}
+					\end{figure}
+				\end{block}				
+			\end{column}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{column}[t]{.25\textwidth}
+				\begin{alertblock}{DLSR}
+					\begin{figure}
+						\centering
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure10e.png}}
+						\vfill			
+						\subfloat{\includegraphics[width=0.75\textwidth]{figure11e.png}}\quad
+					\end{figure}
+				\end{alertblock}				
+				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\end{column}				
+		\end{columns}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{My current work}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Current research}
+		\begin{columns}[T]
+			\begin{column}[t]{0.49\textwidth}
+				\centering
+				\textbf{\underline{Metamaterials: Dispersion diagrams}}
+				\begin{figure}
+					\centering
+					\efbox{\includegraphics[width=1\textwidth]{Surrogate_DL_model_for_PC_Abdalraheem.png}}
+				\end{figure}
+			\end{column}
+			\begin{column}[t]{0.49\textwidth}
+				\centering
+				\textbf{\underline{COMSOL vs. surrogate DL model predictions}}
+				\begin{figure}
+					\centering
+					\efbox{\includegraphics[width=1\textwidth]{plot_1029_4672_10425_KF_DL_FEM_BG_triple_tile.png}}							
+				\end{figure}			
+			\end{column}		
+		\end{columns}				
+	\end{frame}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\begin{frame}{Publications}
+		\vspace{5pt}
+		\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+		\addtolength{\leftmargini}{\labelsep}
+		\begin{tiny}					
+			\begin{columns}[T]
+				\begin{column}[t]{0.48\textwidth}
+					\underline{\textbf{Journal articles}}
+					\begin{enumerate}
+						\justifying
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ijjeh, A., Ullah, S., Radzienski, M. and Kudela, P., 2023. Deep learning super-resolution for the reconstruction of full wavefield of Lamb waves. \textbf{\textit{Mechanical Systems and Signal Processing}}, 186, p.109878.						
+						\textbf{[IF:8.934]}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ullah, S., Ijjeh, A.A. and Kudela, P., 2023. Deep learning approach for delamination identification using animation of Lamb waves. 						
+						\textbf{\textit{Engineering Applications of Artificial Intelligence}}, 117, p.105520.		
+						\textbf{[IF:7.802]}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ijjeh, A.A. and Kudela, P., 2022. Deep learning based segmentation using full wavefield processing for delamination identification: A comparative study. \textbf{\textit{Mechanical Systems and Signal Processing}}, 168, p.108671. \textbf{[IF:8.934]}
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+						\item Ijjeh, A.A., Ullah, S. and Kudela, P., 2021. Full wavefield processing by using FCN for delamination detection. \textbf{\textit{Mechanical Systems and Signal Processing}}, 153, p.107537.		
+						\textbf{[IF:8.934]}	
+						%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					\end{enumerate}					
+				\end{column}
+				\begin{column}[t]{0.48\textwidth}
+					\underline{\textbf{Conference papers}}
+					\begin{enumerate}
+						\justifying
+						\item {Ijjeh, A.}, Kudela, P. Convolutional LSTM for delamination imaging in composite laminates. 
+						The 4th International Conference on Machine Learning and Intelligent Systems (MLIS 2022), November \(8^{th}\) - \(11^{th}\), 2022, Seoul, Republic of Korea.
+						\item Ijjeh, A. and Kudela, P., 2022, June. Delamination Identification Using Global Convolution Networks. 
+						In European Workshop on Structural Health Monitoring: EWSHM 2022-Volume 3 (pp. 521-529). Cham: Springer International Publishing.		
+						\item {Ijjeh, A.}, Kudela, P. Feasibility Study of Full Wavefield Processing by Using CNN for Delamination Detection. 
+						Proceedings of the International Conference on Structural Health Monitoring of Intelligent
+						Infrastructure, June \(30^{th}\) - July \(2^{nd}\), 2021, Porto, Portugal, ISSN 2564-3738, pages 709-713.
+					\end{enumerate}		
+					\underline{\textbf{Chapters}}					
+					\begin{enumerate}
+						\justifying
+						\item {Abdalraheem Ijjeh}, Deep Learning based Damage Imaging techniques, chapter in: Wybrane zagadnienia
+						inżynierii mechanicznej, Praca zbiorowa pod redakcja M.~Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
+						Maszyn Przepływowych PAN, Gdańsk, 2022, ISBN: 978-83-66928-09-1.
+						\item {Abdalraheem Ijjeh}, Data-driven based approach for damage detection, chapter in: Wybrane zagadnienia
+						inżynierii mechanicznej, Praca zbiorowa pod redakcja M.~Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
+						Maszyn Przepływowych PAN, Gdańsk, 2021, ISBN: 978-83-66928-00-8.				
+						\item {Abdalraheem Ijjeh}, Machine Learning for SHM: Literature Review, chapter in: Wybrane zagadnienia
+						inżynierii mechanicznej, Praca zbiorowa pod redakcja M.~Mieloszyk, T. Ochrymiuka, Wydawnictwo Instytutu
+						Maszyn Przepływowych PAN, Gdańsk, 2020, ISBN: 978-83-88237-97-3.
+					\end{enumerate}
+				\end{column}		
+			\end{columns}
+		\end{tiny}
+	\end{frame}	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	{
+		\setbeamercolor{palette primary}{fg=blue, bg=white}
+		\begin{frame}[standout]
+			\centering
+			Thank you for your listening!\\ \vspace{12pt}
+		\end{frame}
+	}
+\end{document}
