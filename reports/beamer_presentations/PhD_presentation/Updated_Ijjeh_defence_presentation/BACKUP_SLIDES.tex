@@ -1,0 +1,1071 @@
+%\PassOptionsToPackage{draft}{graphicx}
+\documentclass[10pt,aspectratio=169,dvipsnames]{beamer} % aspect ratio 16:9
+%\graphicspath{{../../figures/}}
+
+%\includeonlyframes{frame1,frame2,frame3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+%\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{eso-pic} 
+\usepackage{wrapfig}
+\usepackage{animate,media9}
+\usepackage{subfig}
+\usepackage{fancybox}
+%\usepackage{multimedia}
+\usepackage{dashbox}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[document]{ragged2e}
+\usepackage{caption}
+\usepackage{comment}
+\usepackage{mathtools}% Loads amsmath
+
+%\usepackage[export]{adjustbox}
+%\usepackage{background}
+%\backgroundsetup{contents=preliminary,placement=bottom,color=blue}
+%\usepackage{FiraSans}
+
+%\usepackage{comment}
+%\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows} 
+
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+
+\graphicspath{{figures/}}
+
+\captionsetup[figure]{labelformat=empty}%
+\usefonttheme{structurebold}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+%\usefonttheme[onlymath]{Serif} % It should be uncommented if Fira fonts in 
+%%math does not work
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%\newcommand{\matr}[1]{#1}   % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}  % ISO complying version
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+%\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=left}
+%\setbeamertemplate{note page}{\insertnote}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Backup slides for the defence}
+%\subtitle{In preparation for a Ph.D. defence}
+\author{\textbf{Ph.D. candidate, Eng. Abdalraheem A. Ijjeh } 
+	\and \\ 
+	\textbf{Supervisor: D.Sc. Ph.D. Eng. Paweł Kudela}
+} 
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery \\ 
+	Polish Academy of Sciences \\ 
+	\vspace{-1.5cm}
+	\flushright 
+	\includegraphics[width=6cm]{imp_logo.png}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+\begin{document}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\maketitle
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% SLIDES
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\section{Backup slides}
+	\addtocounter{section}{1}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	\begin{frame}{Optimization and Deep Learning}
+		\begin{columns}[T]
+			\begin{column}[t]{.4\textwidth}
+				\begin{itemize}
+					\item \alert{Labeled data} $\rightarrow$ (input data has labels/ground truths)
+					\item \alert{Loss function} $\rightarrow$ measures error between predicted and the ground truth values
+					\item \alert{Learnable parameters} $\rightarrow$ updated during the backpropagation step (optimization e.g. Gradient descent )					
+				\end{itemize}
+			\end{column}
+			\begin{column}[t]{.55\textwidth}
+				\begin{figure}[t]
+					\centering
+					\animategraphics[autoplay,loop,width =1.0\textwidth]{1}{figures/gif_figs/BP/png/BP_technique_}{0}{14}
+				\end{figure}
+			\end{column}
+		\end{columns}		
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Why deep learning?}
+		Conventional methods involve two processes:
+		\alert{\textbf{Feature extraction and classification.}}
+		\begin{figure}
+			\centering
+			\includegraphics[width=.95\textwidth]{conventional_ML.png}
+		\end{figure}	
+		Deep learning offers an \alert{\textbf{end-to-end}} approach: \alert{\textbf{Automatic}} feature extraction and classification.
+		\begin{figure}
+			\includegraphics[width=.95\textwidth]{DL_approach.png}
+		\end{figure}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{
+		In this slide, I present a comparison between the conventional machine learning and deep learning approaches utilised for damage detection.
+		
+		In the conventional approaches, two processes must be performed by the practitioner: 
+		The first one is to extract the useful features from the registered data then to use a proper classification technique in order to get a prediction.
+		
+		This approach has drawbacks such as: 
+		it requires a great amount of human labor and computational effort, and it demands a high amount of experience from the practitioner.
+		
+		On the other hand, the deep learning approach offers the opportunity to develop models that can automatically perform feature extraction and classification tasks by themselves without human intervention in an end-to-end approach. 
+		}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Initial frame interaction}
+	\begin{footnotesize}
+		\begin{itemize}
+			\item The total wave propagation time was set to \(0.75\) ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
+			\item The total time of propagation was converted into \(512\) frames of animated Lamb waves.
+			\item The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
+			\item The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset. 
+			Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
+			\item As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
+		\end{itemize}
+		
+		When the time of interaction \(t_i\) with the delamination is know, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
+		\begin{gather*}
+			t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
+			\\
+			f_n = \frac{t_i}{0.75ms} \times 512
+		\end{gather*}
+	\end{footnotesize}					
+\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\note{			
+		In this work, I used the supervised approach, which means that the input data is labelled.
+		
+		Accordingly, the idea of supervised learning is to learn a model of how to map the inputs to the outputs.
+		
+		Initially, when we start training the deep learning model, all learnable parameters, such as weights and biases, start with random values.
+		These learnable parameters are updated during the training phase.
+		Now, in the forward pass, we feed the data into the model, and it flows through the layers until we get the predicted output.
+		Here, we need an objective loss function to estimate the loss (error) between the predicted output and the ground truth.
+		
+		A well-known optimization algorithm is a gradient descent, which aims to reduce the loss at each step to reach the global minimum value by calculating the gradient and then pushing back the calculated gradients across all the neurons in a technique called backpropagation.
+		
+		Accordingly, all learnable parameters are updated, which leads to minimizing the loss value.
+	}
+	
+	\begin{frame}{Composite specimen}
+		\begin{table}[h]
+			\renewcommand{\arraystretch}{1.1}
+			\centering \footnotesize
+			\caption{Geometry of a plain weave fabric reinforced composite [mm]}
+			\begin{tabular}{cccccc} 
+				%\hline
+				\toprule[1.5pt]
+				\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }\\ 
+				%	\hline \hline
+				\cmidrule(lr){1-4} \cmidrule(lr){5-6} 
+				fill & warp & fill gap& warp gap& fill & warp\\
+				%\hline
+				$a_f$ &$a_w$& $g_f$ & $g_w$ & $h_f$& $h_w$ \\ 
+				%\hline
+				%\midrule
+				\cmidrule(lr){1-2} \cmidrule(lr){3-4} \cmidrule(lr){5-6}
+				1.92 &2.0& 0.05& 0.05 & 0.121875 & 0.121875 \\
+				%\hline 
+				\bottomrule[1.5pt] 
+			\end{tabular} 
+			\label{tab:weave_geo}
+		\end{table}
+	\end{frame}
+
+	\begin{frame}
+		5-cycle Hann-windowed sinusoid:
+		\begin{itemize}
+			\item Narrow-enough band (frequency content)
+			\item central frequency with good energy
+			\item not too short to have less energy and broader band
+			\item not too long to complicate the signal superposition
+			\item useful to identify peak locations  velocities / TOFs
+		\end{itemize}
+				
+		More cycles:
+		\begin{itemize}
+			\item more energy
+			\item narrower bandwidth
+			\item useful for nonlinear analysis (frequency domain)
+		\end{itemize}
+		
+		CHIRP or single-pulse signals:
+		\begin{itemize}
+			\item broadband excitation (broad frequency range)
+			\item good for dispersion analysis
+		\end{itemize}
+		Frequency content can be checked using fast Fourier transform (FFT)
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Dataset}
+		\justifying\footnotesize	
+		\begin{itemize}
+			\item The input signal was a five-cycle Hann window modulated sinusoidal tone burst. 
+			\item The carrier frequency was assumed to be 50 kHz. 
+			\item The total wave propagation time was set to 0.75 ms so that the guided wave could propagate to the plate edges and back to the actuator twice. 
+			\item The number of time integration steps was 150000, which was selected for the stability of the central difference scheme.
+			\item The material was a typical cross-ply CFRP laminate. 
+			\item The stacking sequence \([0/90]_4\) was used in the model. 
+			\item The properties of a single ply were as follows [GPa] (elasticity matrix): \(C_{11}=52.55,\ C_{12}=6.51,\ C_{22}=51.83,\ C_{44}=2.93,\ C_{55}=2.92,\ C_{66}=3.81\). 
+			\item The assumed mass density was 1522.4 kg/\(m^3\). 
+			\item These properties were selected so that wave front patterns and wavelengths simulated numerically are similar to the wavefields measured by the SLDV on CFRP specimens used later on for testing the developed methods for delamination identification. 
+			\item The shortest wavelength of the propagating A0 Lamb wave mode was 21.2 mm for numerical simulations and 19.5 mm for experimental measurements, respectively.
+		\end{itemize}		
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Rule of mixture and homogenization}	
+		\justifying\footnotesize
+		\noindent Composite materials have their micro-structure designed in terms of their macroscopic constituents, e.g., fibers in a homogeneous matrix material. 
+		By controlling the choice of fibres, their volume fraction, and alignment, the mechanical properties may be tailored to meet specific design requirements.
+		\begin{columns}[T]				
+			\begin{column}{0.45\textwidth}
+				Diagram (a) shows a 'uniaxial fibre-reinforced composite material," and (b) shows how the stress on the composite is carried by the fibres and the matrix. 
+				In normal situations, the fibre has a larger Young's modulus than the matrix, and for the continuous fibres shown, where the strain is the same in the matrix and the fibre, the fibre stress is higher than the matrix stress.
+			\end{column}
+			\begin{column}{0.45\textwidth}
+				\begin{figure}
+					\includegraphics[width=0.8\textwidth]{rule_of_mixture.png}
+					\caption{From: McMahon and Graham, :"The Bicycle and the Walkman," Merion (1992)}
+				\end{figure}
+			\end{column}
+		\end{columns}
+		The Young's modulus of the composite is given by the 'rule of mixtures' i.e. \(E_C = E_F V_F + E_MV_M\), also \((V_M + V_F) = 1\) or \(V_M = (1 - V_F )\). 
+		The elastic modulus along the fibre direction can be controlled by selecting the volume fraction of the fibres.		
+	\end{frame}
+	\begin{frame}{Rule of mixture}
+		\justifying\footnotesize
+		The rule of mixtures is a method used to approximate the properties of composite materials, specifically laminates made of different layers or "plies" of material. It is based on the assumption that the properties of the composite can be approximated as a weighted average of the properties of the individual plies.
+		
+		The rule of mixtures can be applied to various properties of composite laminates, such as Young's modulus (a measure of stiffness), Poisson's ratio (a measure of how a material expands or contracts in different directions), and thermal expansion coefficient (a measure of how a material expands or contracts with changes in temperature).
+		
+		For example, the rule of mixtures for Young's modulus of a laminate can be expressed as:
+		\begin{gather*}
+			E_c = (V_1 * E_1) + (V_2 * E_2) + ... + (V_n * E_n)
+		\end{gather*}
+		
+		Where:
+		\(E_c\) = Young's modulus of the composite laminate, \(V_i\) = volume fraction of the ith ply in the laminate, \(E_i\) = Young's modulus of the ith ply
+		
+		The volume fraction of each ply is simply the thickness of that ply divided by the total thickness of the laminate.
+		
+		It is worth noting that the rule of mixtures is only an approximation and not always accurate. More advanced models and methods, such as the laminated plate theory or the finite element method, are often used to more accurately predict the properties of composite laminates, especially in cases where the laminates are subjected to complex loading conditions.	
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	\begin{frame}{Lamb waves}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{alertblock}{Lamb waves}	
+			Lamb waves are plane waves propagating in thin plates.\\
+			Shear vertical waves in conjunction with longitudinal P waves interacts with plate surfaces resulting in complex wave mechanism which leads to creation of Lamb waves.
+		\end{alertblock}
+		%		Horace Lamb discovered these type of waves in 1917.
+		%		He derived theory and dispersion relations.
+		\begin{columns}[T]
+			\begin{column}{0.5\textwidth}
+				\centering
+				symmetric modes
+				\begin{equation*}
+					\frac{\tan(q h)}{\tan(p h)} = -\frac{4 k^2 p q}{\left(q^2 - k^2\right)^2}
+				\end{equation*}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\centering
+				antisymmetric modes
+				\begin{equation*}
+					\frac{\tan(q h)}{\tan(p h)} = -\frac{\left(q^2 - k^2\right)^2}{4 k^2 p q}
+				\end{equation*}
+			\end{column}	
+		\end{columns}	
+		\centering
+		%		\(q=q(\omega,k), \quad p=p(\omega,k) \)
+		\begin{gather*}
+			\centering
+			p^2 = \frac{\omega^2}{c_{L}^2}-k^2,\ q^2 = \frac{\omega^2}{c_{S}^2}-k^2,\ k = \frac{2\pi}{\lambda},\ f=\frac{\omega}{2\pi}
+		\end{gather*}
+		\newline
+		\begin{gather*}
+			\centering
+			c_L=\sqrt{\frac{2\mu (1-\nu)}{\rho(1-2\nu)}},\ c_S=\sqrt{\frac{\mu}{\rho}}
+		\end{gather*}
+	\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\begin{frame}{Prepreg}
+%		\justifying\footnotesize
+%		Prepreg is a composite material made of a reinforcement material, such as carbon fiber or glass fibers, pre-impregnated with a thermo-setting resin, such as epoxy or polyester. 
+%		The reinforcement material is impregnated with the resin in a controlled manner, and then rolled or folded in order to control the thickness and to make it easier to handle. 
+%		The material is then cured at high temperature and pressure to form a solid composite structure. 
+%		Prepregs are commonly used in aerospace, automotive, and sports equipment applications because of their high strength-to-weight ratio and excellent fatigue resistance.			
+%	\end{frame}
+%%	\begin{frame}{Prepreg GG204 P}
+%		\justifying\footnotesize
+%		GG204 P is a specific type of prepreg material manufactured by Hexcel Corporation. 
+%		It is made of a carbon fiber reinforcement pre-impregnated with an epoxy resin. 
+%		GG204 P is a high-performance material that is known for its excellent mechanical properties, high temperature resistance and good processability. 
+%		Some of the specific properties of GG204 P include:
+%		
+%		High strength and modulus.
+%		Low coefficient of thermal expansion.
+%		High temperature resistance.
+%		Excellent fatigue resistance.
+%		Good environmental resistance.
+%		Good processability.
+%		
+%		It is used in aerospace and industrial applications, such as in the manufacturing of aircraft and spacecraft structures, wind turbine blades, sporting goods, and more.
+%	\end{frame}
+%	\begin{frame}{Prepreg GG205 P}
+%		\justifying\footnotesize
+%		GG205 P is a specific type of prepreg material manufactured by Hexcel Corporation. 
+%		It is made of a carbon fiber reinforcement pre-impregnated with an epoxy resin. 
+%		It is a high-performance material that is known for its excellent mechanical properties and high temperature resistance. 
+%		Some of the specific properties of GG205 P include:
+%		
+%		High strength and modulus.
+%		Low coefficient of thermal expansion.
+%		High temperature resistance.
+%		Excellent fatigue resistance.
+%		Good environmental resistance.
+%		
+%		It is used in aerospace and industrial applications, such as in the manufacturing of aircraft and spacecraft structures, wind turbine blades, and more.
+%	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\begin{frame}{Mindlin-Reissner plate theory}
+%		\begin{footnotesize}
+%			\begin{itemize}
+%				\item The Mindlin-Reissner plate theory is a mathematical model used to analyze the behavior of thin plates under various types of loading conditions. 
+%				\item The theory is an extension of the Kirchhoff-Love plate theory, which is typically used for plates that are much thicker than those considered in the Mindlin-Reissner theory.
+%				\item The Mindlin-Reissner theory accounts for the shear deformation of a plate, which is the deformation caused by forces that are parallel to the surface of the plate. 
+%				\item The theory also accounts for the rotational effects of the loading conditions on the plate. 
+%				\item It uses a set of partial differential equations, known as the Mindlin-Reissner equations, to describe the behavior of the plate.
+%				\item The Mindlin-Reissner plate theory is widely used in various fields such as aerospace, civil engineering, and mechanical engineering. 
+%				\item It is used to model the behavior of thin structures like aircraft wings, solar panels and other similar structures. 
+%				\item It also helps in understanding the behavior of plate-like structures such as composite laminates, sandwich structures and smart materials.
+%			\end{itemize}
+%		\end{footnotesize}		
+%	\end{frame}
+%	\begin{frame}{Spectral element method}
+%		\noindent\tiny
+%		The spectral element method (SEM) is a numerical method used to solve partial differential equations (PDEs) in engineering and physics. 
+%		It is a variation of the finite element method (FEM) that uses high-order polynomial shape functions to approximate the solution of the PDEs.
+%		
+%		One of the main advantages of the SEM is that it can achieve high accuracy with relatively few elements, compared to traditional FEM.
+%		This is because it uses high-order polynomials to approximate the solution, which allows for a more accurate representation of the solution without the need for a large number of elements.
+%		
+%		The SEM can be used to solve a wide range of PDEs, including those that govern the behavior of linear and nonlinear elasticity, fluid dynamics, and heat transfer.
+%		
+%		The SEM is also well suited for solving PDEs in complex geometries and problems with singularities, and it is also very well suited for solving highly oscillatory problems such as wave propagation, scattering, and eigenvalue problems.
+%		
+%		It is implemented by discretizing the domain into a number of elements, then within each element, a high-order polynomial is used to approximate the solution. 
+%		The polynomials are chosen to be orthogonal with respect to the chosen weighting function. 
+%		The SEM uses a global-local approach, where the global problem is transformed into a set of local problems, which are then solved independently. The solution of the global problem is obtained by assembling the local solutions.
+%		
+%		SEM is a powerful tool for solving PDEs, but it is computationally intensive. Therefore, it is typically implemented on high-performance computers and parallel processing systems.
+%	\end{frame}
+%	\begin{frame}{GMSH}
+%		GMSH is a 3D finite element mesh generator and post-processor for numerical simulation in engineering and science. It is open-source software and can be used to create complex geometries and mesh them with a variety of element types, including tetrahedral, hexahedral, and triangular elements. GMSH also includes a built-in CAD engine and supports a wide range of file formats for both geometry and mesh input and output. It runs on Windows, Linux, and macOS, and can be used for a wide range of applications such as computational fluid dynamics, structural mechanics, and more. It is widely used in academia and industry due to its flexibility and powerful features.
+%	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}[t]{Conventional signal processing and wavefield imaging}
+		\begin{figure}
+			\includegraphics[width=0.7\textwidth]{figs2/sensors_fig1_algorithm.png}
+		\end{figure}
+		\biblioref{M. Radzienski, P. Kudela, A. Marzani, L. de Marchi, W. Ostachowicz}{2019}{ Damage Identification in Various Types of Composite Plates Using Guided Waves Excited by a Piezoelectric Transducer and Measured by a Laser Vibrometer}{Sensors, 19, 1958}
+	\end{frame}
+	\begin{frame}{LSTM \& ConvLSTM}
+		\begin{columns}[T]
+			\tiny
+			\begin{column}[t]{0.5\textwidth}
+				\begin{figure}[ht!]
+					\centering
+					\includegraphics[width=0.45\textwidth]{figure4a.png}
+				\end{figure}
+				\begin{tcolorbox}
+					\begin{equation}
+							\begin{aligned}
+								&f_{t}=\sigma\left( W_{f}  
+								\left[
+								\begin{array}{c}
+									h_{t-1} \\ x_{t}
+								\end{array} 
+								\right]
+								+ b_{f} \right), \
+								&W_{f} = \left[ W_{h_{t-1}}  W_{x_{t}} \right],
+							\end{aligned}					
+							\label{eq:eq1}
+					\end{equation}				
+					\begin{equation}
+						\begin{aligned}
+							i_{t} &=\sigma\left(W_{i} 
+							\left[
+							\begin{array}{c}
+								h_{t-1} \\ x_{t}
+							\end{array} 
+							\right]+b_{i}\right), 
+							\\ \tilde{c}_{t} &=\tanh \left(W_{c} 
+							\left[
+							\begin{array}{c}
+								h_{t-1} \\ x_{t}
+							\end{array} 
+							\right]+b_{c}\right). 
+						\end{aligned} \label{eq:eq2}
+					\end{equation}
+					\begin{equation}
+						c_{t}=f_{t} \cdot c_{t-1}+i_{t} \cdot \tilde{c}_{t}.
+						\label{eq:eq3}
+					\end{equation}
+					\begin{equation}
+						\begin{aligned}
+							o_{t} &=\sigma\left(W_{o} 
+							\left[
+							\begin{array}{c}
+								h_{t-1} \\ x_{t}
+							\end{array} 
+							\right]
+							+b_{o}\right), \
+							h_{t} &=o_{t} \cdot \tanh \left(c_{t}\right),
+						\end{aligned}
+						\label{eq:eq4}
+					\end{equation} 
+				\end{tcolorbox}
+			\end{column}
+			\begin{column}[t]{0.48\textwidth}
+				\begin{figure}
+					\centering
+					\includegraphics[width=0.6\textwidth]{figure4b.png}
+				\end{figure}[ht!]
+				The inputs \(x_1, \dots, x_t\), hidden states \(h_1, \dots, h_t\), cell states \(c_1, \dots, c_t\) and input, forget, and output gates are represented as \(i_t, f_t\), and \(o_t\), respectively:
+				\begin{tcolorbox}
+					\begin{equation}
+						\begin{aligned}
+							i_{t} &=\sigma\left(W_{x_t} * x_{t}+W_{h_{t-1}} * h_{t-1}+W_{c i} \cdot c_{t-1}+b_{i}\right),
+							\\
+							f_{t} &=\sigma\left(W_{x f} * x_{t}+W_{h f} * h_{t-1}+W_{c f} \cdot c_{t-1}+b_{f}\right), \\
+							c_{t} &=f_{t} \cdot c_{t-1}+i_{t} \cdot \tanh \left(W_{x c} * x_{t}+W_{h c} * h_{t-1}+b_{c}\right), 
+							\\
+							o_{t} &=\sigma\left(W_{x o} * x_{t}+W_{h o} * h_{t-1}+W_{c o} \cdot c_{t}+b_{o}\right), \\
+							h_{t} &=o_{t} \cdot \tanh \left(c_{t}\right),
+						\end{aligned}
+						\label{eq:eq5}
+					\end{equation}
+				\end{tcolorbox}				
+			\end{column}
+		\end{columns}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{RMS based: Analysis of numerical cases}
+		\begin{columns}[T]
+			\tiny
+			\begin{column}[t]{0.48\textwidth}
+				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+				\begin{table}
+					\caption{Evaluation metrics of the three numerical cases.}
+					\label{tab:RMS_num_cases}
+					\begin{tabular}{cccccc}
+						\toprule[1.5pt]
+						\multirow{2}{*}{Model} & \multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+						\cmidrule(lr){4-6} & & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+						\midrule
+						\multirow{3}{*}{Res-UNet} 							
+						& 1 & 257 & \multicolumn{1}{c}{0.45} & \multicolumn{1}{c}{143} & \(44.36\%\) \\ 
+						& 2 & 105 & \multicolumn{1}{c}{0.67} & \multicolumn{1}{c}{88} & \(16.19\%\) \\ 
+						& 3 & 537 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{478} & \(10.99\%\) \\ 
+						\midrule
+						\multirow{3}{*}{VGG16 encoder-decoder} 
+						& 1 & 257 & \multicolumn{1}{c}{0.69} & \multicolumn{1}{c}{203} & \(21.01\%\) \\ 
+						& 2 & 105 & \multicolumn{1}{c}{0.75} & \multicolumn{1}{c}{117} & \(11.43\%\) \\ 
+						& 3 & 537 & \multicolumn{1}{c}{0.65} & \multicolumn{1}{c}{385} & \(28.31\%\) \\ 
+						\midrule
+						\multirow{3}{*}{FCN-DenseNet} 
+						& 1 & 257 & \multicolumn{1}{c}{0.52} & \multicolumn{1}{c}{505} & \(96.50\%\) \\ 
+						& 2 & 105 & \multicolumn{1}{c}{0.66} & \multicolumn{1}{c}{118} & \(12.38\%\) \\ 
+						& 3 & 537 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{815} & \(51.77\%\) \\ 
+						\midrule
+						\multirow{3}{*}{PSPNet} 
+						& 1 & 257 & \multicolumn{1}{c}{0.00} & \multicolumn{1}{c}{0} & \(-\%\) \\ 
+						& 2 & 105 & \multicolumn{1}{c}{0.44} & \multicolumn{1}{c}{156} & \(48.57\%\) \\ 
+						& 3 & 537 & \multicolumn{1}{c}{0.77} & \multicolumn{1}{c}{610} & \(13.59\%\) \\ 
+						\midrule
+						\multirow{3}{*}{GCN} 
+						& 1 & 257 & \multicolumn{1}{c}{0.71} & \multicolumn{1}{c}{215} & \(16.34\%\) \\ 
+						& 2 & 105 & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{177} & \(68.57\%\) \\ 
+						& 3 & 537 & \multicolumn{1}{c}{0.86} & \multicolumn{1}{c}{523} & \(2.61\%\) \\ 
+						\bottomrule[1.5pt]
+					\end{tabular}	
+				\end{table}
+				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			\end{column}
+			\begin{column}[t]{0.48\textwidth}
+				\begin{table}
+					\caption{Analysis of numerical cases.}
+					\label{tab:table_all_numerical_cases_backup}	
+					\begin{tabular}{lcc}
+						\toprule[1.5pt]
+						Model & mean IoU & max IoU \\ 
+						\midrule 
+						Res-UNet & \(0.66\) & \(0.89\) \\ 
+						VGG16 encoder-decoder & \(0.57\) & \(0.84\) \\ 
+						FCN-DenseNet & \(0.68\) & \(0.92\) \\ 
+						PSPNet & \(0.55\) & \(0.91\) \\ 
+						GCN & \(0.76\) & \(0.93\) \\ 
+						\bottomrule[1.5pt]
+					\end{tabular}
+				\end{table}
+			\end{column}
+		\end{columns}
+	\end{frame}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+	\begin{frame}{RMS based: Analysis of experimental case}
+		\begin{columns}[T]
+			\begin{column}[t]{0.9\textwidth}
+				\centering
+				\begin{table}[!ht]
+					\centering
+					\caption{Evaluation metrics of the experimental case.}
+					\label{tab:rms_exp_case_}
+					\begin{tabular}{l@{\ }cccc}
+						\toprule[1.5pt]
+						\multicolumn{1}{l}{Model} & \multicolumn{1}{c}{A [mm\textsuperscript{2}]} & \multicolumn{3}{c}{Predicted output} \\ 
+						\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\ 
+						\midrule
+						Res-UNet & \multicolumn{1}{c}{\multirow{5}{*}{210}} & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{323}  & \(53.8\%\) \\ 
+						VGG16 encoder-decoder &  & \multicolumn{1}{c}{0.62} & \multicolumn{1}{c}{320} & \(52.4\%\) \\ 
+						FCN-DenseNet &  & \multicolumn{1}{c}{0.54} & \multicolumn{1}{c}{386} & \(83.8\%\) \\ 
+						PSPNet &  & \multicolumn{1}{c}{0.49} & \multicolumn{1}{c}{580} & \(176.2\%\) \\ 
+						GCN &  & \multicolumn{1}{c}{0.72} & \multicolumn{1}{c}{309} & \(47.1\%\) \\ 
+						\bottomrule[1.5pt]
+					\end{tabular}		
+				\end{table}			
+			\end{column}
+		\end{columns}			
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{Animation based: Analysis of numerical cases}		
+		\begin{columns}[T]
+			\tiny
+			\begin{column}[t]{.5\textwidth}
+				\begin{table}[!h]
+					\centering
+					\caption{Evaluation metrics of the three numerical cases.}
+					\begin{tabular}{ccccc}
+						\toprule[1.5pt]
+						\multirow{2}{*}{case number} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+						\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+						\midrule
+						1 & 763 & \multicolumn{1}{c}{0.88} & \multicolumn{1}{c}{735} & \(3.67\%\) \\ 
+						2 & 388 & \multicolumn{1}{c}{0.58} & \multicolumn{1}{c}{248} & \(36.08\%\) \\ 
+						3 & 297 & \multicolumn{1}{c}{0.80} & \multicolumn{1}{c}{280} & \(5.72\%\) \\			 					
+						\bottomrule[1.5pt]
+					\end{tabular}	
+					\label{tab:num_cases_}
+				\end{table}
+				\vfil
+				\normalsize{The mean IoU for all 95 test cases is \(0.80\) and the mean \(\epsilon\) is \(5.6\%\).}
+			\end{column}
+			\begin{column}[t]{.5\textwidth}
+				\begin{table}[!h]
+					\centering
+					\caption{Evaluation metrics for experimental case of single delamination.}
+					\begin{tabular}{ccccc}
+						\toprule[1.5pt]
+						\multirow{2}{*}{Specimen} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+						\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+						\midrule
+						Single delamination & 225 & \multicolumn{1}{c}{0.41} &  \multicolumn{1}{c}{386} & \(71.56\%\) \\ 
+						\bottomrule[1.5pt]										
+					\end{tabular}
+				\end{table}
+				\begin{table}[!h]
+					\centering
+					\caption{Evaluation metrics for experimental case of multiple delaminations.}
+					\begin{tabular}{ccccc}
+						\toprule[1.5pt]
+						\multirow{2}{*}{Specimen} & \multicolumn{1}{c}{\multirow{2}{*}{A [mm\textsuperscript{2}]}} & \multicolumn{3}{c}{Predicted output} \\ 
+						\cmidrule(lr){3-5} & & \multicolumn{1}{c}{IoU} & \multicolumn{1}{c}{\(\hat{A}\) [mm\textsuperscript{2}]} & \(\epsilon\) \\
+						\midrule
+						II & 472 & \multicolumn{1}{c}{0.53} &  \multicolumn{1}{c}{344} & \(27.12\%\) \\ 
+						III & 472 & \multicolumn{1}{c}{0.64} & \multicolumn{1}{c}{464} & \(1.69\%\) \\ 
+						IV & 472 & \multicolumn{1}{c}{0.52} & \multicolumn{1}{c}{706} & \(49.58\%\) \\			 					 
+						\bottomrule[1.5pt]										
+					\end{tabular}
+				\end{table}				
+			\end{column}
+		\end{columns}						
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}{SLDV measurements: setup}
+		\begin{figure}
+			\includegraphics[width=0.7\textwidth]{sensors_fig4_setup.png}
+		\end{figure}
+	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{subfigure}{0}
+%	\begin{frame}{Experimental results full wavefield based (Single delamination)}
+%		\begin{figure}[ht!]
+%			\centering
+%%			\subfloat[Full wavefield (512 frames)]{\animategraphics[autoplay,loop,height=3cm]{32}{figures/gif_figs/CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp/CFRP_teflon_30-}{1}{256}}\quad
+%%			\subfloat[Intermidate ouputs]{\animategraphics[autoplay,loop,height=3cm]{24}{figures/gif_figs/CFRP_ijjeh_single_delamination/intermediate_output-}{0}{231}}\quad
+%			\subfloat[RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/RMS_CFRP_teflon_3o_375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_updated_results_.png}}\quad
+%			\subfloat[Binary RMS]{\includegraphics[height=3cm,keepaspectratio]{figures/Binary_RMS_CFRP_teflon_3o__375_375p_50kHz_5HC_x12_15Vpp_Ijjeh_.png}}
+%		\end{figure}
+%		IoU= $0.41$ for the thresholded damage map and $\epsilon=71.56\%$  
+%	\end{frame}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{frame}{Compression rate}
+		\begin{columns}[T]
+			\tiny
+			\begin{column}[t]{0.48\textwidth}
+				The maximum permissible distance between grid points according to Nyquist theorem is calculated as in Eqn.~(\ref{eq:dx}):
+				\begin{equation}
+					d_{max}= \frac{1}{2*k_{max}} = \frac{1}{2*51.28\ [\textup{m}]} = \frac{\lambda}{2} = \frac{19.5}{2}\ \textup{[mm]}.
+					\label{eq:dx}	
+				\end{equation} 
+				where $k_{max}$ is the maximum wavenumber, and $\lambda$ is the shortest wavelength.
+				
+				On the other hand, the longest distance between grid points on uniform square grid in 2D space is along the diagonal as shown in Figure below.
+				Therefore, the number of Nyquist sampling points along edges of the plate is defined as:
+				\begin{align}
+					\begin{split}
+						N_x= \frac{L}{d_{max}/\sqrt{2}}, \\
+						N_y=  \frac{W}{d_{max}/\sqrt{2}},
+					\end{split}
+					\label{eq:Nyq}
+				\end{align}
+				where $L$ is the plate length, and $W$ is the plate width.
+				
+				In our particular case, $L=W=500$~[mm], and number of Nyquist points $N_x= N_y= N_{Nyq} =73$.				
+			\end{column}
+			\begin{column}[t]{0.48\textwidth}
+				\begin{figure}[t]
+					\centering
+					\includegraphics[height=0.3\textheight]{Nyquist_wavelength.png}
+					\caption{Longest distance between grid points.}
+				\end{figure}
+				
+				In this work, we have generated a low-resolution training set with a frame size \((32\times32)\) pixels, which is below the Nyquist sampling rate of a 2D frame.
+				Hence, we have performed image subsampling with bi-cubic interpolation and a uniform mesh of size \((32\times32)\) pixels with a compression rate (CR) of \(19.2\%\) from the Nyquist sampling rate as depicted in Eqn.~\ref{CR}:
+				\begin{equation}
+					CR = \frac{(Low-resolution\ dimension)^2}{(Nyquist\ sampling\ rate)^2} = \frac{(32\times32)}{(73\times73)}=19.2\%
+					\label{CR}
+				\end{equation}			
+			\end{column}
+		\end{columns}	
+	\end{frame}
+	\setcounter{subfigure}{0}
+%	\begin{frame}{Compressed sensing theory}		
+%		\textbf{Compressed sensing} (also known as compressive sensing, compressive sampling, or sparse sampling) is a signal processing technique for efficiently acquiring and reconstructing a signal, by finding solutions to underdetermined linear systems. 
+%		This is based on the principle that, through optimization, the sparsity of a signal can be exploited to recover it from far fewer samples than required by the Nyquist–Shannon sampling theorem. 
+%		
+%		There are two conditions under which recovery is possible: 
+%		\begin{itemize}
+%			\item The first one is sparsity, which requires the signal to be sparse in some domain. 
+%			\item The second one is incoherence, which is applied through the isometric property, which is sufficient for sparse signals.
+%		\end{itemize}
+%	\end{frame}
+
+	\begin{frame}{Compressive sensing theory}
+		\footnotesize
+		\begin{columns}[T]
+			\begin{column}[t]{0.48\textwidth}
+				\justifying
+				Compressed sensing (CS) theory $\rightarrow$ any natural signal (\(x\)), e.g. (sounds, images, $\dots$) \alert{can be recovered using considerably fewer measurements than standard methods}.
+				\\
+				CS relies on two principles:
+				
+				\textbf{\alert{Sparsity}}: which relates to the signal of interest.
+				\begin{equation*}
+					x=\Psi s,
+				\end{equation*}
+				where \(\Psi\) is the universal basis (in this work, Fourier domain was applied), \(s\) is a sparse vector of coefficients (\alert{most of the coefficients are equal or close to zero}).			
+			\end{column}			
+			\begin{column}[t]{0.48\textwidth}
+				\justifying
+				\textbf{\alert{Incoherence}}: which relates to the sensing modality.
+				\begin{gather*}
+					y=Cx, \\
+					y=C\Psi s,
+				\end{gather*}
+				where \(y\) is the measurements in \alert{Low-Resolution (LR)} (below the Nyquist sampling rate),
+				\(C\) is the mask matrix applied to the \(x\).\\
+				This system of equations is \alert{underdetermined}.
+				\\
+				$C$ and \(\Psi\) matrices must be incoherent \alert{(smallest correlation between any two elements in $C$ and $\Psi$)}	
+				
+				\textbf{The goal is to find sparsest \(s\) vector} that solve the underdetermined system of equation.
+				\\ This is an optimization problem:				
+				\begin{equation}
+					\min{\lVert {\bs{s}} \rVert}_1 \quad \textrm{subject to} \quad {\lVert \bs{C} \bs{\Psi} \bs{s} -y \rVert}_2 \leq \sigma ,
+				\end{equation}
+				where $\sigma$ is related to the noise level in the data.										
+			\end{column}		
+		\end{columns}						
+	\end{frame}
+	\note
+	{	
+		\tiny
+		The theory of compressed sensing (CS) states that natural signals (such as sounds and images) can be recovered using considerably fewer samples or measurements (below the Nyquist sampling rate) than standard methods.
+		
+		Now, CS relies on two essential conditions: 	
+		\begin{itemize}
+			\item The first one is Sparsity: which means that(\alert{most of the coefficients in vector \(s\) are equal or close to zero}).
+			$\Psi$ represent a universal basis such as Fourier, cosine or wavelet domains.
+			In this work the Fourier domain was applied. 
+			\item The second one is that the measuring mask C matrix must be incoherent with \(\Psi\) matrix, which means the correlation between any two elements in C and $\Psi$ matrices is small.
+		\end{itemize}		
+		
+		regarding to this equation: 
+		\begin{equation}
+			y = \bs{C}\bs{\Psi}\bs{s}
+		\end{equation}
+		There are an infinite number of solutions for the sparse vector (s) that can solve the y vector.
+		
+		However, we need to find the sparsest s vector.
+		
+		Therefore, it is an optimization problem that can be solved by minimizing the \(L_1\) norm of s such that \(L_2\) norm \(\bs{C}\bs{\Psi}\bs{s}\)-\(\bs{y}\) equals zero, or some noise $\sigma$.
+		
+		Now that we have this sparsest vector (s), we can use the inverse Fourier transform to recover the high-resolution signal.		
+		
+	}
+	\begin{frame}{Answers to reviews: Prof. Marek S\l{}o{n}ski}
+		\tiny
+		\justifying
+		
+		\begin{itemize}
+			\only<1>{\item After getting acquainted with this thesis, I believe that a more appropriate dissertation title would be:\\ \enquote{Feasibility study of deep neural networks for delamination identification in composite laminates}.	
+				
+			\textcolor{Cyan}{
+				\textbf{Response:}
+				\\
+				Thank you for your constructive comment. \\
+				The title of the PhD thesis was derived from the title of the project, which is \enquote{Feasibility Studies of Artificial Intelligence-Driven Diagnostics}. 
+				During the early stages of the research, I investigated and explored several artificial intelligence technologies that could be deployed and utilized for damage identification applications in composite laminates.
+				Afterwards, the pipeline of work began converging toward deep learning techniques.
+				Hence, choosing the AI approach in the title instead of the DL approach was arguable.
+				However, I kept the artificial intelligence approach instead of the deep learning approach.
+			}}
+			\only<2>{\item In my opinion, the better structure of the thesis would be by presenting each application of deep neural networks in one chapter, starting from description of methodology and ending with discussion.
+			
+			\textcolor{Cyan}{
+				\textbf{Response:\\}
+				Thank you for pointing this out. \\
+				The arrangement of my thesis was the same as your valuable suggestion during the writing stage.
+				I intended to present each developed deep learning approach, starting by describing the data preprocessing, then the methodology of the developed model, and finally, the results with discussions in a separate chapter.
+				Later, I realized that each chapter would have some sections that would be repeated (the same content would be repeated).
+				As a result, I changed the thesis's organization to its current format.
+				The methodology chapter discusses dataset acquisition, and each deep learning approach is discussed in its section.
+				The results and discussions of each developed approach are reported in each section of the results and discussions chapter.
+				In this way it is easier to compare all developed deep learning models.
+			}}			
+			\only<3>{\item One of th most important issues related to the application of deep neural networks is the proper tuning of hyperparameters such as learning rate, dropout, among others. 
+			In the thesis, the trial and error approach was used. 
+			Did you consider other methods for finding the best hyperparameters? One of the possible approaches could be the Bayesian model selection method. 
+			In my opinion, it is an important aspect in the presented applications.		
+				
+			\textcolor{Cyan}{
+				\textbf{Response:}\\
+				Thank you for your constructive comment. \\
+				Undoubtedly, the tuning of the hyperparameters of a deep learning model is considered one of the main issues that must be handled properly.
+				A proper selection of hyperparameters will improve the performance of the model. 
+				There are several optimization techniques for tuning the hyperparameters, such as random search, grid search, hyperband, and the Bayesian method.
+				To tune the hyperparameters in the models developed in this thesis, I adopted a trial-and-error approach with an early-stopping technique.
+				I would like to clarify that I was aware of these different optimisation techniques.
+				However, during the training stage, I tuned the hyperparameters with fewer trials. 
+				The performance was remarkable, and there was no sign of overfitting. 
+				Additionally, the developed models could generalise to previously unseen data, whether numerically or experimentally acquired.
+				Because the models were performing well, I concluded that it was not necessary to increase complexities to my approach that would further slightly enhance the performance.
+				Since the Bayesian optimisation approach will generate a range of probability distributions regarding hyperparameters, it will be computationally expensive (even more so for high-dimensional spaces as for the applications for computer vision). 
+			}}	
+			
+			\only<4>{\item In the state-of-the-art, you do not refer to the applications of Bayesian deep neural networks for SHM/NDE and specifically for delamination identification. 
+			Bayesian approach is considered to be useful for uncertainty quantification. 
+			Have you found in the literature any reports on the possibility of using Bayesian deep neural networks as a prospective replacement for the standard deep neural networks in the context of data-driven SHM/NDT?	
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for your constructive comment. \\
+				When I first started planning and writing the state-of-the-art, I was particularly interested in damage recognition techniques based on computer vision since they would be relevant to my thesis work.
+				I was interested in artificial intelligence approaches for damage identification that is based on Lamb waves in composite laminates (e.g. CFRP).
+				I was aware that there are several research studies, reports, techniques, and approaches for damage detection with SHM/NDE that could not be presented or addressed in this thesis.
+				I have seen a few research publications and reports utilising Bayesian inference for damage identification.
+				Certainly, the Bayesian neural network (BNN) approach in SHM/NDE for anomaly identification is quite interesting as it produces set of probabilities or uncertainties for the outputs and weights making the model more robust and accurate than the deterministic outputs produced from a standard neural networks e.g (CNN and RNN).
+				However, implementing such BNN models would be very computationally expensive especially for tasks of computer vision taking into consideration the limited amount of available resources.
+				\\
+				Furthermore, as I have mentioned earlier, the developed models in this work can detect delamination with reasonable accuracy.
+				However, it could be a potential future work to employ the Bayesian inference method to the current work to make some comparisons.}}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Answers to reviews: Prof. Luca De Marchi}
+		\tiny
+		\justifying
+		\begin{itemize}
+			\only<1>{\item In the Table of Contents, the title of Chapter 2 has to be corrected
+			
+			\textcolor{Cyan}{
+				\textbf{Response:}
+				\\
+				Thank your for pointing this out. \\
+				The word \enquote{art} was missed from the chapter title. The corrected title is \enquote{State of the art for SHM}
+			}				
+			\item In Section 3.2.3, I suggest to check this sentence “the future events are also used to
+			predict the output”. I suppose that the correct sentence should be “the past events are
+			also used to predict the output”.
+			
+			\textcolor{Cyan}{
+				\textbf{Response:\\}
+				Thank you for pointing this out. \\
+				What I would like to say is that a feedforward neural network assumes that the inputs and the outputs are independent of each other, so there is no feedback from the outputs to the inputs.
+				However, this is not the case with recurrent neural networks (RNNs) \emph{(the many-to-one approach was utilised specifically for this work, in which the inputs are frames of full wavefield that are spatially and temporally correlated)}, in which the outputs of RNNs depend not only on the prior events within the sequence but also on the future events, which can be beneficial in predicting the output of a given sequence.
+			}}
+			
+			\only<2>{\item Please clarify if the specimens used in the multiple delamination experiments (page 94)
+			are different with respect to the ones used in the other experiments and in the simulations (16 vs 8 layers?).
+			
+			\textcolor{Cyan}{
+				\textbf{Response:}
+				Thank you for your constructive comment. \\
+				The specimen used in the single delamination experiment is a CFRP plate consisting of 16 layers of plain weave fabric (GG204P-IMP503 prepregs) of areal density \(204\frac{g}{m^2}\), and the average thickness was \(3.5\) mm.
+				The CFRP specimens used in the multiple delamination experiments consist of 16 layers of plain weave fabric (GG205P-IMP503Z-HT prepregs)of areal density \(205\frac{g}{m^2}\), with an average thickness of \(3.9 \pm 0.1\) mm. 
+				The average thickness of the specimen of a single delamination is slightly smaller than the average thickness of the specimen of multiple delaminations due to the differences in areal densities for each one (\(204\frac{g}{m^2}\) and \(205\frac{g}{m^2}\), respectively).
+				In the synthetically generated dataset, it was assumed that the composite laminate is made of eight layers with a total thickness of 3.9 mm.
+				For the synthetically generated dataset, it was assumed that the composite laminate has eight layers with a total thickness of 3.9 mm and a stacking sequence of \([0/90]_4\).		
+				\\ \\	
+				It is important to note that the shortest wavelengths of \(A_0\) Lamb wave mode in the numerical and experimental cases are approximately similar (\(21.2\) mm for numerical simulations and \(19.5\) mm for experimental measurements), which results in similar behaviour of the propagating guided waves.
+				It could be concluded that the predicted outputs for the numerical (8 layers CFRP) and experimental cases (16 layers CFRP) proves that the developed deep learning models can generalise on previously unseen data (specimens of single and multiple delaminations) and identify the delaminations with reasonable accuracies.
+			}}	
+			
+			\only<3>{\item In Section 6.2, I suspect that there are missing words ([xxx]) in this sentence: “Another
+			issue that can be investigated is [xxx] when recovering an HR frame […]
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for your constructive comment. \\
+				The sentence is:\\
+				\enquote{Another issue that can be further explored and investigated is when recovering an HR frame from an LR frame acquired with a very compressed number of scanning points(below Nyquist sampling rate).}
+				\\
+				I would like to say that in my present work for recovering the HR frames of the full wavefield the compression ratio (CR) was $19.2\%$, and the generated LR frames have size of \((32\times32)\) points, which is below the Nyquist sampling rate of a 2D frame.
+				Accordingly, this work can be further investigated by enhancing the DLSR model to recover HR frames from LR frames with more compressed data points ($CR<19.2\%$) of the Nyquist sampling rate, and the LR frames of size \((n\times n)\) points, where \(n <32\) pixels.
+			}}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Answers to reviews: Prof. Leonard Ziemiański}
+		\tiny
+		\justifying
+		\begin{itemize}
+			\only<1>{
+				\item At the beginning of the thesis, it would be good to include a list of the designations (abbreviations) used. 
+			The list would make it easier to read the thesis.
+			
+			\textcolor{Cyan}{
+				\textbf{Response:}
+				\\
+				Thank you for your constructive comment.
+				\\
+				During the writing phase of the dissertation, I thought about adding a list of abbreviations.
+				However, I believed that the nomenclature section was superfluous because there are not many equations.
+			}}
+			\only<2>{\item Note regarding the sentence on page 46; "Accordingly, to obtain satisfactory results, I used the trial and error approach to tune the hyperparameters of the developed models." 
+			Since the selection of hyperparameters is sometimes critical to the results' quality, it would be good to expand on this information.		
+			
+			\textcolor{Cyan}{
+				\textbf{Response:\\}
+				Thank you for pointing this out. \\
+				Certainly, the process of tuning hyperparameters in deep learning models is considered one of the main issues to be handled properly.
+				Therefore, choosing the right hyperparameters will enhance the model's performance.
+				The tuning of the hyperparameters can be done using a variety of optimization techniques, including random search, grid search, hyperband, and the Bayesian method.
+				However, I used a trial-and-error method with an early-stopping technique to fine-tune the hyperparameters in the models created for this thesis.
+				During the training stage, I tuned the hyperparameters with a small number of trials.
+				The performance was remarkable, and there was no sign of overfitting.
+				Additionally, the developed models could generalise to previously unseen data, whether numerically or experimentally acquired.
+				Because the models were performing well, I concluded that it was not necessary to add complexity (optimization techniques consume a lot of time and computational resources) to my approach that would further slightly enhance the performance.
+			}}
+			
+			\only<3>{\item Note regarding the sentence on page 46, 6th line from the bottom; "These properties ... ". 
+			How were the CFRP parameters selected? By solving the inverse problem? By the mean-square minimization method? By trial and error method?
+			
+			\textcolor{Cyan}{
+				\textbf{Response:}\\
+				Thank you for your constructive comment. \\
+				CFRP parameters assumed for numerical modelling were established by the homogenization method and the rule of mixtures. 
+				The volume fraction of reinforcing fibres was adjusted so that numerically calculated waveform patterns were similar to the experimental data.
+				Nevertheless, some discrepancies still remained: the wavelengths were 21.2 mm and 19.5 mm for the numerical model and SLDV measurements, respectively
+			}	}
+			
+			\only<4>{\item Page 47, please explain why it was decided to assume that delamination occurs only between the third and fourth layers and is not distributed randomly between them.
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for pointing this out. \\
+				It is important to note that the generation of such a large dataset with such a large number of parameters required three months of running and simulation and resulted in 475 cases with various delamination sizes, locations, and orientations.
+				Indeed, the delamination is fixed between the third and fourth layers to avoid a symmetric situation (between the fourth and fifth layers).
+				Furthermore, adding a new parameter to indicate where to simulate the delamination (between the layers) will add extra complexity, and for sure it will take much more time to generate the dataset.
+				The respected reader must be reminded that numerical measurements were taken from both the top and bottom surfaces of the plate.
+				As a result, I can state that based on measurements taken from the bottom surface of the plate, it appears that the delaminations were positioned between the fifth and sixth layers.
+				In this work, I chose to work with the most difficult case, which is the bottom surface of the plate.
+				It is important to note that the developed DL models were capable of detecting and generalising to the unseen experimentally measured data of specimens with 16 layers that had multiple delaminations inserted between different layers.
+			}}
+			
+			\only<5>{\item Page 49 – error in formula 4.1.
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for your constructive comment. \\
+				Yes there is a typo in the equation, it is \(k=1\) not \(k-1\).
+				Below is the correct formula:
+				%%%%%%%%%%%%%%%
+				\begin{equation*}
+					\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2} 
+					\label{eqn:rms_} 
+				\end{equation*}
+				%%%%%%%%%%%%%%%
+			}	}	
+			
+			\only<6>{\item Note to 4.2.1, regarding the division of data into teaching and testing sets. 
+			As I am guessing, the division into \(80\%\) and \(20\%\) was done randomly from the 121600 dataset, that is, the pattern was a patch (32x32 pixels). 
+			According to my experience, it is better to divide into learning and testing sets, dividing the set not by parts of the image but by whole images (dividing the set of 475 patterns).
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for your constructive comment. \\
+				Sure, this is true, and actually, this was already done.
+				The dataset of 475 cases was divided into two portions: $80\%$ training set and $20\%$ testing set.
+				As a result, 380 cases were used for training, and 95 cases were used for testing.
+				For training purposes, \(20\%\) of the training set (\(380\) cases) was taken as a validation set and used to evaluate the model during the training.
+				It is important to mention that the operation of splitting the dataset into training, validation, and testing sets was performed before preprocessing it to produce the two sets of patches with a total number of \(93100\) and \(121600\), respectively.
+				Consequently, I saved the consistency of the generated patches.
+				Hence, each portion of the dataset, whether it was for training, validation, or testing, contains only the patches generated from the specified portion.
+			}}
+			
+			\only<7>{\item Discussion note regarding paragraph 4.3.1 - concerns the K-folds technique. 
+			I present the view that this method does not reduce overfitting and only allows a better estimation of learning error. 
+			It is most often used when we have small data sets. 
+			However, large data sets are considered in the dissertation. 
+			Did the method produce results in the cases analyzed? When discussing the results, there is no mention of this.
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for your constructive comment. \\
+				The overfitting problem in model selection can, in my opinion, be partially solved using the K-folds cross-validation technique.
+				It is important to note that this technique was only used in conjunction with the one-to-one RMS-based approach (FCN models for delamination identification).
+				The results of applying the K-folds technique compared to when it is not applied are shown in Figure 5.8, which presents a comparison of the experimental cases by using the adaptive wavenumber filtering method [44, 47], FCN-DenseNet [164], and FCN-DenseNet [167].
+				Figure 5.8 (c) shows the predicted output of FCN-DenseNet without applying the K-folds technique, as presented in [164], while Fig. 5.8 (d) shows the predicted output when the K-folds technique is applied, as presented in [167].
+				I can confirm that applying the K-folds technique improved the prediction performance and the generalization capability of the same implemented model based on the results of both approaches (with and without K-folds).
+			}}
+			
+			\only<8>{\item Question relating to the numerical model dataset. 
+			Has the Author considered introducing noise (random noise) into the numerical model? The noise introduction is a frequently used technique to simulate measurements.
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for your constructive comment. \\
+				When evaluating the developed DL models on experimentally acquired data that had noise, they showed their capability to generalise, and they were able to detect and identify the delamination.
+				Hence, adding noise to the synthetic dataset is unnecessary but it might be considered.	
+			}}
+			
+			\only<9>{\item Question regarding paragraph 4.5.1 Please explain how frame f1 is
+			determined
+			
+			\textcolor{Cyan}{
+				\textbf{Response:} \\
+				Thank you for your constructive comment. \\
+				The total wave propagation time was set to \(0.75\) ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
+				The total time of propagation was converted into \(512\) frames of animated Lamb waves.
+				%			Accordingly, the required time for each frame equals to \(\frac{0.75ms}{512}\) which is about \(1.465\times 10^-4\) s.
+				The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
+				The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset.
+				Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
+				As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
+				When we know the time of interaction \(t_i\) with the delamination, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
+				\begin{gather*}
+					t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
+					\\
+					f_n = \frac{t_i}{0.75ms} \times 512
+				\end{gather*}			
+			}}
+		\end{itemize}
+	\end{frame}
+%	\begin{frame}{PSNR}
+%		The peak signal-to-noise ratio (PSNR) is a measure of the quality of a reconstructed image compared to the original image. 
+%		It is defined as the ratio of the maximum possible power of a signal to the power of corrupting noise that affects the fidelity of its representation. 
+%		The PSNR is most commonly used in image and video compression, and is defined as: 
+%		\begin{equation}
+%			PSNR = 10log10(MAX^2 / MSE) 
+%		\end{equation}
+%		
+%		where MAX is the maximum possible pixel value (usually 255 for 8-bit images) and MSE is the mean squared error between the original and reconstructed images.
+%		A higher PSNR value indicates that the reconstructed image is of higher quality.
+%	\end{frame}
+%	\begin{frame}{Pearson CC}
+%		\justifying\footnotesize
+%		The Pearson correlation coefficient (also known as Pearson's r) is a measure of the linear correlation between two variables. 
+%		It ranges from -1 to 1, where a value of 1 indicates a perfect positive linear correlation (i.e. an increase in one variable is always associated with an increase in the other variable), a value of -1 indicates a perfect negative linear correlation (i.e. an increase in one variable is always associated with a decrease in the other variable), and a value of 0 indicates no correlation.
+%		
+%		To calculate the Pearson correlation coefficient, one typically first standardizes the variables (i.e. converts them to have mean 0 and standard deviation 1), then computes the dot product of the two standardized variables. 
+%		The resulting value is the Pearson correlation coefficient.
+%		
+%		It is a commonly used statistical measure for evaluating linear relationships between two continuous variables. 
+%		It is sensitive only to linear relationship between variables and does not capture non-linear relationship.
+%	\end{frame}
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		 END OF SLIDES
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

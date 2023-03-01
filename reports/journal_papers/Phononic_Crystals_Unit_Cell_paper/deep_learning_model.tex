@@ -1,0 +1,74 @@
+\section{Deep learning model}
+\subsection{Dataset preprocessing}
+\noindent 
+
+The synthetically generated dataset contains 9000 samples of unit cells that are classified into three equal subsets of 3000 samples each.
+The shape of a unit cell is \((\textup{512}\times \textup{512})\) pixel points.
+As mentioned earlier, the shape of the unit cell is diagonally symmetrical.
+To reduce the complexity of the computation, we used only the upper left quarter of the unit cell shape with a size of (256 x 256) pixel points for developing the deep learning model.
+Consequently, the total shape of the dataset is (3, 3000, 256, 256, 1).
+For training purposes, 2900 samples of unit cells were randomly selected from each subset, resulting in a training set with a shape of (8700, 256, 256, 1).
+The labels (ground truths) of the dataset are the dispersion diagrams (frequency versus wavenumber) values with a range exceeding \(500\) kHz.
+It is important to mention that we have found that normalizing the frequency values to a range between (0, 1) gives better predicted outputs.
+
+
+\subsection{Deep learning model}
+\noindent
+The calculation of the dispersion diagram for a single unit cell using COMSOL software is a time-consuming process.		
+Therefore, we developed a surrogate deep learning model that is able to calculate such dispersion diagram in a very fast time.
+In general, deep learning techniques such as artificial neural networks (ANNs) and convolution neural networks (CNNs) are considered as a universal approximation functions.
+
+Basically, the developed model is an approximation function, which can map the input (shape of the unit cell) to an output of \(1464\) (frequency versus wavenumber) 
+All dispersion diagrams in the synthetically generated dataset have fixed wavenumber values.
+Thus, we only need to predict the frequencies.		
+Accordingly, our developed deep learning model is a multi-output regressor.	
+
+Figure~\ref{DL_model} presents the general architecture of the developed deep learning model, which is composed of two main parts:		
+\begin{enumerate}
+	\item The encoder
+	\item The dense layers (ANN)
+\end{enumerate}
+The encoder is a CNN model that performs convolution operations followed by subsampling (pooling). 
+Consequentially, the encoder is responsible for extracting the features from the shape of the unit cell.
+Such features contain all the information required regarding the dispersion diagram (the predicted output).
+The ANN part consists of several layers with different numbers of neurons and is responsible for mapping the extracted features by the encoder into the \(1464\) predicted frequency values.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{PC_unit_DL_model.png}
+	\caption{DL Model architecture.}
+	\label{DL_model}
+\end{figure}
+
+The task of hyperparameter optimization is crucial, especially, when developing a deep learning model to solve a complex task.
+Hence, the quality of a predictive model depends largely on its hyperparameter configuration.
+For this purpose we employed the Hyperband optimisation technique~\cite{Li2018}, which is an extension to the successive halving algorithm~\cite{Jamieson2016}.
+The hyperband technique initially runs a random configuration of hyperparameters on a specific schedule of iterations (a small number of iterations) per configuration.
+Then it takes the best performers and again runs them through a larger number of iterations.
+This process is repeated until we get the best configuration of hyperparameters.
+
+Table~\ref{tab:hyperparemeter_tuning} presents the hyperparameters that were tuned with the hyperband technique, the initial range of values of the hyperparameters, and the optimised value.
+Regarding the pooling operation hyperparameter, convolution blocks [1, 2, 4, 5, 6, 7] have average pooling, and convolution block [3] has max pooling.
+The output dense layer has 1464 units representing the number of frequencies we want to predict.
+Furthermore, the MSE loss function was used as our objective loss function with the Adam optimizer.
+Additionally, the early-stopping technique was used to reduce the model overfitting. 
+\begin{table}[] 
+	\caption{Hyperparameters tuning with hyperband technique.}
+	\begin{tabular}{lll}
+		\toprule[1.5pt]
+		Hyperparameter   & initial range of values & optimised value \\
+		\midrule
+		Batch size   & {[}16: 64{]}    & 32  \\		
+		Kernel size  & {[}3: 7{]}  & 5   \\
+		Number of convolution  blocks & {[}3: 8{]}  &  7\\
+		Number hidden layers & {[}1:5{]}   & 4\\
+		Learning rate    & {[}5e-5 : 5e-4{]}   & 1.433e-4\\
+		Pooling operation    & {[}average, max{]}  & Depends on the convolution block \\
+		Dropout  & {[}0.15 - 0.3{]}    & 0.2\\
+		Dense units 1    & {[}1024-8192{]} & 2048\\
+		Dense units 2    & {[}1024-8192{]} & 6656\\
+		Dense units 3    & {[}1464-2042{]} & 1944\\
+		\bottomrule[1.5pt]  
+	\end{tabular}
+	\label{tab:hyperparemeter_tuning}
+\end{table}
