@@ -51,12 +51,12 @@ params = {'batches': 1,
           'time_stamps': 32,
           'num_filters': 16,
           'filter_size': 3,
-          'epochs': 500,
+          'epochs': 1500,
           'dropout': 0.2,
-          'levels': 6,
-          'learning_rate': 0.00014329,
-          'patience_epochs': 100,
-          'val_split': 0.08,
+          'levels': 2,
+          'learning_rate': 0.0002,
+          'patience_epochs': 1200,
+          'val_split': 0.2,
           'hidden_layer': 3,
           'decay_steps': 100000,
           'decay_rate': 0.96,
@@ -68,7 +68,7 @@ img_size = (h, w)
 run["model/parameters"] = params
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+os.environ["CUDA_VISIBLE_DEVICES"] = '2'
 config_ = tf.compat.v1.ConfigProto()
 config_.gpu_options.allow_growth = True
 sess = tf.compat.v1.Session(config=config_)
@@ -78,26 +78,42 @@ sess = tf.compat.v1.Session(config=config_)
 ########################################################################################################################
 os.chdir('/home/aijjeh/Desktop/Phd_Projects/Modeling_guided_waves/Model_1_2_3_datasets/Model_2_dataset')
 samples_gt_delamination = np.load('delamination_ground_truths.npy', mmap_mode='r+')
-print(samples_gt_delamination.shape)
+# samples_gt_delamination = 1 - samples_gt_delamination
+
 healthy_ref = np.load('health_full_wave_fields.npy', mmap_mode='r+')
-print(healthy_ref.shape)
+# healthy_ref = healthy_ref * samples_gt_delamination
+train_set = np.concatenate([samples_gt_delamination, healthy_ref], axis=-1)
+
 ########################################################################################################################
 #  GT
 ########################################################################################################################
 latent_space = np.load('predicted_Latent_space.npy')
-skip_0 = np.load('predicted_skip_connection_0.npy', mmap_mode='r+')
-skip_1 = np.load('predicted_skip_connection_1.npy', mmap_mode='r+')
-skip_2 = np.load('predicted_skip_connection_2.npy', mmap_mode='r+')
-skip_3 = np.load('predicted_skip_connection_3.npy', mmap_mode='r+')
-skip_4 = np.load('predicted_skip_connection_4.npy', mmap_mode='r+')
-skip_5 = np.load('predicted_skip_connection_5.npy', mmap_mode='r+')
+# skip_0 = np.load('predicted_skip_connection_0.npy', mmap_mode='r+')
+# skip_1 = np.load('predicted_skip_connection_1.npy', mmap_mode='r+')
+# skip_2 = np.load('predicted_skip_connection_2.npy', mmap_mode='r+')
+# skip_3 = np.load('predicted_skip_connection_3.npy', mmap_mode='r+')
+# skip_4 = np.load('predicted_skip_connection_4.npy', mmap_mode='r+')
+# skip_5 = np.load('predicted_skip_connection_5.npy', mmap_mode='r+')
 print(latent_space.shape)
-print(skip_0.shape)
-print(skip_1.shape)
-print(skip_2.shape)
-print(skip_3.shape)
-print(skip_4.shape)
-print(skip_5.shape)
+
+train_x, test_x, train_y, test_y = train_test_split(train_set,
+                                                    latent_space,
+                                                    train_size=0.95,
+                                                    shuffle=True,
+                                                    random_state=1988)
+
+
+def PSNR(y_true, y_pred):
+    # cast the target images to integer
+    # y_true = y_true * 255.0
+    # y_true = tf.cast(y_true, tf.uint8)
+    y_true = tf.clip_by_value(y_true, 0, 1)
+    # cast the predicted images to integer
+    # y_pred = y_pred * 255.0
+    # y_pred = tf.cast(y_pred, tf.uint8)
+    y_pred = tf.clip_by_value(y_pred, 0, 1)
+    # return the psnr
+    return tf.image.psnr(y_true, y_pred, max_val=1)
 
 
 def normalize_batch(bn_input):
@@ -114,53 +130,48 @@ def get_time_distributed(time_input, n_filters, f_size):
 
 def get_model(img_size_):
     input_1 = Input(shape=((params.get('time_stamps'),) + img_size_ + (1,)))
-    input_2 = Input(shape=((params.get('time_stamps'),) + img_size_ + (1,)))
-    x_layer = concatenate([input_1, input_2], axis=-1)
-    skip_connection = list()
+    # input_2 = Input(shape=((params.get('time_stamps'),) + img_size_ + (1,)))
+    # x_layer = concatenate([input_1, input_2], axis=-1)
+    x_layer = input_1
+    # skip_connection = list()
+    # skip_connection = []
     ####################################################################################################################
     # Encoder
     ####################################################################################################################
-    factor = 1
     for level in range(params.get('levels')):
-        x_layer = get_time_distributed(x_layer, params.get('num_filters') * factor, 5)
-        x_layer = normalize_batch(x_layer)
-        x_layer = TimeDistributed(tf.keras.layers.AvgPool2D((2, 2), strides=(2, 2)))(x_layer)
-        x_layer = keras.layers.Dropout(params.get('dropout'), name='skip_connection_%d' % level)(x_layer)
-        skip_connection.append(x_layer)
-        factor += 1
-
+        x_layer = ConvLSTM2D(params.get('time_stamps'), 3, padding='same', return_sequences=True)(x_layer)
+        x_layer = tf.keras.layers.AveragePooling3D((1, 2, 2), strides=(1, 2, 2))(x_layer)
+        x_layer = keras.layers.Dropout(params.get('dropout'))(x_layer)
+        x_layer = tf.keras.layers.BatchNormalization(name='skip_connection_%d' % level)(x_layer)
+        # skip_connection.append(x_layer)
     ####################################################################################################################
     # bottleneck layer
     ####################################################################################################################
-
-    output = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(params.get('num_filters') * (factor + 1), 1,
-                                                                    padding='same',
-                                                                    activation='relu'), name='output')(x_layer)
+    x_layer = ConvLSTM2D(params.get('time_stamps'), 3, padding='same', return_sequences=True)(x_layer)
+    x_layer = Conv2D(32, 1, 1, padding='same', activation='sigmoid')(x_layer)
+    x_layer = tf.keras.layers.BatchNormalization(name='encoded_latent_space')(x_layer)
+    encoder_ = Model(input_1, x_layer, name='encoder')
     ####################################################################################################################
-    model_ = Model(inputs=[input_1, input_2],
-                   outputs=[output, skip_connection[0], skip_connection[1], skip_connection[2], skip_connection[3],
-                            skip_connection[4], skip_connection[5]])
-    ####################################################################################################################
-    model_.compile(optimizer=tf.keras.optimizers.Adam(params.get('learning_rate')),
-                   loss='mse',
-                   metrics=[tf.keras.metrics.RootMeanSquaredError()])
-    return model_
+    encoder_.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=params['learning_rate']),
+                     loss=tf.keras.losses.mse,
+                     metrics=[tf.keras.metrics.RootMeanSquaredError(), PSNR])
+    return encoder_
 
 
 keras.backend.clear_session()
 
-model = get_model(img_size)
+Encoder = get_model(img_size)
 
-model.summary()
+Encoder.summary()
 
-env_path = '/home/aijjeh/Desktop/Phd_Projects/Modeling_guided_waves/'
+env_path = '/home/aijjeh/Desktop/Phd_Projects/Modeling_guided_waves/temp/checkpoint/'
 
-checkpoint_filepath = '/home/aijjeh/Desktop/Phd_Projects/Modeling_guided_waves/temp/checkpoint/model_2_mapping_latent_space.h5'
+checkpoint_filepath = 'Model_2_encoder_mapping_GT_Ref_latent_space_skip_connections.h5'
 
 callbacks = [tf.keras.callbacks.EarlyStopping(monitor='val_loss',
                                               patience=params.get('patience_epochs'),
                                               mode='min'),
-             tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_filepath,
+             tf.keras.callbacks.ModelCheckpoint(filepath=env_path + checkpoint_filepath,
                                                 monitor='val_loss',
                                                 save_best_only=True)]
 
@@ -171,9 +182,9 @@ class MonitoringCallback(Callback):
             run[metric_name].log(metric_value)
 
 
-model.fit([samples_gt_delamination, healthy_ref],
-          [latent_space, skip_0, skip_1, skip_2, skip_3, skip_4, skip_5],
-          batch_size=1,
-          epochs=params.get('epochs'),
-          validation_split=0.2,
-          callbacks=[MonitoringCallback(), callbacks])  #
+Encoder.fit(x=train_x,
+            y=train_y,
+            batch_size=1,
+            epochs=params.get('epochs'),
+            validation_split=0.1,
+            callbacks=[MonitoringCallback(), callbacks])  #

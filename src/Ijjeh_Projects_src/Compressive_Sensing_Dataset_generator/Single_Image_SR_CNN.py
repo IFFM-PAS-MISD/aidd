@@ -22,7 +22,10 @@ import neptune
 from decouple import config
 from keras.callbacks import Callback
 from keras.layers import Conv2D, Add
+from decouple import config
+from sklearn.metrics import r2_score
 
+access_token = config('NEPTUNE_API_TOKEN')
 ########################################################################################################################
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = '2'
@@ -34,17 +37,15 @@ print('Number of devices: {}'.format(strategy.num_replicas_in_sync))
 ########################################################################################################################
 # Link to neptune ai for monitoring
 ########################################################################################################################
-run = neptune.init(project_qualified_name='abdalraheem.ijjeh/aidd',
-                   api_token='eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiIxOWE1Njk4NC03MWQxLTQwY2EtODJmMS1kZTczM2M1Y2VkMjkifQ==')
-neptune.create_experiment('Super Resolution with 20% CR of full wavefield')
-neptune.append_tag('SR pixel-shuffle-super-resolution')
+# run = neptune.init(project_qualified_name='abdalraheem.ijjeh/aidd',
+#                    api_token=access_token)
+# neptune.create_experiment('Super Resolution with 20% CR of full wavefield')
+# neptune.append_tag('SR pixel-shuffle-super-resolution')
 
 ########################################################################################################################
 new_dim = 32
 CR = (new_dim ** 2) / (69 ** 2)  # Compression Ratio
 print(CR)
-
-
 ########################################################################################################################
 
 
@@ -54,20 +55,18 @@ def load_dataset():
 
     Full_W_dataset = np.load('CS_dataset_labels_Full_wavefield_475_128_512_512.npy', mmap_mode='r+')
     print(Full_W_dataset.shape)
-    # CS_arr = np.load('CS_dataset_labels_Full_wavefield_475_128_512_512.npy', mmap_mode='r+')
-    # CS_arr = np.load('CS_dataset_interpolated_CR_0.215_percent_nyquist_rate_applied_totally_random_points.npy',
-    #                  mmap_mode='r+')
-    # CS_arr = np.load('CS_dataset_interpolated_CR_0.215_percent_nyquist_rate_applied_UNIFROM_GRID_32_32.npy',
-    #                  mmap_mode='r+')
-    # CS_arr = CS_arr.reshape((475 * 128, 32, 32, 1))
-    CS_arr = np.load('CS_dataset_CR_0.215_percent_nyquist_rate_applied_Uniform_grid.npy')  # used with DLSS paper
+
+    # used with DLSS paper
+    CS_arr = np.load('CS_dataset_CR_0.215_percent_nyquist_rate_applied_Uniform_grid.npy', mmap_mode='r+')
 
     CS_arr = CS_arr.reshape((475 * 128, 32, 32, 1))
     print(CS_arr.shape)
     x_train = CS_arr[:304 * 128]
     y_train = Full_W_dataset[:304 * 128]
+
     x_val = CS_arr[304 * 128:380 * 128]
     y_val = Full_W_dataset[304 * 128:380 * 128]
+
     x_test = CS_arr[380 * 128:]
     y_test = Full_W_dataset[380 * 128:]
 
@@ -80,15 +79,12 @@ def load_dataset():
 
 
 def PSNR(y_true, y_pred):
-    # cast the target images to integer
     y_true = y_true * 255.0
     y_true = tf.cast(y_true, tf.uint8)
     y_true = tf.clip_by_value(y_true, 0, 255)
-    # cast the predicted images to integer
     y_pred = y_pred * 255.0
     y_pred = tf.cast(y_pred, tf.uint8)
     y_pred = tf.clip_by_value(y_pred, 0, 255)
-    # return the psnr
     return tf.image.psnr(y_true, y_pred, max_val=255)
 
 
@@ -112,17 +108,6 @@ def custom_loss(y_true, y_pred):
 
     MSE_Fourier_domain = tf.losses.MSE(fft2d_true_norm, fft2d_pred_norm)
     MSE_Spatial = tf.losses.MSE(y_true, y_pred)
-    # a = (fft2d_true_norm[0])
-    # b = (fft2d_pred_norm[0])
-    #
-    # print(a.numpy().shape)
-    # print(np.max(a.numpy()))
-    # plt.imshow(a, cmap='flag')
-    # plt.show()
-    #
-    # print(b.numpy())
-    # plt.imshow(b, cmap='flag')
-    # plt.show()
 
     return MSE_Fourier_domain + MSE_Spatial
 
@@ -157,16 +142,10 @@ with strategy.scope():
     def SISR_model():
         rdb_Layers = 2  # 4
         inputs = tf.keras.Input(shape=(32, 32, 1))
-        # x = tf.keras.layers.experimental.preprocessing.Resizing(32, 32, interpolation='bicubic')(inputs)
         x1 = Conv2D(64, 5, padding="same", activation="relu",
                     kernel_initializer="Orthogonal")(inputs)
         x2 = Conv2D(64, 3, padding="same", activation="relu",
                     kernel_initializer="Orthogonal")(x1)
-
-        # x2 = Conv2D(64, 3, padding="same", activation="relu",
-        #             kernel_initializer="Orthogonal")(inputs)
-        # x2 = Conv2D(64, 5, padding="same", activation="relu",
-        #             kernel_initializer="Orthogonal")(x2)
 
         x_to_RDB = tf.concat([x1, x2], axis=-1)
 
@@ -184,7 +163,7 @@ with strategy.scope():
                    activation="relu", kernel_initializer="Orthogonal")(x)
         outputs = tf.nn.depth_to_space(x, rescale_factor)
         outputs = Conv2D(1, 1, activation='sigmoid', padding='same')(outputs)
-        # construct the final model and return it
+
         model_SR = Model(inputs, outputs)
 
         model_SR.summary()
@@ -212,7 +191,6 @@ if __name__ == '__main__':
     # calling the model
     ####################################################################################################################
     model = SISR_model()
-
 
     class MonitoringCallback(Callback):
         def on_epoch_end(self, epoch, logs={}):

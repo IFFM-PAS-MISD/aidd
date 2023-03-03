@@ -44,7 +44,7 @@ run = neptune.init_run(project='abdalraheem.ijjeh/Guided-waves-modelling',
                        tags=['capturing latent space with autoencoder']
                        )
 
-params = {'batches': 1,
+params = {'batches': 2,
           'kernel_size': 3,
           'height': 256,
           'width': 256,
@@ -53,7 +53,7 @@ params = {'batches': 1,
           'filter_size': 3,
           'epochs': 1500,
           'dropout': 0.2,
-          'levels': 6,
+          'levels': 2,
           'learning_rate': 0.00014329,
           'patience_epochs': 1200,
           'val_split': 0.2,
@@ -64,14 +64,15 @@ params = {'batches': 1,
 h = params.get('height')
 w = params.get('width')
 img_size = (h, w, 1)
+latent_space = (12, 4, 4, 56)
 
 run["model/parameters"] = params
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = '2'
-config_ = tf.compat.v1.ConfigProto()
-config_.gpu_options.allow_growth = True
-sess = tf.compat.v1.Session(config=config_)
+
+gpu_options = tf.compat.v1.GPUOptions(allow_growth=True)
+session = tf.compat.v1.InteractiveSession(config=tf.compat.v1.ConfigProto(gpu_options=gpu_options))
 
 os.chdir(
     '/home/aijjeh/Desktop/Phd_Projects/Sequence_prediction/Full_wavefield_frames_time_series_project/Datasets/label_set')
@@ -123,6 +124,11 @@ os.chdir('/home/aijjeh/Desktop/Phd_Projects/Modeling_guided_waves/Model_1_2_3_da
 gt = np.load('GT_full_wavefields.npy')
 x = gt
 y = gt
+train_x, val_x, train_y, val_y = train_test_split(x,
+                                                  y,
+                                                  train_size=0.85,
+                                                  shuffle=True,
+                                                  random_state=1988)
 
 
 #
@@ -176,51 +182,31 @@ def VAE():
     # Encoder
     ####################################################################################################################
     for level in range(params.get('levels')):
-        x_layer = get_time_distributed(x_layer, params.get('num_filters') * (level + 1), 5)
-        x_layer = get_time_distributed(x_layer, params.get('num_filters') * (level + 1), 5)
-        x_layer = TimeDistributed(tf.keras.layers.AveragePooling2D((2, 2), strides=(2, 2)))(x_layer)
+        x_layer = ConvLSTM2D(params.get('time_stamps'), 3, padding='same', return_sequences=True)(x_layer)
+        x_layer = tf.keras.layers.AveragePooling3D((1, 2, 2), strides=(1, 2, 2))(x_layer)
+        x_layer = keras.layers.Dropout(params.get('dropout'))(x_layer)
         x_layer = tf.keras.layers.BatchNormalization(name='skip_connection_%d' % level)(x_layer)
         skip_connection.append(x_layer)
-
     ####################################################################################################################
     # bottleneck layer
     ####################################################################################################################
-    x_layer = get_time_distributed(x_layer, params.get('num_filters') * 6, 3)
-    x_layer = get_time_distributed(x_layer, params.get('num_filters') * 6, 3)
+    x_layer = ConvLSTM2D(params.get('time_stamps'), 3, padding='same', return_sequences=True)(x_layer)
     x_layer = tf.keras.layers.BatchNormalization(name='encoded_latent_space')(x_layer)
-    encoder_ = Model(inputs_encoder, [x_layer, skip_connection[0], skip_connection[1], skip_connection[2],
-                                      skip_connection[3], skip_connection[4], skip_connection[5]], name='encoder')
+    encoder_ = Model(inputs_encoder, x_layer, name='encoder')
     encoder_.summary()
 
-    encoder_out = K.int_shape(x_layer)[1:]
-    encoder_skip_0 = K.int_shape(skip_connection[0])[1:]
-    encoder_skip_1 = K.int_shape(skip_connection[1])[1:]
-    encoder_skip_2 = K.int_shape(skip_connection[2])[1:]
-    encoder_skip_3 = K.int_shape(skip_connection[3])[1:]
-    encoder_skip_4 = K.int_shape(skip_connection[4])[1:]
-    encoder_skip_5 = K.int_shape(skip_connection[5])[1:]
-    print(encoder_out, encoder_skip_0, encoder_skip_1, encoder_skip_2, encoder_skip_3, encoder_skip_4, encoder_skip_5)
     ####################################################################################################################
     # Decoder
     ####################################################################################################################
-
+    encoder_out = K.int_shape(x_layer)[1:]
     input_decoder = Input(shape=encoder_out)
-    input_1 = Input(shape=encoder_skip_5)
-    input_2 = Input(shape=encoder_skip_4)
-    input_3 = Input(shape=encoder_skip_3)
-    input_4 = Input(shape=encoder_skip_2)
-    input_5 = Input(shape=encoder_skip_1)
-    input_6 = Input(shape=encoder_skip_0)
 
-    skip_connection = [input_6, input_5, input_4, input_3, input_2, input_1]
     x_layer = input_decoder
     factor = 5
     for level_ in reversed(range(params.get('levels'))):
-        x_layer = concatenate([x_layer, skip_connection[factor]], axis=-1)
-        x_layer = TimeDistributed(UpSampling2D((2, 2)))(x_layer)
+        x_layer = UpSampling3D((1, 2, 2))(x_layer)
+        x_layer = ConvLSTM2D(params.get('time_stamps'), 3, padding='same', return_sequences=True)(x_layer)
         x_layer = keras.layers.Dropout(params.get('dropout'))(x_layer)  # adding dropout layer
-        x_layer = get_time_distributed(x_layer, params.get('num_filters') * (level_ + 1), 3)
-        x_layer = get_time_distributed(x_layer, params.get('num_filters') * (level_ + 1), 3)
         factor -= 1
     ####################################################################################################################
     x_layer = ConvLSTM2D(params.get('time_stamps'), 1, padding='same', return_sequences=True)(x_layer)
@@ -230,7 +216,7 @@ def VAE():
                                                                     activation='sigmoid'),
                                              name='output_decoded')(x_layer)
     ####################################################################################################################
-    decoder_ = Model(inputs=[input_decoder, input_6, input_5, input_4, input_3, input_2, input_1], outputs=output,
+    decoder_ = Model(inputs=input_decoder, outputs=output,
                      name='decoder')  #
 
     decoder_.summary()
@@ -258,8 +244,8 @@ def custom_save(filepath_, *args, **kwargs):
     path, ext = os.path.splitext(filepath_)
 
     # save encoder/decoder separately
-    encoder.save(path + '-encoder.h5', *args, **kwargs)
-    decoder.save(path + '-decoder.h5', *args, **kwargs)
+    encoder.save(path + '-encoder_fully_ConvLSTM.h5', *args, **kwargs)
+    decoder.save(path + '-decoder_fully_ConvLSTM.h5', *args, **kwargs)
 
 
 ####################################################################################################################
@@ -291,8 +277,9 @@ class MonitoringCallback(Callback):
 
 setattr(auto_encoder, 'save', custom_save)
 
-auto_encoder.fit(x, y,
+auto_encoder.fit(x=train_x,
+                 y=train_y,
                  batch_size=params['batches'],
                  epochs=params.get('epochs'),
-                 validation_split=0.2,
+                 validation_data=(val_x, val_y),
                  callbacks=[MonitoringCallback(), callbacks])  #
