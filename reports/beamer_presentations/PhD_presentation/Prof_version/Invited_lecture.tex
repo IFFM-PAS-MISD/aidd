@@ -318,6 +318,25 @@
 		\end{figure}		
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Project}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{columns}[T]
+		\column{0.47\textwidth}
+		\vspace{5mm}
+		\begin{itemize}
+			\item Animations of propagating waves, frame resolution 512$\times$512 pixels
+			\item 2019: National Science Centre project \emph{Feasibility studies of artificial intelligence-driven diagnostics}
+		\end{itemize}
+		\column{0.47\textwidth}
+			\begin{flushleft}
+				\begin{figure}
+					\hspace{1pt}\hspace{16mm}\animategraphics[autoplay,loop,scale=0.29]{8}{/figs2/Specimen_V_frames/Specimen_V_frame_}{10}{256}
+					\caption{Full wavefield of Lamb waves in CFRP laminate}
+				\end{figure}
+			\end{flushleft}	
+	\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Motivation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Defects in composite laminates}
@@ -433,20 +452,20 @@ These waves can be decomposed into infinite plane waves propagating along arbitr
 				\end{equation*}
 				\column{0.9\textwidth}
 				\begin{figure}
-					\includegraphics[width=0.9\textwidth]{/figs/Fig_1_12.png}
+					\includegraphics[width=0.9\textwidth]{/figs2/Lamb_wave_modes_selectivity_cp.png}
 				\end{figure}
 			}
-			\only<2>{
-				\column{0.1\textwidth}
-				\centering
-				\begin{equation*}
-					c_g = \frac{\textrm{d}\omega}{\textrm{d}k}
-				\end{equation*}
-				\column{0.9\textwidth}
-				\begin{figure}
-					\includegraphics[width=0.9\textwidth]{/figs/Fig_1_13.png}
-				\end{figure}
-			}
+			%\only<2>{
+			%	\column{0.1\textwidth}
+			%	\centering
+			%	\begin{equation*}
+			%		c_g = \frac{\textrm{d}\omega}{\textrm{d}k}
+			%	\end{equation*}
+			%	\column{0.9\textwidth}
+			%	\begin{figure}
+			%		\includegraphics[width=0.9\textwidth]{/figs/Fig_1_13.png}
+			%	\end{figure}
+			%}
 	\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -552,7 +571,7 @@ These waves can be decomposed into infinite plane waves propagating along arbitr
 			\end{figure}
 	\end{columns}
 	\begin{center}
-	\alert{Group velocities}
+	\textbf{Group velocities} $c_g = \frac{\textrm{d}\omega}{\textrm{d}k}$
 	\end{center}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1372,7 +1391,29 @@ The RMS is defined as:
 		\end{column}
 	\end{columns}
 	
-IoU= $0.23$ and $\epsilon=10.16\%$ for thresholded damage map.
+IoU= $0.64$ and $\epsilon=1.69\%$ for thresholded damage map.
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wavefield imaging - current research}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Riesz/Hilbert transform methods (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+Wavenumbers and signal's envelope
+	\begin{figure}
+		\subfloat{\animategraphics[autoplay,loop,width=.9\textwidth]{6}{figures/figs2/Hilbert/Hilbert_75_kHz_frame_}{80}{300}}
+	\end{figure}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Riesz/Hilbert transform methods (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\centering
+	\setcounter{subfigure}{0}
+	\begin{figure}
+		\subfloat[Thickness map]{\includegraphics[width=.4\textwidth]{figures/figs2/Hilbert/L3_S4_B_Thickness_map_Data75_packet_interp.png}}
+		\quad
+		\subfloat[Average amplitude of envelope]{\includegraphics[width=.4\textwidth]{figures/figs2/Hilbert/L3_S4_B_Mean_amplitude_selected_Data75_packet_interp.png}}
+	\end{figure}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
