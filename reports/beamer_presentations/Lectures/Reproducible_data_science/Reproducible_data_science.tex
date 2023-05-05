@@ -1,0 +1,317 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+\documentclass[10pt,aspectratio=169,notes]{beamer} % aspect ratio 16:9, frames+notes 
+%\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+%\setbeameroption{show notes on second screen=bottom} % does not work for animations
+
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}}
+%\includeonlyframes{frame1,frame2,frame3}
+%\includeonlyframes{frame10}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+%\usepackage{amscls} % amsthm.sty
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+%\usepackage{FiraSans}
+\usepackage{mathrsfs} % for Fourier and Laplace symbols % installed manually jknappen in miktex console
+\usepackage{verbatim}
+%\usepackage{eulervm} % alternative math fonts
+%\usepackage{comment}
+\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows}  
+% the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
+% install manually media9 from miktex console (it contains pdfbase.sty), ocgx2 (ocgbase.sty)
+\usepackage{animate}
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+\captionsetup[figure]{labelformat=empty}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+%\usefonttheme[onlymath]{Serif} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+%\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%  metropolis compatible (FiraSans auto replacement)
+\newcommand{\matr}[1]{\boldsymbol{#1}}
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+%\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% metropolis compatible (FiraSans auto replacement)
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\myexp}{\mathrm{e}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\renewcommand{\Re}{\operatorname{\mathbb{R}e}}
+\renewcommand{\Im}{\operatorname{\mathbb{I}m}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Reproducible data science: best practices}
+\subtitle{Lecture Series}
+\author{\textbf{Paweł Kudela} }
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery\\Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright %\includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+\includegraphics[width=4cm]{/pkudela_odroid_sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%
+\note{Welcome to the lecture series in the frame of the doctoral school.
+My name is Pawel Kudela. 
+Today I will talk about the importance of the reproducible data science. 
+It is about organising your research workflow so that it is easier to reproduce what you have done in the past for yourself or others. 
+My presentation is composed of two parts: the first part is more theoretical and second part is more practical in which I will show you how to build skeleton of the project and track changes by using version control system.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame1]{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  %\tableofcontents[hideallsubsections]
+  \tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motivation and idea}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Motivation (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+More than \Large\textbf{70\%} \normalsize of researchers have tried and failed toreproduce another scientist’s experiments, and morethan \Large\textbf{50\%} \normalsize have \textbf{failed to reproduce} their own experiments. 
+\vspace{10mm}
+
+This leads to other academics and society losing trust in scientific results.
+
+\begin{biblio}{}
+	\biblioref{Monya Baker}{2016}{Reproducibility crisis?}{Nature, 533(26):353–66}
+\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{There was a study published in Nature in 2016 where more than 1500 scientists were surveyed and more than 70\% said that they have tried and failed to reproduce another scientist experiments.
+More than 50\% said they have tried and failed to reproduce their own experiments.
+Those are some of the telling figures which may lead to loosing trust in scientific results by other academics and society in general.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Motivation (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\begin{columns}[T]
+	\column{0.4\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Revising
+	\end{beamercolorbox}
+	\vspace{10mm}
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Handing off
+	\end{beamercolorbox}
+	\column{0.4\textwidth}
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Borrowing
+	\end{beamercolorbox}
+	\vspace{10mm}
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Accountability
+	\end{beamercolorbox}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{In simple words: you can think about reproducible research as an idea: you want to play that song again. 
+The reason is that data science projects are rarely one-and-done, they are rather incremental, they tend to cumulate knowledge from various fields and adapt to specific problem.
+You may have to revise you research project in future; 
+you may be doing another project and you want to borrow something from previous one; 
+It is very likely that you have to hand it off to somebody else at future point and they have to understand what you did so far. 
+And there is significant issue of accountability. You research workflow should show that your conclusions are justified. You have to show it for clients, funding agencies, regulators and reviewers.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame3]{Definitions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Reproducible data science}
+		\begin{itemize}
+			\item Push-button reproducibility.
+			\item The main goal of enabling reproducibility is to guarantee that all results can be independently recreated and verified to build upon in future work.
+			\item In the context of data science, reproducibility means that everything needed to recreate the model and its results such as data, tools, libraries, frameworks, programming languages and operating systems, have been captured, so with little effort the identical results are produced regardless of how much time has passed since the original project.
+			\item We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used. 
+			Reproducible is distinct from replicable.
+			
+			\textbf{Reproducible}: A result is reproducible when the \emph{same} analysis steps performed on the same dataset consistently produces the same answer.
+			
+			\textbf{Replicable}: A result is replicable when the same analysis performed on \emph{different} datasets produces qualitatively similar answers.
+		\end{itemize}
+	
+	\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{The most common definition of reproducibility (and replication) was first noted by Claerbout and Karrenbach in 1992 and has been used in computational science literature since then.
+We can read there:
+"Now that we have begun using CD-ROM publication, we can go much further. 
+Every figure caption contains a pushbutton that jumps to the appropriate science directory (folder) and initiates a figure rebuild command and then displays the figure, possibly as a movie or interactive program."
+This is still not a common place in scientific journals! We still are not there yet! 
+Even there is more move towards reproducibility, open data science, data submission along publication, etc. we still does not have that push-button reproducibility. 
+It is difficult to achieve for a variety of reasons.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Benefits of data science reproducibility}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{itemize}
+		\item Research credibility
+		\item Transparency and re-usability
+		\item Time savings
+		\item Facilitate collaboration and review process
+		\item Avoid misinformation
+	\end{itemize}
+	
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+\scriptsize Scientific results and evidence are strengthened if those results can be replicated and confirmed by several independent researchers.
+	
+When researchers employ transparency in their research - in other words, when they properly document and share the data and processes associated with their analyses - the broader research community is able to save valuable time when reproducing or building upon published results. 
+
+Often, data or code from prior projects will be re-used by new researchers to verify old findings or develop new analyses.
+	
+“negative results” can be published easily, helping avoid other researchers wasting time repeating analyses that will not return the expected results.
+	
+By designing reproducible workflows and sharing them with the different components of our research project, we can allow others to develop an in-depth understanding of our work. 
+This encourages them to review our methods, test our code, propose useful changes and make thoughtful contributions to develop our project further. 
+Reproducible workflows facilitate the peer review process tremendously by allowing reviewers access to the different parts of the projects that are necessary to validate the research outcomes.
+	
+By working reproducibly, we can develop validated research work, avoid misinformation that can limit replicability of our work and publish accurate research outputs.
+This aspect does not only support the validity of the current work, but any future studies that are based on reproducible research.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame2]{What is needed?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Make:}	
+		\begin{itemize}
+			\item raw data
+			\item code \& documentation to reproduce analysis
+			\item specifications of your computational environment
+		\end{itemize}
+		\textbf{available and accessible}
+	\end{alertblock}
+	
+	\emph{"There is no one-size-fits-all solution for computational reproducibility."}
+	\begin{biblio}{}
+		\biblioref{Jeffrey M. Perkel}{2018}{A toolkit for data transparency takes shape}{Nature, 560, 513-515}
+	\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{What is needed to make data science reproducible?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Organize your project}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Project skeleton - coockie-cutter
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Write READMEs liberally}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Markdown	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Keep data tidy \& machine readable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comment your code}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Use literate programming}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\alert{Literate programming} is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.
+
+\begin{biblio}{}
+	\biblioref{Donald E. Knuth}{1984}{Literate Programming}{The Computer Journal. British Computer Society. 27(2): 97--111, doi:10.1093/comjnl/27.2.97}
+\end{biblio}
+
+Examples: Literate, Jypyter Notebook, Maple Worksheets, Wolfram Notebooks (Mathematica), R Markdown, MATLAB Live Editor.	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Literate programming is a style of programming invented by Donald Knuth, where the main idea is that a program's source code is made primarily to be read and understood by other people, and secondarily to be executed by the computer.
+	
+This frees the programmer from the structure of a program imposed by the computer and means that the programmer can develop programs in the order of the flow of their thoughts.
+A Literate program generally consists of explanation of the code in a natural language such as English, interspersed with snippets of code to be executed. 
+This means that Literate programs are very easy to understand and share, as all the code is well explained.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comment your code}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{References}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{biblio}{Recommended literature}
+		\biblioref{Jon F. Claerbout and Martin Karrenbach.}{1992}{Electronic documents give reproducible research a new meaning}{https://library.seg.org/doi/abs/10.1190/1.1822162}
+		\biblioref{Jeffrey M. Perkel}{2018}{A toolkit for data transparency takes shape}{Nature, 560, 513-515}
+		\biblioref{Karl Broman, Kara Woo}{2018}{Data organization in spreadsheets}{The American Statistician, 72(1), 2-10, doi.org/10.1080/00031305.2017.1375989}
+		\biblioref{Karl Broman}{2018}{Minimal Make}{kbroman.org/minimal{\_}make}
+		\biblioref{Carl Boetiger}{2015}{An introduction to Docker for reproducible research}{ACM SIGOPS Operating System Review, 49(1), 71-79}
+		\biblioref{Ben Marwick, Carl Boettiger, Lincoln Mullen}{2018}{Packaging data analytical work reproducibly using R (and friends)}{The American Statistician, 72, 80-88.}
+	\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setbeamercolor{palette primary}{fg=black, bg=white}
+	\begin{frame}[standout]
+		Thank you for your attention!\\ \vspace{12pt}
+		Questions?\\ \vspace{12pt}
+		\url{pk@imp.gda.pl}
+	\end{frame}
+}
+\note{Thank you for your attention!
+	See you next time!}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
