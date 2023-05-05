@@ -174,3 +174,4 @@ src/external/**
 !data/processed/num/.gitkeep 
 !bin/.gitkeep
 
+*.webp

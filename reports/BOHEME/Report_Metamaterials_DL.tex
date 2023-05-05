@@ -1,0 +1,242 @@
+\documentclass[11pt,a4paper]{report}
+
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb,bm}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks = true, linkcolor = blue, urlcolor  = blue, 
+citecolor = blue, anchorcolor = blue]{hyperref}
+%% my added packages
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{multirow}
+\usepackage{setspace}
+
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\renewcommand{\bibname}{References}
+\graphicspath{{figures/}}
+\renewcommand{\baselinestretch}{2}
+\author{Abdalraheem Ijjeh \\
+	Supervised by: \\
+	Professor Pawel Kudela}
+\title{\Huge Development of deep neural network model fro calculation of dispersion diagrams in phononic crystals\\
+	\huge 06.12.2022 to 28.02.2023}
+
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+%	\onehalfspacing
+	
+	\begin{sloppypar}
+		\section{Deep learning model}		
+		\subsection{Objective}
+		The objective of this work is to replace the finite element method (FEM) forward solver for computing dispersion diagrams (as in COMOSOL Multiphysics) with the surrogate DL model, as schematically depicted in Fig.~\ref{fig:DL_vs_FEM}. 
+		Such a surrogate DL model can predict dispersion curves in a time shorter than 100 [ms]. 
+		It takes as input a binary image in which white pixels represent solid material and black pixels represent a cavity (air). 
+		Since the input to the DL model is an image, it cannot represent the whole 3D geometry as it can in the case of the FEM solver. 		
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=1.0\textwidth]{Surrogate_DL_model_for_PC_Abdalraheem.png}
+			\caption{Schematic representation of the concept of the FEM solver replacement for computing dispersion diagrams by the surrogate DL model in the case of a phononic crystal made by cross-like holes in a matrix (the idea is that the DL model takes an image of the cavity as an input, in which white pixels (ones) represent solids and black pixels (zeroes) represent air).}
+			\label{fig:DL_vs_FEM}
+		\end{figure}
+		
+		\subsection{Dataset pre-processing}
+		\noindent 		
+		The synthetically generated dataset contains 9000 samples of unit cells that are classified into three equal subsets of 3000 samples each.
+		The shape of a unit cell is \((\textup{512}\times \textup{512})\) pixel points.
+		As mentioned earlier, the shape of the unit cell is diagonally symmetrical.
+		To reduce the complexity of the computation, we used only the upper left quarter of the unit cell shape with a size of (256 x 256) pixel points for developing the deep learning model.
+		Consequently, the total shape of the dataset is (3, 3000, 256, 256, 1).
+		For training purposes, 2900 samples of unit cells were randomly selected from each subset, resulting in a training set with a shape of (8700, 256, 256, 1).
+		The labels (ground truths) of the dataset are the dispersion diagrams (frequency versus wavenumber) values with a range exceeding \(500\) kHz.
+		It is important to mention that we have found that normalizing the frequency values to a range between (0, 1) gives better predicted outputs.
+		\subsection{Deep learning model}
+		\noindent
+		The calculation of the dispersion diagram for a single unit cell using COMOSOL Multiphysics software is a time-consuming process.		
+		Consequently, a surrogate deep learning model was developed, which can calculate such a dispersion diagram in a very fast time.
+		In general, deep learning techniques such as artificial neural networks (ANNs) and convolution neural networks (CNNs) are considered universal approximation functions.
+		\noindent Essentially, the developed model is an approximation function, which can map the input (shape of the unit cell) to an output of \(1464\) (frequency versus wavenumber) 
+		All dispersion diagrams in the synthetically generated dataset have fixed wavenumber values.
+		Thus, we only need to predict the frequencies.		
+		Accordingly, the developed deep learning model is a multi-output regressor.		
+		Figure~\ref{DL_model} presents the general architecture of the developed deep learning model, which is composed of two main parts:		
+		\begin{enumerate}
+			\item The encoder.
+			\item The dense layers (ANN).
+		\end{enumerate}
+		The encoder is a CNN model that performs convolution operations followed by subsampling (pooling). 		
+		Consequentially, the encoder is responsible for extracting the features from the shape of the unit cell.
+		Such features contain all information required regarding the dispersion diagram (the predicted output).
+		The ANN part consists of several layers with different numbers of neurons and is responsible for mapping the extracted features by the encoder into the \(1464\) predicted frequency values.
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.65\textwidth]{PC_unit_DL_model.png}
+			\caption{DL Model architecture.}
+			\label{DL_model}
+		\end{figure}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		The task of hyperparameter optimization is crucial, especially, when developing a deep learning model to solve a complex task.
+		Hence, the quality of a predictive model depends largely on its hyperparameter configuration.
+		For this purpose we employed the Hyperband optimisation technique~\cite{Li2018}, which is an extension to the successive halving algorithm~\cite{Jamieson2016}.
+		The hyperband technique initially runs a random configuration of hyperparameters on a specific schedule of iterations (a small number of iterations) per configuration.
+		Then it takes the best performers and again runs them through a larger number of iterations.
+		This process is repeated until we get the best configuration of hyperparameters.
+		
+		Table~\ref{tab:hyperparemeter_tuning} presents the hyperparameters that were tuned with the hyperband technique, the initial range of values of the hyperparameters, and the optimised value.
+		Regarding the pooling operation hyperparameter, convolution blocks [1, 2, 4, 5, 6, 7] have average pooling, and convolution block [3] has max pooling.
+		The output dense layer has 1464 units representing the number of frequencies we want to predict.
+		Furthermore, the MSE loss function was used as our objective loss function with the Adam optimizer.
+		Additionally, the early-stopping technique was used to reduce the model overfitting. 
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{table}[]
+			\centering 
+			\caption{Hyperparameters tuning with hyperband technique.}
+			\begin{tabular}{lcc}
+				\toprule[1.5pt]
+				Hyperparameter   & initial range of values & optimised value \\
+				\midrule
+				Batch size   & \(16\dots 64\)   & 32  \\		
+				Kernel size  & \(3\dots 7\)  & 5   \\
+				Number of convolution  blocks & \(3\dots 8\) &  7\\
+				Number hidden layers & \(1\dots 5\)   & 4\\
+				Learning rate    & \(5e-5 \dots 5e-4\)   & 1.433e-4\\
+				Pooling operation    & {[}average, max{]}  & varies \\
+				Dropout  & \(0.15 \dots 0.3\)    & 0.2\\
+				Dense units 1    & {[}1024-8192{]} & 2048\\
+				Dense units 2    & {[}1024-8192{]} & 6656\\
+				Dense units 3    & {[}1464-2042{]} & 1944\\
+				\bottomrule[1.5pt]  
+			\end{tabular}
+			\label{tab:hyperparemeter_tuning}
+		\end{table}
+	
+		\subsection{Development environment: Tools}
+		The developed DL model was coded in-house} (Tailored specifically to meet task requirements).
+	
+		\noindent The following tools were utilised:
+		\begin{itemize}	
+			\item {Pycharm} (a dedicated Python Integrated Development Environment (IDE)).		
+			\item {Python}: ver. 3.8
+			\item {TensorFlow} (a free and open-source software library for machine learning and artificial intelligence): ver. 2.4
+			\item {Keras} (deep learning API over TensorFlow): ver. 2.4
+			\item {GPUs}: NVIDIA Tesla V100 /32 GB
+		\end{itemize}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\section{Results the DL surrogate model}
+		The results obtained by using the DL model were compared with the results obtained by using the FEM (COMSOL Multiphysics). The following errors were calculated for quantitative assessment of DL model predictions: mean squared error (MSE) and maximum frequency error \(\varepsilon_{max}\):
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{equation}
+			MSE=\frac{1}{n}\sum_{i=1}^{n}\left( f_i - \hat{f_i}\right)^2, \left[k\textup{Hz}^2\right],
+		\end{equation}	
+		\begin{equation}
+			\varepsilon_{max}=max\left(\big |f_i - \hat{f_i}\big |\right), \left[k\textup{Hz}^2\right],
+		\end{equation}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		where \(f\) is the frequency obtained by using the FEM and \(\hat{f_i}\) is the frequency vector obtained by using the DL model.
+		The selected results for random test cases (cases no 1029, 4672 and 10425) are presented in Fig.~\ref{fig:comparision}. The DL model predictions are represented by blue circular markers whereas the FEM results are given by red triangular markers. It can be seen qualitatively that the results agree well, especially in the low-frequency range. For each example, the band gap is properly predicted. The lowest errors were obtained for the cross-like cavity shape (first column of Fig.~\ref{fig:comparision}) where MSE is 2.6 kHz\(^2\) and \(\varepsilon_{max}\) is 9.1 kHz and the highest errors are for blot-like cavity shapes (third column of Fig.~\ref{fig:comparision}) where MSE is 17.6 \(\textup{kHz}^2\) and \(\varepsilon_{max}\) is 15.4 kHz. In conclusion, the results are satisfactory and the trained surrogate DL model can be used for band gap size prediction. It is expected that further improvement in the accuracy of the DL model can be achieved by using a larger dataset for supervised learning.
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=1\textwidth]{plot_1029_4672_10425_KF_DL_FEM_BG_triple_tile.png}
+			\caption{Comparison of DL model predictions with FEM dispersion diagrams for random test cases 1029, 4672 and 10425.}
+			\label{fig:comparision}
+		\end{figure}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\noindent Additionally, the following figures~\ref{fig:first},~\ref{fig:second} and~\ref{fig:third} represent a comparison of DL model predictions with FEM dispersion diagrams with respect to the three subsets, respectively.
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{figure}[ht!]
+			\centering
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_1187__normalized.png}
+				\label{fig:1187}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_1396__normalized.png}
+				\label{fig:1396}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_1596__normalized.png}
+				\label{fig:1596}
+			\end{subfigure}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\caption{Comparison of DL model predictions with FEM dispersion diagrams for random first distribution test cases no. 1187, 1396 and 1596, respectively.}
+			\label{fig:first}			
+		\end{figure}
+		\begin{figure}[ht!]
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_3005__normalized.png}
+				\label{fig:3005}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_3161__normalized.png}
+				\label{fig:3161}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_3219__normalized.png}
+				\label{fig:3219}
+			\end{subfigure}			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\caption{Comparison of DL model predictions with FEM dispersion diagrams for random second distribution test cases no. 3005, 3161 and 3219, respectively.}
+			\label{fig:second}				
+		\end{figure}
+		\begin{figure}[ht!]	
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_10015__normalized.png}
+				\label{fig:10015}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_10667__normalized.png}
+				\label{fig:10667}
+			\end{subfigure}
+			\hfill
+			\begin{subfigure}[b]{0.32\textwidth}
+				\centering
+				\includegraphics[width=1.0\textwidth]{val_test_input_img_predicted_dispersion_curve_case_10750__normalized.png}
+				\label{fig:10750}
+			\end{subfigure}
+			\caption{Comparison of DL model predictions with FEM dispersion diagrams for random third distribution test cases no. 10015, 10667 and 10750, respectively.}
+			\label{fig:third}
+		\end{figure}
+		
+		
+		\newpage
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\section{Publication}
+		\noindent With the developed DL model, it was possible to perform the optimisation process in a relatively short amount of time to obtain a specific unit cell shape for a given band gap.\\
+		Currently, we are in the process of finalizing a paper article:
+		\begin{itemize}
+			\item \textup{Paweł Kudela}, \textup{Abdalraheem Ijjeh}, \textup{Maciej Radzienski}, \textup{Marco Miniaci}, \textup{Nicola Pugno}, \textup{Wieslaw Ostachowicz}. \enquote{Deep learning aided topology optimization of phononic crystals}.
+		\end{itemize}
+			
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\bibliography{biblography.bib}
+		\bibliographystyle{unsrt}
+	\end{sloppypar}	
+\end{document}

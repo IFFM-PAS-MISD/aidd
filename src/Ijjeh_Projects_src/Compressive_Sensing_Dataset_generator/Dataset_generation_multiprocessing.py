@@ -16,13 +16,6 @@ import gc
 import scipy
 import multiprocessing as mp
 
-# param = []
-# for i in range(475):
-#     for j in range(512):
-#         param.append(
-#             '/aijjeh_odroid_sensors/aidd/data/raw/num/wavefield_dataset2_bottom_out/%d_output/%d_flat_shell_Vz_%d_500x500bottom.png' % (
-#                 (i + 1), (j + 1), (i + 1)))
-
 path_cs_dataset = '/home/aijjeh/Desktop/Phd_Projects/compressive_sensing_project/cs_datasets'
 os.chdir(path_cs_dataset)
 # Full_W_dataset = np.load('CS_dataset_labels_Full_wavefield_475_512_49_49.npy', mmap_mode='r+')
