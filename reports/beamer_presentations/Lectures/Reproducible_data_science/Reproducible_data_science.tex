@@ -47,7 +47,8 @@
 % Metropolis theme custom modification file
 \input{metropolis_mods.tex}
 %\usefonttheme[onlymath]{Serif} 
-
+\hypersetup{colorlinks,linkcolor=,urlcolor=logoblue}
+\usepackage{forest}% for folder structures
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Custom commands
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,6 +72,18 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 \renewcommand{\Re}{\operatorname{\mathbb{R}e}}
 \renewcommand{\Im}{\operatorname{\mathbb{I}m}}
+% folder
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+\def\Size{4pt}
+\tikzset{
+	folder/.pic={
+		\filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+		(-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);  
+		\filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+		(-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+	}
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Title page options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,9 +109,9 @@
 %%%%%%%%%%%%%%%%%%%%
 \note{Welcome to the lecture series in the frame of the doctoral school.
 My name is Pawel Kudela. 
+I am an associate professor at the Institute of Fluid Machinery, Polish Academy of Sciences.
 Today I will talk about the importance of the reproducible data science. 
 It is about organising your research workflow so that it is easier to reproduce what you have done in the past for yourself or others. 
-My presentation is composed of two parts: the first part is more theoretical and second part is more practical in which I will show you how to build skeleton of the project and track changes by using version control system.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SLIDES
@@ -109,11 +122,14 @@ My presentation is composed of two parts: the first part is more theoretical and
   \tableofcontents
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{My presentation is composed of two parts: the first part is more theoretical and second part is more practical.
+In the theoretical part, I will talk about the idea of reproducible data science, components needed for reproducibility as well as best practices in project organisation and development. 
+	
+In the practical part, I will show you how to build skeleton of the project by using cookiecutter, write README files by using Markdown and track changes by using git version control system.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Motivation and idea}
+\section{Motivation and idea of reproducible data science}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Motivation (1)}
+\begin{frame}[label=frame2]{Motivation (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 More than \Large\textbf{70\%} \normalsize of researchers have tried and failed toreproduce another scientist’s experiments, and morethan \Large\textbf{50\%} \normalsize have \textbf{failed to reproduce} their own experiments. 
 \vspace{10mm}
@@ -125,11 +141,11 @@ This leads to other academics and society losing trust in scientific results.
 \end{biblio}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{There was a study published in Nature in 2016 where more than 1500 scientists were surveyed and more than 70\% said that they have tried and failed to reproduce another scientist experiments.
+\note{There was a study published in Nature in 2016 where more than fifteen hundreds scientists were surveyed and more than 70\% said that they have tried and failed to reproduce another scientist experiments.
 More than 50\% said they have tried and failed to reproduce their own experiments.
-Those are some of the telling figures which may lead to loosing trust in scientific results by other academics and society in general.}
+Those are some of the telling figures which may lead to loosing trust in scientist and their research findings by other academics and society in general.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Motivation (2)}
+\begin{frame}[label=frame3]{Motivation (2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \begin{columns}[T]
 	\column{0.4\textwidth}
@@ -157,37 +173,87 @@ The reason is that data science projects are rarely one-and-done, they are rathe
 You may have to revise you research project in future; 
 you may be doing another project and you want to borrow something from previous one; 
 It is very likely that you have to hand it off to somebody else at future point and they have to understand what you did so far. 
-And there is significant issue of accountability. You research workflow should show that your conclusions are justified. You have to show it for clients, funding agencies, regulators and reviewers.}
+And there is significant issue of accountability. You research workflow should show that your conclusions are justified. You have to show it for clients, funding agencies, regulators and most often reviewers.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame3]{Definitions}
+\begin{frame}[t,label=frame4]{Definitions (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Reproducible data science}
 		\begin{itemize}
 			\item Push-button reproducibility.
-			\item The main goal of enabling reproducibility is to guarantee that all results can be independently recreated and verified to build upon in future work.
-			\item In the context of data science, reproducibility means that everything needed to recreate the model and its results such as data, tools, libraries, frameworks, programming languages and operating systems, have been captured, so with little effort the identical results are produced regardless of how much time has passed since the original project.
-			\item We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used. 
-			Reproducible is distinct from replicable.
+			\item Prepare a document which can reproduce research results a year or more later by pressing a single button.
 			
-			\textbf{Reproducible}: A result is reproducible when the \emph{same} analysis steps performed on the same dataset consistently produces the same answer.
+			\biblioref{Jon F. Claerbout and Martin Karrenbach.}{1992}{Electronic documents give reproducible research a new meaning}{https://library.seg.org/doi/abs/10.1190/1.1822162}
 			
-			\textbf{Replicable}: A result is replicable when the same analysis performed on \emph{different} datasets produces qualitatively similar answers.
 		\end{itemize}
 	
 	\end{alertblock}
+
+\only<2>{
+	\vspace{5mm}
+	\begin{tikzpicture}
+		\draw[ultra thick,|-stealth,logoblue] (0,0)--(10,0);  % horizon
+		\node[logoblue] at  (10,0.3) {o}; % target
+		\draw[thick, -stealth, logoblue] (10,1)--(10,0.3); % target arrow
+		\node[logoblue] at  (10.5,0.7) {target}; % target
+		\node[draw,logoblue,below,align=left] at (0,-0.2) {nobody,\\ not even yourself,\\can recreate your analysis};
+		\node[draw,logoblue,below,align=left] at (10,-0.2) {push-button\\reproducibility};
+		\draw[ultra thick,|-|,orange] (6,0.3) -- node[above] {happy medium} (9,0.3); % happy medium
+	\end{tikzpicture}
+	}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{The most common definition of reproducibility (and replication) was first noted by Claerbout and Karrenbach in 1992 and has been used in computational science literature since then.
-We can read there:
+\note{\scriptsize The most common definition of reproducibility (and replication) was first noted by Claerbout and Karrenbach in 1992 and has been used in computational science literature since then.
+They set goals such as:\\
+- Learn how to merge a publication with its underlying computational analysis.\\
+- Teach researchers how to prepare a document which can reproduce research results a year or more later by pressing a single button.\\
+- Learn how to leave finished work in a condition where coworkers can reproduce the calculation including the final illustration by pressing a button in the caption.\\
+- Prepare copy of local software environment, so that students can take their work elsewhere, press a button and reproduce their work.\\
+- Merge electronic documents written by multiple authors.\\
+- Export electronic documents to numerous other sites.\\
+In this article we can also read:
 "Now that we have begun using CD-ROM publication, we can go much further. 
 Every figure caption contains a pushbutton that jumps to the appropriate science directory (folder) and initiates a figure rebuild command and then displays the figure, possibly as a movie or interactive program."
 This is still not a common place in scientific journals! We still are not there yet! 
 Even there is more move towards reproducibility, open data science, data submission along publication, etc. we still does not have that push-button reproducibility. 
-It is difficult to achieve for a variety of reasons.
+It is difficult to achieve that for a variety of reasons.
+
+If we look at this graph as a kind of reproducibility horizon where on one end nobody, not even yourself can recreate any part of your analysis and at the other and you have push button reproducibility and published work, you want to target that ultimate goal of push button reproducibility but when you are in a zone close to that I would say it is happy medium.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Benefits of data science reproducibility}
+\begin{frame}[label=frame5]{Definitions (2)}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Reproducible data science}
+		\begin{itemize}
+			\item The main goal of enabling reproducibility is to guarantee that all results can be independently recreated and verified to build upon in future work.
+			\item In the context of data science, reproducibility means that everything needed to recreate the model and its results such as data, tools, libraries, frameworks, programming languages and operating systems, have been captured, so with little effort the identical results are produced regardless of how much time has passed since the original project.
+		\end{itemize}	
+	\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{To summarize the definition of reproducible research in modern world we can say that reproducibility means that recreation of models and its results such as data, tools and graphs can be done with little effort and it leads to identical results as obtained in the past.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame6]{Definitions (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Reproducible vs Replicable}
+			We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used. 
+			Reproducible is distinct from replicable.
+			\vspace{5mm}
+			
+			\textbf{Reproducible}: A result is reproducible when the \emph{same} analysis steps performed on the \alert{same dataset} consistently produces the \underline{same} answer.
+			
+			\textbf{Replicable}: A result is replicable when the \emph{same} analysis performed on \alert{different datasets} produces qualitatively \underline{similar} answers.
+	\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used.
+To complement this definition, however, we should distinguish between reproducibility and replicability of research. 
+In both cases we want to answer the same research questions, we want to get the same results but in the case of replicability we are performing the analysis on a different dataset.
+For example, we want to replicate a signal processing method published few years ago which aims to de-noise audio recordings and compare it qualitatively to our own method by using our own signals such as our voice recordings.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame7]{Benefits of data science reproducibility}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{itemize}
 		\item Research credibility
 		\item Transparency and re-usability
@@ -199,21 +265,21 @@ It is difficult to achieve for a variety of reasons.
 	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{
-\scriptsize Scientific results and evidence are strengthened if those results can be replicated and confirmed by several independent researchers.
+\note{What are the benefits of data science reproducibility?
+\scriptsize Well, scientific results are strengthened if those results can be replicated and confirmed by several independent researchers.
 	
 When researchers employ transparency in their research - in other words, when they properly document and share the data and processes associated with their analyses - the broader research community is able to save valuable time when reproducing or building upon published results. 
 
 Often, data or code from prior projects will be re-used by new researchers to verify old findings or develop new analyses.
 	
-“negative results” can be published easily, helping avoid other researchers wasting time repeating analyses that will not return the expected results.
+It should be noted that “negative results” also have a value and can be published easily, helping avoid other researchers wasting time repeating analyses that will not return the expected results.
 	
 By designing reproducible workflows and sharing them with the different components of our research project, we can allow others to develop an in-depth understanding of our work. 
 This encourages them to review our methods, test our code, propose useful changes and make thoughtful contributions to develop our project further. 
 Reproducible workflows facilitate the peer review process tremendously by allowing reviewers access to the different parts of the projects that are necessary to validate the research outcomes.
 	
 By working reproducibly, we can develop validated research work, avoid misinformation that can limit replicability of our work and publish accurate research outputs.
-This aspect does not only support the validity of the current work, but any future studies that are based on reproducible research.
+This aspect does not only support the validity of the \textbf{current} work, but any \textbf{future} studies that are based on reproducible research.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame2]{What is needed?}
@@ -233,15 +299,149 @@ This aspect does not only support the validity of the current work, but any futu
 	\end{biblio}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{What is needed to make data science reproducible?}
+\note{\scriptsize An important outcome of our research is the publication but publication does not necessarily reflect the amount of hard work we put in it.
+And this work is actually where science is happening not the published article itself which we are getting credit for.
+The thing is that if anybody want to reproduce your hard work or you want to reproduce what is in the published paper which you are interested in, it is not easy task because the paper often lacks important components.
+So, what is needed to make data science reproducible?
+We have to make raw data available along with the paper by for example linking dataset published in an open repository, we have to share the code and documentation of the steps which are needed to reproduce the results and make specification of the computational environment available and accessible. Without these three components it is impossible to reproduce someone's work.
 
+There is no one-size-fits-all solution for computational reproducibility.
+The research workflow might differ substantially if you work in the field of bioinformatics, mechanical engineering, chemistry or some specific specialization.
+But there are common elements in each case.
+
+My advise would be that if you want to make your research work reproducible you have to set you mindset right away when starting the project not at the paper submission stage.
+
+I hope that hints which I will give at the next slides will help you to do that.
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Organize your project}
+\subsection{Project skeleton}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Project skeleton - coockie-cutter
+\begin{frame}[t]{Organize your project (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Project skeleton (template) and strategy is needed to store files!
+\vspace{3mm}
+
+\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
+	\emph{A place for everything, everything in its place}\\
+	\flushright
+	Benjamin Franklin
+\end{beamercolorbox}
+\vspace{3mm}
+
+\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
+	\emph{File organization and naming are powerful weapons against chaos}\\
+	\flushright
+	Jenny Bryan
+\end{beamercolorbox}	
+\begin{columns}[T]
+	\hspace{0.05\textwidth}
+	\column{0.2\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering Raw data
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering Processed data
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering Numerical results
+	\end{beamercolorbox}
+	\column{0.1\textwidth}
+	\centering
+	\tikz\node at (0,0) [fill=black,shape=single arrow,text width=0.8\textwidth,text height=2ex] {};
+	\column{0.2\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering figures
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering tables
+	\end{beamercolorbox}
+	\column{0.1\textwidth}
+	\centering
+	\tikz\node at (0,0) [fill=black,shape=single arrow,text width=0.8\textwidth,text height=2ex] {};
+	\column{0.2\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering report
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering manuscript
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering presentation
+	\end{beamercolorbox}
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{Let's start with organizing your project by creating a project skeleton or template.
+What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
+"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Organize your project (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Project skeleton (template) and strategy is needed to store files!
+\begin{forest}
+	for tree={
+		font=\ttfamily,
+		grow'=0,
+		child anchor=west,
+		parent anchor=south,
+		anchor=west,
+		calign=first,
+		inner xsep=7pt,
+		edge path={
+			\noexpand\path [draw, \forestoption{edge}]
+			(!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+		},
+		before typesetting nodes={
+			if n=1
+			{insert before={[,phantom]}}
+			{}
+		},
+		fit=band,
+		before computing xy={l=15pt},
+	}  
+	[system
+	[config
+	]
+	[lib
+	[Access
+	]
+	[Plugin
+	]
+	]
+	[templates
+	]
+	[tests
+	]
+	]
+\end{forest}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Let's start with organizing your project by creating a project skeleton or template.
+	What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
+	"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Organize your project (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Project skeleton (template) - \alert{Coockiecutter} by Audrey Roy Greenfeld\\
+Documentation: \url{https://cookiecutter.readthedocs.io/en/stable/README.html}\\
+GitHub: \url{https://github.com/cookiecutter/cookiecutter}\\
+\begin{itemize}
+	\item Cookiecutter takes a template provided as a directory structure with template-files.
+	\item It reads a settings file and prompts the user interactively whether to change the settings.
+	\item Then it takes both and generates an output directory structure from it.
+\end{itemize}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{A useful, small tool which I came across and I am using myself is coockie-cutter by Mr Greenfeld.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Write READMEs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Write READMEs liberally}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -250,12 +450,16 @@ Markdown
 %%%%%%%%%%%%%%%%%%%%
 \note{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Machine readable data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Keep data tidy \& machine readable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Code development}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Comment your code}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -281,12 +485,89 @@ This frees the programmer from the structure of a program imposed by the compute
 A Literate program generally consists of explanation of the code in a natural language such as English, interspersed with snippets of code to be executed. 
 This means that Literate programs are very easy to understand and share, as all the code is well explained.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Comment your code}
+\subsection{Version control}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Use version control (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Version control system}
+	Software tools that helps in recording changes made to files by keeping a track of modifications done in the code. 
+\end{alertblock}
+
+Examples: \alert{Git}, Helic core, Microsoft TFS, Perforce, Subversion, Mercurial...	
+
+Internet hosting services for software development and version control using Git:\\
+GitHub, GitLab and BitBucket.
+\vspace{10mm}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[scale=0.1]{Git-Logo-1788C.png}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics{github-mark.png}
+	\includegraphics[scale=0.1]{GitHub_Logo.png}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{What is version control system? 
+Basically Version control system keeps track of changes made on a particular project and take a snapshot of every modification done in the code.
+The most popular examples of version control systems are: Git, Helic core, Microsoft TFS, Perforce, Subversion and Mercurial among others.
+
+Version control system should be distinguished from internet hosting services which offers code repositories along with version control, bug tracking, continuous integration, etc. for every project. 
+
+Examples of such repositories are: GitHub, GitLab and BitBucket.
+GitHub and GitLab utilize git as underlying version control system.
+BitBucket offered both Git and Mercurial as a version control system but the Bitbucket Mercurial Support ended in 2020.
+
+Due to popularity of Git version control system we will learn basics of it in the practical part of this lecture.
+
+Other tools helpful for software development are CloudBees, CircleCI and Jenkins.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Use version control (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Purpose of Version Control: 
+\begin{itemize}
+	\item Collaboration
+	\item Integration of work
+	\item Remote access / multiple computer use
+	\item Roll back (undo) feature
+\end{itemize}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{The purpose of version control is collaboration: 
+Multiple people can work simultaneously on a single project. 
+Everyone works on and edits their own copy of the files and it is up to them when they wish to share the changes made by them with the rest of the team. 
+
+Following this up, version control system integrates the work that is done simultaneously by different members of the team. 
+In some rare cases, when conflicting edits are made by two people to the same line of a file, then human assistance is requested by the version control system in deciding what should be done - which version (or line of the code) should we keep and which discard.
+
+It also enables one person to use multiple computers to work on a project, so it is valuable even if you are working by yourself.
+
+One of the most important purpose of version control system is roll back feature. 
+Version control provides access to the historical versions of a project. 
+This is insurance against computer crashes or data loss. 
+If any mistake is made, you can easily roll back to a previous version. 
+It is also possible to undo specific edits without losing the work done in the meanwhile. 
+It can be easily known when, why, and by whom any part of a file was edited.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Workflow automation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Automate your process}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Make, make all scripts	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Run scripts in particular order}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computational environment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Share your computing environment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{Sharing computing environment is especially important when we work with Machine Learning.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{References}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -299,7 +580,8 @@ This means that Literate programs are very easy to understand and share, as all 
 		\biblioref{Ben Marwick, Carl Boettiger, Lincoln Mullen}{2018}{Packaging data analytical work reproducibly using R (and friends)}{The American Statistician, 72, 80-88.}
 	\end{biblio}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Practical part (Cookiecutter, Markdown, Git, Github)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=black, bg=white}
 	\begin{frame}[standout]
