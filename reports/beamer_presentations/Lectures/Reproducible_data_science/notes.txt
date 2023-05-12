@@ -90,5 +90,6 @@ Markdown - very lightweight mark up language
 
 https://www.earthdatascience.org/courses/intro-to-earth-data-science/open-reproducible-science/get-started-open-reproducible-science/best-practices-for-organizing-open-reproducible-science/
 
-
-
+Organization
+http://www2.stat.duke.edu/~rcs46/lectures_2015/01-markdown-git/slides/organization-slides/organization-slides.pdf
+https://uw-madison-aci.github.io/2016-08-23-uwmadison/assets/DC_day2intro.html#1

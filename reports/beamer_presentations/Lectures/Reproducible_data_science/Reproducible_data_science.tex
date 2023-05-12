@@ -48,7 +48,8 @@
 \input{metropolis_mods.tex}
 %\usefonttheme[onlymath]{Serif} 
 \hypersetup{colorlinks,linkcolor=,urlcolor=logoblue}
-\usepackage{forest}% for folder structures
+\usepackage[edges]{forest}% for folder structures
+\usepackage[normalem]{ulem} % for strikeout
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Custom commands
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,14 +76,41 @@
 % folder
 \definecolor{folderbg}{RGB}{124,166,198}
 \definecolor{folderborder}{RGB}{110,144,169}
-\def\Size{4pt}
-\tikzset{
-	folder/.pic={
-		\filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
-		(-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);  
-		\filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
-		(-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
-	}
+\newlength\Size
+\setlength\Size{4pt}
+\tikzset{%
+	folder/.pic={%
+		\filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+		\filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+	},
+	file/.pic={%
+		\filldraw [draw=folderborder, top color=folderbg!5, bottom color=folderbg!10] (-\Size,.4*\Size+5pt) coordinate (a) |- (\Size,-1.2*\Size) coordinate (b) -- ++(0,1.6*\Size) coordinate (c) -- ++(-5pt,5pt) coordinate (d) -- cycle (d) |- (c) ;
+	},
+}
+\forestset{%
+	declare autowrapped toks={pic me}{},
+	pic dir tree/.style={%
+		for tree={%
+			folder,
+			font=\ttfamily,
+			grow'=0,
+		},
+		before typesetting nodes={%
+			for tree={%
+				edge label+/.option={pic me},
+			},
+		},
+	},
+	pic me set/.code n args=2{%
+		\forestset{%
+			#1/.style={%
+				inner xsep=2\Size,
+				pic me={pic {#2}},
+			}
+		}
+	},
+	pic me set={directory}{folder},
+	pic me set={file}{file},
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Title page options
@@ -282,7 +310,7 @@ By working reproducibly, we can develop validated research work, avoid misinform
 This aspect does not only support the validity of the \textbf{current} work, but any \textbf{future} studies that are based on reproducible research.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame2]{What is needed?}
+\begin{frame}[label=frame8]{What is needed?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Make:}	
 		\begin{itemize}
@@ -376,56 +404,259 @@ Project skeleton (template) and strategy is needed to store files!
 %%%%%%%%%%%%%%%%%%%%
 \note{Let's start with organizing your project by creating a project skeleton or template.
 What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
+And there is always a lot of them!
 "File organization and naming are powerful weapons against chaos" said Jenny Bryan.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Organize your project (2)}
+\begin{frame}[t]{Organize your project (2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Project skeleton (template) and strategy is needed to store files!
-\begin{forest}
-	for tree={
-		font=\ttfamily,
-		grow'=0,
-		child anchor=west,
-		parent anchor=south,
-		anchor=west,
-		calign=first,
-		inner xsep=7pt,
-		edge path={
-			\noexpand\path [draw, \forestoption{edge}]
-			(!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+\vspace{-5mm}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
 		},
-		before typesetting nodes={
-			if n=1
-			{insert before={[,phantom]}}
-			{}
+		[simple\_project
+			[raw\_data
+			]
+			[processed\_data
+			]
+			[manuscript
+				[mssp\_paper.tex, file
+				]
+			]
+		]
+	\end{forest}
+	\column{0.5\textwidth}
+	\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
 		},
-		fit=band,
-		before computing xy={l=15pt},
-	}  
-	[system
-	[config
-	]
-	[lib
-	[Access
-	]
-	[Plugin
-	]
-	]
-	[templates
-	]
-	[tests
-	]
-	]
-\end{forest}	
+		[more\_complex\_project
+		[data
+			[raw\_data
+			]
+			[processed\_data
+			]
+		]
+		[src
+			[data\_processing
+			]
+			[visualization
+			]
+			[models
+			]
+		]
+		[reports
+			[figures
+			]
+			[journal\_papers
+			]
+		]
+		]
+	\end{forest}
+\end{columns}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{Let's start with organizing your project by creating a project skeleton or template.
-	What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
-	"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
+What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
+"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
+Project skeleton (template) and strategy is needed to store files!
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Organize your project (3)}
+\begin{frame}[t]{Organize your project (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Hints:
+\begin{itemize}
+	\item all files in common directory (named by project slug - abbreviation) 
+	\item separate raw data from processed data
+	\item give team members read-only permissions to raw data
+	\item separate code from data
+	\item file names: meaningful, sortable, consistent (controlled vocabulary)
+	\item dates like 2023-05-10
+	\item remove clutter of unneeded old stuff by moving files to folder 
+	\begin{tikzpicture}
+		\pic{folder};
+	\end{tikzpicture}
+	\texttt{unused}
+\end{itemize}	
+\begin{columns}[T]
+	\hspace{5mm}
+	\column{0.5\textwidth}
+	\textbf{dos}\\
+	\texttt{mssp\_paper.tex}\\
+	\texttt{mssp-paper-draft-2023-05-10.tex}\\
+	\texttt{mssp-paper-final-2023-05-15.tex}\\
+	\column{0.5\textwidth}
+	\textbf{don'ts}\\
+	\sout{\texttt{MSSP paper 1.tex}}\\
+	\sout{\texttt{MSSP\_paper\_v5\_final\_rev\_FINAL\_FOR\_REAL.tex}}
+	\alert{Dash '-' does not work in MATLAB!}
+\end{columns}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{make a file’s name and location VERYINFORMATIVE about what it is, why it exists,
+how it relates to other things
+the more things are self-explanatory, thebetter
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Organize your project (4) - controlled vocabulary}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Organize your project (5) - my strategy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5mm}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+	\only<1>
+	{
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[my\_project
+		[data
+		[raw\_data
+			[specimen\_1
+				[\textcolor{orange}{50kHz\_pzt.mat}, file
+				]
+			]
+		]
+		[processed\_data
+			[specimen\_1
+			]
+		]
+		]
+		[src
+			[data\_processing
+				[\alert{rms.m}, file
+				]
+			]
+		]
+		]
+	\end{forest}
+	}
+	\only<2->
+	{
+		\begin{forest}
+			pic dir tree,
+			where level=0{}{% folder icons by default; override using file for file icons
+				directory,
+			},
+			[my\_project
+			[data
+			[raw\_data
+				[specimen\_1
+					[\textcolor{orange}{50kHz\_pzt.mat}, file
+					]
+				]
+			]
+			[processed\_data
+				[specimen\_1
+					[\alert{rms}
+						[\alert{rms}\_\textcolor{orange}{50kHz\_pzt.mat}, file
+						]
+					]
+				]
+			]
+			]
+			[src
+				[data\_processing
+					[\alert{rms.m}, file
+					]
+				]
+			]
+			]
+		\end{forest}
+	}
+	\column{0.5\textwidth}
+	\centering
+	\only<3>
+	{
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[my\_project
+		[src
+			[data\_processing
+			]
+			[visualization
+				[\alert{plot\_rms.m}, file
+				]
+			]
+		]
+		[reports
+			[figures
+			]
+			[journal\_papers
+			]
+		]
+		]
+	\end{forest}
+	}
+	\only<4->
+	{
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[my\_project
+		[src
+			[data\_processing
+			]
+			[visualization
+				[\alert{plot\_rms.m}, file
+				]
+			]
+		]
+		[reports
+			[figures
+				[\alert{plot\_rms}
+					[\alert{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt.png},file
+					]
+				]
+			]
+			[journal\_papers
+			]
+		]
+		]
+	\end{forest}
+	}
+\end{columns}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize It is easy to get lost with increasing number of scripts, results and figures so I will share with you what is my strategy which works for me pretty well.
+A part of my project directory tree structure looks like this.
+Let's say that I want to process the file in orange, which is related to raw measurement data on specimen 1; in particular I want to compute root mean square value of that data.
+To do this I write a script in data processing folder, the script name is rms dot m,
+which is MATLAB format but it can be written in any other language like python for example.
+The key here is that when the script is run, it extracts its own name.
+Based on that name subfolder is created in appropriate place of processed\_data and this subfolder name is the same as the name of the script. 
+Moreover, the name of resulting processed data is composed of two parts: inherited subfolder name 'rms' and original raw data file name '50kHz\_pzt' joined by underscore.
+In this way everything is logically placed and it is easy to identify which script generated which result.
+I use the same approach for vizualisation of results.
+I create a script in 'visualization' folder named 'plot underscore rms dot m' which automatically creates appropriate subfolder in the 'figures' folder.
+Similarly, the name of resulting png image inherits subfolder name, additionally specimen name and data name.
+Off course you can develop you own strategy, but choose one and be consistent.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Organize your project (5)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Project skeleton (template) - \alert{Coockiecutter} by Audrey Roy Greenfeld\\
 Documentation: \url{https://cookiecutter.readthedocs.io/en/stable/README.html}\\
@@ -435,7 +666,8 @@ GitHub: \url{https://github.com/cookiecutter/cookiecutter}\\
 	\item It reads a settings file and prompts the user interactively whether to change the settings.
 	\item Then it takes both and generates an output directory structure from it.
 \end{itemize}
-	
+\texttt{README} file with the project description, \texttt{LICENSE} file and list of authors in \texttt{AUTHORS} file can be incorporated in the template.\\
+Additionally, project skeleton generated by cookiecutter is version control ready. 	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{A useful, small tool which I came across and I am using myself is coockie-cutter by Mr Greenfeld.
@@ -454,7 +686,14 @@ Markdown
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Keep data tidy \& machine readable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+Hints for spreadsheets, data tables:
+\begin{itemize}
+	\item rows=observations, columns=variables
+	\item one header row; avoid white spaces
+	\item no calculations in raw data files
+	\item save as CSV
+	\item don't use font color or highlighting as data
+\end{itemize}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{}
