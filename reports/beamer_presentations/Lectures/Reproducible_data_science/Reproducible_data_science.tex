@@ -159,7 +159,9 @@ In the practical part, I will show you how to build skeleton of the project by u
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame2]{Motivation (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-More than \Large\textbf{70\%} \normalsize of researchers have tried and failed toreproduce another scientist’s experiments, and morethan \Large\textbf{50\%} \normalsize have \textbf{failed to reproduce} their own experiments. 
+More than \Large\textbf{70\%} \normalsize of researchers have tried and failed to
+reproduce another scientist’s experiments, and more
+than \Large\textbf{50\%} \normalsize have \textbf{failed to reproduce} their own experiments. 
 \vspace{10mm}
 
 This leads to other academics and society losing trust in scientific results.
@@ -501,9 +503,11 @@ Hints:
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{make a file’s name and location VERYINFORMATIVE about what it is, why it exists,
+\note{make a file’s name and location VERY
+INFORMATIVE about what it is, why it exists,
 how it relates to other things
-the more things are self-explanatory, thebetter
+the more things are self-explanatory, the
+better
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Organize your project (4) - controlled vocabulary}
@@ -518,7 +522,7 @@ the more things are self-explanatory, thebetter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-5mm}
 \begin{columns}[T]
-	\column{0.5\textwidth}
+	\column{0.4\textwidth}
 	\centering
 	\only<1>
 	{
@@ -531,7 +535,7 @@ the more things are self-explanatory, thebetter
 		[data
 		[raw\_data
 			[specimen\_1
-				[\textcolor{orange}{50kHz\_pzt.mat}, file
+				[\textcolor{orange}{50kHz\_pzt}.mat, file
 				]
 			]
 		]
@@ -542,7 +546,7 @@ the more things are self-explanatory, thebetter
 		]
 		[src
 			[data\_processing
-				[\alert{rms.m}, file
+				[\alert{rms}.m, file
 				]
 			]
 		]
@@ -560,14 +564,14 @@ the more things are self-explanatory, thebetter
 			[data
 			[raw\_data
 				[specimen\_1
-					[\textcolor{orange}{50kHz\_pzt.mat}, file
+					[\textcolor{orange}{50kHz\_pzt}.mat, file
 					]
 				]
 			]
 			[processed\_data
 				[specimen\_1
 					[\alert{rms}
-						[\alert{rms}\_\textcolor{orange}{50kHz\_pzt.mat}, file
+						[\textcolor{orange}{50kHz\_pzt\_}\alert{rms}.mat, file
 						]
 					]
 				]
@@ -575,14 +579,14 @@ the more things are self-explanatory, thebetter
 			]
 			[src
 				[data\_processing
-					[\alert{rms.m}, file
+					[\alert{rms}.m, file
 					]
 				]
 			]
 			]
 		\end{forest}
 	}
-	\column{0.5\textwidth}
+	\column{0.6\textwidth}
 	\centering
 	\only<3>
 	{
@@ -596,7 +600,7 @@ the more things are self-explanatory, thebetter
 			[data\_processing
 			]
 			[visualization
-				[\alert{plot\_rms.m}, file
+				[\textcolor{logoblue}{plot\_rms}.m, file
 				]
 			]
 		]
@@ -621,14 +625,14 @@ the more things are self-explanatory, thebetter
 			[data\_processing
 			]
 			[visualization
-				[\alert{plot\_rms.m}, file
+				[\textcolor{logoblue}{plot\_rms}.m, file
 				]
 			]
 		]
 		[reports
 			[figures
-				[\alert{plot\_rms}
-					[\alert{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt.png},file
+				[\textcolor{logoblue}{plot\_rms}
+					[\textcolor{logoblue}{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt}\_\alert{rms}.png,file
 					]
 				]
 			]
@@ -795,6 +799,8 @@ It can be easily known when, why, and by whom any part of a file was edited.}
 \begin{frame}{Automate your process}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Make, make all scripts	
+"Good workflow" means \textbf{not having to remember} things.
+Kjell Wooding
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{Run scripts in particular order}
@@ -803,7 +809,7 @@ Make, make all scripts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Share your computing environment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+Hint: One environment per repo!	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{Sharing computing environment is especially important when we work with Machine Learning.}
