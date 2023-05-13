@@ -4,6 +4,7 @@ clear all; close all;
 currentFile = mfilename('fullpath');
 [pathstr,name,ext] = fileparts( currentFile );
 
+
 specimen_name = 'specimen_1';
 processing_name = {'rms', 'rms_norm'};
 filename = '50kHz_pzt';
