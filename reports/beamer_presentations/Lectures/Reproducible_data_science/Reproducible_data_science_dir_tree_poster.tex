@@ -1,0 +1,530 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, frames+notes 
+%\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
+\usepackage{pgfpages}
+\usepackage[orientation=portrait,size=a4,scale=2]{beamerposter}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+%\setbeameroption{show notes on second screen=bottom} % does not work for animations
+
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}}
+%\includeonlyframes{frame1,frame2,frame3}
+%\includeonlyframes{frame10}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+%\usepackage{amscls} % amsthm.sty
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+%\usepackage{FiraSans}
+\usepackage{mathrsfs} % for Fourier and Laplace symbols % installed manually jknappen in miktex console
+\usepackage{verbatim}
+%\usepackage{eulervm} % alternative math fonts
+%\usepackage{comment}
+\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows}  
+% the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
+% install manually media9 from miktex console (it contains pdfbase.sty), ocgx2 (ocgbase.sty)
+\usepackage{animate}
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+\captionsetup[figure]{labelformat=empty}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+%\usefonttheme[onlymath]{Serif} 
+\hypersetup{colorlinks,linkcolor=,urlcolor=logoblue}
+\usepackage[edges]{forest}% for folder structures
+\usepackage[normalem]{ulem} % for strikeout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+%\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%  metropolis compatible (FiraSans auto replacement)
+\newcommand{\matr}[1]{\boldsymbol{#1}}
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+%\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% metropolis compatible (FiraSans auto replacement)
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\myexp}{\mathrm{e}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\renewcommand{\Re}{\operatorname{\mathbb{R}e}}
+\renewcommand{\Im}{\operatorname{\mathbb{I}m}}
+% folder
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+\newlength\Size
+\setlength\Size{4pt}
+\tikzset{%
+	folder/.pic={%
+		\filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+		\filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+	},
+	file/.pic={%
+		\filldraw [draw=folderborder, top color=folderbg!5, bottom color=folderbg!10] (-\Size,.4*\Size+5pt) coordinate (a) |- (\Size,-1.2*\Size) coordinate (b) -- ++(0,1.6*\Size) coordinate (c) -- ++(-5pt,5pt) coordinate (d) -- cycle (d) |- (c) ;
+	},
+}
+\forestset{%
+	declare autowrapped toks={pic me}{},
+	pic dir tree/.style={%
+		for tree={%
+			folder,
+			font=\ttfamily,
+			grow'=0,
+		},
+		before typesetting nodes={%
+			for tree={%
+				edge label+/.option={pic me},
+			},
+		},
+	},
+	pic me set/.code n args=2{%
+		\forestset{%
+			#1/.style={%
+				inner xsep=2\Size,
+				pic me={pic {#2}},
+			}
+		}
+	},
+	pic me set={directory}{folder},
+	pic me set={file}{file},
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Reproducible data science: best practices}
+\subtitle{Lecture Series}
+\author{\textbf{Paweł Kudela} }
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery\\Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright %\includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+\includegraphics[width=4cm]{/pkudela_odroid_sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Cookie directory tree - step 1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[cookie
+		[AUTHORS.md, file]
+		[LICENSE, file]
+		[README.md, file]
+		[bin]
+		[data
+		[raw\_data
+			[specimen\_1
+				[\textcolor{orange}{50kHz\_pzt}.mat, file
+				]
+			]
+		]
+		[processed\_data
+		]
+		]
+		[src
+			[data\_processing
+			]
+			[models
+			]
+			[tools
+			]
+			[visualization
+			]
+		]
+		[reports
+			[conference\_papers]	
+			[figures
+			]
+			[journal\_papers
+			]
+			[presentations]
+		]
+		]
+	\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Cookie directory tree - step 2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[cookie
+		[AUTHORS.md, file]
+		[LICENSE, file]
+		[README.md, file]
+		[bin]
+		[data
+		[raw\_data
+			[specimen\_1
+				[\textcolor{orange}{50kHz\_pzt}.mat, file
+				]
+			]
+		]
+		[processed\_data
+			[specimen\_1
+				[\alert{rms}
+					[\textcolor{orange}{50kHz\_pzt\_}\alert{rms}.mat, file
+					]
+				]
+			]
+		]
+		]
+		[src
+			[data\_processing
+				[\alert{rms}.m, file
+				]
+			]
+			[models
+			]
+			[tools
+			]
+			[visualization
+			]
+		]
+		[reports
+			[conference\_papers]	
+			[figures
+			]
+			[journal\_papers
+			]
+			[presentations]
+		]
+		]
+	\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Cookie directory tree - step 3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[cookie
+		[AUTHORS.md, file]
+		[LICENSE, file]
+		[\textcolor{red}{Makefile}, file]
+		[README.md, file]
+		[bin]
+		[data
+		[raw\_data
+			[specimen\_1
+				[\textcolor{orange}{50kHz\_pzt}.mat, file
+				]
+			]
+		]
+		[processed\_data
+			[specimen\_1
+				[\alert{rms}
+					[\textcolor{orange}{50kHz\_pzt\_}\alert{rms}.mat, file
+					]
+				]
+			]
+		]
+		]
+		[src
+			[data\_processing
+				[\alert{rms}.m, file
+				]
+			]
+			[models
+			]
+			[tools
+			]
+			[visualization
+			]
+		]
+		[reports
+			[conference\_papers]	
+			[figures
+			]
+			[journal\_papers
+			]
+			[presentations]
+		]
+		]
+	\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Cookie directory tree - step 4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[cookie
+		[AUTHORS.md, file]
+		[LICENSE, file]
+		[\textcolor{red}{Makefile}, file]
+		[README.md, file]
+		[bin]
+		[data
+		[raw\_data
+			[specimen\_1
+				[\textcolor{orange}{50kHz\_pzt}.mat, file
+				]
+			]
+		]
+		[processed\_data
+			[specimen\_1
+				[rms
+					[50kHz\_pzt\_rms.mat, file
+					]
+				]
+				[\alert{rms\_norm}
+					[\textcolor{orange}{50kHz\_pzt\_}\alert{rms\_norm}.mat, file
+					]
+				]
+			]
+		]
+		]
+		[src
+			[data\_processing
+				[rms.m, file
+				]
+				[\alert{rms\_norm}.py, file
+				]
+			]
+			[models
+			]
+			[tools
+			]
+			[visualization
+			]
+		]
+		[reports
+			[conference\_papers]	
+			[figures
+			]
+			[journal\_papers
+			]
+			[presentations]
+		]
+		]
+	\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Cookie directory tree - step 5}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[cookie
+		[AUTHORS.md, file]
+		[LICENSE, file]
+		[\textcolor{red}{Makefile}, file]
+		[README.md, file]
+		[bin]
+		[data
+		[raw\_data
+			[specimen\_1
+				[50kHz\_pzt.mat, file
+				]
+			]
+		]
+		[processed\_data
+			[specimen\_1
+				[rms
+					[\textcolor{orange}{50kHz\_pzt\_}\alert{rms}.mat, file
+					]
+				]
+				[rms\_norm
+					[\textcolor{orange}{50kHz\_pzt\_}\alert{rms\_norm}.mat, file
+					]
+				]
+			]
+		]
+		]
+		[src
+			[data\_processing
+				[rms.m, file
+				]
+				[rms\_norm.py, file
+				]
+			]
+			[models
+			]
+			[tools
+			]
+			[visualization
+				[\textcolor{logoblue}{plot\_rms}.m, file
+				]
+			]
+		]
+		[reports
+			[conference\_papers]	
+			[figures
+				[\textcolor{logoblue}{plot\_rms}
+					[\textcolor{logoblue}{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt}\_\alert{rms}.png,file
+					]
+					[\textcolor{logoblue}{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt}\_\alert{rms\_norm}.png,file
+					]
+				]
+			]
+			[journal\_papers
+			]
+			[presentations]
+		]
+		]
+	\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Cookie directory tree - step 6}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[cookie
+		[AUTHORS.md, file]
+		[LICENSE, file]
+		[\textcolor{red}{Makefile}, file]
+		[README.md, file]
+		[bin]
+		[data
+		]
+		[src
+			[data\_processing
+				[rms.m, file
+				]
+				[rms\_norm.py, file
+				]
+			]
+			[models
+			]
+			[tools
+				[\textcolor{green}{copy\_figs\_2023\_mssp\_paper}.sh, file
+				]
+			]
+			[visualization
+				[plot\_rms.m, file
+				]
+			]
+		]
+		[reports
+			[conference\_papers]	
+			[figures
+				[plot\_rms
+					[\textcolor{logoblue}{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt}\_\alert{rms}.png,file
+					]
+					[\textcolor{logoblue}{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt}\_\alert{rms\_norm}.png,file
+					]
+				]
+			]
+			[journal\_papers
+				[2023\_mssp\_paper
+					[\textcolor{green}{figs}
+						[\textcolor{green}{figure1}.png,file]
+						[\textcolor{green}{figure2}.png,file]
+					]
+				]
+			]
+			[presentations]
+		]
+		]
+	\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Cookie directory tree - step 7}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+	\begin{forest}
+		pic dir tree,
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[cookie
+		[AUTHORS.md, file]
+		[LICENSE, file]
+		[\textcolor{red}{Makefile}, file]
+		[README.md, file]
+		[bin]
+		[data
+		]
+		[src
+		]
+		[reports
+			[conference\_papers]	
+			[figures
+				[plot\_rms
+					[plot\_rms\_specimen\_1\_50kHz\_pzt\_rms.png,file
+					]
+					[plot\_rms\_specimen\_1\_50kHz\_pzt\_rms\_norm.png,file
+					]
+				]
+			]
+			[journal\_papers
+				[\alert{2023\_mssp\_paper}
+					[\textcolor{logoblue}{main}\_\alert{2023\_mssp\_paper}.pdf, file]
+					[\textcolor{logoblue}{main}\_\alert{2023\_mssp\_paper}.tex, file]
+					[\alert{2023\_mssp\_paper}\_\textcolor{orange}{abstract}.tex, file]
+					[\alert{2023\_mssp\_paper}\_\textcolor{orange}{introduction}.tex, file]
+					[\alert{2023\_mssp\_paper}\_\textcolor{orange}{methodology}.tex, file]
+					[\alert{2023\_mssp\_paper}\_\textcolor{orange}{results}.tex, file]
+					[\alert{2023\_mssp\_paper}\_\textcolor{orange}{conclusions}.tex, file]
+					[\alert{2023\_mssp\_paper}\_\textcolor{orange}{bibliography}.bib, file]
+					[\textcolor{orange}{num\_order}.bst, file]
+					[\textcolor{green}{figs}
+						[\textcolor{green}{figure1}.png,file]
+						[\textcolor{green}{figure2}.png,file]
+					]
+					[\textcolor{orange}{latexmk\_aux}]
+				]
+			]
+			[presentations]
+		]
+		]
+	\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

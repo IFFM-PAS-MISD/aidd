@@ -1,0 +1,4 @@
+# in MATLAB prompt: >> version or >> ver
+MATLAB 9.14.0.2206163 (R2023a)
+latexmk # pearl script for compiling latex files (installed as a package from MiKTeX Console)
+Python 3.4+

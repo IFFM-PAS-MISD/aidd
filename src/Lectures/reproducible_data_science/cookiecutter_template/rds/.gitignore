@@ -109,6 +109,10 @@ target/
 *.auxlock
 *.snm
 *.synctex(busy)
+# latexmk
+*.fdb_latexmk
+*.fls
+*.spl
 
 # Matlab
 *.asv
