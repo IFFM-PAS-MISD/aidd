@@ -8,7 +8,7 @@ currentFile = mfilename('fullpath');
 filename = '50kHz_pzt';
 specimen_name = 'specimen_1';
 load(['../../data/raw/',specimen_name,'/',filename,'.mat']); % Data, time, L
-
+%
 %% process data - calculate root mean square value
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Data_rms = sqrt(mean(Data.^2,2));

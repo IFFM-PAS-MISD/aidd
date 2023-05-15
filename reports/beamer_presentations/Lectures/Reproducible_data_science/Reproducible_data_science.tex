@@ -46,6 +46,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metropolis theme custom modification file
 \input{metropolis_mods.tex}
+\setbeamertemplate{note page}{\insertnote\par} % fix note spacing issue
 %\usefonttheme[onlymath]{Serif} 
 \hypersetup{colorlinks,linkcolor=,urlcolor=logoblue}
 \usepackage[edges]{forest}% for folder structures
@@ -73,6 +74,9 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 \renewcommand{\Re}{\operatorname{\mathbb{R}e}}
 \renewcommand{\Im}{\operatorname{\mathbb{I}m}}
+% ------------------------------------------------------------------------------
+% % dir tree
+% ------------------------------------------------------------------------------
 % folder
 \definecolor{folderbg}{RGB}{124,166,198}
 \definecolor{folderborder}{RGB}{110,144,169}
@@ -112,6 +116,51 @@
 	pic me set={directory}{folder},
 	pic me set={file}{file},
 }
+% ------------------------------------------------------------------------------
+% minted (sudo apt-get install python-pygments)
+% ------------------------------------------------------------------------------
+\usepackage[outputdir=build]{minted}
+% default ok
+%\usemintedstyle{manni} % so so
+%\usemintedstyle{tango} % too blue
+%\usemintedstyle{friendly} % bland on my background
+%\usemintedstyle{borland} % too many things black
+%\usemintedstyle{rrt} % unreadable
+%\usemintedstyle{arduino} % bland
+%\usemintedstyle{lovelace} % ok
+%\usemintedstyle{rainbow_dash} % ok, $ = colors, variables black, comments light blue
+%\usemintedstyle{igor} % red comments to much black fonts
+\usemintedstyle{emacs} % very nice, green comments, orange variables 
+%\usemintedstyle{perldoc} % nice, green comments, purplle $, greenish target simillar to command
+%\usemintedstyle{pastie} % nice, grey comments
+%\usemintedstyle{colorful} % nice, grey comments, brown variables
+%\usemintedstyle{vim} % nice, comments a little bit similar to background
+% ------------------------------------------------------------------------------
+% tcolorbox / tcblisting
+% ------------------------------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{codecolor}{HTML}{FFC300}
+
+\usepackage{tcolorbox}
+%\tcbuselibrary{most,listingsutf8,minted}
+
+%\tcbset{tcbox width=auto,left=1mm,top=1mm,bottom=1mm,
+%right=1mm,boxsep=1mm,middle=1pt}
+
+%\newtcblisting{myr}[1]{colback=codecolor!5,colframe=codecolor!80!black,listing only, 
+%minted options={numbers=left, style=tcblatex,fontsize=\tiny,breaklines,autogobble,linenos,numbersep=3mm},
+%left=5mm,enhanced,
+%title=#1, fonttitle=\bfseries,
+%listing engine=minted,minted language=r}
+% ------------------------------------------------------------------------------
+% Listings
+% ------------------------------------------------------------------------------
+\definecolor{mygreen}{HTML}{37980D}
+\definecolor{myblue}{HTML}{0D089F}
+\definecolor{myred}{HTML}{98290D}
+
+% \usepackage{listings}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Title page options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -202,7 +251,7 @@ Those are some of the telling figures which may lead to loosing trust in scienti
 The reason is that data science projects are rarely one-and-done, they are rather incremental, they tend to cumulate knowledge from various fields and adapt to specific problem.
 You may have to revise you research project in future; 
 you may be doing another project and you want to borrow something from previous one; 
-It is very likely that you have to hand it off to somebody else at future point and they have to understand what you did so far. 
+It is very likely that you have to hand it off to somebody else at some point because they may want to extend it, validate it, present it, learn it, etc. Thus, they have to revisit and understand what you did so far. 
 And there is significant issue of accountability. You research workflow should show that your conclusions are justified. You have to show it for clients, funding agencies, regulators and most often reviewers.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frame4]{Definitions (1)}
@@ -245,8 +294,8 @@ In this article we can also read:
 Every figure caption contains a pushbutton that jumps to the appropriate science directory (folder) and initiates a figure rebuild command and then displays the figure, possibly as a movie or interactive program."
 This is still not a common place in scientific journals! We still are not there yet! 
 Even there is more move towards reproducibility, open data science, data submission along publication, etc. we still does not have that push-button reproducibility. 
-It is difficult to achieve that for a variety of reasons.
-
+It is difficult to achieve that for a variety of reasons.\\
+------------------------------------------------------\\
 If we look at this graph as a kind of reproducibility horizon where on one end nobody, not even yourself can recreate any part of your analysis and at the other and you have push button reproducibility and published work, you want to target that ultimate goal of push button reproducibility but when you are in a zone close to that I would say it is happy medium.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -254,13 +303,16 @@ If we look at this graph as a kind of reproducibility horizon where on one end n
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Reproducible data science}
 		\begin{itemize}
-			\item The main goal of enabling reproducibility is to guarantee that all results can be independently recreated and verified to build upon in future work.
+			\item The main goal of enabling reproducibility is to guarantee that all results can be independently recreated and verified to build upon in future work.\\
+			Source: \url{https://engineering.rappi.com/reproducible-data-science-and-why-it-matters-e4e62fd60b9a}
 			\item In the context of data science, reproducibility means that everything needed to recreate the model and its results such as data, tools, libraries, frameworks, programming languages and operating systems, have been captured, so with little effort the identical results are produced regardless of how much time has passed since the original project.
+			Source: \url{https://www.dominodatalab.com/blog/reproducible-data-science}
 		\end{itemize}	
 	\end{alertblock}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{To summarize the definition of reproducible research in modern world we can say that reproducibility means that recreation of models and its results such as data, tools and graphs can be done with little effort and it leads to identical results as obtained in the past.
+\note{I am listing here some definitions which I have found on blog posts which may be worthy to read.
+To summarize the definition of reproducible research in modern world we can say that reproducibility means that recreation of models and its results such as data, tools and graphs can be done with little effort and it leads to identical results as obtained in the past.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame6]{Definitions (3)}
@@ -279,7 +331,7 @@ If we look at this graph as a kind of reproducibility horizon where on one end n
 \note{We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used.
 To complement this definition, however, we should distinguish between reproducibility and replicability of research. 
 In both cases we want to answer the same research questions, we want to get the same results but in the case of replicability we are performing the analysis on a different dataset.
-For example, we want to replicate a signal processing method published few years ago which aims to de-noise audio recordings and compare it qualitatively to our own method by using our own signals such as our voice recordings.
+For example, we want to \textbf{replicate} a signal processing method published few years ago which aims to de-noise audio recordings and compare it qualitatively to our own method by using our own signals such as our voice recordings.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame7]{Benefits of data science reproducibility}
@@ -348,7 +400,6 @@ I hope that hints which I will give at the next slides will help you to do that.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Organize your project (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Project skeleton (template) and strategy is needed to store files!
 \vspace{3mm}
 
 \begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
@@ -402,12 +453,18 @@ Project skeleton (template) and strategy is needed to store files!
 		\centering presentation
 	\end{beamercolorbox}
 \end{columns}
+\vspace{3mm}
+\alert{Project skeleton (template) and strategy is needed to store files!}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{Let's start with organizing your project by creating a project skeleton or template.
+\note{Let me mention two quotes which fits nicely to our topic.
+"A place for everything, everything in its place" said Benjamin Franklin.
+"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
+
+Let's start with organizing your project by creating a project skeleton or template.
 What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
 And there is always a lot of them!
-"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
+
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Organize your project (2)}
@@ -797,14 +854,72 @@ It can be easily known when, why, and by whom any part of a file was edited.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Workflow automation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Automate your process}
+\begin{frame}{Automate your process (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Make, make all scripts	
 "Good workflow" means \textbf{not having to remember} things.
 Kjell Wooding
+
+%target: dependencies
+%<tab>    command
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{Run scripts in particular order}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Automate your process (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\begin{block}{}
+\begin{minted}{c}
+int main() {
+printf("hello, world");
+return 0;
+}
+\end{minted}
+\end{block}
+
+\begin{exampleblock}{code}
+\textcolor{orange}{target}: \textcolor{Purple}{dependencies}\\
+	command
+\end{exampleblock}
+\end{comment}
+
+\begin{block}{Makefile}
+\begin{minted}[tabsize=4,obeytabs=true]{makefile}
+#!/bin/bash
+# comment
+# ***** Variables *****
+CONDA_ENV := cookie_env
+VIZ := ./src/visualization/
+PROC := ./src/data_processing/
+
+target: dependencies
+	<tab> cd $(VIZ) && command && @echo "Terminal output"
+	
+.PHONY clean
+\end{minted}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Automate your process (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Makefile}
+\begin{minted}[tabsize=4,obeytabs=true]{makefile}
+#!/bin/bash
+# comment
+# ***** Variables *****
+CONDA_ENV := cookie_env
+VIZ := ./src/visualization/
+PROC := ./src/data_processing/
+
+# data processing in Python
+50kHz_pzt_rms_norm.mat : $(PROC)rms_norm.py 50kHz_pzt.mat
+	cd $(PROC) && conda run -n $(CONDA_ENV) python3 rms_norm.py
+	
+.PHONY clean
+\end{minted}
+\end{block}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Computational environment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

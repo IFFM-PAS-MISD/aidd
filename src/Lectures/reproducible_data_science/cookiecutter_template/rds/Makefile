@@ -7,6 +7,7 @@
 # 'make' build main_2023_mssp_paper.pdf
 # 'make doc' build main_2023_mssp_paper.pdf
 # 'make clean' removes latex build files (latexmk_aux)
+# The @ at the beginning of the receipe means that the command itself isn't displayed in the terminal
 
 # ***** Variables - environments *****
 CONDA_ENV := cookie_env
@@ -26,6 +27,12 @@ MATLAB := /usr/local/MATLAB/R2023a/bin/matlab -nodesktop -nosplash -nodisplay
 # Stop GNU make from overzealous deletion of intermediate files
 .PRECIOUS: %.dvi %.ps %.pdf %.png
 
+help : doc
+	@echo "----------------HELP----------------"
+	@echo "To build project type: make"
+	@echo "To build pdf files type: make doc"
+	@echo "To clean latex aux files type: make clean"
+	
 # ***** 2023_mssp_paper target *****
 PAPERFOLDER = $(PAPERS)2023_mssp_paper/
 
@@ -47,7 +54,6 @@ $(PAPERFOLDER)figs/figure1.png : $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rm
 	 cd $(TOOLS) && ./copy_figs_2023_mssp_paper.sh
 
 # data visualization in MATLAB
-# @ at the beginning of the receipe means that this line will not be displayed in the terminal
 $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rms.png $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rms_norm.png : $(VIZ)plot_rms.m \
 ./data/processed/specimen_1/rms/50kHz_pzt_rms.mat ./data/processed/specimen_1/rms_norm/50kHz_pzt_rms_norm.mat
 	@$(MATLAB) -r "try, run('$(VIZ)plot_rms'); catch, warning('Problem running Matlab script: plot_rms'); end, exit" \
@@ -68,7 +74,7 @@ else
 	@echo rms.m or 50kHz_pzt.mat has changed but file 50kHz_pzt_rms.mat exist - do nothing
 endif 
 
-.PHONY: clean doc
+.PHONY: clean help doc
 clean :
 	rm -f -r $(PAPERFOLDER)latexmk_aux
 #	-rm -f $(DISPOSABLE_OBJS) # dash at the beginning means ignore errors
