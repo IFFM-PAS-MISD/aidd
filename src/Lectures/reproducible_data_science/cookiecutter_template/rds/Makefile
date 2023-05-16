@@ -1,7 +1,11 @@
 #!/bin/bash
 # Make is a tool developed in 70! But it has easy syntax and is still popular. 
 # When it is time to execute commands to update a target, they are executed by making a new subshell for each line
-# This is a makefile for rds project
+# ****************************************************
+# This is an exemplary Makefile for a reaserch project
+# 		written by 
+# 		Pawel Kudela
+# ****************************************************
 # The main aim is to link figures in publications with data, automate workflow tracking all dependencies
 # and build pdf for target papers
 # 'make' build main_2023_mssp_paper.pdf
@@ -26,16 +30,18 @@ MATLAB := /usr/local/MATLAB/R2023a/bin/matlab -nodesktop -nosplash -nodisplay
 # OBJS = $(DISPOSABLE_OBJS) $(PRECIOUS_OBJS)
 # Stop GNU make from overzealous deletion of intermediate files
 .PRECIOUS: %.dvi %.ps %.pdf %.png
-
+# ****************************************************
 help : doc
 	@echo "----------------HELP----------------"
 	@echo "To build project type: make"
 	@echo "To build pdf files type: make doc"
 	@echo "To clean latex aux files type: make clean"
-	
-# ***** 2023_mssp_paper target *****
+# ****************************************************	
+# 		2023_mssp_paper
+# ****************************************************
 PAPERFOLDER = $(PAPERS)2023_mssp_paper/
-
+# doc is pseudo-target (phony target); It is not really the name of a file; 
+# rather it is just a name for a recipe to be executed
 doc : $(PAPERFOLDER)main_2023_mssp_paper.pdf
 
 # compile latex document
@@ -56,7 +62,7 @@ $(PAPERFOLDER)figs/figure1.png : $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rm
 # data visualization in MATLAB
 $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rms.png $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rms_norm.png : $(VIZ)plot_rms.m \
 ./data/processed/specimen_1/rms/50kHz_pzt_rms.mat ./data/processed/specimen_1/rms_norm/50kHz_pzt_rms_norm.mat
-	@$(MATLAB) -r "try, run('$(VIZ)plot_rms'); catch, warning('Problem running Matlab script: plot_rms'); end, exit" \
+	@ $(MATLAB) -r "try, run('$(VIZ)plot_rms'); catch, warning('Problem running Matlab script: plot_rms'); end, exit" \
 	&& sleep 3 # writing images to hard drive may take a while so we are waiting 3s
 	
 # data processing in Python
@@ -64,16 +70,18 @@ $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rms.png $(FIG)plot_rms/plot_rms_spe
 	cd $(PROC) && conda run -n $(CONDA_ENV) python3 rms_norm.py
 
 # data processing in MATLAB	
-# Build target only if it does not exist despite time stamp of dependencies has changed; useful if computation to obtain target are long
+# Build target only if it does not exist despite that the time stamp of dependencies has changed; 
+# useful if computations to obtain the target are long
+
 ifeq (,$(wildcard ./data/processed/specimen_1/rms/50kHz_pzt_rms.mat)) 
 FILE_EXISTS = false ; $(info File 50kHz_pzt_rms.mat does not exist - recomputing)
 ./data/processed/specimen_1/rms/50kHz_pzt_rms.mat : $(PROC)rms.m ./data/raw/specimen_1/50kHz_pzt.mat
 	$(MATLAB) -r "try, run('$(PROC)rms'); catch, warning('Problem running Matlab script: rms'); end, exit" 
 else
 ./data/processed/specimen_1/rms/50kHz_pzt_rms.mat : $(PROC)rms.m ./data/raw/specimen_1/50kHz_pzt.mat
-	@echo rms.m or 50kHz_pzt.mat has changed but file 50kHz_pzt_rms.mat exist - do nothing
+	@ echo rms.m or 50kHz_pzt.mat has changed but file 50kHz_pzt_rms.mat exist - do nothing
 endif 
-
+# ****************************************************
 .PHONY: clean help doc
 clean :
 	rm -f -r $(PAPERFOLDER)latexmk_aux
