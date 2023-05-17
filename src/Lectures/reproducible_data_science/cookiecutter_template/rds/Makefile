@@ -1,6 +1,5 @@
 #!/bin/bash
-# Make is a tool developed in 70! But it has easy syntax and is still popular. 
-# When it is time to execute commands to update a target, they are executed by making a new subshell for each line
+
 # ****************************************************
 # This is an exemplary Makefile for a reaserch project
 # 		written by 
@@ -12,11 +11,14 @@
 # 'make doc' build main_2023_mssp_paper.pdf
 # 'make clean' removes latex build files (latexmk_aux)
 # The @ at the beginning of the receipe means that the command itself isn't displayed in the terminal
+# Commands in a make rule are executed by making a new subshell for each line!
 
 # ***** Variables - environments *****
 CONDA_ENV := cookie_env
 # ***** Variables - paths *****
 CONDA_ENV_PATH := /usr/local/anaconda3/
+DRAW := ./data/raw/
+DPROC := ./data/processed/
 VIZ := ./src/visualization/
 PROC := ./src/data_processing/
 TOOLS := ./src/tools/
@@ -61,24 +63,24 @@ $(PAPERFOLDER)figs/figure1.png : $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rm
 
 # data visualization in MATLAB
 $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rms.png $(FIG)plot_rms/plot_rms_specimen_1_50kHz_pzt_rms_norm.png : $(VIZ)plot_rms.m \
-./data/processed/specimen_1/rms/50kHz_pzt_rms.mat ./data/processed/specimen_1/rms_norm/50kHz_pzt_rms_norm.mat
+$(DPROC)specimen_1/rms/50kHz_pzt_rms.mat $(DPROC)specimen_1/rms_norm/50kHz_pzt_rms_norm.mat
 	@ $(MATLAB) -r "try, run('$(VIZ)plot_rms'); catch, warning('Problem running Matlab script: plot_rms'); end, exit" \
 	&& sleep 3 # writing images to hard drive may take a while so we are waiting 3s
 	
 # data processing in Python
-./data/processed/specimen_1/rms_norm/50kHz_pzt_rms_norm.mat : $(PROC)rms_norm.py ./data/raw/specimen_1/50kHz_pzt.mat
+$(DPROC)specimen_1/rms_norm/50kHz_pzt_rms_norm.mat : $(PROC)rms_norm.py ./data/raw/specimen_1/50kHz_pzt.mat
 	cd $(PROC) && conda run -n $(CONDA_ENV) python3 rms_norm.py
 
 # data processing in MATLAB	
 # Build target only if it does not exist despite that the time stamp of dependencies has changed; 
 # useful if computations to obtain the target are long
 
-ifeq (,$(wildcard ./data/processed/specimen_1/rms/50kHz_pzt_rms.mat)) 
+ifeq (,$(wildcard $(DPROC)specimen_1/rms/50kHz_pzt_rms.mat)) 
 FILE_EXISTS = false ; $(info File 50kHz_pzt_rms.mat does not exist - recomputing)
-./data/processed/specimen_1/rms/50kHz_pzt_rms.mat : $(PROC)rms.m ./data/raw/specimen_1/50kHz_pzt.mat
+$(DPROC)specimen_1/rms/50kHz_pzt_rms.mat : $(PROC)rms.m $(DRAW)specimen_1/50kHz_pzt.mat
 	$(MATLAB) -r "try, run('$(PROC)rms'); catch, warning('Problem running Matlab script: rms'); end, exit" 
 else
-./data/processed/specimen_1/rms/50kHz_pzt_rms.mat : $(PROC)rms.m ./data/raw/specimen_1/50kHz_pzt.mat
+.$(DPROC)specimen_1/rms/50kHz_pzt_rms.mat : $(PROC)rms.m $(DRAW)specimen_1/50kHz_pzt.mat
 	@ echo rms.m or 50kHz_pzt.mat has changed but file 50kHz_pzt_rms.mat exist - do nothing
 endif 
 # ****************************************************

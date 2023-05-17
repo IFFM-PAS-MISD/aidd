@@ -116,6 +116,10 @@
 	pic me set={directory}{folder},
 	pic me set={file}{file},
 }
+\forestset{
+  L1/.style={draw=black,},
+  L2/.style={,edge={,line width=0.8pt}},
+}
 % ------------------------------------------------------------------------------
 % minted (sudo apt-get install python-pygments)
 % ------------------------------------------------------------------------------
@@ -460,11 +464,11 @@ I hope that hints which I will give at the next slides will help you to do that.
 \note{Let me mention two quotes which fits nicely to our topic.
 "A place for everything, everything in its place" said Benjamin Franklin.
 "File organization and naming are powerful weapons against chaos" said Jenny Bryan.
-
-Let's start with organizing your project by creating a project skeleton or template.
-What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
-And there is always a lot of them!
-
+The typical data-driven research workflow can look like in this diagram.
+We start with a raw data which is then processed, we can have also some numerical results.
+From that some figures and tables are created and the end result is a report, manuscript or presentation.
+At each stage of the workflow, files are created, and there is always a lot of them!
+We need to store them in an organized and efficient manner.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frame10]{Organize your project (2)}
@@ -475,6 +479,9 @@ And there is always a lot of them!
 	\centering
 	\begin{forest}
 		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
 		where level=0{}{% folder icons by default; override using file for file icons
 			directory,
 		},
@@ -493,6 +500,9 @@ And there is always a lot of them!
 	\centering
 	\begin{forest}
 		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
 		where level=0{}{% folder icons by default; override using file for file icons
 			directory,
 		},
@@ -523,9 +533,18 @@ And there is always a lot of them!
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{Let's start with organizing your project by creating a project skeleton or template.
-What I mean by the project skeleton, is a folder tree structure which help us sort and navigate through data and files which we are creating during project development.
-"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
-Project skeleton (template) and strategy is needed to store files!
+What I mean by the project skeleton, is a directory tree structure which help us sort and navigate through data and files which we are creating during project development.
+It is a good idea to have such a template and use it each time we start a new project.
+It is also important to have a strategy to name a files.
+For a simple project a flat directory tree is fine.
+The important aspect here is that the raw data is separated from the processed data.
+For more complex projects, multi-level directory tree is needed but too much nesting should be avoided.
+
+An example of moderately complex project skeleton is shown here. 
+Apart from separation of raw data from processed data also code is separated from data and it resides in src folder which is abbreviation from source.
+In the source folder, there are three subfolders for storing a code related to data processing, visualization and models.
+In the folder 'reports' we can have a folder for figures, journal papers, etc.
+Of course, depending on the needs, a project skeleton can be further segmented, for example, we might want to divide data into experimental and numerical ones.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frame11]{Organize your project (3)}
@@ -560,23 +579,120 @@ Hints:
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{make a file’s name and location VERY
-INFORMATIVE about what it is, why it exists,
-how it relates to other things
-the more things are self-explanatory, the
-better
+\note{\scriptsize
+The rule of thumb is to make a file’s name and location VERY INFORMATIVE about what it is, why it exists and how it relates to other things.
+
+The more things are self-explanatory, the better.
+
+All files related to the project should be stored in a common directory.
+
+We can use project slug, namely its abbreviation to name a folder at the top level of the directory tree.
+For example I have a project entitled "Artificial Intelligence Driven Diagnostics" so I am storing everything related to this project in a folder named 'aidd'.
+
+As I mentioned before, separate raw data from processed data. 
+Moreover, it is good idea to assign read only permissions to raw data for all team members.
+It will avoid the situation of accidental changes of raw data.
+
+Following Benjamin Franklin's advice that there is a place for everything, separate code from data.
+File name should be meaningful, sortable and consistent.
+I will talk in a minute about the idea of controlled vocabulary which can be useful for naming files.
+
+If you decide to use dates in your strategy follow year-month-date format.
+
+If you produce too much stuff which is old and cluttering your project it maybe good idea to move them to folder 'unused'.
+
+----------------------------
+
+Do not use white spaces in folder and file names.
+Use underscores or eventually dashes to obtain meaningful file names composed of few parts or words.
+However, dash does not work in MATLAB so you will not be able to run script from other location if you have a dash on a paths to this script.
+This is why I am using underscores everywhere: for naming files, folders and variables.
+
 Linux file system is case sensitive whereas Windows is not!
+Therefore, I suggest to avoid capital letters in order to maintain cross-platform compatibility.
+
+Make distinction between draft and final version of the paper and do not produce such a filename like here because after few days you will never now which was the final version.
+Such a situation can be completely avoided by using versioning system.
+I will cover some basic information about git versioning system later during my presentation.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frame12]{Organize your project (4) - controlled vocabulary}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\emph{Keywords} are words or short phrases used commonly within a system to point to the meaning or subject of information.
 
+\emph{Tags} are labels that have been applied to information (e.g. digital photographs). 
+Tags can be used to mark information with keywords, codes, and open-ended information that is relevant only to the user.
+
+\emph{Captions} are bits of free text that describe or draw attention to something in the image that is not obvious.
+
+The essence of a \alert{controlled vocabulary} is structuring your keywords in a meaningful and repeatable way.
+
+\begin{alertblock}{Controlled vocabulary}
+It is an organized arrangement of words and phrases used to index content and/or to retrieve content through
+browsing or searching.
+\end{alertblock}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{
+Controlled vocabulary are helpful for sorting things.
+
+You probably know the term \textbf{tagging photographs}.
+Tags are composed of \emph{keywords} which are assigned to photographs usually in the form of metadata so that it is easy to search for some particular photo.
+
+\vspace{5mm}
+The essence of a \alert{controlled vocabulary} is structuring your keywords in a meaningful and repeatable way.
+So, we can define \alert{controlled vocabulary} as an organized arrangement of words and phrases used to index content and/or to retrieve content throughbrowsing or searching.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame13]{Organize your project (5) - my strategy}
+\begin{frame}[t, label=frame13]{Organize your project (5) - controlled vocabulary}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+\column{0.5\textwidth}
+	\centering
+	How to build your \alert{controlled vocabulary}?
+	\begin{itemize}
+	\item Step 1 - choose your keywords
+	\item Step 2 - set the structure (hierarchy)
+	\item Step 3 - tagging
+	\end{itemize}
+\column{0.5\textwidth}
+	\centering
+	\vspace{5mm}
+	
+	\begin{forest}
+	    for tree={
+	        grow=0,reversed, % tree direction
+	        parent anchor=east,child anchor=west, % edge anchors
+	        edge={line cap=round},outer sep=+1pt, % edge/node connection
+	        rounded corners,minimum width=15mm,minimum height=6mm, % node shape
+	        l sep=10mm % level distance
+	    }
+	  [Mammals, L1
+	    [Bears, L1
+	    	[Grizzlies, L1]
+	    	[Pandas, L1]
+	    	[Polar Bears,L1]
+	    ]
+	    [Cammels, L1]
+	    [Elephants, L1]
+	    [Moose, L1]
+	  ]
+	\end{forest}
+	\vspace{5mm}	
+	
+	\texttt{mammals\_bears\_pandas.png}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Three steps are needed to build controlled vocabulary: choosing keywords, setting the structure and tagging.
+
+An exemplary structure related to Mammals is shown here.
+
+If we combine controlled file name format with controlled vocabulary we are golden. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame14]{Organize your project (5) - my strategy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-5mm}
 \begin{columns}[T]
@@ -586,6 +702,9 @@ Linux file system is case sensitive whereas Windows is not!
 	{
 	\begin{forest}
 		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
 		where level=0{}{% folder icons by default; override using file for file icons
 			directory,
 		},
@@ -615,6 +734,9 @@ Linux file system is case sensitive whereas Windows is not!
 	{
 		\begin{forest}
 			pic dir tree,
+			tikz+={
+					\pic at ([xshift=0.7\Size].west) {folder};
+				},align={l},
 			where level=0{}{% folder icons by default; override using file for file icons
 				directory,
 			},
@@ -650,6 +772,9 @@ Linux file system is case sensitive whereas Windows is not!
 	{
 	\begin{forest}
 		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
 		where level=0{}{% folder icons by default; override using file for file icons
 			directory,
 		},
@@ -675,6 +800,9 @@ Linux file system is case sensitive whereas Windows is not!
 	{
 	\begin{forest}
 		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
 		where level=0{}{% folder icons by default; override using file for file icons
 			directory,
 		},
@@ -704,50 +832,115 @@ Linux file system is case sensitive whereas Windows is not!
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{\scriptsize It is easy to get lost with increasing number of scripts, results and figures so I will share with you what is my strategy which works for me pretty well.
+
 A part of my project directory tree structure looks like this.
+
 Let's say that I want to process the file in orange, which is related to raw measurement data on specimen 1; in particular I want to compute root mean square value of that data.
+
 To do this I write a script in data processing folder, the script name is rms dot m,
 which is MATLAB format but it can be written in any other language like python for example.
+
 The key here is that when the script is run, it extracts its own name.
+
 Based on that name subfolder is created in appropriate place of processed\_data and this subfolder name is the same as the name of the script. 
+
 Moreover, the name of resulting processed data is composed of two parts: inherited subfolder name 'rms' and original raw data file name '50kHz\_pzt' joined by underscore.
+
 In this way everything is logically placed and it is easy to identify which script generated which result.
-I use the same approach for vizualisation of results.
+
+-------------------
+
+I use the same approach for visualization of results.
+
 I create a script in 'visualization' folder named 'plot underscore rms dot m' which automatically creates appropriate subfolder in the 'figures' folder.
+
 Similarly, the name of resulting png image inherits subfolder name, additionally specimen name and data name.
+
 Off course you can develop you own strategy, but choose one and be consistent.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame14]{Organize your project (5)}
+\begin{frame}[label=frame15]{Organize your project (6)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Project skeleton (template) - \alert{Coockiecutter} by Audrey Roy Greenfeld\\
+Project skeleton - \alert{Cookiecutter} by Audrey Roy Greenfeld\\
 Documentation: \url{https://cookiecutter.readthedocs.io/en/stable/README.html}\\
 GitHub: \url{https://github.com/cookiecutter/cookiecutter}\\
 \begin{itemize}
-	\item Cookiecutter takes a template provided as a directory structure with template-files.
+	\item \alert{Cookiecutter} takes a template provided as a directory structure with template-files.
 	\item It reads a settings file and prompts the user interactively whether to change the settings.
 	\item Then it takes both and generates an output directory structure from it.
 \end{itemize}
-\texttt{README} file with the project description, \texttt{LICENSE} file and list of authors in \texttt{AUTHORS} file can be incorporated in the template.\\
-Additionally, project skeleton generated by cookiecutter is version control ready. 	
+\texttt{README}, \texttt{LICENSE} and \texttt{AUTHORS} files can be incorporated in the template.\\ 	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{A useful, small tool which I came across and I am using myself is coockie-cutter by Mr Greenfeld.
+\note{A small, useful tool which I came across and I am using myself is cookie-cutter by Mr Greenfeld.
+
+It is a tool for automatic creation of a project skeleton from a template and text based interactive prompts.
+
+Additional files such as \texttt{README} with the project description, \texttt{LICENSE} and \texttt{AUTHORS} files as well as other files can be included in the template. 
+
+I will show you how this tool work in a practical part of this lecture.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Write READMEs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame15]{Write READMEs liberally}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Markdown	
+\begin{columns}
+	\column{0.5\textwidth}
+	\centering
+\begin{forest}
+			pic dir tree,
+			tikz+={
+					\pic at ([xshift=0.7\Size].west) {folder};
+				},align={l},
+			where level=0{}{% folder icons by default; override using file for file icons
+				directory,
+			},
+			[my\_project
+			[\alert{README.md}, file]
+			[data
+			[raw\_data
+				[specimen\_1
+					[\alert{README.md}, file]
+				]
+			]
+			[processed\_data
+				[\alert{README.md}, file]
+			]
+			]
+			[src
+				[data\_processing
+					[\alert{README.md}, file]
+				]
+			]
+			]
+		\end{forest}
+\column{0.5\textwidth}
+	\centering
+Use \alert{Markdown} for writing \texttt{README.md}	
+\includegraphics[scale=0.04]{markdown_logo.png}
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{It is good practice to place \texttt{README} at almost each folder of your project's directory tree.
+
+\texttt{README} at the root of the project contains the general project description, whereas \texttt{READMEs} in particular folders describe its components for example how experimental data was acquired, what was the experimental setup, etc.
+
+\texttt{READMEs} are written in a plain text but it is useful to use Markdown.
+
+It is a lightweight markup language for formatted text.
+
+It is used in GitHub repository for example.
+
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Machine readable data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=frame16]{Keep data tidy \& machine readable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}
+\column{0.5\textwidth}
+	\centering
 Hints for spreadsheets, data tables:
 \begin{itemize}
 	\item rows=observations, columns=variables
@@ -755,19 +948,148 @@ Hints for spreadsheets, data tables:
 	\item no calculations in raw data files
 	\item save as CSV
 	\item don't use font color or highlighting as data
-\end{itemize}	
+\end{itemize}
+\column{0.5\textwidth}
+	\centering	
+\begin{table}
+	\renewcommand{\arraystretch}{1.1}
+	\centering \footnotesize
+	\begin{tabular}{lccc} 
+		\toprule
+		observation\_no& x & y & rel\_error\\
+		\midrule
+		observation\_1 & 0.31 & 0.44 & 0.011\\
+		observation\_2 & 0.32 & 0.43 & 0.012\\
+		\bottomrule 
+	\end{tabular} 
+\end{table}
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Code development}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame17]{Comment your code}
+\begin{frame}[label=frame17]{Comment your code (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
+	\emph{Programs must be written for people to read and only incidentally for machines to execute}\\
+	\flushright
+	MIT professor Hal Abelson
+\end{beamercolorbox}
+
+Best practices for writing code comments:
+\begin{itemize}
+\item Make them brief
+\item Keep them relevant
+\item Use them liberally but not to excess
+\end{itemize}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{Again, I have a quote for you about writing code comments by MIT professor Hal Abelson:
+"Programs must be written for people to read and only incidentally for machines to execute".
+It implies that we should use them liberally but duplicating a code with a comment should be avoided.
+Comments are descriptions that help programmers better understand the intent and functionality of the program. 
+They are completely ignored by compilers and interpreters.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame18]{Comment your code (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Examples of code comments}
+\begin{minted}[tabsize=4,obeytabs=true,baselinestretch=1.2]{matlab}
+%------ CONSTANTS ------
+plate_length = 0.5; % units [m]
+
+% w was obtained by sweeping from 0 to 1 and fitting to experimental data
+w = 0.81; % weighting parameters 
+
+Ivalid = find(isvalid); % indices of valid polygons
+
+%% cavity to image conversion
+cavity_polygon_in_pixels = Npixels./2.*(1.+cavity_polygon); 
+cc=0;
+for k=1:length(Ivalid)
+    cc=cc+1;
+\end{minted}
+\end{block} 
+\end{frame}  
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Write comments as you write a code.
+
+Some programmers advise to not use comments as visual markers.
+These visual marks take a lot of space and often they are useless.
+But I am using them sometimes to divide MATLAB scripts in sections of certain functionalities.
+
+If you have self-explanatory variable we don't need to explained it but it is worthy to mention for example units.
+
+By the way, you should always use International System of Units (SI for short) in your research programs.
+
+If you have some arbitrary parameter, it maybe not be enough to write its meaning, it is worthy to explained how you arrive with its value.
+
+If a line of code is not obvious, put brief clarification comment.
+
+But do not use comments to explain poorly written code. 
+Re-write the code instead.
+
+You can also add a description to the section of you script explaining what it does.
+
+Another good practice is to add links to the origin of copied code.
+
+Do not “comment out” code that “could be useful in the future”.
+Just delete it.
+
+An out-commented piece of code causes confusion. 
+
+The future reader may wonder:
+
+Why is the code commented out?
+
+Should this not be commented out?
+
+Should I delete this code?
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame19]{Comment your code (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\url{https://www.sphinx-doc.org/en/master/}
+\begin{block}{Docstrings for Python functions}
+\begin{minted}[tabsize=4,obeytabs=true]{python}
+def add_binary(a, b):
+    '''
+    Returns the sum of two decimal numbers in binary digits.
+
+            Parameters:
+                    a (int): A decimal integer
+                    b (int): Another decimal integer
+
+            Returns:
+                    binary_sum (str): Binary string of the sum of a and b
+    '''
+    binary_sum = bin(a+b)[2:]
+    return binary_sum
+\end{minted}
+\end{block} 
+\end{frame}  
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Some programming languages such as Python have their standards for writing special type of comments called \alert{docstrings}. 
+
+Unfortunately, MATLAB does not have such a standard yet but it has similar mechanism. 
+
+If written correctly, docstrings can be used for automatic generation of code documentation.
+
+For example there is a Python documentation generator, called Sphinx.
+
+It utilizes Python docstrings.
+
+Python docstrings are the string literals that appear right after the definition of a function, method, class, or module.
+
+As you can see in this example there is a line explaining what function does, what parameters it takes and the value it returns.
+
+Such description should always be present in you code. 
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Use literate programming}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -783,7 +1105,9 @@ Examples: Literate, Jypyter Notebook, Maple Worksheets, Wolfram Notebooks (Mathe
 \note{Literate programming is a style of programming invented by Donald Knuth, where the main idea is that a program's source code is made primarily to be read and understood by other people, and secondarily to be executed by the computer.
 	
 This frees the programmer from the structure of a program imposed by the computer and means that the programmer can develop programs in the order of the flow of their thoughts.
-A Literate program generally consists of explanation of the code in a natural language such as English, interspersed with snippets of code to be executed. 
+
+A Literate program generally consists of explanation of the code in a natural language such as English, interspersed with snippets of code to be executed  and sometimes graphs. 
+
 This means that Literate programs are very easy to understand and share, as all the code is well explained.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Version control}
@@ -838,18 +1162,25 @@ Purpose of Version Control:
 %%%%%%%%%%%%%%%%%%%%
 \note{The purpose of version control is collaboration: 
 Multiple people can work simultaneously on a single project. 
+
 Everyone works on and edits their own copy of the files and it is up to them when they wish to share the changes made by them with the rest of the team. 
 
 Following this up, version control system integrates the work that is done simultaneously by different members of the team. 
+
 In some rare cases, when conflicting edits are made by two people to the same line of a file, then human assistance is requested by the version control system in deciding what should be done - which version (or line of the code) should we keep and which discard.
 
 It also enables one person to use multiple computers to work on a project, so it is valuable even if you are working by yourself.
 
 One of the most important purpose of version control system is roll back feature. 
+
 Version control provides access to the historical versions of a project. 
+
 This is insurance against computer crashes or data loss. 
+
 If any mistake is made, you can easily roll back to a previous version. 
+
 It is also possible to undo specific edits without losing the work done in the meanwhile. 
+
 It can be easily known when, why, and by whom any part of a file was edited.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Workflow automation}
@@ -867,53 +1198,58 @@ GNU make:\\
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{Run scripts in particular order
-make is an expert system. You give it a set of rules for how to construct things, and a target to be constructed. The rules can be decomposed into pair-wise ordered dependencies between files. make takes the rules and determines how to build the given target. Once it has determined how to construct the target, it proceeds to do so.
+\note{
+Because the research is iterative process and a lot of experimentation is involved it is easy to get lost.
+You probably encounter a situation that you were coming back to old files thinking which scripts and in which order should I run them to obtain results.
 
-make determines how to build the target by constructing a directed acyclic graph.
+In order to alleviate that, workflow automation can be implemented.
+Workflow automation is very helpful so that we don't have to remember things.
 
+Tools such as make and snakemake can be used for this purpose. 
+
+Snakemake is quite popular in the field of bio-informatics.
+
+We however will take a closer look at make.
+
+Make is an expert system developed in 70! 
+
+But it is still popular and widely used. 
+
+Its strengths is easy syntax. 
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile,label=frame21]{Automate your process (2) - make}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
-\begin{block}{}
-\begin{minted}{c}
-int main() {
-printf("hello, world");
-return 0;
-}
-\end{minted}
-\end{block}
-
-\begin{exampleblock}{code}
-\textcolor{orange}{target}: \textcolor{Purple}{dependencies}\\
-	command
-\end{exampleblock}
-\end{comment}
-
 \begin{block}{Makefile}
 \begin{minted}[tabsize=4,obeytabs=true]{makefile}
 #!/bin/bash
-# comment
-# ***** Variables *****
-CONDA_ENV := cookie_env
-VIZ := ./src/visualization/
-PROC := ./src/data_processing/
 
 # Makefile rule
 
 target: dependencies
-	<tab> @ cd $(VIZ) && command && echo "Terminal output"
+	<tab> command
 	
-.PHONY clean
-clean:
-	rm *.o temp
 \end{minted}
 \end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{A phony target is a pseudo-target that is not really the name of a file; rather it is just a name for a recipe to be executed. There are two reasons to use a phony target: to avoid a conflict with a file of the same name, and to improve performance.
+\note{
+You give make a set of rules for how to construct things, and a target to be constructed. 
+
+These rules are written in a text file named Makefile.
+
+The rules can be decomposed into pair-wise ordered dependencies between files. 
+
+Make takes the rules and determines how to build the given target. 
+
+Once it has determined how to construct the target, it proceeds to do so.
+
+Make determines how to build the target by constructing a directed acyclic graph.
+
+But we don't have to know about that too much as long as we know how to write rules.
+
+A phony target is a pseudo-target that is not really the name of a file; rather it is just a name for a recipe to be executed. There are two reasons to use a phony target: to avoid a conflict with a file of the same name, and to improve performance.
+When it is time to execute commands to update a target, they are executed by making a new subshell for each line
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile,label=frame22]{Automate your process (3) - make}
@@ -939,7 +1275,8 @@ clean:
 \end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{}
+\note{Other elements of Makefile are
+Shebang, comment variable definitions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frame23]{Automate your process (3) - recursive make}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -991,7 +1328,7 @@ Hint: One environment per repo!
 	\end{biblio}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Practical part (Cookiecutter, Markdown, Git, Github)}
+\section{Practical part (Cookiecutter, Markdown, Git, Github, Makefile)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\setbeamercolor{palette primary}{fg=black, bg=white}
 	\begin{frame}[standout]

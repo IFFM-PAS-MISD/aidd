@@ -10,8 +10,7 @@ filename = '50kHz_pzt';
 for proc_no=1:length(processing_name)
     % load data
     load(['../../data/processed/',specimen_name,'/',processing_name{proc_no},'/',filename,'_',processing_name{proc_no},'.mat']);
-    %% visualize data
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% visualize data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % figure parameters
     fig_w = 14; % figure width in cm
     fig_h = 12; % figure height in cm
@@ -20,7 +19,7 @@ for proc_no=1:length(processing_name)
     figname = [name,'_',specimen_name,'_',filename,'_',processing_name{proc_no}];
     switch proc_no
         case 1
-            plot(linspace(0,L,length(Data_rms)),Data_rms,'r-','LineWidth',1);
+            plot(linspace(0,L,length(Data_rms)),Data_rms,'g-','LineWidth',1);
             ylabel('RMS');
         case 2
             plot(linspace(0,L,length(Data_rms_norm)),Data_rms_norm,'b-','LineWidth',1);
@@ -33,7 +32,7 @@ for proc_no=1:length(processing_name)
     set(fig1,'color','white');
     set(fig1, 'Units','centimeters', 'Position',[10 10 fig_w fig_h]); 
     set(fig1,'PaperPositionMode','auto');
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%
     % check if directory exist; if not, create it
     figure_output_path = ['../../reports/figures/',name,'/'];
