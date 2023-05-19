@@ -4,7 +4,7 @@
 %\documentclass[10pt,aspectratio=169,notes=only]{beamer} % aspect ratio 16:9, notes only 
 \usepackage{pgfpages}
 %\setbeameroption{show notes}
-%\setbeameroption{show only notes}
+\setbeameroption{show only notes}
 %\setbeameroption{show notes on second screen=right}
 %\setbeameroption{show notes on second screen=bottom} % does not work for animations
 
@@ -48,7 +48,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Metropolis theme custom modification file
 \input{metropolis_mods.tex}
-\setbeamertemplate{note page}{\insertnote\par} % fix note spacing issue
+%\setbeamertemplate{note page}{\insertnote\par} % fix note spacing issue but brakes notes appearance (mini slides not showing)
 %\usefonttheme[onlymath]{Serif} 
 \hypersetup{colorlinks,linkcolor=,urlcolor=logoblue}
 \usepackage[edges]{forest}% for folder structures
@@ -290,18 +290,6 @@ You have to show it for clients, funding agencies, regulators and most often rev
 	
 	\end{alertblock}
 
-\only<2>{
-	\vspace{5mm}
-	\begin{tikzpicture}
-		\draw[ultra thick,|-stealth,logoblue] (0,0)--(10,0);  % horizon
-		\node[logoblue] at  (10,0.3) {o}; % target
-		\draw[thick, -stealth, logoblue] (10,1)--(10,0.3); % target arrow
-		\node[logoblue] at  (10.5,0.7) {target}; % target
-		\node[draw,logoblue,below,align=left] at (0,-0.2) {nobody,\\ not even yourself,\\can recreate your analysis};
-		\node[draw,logoblue,below,align=left] at (10,-0.2) {push-button\\reproducibility};
-		\draw[ultra thick,|-|,orange] (6,0.3) -- node[above] {happy medium} (9,0.3); % happy medium
-	\end{tikzpicture}
-	}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{\scriptsize The most common definition of reproducibility (and replication) was first noted by Claerbout and Karrenbach in 1992 and has been used in computational science literature since then.
@@ -320,12 +308,30 @@ This is still not a common place in scientific journals! We still are not there 
 
 Even there is more move towards reproducibility, open data science, data submission along publication, etc. we still does not have that push-button reproducibility. 
 
-It is difficult to achieve that for a variety of reasons.\\
-------------------------------------------------------\\
+It is difficult to achieve that for a variety of reasons.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame5]{Definitions (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\vspace{5mm}
+	\begin{tikzpicture}
+		\draw[ultra thick,|-stealth,logoblue] (0,0)--(10,0);  % horizon
+		\node[logoblue] at  (10,0.3) {o}; % target
+		\draw[thick, -stealth, logoblue] (10,1)--(10,0.3); % target arrow
+		\node[logoblue] at  (10.5,0.7) {target}; % target
+		\node[draw,logoblue,below,align=left] at (0,-0.2) {nobody,\\ not even yourself,\\can recreate your analysis};
+		\node[draw,logoblue,below,align=left] at (10,-0.2) {push-button\\reproducibility};
+		\draw[ultra thick,|-|,orange] (6,0.3) -- node[above] {happy medium} (9,0.3); % happy medium
+	\end{tikzpicture}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{ 
 If we look at this graph as a kind of reproducibility horizon where on one end nobody, not even yourself can recreate any part of your analysis and at the other and you have push button reproducibility and published work, you want to target that ultimate goal of push button reproducibility but when you are in a zone close to that I would say it is happy medium.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame5]{Definitions (2)}
+\begin{frame}[label=frame6]{Definitions (3)}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Reproducible data science}
 		\begin{itemize}
@@ -342,7 +348,7 @@ If we look at this graph as a kind of reproducibility horizon where on one end n
 To summarize the definition of reproducible research in modern world we can say that reproducibility means that recreation of models and its results such as data, tools and graphs can be done with little effort and it leads to identical results as obtained in the past.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame6]{Definitions (3)}
+\begin{frame}[label=frame7]{Definitions (4)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Reproducible vs Replicable}
 			We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used. 
@@ -363,7 +369,7 @@ In both cases we want to answer the same research questions, we want to get the 
 For example, we want to \textbf{replicate} a signal processing method published few years ago which aims to de-noise audio recordings and compare it qualitatively to our own method by using our own signals such as our voice recordings.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame7]{Benefits of data science reproducibility}
+\begin{frame}[label=frame8]{Benefits of data science reproducibility}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{itemize}
 		\item Research credibility
@@ -396,7 +402,7 @@ By working reproducibly, we can develop validated research work, avoid misinform
 This aspect does not only support the validity of the \textbf{current} work, but any \textbf{future} studies that are based on reproducible research.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame8]{What is needed?}
+\begin{frame}[label=frame9]{What is needed?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{alertblock}{Make:}	
 		\begin{itemize}
@@ -438,7 +444,7 @@ I hope that hints which I will give at the next slides will help you to do that.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Project skeleton}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame9]{Organize your project (1)}
+\begin{frame}[t,label=frame10]{Organize your project (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{3mm}
 
@@ -514,7 +520,7 @@ At each stage of the workflow, files are created, and there is always a lot of t
 We need to store them in an organized and efficient manner.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame10]{Organize your project (2)}
+\begin{frame}[t,label=frame11]{Organize your project (2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-5mm}
 \begin{columns}[T]
@@ -575,7 +581,8 @@ We need to store them in an organized and efficient manner.
 \end{columns}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{Let's start with organizing your project by creating a project skeleton or template.
+\note{\scriptsize
+Let's start with organizing your project by creating a project skeleton or template.
 
 What I mean by the project skeleton, is a directory tree structure which help us sort and navigate through data and files which we are creating during project development.
 
@@ -592,14 +599,14 @@ An example of moderately complex project skeleton is shown here.
 
 Apart from separation of raw data from processed data also code is separated from data and it resides in src folder which is abbreviation from source.
 
-In the source folder, there are three subfolders for storing a code related to data processing, visualization and models.
+In the source folder, there are three subfolders for storing a code related to data processing, visualization and models. 
 
 In the folder 'reports' we can have a folder for figures, journal papers, etc.
 
 Of course, depending on the needs, a project skeleton can be further segmented, for example, we might want to divide data into experimental and numerical ones.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame11]{Organize your project (3)}
+\begin{frame}[t,label=frame12]{Organize your project (3)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Hints:
 \begin{itemize}
@@ -615,20 +622,6 @@ Hints:
 	\end{tikzpicture}
 	\texttt{unused}
 \end{itemize}	
-\begin{columns}[T]
-	\hspace{5mm}
-	\column{0.5\textwidth}
-	\textbf{dos}\\
-	\texttt{mssp\_paper.tex}\\
-	\texttt{mssp-paper-draft-2023-05-10.tex}\\
-	\texttt{mssp-paper-final-2023-05-15.tex}\\
-	\column{0.5\textwidth}
-	\textbf{don'ts}\\
-	\sout{\texttt{MSSP paper 1.tex}}\\
-	\sout{\texttt{MSSP\_paper\_v5\_final\_rev\_FINAL\_FOR\_REAL.tex}}
-	\alert{Dash '-' does not work in MATLAB!}
-\end{columns}
-
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
 \note{\scriptsize
@@ -656,9 +649,27 @@ I will talk in a minute about the idea of controlled vocabulary which can be use
 If you decide to use dates in your strategy follow year-month-date format.
 
 If you produce too much stuff which is old and cluttering your project it maybe good idea to move them to folder 'unused'.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame13]{Organize your project (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\begin{columns}[T]
+	\hspace{5mm}
+	\column{0.5\textwidth}
+	\textbf{dos}\\
+	\texttt{mssp\_paper.tex}\\
+	\texttt{mssp-paper-draft-2023-05-10.tex}\\
+	\texttt{mssp-paper-final-2023-05-15.tex}\\
+	\column{0.5\textwidth}
+	\textbf{don'ts}\\
+	\sout{\texttt{MSSP paper 1.tex}}\\
+	\sout{\texttt{MSSP\_paper\_v5\_final\_rev\_FINAL\_FOR\_REAL.tex}}
+	\alert{Dash '-' does not work in MATLAB!}
+\end{columns}
 
-----------------------------
-
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
 Do not use white spaces in folder and file names.
 
 Use underscores or eventually dashes to obtain meaningful file names composed of few parts or words.
@@ -678,7 +689,7 @@ Such a situation can be completely avoided by using versioning system.
 I will cover some basic information about git versioning system later during my presentation.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame12]{Organize your project (4) - controlled vocabulary}
+\begin{frame}[t,label=frame14]{Organize your project (4) - controlled vocabulary}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \emph{Keywords} are words or short phrases used commonly within a system to point to the meaning or subject of information.
 
@@ -708,7 +719,7 @@ The essence of a \alert{controlled vocabulary} is structuring your keywords in a
 So, we can define \alert{controlled vocabulary} as an organized arrangement of words and phrases used to index content and/or to retrieve content throughbrowsing or searching.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t, label=frame13]{Organize your project (5) - controlled vocabulary}
+\begin{frame}[t, label=frame15]{Organize your project (5) - controlled vocabulary}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{columns}[T]
 \column{0.5\textwidth}
@@ -756,7 +767,7 @@ An exemplary structure related to Mammals is shown here.
 If we combine controlled file name format with controlled vocabulary we are golden. 
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame14]{Organize your project (5) - my strategy}
+\begin{frame}[t,label=frame16]{Organize your project (5) - my strategy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-5mm}
 \begin{columns}[T]
@@ -923,7 +934,7 @@ Similarly, the name of resulting png image inherits subfolder name, additionally
 Off course you can develop you own strategy, but choose one and be consistent.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame15]{Organize your project (6)}
+\begin{frame}[label=frame17]{Organize your project (6)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Project skeleton - \alert{Cookiecutter} by Audrey Roy Greenfeld\\
 Documentation: \url{https://cookiecutter.readthedocs.io/en/stable/README.html}\\
@@ -947,7 +958,7 @@ I will show you how this tool work in a practical part of this lecture.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Write READMEs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame16]{Write READMEs liberally}
+\begin{frame}[fragile,label=frame18]{Write READMEs liberally}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-2mm}
 \begin{columns}[T]
@@ -1017,7 +1028,7 @@ It is used in GitHub repository for example.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Machine readable data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame17]{Keep data tidy \& machine readable}
+\begin{frame}[label=frame19]{Keep data tidy \& machine readable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{columns}
 \column{0.5\textwidth}
@@ -1077,7 +1088,7 @@ In this example we have a respective data information about measurements which w
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Code development}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame18]{Comment your code (1)}
+\begin{frame}[label=frame20]{Comment your code (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
 	\emph{Programs must be written for people to read and only incidentally for machines to execute}\\
@@ -1104,7 +1115,7 @@ Comments are descriptions that help programmers better understand the intent and
 They are completely ignored by compilers and interpreters.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame19]{Comment your code (2)}
+\begin{frame}[fragile,label=frame21]{Comment your code (2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{block}{Examples of code comments}
 \begin{minted}[tabsize=4,obeytabs=true,baselinestretch=1.2]{matlab}
@@ -1125,7 +1136,7 @@ for k=1:length(Ivalid)
 \end{block} 
 \end{frame}  
 %%%%%%%%%%%%%%%%%%%%
-\note{
+\note{\scriptsize
 Write comments as you write a code.
 
 Some programmers advise to not use comments as visual markers.
@@ -1134,7 +1145,7 @@ But I am using them sometimes to divide MATLAB scripts in sections of certain fu
 
 If you have self-explanatory variable we don't need to explained it but it is worthy to mention for example units.
 
-By the way, you should always use International System of Units (SI for short) in your research programs.
+By the way, in your research programs, you should always use International System of Units (SI for short) .
 
 If you have some arbitrary parameter, it maybe not be enough to write its meaning, it is worthy to explained how you arrive with its value.
 
@@ -1162,7 +1173,7 @@ Should I delete this code?
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame20]{Comment your code (2)}
+\begin{frame}[fragile,label=frame22]{Comment your code (2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \url{https://www.sphinx-doc.org/en/master/}
 \begin{block}{Docstrings for Python functions}
@@ -1202,7 +1213,7 @@ As you can see in this example there is a line explaining what function does, wh
 Such description should always be present in you code. 
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame21]{Use literate programming}
+\begin{frame}[label=frame23]{Use literate programming}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \alert{Literate programming} is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.
 
@@ -1213,7 +1224,8 @@ Such description should always be present in you code.
 Examples: Literate, Jypyter Notebook, Maple Worksheets, Wolfram Notebooks (Mathematica), R Markdown, MATLAB Live Editor.	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{Literate programming is a style of programming invented by Donald Knuth, where the main idea is that a program's source code is made primarily to be read and understood by other people, and secondarily to be executed by the computer.
+\note{\scriptsize
+Literate programming is a style of programming invented by Donald Knuth, where the main idea is that a program's source code is made primarily to be read and understood by other people, and secondarily to be executed by the computer.
 	
 This frees the programmer from the structure of a program imposed by the computer and means that the programmer can develop programs in the order of the flow of their thoughts.
 
@@ -1236,7 +1248,7 @@ Additional tools may be needed for enhancement of notebook version controlling w
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Version control}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame22]{Use version control (1)}
+\begin{frame}[label=frame24]{Use version control (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{alertblock}{Version control system}
 	Software tools that helps in recording changes made to files by keeping a track of modifications done in the code. 
@@ -1273,7 +1285,7 @@ Due to popularity of Git version control system we will learn basics of it in th
 Other tools helpful for software development are CloudBees, CircleCI and Jenkins but I don't know this tools.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame23]{Use version control (2)}
+\begin{frame}[label=frame25]{Use version control (2)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Purpose of Version Control: 
 \begin{itemize}
@@ -1284,7 +1296,9 @@ Purpose of Version Control:
 \end{itemize}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{The purpose of version control is collaboration: 
+\note{\scriptsize
+The purpose of version control is collaboration: 
+
 Multiple people can work simultaneously on a single project. 
 
 Everyone works on and edits their own copy of the files and it is up to them when they wish to share the changes made by them with the rest of the team. 
@@ -1309,7 +1323,7 @@ It can be easily known when, why, and by whom any part of a file was edited.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Workflow automation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame24]{Automate your process (1)}
+\begin{frame}[label=frame26]{Automate your process (1)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
 	\emph{"Good workflow" means \textbf{not having to remember} things}\\
@@ -1346,7 +1360,7 @@ But it is still popular and widely used.
 Its strength is easy syntax. 
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame25]{Automate your process (2) - make}
+\begin{frame}[fragile,label=frame27]{Automate your process (2) - make}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{block}{Makefile}
 \begin{minted}[tabsize=4,obeytabs=true]{makefile}
@@ -1382,7 +1396,7 @@ Make rule is in the form of target followed by colon and dependencies known also
 And than in a new line, after tab, command appears.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame26]{Automate your process (3) - make}
+\begin{frame}[fragile,label=frame28]{Automate your process (3) - make}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{block}{Makefile}
 \begin{minted}[tabsize=4,obeytabs=true]{makefile}
@@ -1436,7 +1450,7 @@ We have two commands which have to be executed in the same subshell.
 Therefore we place commands in one line and separate them by 'and' represented by double ampersand.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame27]{Automate your process (4) - make}
+\begin{frame}[fragile,label=frame29]{Automate your process (4) - make}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{block}{Makefile}
 \begin{minted}[tabsize=4,obeytabs=true]{makefile}
@@ -1478,7 +1492,7 @@ Command 'make' checks all rules in a Makefile and updates targets accordingly.
 We will experiment with make in a practical part of the lecture.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame28]{Automate your process (5) - recursive make}
+\begin{frame}[t,label=frame30]{Automate your process (5) - recursive make}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{forest}
 	pic dir tree,
@@ -1518,7 +1532,7 @@ If you are interested I can make a quick tutorial on recursive make.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Computational environment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile,label=frame29]{Share your computing environment}
+\begin{frame}[fragile,label=frame31]{Share your computing environment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{columns}
 \column{0.5\textwidth}
@@ -1543,7 +1557,7 @@ dependencies:
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%
-\note{
+\note{\scriptsize
 And last but not least component of reproducible data science is sharing your computational environment.
 
 Sharing computing environment is especially important when we work with Machine Learning.
@@ -1570,7 +1584,7 @@ If all dependencies are installed it is guaranteed that our scripts and function
 It is advised to use one environment per repository. I highly recommend to check this link if you want to read more about it.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=frame29]{References}
+\begin{frame}[label=frame32]{References}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{biblio}{Recommended literature}
 		\biblioref{Jon F. Claerbout and Martin Karrenbach.}{1992}{Electronic documents give reproducible research a new meaning}{https://library.seg.org/doi/abs/10.1190/1.1822162}
