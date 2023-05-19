@@ -8,6 +8,7 @@ conda install cookiecutter
 conda install numpy
 conda install scipy
 conda env export --name cookie_env --from-history --file environment.yml
+conda create --name clone_cookie_env --clone cookie_env
  
 cookiecutter ./cookiecutter-my-reproducible-science
 conda deactivate
