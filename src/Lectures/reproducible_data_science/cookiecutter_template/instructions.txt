@@ -1,0 +1,23 @@
+# unzip cookiecutter_my_reproducible_science.zip
+# there is cookiecutter with all necessary files inside
+# setup GitHub account
+# install anaconda
+# https://docs.anaconda.com/free/anaconda/install/linux/#installation
+conda config --add channels conda-forge
+conda create --name cookie_env
+conda activate cookie_env python=3
+conda install cookiecutter
+conda install numpy
+conda install scipy
+conda env export --name cookie_env --from-history --file environment.yml
+conda create --name clone_cookie_env --clone cookie_env
+conda activate cookie_env
+cookiecutter ./cookiecutter-my-reproducible-science
+conda deactivate
+git init
+git add -A
+git commit -m "first commit"
+# for remote repo
+# replace 'projectslug' by what you have used in the interactive cookiecutter initialization
+git remote add projectslug http://github.com/yourname/projectslug
+git push -u projectslug master

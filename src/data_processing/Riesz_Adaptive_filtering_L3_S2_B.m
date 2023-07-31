@@ -17,7 +17,7 @@ figure_output_path = prepare_figure_paths(modelname);
 %image_label_path=fullfile(projectroot,'data','interim','exp',filesep);
 image_label_path='/pkudela_odroid_sensors/aidd/data/interim/exp/new_exp/';
 
-test_case=[2]; % select file numbers for processing
+test_case=[1,3:8]; % select file numbers for processing
 
 %% input for figures
 Cmap = jet(256); 
@@ -93,7 +93,8 @@ for k = test_case
             end
             %% Adaptive filtering
             [FilterMask,RMSF,ERMSF,WRMSF] = AdaptiveFilteringMask(Data,time,WL,mask_thr,PLT);
-             ReverseFilterMask = -1*(FilterMask - 1);
+            ERMSF = ERMSF(2:end-2,2:end-2,:);
+            ReverseFilterMask = -1*(FilterMask - 1);
 
             M=nx;
             N=ny;
@@ -287,6 +288,7 @@ for k = test_case
                
                Aadapt=Aadapt+amp.^2;
             end
+            Aadapt=Aadapt(2:end-2,2:end-2,:);
             figure;surf(Aadapt);shading interp;  axis square;view(2);drawnow;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Adaptive Reverse filtering mask + Riesz

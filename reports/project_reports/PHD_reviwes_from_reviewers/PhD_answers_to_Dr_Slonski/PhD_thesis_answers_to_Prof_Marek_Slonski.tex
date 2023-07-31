@@ -1,0 +1,106 @@
+\documentclass[11pt,a2paper]{report}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{dirtytalk}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
+%% my added packages
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+\usepackage{geometry}
+%\usepackage{showframe} %This line can be used to clearly show the new margins
+
+\newgeometry{vmargin={25mm}, hmargin={30mm,30mm}}
+%\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
+%\usepackage{breqn}
+\usepackage{multirow}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\graphicspath{{figures/}}
+
+\begin{document}
+	\sloppy{
+	\noindent I appreciate the time and effort that Prof. Marek S\l{}o{n}ski has dedicated to provide valuable feedback on my PhD thesis. 
+	I would like to thank Prof. Marek S\l{}o{n}ski for his constructive comments, which will help me to improve my PhD defence presentation. 
+	
+	\noindent Here is a point-by-point response to the reviewer’s comments and concerns.
+	\\ \\
+	\textbf{List of queries}: \\
+	\textcolor{Cyan}{
+		\newline\textbf{Response:}
+		First of all I would like to thank Prof. Marek S\l{}o{n}ski for his positive feedback regarding my PhD thesis.
+	}
+	\begin{enumerate}
+		\item After getting acquainted with this thesis, I believe that a more appropriate dissertation title would be:\\ \enquote{Feasibility study of deep neural networks for delamination identification in composite laminates}.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			\\
+			Thank you for your constructive comment. \\
+			The title of the PhD thesis was derived from the title of the project, which is \enquote{Feasibility Studies of Artificial Intelligence-Driven Diagnostics}. 
+			During the early stages of the research, I investigated and explored several artificial intelligence technologies that could be deployed and utilized for damage identification applications in composite laminates.
+			Afterwards, the pipeline of work began converging toward deep learning techniques.
+			Hence, choosing the AI approach in the title instead of the DL approach was arguable.
+			However, I kept the artificial intelligence approach instead of the deep learning approach.
+		}
+		\item In my opinion, the better structure of the thesis would be by presenting each application of deep neural networks in one chapter, starting from description of methodology and ending with discussion.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:\\}
+			Thank you for pointing this out. \\
+			The arrangement of my thesis was the same as your valuable suggestion during the writing stage.
+			I intended to present each developed deep learning approach, starting by describing the data preprocessing, then the methodology of the developed model, and finally, the results with discussions in a separate chapter.
+			Later, I realized that each chapter would have some sections that would be repeated (the same content would be repeated).
+			As a result, I changed the thesis's organization to its current format.
+			The methodology chapter discusses dataset acquisition, and each deep learning approach is discussed in its section.
+			The results and discussions of each developed approach are reported in each section of the results and discussions chapter.
+			In this way it is easier to compare all developed deep learning models.
+		}
+		
+		\item One of th most important issues related to the application of deep neural networks is the proper tuning of hyperparameters such as learning rate, dropout, among others. 
+		In the thesis, the trial and error approach was used. 
+		Did you consider other methods for finding the best hyperparameters? One of the possible approaches could be the Bayesian model selection method. 
+		In my opinion, it is an important aspect in the presented applications.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}\\
+			Thank you for your constructive comment. \\
+			Undoubtedly, the tuning of the hyperparameters of a deep learning model is considered one of the main issues that must be handled properly.
+			A proper selection of hyperparameters will improve the performance of the model. 
+			There are several optimization techniques for tuning the hyperparameters, such as random search, grid search, hyperband, and the Bayesian method.
+			To tune the hyperparameters in the models developed in this thesis, I adopted a trial-and-error approach with an early-stopping technique.
+			I would like to clarify that I was aware of these different optimisation techniques.
+			However, during the training stage, I tuned the hyperparameters with fewer trials. 
+			The performance was remarkable, and there was no sign of overfitting. 
+			Additionally, the developed models could generalise to previously unseen data, whether numerically or experimentally acquired.
+			Because the models were performing well, I concluded that it was not necessary to increase complexities to my approach that would further slightly enhance the performance.
+			Since the Bayesian optimisation approach will generate a range of probability distributions regarding hyperparameters, it will be computationally expensive (even more so for high-dimensional spaces as for the applications for computer vision). 
+		}	
+		
+		\item In the state-of-the-art, you do not refer to the applications of Bayesian deep neural networks for SHM/NDE and specifically for delamination identification. 
+		Bayesian approach is considered to be useful for uncertainty quantification. 
+		Have you found in the literature any reports on the possibility of using Bayesian deep neural networks as a prospective replacement for the standard deep neural networks in the context of data-driven SHM/NDT?	
+			
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			Thank you for your constructive comment. \\
+			When I first started planning and writing the state-of-the-art, I was particularly interested in damage recognition techniques based on computer vision since they would be relevant to my thesis work.
+			I was interested in artificial intelligence approaches for damage identification that is based on Lamb waves in composite laminates (e.g. CFRP).
+			I was aware that there are several research studies, reports, techniques, and approaches for damage detection with SHM/NDE that could not be presented or addressed in this thesis.
+			I have seen a few research publications and reports utilising Bayesian inference for damage identification.
+			Certainly, the Bayesian neural network (BNN) approach in SHM/NDE for anomaly identification is quite interesting as it produces set of probabilities or uncertainties for the outputs and weights making the model more robust and accurate than the deterministic outputs produced from a standard neural networks e.g (CNN and RNN).
+			However, implementing such BNN models would be very computationally expensive especially for tasks of computer vision taking into consideration the limited amount of available resources.
+			\\
+			Furthermore, as I have mentioned earlier, the developed models in this work can detect delamination with reasonable accuracy.
+			However, it could be a potential future work to employ the Bayesian inference method to the current work to make some comparisons.
+		}
+	\end{enumerate}
+}
+\end{document}

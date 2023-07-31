@@ -1,0 +1,1615 @@
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9, only frames
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show only notes}
+%\setbeameroption{show notes on second screen=right}
+%\setbeameroption{show notes on second screen=bottom} % does not work for animations
+
+%\graphicspath{{../../figures/}}
+\graphicspath{{figs/}}
+%\includeonlyframes{frame1,frame2,frame3}
+%\includeonlyframes{frame21,frame22}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{csvsimple} % for csv read
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepackage{xspace}
+%\usepackage{amscls} % amsthm.sty
+\usepackage{amsmath}
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage[beamer,customcolors]{hf-tikz} % for highlights in the table
+\usepackage{bm}
+%\usepackage{FiraSans}
+\usepackage{mathrsfs} % for Fourier and Laplace symbols % installed manually jknappen in miktex console
+\usepackage{verbatim}
+%\usepackage{eulervm} % alternative math fonts
+%\usepackage{comment}
+\usetikzlibrary{external} % speedup compilation
+%\tikzexternalize % activate!
+%\usetikzlibrary{shapes,arrows}  
+% the animations are only supported by some pdf readers (AcrobatReader, PDF-XChange, acroread, and Foxit Reader)
+% install manually media9 from miktex console (it contains pdfbase.sty), ocgx2 (ocgbase.sty)
+\usepackage{animate}
+\usepackage{ifthen}
+\newcounter{angle}
+\setcounter{angle}{0}
+%\usepackage{bibentry}
+%\nobibliography*
+\usepackage{caption}%
+\captionsetup[figure]{labelformat=empty}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metropolis theme custom modification file
+\input{metropolis_mods.tex}
+%\setbeamertemplate{note page}{\insertnote\par} % fix note spacing issue but brakes notes appearance (mini slides not showing)
+%\usefonttheme[onlymath]{Serif} 
+\hypersetup{colorlinks,linkcolor=,urlcolor=logoblue}
+\usepackage[edges]{forest}% for folder structures
+\usepackage[normalem]{ulem} % for strikeout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+%\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+%  metropolis compatible (FiraSans auto replacement)
+\newcommand{\matr}[1]{\boldsymbol{#1}}
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command 
+%\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% metropolis compatible (FiraSans auto replacement)
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+% bold symbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\myexp}{\mathrm{e}}
+% 
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\renewcommand{\Re}{\operatorname{\mathbb{R}e}}
+\renewcommand{\Im}{\operatorname{\mathbb{I}m}}
+% ------------------------------------------------------------------------------
+% % dir tree
+% ------------------------------------------------------------------------------
+% folder
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+\newlength\Size
+\setlength\Size{4pt}
+\tikzset{%
+	folder/.pic={%
+		\filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+		\filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+	},
+	file/.pic={%
+		\filldraw [draw=folderborder, top color=folderbg!5, bottom color=folderbg!10] (-\Size,.4*\Size+5pt) coordinate (a) |- (\Size,-1.2*\Size) coordinate (b) -- ++(0,1.6*\Size) coordinate (c) -- ++(-5pt,5pt) coordinate (d) -- cycle (d) |- (c) ;
+	},
+}
+\forestset{%
+	declare autowrapped toks={pic me}{},
+	pic dir tree/.style={%
+		for tree={%
+			folder,
+			font=\ttfamily,
+			grow'=0,
+		},
+		before typesetting nodes={%
+			for tree={%
+				edge label+/.option={pic me},
+			},
+		},
+	},
+	pic me set/.code n args=2{%
+		\forestset{%
+			#1/.style={%
+				inner xsep=2\Size,
+				pic me={pic {#2}},
+			}
+		}
+	},
+	pic me set={directory}{folder},
+	pic me set={file}{file},
+}
+\forestset{
+  L1/.style={draw=black,},
+  L2/.style={,edge={,line width=0.8pt}},
+}
+
+\tikzset{hl/.style={
+    set fill color=red!80!black!40,
+    set border color=red!80!black,
+  },
+}
+% ------------------------------------------------------------------------------
+% minted (sudo apt-get install python-pygments)
+% ------------------------------------------------------------------------------
+\usepackage[outputdir=build]{minted}
+% default ok
+%\usemintedstyle{manni} % so so
+%\usemintedstyle{tango} % too blue
+%\usemintedstyle{friendly} % bland on my background
+%\usemintedstyle{borland} % too many things black
+%\usemintedstyle{rrt} % unreadable
+%\usemintedstyle{arduino} % bland
+%\usemintedstyle{lovelace} % ok
+%\usemintedstyle{rainbow_dash} % ok, $ = colors, variables black, comments light blue
+%\usemintedstyle{igor} % red comments to much black fonts
+\usemintedstyle{emacs} % very nice, green comments, orange variables 
+%\usemintedstyle{perldoc} % nice, green comments, purplle $, greenish target simillar to command
+%\usemintedstyle{pastie} % nice, grey comments
+%\usemintedstyle{colorful} % nice, grey comments, brown variables
+%\usemintedstyle{vim} % nice, comments a little bit similar to background
+% ------------------------------------------------------------------------------
+% tcolorbox / tcblisting
+% ------------------------------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{codecolor}{HTML}{FFC300}
+
+\usepackage{tcolorbox}
+%\tcbuselibrary{most,listingsutf8,minted}
+
+%\tcbset{tcbox width=auto,left=1mm,top=1mm,bottom=1mm,
+%right=1mm,boxsep=1mm,middle=1pt}
+
+%\newtcblisting{myr}[1]{colback=codecolor!5,colframe=codecolor!80!black,listing only, 
+%minted options={numbers=left, style=tcblatex,fontsize=\tiny,breaklines,autogobble,linenos,numbersep=3mm},
+%left=5mm,enhanced,
+%title=#1, fonttitle=\bfseries,
+%listing engine=minted,minted language=r}
+% ------------------------------------------------------------------------------
+% Listings
+% ------------------------------------------------------------------------------
+\definecolor{mygreen}{HTML}{37980D}
+\definecolor{myblue}{HTML}{0D089F}
+\definecolor{myred}{HTML}{98290D}
+
+% \usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Title page options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \date{\today}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% option 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Reproducible data science: best practices}
+\subtitle{Lecture Series}
+\author{\textbf{Paweł Kudela} }
+% logo align to Institute 
+\institute{Institute of Fluid Flow Machinery\\Polish Academy of Sciences \\ \vspace{-1.5cm}\flushright %\includegraphics[width=4cm]{//odroid-sensors/sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+\includegraphics[width=4cm]{/pkudela_odroid_sensors/MISD_shared/logo/logo_eng_40mm.eps}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tikzexternalize % activate!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%
+\note{Welcome to the lecture series in the frame of the doctoral school.
+My name is Pawel Kudela. 
+I am an associate professor at the Institute of Fluid Machinery, Polish Academy of Sciences.
+Today I will talk about the importance of the reproducible data science. 
+It is about organising your research workflow so that it is easier to reproduce what you have done in the past for yourself or others. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame1]{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  %\tableofcontents[hideallsubsections]
+  \tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{My presentation is composed of two parts: the first part is more theoretical and second part is more practical.
+In the theoretical part, I will talk about the idea of reproducible data science, components needed for reproducibility as well as best practices in project organisation and development. 
+	
+In the practical part, I will show you how to build skeleton of the project by using cookiecutter, write README files by using Markdown and track changes by using git version control system and write Makefiles to automate workflows.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motivation and idea of reproducible data science}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame2]{Motivation (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+More than \Large\textbf{70\%} \normalsize of researchers have tried and failed to
+reproduce another scientist’s experiments, and more
+than \Large\textbf{50\%} \normalsize have \textbf{failed to reproduce} their own experiments. 
+\vspace{10mm}
+
+This leads to other academics and society losing trust in scientific results.
+
+\begin{biblio}{}
+	\biblioref{Monya Baker}{2016}{Reproducibility crisis?}{Nature, 533(26):353–66}
+\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{There was a study published in Nature in 2016 where more than fifteen hundreds scientists were surveyed and more than 70\% said that they have tried and failed to reproduce another scientist experiments.
+More than 50\% said they have tried and failed to reproduce their own experiments.
+Those are some of the telling figures which may lead to loosing trust in scientist and their research findings by other academics and society in general.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame3]{Motivation (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\begin{columns}[T]
+	\column{0.4\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Revising
+	\end{beamercolorbox}
+	\vspace{10mm}
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Handing off
+	\end{beamercolorbox}
+	\column{0.4\textwidth}
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Borrowing
+	\end{beamercolorbox}
+	\vspace{10mm}
+	\begin{beamercolorbox}[wd=\textwidth,rounded=true,shadow=true]{block body}
+		\huge Accountability
+	\end{beamercolorbox}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{In simple words: you can think about reproducible research as an idea: you want to play that song again. 
+
+The reason is that data science projects are rarely one-and-done, they are rather incremental, they tend to accumulate knowledge from various fields and adapt to specific problem.
+
+You may have to revise you research project in future; 
+
+you may be doing another project and you want to borrow something from previous one; 
+
+It is very likely that you have to hand it off to somebody else at some point because they may want to extend it, validate it, present it, learn it, etc. 
+
+Thus, they have to revisit and understand what you did so far. 
+
+And there is significant issue of accountability. 
+
+You research workflow should show that your conclusions are justified. 
+
+You have to show it for clients, funding agencies, regulators and most often reviewers.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame4]{Definitions (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Reproducible data science}
+		\begin{itemize}
+			\item Push-button reproducibility.
+			\item Prepare a document which can reproduce research results a year or more later by pressing a single button.
+			
+			\biblioref{Jon F. Claerbout and Martin Karrenbach.}{1992}{Electronic documents give reproducible research a new meaning}{https://library.seg.org/doi/abs/10.1190/1.1822162}
+			
+		\end{itemize}
+	
+	\end{alertblock}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize The most common definition of reproducibility (and replication) was first noted by Claerbout and Karrenbach in 1992 and has been used in computational science literature since then.
+They set goals such as:\\
+- Learn how to merge a publication with its underlying computational analysis.\\
+- Teach researchers how to prepare a document which can reproduce research results a year or more later by pressing a single button.\\
+- Learn how to leave finished work in a condition where coworkers can reproduce the calculation including the final illustration by pressing a button in the caption.\\
+- Prepare copy of local software environment, so that students can take their work elsewhere, press a button and reproduce their work.\\
+- Merge electronic documents written by multiple authors.\\
+- Export electronic documents to numerous other sites.\\
+In this article we can also read:\\
+"Now that we have begun using CD-ROM publication, we can go much further. 
+Every figure caption contains a pushbutton that jumps to the appropriate science directory (folder) and initiates a figure rebuild command and then displays the figure, possibly as a movie or interactive program."
+
+This is still not a common place in scientific journals! We still are not there yet! 
+
+Even there is more move towards reproducibility, open data science, data submission along publication, etc. we still does not have that push-button reproducibility. 
+
+It is difficult to achieve that for a variety of reasons.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame5]{Definitions (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\vspace{5mm}
+	\begin{tikzpicture}
+		\draw[ultra thick,|-stealth,logoblue] (0,0)--(10,0);  % horizon
+		\node[logoblue] at  (10,0.3) {o}; % target
+		\draw[thick, -stealth, logoblue] (10,1)--(10,0.3); % target arrow
+		\node[logoblue] at  (10.5,0.7) {target}; % target
+		\node[draw,logoblue,below,align=left] at (0,-0.2) {nobody,\\ not even yourself,\\can recreate your analysis};
+		\node[draw,logoblue,below,align=left] at (10,-0.2) {push-button\\reproducibility};
+		\draw[ultra thick,|-|,orange] (6,0.3) -- node[above] {happy medium} (9,0.3); % happy medium
+	\end{tikzpicture}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{ 
+If we look at this graph as a kind of reproducibility horizon where on one end nobody, not even yourself can recreate any part of your analysis and at the other and you have push button reproducibility and published work, you want to target that ultimate goal of push button reproducibility but when you are in a zone close to that I would say it is happy medium.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame6]{Definitions (3)}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Reproducible data science}
+		\begin{itemize}
+			\item The main goal of enabling reproducibility is to guarantee that all results can be independently recreated and verified to build upon in future work.\\
+			Source: \url{https://engineering.rappi.com/reproducible-data-science-and-why-it-matters-e4e62fd60b9a}
+			\item In the context of data science, reproducibility means that everything needed to recreate the model and its results such as data, tools, libraries, frameworks, programming languages and operating systems, have been captured, so with little effort the identical results are produced regardless of how much time has passed since the original project.
+			Source: \url{https://www.dominodatalab.com/blog/reproducible-data-science}
+		\end{itemize}	
+	\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{I am listing here some definitions which I have found on blog posts which may be worthy to read.
+
+To summarize the definition of reproducible research in modern world we can say that reproducibility means that recreation of models and its results such as data, tools and graphs can be done with little effort and it leads to identical results as obtained in the past.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame7]{Definitions (4)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Reproducible vs Replicable}
+			We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used. 
+			Reproducible is distinct from replicable.
+			\vspace{5mm}
+			
+			\textbf{Reproducible}: A result is reproducible when the \emph{same} analysis steps performed on the \alert{same dataset} consistently produces the \underline{same} answer.
+			
+			\textbf{Replicable}: A result is replicable when the \emph{same} analysis performed on \alert{different datasets} produces qualitatively \underline{similar} answers.
+	\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{We define reproducible research as work that can be independently recreated from the same data and the same code that the original team used.
+
+To complement this definition, however, we should distinguish between reproducibility and replicability of research. 
+In both cases we want to answer the same research questions, we want to get the same results but in the case of replicability we are performing the analysis on a \textbf{different} dataset.
+
+For example, we want to \textbf{replicate} a signal processing method published few years ago which aims to de-noise audio recordings and compare it qualitatively to our own method by using our own signals such as our voice recordings.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame8]{Benefits of data science reproducibility}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{itemize}
+		\item Research credibility
+		\item Transparency and re-usability
+		\item Time savings
+		\item Facilitate collaboration and review process
+		\item Avoid misinformation
+	\end{itemize}
+	
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{What are the benefits of data science reproducibility?
+\scriptsize Well, scientific results are strengthened if those results can be replicated and confirmed by several independent researchers.
+	
+When researchers employ transparency in their research - in other words, when they properly document and share the data and processes associated with their analyses - the broader research community is able to save valuable time when reproducing or building upon published results. 
+
+Often, data or code from prior projects will be re-used by new researchers to verify old findings or develop new analyses.
+	
+It should be noted that “negative results” also have a value and can be published easily, helping avoid other researchers wasting time repeating analyses that will not return the expected results.
+	
+By designing reproducible workflows and sharing them with the different components of our research project, we can allow others to develop an in-depth understanding of our work. 
+
+This encourages them to review our methods, test our code, propose useful changes and make thoughtful contributions to develop our project further. 
+
+Reproducible workflows facilitate the peer review process tremendously by allowing reviewers access to the different parts of the projects that are necessary to validate the research outcomes.
+	
+By working reproducibly, we can develop validated research work, avoid misinformation that can limit replicability of our work and publish accurate research outputs.
+
+This aspect does not only support the validity of the \textbf{current} work, but any \textbf{future} studies that are based on reproducible research.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame9]{What is needed?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{alertblock}{Make:}	
+		\begin{itemize}
+			\item raw data
+			\item code \& documentation to reproduce analysis
+			\item specifications of your computational environment
+		\end{itemize}
+		\textbf{available and accessible}
+	\end{alertblock}
+	
+	\emph{"There is no one-size-fits-all solution for computational reproducibility."}
+	\begin{biblio}{}
+		\biblioref{Jeffrey M. Perkel}{2018}{A toolkit for data transparency takes shape}{Nature, 560, 513-515}
+	\end{biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize An important outcome of our research is the publication but publication does not necessarily reflect the amount of hard work we put in it.
+
+And this work is actually where science is happening not the published article itself which we are getting credit for.
+
+The thing is that if anybody want to reproduce your hard work or you want to reproduce what is in the published paper which you are interested in, it is not easy task because the paper often lacks important components.
+
+So, what is needed to make data science reproducible?
+
+We have to make raw data available along with the paper by for example linking dataset published in an open repository, we have to share the code and documentation of the steps which are needed to reproduce the results and make specification of the computational environment available and accessible. 
+
+Without these three components it is impossible to reproduce someone's work.
+
+There is no one-size-fits-all solution for computational reproducibility.
+
+The research workflow might differ substantially if you work in the field of bioinformatics, mechanical engineering, chemistry or some specific specialization.
+
+But there are common elements in each case.
+
+My advise would be that if you want to make your research work reproducible you have to set you mindset right away when starting the project not at the paper submission stage.
+
+I hope that hints which I will give at the next slides will help you to do that.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Project skeleton}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame10]{Organize your project (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{3mm}
+
+\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
+	\emph{A place for everything, everything in its place}\\
+	\flushright
+	Benjamin Franklin
+\end{beamercolorbox}
+\vspace{3mm}
+
+\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
+	\emph{File organization and naming are powerful weapons against chaos}\\
+	\flushright
+	Jenny Bryan
+\end{beamercolorbox}	
+\begin{columns}[T]
+	\hspace{0.05\textwidth}
+	\column{0.2\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering Raw data
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering Processed data
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering Numerical results
+	\end{beamercolorbox}
+	\column{0.1\textwidth}
+	\centering
+	\tikz\node at (0,0) [fill=black,shape=single arrow,text width=0.8\textwidth,text height=2ex] {};
+	\column{0.2\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering figures
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering tables
+	\end{beamercolorbox}
+	\column{0.1\textwidth}
+	\centering
+	\tikz\node at (0,0) [fill=black,shape=single arrow,text width=0.8\textwidth,text height=2ex] {};
+	\column{0.2\textwidth}
+	\centering
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering report
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering manuscript
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{frametitle}
+		\centering presentation
+	\end{beamercolorbox}
+\end{columns}
+\vspace{3mm}
+\alert{Project skeleton (template) and strategy is needed to store files!}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Let me mention two quotes which fits nicely to our topic.
+
+"A place for everything, everything in its place" said Benjamin Franklin.
+
+"File organization and naming are powerful weapons against chaos" said Jenny Bryan.
+
+The data-driven research workflow may look like in this diagram.
+
+We start with a raw data which is then processed, we can have also some numerical results.
+
+From that some figures and tables are created and the end result is a report, manuscript or presentation.
+
+At each stage of the workflow, files are created, and there is always a lot of them!
+
+We need to store them in an organized and efficient manner.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame11]{Organize your project (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5mm}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+	\begin{forest}
+		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[simple\_project
+			[raw\_data
+			]
+			[processed\_data
+			]
+			[manuscript
+				[mssp\_paper.tex, file
+				]
+			]
+		]
+	\end{forest}
+	\column{0.5\textwidth}
+	\centering
+	\begin{forest}
+		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[more\_complex\_project
+		[data
+			[raw\_data
+			]
+			[processed\_data
+			]
+		]
+		[src
+			[data\_processing
+			]
+			[visualization
+			]
+			[models
+			]
+		]
+		[reports
+			[figures
+			]
+			[journal\_papers
+			]
+		]
+		]
+	\end{forest}
+\end{columns}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize
+Let's start with organizing your project by creating a project skeleton or template.
+
+What I mean by the project skeleton, is a directory tree structure which help us sort and navigate through data and files which we are creating during project development.
+
+It is a good idea to have such a template and use it each time we start a new project.
+
+It is also important to have a strategy to name a files.
+
+For a simple project a flat directory tree is fine.
+
+The important aspect here is that the raw data is separated from the processed data.
+For more complex projects, multi-level directory tree is needed but too much nesting should be avoided.
+
+An example of moderately complex project skeleton is shown here. 
+
+Apart from separation of raw data from processed data also code is separated from data and it resides in src folder which is abbreviation from source.
+
+In the source folder, there are three subfolders for storing a code related to data processing, visualization and models. 
+
+In the folder 'reports' we can have a folder for figures, journal papers, etc.
+
+Of course, depending on the needs, a project skeleton can be further segmented, for example, we might want to divide data into experimental and numerical ones.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame12]{Organize your project (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Hints:
+\begin{itemize}
+	\item all files in common directory (named by project slug - abbreviation) 
+	\item separate raw data from processed data
+	\item give team members read-only permissions to raw data
+	\item separate code from data
+	\item file names: meaningful, sortable, consistent (controlled vocabulary)
+	\item dates like 2023-05-10
+	\item remove clutter of unneeded old stuff by moving files to folder 
+	\begin{tikzpicture}
+		\pic{folder};
+	\end{tikzpicture}
+	\texttt{unused}
+\end{itemize}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize
+The rule of thumb is to make a file’s name and location VERY INFORMATIVE about what it is, why it exists and how it relates to other things.
+
+The more things are self-explanatory, the better.
+
+All files related to the project should be stored in a common directory.
+
+We can use project slug, namely its abbreviation to name a folder at the top level of the directory tree.
+
+For example I have a project entitled "Artificial Intelligence Driven Diagnostics" so I am storing everything related to this project in a folder named 'aidd'.
+
+As I mentioned before, separate raw data from processed data. 
+
+Moreover, it is good idea to assign read only permissions to raw data for all team members.
+
+It will avoid the situation of accidental changes of raw data.
+
+Following Benjamin Franklin's advice that there is a place for everything, separate code from data.
+File name should be meaningful, sortable and consistent.
+
+I will talk in a minute about the idea of controlled vocabulary which can be useful for naming files.
+
+If you decide to use dates in your strategy follow year-month-date format.
+
+If you produce too much stuff which is old and cluttering your project it maybe good idea to move them to folder 'unused'.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame13]{Organize your project (3)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\begin{columns}[T]
+	\hspace{5mm}
+	\column{0.5\textwidth}
+	\textbf{dos}\\
+	\texttt{mssp\_paper.tex}\\
+	\texttt{mssp-paper-draft-2023-05-10.tex}\\
+	\texttt{mssp-paper-final-2023-05-15.tex}\\
+	\column{0.5\textwidth}
+	\textbf{don'ts}\\
+	\sout{\texttt{MSSP paper 1.tex}}\\
+	\sout{\texttt{MSSP\_paper\_v5\_final\_rev\_FINAL\_FOR\_REAL.tex}}
+	\alert{Dash '-' does not work in MATLAB!}
+\end{columns}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Do not use white spaces in folder and file names.
+
+Use underscores or eventually dashes to obtain meaningful file names composed of few parts or words.
+
+However, dash does not work in MATLAB so you will not be able to run script from other location if you have a dash on a paths to this script.
+
+This is why I am using underscores everywhere: for naming files, folders and variables.
+
+Linux file system is case sensitive whereas Windows is not!
+
+Therefore, I suggest to avoid capital letters in order to maintain cross-platform compatibility.
+
+Make distinction between draft and final version of the paper and do not produce such a filename like here because after few days you will never now which was the final version.
+
+Such a situation can be completely avoided by using versioning system.
+
+I will cover some basic information about git versioning system later during my presentation.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame14]{Organize your project (4) - controlled vocabulary}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\emph{Keywords} are words or short phrases used commonly within a system to point to the meaning or subject of information.
+
+\emph{Tags} are labels that have been applied to information (e.g. digital photographs). 
+Tags can be used to mark information with keywords, codes, and open-ended information that is relevant only to the user.
+
+\emph{Captions} are bits of free text that describe or draw attention to something in the image that is not obvious.
+
+The essence of a \alert{controlled vocabulary} is structuring your keywords in a meaningful and repeatable way.
+
+\begin{alertblock}{Controlled vocabulary}
+It is an organized arrangement of words and phrases used to index content and/or to retrieve content through
+browsing or searching.
+\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Controlled vocabulary are helpful for sorting things.
+
+You probably know the term \textbf{tagging photographs}.
+
+Tags are composed of \emph{keywords} which are assigned to photographs usually in the form of metadata so that it is easy to search for some particular photo.
+
+\vspace{5mm}
+The essence of a \alert{controlled vocabulary} is structuring your keywords in a meaningful and repeatable way.
+
+So, we can define \alert{controlled vocabulary} as an organized arrangement of words and phrases used to index content and/or to retrieve content throughbrowsing or searching.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t, label=frame15]{Organize your project (5) - controlled vocabulary}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}[T]
+\column{0.5\textwidth}
+	\centering
+	How to build your \alert{controlled vocabulary}?
+	\begin{itemize}
+	\item Step 1 - choose your keywords
+	\item Step 2 - set the structure (hierarchy)
+	\item Step 3 - tagging
+	\end{itemize}
+\column{0.5\textwidth}
+	\centering
+	\vspace{5mm}
+	
+	\begin{forest}
+	    for tree={
+	        grow=0,reversed, % tree direction
+	        parent anchor=east,child anchor=west, % edge anchors
+	        edge={line cap=round},outer sep=+1pt, % edge/node connection
+	        rounded corners,minimum width=15mm,minimum height=6mm, % node shape
+	        l sep=10mm % level distance
+	    }
+	  [Mammals, L1
+	    [Bears, L1
+	    	[Grizzlies, L1]
+	    	[Pandas, L1]
+	    	[Polar Bears,L1]
+	    ]
+	    [Cammels, L1]
+	    [Elephants, L1]
+	    [Moose, L1]
+	  ]
+	\end{forest}
+	\vspace{5mm}	
+	
+	\texttt{mammals\_bears\_pandas.png}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Three steps are needed to build controlled vocabulary: choosing keywords, setting the structure and tagging.
+
+An exemplary structure related to Mammals is shown here.
+
+If we combine controlled file name format with controlled vocabulary we are golden. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame16]{Organize your project (5) - my strategy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5mm}
+\begin{columns}[T]
+	\column{0.4\textwidth}
+	\centering
+	\only<1>
+	{
+	\begin{forest}
+		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[my\_project
+		[data
+		[raw\_data
+			[specimen\_1
+				[\textcolor{orange}{50kHz\_pzt}.mat, file
+				]
+			]
+		]
+		[processed\_data
+			[specimen\_1
+			]
+		]
+		]
+		[src
+			[data\_processing
+				[\alert{rms}.m, file
+				]
+			]
+		]
+		]
+	\end{forest}
+	}
+	\only<2->
+	{
+		\begin{forest}
+			pic dir tree,
+			tikz+={
+					\pic at ([xshift=0.7\Size].west) {folder};
+				},align={l},
+			where level=0{}{% folder icons by default; override using file for file icons
+				directory,
+			},
+			[my\_project
+			[data
+			[raw\_data
+				[specimen\_1
+					[\textcolor{orange}{50kHz\_pzt}.mat, file
+					]
+				]
+			]
+			[processed\_data
+				[specimen\_1
+					[\alert{rms}
+						[\textcolor{orange}{50kHz\_pzt\_}\alert{rms}.mat, file
+						]
+					]
+				]
+			]
+			]
+			[src
+				[data\_processing
+					[\alert{rms}.m, file
+					]
+				]
+			]
+			]
+		\end{forest}
+	}
+	\column{0.6\textwidth}
+	\centering
+	\only<3>
+	{
+	\begin{forest}
+		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[my\_project
+		[src
+			[data\_processing
+			]
+			[visualization
+				[\textcolor{logoblue}{plot\_rms}.m, file
+				]
+			]
+		]
+		[reports
+			[figures
+			]
+			[journal\_papers
+			]
+		]
+		]
+	\end{forest}
+	}
+	\only<4->
+	{
+	\begin{forest}
+		pic dir tree,
+		tikz+={
+				\pic at ([xshift=0.7\Size].west) {folder};
+			},align={l},
+		where level=0{}{% folder icons by default; override using file for file icons
+			directory,
+		},
+		[my\_project
+		[src
+			[data\_processing
+			]
+			[visualization
+				[\textcolor{logoblue}{plot\_rms}.m, file
+				]
+			]
+		]
+		[reports
+			[figures
+				[\textcolor{logoblue}{plot\_rms}
+					[\textcolor{logoblue}{plot\_rms}\_specimen\_1\_\textcolor{orange}{50kHz\_pzt}\_\alert{rms}.png,file
+					]
+				]
+			]
+			[journal\_papers
+			]
+		]
+		]
+	\end{forest}
+	}
+\end{columns}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize It is easy to get lost with increasing number of scripts, results and figures so I will share with you what is my strategy which works for me pretty well.
+
+A part of my project directory tree structure looks like this.
+
+Let's say that I want to process the file in orange, which is related to raw measurement data on specimen 1; in particular I want to compute root mean square value of that data.
+
+To do this I write a script in data processing folder, the script name is rms dot m,
+which is MATLAB format but it can be written in any other language like python for example.
+
+The key here is that when the script is run, it extracts its own name.
+
+Based on that name subfolder is created in appropriate place of processed\_data and this subfolder name is the same as the name of the script. 
+
+Moreover, the name of resulting processed data is composed of two parts: inherited subfolder name 'rms' and original raw data file name '50kHz\_pzt' joined by underscore.
+
+In this way everything is logically placed and it is easy to identify which script generated which result.
+
+-------------------
+
+I use the same approach for visualization of results.
+
+I create a script in 'visualization' folder named 'plot underscore rms dot m' which automatically creates appropriate subfolder in the 'figures' folder.
+
+Similarly, the name of resulting png image inherits subfolder name, additionally specimen name and data name.
+
+Off course you can develop you own strategy, but choose one and be consistent.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame17]{Organize your project (6)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Project skeleton - \alert{Cookiecutter} by Audrey Roy Greenfeld\\
+Documentation: \url{https://cookiecutter.readthedocs.io/en/stable/README.html}\\
+GitHub: \url{https://github.com/cookiecutter/cookiecutter}\\
+\begin{itemize}
+	\item \alert{Cookiecutter} takes a template provided as a directory structure with template-files.
+	\item It reads a settings file and prompts the user interactively whether to change the settings.
+	\item Then it takes both and generates an output directory structure from it.
+\end{itemize}
+\texttt{README}, \texttt{LICENSE} and \texttt{AUTHORS} files can be incorporated in the template.\\ 	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{A small, useful tool which I came across and I am using myself is cookie-cutter by Mr Greenfeld.
+
+It is a tool for automatic creation of a project skeleton from a template and text based interactive prompts.
+
+Additional files such as \texttt{README} with the project description, \texttt{LICENSE} and \texttt{AUTHORS} files as well as other files can be included in the template. 
+
+I will show you how this tool work in a practical part of this lecture.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Write READMEs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame18]{Write READMEs liberally}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-2mm}
+\begin{columns}[T]
+	\column{0.3\textwidth}
+\begin{forest}
+			pic dir tree,
+			tikz+={
+					\pic at ([xshift=0.7\Size].west) {folder};
+				},align={l},
+				where level=0{}{% folder icons by default; override using file for file icons
+					directory,
+				},
+			[my\_project
+				[\alert{README.md}, file]	
+				[data
+					[raw\_data
+						[\alert{README.md}, file]
+						[50kHz\_pzt.mat, file]
+						[100kHz\_pzt.mat, file]
+						[50kHz\_fbg.mat, file]						
+					]													
+				]
+				[src
+					[data\_processing
+						[\alert{README.md}, file]
+					]
+				]
+			]
+\end{forest}
+\column{0.7\textwidth}
+Use \alert{Markdown} for writing \texttt{README.md}	\includegraphics[scale=0.01]{markdown_logo.png}
+\begin{block}{README}
+\begin{minted}[tabsize=4,obeytabs=true]{md}
+# raw data
+This folder contains the raw data for the project.
+All data were acquired by using NI equipment 
+on 2023-10-05.
+---
+*  50kHz_pzt: sensing by pzt, excitation Hann 
+			  windowed signal, 5 cycles, 50kHz
+* 100kHz_pzt: sensing by pzt, excitation Hann 
+			  windowed signal, 5 cycles, 100kHz 
+*  50kHz_fbg: sensing by fbg, excitation Hann 
+		      windowed signal, 5 cycles, 50kHz
+\end{minted}
+\end{block} 
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{It is good practice to place \texttt{README} at almost each folder of your project's directory tree.
+
+\texttt{README} at the root of the project contains the general project description, whereas \texttt{READMEs} in particular folders describe its components for example how experimental data was acquired, what was the experimental setup, etc.
+
+Don't assume that you will remember these things.
+
+An example of README content is presented here. 
+
+It is related to raw data folder and explains all the files which reside in this folder.
+
+\texttt{READMEs} are written in a plain text but it is useful to use Markdown.
+
+It is a lightweight markup language for formatted text.
+
+It is used in GitHub repository for example.
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Machine readable data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame19]{Keep data tidy \& machine readable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}
+\column{0.5\textwidth}
+Hints for spreadsheets, data tables:
+\begin{itemize}
+	\item rows=observations, columns=variables
+	\item one header row; avoid white spaces
+	\item no calculations in raw data files
+	\item save as CSV
+	\item don't use font color or highlighting as data
+\end{itemize}
+\column{0.5\textwidth}
+	\centering	
+\begin{table}
+	\renewcommand{\arraystretch}{1.2}
+	\centering \footnotesize
+	\caption*{\textbf{Human readable}}
+	\begin{tabular}{lccc} 
+		\toprule
+		\textbf{observation\_no}& \textbf{x} & \textbf{y} & \textbf{rel\_error}\\
+		\midrule
+		observation\_1 & 0.31 & 0.44 & 0.011\\
+		\tikzmarkin<1->[hl]{a}observation\_2 & 0.32 & 0.43 & 0.012\tikzmarkend{a}\\
+		\bottomrule 
+		& & & \\
+		\tikzmarkin<1->[hl]{b}observation\_no\tikzmarkend{b} &night & &\\ 
+	\end{tabular} 
+\end{table}
+\begin{table}
+	\renewcommand{\arraystretch}{1.1}
+	\centering \footnotesize
+	\caption*{\alert{Machine readable}}
+	\begin{tabular}{lcccc} 
+		\toprule
+		\textbf{observation\_no}& \textbf{x} & \textbf{y} & \textbf{rel\_error}& \textbf{night}\\
+		\midrule
+		observation\_1 & 0.31 & 0.44 & 0.011 & true\\
+		observation\_2 & 0.32 & 0.43 & 0.012 & false\\
+		\bottomrule 
+	\end{tabular} 
+\end{table}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Keep data tidy and machine readable.
+
+If you have spreadsheet, data tables, put observations in rows whereas variables in columns.
+
+Use only one row for header and again avoid white spaces, you use underscores instead.
+
+To have data machine readable do not use color or highlight as data.
+
+Colors are great for human perception and works well with legend but for machine readability it is better to have just one more column.
+
+In this example we have a respective data information about measurements which were taken during the night.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Code development}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame20]{Comment your code (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
+	\emph{Programs must be written for people to read and only incidentally for machines to execute}\\
+	\flushright
+	MIT professor Hal Abelson
+\end{beamercolorbox}
+
+Best practices for writing code comments:
+\begin{itemize}
+\item Make them brief
+\item Keep them relevant
+\item Use them liberally but not to excess
+\end{itemize}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{Again, I have a quote for you about writing code comments by MIT professor Hal Abelson:
+
+"Programs must be written for people to read and only incidentally for machines to execute".
+
+It implies that we should use them liberally but duplicating a code with a comment should be avoided.
+
+Comments are descriptions that help programmers better understand the intent and functionality of the program. 
+
+They are completely ignored by compilers and interpreters.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame21]{Comment your code (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Examples of code comments}
+\begin{minted}[tabsize=4,obeytabs=true,baselinestretch=1.2]{matlab}
+%------ CONSTANTS ------
+plate_length = 0.5; % units [m]
+
+% w was obtained by sweeping from 0 to 1 and fitting to experimental data
+w = 0.81; % weighting parameters 
+
+Ivalid = find(isvalid); % indices of valid polygons
+
+%% cavity to image conversion
+cavity_polygon_in_pixels = Npixels./2.*(1.+cavity_polygon); 
+cc=0;
+for k=1:length(Ivalid)
+    cc=cc+1;
+\end{minted}
+\end{block} 
+\end{frame}  
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize
+Write comments as you write a code.
+
+Some programmers advise to not use comments as visual markers.
+These visual marks take a lot of space and often they are useless.
+But I am using them sometimes to divide MATLAB scripts in sections of certain functionalities.
+
+If you have self-explanatory variable we don't need to explained it but it is worthy to mention for example units.
+
+By the way, in your research programs, you should always use International System of Units (SI for short) .
+
+If you have some arbitrary parameter, it maybe not be enough to write its meaning, it is worthy to explained how you arrive with its value.
+
+If a line of code is not obvious, put brief clarification comment.
+
+But do not use comments to explain poorly written code. 
+Re-write the code instead.
+
+You can also add a description to the section of you script explaining what it does.
+
+Another good practice is to add links to the origin of copied code.
+
+Do not “comment out” code that “could be useful in the future”.
+Just delete it.
+
+An out-commented piece of code causes confusion. 
+
+The future reader may wonder:
+
+Why is the code commented out?
+
+Should this not be commented out?
+
+Should I delete this code?
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame22]{Comment your code (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\url{https://www.sphinx-doc.org/en/master/}
+\begin{block}{Docstrings for Python functions}
+\begin{minted}[tabsize=4,obeytabs=true]{python}
+def add_binary(a, b):
+    '''
+    Returns the sum of two decimal numbers in binary digits.
+
+            Parameters:
+                    a (int): A decimal integer
+                    b (int): Another decimal integer
+
+            Returns:
+                    binary_sum (str): Binary string of the sum of a and b
+    '''
+    binary_sum = bin(a+b)[2:]
+    return binary_sum
+\end{minted}
+\end{block} 
+\end{frame}  
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Some programming languages such as Python have their standards for writing special type of comments called \alert{docstrings}. 
+
+Unfortunately, MATLAB does not have such a standard yet but it has similar mechanism. 
+
+If written correctly, docstrings can be used for automatic generation of code documentation.
+
+For example there is a Python documentation generator, called Sphinx.
+
+It utilizes Python docstrings.
+
+Python docstrings are the string literals that appear right after the definition of a function, method, class, or module.
+
+As you can see in this example there is a line explaining what function does, what parameters it takes and the value it returns.
+
+Such description should always be present in you code. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame23]{Use literate programming}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\alert{Literate programming} is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.
+
+\begin{biblio}{}
+	\biblioref{Donald E. Knuth}{1984}{Literate Programming}{The Computer Journal. British Computer Society. 27(2): 97--111, doi:10.1093/comjnl/27.2.97}
+\end{biblio}
+
+Examples: Literate, Jypyter Notebook, Maple Worksheets, Wolfram Notebooks (Mathematica), R Markdown, MATLAB Live Editor.	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize
+Literate programming is a style of programming invented by Donald Knuth, where the main idea is that a program's source code is made primarily to be read and understood by other people, and secondarily to be executed by the computer.
+	
+This frees the programmer from the structure of a program imposed by the computer and means that the programmer can develop programs in the order of the flow of their thoughts.
+
+A Literate program generally consists of explanation of the code in a natural language such as English, interspersed with snippets of code to be executed and sometimes graphs. 
+
+They resemble notebooks.
+
+This means that they are very easy to understand and share, as all the code is well explained.
+
+Examples of such approaches are Literate, Jupyter Notebook, Maple Worksheet, Mathematica Notebooks, R Markdown and MATLAB Live Editor.
+
+I like the concept of notebooks for exploratory research and sketching new ideas. 
+
+However for more complex analysis and parametric studies I prefer integrated development environments where I am writing code in a plain text.
+
+Version control of such a code is easier to handle because it does not contain any binary blobs as it is in the case of evaluated notebooks.
+
+Additional tools may be needed for enhancement of notebook version controlling whereas plain code can be versioned without any additional tools.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Version control}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame24]{Use version control (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{alertblock}{Version control system}
+	Software tools that helps in recording changes made to files by keeping a track of modifications done in the code. 
+\end{alertblock}
+
+Examples: \alert{Git}, Helic core, Microsoft TFS, Perforce, Subversion, Mercurial...	
+
+Internet hosting services for software development and version control using Git:\\
+GitHub, GitLab and BitBucket.
+\vspace{10mm}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[scale=0.1]{Git-Logo-1788C.png}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics{github-mark.png}
+	\includegraphics[scale=0.1]{GitHub_Logo.png}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{What is version control system? 
+Basically Version control system keeps track of changes made on a particular project and take a snapshot of every modification done in the code.
+The most popular examples of version control systems are: Git, Helic core, Microsoft TFS, Perforce, Subversion and Mercurial among others.
+
+Version control system should be distinguished from internet hosting services which offers storage for code repositories along with version control, bug tracking, continuous integration, etc. for every project. 
+
+Examples of such repositories are: GitHub, GitLab and BitBucket.
+GitHub and GitLab utilize git as underlying version control system.
+BitBucket offered both Git and Mercurial as a version control system but the Bitbucket Mercurial Support ended in 2020.
+
+Due to popularity of Git version control system we will learn basics of it in the practical part of this lecture.
+
+Other tools helpful for software development are CloudBees, CircleCI and Jenkins but I don't know this tools.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame25]{Use version control (2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Purpose of Version Control: 
+\begin{itemize}
+	\item Collaboration
+	\item Integration of work
+	\item Remote access / multiple computer use
+	\item Roll back (undo) feature
+\end{itemize}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize
+The purpose of version control is collaboration: 
+
+Multiple people can work simultaneously on a single project. 
+
+Everyone works on and edits their own copy of the files and it is up to them when they wish to share the changes made by them with the rest of the team. 
+
+Following this up, version control system integrates the work that is done simultaneously by different members of the team. 
+
+In some rare cases, when conflicting edits are made by two people to the same line of a file, then human assistance is requested by the version control system in deciding what should be done - which version (or line of the code) should we keep and which discard.
+
+It also enables one person to use multiple computers to work on a project, so it is valuable even if you are working by yourself.
+
+One of the most important purpose of version control system is roll back feature. 
+
+Version control provides access to the historical versions of a project. 
+
+This is insurance against computer crashes or data loss. 
+
+If any mistake is made, you can easily roll back to a previous version. 
+
+It is also possible to undo specific edits without losing the work done in the meanwhile. 
+
+It can be easily known when, why, and by whom any part of a file was edited.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Workflow automation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame26]{Automate your process (1)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{beamercolorbox}[wd=0.8\textwidth,rounded=true,shadow=true]{block body}
+	\emph{"Good workflow" means \textbf{not having to remember} things}\\
+	\flushright
+	Kjell Wooding
+\end{beamercolorbox}
+
+\alert{GNU make:}\\
+\url{https://www.gnu.org/software/make/manual/html_node/index.html}\\
+\textbf{Snakemake}:\\
+\url{https://snakemake.readthedocs.io/en/stable/}
+\textbf{Nextflow}:\\
+\url{https://www.nextflow.io/}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Because the research is iterative process and a lot of experimentation is involved it is easy to get lost.
+You probably encounter a situation that you were coming back to old files thinking which scripts and in which order should I run them to obtain results.
+
+In order to alleviate that, workflow automation can be implemented.
+Workflow automation is very helpful so that we don't have to remember things.
+
+Tools such as make and snakemake can be used for this purpose. 
+
+Snakemake and Nextflow are quite popular in the field of bio-informatics.
+
+We however will take a closer look at make.
+
+Make is an expert system developed in 70! 
+
+But it is still popular and widely used. 
+
+Its strength is easy syntax. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame27]{Automate your process (2) - make}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Makefile}
+\begin{minted}[tabsize=4,obeytabs=true]{makefile}
+#!/bin/bash
+
+target: dependencies
+	<tab> command
+	
+\end{minted}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+You give make a set of rules for how to construct things, and a target to be constructed. 
+
+These rules or recipes are written in a text file named Makefile.
+
+The rules can be decomposed into pair-wise ordered dependencies between files. 
+
+Make takes the rules and determines how to build the given target. 
+
+Once it has determined how to construct the target, it proceeds to do so.
+
+Make determines how to build the target by constructing a directed acyclic graph.
+
+But we don't have to know about that too much as long as we know how to write rules.
+
+Makefile starts with a shebang.
+It is a character sequence composed of a number sign (hash) and exclamation mark. 
+After that shell type is provided, in this case it is bash, which will be used to interpret commands in a Makefile.
+
+Make rule is in the form of target followed by colon and dependencies known also as prerequisites.
+And than in a new line, after tab, command appears.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame28]{Automate your process (3) - make}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Makefile}
+\begin{minted}[tabsize=4,obeytabs=true]{makefile}
+#!/bin/bash
+# comment
+# ***** Variables *****
+CONDA_ENV = cookie_env
+PROC := ./src/data_processing/
+
+# data processing in Python
+
+50kHz_pzt_rms_norm.mat : $(PROC)rms_norm.py 50kHz_pzt.mat
+	@ cd $(PROC) && conda run -n $(CONDA_ENV) python3 rms_norm.py
+
+\end{minted}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize
+Other elements of Makefile are comments and variable definitions.
+
+Everything after hash in the Makefile is treated as a comments.
+
+Static variables are defined by using colon and equal sign.
+On the left side we have a string of text representing variable name and on the right side its value.
+
+We can also define variables by using only equal sign and such variables can be changed at the execution time.
+
+Variable names are case-sensitive.
+
+We can substitute variable values in the make rule by writing dollar sign followed by the name of the variable in parentheses. 
+
+Variable references can be used in any context: targets, prerequisites, commands, and new variable values. 
+
+Here is an example of make rule for data processing in Python.
+
+It says: to make target file of this name I need these two files, and this python script is located at this path defined by variable PROC. 
+
+To make a target I need to issue the following commands: 
+
+I need to change directory to the location defined by variable PROC and run this script by using python in conda environment defined by variable CONDA\_ENV.
+
+Every time we change something in the dependencies and run 'make' command in the terminal the target will be rebuild.
+
+By default make displays the whole command in a terminal prompt, if we don't want that we can place at symbol at the beginning of the command.
+
+It is important to note that when it is the time to execute commands to update a target, they are executed by making a new subshell for each line. 
+
+We have two commands which have to be executed in the same subshell.
+
+Therefore we place commands in one line and separate them by 'and' represented by double ampersand.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame29]{Automate your process (4) - make}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{block}{Makefile}
+\begin{minted}[tabsize=4,obeytabs=true]{makefile}
+#!/bin/bash
+# comment
+# ***** Variables *****
+CONDA_ENV = cookie_env
+PROC := ./src/data_processing/
+
+# data processing in Python
+
+50kHz_pzt_rms_norm.mat : $(PROC)rms_norm.py 50kHz_pzt.mat
+	@ cd $(PROC) && conda run -n $(CONDA_ENV) python3 rms_norm.py
+
+.PHONY clean
+clean:
+	rm *.o temp
+\end{minted}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+Make have other functionalities and special keywords started with dot such as .PHONY
+
+A phony target is a pseudo-target that is not really the name of a file; 
+
+it is rather just a name for a recipe to be executed. 
+
+There are two reasons to use a phony target: to avoid a conflict with a file of the same name, and to improve performance.
+
+In this particular case we define clean as PHONY target. 
+
+There are no dependencies for this rule but there is a recipe to remove all files with extension .o and file of the name temp.
+
+Every time we issue a command 'make clean' in the terminal, these files will be removed. 
+
+Command 'make' checks all rules in a Makefile and updates targets accordingly.
+
+We will experiment with make in a practical part of the lecture.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame30]{Automate your process (5) - recursive make}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{forest}
+	pic dir tree,
+	tikz+={
+	        \pic at ([xshift=0.7\Size].west) {file};
+	      },align={l},
+	where level=0{}{% file icons by default
+		file,
+	},
+	[Makefile
+	[make\_paper1.mk
+		[make\_paper1\_contributor\_1.mk	
+		]
+		[make\_paper1\_contributor\_2.mk	
+		]
+	]
+	[make\_paper2.mk]
+	]
+\end{forest}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{
+It is possible to arrange recursive make so that from the main Makefile make commands will be issued on sub-makefiles represented here with extension .mk.
+
+Multilevel nesting is possible.
+
+Such approach could be useful if your research project has clear segments and one Makefile would be long and complex.
+
+For example you can have separate Makefiles for building each paper composed during project development.
+
+You can also divide Makefiles between contributors to the project.
+
+In this way, git versioning could be easier and there will be less merge conflicts.
+
+If you are interested I can make a quick tutorial on recursive make.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computational environment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile,label=frame31]{Share your computing environment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{columns}
+\column{0.5\textwidth}
+Hint: One environment per repo!	\\
+\vspace{5mm}
+
+\url{https://carpentries-incubator.github.io/introduction-to-conda-for-data-scientists/04-sharing-environments/index.html}
+\column{0.5\textwidth}
+\begin{block}{environment.yml}
+\begin{minted}[tabsize=4,obeytabs=true]{yaml+jinja}
+name: machine_learning_env
+
+dependencies:
+  - ipython=7.13
+  - matplotlib=3.1
+  - pandas=1.0
+  - pip=20.0
+  - python=3.6
+  - scikit-learn=0.22
+\end{minted}
+\end{block}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\note{\scriptsize
+And last but not least component of reproducible data science is sharing your computational environment.
+
+Sharing computing environment is especially important when we work with Machine Learning.
+
+It can be frustrating trying to run your colleague script and getting an error because he is using different version of library or python module than you or different operating system.
+
+To avoid such a situation, operating system agnostic file is created, in which all necessary dependencies are listed.
+
+It is extremely important to have isolated environment from your global system because installing new packages can destroy you dependencies and other programs may not work correctly.
+
+I recommend conda package package management system and environment management system.
+You can also use python venv to create and manage virtual environments.
+
+Conda is an open-source that runs on Windows, macOS, and Linux. Conda installs, runs, and updates packages and their dependencies. 
+
+Conda creates, saves, loads, and switches between environments on your local computer. 
+It was created for Python programs. Conda uses YAML, a human readable data serialization language, to export environment.yml files
+or install packages listed in environment.yml 
+
+An example of environment yaml file is presented here.The name of the environment is machine\_learning\_env and dependencies with major and minor version number are listed.
+
+If all dependencies are installed it is guaranteed that our scripts and functions will run elsewhere.
+
+It is advised to use one environment per repository. I highly recommend to check this link if you want to read more about it.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=frame32]{References}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{biblio}{Recommended literature}
+		\biblioref{Jon F. Claerbout and Martin Karrenbach.}{1992}{Electronic documents give reproducible research a new meaning}{https://library.seg.org/doi/abs/10.1190/1.1822162}
+		\biblioref{Jeffrey M. Perkel}{2018}{A toolkit for data transparency takes shape}{Nature, 560, 513-515}
+		\biblioref{Karl Broman, Kara Woo}{2018}{Data organization in spreadsheets}{The American Statistician, 72(1), 2-10, doi.org/10.1080/00031305.2017.1375989}
+		\biblioref{Karl Broman}{2018}{Minimal Make}{kbroman.org/minimal{\_}make}
+		\biblioref{Carl Boetiger}{2015}{An introduction to Docker for reproducible research}{ACM SIGOPS Operating System Review, 49(1), 71-79}
+		\biblioref{Ben Marwick, Carl Boettiger, Lincoln Mullen}{2018}{Packaging data analytical work reproducibly using R (and friends)}{The American Statistician, 72, 80-88.}
+	\end{biblio}
+\end{frame}
+\note{This is a list of recommended literature. 
+I have not covered a topic about Docker which also can be used to generate isolated environments.
+You can read about it in this publication.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Practical part (Cookiecutter, Markdown, Git, Github, Makefile)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\setbeamercolor{palette primary}{fg=black, bg=white}
+	\begin{frame}[standout]
+		Thank you for your attention!\\ \vspace{12pt}
+		Questions?\\ \vspace{12pt}
+		\url{pk@imp.gda.pl}
+	\end{frame}
+}
+\note{Thank you for your attention!
+	See you next time!}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

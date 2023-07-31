@@ -135,6 +135,7 @@ target/
 *.tiff
 *.PNG
 *.svg
+*.gif
 # animations/large files
 *.avi
 *.mpg
@@ -173,3 +174,4 @@ src/external/**
 !data/processed/num/.gitkeep 
 !bin/.gitkeep
 
+*.webp

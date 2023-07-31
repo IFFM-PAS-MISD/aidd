@@ -1,0 +1,51 @@
+\documentclass[10pt,aspectratio=169,dvipsnames]{beamer}
+
+
+%\usepackage{appendixnumberbeamer}
+%\usepackage{booktabs}
+%\usepackage{csvsimple} % for csv read
+%\usepackage[scale=2]{ccicons}
+%\usepackage{pgfplots}
+
+%\usepackage{amsmath, nccmath} % fleqn
+\usepackage{amssymb}
+\usepackage{xspace}
+\usepackage{xcolor}
+
+\usepackage{totcount}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{eso-pic} 
+\usepackage{wrapfig}
+\usepackage{animate,media9,movie15}
+\usepackage{subfig}
+\usepackage{fancybox}
+%\usepackage{multimedia}
+\usepackage{dashbox}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{tikz}
+
+\usepackage{subfig}
+
+\usepackage{xcolor}
+
+\begin{document}
+	\begin{frame}
+		\noindent
+		\alert{Convolution operation (cross-correlation)} \\ 
+		known as a \alert{sliding dot product} or \alert{sliding inner-product}
+		\begin{equation*}
+			G[i,j]= k \otimes F  = {\sum_{a}^{}\sum_{b}k(a,b)F(i+a, j+b)}
+		\end{equation*}	
+		
+		\begin{equation*}
+			h_n= \frac{h+2 \times p -h_k}{s} + 1\hspace{20} \& \hspace{20} w_n= \frac{w+2 \times p -w_k}{s} + 1
+		\end{equation*}	
+	{\alert{\(h_n\)} and \alert{\(w_n\)}} are the new height and width dimensions of the feature map. \\
+	\alert{\(p\)} is the padding added to the input image. \\
+	{\alert{\(h_k\)} and \alert{\(w_k\)}} are the height and the width of the kernel. \\
+	\alert{\(s\)} is the stride that defines how much the kernel slides each step during convolution.	
+	\end{frame}	
+\end{document}

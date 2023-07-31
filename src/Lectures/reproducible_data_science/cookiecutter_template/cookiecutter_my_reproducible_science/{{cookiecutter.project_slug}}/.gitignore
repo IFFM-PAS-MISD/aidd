@@ -1,0 +1,165 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C and Fortran extensions
+*.so
+*.dylib
+*.dll
+*.slo
+*.lo
+*.o
+*.obj
+*.mod
+*.smod
+*.lai
+*.la
+*.a
+*.lib
+*.exe
+*.out
+*.app
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# DotEnv configuration
+.env
+
+# Database
+*.db
+*.rdb
+
+# Pycharm
+.idea
+
+# TeX/LaTeX
+*.xwm
+*.aux
+*.toc
+*.mw
+*.backup
+*.brf
+*.tdo
+*.bbl
+*.blg
+*.el
+*.log
+*.dvi
+*.nav
+*.pdf
+*.glo
+*.idx
+*.ilg
+*.ind
+*.nlo
+*.nls
+*.out
+*.synctex.gz
+*.md5
+*.vrb
+*.auxlock
+*.snm
+*.synctex(busy)
+
+# Matlab
+*.asv
+*.mlx
+*.mat
+*.fig
+*.p
+*.slx
+*.mdl
+*.mdlp
+*.slxp
+*.sldd
+*.mexa64
+*.mexw64
+*.mexmaci64
+
+# documents
+*.docx
+
+# figures
+*.png
+*.jpg
+*.tif
+*.tiff
+*.PNG
+*.svg
+*.gif
+# animations/large files
+*.avi
+*.mpg
+*.mpeg
+
+# IPython NB Checkpoints
+.ipynb_checkpoints/
+
+# exclude compiled binaries
+bin/**
+
+# exclude data from source control by default
+data/processed/**
+data/raw/**
+
+# exclude hdf data files like cnn models
+*.h5
+
+# exclude zip files
+*.zip*
+
+# exception to the rule
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!bin/.gitkeep
+
+*.webp

@@ -31,16 +31,12 @@ def load_dataset():
     os.chdir(path_cs_dataset)
     Full_W_dataset = np.load('CS_dataset_labels_Full_wavefield_475_128_512_512.npy', mmap_mode='r+')
     print(Full_W_dataset.shape)
-    # CS_arr = np.load('CS_dataset_interpolated_CR_0.215_percent_nyquist_rate_applied_totally_random_points.npy',
-    #                  mmap_mode='r+')
-    # CS_arr = np.load('CS_dataset_labels_Full_wavefield_475_128_512_512.npy', mmap_mode='r+')
-    # CS_arr = CS_arr.reshape((475 * 128, 512, 512, 1))
     gt_input = np.load('CS_dataset_CR_0.215_percent_nyquist_rate_applied_Uniform_grid.npy')
     gt_input = gt_input.reshape((475 * 128, 32, 32, 1))
     # x_test = CS_arr[380 * 128:]
     y_test = Full_W_dataset[380 * 128:]
     gt_x_input = gt_input[380 * 128:]
-    return gt_x_input, y_test, gt_x_input  # x_test
+    return gt_x_input, y_test
 
 
 ########################################################################################################################
@@ -82,7 +78,7 @@ def testing():
 
     # for output_case in range(1, 96):
     output_case = 95
-    x_test, y_test, LR_input = load_dataset()
+    LR_input, y_test = load_dataset()
     path_ = path + '/Output_%d' % (output_case + 380)
     try:
         os.mkdir(path_)
@@ -92,18 +88,17 @@ def testing():
         print("Successfully created the directory %s " % path_)
     os.chdir(path_)
 
-    x_test = x_test[(output_case - 1) * 128:(output_case - 1) * 128 + 128]
-    y_test = y_test[(output_case - 1) * 128:(output_case - 1) * 128 + 128]
     LR_input = LR_input[(output_case - 1) * 128:(output_case - 1) * 128 + 128]
-    print(x_test.shape)
-    prediction = model.predict(x_test, batch_size=4)
+    y_test = y_test[(output_case - 1) * 128:(output_case - 1) * 128 + 128]
+    print(LR_input.shape)
+    prediction = model.predict(LR_input, batch_size=4)
     prediction = np.asarray(prediction)
     print(prediction.shape)
     frames = 128
     for i in range(frames):
         SR_pred = prediction[i].astype('float32')
         lr_input = LR_input[i].astype('float32')
-        original = x_test[i].astype('float32')
+        original = LR_input[i].astype('float32')
         GT_label_input = y_test[i].astype('float32')
         ############################################################################################################
         plt.figure(figsize=(5 / 2.54, 5 / 2.54), dpi=600)

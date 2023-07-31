@@ -1,0 +1,95 @@
+
+
+
+
+Reproducible data science
+
+https://youtu.be/IFn18o7TLss
+
+Revising, Borrowing, Handing off, Accountability
+
+https://youtu.be/r7mcMHD6u7s
+
+Make:
+
+- raw data,
+
+- code & documentation to reproduce analysis,
+
+- specifications of your computational environment
+
+available and acessible
+
+"There is no one-size-fits-all solution for computational reproducibility."
+
+Jeffrey M. Perkel, A toolkit for data transparency takes shape, Nature, 560, 2018, 513-515.
+
+
+
+Lucy D'Agostino McGowan, One year to dissertate, https://livefreeordichotomize.com/posts/2018-09-14-one-year-to-dissertate/
+
+
+
+
+
+1. Organize your project
+
+2. Write READMEs liberally
+
+3. Keep data tidy & machine readable
+
+4. Comment your code
+
+5. Use literate programming
+
+Rmarkdown (written in a plain text), notebooks?
+
+6. Use version control
+
+7. Automate your process
+
+8. Share your computing environment
+
+Painful bits:
+
+- Coming up with good names
+
+- stages of data cleaning
+
+- going back and redoing stuff
+
+- adding interim steps
+
+- keeping track of order of things
+
+- clutter of unneeded old stuff (folder 'unused')
+
+
+
+
+
+Karl Broman, Kara Woo, Data organization in spreadsheets, The American Statistician, 72(1), 2018, 2-10, doi.org/10.1080/00031305.2017.1375989
+
+
+
+Karl Broman, Minimal Make, kbroman.org/minimal_make
+
+
+
+Carl Boetiger, An introduction to Docker for reproducible research, ACM SIGOPS Operating System Review, 49(1), 2015, 71-79
+
+Ben Marwick, Carl Boettiger, Lincoln Mullen, Packaging data analytical work reproducibly using R (and friends), The American Statistician, 72, 2018, 80-88.
+
+
+
+Snakemake - bioinformatics
+
+Markdown - very lightweight mark up language
+
+
+
+https://www.earthdatascience.org/courses/intro-to-earth-data-science/open-reproducible-science/get-started-open-reproducible-science/best-practices-for-organizing-open-reproducible-science/
+
+Organization
+http://www2.stat.duke.edu/~rcs46/lectures_2015/01-markdown-git/slides/organization-slides/organization-slides.pdf
+https://uw-madison-aci.github.io/2016-08-23-uwmadison/assets/DC_day2intro.html#1

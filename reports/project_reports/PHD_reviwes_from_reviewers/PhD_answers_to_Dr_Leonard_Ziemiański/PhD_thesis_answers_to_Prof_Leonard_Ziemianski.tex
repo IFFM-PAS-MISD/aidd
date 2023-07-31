@@ -1,0 +1,174 @@
+\documentclass[11pt,a2paper]{report}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{dirtytalk}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,bm}
+%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,citecolor=green]{hyperref}
+%% my added packages
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
+\usepackage{graphicx}
+\usepackage{geometry}
+%\usepackage{showframe} %This line can be used to clearly show the new margins
+
+\newgeometry{vmargin={30mm}, hmargin={20mm,20mm}}
+%\usepackage[outdir=//odroid-sensors/sensors/aidd/reports/journal_papers/MSSP_Paper/Figures/]{epstopdf}
+%\usepackage{breqn}
+\usepackage{multirow}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\graphicspath{{figures/}}
+
+\begin{document}
+	
+	\noindent I appreciate the time and effort that Prof. Leonard Ziemiański has dedicated to provide valuable feedback on my PhD thesis. 
+	I would like to thank Prof. Leonard Ziemiański for his constructive comments, which will help me to improve my PhD defence presentation. 
+	
+	\noindent Here is a point-by-point response to the reviewer’s comments and concerns.
+	\\ \\
+	\textbf{Comments, thesis notes, and questions}: \\
+	\textcolor{Cyan}{
+		\newline\textbf{Response:}
+		First of all I would like to thank Prof. Leonard Ziemiański for his positive feedback regarding my PhD thesis.
+	}	
+	\sloppy{
+%	Selected comments and some questions.
+	\begin{enumerate}
+		\item At the beginning of the thesis, it would be good to include a list of the designations (abbreviations) used. 
+		The list would make it easier to read the thesis.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}
+			\\
+			Thank you for your constructive comment.
+			\\
+			During the writing phase of the dissertation, I thought about adding a list of abbreviations.
+			However, I believed that the nomenclature section was superfluous because there are not many equations.
+		}
+		\item Note regarding the sentence on page 46; "Accordingly, to obtain satisfactory results, I used the trial and error approach to tune the hyperparameters of the developed models." 
+		Since the selection of hyperparameters is sometimes critical to the results' quality, it would be good to expand on this information.		
+		
+		\textcolor{Cyan}{
+			\textbf{Response:\\}
+			Thank you for pointing this out. \\
+			Certainly, the process of tuning hyperparameters in deep learning models is considered one of the main issues to be handled properly.
+			Therefore, choosing the right hyperparameters will enhance the model's performance.
+			The tuning of the hyperparameters can be done using a variety of optimization techniques, including random search, grid search, hyperband, and the Bayesian method.
+			However, I used a trial-and-error method with an early-stopping technique to fine-tune the hyperparameters in the models created for this thesis.
+			During the training stage, I tuned the hyperparameters with a small number of trials.
+			The performance was remarkable, and there was no sign of overfitting.
+			Additionally, the developed models could generalise to previously unseen data, whether numerically or experimentally acquired.
+			Because the models were performing well, I concluded that it was not necessary to add complexity (optimization techniques consume a lot of time and computational resources) to my approach that would further slightly enhance the performance.
+			}
+		
+		\item Note regarding the sentence on page 46, 6th line from the bottom; "These properties ... ". 
+		How were the CFRP parameters selected? By solving the inverse problem? By the mean-square minimization method? By trial and error method?
+		
+		\textcolor{Cyan}{
+			\textbf{Response:}\\
+			Thank you for your constructive comment. \\
+			CFRP parameters assumed for numerical modelling were established by the homogenization method and the rule of mixtures. 
+			The volume fraction of reinforcing fibres was adjusted so that numerically calculated waveform patterns were similar to the experimental data.
+			Nevertheless, some discrepancies still remained: the wavelengths were 21.2 mm and 19.5 mm for the numerical model and SLDV measurements, respectively
+			}	
+		
+		\item Page 47, please explain why it was decided to assume that delamination occurs only between the third and fourth layers and is not distributed randomly between them.
+				
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			Thank you for pointing this out. \\
+			It is important to note that the generation of such a large dataset with such a large number of parameters required three months of running and simulation and resulted in 475 cases with various delamination sizes, locations, and orientations.
+			Indeed, the delamination is fixed between the third and fourth layers to avoid a symmetric situation (between the fourth and fifth layers).
+			Furthermore, adding a new parameter to indicate where to simulate the delamination (between the layers) will add extra complexity, and for sure it will take much more time to generate the dataset.
+			The respected reader must be reminded that numerical measurements were taken from both the top and bottom surfaces of the plate.
+			As a result, I can state that based on measurements taken from the bottom surface of the plate, it appears that the delaminations were positioned between the fifth and sixth layers.
+			In this work, I chose to work with the most difficult case, which is the bottom surface of the plate.
+			It is important to note that the developed DL models were capable of detecting and generalising to the unseen experimentally measured data of specimens with 16 layers that had multiple delaminations inserted between different layers.
+		}
+	
+		\item Page 49 – error in formula 4.1.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			Thank you for your constructive comment. \\
+			Yes there is a typo in the equation, it is \(k=1\) not \(k-1\).
+			Below is the correct formula:
+			%%%%%%%%%%%%%%%
+			\begin{equation*}
+				\hat{s}(x,y) = \sqrt{\frac{1}{N}\sum_{k=1}^{N}s(x,y,t_k)^2} 
+				\label{eqn:rms} 
+			\end{equation*}
+			%%%%%%%%%%%%%%%
+		}		
+	
+		\item Note to 4.2.1, regarding the division of data into teaching and testing sets. 
+		As I am guessing, the division into \(80\%\) and \(20\%\) was done randomly from the 121600 dataset, that is, the pattern was a patch (32x32 pixels). 
+		According to my experience, it is better to divide into learning and testing sets, dividing the set not by parts of the image but by whole images (dividing the set of 475 patterns).
+		
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			Thank you for your constructive comment. \\
+			Sure, this is true, and actually, this was already done.
+			The dataset of 475 cases was divided into two portions: $80\%$ training set and $20\%$ testing set.
+			As a result, 380 cases were used for training, and 95 cases were used for testing.
+			For training purposes, \(20\%\) of the training set (\(380\) cases) was taken as a validation set and used to evaluate the model during the training.
+			It is important to mention that the operation of splitting the dataset into training, validation, and testing sets was performed before preprocessing it to produce the two sets of patches with a total number of \(93100\) and \(121600\), respectively.
+			Consequently, I saved the consistency of the generated patches.
+			Hence, each portion of the dataset, whether it was for training, validation, or testing, contains only the patches generated from the specified portion.
+		}
+	
+		\item Discussion note regarding paragraph 4.3.1 - concerns the K-folds technique. 
+		I present the view that this method does not reduce overfitting and only allows a better estimation of learning error. 
+		It is most often used when we have small data sets. 
+		However, large data sets are considered in the dissertation. 
+		Did the method produce results in the cases analyzed? When discussing the results, there is no mention of this.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			Thank you for your constructive comment. \\
+			The overfitting problem in model selection can, in my opinion, be partially solved using the K-folds cross-validation technique.
+			It is important to note that this technique was only used in conjunction with the one-to-one RMS-based approach (FCN models for delamination identification).
+			The results of applying the K-folds technique compared to when it is not applied are shown in Figure 5.8, which presents a comparison of the experimental cases by using the adaptive wavenumber filtering method [44, 47], FCN-DenseNet [164], and FCN-DenseNet [167].
+			Figure 5.8 (c) shows the predicted output of FCN-DenseNet without applying the K-folds technique, as presented in [164], while Fig. 5.8 (d) shows the predicted output when the K-folds technique is applied, as presented in [167].
+			I can confirm that applying the K-folds technique improved the prediction performance and the generalization capability of the same implemented model based on the results of both approaches (with and without K-folds).
+		}
+		
+		\item Question relating to the numerical model dataset. 
+		Has the Author considered introducing noise (random noise) into the numerical model? The noise introduction is a frequently used technique to simulate measurements.
+		
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			Thank you for your constructive comment. \\
+			When evaluating the developed DL models on experimentally acquired data that had noise, they showed their capability to generalise, and they were able to detect and identify the delamination.
+			Hence, adding noise to the synthetic dataset is unnecessary but it might be considered.	
+		}
+		
+		\item Question regarding paragraph 4.5.1 Please explain how frame f1 is
+		determined
+		
+		\textcolor{Cyan}{
+			\textbf{Response:} \\
+			Thank you for your constructive comment. \\
+			The total wave propagation time was set to \(0.75\) ms so that the guided wave could propagate to the plate edges and back to the actuator twice.
+			The total time of propagation was converted into \(512\) frames of animated Lamb waves.
+%			Accordingly, the required time for each frame equals to \(\frac{0.75ms}{512}\) which is about \(1.465\times 10^-4\) s.
+			The calculated group velocity of \(A_0\) mode is about \(1100\ m/s\).
+			The \((x, y)\) coordinates of the center of the delaminations are known for the numerically generated dataset.
+			Therefore, we can calculate the distance between the center of the plate and the center of the delamination.
+			As the group velocity of \(A_0\) mode is known, and the distance is known, we can calculate the required time for the propagating wave to reach the center of the delamination. 
+			When we know the time of interaction \(t_i\) with the delamination, we can approximately convert it to the frame number \(f_n\) as depicted in the equations given below:		
+				\begin{gather*}
+					t_i = \frac{\sqrt{(x-0.25)^2 +(y-0.25)^2} \ m}{1100\ m/s}
+					\\
+					f_n = \frac{t_i}{0.75ms} \times 512
+				\end{gather*}			
+		}
+	\end{enumerate}
+	}
+\end{document}
