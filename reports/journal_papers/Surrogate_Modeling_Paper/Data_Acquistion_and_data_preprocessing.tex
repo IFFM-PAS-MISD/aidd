@@ -1,0 +1,123 @@
+\section{Data acquisition and data preprocessing:}
+\subsection{Data acquisition:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, a synthetic dataset of propagating waves in carbon fibre 
+reinforced composite plates was computed by using the parallel implementation 
+of the time domain spectral element method~\cite{Kudela2020}. 
+Essentially, the dataset resembles the particle velocity measurements at the 
+bottom surface of the plate acquired by the SLDV in the transverse direction as 
+a response to the piezoelectric (PZT) excitation at the centre of the plate. 
+The input signal was a five-cycle Hann window modulated sinusoidal tone burst. 
+The carrier frequency was assumed to be 50 kHz. 
+The total wave propagation time was set to 0.75 ms so that the guided wave 
+could propagate to the plate edges and back to the actuator twice.
+The number of time integration steps was 150000, which was selected for the 
+stability of the central difference scheme.
+
+The material was a typical cross-ply CFRP laminate. 
+The stacking sequence [0/90]\(_4\) was used in the model. 
+The properties of a single ply were as follows [GPa]:
+\(C_{11} = 52.55, \, C_{12} = 6.51, \, C_{22} = 51.83, C_{44} = 2.93, C_{55} = 
+2.92, C_{66} = 3.81\). 
+The assumed mass density was 1522.4 kg/m\textsuperscript{3}.
+These properties were selected so that they simulated numerically wave front 
+patterns and wavelengths that are similar to the wavefields measured by SLDV on 
+CFRP specimens used later on for testing the developed approach for 
+delamination identification.
+The shortest wavelength of the propagating A0 Lamb wave mode was 21.2 mm for 
+numerical simulations and 19.5 mm for experimental measurements.
+
+475 cases were simulated, representing Lamb waves propagation and interaction 
+with single delamination for each case. 
+The following random factors were used in simulated delamination scenarios:
+\begin{itemize}
+	\item delamination geometrical size	\(2b\) and \(2a\), namely ellipse minor 
+	and major axis randomly selected from the interval \newline \(\left[10 \, 
+	\textrm{mm}, 40\, \textrm{mm}\right]\),
+	\item delamination angle \(\alpha\) randomly selected from the interval \( 
+	\left[ 0^{\circ}, 180^{\circ} \right]\),
+	\item coordinates of the centre of delamination \((x_c,y_c)\) randomly 
+	selected from the interval \(\left[0\, \textrm{mm}, 250\, \textrm{mm} 
+	-\delta \right]\) and \newline \( \left[250\, \textrm{mm}+\delta, 500\, 
+	\textrm{mm} 
+	\right] \), where \(\delta = 10\, \textrm{mm}\)).
+\end{itemize}
+These parameters are defined in Fig.~\ref{fig:random_delaminations} which 
+illustrates exemplary possible locations, sizes, and shapes of random 
+delaminations used for Lamb wave propagation modeling.
+It should be noted that the numerical cases include delaminations located at 
+the edge and corners of the plate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=9cm]{Graphics/figure2.png}
+	\end{center}
+	\caption{Exemplary locations, sizes and shapes of random delaminations used 
+		for Lamb wave propagation modeling.} 
+	\label{fig:random_delaminations}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The dataset contains frames of propagating waves (512  frames for each 
+delamination scenario) and is available online~\cite{kudela_pawel_2021_5414555}.
+The synthetic dataset is used for training the first step of the proposed 
+neural network with the aim of delamination identification directly from SLDV 
+measurements without the need for a baseline wavefield.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The dataset contains 475 different cases, with 512 frames 
+per case, producing a total number of 243,\,200 frames with a frame size of 
+\((500\times500)\)~pixels representing the geometry of the specimen of size 
+\((500\times500)\)~mm\(^{2}\).
+The size of dataset is reduced into \((256\times256)\) for the purpose of 
+reducing the computational complexity.
+A full wavefield of frames without delaminations are used as input data to the 
+proposed system in the seconds step alongwith the ground truth of the 
+respective delamination case.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data augmentation}
+The best way of generalizing the neural network well is to acquire more data. 
+In practice, the amount of available data are usually less for training a deep 
+learning model. 
+For tackling this issue, one way is to create some fake data based on the 
+original dataset and adding it to the training set, which is termed as data 
+augmentation. 
+Data augmentation is an efficient approach for various computer vision and deep 
+learning tasks. 
+Data augmentation includes randomly cropping a region from the original image, 
+adjusting contrast, rotation for a small angle and flipping of the images, 
+etc.~\cite{szegedy2015going}.
+In this research work, the dataset is composed of 475 delamination case which 
+are not enough for a deep learning model to perform well.
+Therefore, all the images in the 475 delamination cases are flipped diagonally, 
+horizontally, and vertically in order to enhance the performance of the 
+proposed deep learning model. 
+Therefore, the total dataset after data augmentation is now composed of 1900 
+\((475\times4 = 1900)\) delamination cases.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dataset distribution}
+For training and evaluation of the proposed deep learning model, the dataset 
+was divided into two sets: training and testing, with 
+a ratio of \(80\%\) and \(20\% \) respectively.
+Moreover, \(10\%\) of the training set was preserved as a validation 
+set to validate the model during the training process, the dataset distribution 
+process is shown in Fig.~\ref{fig:data_distribution}.
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics[width=8cm]{Graphics/figure3.png}
+	\end{center}
+	\caption{Dataset distribution process for this research work.} 
+	\label{fig:data_distribution}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Additionally, the dataset was normalised to a range of \((0, 1)\) to improve 
+the convergence of the gradient descent algorithm.
+The author selected \(32\) consecutive frames in each delamination case as 
+using all frames in each case has high computational and memory 
+costs.
+Additionally, frames displaying the propagation of guided waves before 
+interaction with the delamination has no features to be extracted.
+Hence, only a certain number of frames were selected from the initial 
+occurrence of the interactions with the delamination.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

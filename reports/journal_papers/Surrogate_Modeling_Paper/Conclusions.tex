@@ -1,0 +1,23 @@
+\section{Conclusions}
+\label{conclusion}
+In this research work, we presented a novel deep learning-based surrogate 
+model. 
+The developed model adopts the architecture of autoencoder-decoder in 
+conjunction with the ConvLSTM for the prediction of full wavefield containing 
+delamination. 
+In the proposed model, the encoder and decoder parts of the proposed model 
+are trained jointly on full wavefield containing delamination. 
+Then the encoder is training separately on reference data without delamination. 
+The delamination information in the form of binary images is also provided 
+along with the reference images to the encoder part for training the encoder, 
+and the final prediction of frames containing delamination.
+In simple words, this deep learning based surrogate models takes full wavefield 
+frames without delamination as input and predicts full wavefields containing 
+delamination.
+The proposed model performed well as proved by the results.
+The proposed model is helpful for the prediction the full wavefield data from 
+the time of excitation initiation to the desired simulation time. 
+The predicted wavefield from the proposed architecture can be used for NDT and 
+SHM inverse problems.
+Where, there will be no need to acquire the full wavefield data from the 
+beginning which is very expensive and time-consuming task.

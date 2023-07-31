@@ -1,0 +1,325 @@
+\section{Results and discussions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, we present the evaluation of the proposed model based 
+on numerical test data of \(95\) delamination cases representing the frames of 
+the full wavefield propagation, which was not shown to the proposed model 
+during training. 
+The proposed model was evaluated using numerical test data to 
+demonstrate the capability to predict delamination location, shape, and size 
+from the reference frame (without delamination), and the delamination 
+information in binary form.
+
+Three different representative cases were selected from the numerical dataset 
+to show the performance of the developed model.
+Figures~\ref{fig:first_scenario},~\ref{fig:second_scenario}, 
+and~\ref{fig:third_scenario} shows three different frames from three different 
+numerical test cases.  
+Figures~\ref{fig:first_scenario_ref_28},~\ref{fig:first_scenario_ref_30},
+~\ref{fig:first_scenario_ref_32},~\ref{fig:second_scenario_ref_28},
+~\ref{fig:second_scenario_ref_30},~\ref{fig:second_scenario_ref_32},
+~\ref{fig:third_scenario_ref_28},~\ref{fig:third_scenario_ref_30}, 
+and~\ref{fig:third_scenario_ref_32} represents the frame without delamination 
+(reference) frame, which is given as input to the deep learning model for the 
+prediction purpose. 
+Figures~\ref{fig:first_scenario_pred_28},~\ref{fig:first_scenario_pred_30},
+~\ref{fig:first_scenario_pred_32},~\ref{fig:second_scenario_pred_28},
+~\ref{fig:second_scenario_pred_30},~\ref{fig:second_scenario_pred_32},
+~\ref{fig:third_scenario_pred_28}, ~\ref{fig:third_scenario_pred_30}, 
+and~\ref{fig:third_scenario_pred_32} represents the predicted frame by the deep 
+learning model. 
+Whereas, 
+figures~\ref{fig:first_scenario_lab_28},~\ref{fig:first_scenario_lab_30},
+~\ref{fig:first_scenario_lab_32},~\ref{fig:second_scenario_lab_28},
+~\ref{fig:second_scenario_lab_30},~\ref{fig:second_scenario_lab_32},
+~\ref{fig:third_scenario_lab_28}, ~\ref{fig:third_scenario_lab_30}, 
+and~\ref{fig:third_scenario_lab_32} represents the the label frame, to which 
+the prediction of the proposed model is compared.
+Furthermore, figures~\ref{fig:first_scenario_ref_28}, 
+~\ref{fig:first_scenario_pred_28},~\ref{fig:first_scenario_lab_28},
+~\ref{fig:second_scenario_ref_28}, 
+~\ref{fig:second_scenario_pred_28},~\ref{fig:second_scenario_lab_28},
+~\ref{fig:third_scenario_ref_28}, ~\ref{fig:third_scenario_pred_28} 
+and~\ref{fig:third_scenario_lab_28} represents the $28\textsuperscript{th}$ 
+frame after the interaction with the delamination. 
+Figures~\ref{fig:first_scenario_ref_30}, 
+~\ref{fig:first_scenario_pred_30},~\ref{fig:first_scenario_lab_30},
+~\ref{fig:second_scenario_ref_30}, 
+~\ref{fig:second_scenario_pred_30},~\ref{fig:second_scenario_lab_30},
+~\ref{fig:third_scenario_ref_30}, ~\ref{fig:third_scenario_pred_30} 
+and~\ref{fig:third_scenario_lab_30} represents $30\textsuperscript{th}$ frame 
+after the interaction with the delamination.
+Whereas, figures~\ref{fig:first_scenario_ref_32}, 
+~\ref{fig:first_scenario_pred_32},~\ref{fig:first_scenario_lab_32},
+~\ref{fig:second_scenario_ref_32}, 
+~\ref{fig:second_scenario_pred_32},~\ref{fig:second_scenario_lab_32},
+~\ref{fig:third_scenario_ref_32}, ~\ref{fig:third_scenario_pred_32} 
+and~\ref{fig:third_scenario_lab_32} represents $32\textsuperscript{th}$ frame 
+after the interaction with the delamination.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure6a.png}
+		\caption{Reference}
+		\label{fig:first_scenario_ref_28}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure6b.png}
+		\caption{Prediction}
+		\label{fig:first_scenario_pred_28}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure6c.png}
+		\caption{Label}
+		\label{fig:first_scenario_lab_28}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure6d.png}
+		\caption{Reference}
+		\label{fig:first_scenario_ref_30}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure6e.png}
+		\caption{Prediction}
+		\label{fig:first_scenario_pred_30}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure6f.png}
+		\caption{Label}
+		\label{fig:first_scenario_lab_30}
+	\end{subfigure}
+
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure6g.png}
+		\caption{Reference}
+		\label{fig:first_scenario_ref_32}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+	\centering
+	\includegraphics[scale=0.7]{Graphics/figure6h.png}
+	\caption{Prediction}
+	\label{fig:first_scenario_pred_32}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+	\centering
+	\includegraphics[scale=0.7]{Graphics/figure6i.png}
+	\caption{Label}
+	\label{fig:first_scenario_lab_32}
+	\end{subfigure}
+	
+	\caption{First Scenario: Comparison of predicted frames with the label 
+		frames at $28\textsuperscript{th}$, $30\textsuperscript{th}$, and 
+		$32\textsuperscript{th}$ frame after the interaction with delamination.}
+	\label{fig:first_scenario}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure7a.png}
+		\caption{Reference}
+		\label{fig:second_scenario_ref_28}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure7b.png}
+		\caption{Prediction}
+		\label{fig:second_scenario_pred_28}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure7c.png}
+		\caption{Label}
+		\label{fig:second_scenario_lab_28}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure7d.png}
+		\caption{Reference}
+		\label{fig:second_scenario_ref_30}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure7e.png}
+		\caption{Prediction}
+		\label{fig:second_scenario_pred_30}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure7f.png}
+		\caption{Label}
+		\label{fig:second_scenario_lab_30}
+	\end{subfigure}
+    	\hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7]{Graphics/figure7g.png}
+    	\caption{Reference}
+    	\label{fig:second_scenario_ref_32}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7]{Graphics/figure7h.png}
+    	\caption{Prediction}
+    	\label{fig:second_scenario_pred_32}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7]{Graphics/figure7i.png}
+    	\caption{Label}
+    	\label{fig:second_scenario_lab_32}
+    \end{subfigure}
+	
+	\caption{Second Scenario: Comparison of predicted frames with the label 
+		frames at $28\textsuperscript{th}$, $30\textsuperscript{th}$, and 
+		$32\textsuperscript{th}$ frame after the interaction with delamination.}
+	\label{fig:second_scenario}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [!ht]
+	\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8a.png}
+		\caption{Reference}
+		\label{fig:third_scenario_ref_28}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8b.png}
+		\caption{Prediction}
+		\label{fig:third_scenario_pred_28}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8c.png}
+		\caption{Label}
+		\label{fig:third_scenario_lab_28}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8d.png}
+		\caption{Reference}
+		\label{fig:third_scenario_ref_30}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8e.png}
+		\caption{Prediction}
+		\label{fig:third_scenario_pred_30}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8f.png}
+		\caption{Label}
+		\label{fig:third_scenario_lab_30}
+	\end{subfigure}
+
+		\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8g.png}
+		\caption{Reference}
+		\label{fig:third_scenario_ref_32}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8h.png}
+		\caption{Prediction}
+		\label{fig:third_scenario_pred_32}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\includegraphics[scale=0.7]{Graphics/figure8i.png}
+		\caption{Label}
+		\label{fig:third_scenario_lab_32}
+	\end{subfigure}
+	
+	\caption{Third Scenario: Comparison of predicted frames with the label 
+		frames at $28\textsuperscript{th}$, $30\textsuperscript{th}$, and 
+		$32\textsuperscript{th}$ frame after the interaction with delamination.}
+	\label{fig:third_scenario}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As can be seen in the first and second scenario (Fig~\ref{fig:first_scenario}, 
+and Fig~\ref{fig:second_scenario}),  the delamination is occurred at the 
+top-left of the plate, whereas in the third scenario, 
+Fig~\ref{fig:third_scenario} the 
+delamination is occurred at the top-center of the plate. 
+As shown in Fig~\ref{fig:first_scenario}, the delamination is very tiny in this 
+case and not clearly seen by human eyes, but our deep learning algorithm is 
+somehow able to reconstruct the full wavefield along with the delamination. 
+From all of the 
+Figs~\ref{fig:first_scenario_pred_28},~\ref{fig:first_scenario_pred_30},
+~\ref{fig:first_scenario_pred_32},~\ref{fig:second_scenario_pred_28},
+~\ref{fig:second_scenario_pred_30},~\ref{fig:second_scenario_pred_32},
+~\ref{fig:third_scenario_pred_28},~\ref{fig:third_scenario_pred_30} 
+and~\ref{fig:third_scenario_pred_32} it can be confirmed the that the proposed 
+deep learning-based surrogate model has reconstructed the full wavefield 
+containing delamination with minimal error. 
+Furthermore, the PSNR and Pearson CC values of all these three scenarios are 
+shown in Table~\ref{tab:psnr_pearson}. 
+%\newpage%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[ht]
+	\centering
+	\caption{Evaluation metric for three numerical cases}
+	\begin{tabular}{@{}ccc@{}}
+		\toprule
+		case number       & PSRN    & Pearson CC \\ \midrule
+		1 ( $28\textsuperscript{th}$ frame) & 22.3 dB & 0.96       \\ \midrule
+		1 ( $30\textsuperscript{th}$ frame)    & 22.7 dB & 0.98       \\ 
+		\midrule
+		1 ( $32\textsuperscript{th}$ frame)    & 23.1 dB & 0.98       \\ 
+		\midrule
+		2 ( $28\textsuperscript{th}$ frame) & 22.0 dB & 0.96       \\ \midrule
+		2 ( $30\textsuperscript{th}$ frame)    & 22.6 dB & 0.98       \\ 
+		\midrule
+		2 ( $32\textsuperscript{th}$ frame)    & 23.0 dB & 0.98       \\ 
+		\midrule
+		3 ( $28\textsuperscript{th}$ frame) & 21.8 dB & 0.97       \\ \midrule
+		3 ( $30\textsuperscript{th}$ frame) & 22.3 dB & 0.98       \\ \midrule
+		3 ( $32\textsuperscript{th}$ frame)    & 23.2 dB & 0.99       \\ 
+		\bottomrule
+	\end{tabular}
+	\label{tab:psnr_pearson}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+The mean PSNR value was 21.8 dB, and the mean Pearson CC value was 0.98 
+on all of the test data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
