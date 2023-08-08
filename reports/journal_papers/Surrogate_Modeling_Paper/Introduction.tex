@@ -4,124 +4,73 @@
 Detecting delamination in composite materials poses a significant challenge for 
 conventional visual inspection techniques as it occurs between plies of the 
 composite laminate and remains invisible from external 
-surfaces~\cite{staszewski2009health, tuo2019damage}. As a result, various 
-nondestructive testing (NDT) and structural health monitoring (SHM) techniques 
-have been proposed for delamination identification in composite structures. 
+surfaces~\cite{staszewski2009health, tuo2019damage}. 
+As a result, various nondestructive testing (NDT) and structural health monitoring (SHM) techniques have been proposed for delamination identification in composite structures. 
 Among these techniques, ultrasonic guided waves are widely recognized as one of 
 the most promising approaches for quantitatively identifying defects in 
-composites. Their extensive application is attributed to their high sensitivity 
-to small defects, low propagation attenuation, and ability to monitor large 
-areas using only a small number of sparsely distributed 
-transducers~\cite{Barthorpe2020, Ihn2008, Cantero-Chinchilla2020}.
+composites. 
+Their extensive application is attributed to their high sensitivity to small defects, low propagation attenuation, and ability to monitor large areas using only a small number of sparsely distributed transducers~\cite{Barthorpe2020, Ihn2008, Cantero-Chinchilla2020}.
 
-However, using a smaller number of transducers is inadequate for obtaining 
-high-quality resolution damage maps and assessing the size of the damage 
-accurately. Conversely, employing a very dense array of transducers is 
-impractical in most situations. To address these issues, a scanning laser 
-Doppler vibrometer (SLDV) is employed. SLDV can measure the propagation of 
-guided waves in a highly dense grid of points over the surface of a large 
-specimen, collectively known as full wavefield~\cite{Radzienski2019a}. In 
-recent years, full wavefield signals have been utilized for detecting and 
-localizing defects in composite structures~\cite{Radzienski2019a, 
-	Girolamo2018a, kudela2018impact, rogge2013characterization}. These damage 
-identification techniques using full wavefield signals can effectively estimate 
-not only the location but also the size of the damage~\cite{Girolamo2018a, 
-	kudela2018impact}. Full wavefields offer valuable insights into the 
-	interaction 
-of guided Lamb waves with potential defects. However, acquiring the full 
-wavefield of guided waves is a time-consuming process.
+However, using a smaller number of transducers is inadequate for obtaining high-quality resolution damage maps and assessing the size of the damage accurately. 
+Conversely, employing a very dense array of transducers is impractical in most situations. To address these issues, a scanning laser Doppler vibrometer (SLDV) is employed. 
+SLDV can measure the propagation of guided waves in a highly dense grid of points over the surface of a large specimen, collectively known as full wavefield~\cite{Radzienski2019a}. 
+In recent years, full wavefield signals have been utilized for detecting and localizing defects in composite structures~\cite{Radzienski2019a, Girolamo2018a, kudela2018impact, rogge2013characterization}. 
+These damage identification techniques using full wavefield signals can effectively estimate 
+not only the location but also the size of the damage~\cite{Girolamo2018a, kudela2018impact}. 
+Full wavefields offer valuable insights into the interaction of guided Lamb waves with potential defects. However, acquiring the full wavefield of guided waves is a time-consuming process.
 
+One possible solution to address this problem involves obtaining Lamb waves in a low-resolution format and subsequently applying a compressive sensing (CS) eventually enhanced by deep learning method~\cite{esfandabadideep} or end-to-end deep learning-based super-resolution technique~\cite{ijjeh2023deep}. 
 
-One possible solution to address this problem involves obtaining Lamb waves in 
-a low-resolution format and subsequently applying a compressive sensing (CS) or 
-deep learning-based super-resolution technique to enhance the low-resolution 
-full wavefield data~\cite{ijjeh2023deep}. Another approach is to utilize a deep 
-learning-based surrogate model for generating full wavefield data. A surrogate 
-model imitates the behavior of the simulation model while replacing 
-time-consuming forward simulations with approximate solutions.
+Nevertheless, the damage identification methods operating on the full wavefield cannot be directly extended to the cases when only spatially sparse data is available, e.g. array of sensors is installed on the structure.
+In such a case, usually inverse procedure is employed in which efficient methods for solving wave equations are required (forward solver).  
+However, numerical modeling of ultrasonic guided wave propagation in solid media containing damage is complex, requires fine discretization which makes computation time consuming.
+Even methods such as p-version of the finite element method (p-FEM)~\cite{Duczek2013}, the iso-geometric analysis (IGA)~\cite{Anitescu2019}, the spectral cell method (SCM)~\cite{Mossaiby2019} or the time-domain spectral element method (SEM)~\cite{Ostachowicz2012} are not efficient enough.
+In the end, calling objective function for each damage case scenario in which forward solver is used, is unfeasible.
 
-Deep learning has seen extensive research and successful implementation in the 
-fields of nondestructive testing (NDT) and structural health monitoring (SHM). 
-Convolutional neural network (CNN) is among the most popular deep learning 
-architectures. Initially introduced for image processing, CNN has now been 
-extended to various research domains, including NDT and SHM applications such 
-as damage detection, localization, and characterization~\cite{rautela2019deep, 
-	pandey2022explainable, ijjeh2021full, ijjeh2022deep}.
+An alternative approach is to utilize a deep learning-based surrogate model for generating full wavefield data or time series resembling signals registered at array of sensors. 
+A surrogate model imitates the behavior of the simulation model while replacing time-consuming forward simulations with approximate solutions.
 
-In modern deep learning, the focus is on creating more efficient and simpler 
-architectures by emphasizing the most significant elements and preserving 
-relevant features of the original data. Feature engineering, the process of 
-extracting feature representations from data, requires specific knowledge and 
-is time-consuming. Additionally, it varies for different types of data, making 
-it challenging to have generic procedures. An autoencoder (AE) is a neural 
-network capable of automatically learning features from unlabeled data in an 
-unsupervised way, eliminating the need for extensive feature 
+Deep learning has seen extensive research and successful implementation in the fields of nondestructive testing (NDT) and structural health monitoring (SHM). 
+Convolutional neural network (CNN) is among the most popular deep learning architectures. 
+Initially introduced for image processing, CNN has now been extended to various research domains, including NDT and SHM applications such as damage detection, localization, and characterization~\cite{rautela2019deep, pandey2022explainable, ijjeh2021full, ijjeh2022deep}.
+
+In modern deep learning, the focus is on creating more efficient and simpler architectures by emphasizing the most significant elements and preserving relevant features of the original data. 
+Feature engineering, the process of extracting feature representations from data, requires specific knowledge and is time-consuming. 
+Additionally, it varies for different types of data, making it challenging to have generic procedures. 
+An autoencoder (AE) is a neural network capable of automatically learning features from unlabeled data in an unsupervised way, eliminating the need for extensive feature 
 engineering~\cite{pinaya2020autoencoders}. 
-An AE consists of two parts, the encoder, which maps inputs to a desired latent 
-space, and the decoder, which decodes the latent space back into the original 
-input space. By using adequate training data, AEs can create a latent 
-representation, thus avoiding the need for substantial feature engineering.
+An AE consists of two parts, the encoder, which maps inputs to a desired latent space, and the decoder, which decodes the latent space back into the original input space. 
+By using adequate training data, AEs can create a latent representation, thus avoiding the need for substantial feature engineering.
 
-However, general AEs may not capture spatial features, such as images, or 
-sequential information when dealing with dynamics, like time-series 
-forecasting. To address the limitation of capturing spatial feature, the use of 
-a CNN-based autoencoder is recommended, whereas, an RNN-based autoencoder is 
-usually employed for learning features from time-series data.
-Deep CNN-based autoencoders (DCAEs) excel at extracting spatial features from 
-images-based input data, they may not be sufficient for extracting features 
-from sequences of images, particularly in cases involving full wavefield data, 
-which contains numerous sequential frames/images for each delamination 
-scenario. 
-For such situations, ConvLSTM~\cite{shi2015convolutional} is 
-employed. ConvLSTM combines CNN and LSTM, enabling it to effectively learn 
-features from sequences of images. In ConvLSTM architecture, CNN is responsible 
-for learning features from images, while LSTM retains sequential information.
+However, general AEs may not capture spatial features, such as images, or sequential information when dealing with dynamics, like time-series forecasting. 
+To address the limitation of capturing spatial feature, the use of a CNN-based autoencoder is recommended, whereas, an RNN-based autoencoder is usually employed for learning features from time-series data.
+Deep CNN-based autoencoders (DCAEs) excel at extracting spatial features from images-based input data, they may not be sufficient for extracting features from sequences of images, particularly in cases involving full wavefield data, which contains numerous sequential frames/images for each delamination scenario. 
+For such situations, ConvLSTM~\cite{shi2015convolutional} is employed. 
+ConvLSTM combines CNN and LSTM, enabling it to effectively learn features from sequences of images. 
+In ConvLSTM architecture, CNN is responsible for learning features from images, while LSTM retains sequential information.
 
-DCAE based surrogate modeling has been implemented in~\cite{jo2021adaptive, 
-	nikolopoulos2022non, sharma2022wave}. 
-Jo et al.~\cite{jo2021adaptive} developed a DCAE framework for the purpose of  
-extracting latent features from spatial properties and investigating adaptive 
-surrogate estimation to sequester $CO_2$ into heterogeneous deep saline 
-aquifers. 
-They used DCAE and a fully-convolutional network for reducing the
-computational costs and extracting dimensionality-reduced features for  
-conserving spatial characteristics. 
-Nikolopoulos et al.~\cite{nikolopoulos2022non} presented a non-intrusive 
-deep learning based surrogate modeling scheme for predictive modeling of 
-complex systems, which they described by parametrized time-dependent partial 
-differential equations. 
-Sharma et al.~\cite{sharma2022wave} proposed a DCAE based surrogate predictive 
-model for wave propagation. 
+DCAE based surrogate modeling has been implemented in~\cite{jo2021adaptive, nikolopoulos2022non, sharma2022wave}. 
+Jo et al.~\cite{jo2021adaptive} developed a DCAE framework for the purpose of extracting latent features from spatial properties and investigating adaptive surrogate estimation to sequester $CO_2$ into heterogeneous deep saline aquifers. 
+They used DCAE and a fully-convolutional network for reducing the computational costs and extracting dimensionality-reduced features for conserving spatial characteristics. 
+Nikolopoulos et al.~\cite{nikolopoulos2022non} presented a non-intrusive deep learning based surrogate modeling scheme for predictive modeling of complex systems, which they described by parametrized time-dependent partial differential equations. 
+Sharma et al.~\cite{sharma2022wave} proposed a DCAE based surrogate predictive model for wave propagation. 
 Their model is able to generate data for a given crack location and depth
 of one-dimensional rod of isotropic material.
 
-Recently, Peng et al.~\cite{peng2021structural} proposed an encoding 
-convolution long short-term memory (encoding ConvLSTM) framework for building a 
-surrogate structural model with spatiotemporal evolution, estimating structural 
-spatiotemporal states, and predicting dynamic responses under future dynamic 
-load conditions. Zargar and Yuan~\cite{zargar2021impact} presented a hybrid 
-CNN-recurrent neural network (RNN) for handling spatiotemporal information 
-extraction challenges in impact damage detection problems.
+Recently, Peng et al.~\cite{peng2021structural} proposed an encoding convolution long short-term memory (encoding ConvLSTM) framework for building a surrogate structural model with spatiotemporal evolution, estimating structural spatiotemporal states, and predicting dynamic responses under future dynamic load conditions. 
+Zargar and Yuan~\cite{zargar2021impact} presented a hybrid CNN-recurrent neural network (RNN) for handling spatiotemporal information extraction challenges in impact damage detection problems.
 
 In this research work, a deep ConvLSTM autoencoder-based surrogate model is 
-applied to composite structures with various delamination cases. The model 
-first learns the full wavefield representation from frames containing 
-delaminations and project it to a compressed domain known as the latent space. 
-This latent space is used as labels for the encoder part of the training, where 
-input frames without delaminations and ground truth (delamination information) 
-data for the respective delamination cases are provided.
-This process eliminates the need to repeatedly solve the system's governing 
-equations, resulting in significant time and computational cost savings, making 
-it particularly suitable for issues requiring repeated model computations. 
-The novelty of this research lies in the implementation of ConvLSTM-based 
-autoencoders for the generation of full wavefield data in composite 
-structures by providing the delamination size and location.
-A complete working procedure of the proposed system is shown in 
-Fig~\ref{fig:complete_flowchart}.
+applied to composite structures with various delamination cases. 
+The model first learns the full wavefield representation from frames containing delaminations and project it to a compressed domain known as the latent space. 
+This latent space is used as labels for the encoder part of the training, where input frames without delaminations and ground truth (delamination information) data for the respective delamination cases are provided.
+This process eliminates the need to repeatedly solve the system's governing equations, resulting in significant time and computational cost savings, making it particularly suitable for issues requiring repeated model computations. 
+The novelty of this research lies in the implementation of ConvLSTM-based autoencoders for the generation of full wavefield data in composite structures by providing the delamination size and location.
+A complete working procedure of the proposed system is shown in Fig~\ref{fig:complete_flowchart}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
-		\includegraphics[width=12cm]{Graphics/figure1.png}
+		\includegraphics[width=12cm]{figure1.png}
 	\end{center}
 	\caption{Flowchart of the complete working system of the proposed model.} 
 	\label{fig:complete_flowchart}
