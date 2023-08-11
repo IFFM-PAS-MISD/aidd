@@ -1,61 +1,33 @@
-\section{The proposed model:}
-\label{proposed_approach}
+\section{The proposed DL model for supervised learning}
+\label{sec:proposed_approach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this research work, we developed a novel deep ConvLSTM autoencoder 
-based surrogate model utilising full wavefield frames of Lamb wave propagation 
-for the purpose of data generation for delamination identification in CFRP 
-materials.
-The developed model takes \(32\) frames without delamination 
-(reference frames) representing the full wavefield along-with the delamination 
-information of the respective delamination case in ground truth (binary image 
-form), for the purpose of producing full wavefield propagation through time and 
-their interaction with the delamination to extract the damage features and 
-finally predict the full wavefield frames with the delamination location, 
-shape, and size.
+In this research work, we developed a novel deep ConvLSTM autoencoder-based surrogate model utilising full wavefield frames of Lamb wave propagation for the purpose of data generation for delamination identification in CFRP materials.
+The developed DL model takes as an input \(32\) frames without delamination (reference frames) representing the full wavefield and the delamination information of the respective delamination case in the form of binary image for the purpose of producing full wavefield propagation of Lamb waves through space and time (3D matrix).
+The most important aspect of the DL model is the prediction of the interaction of Lamb waves with the delamination so that the delamination location, shape, and size can be estimated.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
 	\begin{center}
 		\includegraphics[width=9cm]{figure4.png}
 	\end{center}
-	\caption{The flowchart of the proposed deep learning model.} 
+	\caption{The flowchart of the proposed DL model.} 
 	\label{fig:proposed_model}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The complete flowchart of the proposed model is presented in 
-Fig.~\ref{fig:proposed_model}. 
+The complete flowchart of the proposed DL model is presented in Fig.~\ref{fig:proposed_model}. 
 The training and evaluation process of the proposed model can be summarized in 
 the following three steps:  
 \begin{enumerate}
-	\item{\textbf{Feature extraction:} As we have no labels for the dataset, 
-		the dataset is composed of delamination cases. 
-		So the first task was to extract features from all of the delamination 
-		cases, and then use these features as labels in the second step during 
-		model training.
-		Therefore, in this step the encoder and decoder parts of the proposed 
-		model are trained jointly, so the decoder part can be used separately 
-		for full wavefield predictions for the identification of delamination.
-		During this step, the features are extracted with very minimal 
-		reconstruction error in a compressed form, which matches the dimensions 
-		of the latent space.}
-	\item{\textbf{Model training:} In this step, the actual model training is 
-		being carried out. 
-		The full wavefield frames without delaminations alongwith the ground 
-		truth 
-		of the respective delamination case is feed into the deep learning 
-		model 
-		for training. 
-		The features extracted from encoder part of first step are used as 
-		labels 
-		here in this step, as shown in Fig.~\ref{fig:proposed_model}}.
-	\item{\textbf{Evaluation of the proposed model on unseen data:} At this 
-		stage, both of the pretrained models (pretrained decoder from step 1, 
-		and pretrained encoder from step 2) are utilisied for the prediction of 
-		full wavefield frame on unseen data.
-		During this step, the model just takes reference frames with ground 
-		truths (delamination information), and produce the output as the full 
-		wavefield frames containing delamination.}
+	\item{\textbf{Feature extraction:} As we have no labels for the dataset, the dataset is composed of delamination cases. 
+		So the first task was to extract features from all of the delamination cases, and then use these features as labels in the second step during model training.
+		Therefore, in this step, the encoder and decoder parts of the proposed model are trained jointly, so the decoder part can be used separately for full wavefield predictions.
+		During this step, the features are extracted with very minimal reconstruction error in a compressed form, which matches the dimensions of the latent space.}
+	\item{\textbf{Model training:} In this step, the actual model training is being carried out. 
+		The full wavefield frames in a plate without delamination along with the binary image of the respective delamination case are fed into the DL model for training. 
+		The features extracted from encoder part of the first step are used as labels in this step, as shown in Fig.~\ref{fig:proposed_model}}.
+	\item{\textbf{Evaluation of the proposed DL model on unseen data:} At this stage, both of the pre-trained models (pre-trained decoder from step 1, and pre-trained encoder from step 2) are utilised for the prediction of full wavefield frames on unseen data.
+		During this step, the model just takes reference frames with the delamination information and produces the output as the full wavefield frames containing interaction of Lamb waves with delamination.}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,77 +35,49 @@ the following three steps:
 	\begin{center}
 		\includegraphics[width=11cm]{figure5.png}
 	\end{center}
-	\caption{Architecture of the proposed ConvLSTM autoencoder model.} 
+	\caption{The architecture of the proposed ConvLSTM autoencoder model.} 
 	\label{fig:convlstm}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The proposed ConvLSTM autoencoder model takes \(32\) frames as input, and it 
-consists of six ConvLSTM layers.
-The first ConvLSTM layer has \(32\) filters, the second and third layer has 
-\(192\) filters, the fourth layer has \(32\) filters, and the last two ConvLSTM 
-layers has \(192\) filters.
-The kernel size of the ConvLSTM layers was set to (\(3\times3\)) with a stride 
-of \((1)\). 
-Padding was set to "same", which makes the output the same as the input in the 
-case of stride \(1\).
-Furthermore, a \(\tanh\) (the hyperbolic tangent) activation function was used 
-within the ConvLSTM layers that output values in a range between (\(-1\) and 
-\(1\)).
-Maxpooling and Upsampling were applied at each ConvLSTM layer for reducing the 
-size of features and reconstruction purposes, respectively. 
-Moreover, a batch normalization technique~\cite{Santurkar2018} was applied 
-at each of the ConvLSTM layer.
-At the final output layer, a 2D convolutional layer followed by a sigmoid 
-activation function is applied.
+The proposed ConvLSTM autoencoder model takes \(32\) frames as input concatenated with a binary image which is replicated 32 times (see Fig.~\ref{fig:proposed_model}). 
+The DL model consists of six ConvLSTM layers.
+The first ConvLSTM layer has \(32\) filters, the second and third layer has \(192\) filters, the fourth layer has \(32\) filters, and the last two ConvLSTM layers has \(192\) filters.
+The kernel size of the ConvLSTM layers was set to (\(3\times3\)) with a stride of \((1)\). 
+Padding was set to "same", which makes the output the same as the input in the case of stride \(1\).
+Furthermore, a \(\tanh\) (the hyperbolic tangent) activation function was used within the ConvLSTM layers that output values in a range between (\(-1\) and \(1\)).
+Maxpooling and upsampling were applied at each ConvLSTM layer for reducing the size of features and reconstruction purposes, respectively. 
+Moreover, a batch normalization technique~\cite{Santurkar2018} was applied at each of the ConvLSTM layers.
+At the final output layer, a 2D convolutional layer followed by a sigmoid activation function is applied.
 
-To alleviate the overfitting, we used an early-stopping mechanism that 
-monitors the validation loss during training of the model and stops the 
-training of the model after 30 epochs if there is no improvement. 
-Adam optimizer was employed for back-propagation and \(MSE\) as loss 
-function for both training steps.
+To alleviate the over-fitting, we used an early-stopping mechanism that monitors the validation loss during the training of the model and stops the training of the model after 30 epochs if there is no improvement. 
+Adam optimizer was employed for back-propagation and MSE as a loss function for both training steps.
 
-For evaluating the performance of the proposed model, two evaluation metrics 
-namely peak signal-to-noise ratio (\(PSNR\)), and Pearson correlation 
-coefficient (Pearson CC) were utilized. 
-The \(PSNR\) measures the maximum potential power of a signal and the power of 
-the noise that affects the quality of its representation, and is expressed 
-mathematically in Equation~(\ref{eqn:psnr}):
+For evaluating the performance of the proposed model, two evaluation metrics, namely peak signal-to-noise ratio (PSNR), and Pearson correlation coefficient (Pearson CC) were utilized. 
+The PSNR measures the maximum potential power of a signal and the power of the noise that affects the quality of its representation and is expressed mathematically in Eq.~(\ref{eqn:psnr}):
 
 \begin{equation}
-	PSNR=20 \log _{10} \frac{L}{\sqrt{\mathrm{MSE}}}
+	\mathrm{PSNR}=20 \log _{10} \frac{L}{\sqrt{\mathrm{MSE}}}
 	\label{eqn:psnr}
 \end{equation}
 
-Where \(L\) denotes the highest degree of variation present in the input image, 
-which is 255. Meanwhile, \(MSE\) stands for mean squared error, which 
-represents the discrepancy between the predicted output and the relevant ground 
-truth.
+Where \(L\) denotes the highest degree of variation present in the input image. 
+Meanwhile, MSE stands for mean squared error, which represents the discrepancy between the predicted output and the relevant ground truth.
 
-Pearson CC is a metric that estimates the linear connection between two sets of 
-variables, \(X\) (which represents the ground truth values) and \(Y\) (which 
-represents the predicted values). The mathematical formula for computing 
-Pearson CC is shown in Equation~(\ref{eqn:pearsoncc}):
+Pearson CC is a metric that estimates the linear connection between two sets of variables, \(\vect{x}\) (which represents the ground truth values) and \(\vect{y}\) (which represents the predicted values). 
+The mathematical formula for computing Pearson CC is shown in Eq.~(\ref{eqn:pearsoncc}):
 
 \begin{equation}
 	r_{x 
 		y}=\frac{\sum_{k=1}^n\left(x_k-\bar{x}\right)\left(y_k-\bar{y}\right)}{\sqrt{\sum_{k=1}^n\left(x_k-\bar{x}\right)^2}
-		\sqrt{\sum_{k=1}^n\left(y_k-\bar{y}\right)^2}}
+		\sqrt{\sum_{k=1}^n\left(y_k-\bar{y}\right)^2}},
 	\label{eqn:pearsoncc}
 \end{equation}
 
-In this equation, $r_xy$ represents the Pearson CC, \(n\) represents the 
-count of data points in a sample, and $x_k$ and $y_k$ denote the values 
-of the ground truth and predicted values, respectively, for each data point. 
-Additionally, $\bar{x}$ denotes the mean value of the sample, $\bar{y}$ 
-represents the means value of the predicted values. 
+where $r_xy$ represents the Pearson CC, \(n\) represents the number of data points in a sample, and $x_k$ and $y_k$ denote the values of the ground truth and predicted values, respectively, for each data point. 
+Additionally, $\bar{x}$ denotes the mean value of the sample, $\bar{y}$ represents the mean value of the predicted values. 
 The values of $r_{xy}$ ranges from ‘-1’ to ‘+1’. 
-Value ‘0’ specifies that there is no relation between the samples and the 
-predicted values. 
-A value greater than ‘0’ indicates a positive relationship between the 
-samples 
-and the predicted data, whereas, a value less than ‘0’ represents a 
-negative relationship between them.
+Value ‘0’ specifies that there is no relation between the samples and the predicted values. 
+A value greater than ‘0’ indicates a positive relationship between the samples and the predicted data, whereas, a value less than ‘0’ represents a negative relationship between them.
 
-The maximum \(PSNR\) and Pearson CC values on the validation data were noted as 
-23.7 dB and \(0.99\) respectively.
+The maximum PSNR and Pearson CC values on the validation data were noted as 23.7 dB and 0.99, respectively.
