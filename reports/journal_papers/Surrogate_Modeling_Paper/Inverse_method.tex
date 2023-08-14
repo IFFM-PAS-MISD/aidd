@@ -18,11 +18,12 @@ where $r$ are random numbers, $y_{ij}$ is the particle's best-known position, $\
 Cognitive and social parameters control the particle's behaviour given two choices: (i) to follow its personal best or (ii) follow the swarm’s global best position.
 Overall, this dictates if the swarm is explorative or exploitative in nature. 
 In our tests, we used the following parameters: $c_1 = c_2 = 0.3$ and $w=0.8$.
+Good convergence was achieved for these set of parameters, therefore further parameter tuning was unnecessary.
 
 The following decision variables were used in the PSO:
 \begin{itemize}
-	\item delamination coordinates $(x_c, y_c)$ with bounds [0 m, 0.5 m]
-	\item delamination elliptic shape represented by semi-major and semi-minor axis $a, b$ with bounds [0.005 m, 0.02 m]
+	\item delamination coordinates $(x_c, y_c)$ with bounds [0 mm, 500 m],
+	\item delamination elliptic shape represented by semi-major and semi-minor axis $a, b$ with bounds [5 mm, 20 mm],
 	\item delamination rotation angle $\alpha$ with bounds [$0^\circ$, $180^\circ$].
 \end{itemize}
 

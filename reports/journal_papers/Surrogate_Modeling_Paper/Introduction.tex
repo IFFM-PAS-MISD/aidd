@@ -12,13 +12,13 @@ SLDV can measure the propagation of guided waves in a highly dense grid of point
 In recent years, full wavefield signals have been utilized for detecting and localizing defects in composite structures~\cite{Radzienski2019a, Girolamo2018a, kudela2018impact, rogge2013characterization}. 
 These damage identification techniques using full wavefield signals can effectively estimate 
 not only the location but also the size of the damage~\cite{Girolamo2018a, kudela2018impact}. 
-Full wavefields offer valuable insights into the interaction of guided Lamb waves with potential defects. However, acquiring the full wavefield of guided waves is a time-consuming process.
+Full wavefield scans offer valuable insights into the interaction of guided waves with defects. However, acquiring the full wavefield of guided waves is a time-consuming process.
 
 One possible solution to address this problem involves obtaining Lamb waves in a low-resolution format and subsequently applying compressive sensing (CS) eventually enhanced by deep learning (DL) method~\cite{esfandabadideep} or end-to-end DL-based super-resolution technique~\cite{ijjeh2023deep}. 
 
 Nevertheless, the damage identification methods operating on the full wavefield cannot be directly extended to the cases when only spatially sparse data is available, e.g. an array of sensors is installed on the structure.
 In such a case, usually, an inverse procedure is employed in which efficient methods for solving wave equations are required (forward solver).  
-However, numerical modelling of ultrasonic guided wave propagation in solid media containing damage is complex, requires fine discretization and is computationally intensive.
+However, numerical modelling of ultrasonic guided wave propagation in solid media exhibiting discontinuities, such as damage, is complex, requires fine discretization and is computationally intensive.
 Even methods such as p-version of the finite element method (p-FEM)~\cite{Duczek2013}, the iso-geometric analysis (IGA)~\cite{Anitescu2019}, the spectral cell method (SCM)~\cite{Mossaiby2019} or the time-domain spectral element method (SEM)~\cite{Ostachowicz2012} are not efficient enough.
 In the end, calling the objective function for each damage case scenario in which the forward solver is used, is unfeasible.
 
@@ -29,12 +29,15 @@ DL has seen extensive research and successful implementation in the fields of no
 Convolutional neural network (CNN) is among the most popular DL architectures. 
 Initially introduced for image processing, CNN has now been extended to various research domains, including NDT and SHM applications such as damage detection, localization, and characterization~\cite{rautela2019deep, pandey2022explainable, ijjeh2021full, ijjeh2022deep}.
 
-In modern DL, the focus is on creating more efficient and simpler architectures by emphasizing the most significant elements and preserving relevant features of the original data. 
-Feature engineering, the process of extracting feature representations from data, requires specific knowledge and is time-consuming. 
-Additionally, it varies for different types of data, making it challenging to have generic procedures. 
-An autoencoder is a neural network capable of automatically learning features from unlabeled data in an unsupervised way, eliminating the need for extensive feature engineering~\cite{pinaya2020autoencoders}. 
-An autoencoder consists of two parts, the encoder, which maps inputs to a desired latent space, and the decoder, which decodes the latent space back into the original input space. 
-By using adequate training data, autoencoders can create a latent representation, thus avoiding the need for substantial feature engineering.
+In modern DL, the focus is on constructing more efficient and streamlined architectures, wherein key components are accentuated and essential attributes from the original data are preserved. 
+This process of crafting architectures involves the meticulous extraction of feature representations from data, which is commonly referred to as feature engineering. 
+However, this practice demands specialized knowledge and a significant investment of time. 
+Moreover, the intricacies of feature engineering differ across various data types, posing a challenge in establishing universally applicable procedures.
+
+An innovative solution comes in the form of an autoencoder, a type of neural network that possesses the capability to autonomously learn features from unlabeled data using unsupervised learning techniques. 
+This unique ability obviates the need for extensive feature engineering~\cite{pinaya2020autoencoders}. 
+Consisting of two integral components, an autoencoder comprises an encoder responsible for mapping inputs to a desired latent space, and a decoder that skilfully reverts the latent space back to the original input domain. 
+By harnessing appropriately curated training data, autoencoders have the capacity to generate a latent representation, thereby negating the necessity for labour-intensive feature engineering endeavours.
 
 However, general autoencoders may not capture spatial features, such as images, or sequential information when dealing with dynamics, like time-series forecasting. 
 To address the limitation of capturing spatial features, the use of a CNN-based autoencoder is recommended, whereas, an RNN-based autoencoder is usually employed for learning features from time-series data.
@@ -53,12 +56,15 @@ Their model is able to generate data for a given crack location and depth of the
 Recently, Peng et al.~\cite{peng2021structural} proposed an encoding convolution long short-term memory (encoding ConvLSTM) framework for building a surrogate structural model with spatiotemporal evolution, estimating structural spatio-temporal states, and predicting dynamic responses under future dynamic load conditions. 
 Zargar and Yuan~\cite{zargar2021impact} presented a hybrid CNN-recurrent neural network (RNN) for handling spatiotemporal information extraction challenges in impact damage detection problems.
 
-In this research work, a deep ConvLSTM autoencoder-based surrogate model is  applied to composite structures with various delamination cases. 
-The model first learns the full wavefield representation from frames containing delaminations and projects it to a compressed domain known as the latent space. 
-This latent space is used as labels for the encoder part of the training, where input contains reference frames (without delaminations) and information about the delamination shape and location. 
+In this work, a novel approach is employed to investigate the propagation of guided waves in composite structures with varying instances of delamination. 
+The method involves utilising a deep ConvLSTM autoencoder-based surrogate model. 
+The main function of the developed model is to capture and learn the full wavefield representation present within frames containing delamination scenarios. 
+Subsequently, it transforms this information into a compressed domain known as the latent space.
+
+During training, the encoder is presented with inputs containing both reference frames (without delaminations) and explicit data detailing the shape and location of the delaminations. 
 This process eliminates the need to repeatedly solve the system's governing equations, resulting in significant time and computational cost savings in comparison to forward modelling by using conventional techniques.
 
-The novelty of this research lies in the implementation of ConvLSTM-based autoencoders for the generation of full wavefield data in composite structures.
+The novelty of this research lies in the implementation of ConvLSTM-based autoencoders for the generation of full wavefield data of propagating guided waves in composite structures.
 The DL model for full wavefield prediction was applied for the first time in the inverse problem of damage identification.
 For this purpose, particle swarm optimisation (PSO) was applied~\cite{Keneddy1995}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,11 +84,12 @@ It is composed of three building blocks: (i) dataset computation, (ii) supervise
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 For the problem of guided wave-based damage identification, it is unfeasible to collect a large experimental dataset which would cover various damage case scenarios because it would require manufacturing and damaging multiple samples.
-Therefore, such a dataset can be computed numerically by using e.g. finite element solver.
-In particular, the dataset which is used in the current research was generated by using the time domain spectral element method~\cite{Kudela2020}.
+Therefore, possible alternative is a dataset computed numerically by using e.g. finite element solver.
+In particular, the dataset which is employed in the current research was generated by using the time domain spectral element method~\cite{Kudela2020}.
 The dataset focuses on the delamination as it is one of the most dangerous types of damage occurring in composite laminates such as carbon fibre-reinforced polymers (CFRP).
-It was generated by feeding the mesh with delamination of random shapes and locations to the forward solver.
-It resulted in frames of propagating waves and their interaction with delamination (512 frames for each delamination scenario).
+The process of generating this dataset involved modelling a square plate with delaminations of varying shapes and positions into the parametric unstructured mesh. 
+Following this, a forward solver was utilised to capture the interactions between the propagating guided waves with the delamination and the boundaries of the plate.
+It resulted in 512 frames for each delamination scenario.
 The dataset is available online~\cite{kudela_pawel_2021_5414555} so that the results can be easily replicated.
 
 The dataset was used for the supervised training of the DL model.

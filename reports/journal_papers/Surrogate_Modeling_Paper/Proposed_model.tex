@@ -1,7 +1,7 @@
 \section{The proposed DL model for supervised learning}
 \label{sec:proposed_approach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this research work, we developed a novel deep ConvLSTM autoencoder-based surrogate model utilising full wavefield frames of Lamb wave propagation for the purpose of data generation for delamination identification in CFRP materials.
+In this research work, we developed a novel deep ConvLSTM autoencoder-based surrogate model utilising full wavefield frames of Lamb wave propagation for the purpose of data generation for delamination identification in thin plates made of composite materials.
 The developed DL model takes as an input \(32\) frames without delamination (reference frames) representing the full wavefield and the delamination information of the respective delamination case in the form of binary image for the purpose of producing full wavefield propagation of Lamb waves through space and time (3D matrix).
 The most important aspect of the DL model is the prediction of the interaction of Lamb waves with the delamination so that the delamination location, shape, and size can be estimated.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -74,7 +74,7 @@ The mathematical formula for computing Pearson CC is shown in Eq.~(\ref{eqn:pear
 	\label{eqn:pearsoncc}
 \end{equation}
 
-where $r_xy$ represents the Pearson CC, \(n\) represents the number of data points in a sample, and $x_k$ and $y_k$ denote the values of the ground truth and predicted values, respectively, for each data point. 
+where $r_{xy}$ represents the Pearson CC, \(n\) represents the number of data points in a sample, and $x_k$ and $y_k$ denote the values of the ground truth and predicted values, respectively, for each data point. 
 Additionally, $\bar{x}$ denotes the mean value of the sample, $\bar{y}$ represents the mean value of the predicted values. 
 The values of $r_{xy}$ ranges from ‘-1’ to ‘+1’. 
 Value ‘0’ specifies that there is no relation between the samples and the predicted values. 
