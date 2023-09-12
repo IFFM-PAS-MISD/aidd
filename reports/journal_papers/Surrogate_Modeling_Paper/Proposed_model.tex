@@ -62,7 +62,18 @@ The PSNR measures the maximum potential power of a signal and the power of the n
 \end{equation}
 
 Where \(L\) denotes the highest degree of variation present in the input image. 
-Meanwhile, MSE stands for mean squared error, which represents the discrepancy between the predicted output and the relevant ground truth.
+Meanwhile, MSE stands for mean squared error, which represents the discrepancy 
+between the predicted output and the relevant ground truth. The calculation of 
+the MSE is shown in Eq.~(\ref{eqn:mse}): 
+
+\begin{equation}
+	M S E=\frac{1}{M * N} \sum_{M, N}\left(Y_{(m, n)}-\hat{Y}_{(m, n)}\right)^2
+	\label{eqn:mse}
+\end{equation}
+
+Where \(M\) and \(N\) represent the number of rows and columns in the input 
+images, $Y_{(m, n)}$ is the ground truth value, and $\hat{Y}_{(m, n)}$ is the 
+predicted value.
 
 Pearson CC is a metric that estimates the linear connection between two sets of variables, \(\vect{x}\) (which represents the ground truth values) and \(\vect{y}\) (which represents the predicted values). 
 The mathematical formula for computing Pearson CC is shown in Eq.~(\ref{eqn:pearsoncc}):

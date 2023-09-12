@@ -41,7 +41,9 @@ The termination criterion was assumed as 100 iterations but it was observed that
 In the final step, the best matching wavefields indicate coordinates, semi-major, semi-minor axis and rotation angle of the elliptic-shaped delamination. 
 These parameters are used for a visual representation of the best-matched delamination in the form of binary image compared against the ground truth (see also Fig.~\ref{fig:complete_flowchart}).
 
-As an evaluation metric for assessing the accuracy of the identified delamination, we used the intersection over union (IoU) which measures how well the predicted delamination overlaps the true delamination. 
+As an evaluation metric for assessing the accuracy of the identified 
+delamination, we used the intersection over union (IoU), which measures the 
+degree to which the predicted delamination overlaps the true delamination. 
 It is defined as:
 \begin{equation}
 	IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y}

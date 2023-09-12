@@ -2,19 +2,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Detecting delamination in composite materials poses a significant challenge for conventional visual inspection techniques as it occurs between plies of the composite laminate and remains invisible from external surfaces~\cite{staszewski2009health, tuo2019damage}. 
-As a result, various nondestructive testing (NDT) and structural health monitoring (SHM) techniques have been proposed for delamination identification in composite structures. 
-Among these techniques, ultrasonic guided waves are widely recognized as one of the most promising approaches for quantitatively identifying defects in composites. 
+As a result, various nondestructive testing (NDT) and structural health 
+monitoring (SHM) techniques have been proposed for delamination identification 
+in composite structures. 
+Among these techniques, ultrasonic guided waves are widely recognized as one of 
+the most promising approaches for quantitatively identifying defects in 
+composites~\cite{tian2015delamination, munian2018lamb}. 
 Their extensive application is attributed to their high sensitivity to small defects, low propagation attenuation, and ability to monitor large areas using only a small number of sparsely distributed transducers~\cite{Barthorpe2020, Ihn2008, Cantero-Chinchilla2020}.
 
-However, using a smaller number of transducers is inadequate for obtaining high-quality resolution damage maps and assessing the size of the damage accurately. 
-Conversely, employing a very dense array of transducers is impractical in most situations. To address these issues, a scanning laser Doppler vibrometer (SLDV) is employed. 
+However, using a smaller number of transducers does not allow to obtain 
+high-quality resolution damage maps and accurately asses the size of 
+experienced damage. 
+Conversely, employing a very dense array of transducers is impractical in most 
+situations. To address these issues, a scanning laser Doppler vibrometer (SLDV) 
+can be employed. 
 SLDV can measure the propagation of guided waves in a highly dense grid of points over the surface of a large specimen, collectively known as a full wavefield~\cite{Radzienski2019a}. 
 In recent years, full wavefield signals have been utilized for detecting and localizing defects in composite structures~\cite{Radzienski2019a, Girolamo2018a, kudela2018impact, rogge2013characterization}. 
-These damage identification techniques using full wavefield signals can effectively estimate 
-not only the location but also the size of the damage~\cite{Girolamo2018a, kudela2018impact}. 
+These damage identification techniques using full wavefield signals can 
+effectively estimate not only the location but also the size of the 
+damage~\cite{Girolamo2018a, kudela2018impact}. 
 Full wavefield scans offer valuable insights into the interaction of guided waves with defects. However, acquiring the full wavefield of guided waves is a time-consuming process.
 
-One possible solution to address this problem involves obtaining Lamb waves in a low-resolution format and subsequently applying compressive sensing (CS) eventually enhanced by deep learning (DL) method~\cite{esfandabadideep} or end-to-end DL-based super-resolution technique~\cite{ijjeh2023deep}. 
+One possible solution to address this problem involves obtaining Lamb waves in 
+a low-resolution format and subsequently applying compressive sensing (CS) 
+eventually enhanced by deep learning (DL) methods~\cite{esfandabadideep}, such 
+as end-to-end DL-based super-resolution technique~\cite{ijjeh2023deep}. 
 
 Nevertheless, the damage identification methods operating on the full wavefield cannot be directly extended to the cases when only spatially sparse data is available, e.g. an array of sensors is installed on the structure.
 In such a case, usually, an inverse procedure is employed in which efficient methods for solving wave equations are required (forward solver).  
@@ -34,8 +46,13 @@ This process of crafting architectures involves the meticulous extraction of fea
 However, this practice demands specialized knowledge and a significant investment of time. 
 Moreover, the intricacies of feature engineering differ across various data types, posing a challenge in establishing universally applicable procedures.
 
-An innovative solution comes in the form of an autoencoder, a type of neural network that possesses the capability to autonomously learn features from unlabeled data using unsupervised learning techniques. 
-This unique ability obviates the need for extensive feature engineering~\cite{pinaya2020autoencoders}. 
+An established option for feature extraction, alleviating feature engineering, 
+is delivered in the form of an autoencoder, a type of neural network that 
+possesses the capability to autonomously learn features from unlabeled data 
+using unsupervised learning techniques. 
+This unique ability obviates the need for extensive feature 
+engineering~\cite{pinaya2020autoencoders, ardelean2023study, 
+simpson2021machine}. 
 Consisting of two integral components, an autoencoder comprises an encoder responsible for mapping inputs to a desired latent space, and a decoder that skilfully reverts the latent space back to the original input domain. 
 By harnessing appropriately curated training data, autoencoders have the capacity to generate a latent representation, thereby negating the necessity for labour-intensive feature engineering endeavours.
 
@@ -83,20 +100,29 @@ It is composed of three building blocks: (i) dataset computation, (ii) supervise
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For the problem of guided wave-based damage identification, it is unfeasible to collect a large experimental dataset which would cover various damage case scenarios because it would require manufacturing and damaging multiple samples.
-Therefore, possible alternative is a dataset computed numerically by using e.g. finite element solver.
+For the problem of guided wave-based damage identification, it is infeasible to 
+collect a large experimental dataset which would cover various damage case 
+scenarios because it would require manufacturing and damaging multiple samples.
+Therefore, a possible alternative is a dataset computed numerically by using 
+e.g. a finite element solver.
 In particular, the dataset which is employed in the current research was generated by using the time domain spectral element method~\cite{Kudela2020}.
-The dataset focuses on the delamination as it is one of the most dangerous types of damage occurring in composite laminates such as carbon fibre-reinforced polymers (CFRP).
+The dataset focuses on delamination defects as it these represent the most 
+dangerous types of damage occurring in composite laminates such as carbon 
+fibre-reinforced polymers (CFRP).
 The process of generating this dataset involved modelling a square plate with delaminations of varying shapes and positions into the parametric unstructured mesh. 
 Following this, a forward solver was utilised to capture the interactions between the propagating guided waves with the delamination and the boundaries of the plate.
 It resulted in 512 frames for each delamination scenario.
-The dataset is available online~\cite{kudela_pawel_2021_5414555} so that the results can be easily replicated.
+The dataset is made available online~\cite{kudela_pawel_2021_5414555} so that 
+the results can be easily replicated.
 
 The dataset was used for the supervised training of the DL model.
 The idea was to input to the DL model a binary image in which ones (white pixels) represent  the delamination region and zeros (black pixels) represent the healthy region for the respective delamination cases.
 Once the model is trained, it can be used in the inverse procedure as a surrogate model instead of a computationally expensive p-FEM or SEM forward solver.
 
-It should be noted that the PSO algorithm was used in the inverse method due to its efficiency but other algorithms can be used as well. 
+It should be noted that the PSO algorithm was used in the inverse method due to 
+its efficiency in handling more general formulations of objective functions (as 
+opposed to stricter algebraic constructs), but other algorithms can be used as 
+well. 
 On one hand, inputs are initial particles represented by binary images in Fig~\ref{fig:complete_flowchart}.
 These are fed to the trained DL model which in turn is predicting the full wavefield of propagating waves for respective delamination scenarios.
 On the other hand, full wavefield measurements are acquired. 

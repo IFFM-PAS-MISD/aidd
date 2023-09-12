@@ -4,8 +4,12 @@ The novelty of this research lies in the implementation of ConvLSTM-based autoen
 The developed surrogate deep learning model takes as input full wavefield frames of propagating waves in a healthy plate along with a binary image representing delamination and predicts frames of propagating waves in a plate which contains single delamination.
 The evaluation of the surrogate model is ultrafast.
 Therefore, unlike traditional forward solvers, the surrogate model can be employed efficiently in the inverse framework of damage identification.
-Particle swarm optimisation is applied for this purpose. 
+In this work, particle swarm optimisation is applied as a suitable tool to this 
+end. 
 
 The proposed method was tested on a synthetic dataset showing that it is capable to estimate delamination location and size with a good accuracy.
-The test involved a full wavefield data in the objective function of the inverse method but it should be underlined that also a data with limited number of signals can be implemented.
-This is extremely important for practical applications in structural health monitoring where only signals at sensor locations are available.
+The test involved full wavefield data in the objective function of the inverse 
+method but it should be underlined that also partial data with measurements can 
+be implemented.
+This is extremely important for practical applications in structural health 
+monitoring where only signals at a finite number of locations are available.
