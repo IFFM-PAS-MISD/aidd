@@ -42,6 +42,7 @@ the following three steps:
 
 The proposed ConvLSTM autoencoder model takes \(32\) frames as input concatenated with a binary image which is replicated 32 times (see Fig.~\ref{fig:proposed_model}). 
 The DL model consists of six ConvLSTM layers.
+The size of filters were tailored to the input-output data in a way to saturate available GPU memory (32 GB of Nvidia Tesla V100).
 The first ConvLSTM layer has \(32\) filters, the second and third layer has \(192\) filters, the fourth layer has \(32\) filters, and the last two ConvLSTM layers has \(192\) filters.
 The kernel size of the ConvLSTM layers was set to (\(3\times3\)) with a stride of \((1)\). 
 Padding was set to "same", which makes the output the same as the input in the case of stride \(1\).

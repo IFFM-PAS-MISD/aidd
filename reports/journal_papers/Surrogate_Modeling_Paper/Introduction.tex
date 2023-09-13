@@ -10,27 +10,21 @@ the most promising approaches for quantitatively identifying defects in
 composites~\cite{tian2015delamination, munian2018lamb}. 
 Their extensive application is attributed to their high sensitivity to small defects, low propagation attenuation, and ability to monitor large areas using only a small number of sparsely distributed transducers~\cite{Barthorpe2020, Ihn2008, Cantero-Chinchilla2020}.
 
-However, using a smaller number of transducers does not allow to obtain 
+However, using a smaller number of sensors does not allow to obtain 
 high-quality resolution damage maps and accurately asses the size of 
 experienced damage. 
-Conversely, employing a very dense array of transducers is impractical in most 
-situations. To address these issues, a scanning laser Doppler vibrometer (SLDV) 
-can be employed. 
+Conversely, employing a very dense array of sensors is mostly feasible only in laboratory conditions but impractical due to added mass and cabling. To address these issues, a scanning laser Doppler vibrometer (SLDV) can be employed for guided wave sensing. 
 SLDV can measure the propagation of guided waves in a highly dense grid of points over the surface of a large specimen, collectively known as a full wavefield~\cite{Radzienski2019a}. 
+It is very useful for better understanding of underlying physics of interaction of guided waves with discontinuities, mode conversion, etc.
 In recent years, full wavefield signals have been utilized for detecting and localizing defects in composite structures~\cite{Radzienski2019a, Girolamo2018a, kudela2018impact, rogge2013characterization}. 
-These damage identification techniques using full wavefield signals can 
-effectively estimate not only the location but also the size of the 
-damage~\cite{Girolamo2018a, kudela2018impact}. 
+These damage identification techniques using full wavefield signals can effectively estimate not only the location but also the size of the damage~\cite{Girolamo2018a, kudela2018impact}. 
 Full wavefield scans offer valuable insights into the interaction of guided waves with defects. However, acquiring the full wavefield of guided waves is a time-consuming process.
 
-One possible solution to address this problem involves obtaining Lamb waves in 
-a low-resolution format and subsequently applying compressive sensing (CS) 
-eventually enhanced by deep learning (DL) methods~\cite{esfandabadideep}, such 
-as end-to-end DL-based super-resolution technique~\cite{ijjeh2023deep}. 
+One possible solution to address this problem involves obtaining Lamb waves in a low-resolution format and subsequently applying compressive sensing (CS) eventually enhanced by deep learning (DL) methods~\cite{esfandabadideep}, such as end-to-end DL-based super-resolution technique~\cite{ijjeh2023deep}. 
 
 Nevertheless, the damage identification methods operating on the full wavefield cannot be directly extended to the cases when only spatially sparse data is available, e.g. an array of sensors is installed on the structure.
 In such a case, usually, an inverse procedure is employed in which efficient 
-methods for solving wave equations are required.  
+methods for solving wave equations are required usually reflected in physics-based forward simulators.  
 However, numerical modelling of ultrasonic guided wave propagation in solid media exhibiting discontinuities, such as damage, is complex, requires fine discretization and is computationally intensive.
 Even methods such as p-version of the finite element method (p-FEM)~\cite{Duczek2013}, the iso-geometric analysis (IGA)~\cite{Anitescu2019}, the spectral cell method (SCM)~\cite{Mossaiby2019} or the time-domain spectral element method (SEM)~\cite{Ostachowicz2012} are not efficient enough.
 In the end, calling the objective function for each damage case scenario in which the forward solver is used, is unfeasible.
@@ -42,17 +36,13 @@ DL has seen extensive research and successful implementation in the fields of no
 Convolutional neural network (CNN) is among the most popular DL architectures. 
 Initially introduced for image processing, CNN has now been extended to various research domains, including NDT and SHM applications such as damage detection, localization, and characterization~\cite{rautela2019deep, pandey2022explainable, ijjeh2021full, ijjeh2022deep}.
 
-In modern DL, the focus is on constructing more efficient and streamlined architectures, wherein key components are accentuated and essential attributes from the original data are preserved. 
-This process of crafting architectures involves the meticulous extraction of feature representations from data, which is commonly referred to as feature engineering. 
-However, this practice demands specialized knowledge and a significant investment of time. 
+Usually, streamlined NN architectures were used with curated input to force the DL model to learn features. 
+The meticulous extraction of feature representations from data is commonly referred to as feature engineering. 
+This practice requires specialized knowledge and a significant investment of time. 
 Moreover, the intricacies of feature engineering differ across various data types, posing a challenge in establishing universally applicable procedures.
 
-An established option for feature extraction, alleviating feature engineering, 
-is delivered in the form of an autoencoder, a type of neural network that 
-possesses the capability to autonomously learn features from unlabeled data 
-using unsupervised learning techniques. 
-This unique ability obviates the need for extensive feature 
-engineering~\cite{pinaya2020autoencoders, ardelean2023study, 
+An established option for feature extraction, alleviating feature engineering, is delivered in the form of an autoencoder, a type of neural network that possesses the capability to autonomously learn features from unlabeled data using unsupervised learning techniques. 
+This unique ability obviates the need for extensive feature engineering~\cite{pinaya2020autoencoders, ardelean2023study, 
 simpson2021machine}. 
 Consisting of two integral components, an autoencoder comprises an encoder responsible for mapping inputs to a desired latent space, and a decoder that skilfully reverts the latent space back to the original input domain. 
 By harnessing appropriately curated training data, autoencoders have the capacity to generate a latent representation, thereby negating the necessity for labour-intensive feature engineering endeavours.

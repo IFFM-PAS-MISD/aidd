@@ -32,7 +32,7 @@ In these images, ones (white pixels) represent delamination whereas zeros (black
 
 The most important component of the proposed inverse method is the surrogate DL model described in section~\ref{sec:proposed_approach}.
 The trained DL model is used for ultrafast full wavefield prediction as illustrated in Fig.~\ref{fig:complete_flowchart}.
-For a single particle and respective binary image, the DL model is evaluated 7 times for 32 consecutive frames giving as an output 224 frames. 
+For a single particle and respective binary image, the DL model is evaluated 7 times for 32 consecutive frames giving as an output 224 frames which takes below 10 seconds. 
 These predicted frames are compared to 'measured' frames by using the MSE metric which is utilised in the objective function.
 However, for the sake of replicability of the results and compatibility with the available dataset~\cite{kudela_pawel_2021_5414555}, we used synthetic data instead of measured data (acquired by SLDV).
 
