@@ -1,0 +1,199 @@
+%Version 3 October 2023
+% See section 11 of the User Manual for version history
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double 
+%%%line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,sn-basic]{sn-jnl}% Basic Springer Nature Reference 
+%%%Style/Chemistry Reference Style
+
+%%======================================================%%
+%% to compile with pdflatex/xelatex use pdflatex option %%
+%%======================================================%%
+
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference 
+%%%Style/Chemistry Reference Style
+
+
+%%Note: the following reference styles support Namedate and Numbered 
+%%referencing. By default the style follows the most common style. To switch 
+%%between the options you can add or remove Numbered in the optional 
+%%parenthesis. 
+%%The option is available for: sn-basic.bst, sn-vancouver.bst, sn-chicago.bst%  
+
+%%\documentclass[sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio 
+%%%journals
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference 
+%%%Style/Chemistry Reference Style
+\documentclass[sn-mathphys-num]{sn-jnl}% Math and Physical Sciences Numbered 
+%Reference Style 
+%%\documentclass[sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author 
+%%%Year Reference Style
+%%\documentclass[sn-aps]{sn-jnl}% American Physical Society (APS) Reference 
+%%%Style
+%%\documentclass[sn-vancouver,Numbered]{sn-jnl}% Vancouver Reference Style
+%%\documentclass[sn-apa]{sn-jnl}% APA Reference Style 
+%%\documentclass[sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{algorithm}%
+\usepackage{algorithmicx}%
+\usepackage{algpseudocode}%
+\usepackage{listings}%
+%\usepackage{subfigure}
+
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals 
+%%%%published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios 
+%%%%and 
+%%%%  research disciplines. You may find sections in this template are 
+%%%%irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in 
+%%%%the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+%% as per the requirement new theorem styles can be included as shown below
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of 
+%%independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem 
+%%%and proposition etc.
+
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\graphicspath{{Graphics/}{//pkudela_odroid_sensors/ALPHORN/surrogate_modelling_paper/Graphics/}}
+
+\begin{document}
+	%\begin{frontmatter}
+		%\addcontentsline{toc}{section}{References}
+		%% Title, authors and addresses
+		%% use the tnoteref command within \title for footnotes;
+		%% use the tnotetext command for theassociated footnote;
+		%% use the fnref command within \author or \address for footnotes;
+		%% use the fntext command for theassociated footnote;
+		%% use the corref command within \author for corresponding author 
+		%%footnotes;
+		%% use the cortext command for theassociated footnote;
+		%% use the ead command for the email address,
+		%% and the form \ead[url] for the home page:
+		%% \title{Title\tnoteref{label1}}
+		%% \tnotetext[label1]{}
+		%% \author{Name\corref{cor1}\fnref{label2}}
+		%% \ead{email address}
+		%% \ead[url]{home page}
+		%% \fntext[label2]{}
+		%% \cortext[cor1]{}
+		%% \address{Address\fnref{label3}}
+		%% \fntext[label3]{}
+		\title{Simulation of full wavefield data with deep learning approach for delamination identification}
+		
+%%=============================================================%%
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% \author*[1,2]{\fnm{Joergen W.} \spfx{van der} \sur{Ploeg} 
+	%%  \sfx{IV}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author[1]{\fnm{Saeed} \sur{Ullah}}\email{sullah@imp.gda.pl}
+
+\author*[2]{\fnm{Pawel} \sur{Kudela}}\email{pk@imp.gda.pl}
+
+\author[3]{\fnm{Abdalraheem} \sur{A. Ijjeh}}\email{iiiauthor@gmail.com}
+
+\author[4]{\fnm{Eleni} \sur{Chatzi}}\email{iiiauthor@gmail.com}
+
+\author[5]{\fnm{Wieslaw} \sur{Ostachowicz}}\email{wieslaw@imp.gda.pl}
+
+\affil*[1, 2, 3, 5]{\orgdiv{Institute of Fluid Flow Machinery}, \orgname{Polish 
+Academy of Sciences, Poland}, 
+\orgaddress{\street{Generała Józefa Fiszera 14}, \city{Gdańsk}, 
+\postcode{80-231}, \country{Poland}}}
+
+\affil[4]{\orgdiv{Department of Civil, Environmental, and Geomatic 
+Engineering}, \orgname{ETH Z\"{u}rich, Switzerland}, 
+\orgaddress{\street{Stefano-​Franscini-Platz 5}, \city{Z\"{u}rich}, 
+\postcode{8093}, \country{Switzerland}}}
+		
+		\begin{abstract}
+			\input{Abstract}
+		\end{abstract}
+	
+	\keywords{Lamb waves, structural health monitoring, surrogate modeling, 
+	delamination identification, deep learning, autoencoders, ConvLSTM}
+	%\end{frontmatter}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Introduction}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Data_Acquistion_and_data_preprocessing}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Proposed_model}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Inverse_method}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\input{Results_and_discussions}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\clearpage
+	\input{Conclusions}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\clearpage	
+	%\appendix
+	\section*{Acknowledgments}
+	The research was funded by the Polish National Science Center under grant agreements no 2019/01/Y/ST8/00060.
+	
+	\bibliography{sn-bibliography}% common bib file
+	%% if required, the content of .bbl file can be included here once bbl is 
+	%%generated
+	%%\input sn-article.bbl
+
+\end{document}
+
+

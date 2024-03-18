@@ -1,0 +1,313 @@
+\section{Results and discussions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation of the surrogate DL model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, we present the evaluation of the proposed DL model based on numerical test data of \(95\) delamination cases representing the frames of the full wavefield propagation, which was not shown in the proposed DL model during training. 
+The proposed DL model was evaluated using numerical test data to demonstrate the capability to predict the interaction of Lamb waves with delamination of various locations, shapes and sizes.
+
+Three different representative cases were selected from the numerical dataset to show the performance of the developed DL model.
+Figures~\ref{fig:num_415},~\ref{fig:num_453}, 
+and~\ref{fig:num_462} shows three different frames from three selected numerical test cases.  
+Frames on the left column represent the labels to which the prediction of the proposed DL model is compared.
+Frames on the right column represent prediction by the DL model.
+Particular frames were selected to show the interaction of propagating Lamb waves with the delamination, namely $10\textsuperscript{th}$, $20\textsuperscript{th}$ and $30\textsuperscript{th}$ frame after the interaction with the delamination. These frame numbers were easily extracted knowing the A0 mode velocity and modelled delamination location. 
+
+As can be seen in the first scenario (Fig~\ref{fig:num_415}), the delamination occurred at the upper-left side of the plate, in the second scenario (Fig~\ref{fig:num_453}), the delamination occurred at the top-left of the plate whereas in the third scenario, (Fig~\ref{fig:num_462}) the delamination occurred at the top-centre of the plate. 
+
+In all presented cases (Figs.~\ref{fig:num_415}--\ref{fig:num_462}), the change of wave velocity due to delamination is well reproduced by the DL model.
+The wave reflections from the delamination are very well predicted in Fig.~\ref{fig:num_453} whereas in some cases and frames the reflection pattern differs between the label and the DL prediction - compare Fig.~\ref{fig:num_462_label3} to Fig.~\ref{fig:num_462_pred3}.
+It should be underlined that these reflections are of much smaller amplitude than the main wavefront and the proposed DL model is not able to reproduce correctly all detailed intricacies of Lamb wave reflections. 
+A more complex DL model could be required to further improve the results.
+Nevertheless, testing results are satisfactory and very promising.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} []
+	\centering
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure6a.png}
+		\caption{Label, $10\textsuperscript{th}$ frame}
+		\label{fig:num_415_label1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure6b.png} 
+		\caption{Prediction, $10\textsuperscript{th}$ frame}
+		\label{fig:num_415_pred1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure6c.png}
+		\caption{Label, $20\textsuperscript{th}$ frame}
+		\label{fig:num_415_label2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure6d.png}
+		\caption{Prediction, $20\textsuperscript{th}$ frame}
+		\label{fig:num_415_pred2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure6e.png}
+		\caption{Label, $30\textsuperscript{th}$ frame}
+		\label{fig:num_415_label3}
+	\end{subfigure}
+	\hfill	
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure6f.png}
+		\caption{Prediction, $30\textsuperscript{th}$ frame}
+		\label{fig:num_415_pred3}
+	\end{subfigure}
+	\hfill	
+	\caption{First scenario: comparison of predicted frames with the label 
+		frames at $10\textsuperscript{th}$, $20\textsuperscript{th}$, and 
+		$30\textsuperscript{th}$ frame after the interaction with delamination.}
+	\label{fig:num_415}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} []
+	\centering
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure7a.png}
+		\caption{Label, $10\textsuperscript{th}$ frame}
+		\label{fig:num_453_label1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure7b.png} 
+		\caption{Prediction, $10\textsuperscript{th}$ frame}
+		\label{fig:num_453_pred1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure7c.png}
+		\caption{Label, $20\textsuperscript{th}$ frame}
+		\label{fig:num_453_label2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure7d.png}
+		\caption{Prediction, $20\textsuperscript{th}$ frame}
+		\label{fig:num_453_pred2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure7e.png}
+		\caption{Label, $30\textsuperscript{th}$ frame}
+		\label{fig:num_453_label3}
+	\end{subfigure}
+	\hfill	
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure7f.png}
+		\caption{Prediction, $30\textsuperscript{th}$ frame}
+		\label{fig:num_453_pred3}
+	\end{subfigure}
+	\hfill	
+	\caption{Second scenario: comparison of predicted frames with the label 
+		frames at $10\textsuperscript{th}$, $20\textsuperscript{th}$, and 
+		$30\textsuperscript{th}$ frame after the interaction with delamination.}
+	\label{fig:num_453}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} []
+	\centering
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure8a.png}
+		\caption{Label, $10\textsuperscript{th}$ frame}
+		\label{fig:num_462_label1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure8b.png} 
+		\caption{Prediction, $10\textsuperscript{th}$ frame}
+		\label{fig:num_462_pred1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure8c.png}
+		\caption{Label, $20\textsuperscript{th}$ frame}
+		\label{fig:num_462_label2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure8d.png}
+		\caption{Prediction, $20\textsuperscript{th}$ frame}
+		\label{fig:num_462_pred2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure8e.png}
+		\caption{Label, $30\textsuperscript{th}$ frame}
+		\label{fig:num_462_label3}
+	\end{subfigure}
+	\hfill	
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{figure8f.png}
+		\caption{Prediction, $30\textsuperscript{th}$ frame }
+		\label{fig:num_462_pred3}
+	\end{subfigure}
+	\hfill	
+	\caption{Third scenario: comparison of predicted frames with the label 
+		frames at $10\textsuperscript{th}$, $20\textsuperscript{th}$, and 
+		$30\textsuperscript{th}$ frame after the interaction with delamination.}
+	\label{fig:num_462}
+\end{figure}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+From all three scenarios, it can be confirmed that the proposed DL-based surrogate model has reconstructed the full wavefield containing delamination with minimal error. 
+Furthermore, the PSNR and Pearson CC values of all these three scenarios are shown in Table~\ref{tab:psnr_pearson}. 
+The mean PSNR value was 21.8 dB, and the mean Pearson CC value was 0.98 on all of the test data.
+It confirms that the predictions by the proposed DL model are accurate.
+%\newpage%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[ht]
+	\centering
+	\caption{DL surrogate model evaluation metrics for three numerical cases}
+	\begin{tabular}{@{}cccc@{}}
+		\toprule
+		\multicolumn{2}{c}{scenario}                            & PSNR    & Pearson CC \\ 
+		\midrule
+		\multirow{3}{*}{first} & $10\textsuperscript{th}$ frame & 23.3 dB & 0.96       \\ 
+		& $20\textsuperscript{th}$ frame                        & 23.4 dB & 0.98       \\ 
+		& $30\textsuperscript{th}$ frame                        & 23.7 dB & 0.98       \\ 
+		\midrule
+		\multirow{3}{*}{second}& $10\textsuperscript{th}$ frame & 21.4 dB & 0.96       \\ 
+		& $20\textsuperscript{th}$ frame                        & 22.1 dB & 0.98       \\ 
+		& $30\textsuperscript{th}$ frame                        & 22.6 dB & 0.98       \\ 
+		\midrule
+		\multirow{3}{*}{third}& $10\textsuperscript{th}$ frame  & 21.8 dB & 0.97       \\ 
+		& $20\textsuperscript{th}$ frame                        & 22.1 dB & 0.98       \\ 
+		& $30\textsuperscript{th}$ frame                        & 22.3 dB & 0.99       \\ 
+		\bottomrule
+	\end{tabular}
+	\label{tab:psnr_pearson}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Delamination identification results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The delamination identification results obtained by using PSO aided by the DL-based surrogate model are presented in Fig.~\ref{fig:pso_identification}.
+Several runs were performed due to the meta-heuristic nature of the PSO algorithm and the results were selected for two runs for illustration purposes.
+The following cases were selected, namely case 1 (Fig.~\ref{fig:pso_case391_run1}, Fig.~\ref{fig:pso_case391_run2}), case 2 (Fig.~\ref{fig:pso_case462_run1}, Fig.~\ref{fig:pso_case462_run2}) and case 3 (Fig.~\ref{fig:pso_case453_run1}, Fig.~\ref{fig:pso_case453_run2}),  where the damage identification difficulty can be ranked from highest to lowest.
+The most difficult case is case 1 in which delamination is in the corner of the plate.
+The delamination for case 2 is located very close to the top edge of the plate where edge reflections can overshadow reflections from delamination.
+The delamination for case 3 is quite large and far away from the plate's edges so it should be easily detected.
+
+Actually, the damage identification difficulty level is reflected in the obtained IoU values which are shown in the zoomed-in regions around delamination in Fig.~\ref{fig:pso_identification}.
+On average, the lowest IoU values were obtained for case 1.
+
+The visualisation of damage identification results is performed in such a way that the delamination ground truth is shown in green colour, DL model prediction in red colour and the intersection of the two is made by colour mixing which gives yellow colour.
+Therefore, the more yellow pixels, the greater overlap of delaminations and, in turn, better accuracy.
+
+It should be noted that despite low IoU values in certain cases, the identification algorithm performed remarkably well because delamination was localised accurately for each scenario.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} []
+	\centering
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case391_run1.png}
+		\caption{Case 1, run 1}
+		\label{fig:pso_case391_run1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case391_run2.png}
+		\caption{Case 1, run 2}
+		\label{fig:pso_case391_run2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case462_run1.png}
+		\caption{Case 2, run 1}
+		\label{fig:pso_case462_run1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case462_run2.png}
+		\caption{Case 2, run 2}
+		\label{fig:pso_case462_run2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case453_run1.png}
+		\caption{Case 3, run 1}
+		\label{fig:pso_case453_run1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case453_run2.png}
+		\caption{Case 3, run 2}
+		\label{fig:pso_case453_run2}
+	\end{subfigure}
+	\hfill
+	\caption{Delamination identification results; green - ground truth, red - prediction, yellow - intersection.}
+	\label{fig:pso_identification}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The delamination identification results in terms of IoU values are gathered in Table~\ref{tab:iou} where also the results from~\cite{Ullah2023} are added for comparison.
+The method presented in~\cite{Ullah2023} is completely different than the one presented here but it relies on the same dataset.
+However, the frame size was larger, namely \((512\times512)\)~pixels versus \((256\times256)\)~pixels here, giving better resolution of damage identification.
+
+Although, according to Table~\ref{tab:iou}, the current results are not as good as compared to our previous paper~\cite{Ullah2023}, the advantage of the proposed method is that it can be easily extended to the cases in which only a limited number of signals are available in comparison to full wavefield data.
+This is extremely important for practical applications in structural health monitoring where only signals at sensor locations are available.
+ 
+It should also be stressed, that the complexity of the proposed DL model and dataset size used for training is limited by the memory of a single Nvidia Tesla V100 GPU (32 GB memory) which was available to us.
+Certainly, the surrogate DL model can be improved by using a larger number of frames in the sequence of ConvLSTM layers. 
+It is expected that damage identification would improve as well with a more accurate surrogate DL model.
+
+\begin{table}[ht]
+	\centering
+	\caption{Damage identification evaluation metrics for three numerical cases}
+	\begin{tabular}{@{}cccc@{}}
+		\toprule
+		\multicolumn{2}{c}{case number}       & \multicolumn{2}{c}{IoU} \\ 
+		\cmidrule(lr){3-4} 
+		& & current & \cite{Ullah2023}\\
+		\midrule
+		\multirow{3}{*}{1} & run 1    & 0.25 & \multirow{3}{*}{0.74}       \\ 
+						   & run 2    & 0.41 &        \\ 
+						   & run 3    & 0.34 &        \\ 
+		\midrule
+		\multirow{3}{*}{2} & run 1    & 0.84 & \multirow{3}{*}{0.76}       \\ 
+		                   & run 2    & 0.32 &        \\ 
+		                   & run 3    & 0.34 &        \\ 
+		\midrule
+		\multirow{3}{*}{3} & run 1     & 0.78 & \multirow{3}{*}{0.88}       \\ 
+		                   & run 2     & 0.60 &        \\ 
+		                   & run 3     & 0.85 &        \\ 
+		\bottomrule
+	\end{tabular}
+	\label{tab:iou}
+\end{table}

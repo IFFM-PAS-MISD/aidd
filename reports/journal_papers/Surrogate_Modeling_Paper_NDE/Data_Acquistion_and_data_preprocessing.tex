@@ -1,0 +1,72 @@
+\section{Dataset computation and preprocessing}
+\subsection{Dataset computation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this work, a synthetic dataset of propagating waves in carbon fibre reinforced composite plates was computed by using the parallel implementation of the time domain spectral element method~\cite{Kudela2020}. 
+Essentially, the dataset resembles the particle velocity measurements at the bottom surface of the plate acquired by the SLDV in the transverse direction as a response to the piezoelectric transducer excitation placed at the centre of the plate's top surface. 
+The input signal was a five-cycle Hann window-modulated sinusoidal tone burst. 
+The carrier frequency was assumed to be 50 kHz. 
+The total wave propagation time was set to 0.75 ms.
+The number of time integration steps was 150000, which was selected for the 
+stability of the central difference scheme.
+
+The material was a typical cross-ply CFRP laminate. 
+The stacking sequence [0/90]\(_4\) was used in the model. 
+The properties of a single ply were as follows [GPa]:
+\(C_{11} = 52.55, \, C_{12} = 6.51, \, C_{22} = 51.83, C_{44} = 2.93, C_{55} = 
+2.92, C_{66} = 3.81\). 
+The assumed mass density was 1522.4 kg/m\textsuperscript{3}.
+These properties were selected so that wavefields simulated numerically are matching the wavefields measured by SLDV on real CFRP specimens.
+The wavelength of the dominating A0 Lamb wave mode was 21.2 mm.
+
+475 cases were simulated, representing Lamb waves propagation and interaction 
+with single delamination for each case. 
+The following random factors were used in simulated delamination scenarios:
+\begin{itemize}
+	\item coordinates of the centre of delamination,
+	\item delamination geometrical size	determined by ellipse minor and major axis randomly selected from the range $10-40$ mm,
+	\item delamination angle randomly selected from the range $ 0^{\circ}-180^{\circ}$.
+	
+\end{itemize}
+The delamination modelling was realized by writing custom geometry files which were used to generate unstructured mesh consisting of quadrilateral elements by using gmsh software~\cite{Geuzaine2009}.
+An exemplary mesh of quadrilateral elements is shown in Fig.~\ref{fig:random_delam_mesh} in which green elements highlight the delamination whereas red elements represent the location of the piezoelectric actuator.
+Next, the mesh was modified by doubling elements and splitting nodes at delamination region.
+Additionally, the quadrilateral elements were converted to the 36-node spectral elements by using a custom MATLAB script.
+The wave propagation problem was solved by using in-house code of the time domain SEM which was run on GPU.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure} [h!]
+	\begin{center}
+		\includegraphics{figure2.png}
+	\end{center}
+	\caption{Exemplary mesh containing piezoelectric transducer (red) and random delamination (green) used for Lamb wave propagation modelling.} 
+	\label{fig:random_delam_mesh}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The dataset contains 475 different delamination cases, with 512 frames per case, producing a total number of 243,\,200 frames with a frame size of \((500\times500)\)~pixels representing the geometry of the specimen surface of size \((500\times500)\)~mm\(^{2}\).
+The frames in the dataset are 8-bit .png greyscale images.
+The spatial size of the wavefield was further downsampled to \((256\times256)\) for the purpose of 
+reducing the computational complexity.
+
+It is important to note that input data to the DL model in the form of the binary image representing the respective delamination case as it is presented in Fig.~\ref{fig:complete_flowchart} was insufficient to train a reliable model.
+It was necessary to provide additional inputs in the form of reference full wavefield frames (without delaminations).
+This is explained along with the DL model in section~\ref{sec:proposed_approach}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data augmentation}
+The best way for improving the generalisation capabilities of the neural network is to acquire more data. 
+However, in practice, it can be difficult to acquire more data and the amount of available data for neural network training is limited.
+For tackling this issue, one way is to create some fake data based on the original dataset and add it to the training set, which is termed data augmentation. 
+Data augmentation is an efficient approach for various computer vision and DL tasks. 
+Data augmentation includes randomly cropping a region from the original image, adjusting contrast, rotation for a small angle and flipping images, etc.~\cite{szegedy2015going}.
+In this research work, the dataset is composed of 475 delamination cases which is not enough for a targeted DL model to perform well.
+Therefore, all the images in the 475 delamination cases are flipped diagonally, horizontally, and vertically in order to enhance the performance of the proposed DL model. 
+Therefore, the total dataset after data augmentation is now composed of 1900 \((475\times4 = 1900)\) delamination cases.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dataset division and preprocessing}
+For training and evaluation of the proposed DL model, the dataset was divided into two sets: training and testing, with a ratio of \(80\%\) and \(20\%\), respectively.
+Moreover, \(20\%\) of the training set was preserved as a validation set to validate the model during the training process.
+
+Moreover, the dataset was normalised to a range of \((0, 1)\) to improve the convergence of the gradient descent algorithm.
+Due to memory limitations, \(32\) consecutive frames in each delamination case were selected for DL model training.
+Additionally, frames displaying the propagation of guided waves before interaction with the delamination have no features to be extracted.
+Hence, only a certain number of frames were selected from the initial occurrence of the interactions with the delamination.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

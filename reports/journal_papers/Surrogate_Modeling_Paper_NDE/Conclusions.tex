@@ -1,0 +1,16 @@
+\section{Conclusions and future work}
+\label{conclusion}
+In this research work, we presented a novel DL-based surrogate model. 
+The developed model adopts the architecture of autoencoder-decoder in conjunction with the ConvLSTM for the prediction of a full wavefield containing interacting Lamb waves with delamination. 
+In the proposed model, the encoder and decoder parts are trained jointly on a synthetic dataset consisting of frames which contain wave patterns of delamination reflections and changes of wavefront due to delamination. 
+Then the encoder is trained separately on reference data without delamination. 
+The delamination information in the form of binary images is also provided along with the reference images to the encoder part for training the encoder, and the final prediction of frames propagating in the plate with delamination.
+In simple words, this DL-based surrogate model takes full wavefield frames of propagating waves in a healthy plate as input and predicts full wavefields in a plate which contains single delamination.
+
+The proposed DL model performed well as proved by the results.
+The proposed DL model is helpful for the prediction of the full wavefield data from the time of excitation initiation to the desired simulation time. 
+The predicted wavefield from the proposed architecture can be used for inverse problems in NDT (shown here) and SHM (possibly in future).
+The wavefield prediction by the proposed DL model is ultrafast, therefore objective functions which require multiple evaluations can be applied in the inverse methods.
+In contrast, such an approach is unfeasible with conventional forward solvers, e.g. based on p-FEM or SEM. 
+
+It is planned to test the proposed damage identification framework on experimental data in future.
