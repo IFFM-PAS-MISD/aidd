@@ -66,7 +66,9 @@
 \usepackage{algorithmicx}%
 \usepackage{algpseudocode}%
 \usepackage{listings}%
-%\usepackage{subfigure}
+\usepackage{amsmath} % for \vec command
+\usepackage{caption}
+
 
 %%%%
 
@@ -88,21 +90,21 @@
 %%%%%=============================================================================%%%%
 
 %% as per the requirement new theorem styles can be included as shown below
-\theoremstyle{thmstyleone}%
-\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%\theoremstyle{thmstyleone}%
+%\newtheorem{theorem}{Theorem}%  meant for continuous numbers
 %%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
 %% optional argument [theorem] produces theorem numbering sequence instead of 
 %%independent numbers for Proposition
-\newtheorem{proposition}[theorem]{Proposition}% 
+%\newtheorem{proposition}[theorem]{Proposition}% 
 %%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem 
 %%%and proposition etc.
 
-\theoremstyle{thmstyletwo}%
-\newtheorem{example}{Example}%
-\newtheorem{remark}{Remark}%
+%\theoremstyle{thmstyletwo}%
+%\newtheorem{example}{Example}%
+%\newtheorem{remark}{Remark}%
 
-\theoremstyle{thmstylethree}%
-\newtheorem{definition}{Definition}%
+%\theoremstyle{thmstylethree}%
+%\newtheorem{definition}{Definition}%
 
 \raggedbottom
 %%\unnumbered% uncomment this for unnumbered level heads
@@ -146,9 +148,9 @@
 
 \author*[2]{\fnm{Pawel} \sur{Kudela}}\email{pk@imp.gda.pl}
 
-\author[3]{\fnm{Abdalraheem} \sur{A. Ijjeh}}\email{iiiauthor@gmail.com}
+\author[3]{\fnm{Abdalraheem} \sur{A. Ijjeh}}\email{aijjeh@us.es}
 
-\author[4]{\fnm{Eleni} \sur{Chatzi}}\email{iiiauthor@gmail.com}
+\author[4]{\fnm{Eleni} \sur{Chatzi}}\email{chatzi@ibk.baug.ethz.ch}
 
 \author[5]{\fnm{Wieslaw} \sur{Ostachowicz}}\email{wieslaw@imp.gda.pl}
 
@@ -162,26 +164,1039 @@ Engineering}, \orgname{ETH Z\"{u}rich, Switzerland},
 \orgaddress{\street{Stefano-​Franscini-Platz 5}, \city{Z\"{u}rich}, 
 \postcode{8093}, \country{Switzerland}}}
 		
-		\begin{abstract}
-			\input{Abstract}
-		\end{abstract}
+\abstract{In this work, a novel approach of guided wave-based damage 		 
+	identification in composite laminates is proposed. 
+	The novelty of this research lies in the implementation of ConvLSTM-based 
+	autoencoders for the generation of full wavefield data of propagating 
+	guided waves in composite structures.
+	The developed surrogate deep learning model takes as input full wavefield 
+	frames of propagating waves in a healthy plate along with a binary image 
+	representing delamination and predicts frames of propagating waves in a 
+	plate which contains single delamination.
+	The evaluation of the surrogate model is ultrafast.
+	Therefore, unlike traditional forward solvers, the surrogate model can be 
+	employed efficiently in the inverse framework of damage identification.
+	In this work, particle swarm optimisation is applied as a suitable tool to 
+	this end. 
+	
+	The proposed method was tested on a synthetic dataset showing that it is 
+	capable to estimate delamination location and size with a good accuracy.
+	The test involved full wavefield data in the objective function of the 
+	inverse method but it should be underlined that also partial data with 
+	measurements can be implemented.
+	This is extremely important for practical applications in structural health 
+	monitoring where only signals at a finite number of locations are 
+	available.}
 	
 	\keywords{Lamb waves, structural health monitoring, surrogate modeling, 
 	delamination identification, deep learning, autoencoders, ConvLSTM}
-	%\end{frontmatter}
+	
+	\maketitle
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{Introduction}
+	\section{Introduction}\label{sec1}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	Detecting delamination in composite materials poses a significant challenge 
+	for conventional visual inspection techniques as it occurs between plies of 
+	the composite laminate and remains invisible from external 
+	surfaces~\cite{staszewski2009health, tuo2019damage}. 
+	As a result, various nondestructive testing (NDT) and structural health 
+	monitoring (SHM) techniques have been proposed for delamination 
+	identification in composite structures. 
+	Among these techniques, ultrasonic guided waves are widely recognized as 
+	one of the most promising approaches for quantitatively identifying defects 
+	in composites~\cite{tian2015delamination, munian2018lamb}. 
+	Their extensive application is attributed to their high sensitivity to 
+	small defects, low propagation attenuation, and ability to monitor large 
+	areas using only a small number of sparsely distributed 
+	transducers~\cite{Barthorpe2020, Ihn2008, Cantero-Chinchilla2020}.
+	
+	However, using a smaller number of transducers does not allow to obtain 
+	high-quality resolution damage maps and accurately asses the size of 
+	experienced damage. 
+	Conversely, employing a very dense array of transducers is impractical in 
+	most situations. 
+	To address these issues, a scanning laser Doppler vibrometer (SLDV) 
+	can be employed. 
+	SLDV can measure the propagation of guided waves in a highly dense grid of 
+	points over the surface of a large specimen, collectively known as a full 
+	wavefield~\cite{Radzienski2019a}. 
+	In recent years, full wavefield signals have been utilized for detecting 
+	and localizing defects in composite structures~\cite{Radzienski2019a, 
+	Girolamo2018a, kudela2018impact, rogge2013characterization}. 
+	These damage identification techniques using full wavefield signals can 
+	effectively estimate not only the location but also the size of the 
+	damage~\cite{Girolamo2018a, kudela2018impact}. 
+	Full wavefield scans offer valuable insights into the interaction of guided 
+	waves with defects. However, acquiring the full wavefield of guided waves 
+	is a time-consuming process.
+	
+	One possible solution to address this problem involves obtaining Lamb waves 
+	in a low-resolution format and subsequently applying compressive sensing 
+	(CS) eventually enhanced by deep learning (DL) 
+	methods~\cite{esfandabadideep}, such as end-to-end DL-based 
+	super-resolution technique~\cite{ijjeh2023deep}. 
+	
+	Nevertheless, the damage identification methods operating on the full 
+	wavefield cannot be directly extended to the cases when only spatially 
+	sparse data is available, e.g. an array of sensors is installed on the 
+	structure.
+	In such a case, usually, an inverse procedure is employed in which 
+	efficient methods for solving wave equations are required.  
+	However, numerical modelling of ultrasonic guided wave propagation in solid 
+	media exhibiting discontinuities, such as damage, is complex, requires fine 
+	discretization and is computationally intensive.
+	Even methods such as p-version of the finite element method 
+	(p-FEM)~\cite{Duczek2013}, the iso-geometric analysis 
+	(IGA)~\cite{Anitescu2019}, the spectral cell method 
+	(SCM)~\cite{Mossaiby2019} or the time-domain spectral element method 
+	(SEM)~\cite{Ostachowicz2012} are not efficient enough.
+	In the end, calling the objective function for each damage case scenario in 
+	which the forward solver is used, is unfeasible.
+	
+	An alternative approach is to utilize a DL-based surrogate model for 
+	generating full wavefield data or time series resembling signals registered 
+	at an array of sensors. 
+	A surrogate model imitates the behavior of the simulation model while 
+	replacing time-consuming forward simulations with approximate solutions.
+	
+	DL has seen extensive research and successful implementation in the fields 
+	of NDT and SHM. 
+	Convolutional neural network (CNN) is among the most popular DL 
+	architectures. 
+	Initially introduced for image processing, CNN has now been extended to 
+	various research domains, including NDT and SHM applications such as damage 
+	detection, localization, and characterization~\cite{rautela2019deep, 
+	pandey2022explainable, ijjeh2021full, ijjeh2022deep}.
+	
+	In modern DL, the focus is on constructing more efficient and streamlined 
+	architectures, wherein key components are accentuated and essential 
+	attributes from the original data are preserved. 
+	This process of crafting architectures involves the meticulous extraction 
+	of feature representations from data, which is commonly referred to as 
+	feature engineering. 
+	However, this practice demands specialized knowledge and a significant 
+	investment of time. 
+	Moreover, the intricacies of feature engineering differ across various data 
+	types, posing a challenge in establishing universally applicable procedures.
+	
+	An established option for feature extraction, alleviating feature 
+	engineering, 
+	is delivered in the form of an autoencoder, a type of neural network that 
+	possesses the capability to autonomously learn features from unlabeled data 
+	using unsupervised learning techniques. 
+	This unique ability obviates the need for extensive feature 
+	engineering~\cite{pinaya2020autoencoders, ardelean2023study, 
+		simpson2021machine}. 
+	Consisting of two integral components, an autoencoder comprises an encoder 
+	responsible for mapping inputs to a desired latent space, and a decoder 
+	that skilfully reverts the latent space back to the original input domain. 
+	By harnessing appropriately curated training data, autoencoders have the 
+	capacity to generate a latent representation, thereby negating the 
+	necessity for labour-intensive feature engineering endeavours.
+	
+	However, general autoencoders may not capture spatial features, such as 
+	images, or sequential information when dealing with dynamics, like 
+	time-series forecasting. 
+	To address the limitation of capturing spatial features, the use of a 
+	CNN-based autoencoder is recommended, whereas, an RNN-based autoencoder is 
+	usually employed for learning features from time-series data.
+	Deep CNN-based autoencoders (DCAEs) excel at extracting spatial features 
+	from images-based input data, they may not be sufficient for extracting 
+	features from sequences of images, particularly in cases involving full 
+	wavefield data, which contains numerous sequential frames/images for each 
+	delamination scenario. 
+	For such situations, ConvLSTM~\cite{shi2015convolutional} is employed. 
+	ConvLSTM combines CNN and LSTM, enabling it to effectively learn features 
+	from sequences of images. 
+	In ConvLSTM architecture, CNN is responsible for learning features from 
+	images, while LSTM retains sequential information.
+	
+	DCAE-based surrogate modelling has been implemented 
+	in~\cite{jo2021adaptive, nikolopoulos2022non, sharma2022wave}. 
+	Jo et al.~\cite{jo2021adaptive} developed a DCAE framework for the purpose 
+	of extracting latent features from spatial properties and investigating 
+	adaptive surrogate estimation to sequester $CO_2$ into heterogeneous deep 
+	saline aquifers. 
+	They used DCAE and a fully-convolutional network for reducing the 
+	computational costs and extracting dimensionality-reduced features for 
+	conserving spatial characteristics. 
+	Nikolopoulos et al.~\cite{nikolopoulos2022non} presented a non-intrusive 
+	DL-based surrogate modelling scheme for predictive modelling of complex 
+	systems, which they described by parametrized time-dependent partial 
+	differential equations. 
+	Sharma et al.~\cite{sharma2022wave} proposed a DCAE-based surrogate 
+	predictive model for wave propagation. 
+	Their model is able to generate data for a given crack location and depth 
+	of the one-dimensional rod of isotropic material.
+	
+	Recently, Peng et al.~\cite{peng2021structural} proposed an encoding 
+	convolution long short-term memory (encoding ConvLSTM) framework for 
+	building a surrogate structural model with spatiotemporal evolution, 
+	estimating structural spatio-temporal states, and predicting dynamic 
+	responses under future dynamic load conditions. 
+	Zargar and Yuan~\cite{zargar2021impact} presented a hybrid CNN-recurrent 
+	neural network (RNN) for handling spatiotemporal information extraction 
+	challenges in impact damage detection problems.
+	
+	In this work, a novel approach is employed to investigate the propagation 
+	of guided waves in composite structures with varying instances of 
+	delamination. 
+	The method involves utilising a deep ConvLSTM autoencoder-based surrogate 
+	model. 
+	The main function of the developed model is to capture and learn the full 
+	wavefield representation present within frames containing delamination 
+	scenarios. 
+	Subsequently, it transforms this information into a compressed domain known 
+	as the latent space.
+	
+	During training, the encoder is presented with inputs containing both 
+	reference frames (without delaminations) and explicit data detailing the 
+	shape and location of the delaminations. 
+	This process eliminates the need to repeatedly solve the system's governing 
+	equations, resulting in significant time and computational cost savings in 
+	comparison to forward modelling by using conventional techniques.
+	
+	The novelty of this research lies in the implementation of ConvLSTM-based 
+	autoencoders for the generation of full wavefield data of propagating 
+	guided waves in composite structures.
+	The DL model for full wavefield prediction was applied for the first time 
+	in the inverse problem of damage identification.
+	For this purpose, particle swarm optimisation (PSO) was 
+	applied~\cite{Keneddy1995}.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{General concept}\label{sec2}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	A framework of the proposed inverse method for damage identification is 
+	shown in Fig~\ref{fig:complete_flowchart}.
+	It is composed of three building blocks: (i) dataset computation, (ii) 
+	supervised learning and (iii) inverse method.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure} [h!]
+		\begin{center}
+			\includegraphics[width=12cm]{figure1.png}
+		\end{center}
+		\caption{Flowchart of the proposed inverse method for damage 
+		identification.} 
+		\label{fig:complete_flowchart}
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	For the problem of guided wave-based damage identification, it is 
+	infeasible to collect a large experimental dataset which would cover 
+	various damage case scenarios because it would require manufacturing and 
+	damaging multiple samples.
+	Therefore, a possible alternative is a dataset computed numerically by 
+	using e.g. a finite element solver.
+	In particular, the dataset which is employed in the current research was 
+	generated by using the time domain spectral element 
+	method~\cite{Kudela2020}.
+	The dataset focuses on delamination defects as it these represent the most 
+	dangerous types of damage occurring in composite laminates such as carbon 
+	fibre-reinforced polymers (CFRP).
+	The process of generating this dataset involved modelling a square plate 
+	with delaminations of varying shapes and positions into the parametric 
+	unstructured mesh. 
+	Following this, a forward solver was utilised to capture the interactions 
+	between the propagating guided waves with the delamination and the 
+	boundaries of the plate.
+	It resulted in 512 frames for each delamination scenario.
+	The dataset is made available online~\cite{kudela_pawel_2021_5414555} so 
+	that the results can be easily replicated.
+	
+	The dataset was used for the supervised training of the DL model.
+	The idea was to input to the DL model a binary image in which ones (white 
+	pixels) represent  the delamination region and zeros (black pixels) 
+	represent the healthy region for the respective delamination cases.
+	Once the model is trained, it can be used in the inverse procedure as a 
+	surrogate model instead of a computationally expensive p-FEM or SEM forward 
+	solver.
+	
+	It should be noted that the PSO algorithm was used in the inverse method 
+	due to its efficiency in handling more general formulations of objective 
+	functions (as opposed to stricter algebraic constructs), but other 
+	algorithms can be used as well. 
+	On one hand, inputs are initial particles represented by binary images in 
+	Fig~\ref{fig:complete_flowchart}.
+	These are fed to the trained DL model which in turn is predicting the full 
+	wavefield of propagating waves for respective delamination scenarios.
+	On the other hand, full wavefield measurements are acquired. 
+	An objective function is built upon the computation of the mean square 
+	error (MSE) between the predicted wavefield and the measured wavefield.
+	Next, particle positions and their velocities are updated accordingly until 
+	the termination criterion is met.
+	Finally, the identified delamination is visualized for the best match.
+	It should be added that the proposed method was validated on synthetic data 
+	only. 
+	
+	The next sections describe each building block of the proposed method in 
+	detail.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{Data_Acquistion_and_data_preprocessing}
+	\section{Dataset computation and preprocessing}\label{sec3}
+	\subsection{Dataset computation}\label{subsec1}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	In this work, a synthetic dataset of propagating waves in carbon fibre 
+	reinforced composite plates was computed by using the parallel 
+	implementation of the time domain spectral element 
+	method~\cite{Kudela2020}. 
+	Essentially, the dataset resembles the particle velocity measurements at 
+	the bottom surface of the plate acquired by the SLDV in the transverse 
+	direction as a response to the piezoelectric transducer excitation placed 
+	at the centre of the plate's top surface. 
+	The input signal was a five-cycle Hann window-modulated sinusoidal tone 
+	burst. 
+	The carrier frequency was assumed to be 50 kHz. 
+	The total wave propagation time was set to 0.75 ms.
+	The number of time integration steps was 150000, which was selected for the 
+	stability of the central difference scheme.
+	
+	The material was a typical cross-ply CFRP laminate. 
+	The stacking sequence [0/90]\(_4\) was used in the model. 
+	The properties of a single ply were as follows [GPa]:
+	\(C_{11} = 52.55, \, C_{12} = 6.51, \, C_{22} = 51.83, C_{44} = 2.93, 
+	C_{55} = 
+	2.92, C_{66} = 3.81\). 
+	The assumed mass density was 1522.4 kg/m\textsuperscript{3}.
+	These properties were selected so that wavefields simulated numerically are 
+	matching the wavefields measured by SLDV on real CFRP specimens.
+	The wavelength of the dominating A0 Lamb wave mode was 21.2 mm.
+	
+	475 cases were simulated, representing Lamb waves propagation and 
+	interaction 
+	with single delamination for each case. 
+	The following random factors were used in simulated delamination scenarios:
+	\begin{itemize}
+		\item coordinates of the centre of delamination,
+		\item delamination geometrical size	determined by ellipse minor and 
+		major axis randomly selected from the range $10-40$ mm,
+		\item delamination angle randomly selected from the range $ 
+		0^{\circ}-180^{\circ}$.
+		
+	\end{itemize}
+	The delamination modelling was realized by writing custom geometry files 
+	which were used to generate unstructured mesh consisting of quadrilateral 
+	elements by using gmsh software~\cite{Geuzaine2009}.
+	An exemplary mesh of quadrilateral elements is shown in 
+	Fig.~\ref{fig:random_delam_mesh} in which green elements highlight the 
+	delamination whereas red elements represent the location of the 
+	piezoelectric actuator.
+	Next, the mesh was modified by doubling elements and splitting nodes at 
+	delamination region.
+	Additionally, the quadrilateral elements were converted to the 36-node 
+	spectral elements by using a custom MATLAB script.
+	The wave propagation problem was solved by using in-house code of the time 
+	domain SEM which was run on GPU.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure} [h!]
+		\begin{center}
+			\includegraphics{figure2.png}
+		\end{center}
+		\caption{Exemplary mesh containing piezoelectric transducer (red) and 
+		random delamination (green) used for Lamb wave propagation modelling.} 
+		\label{fig:random_delam_mesh}
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	The dataset contains 475 different delamination cases, with 512 frames per 
+	case, producing a total number of 243,\,200 frames with a frame size of 
+	\((500\times500)\)~pixels representing the geometry of the specimen surface 
+	of size \((500\times500)\)~mm\(^{2}\).
+	The frames in the dataset are 8-bit .png greyscale images.
+	The spatial size of the wavefield was further downsampled to 
+	\((256\times256)\) for the purpose of 
+	reducing the computational complexity.
+	
+	It is important to note that input data to the DL model in the form of the 
+	binary image representing the respective delamination case as it is 
+	presented in Fig.~\ref{fig:complete_flowchart} was insufficient to train a 
+	reliable model.
+	It was necessary to provide additional inputs in the form of reference full 
+	wavefield frames (without delaminations).
+	This is explained along with the DL model in 
+	section~\ref{sec:proposed_approach}.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Data augmentation}\label{subsec2}
+	The best way for improving the generalisation capabilities of the neural 
+	network is to acquire more data. 
+	However, in practice, it can be difficult to acquire more data and the 
+	amount of available data for neural network training is limited.
+	For tackling this issue, one way is to create some fake data based on the 
+	original dataset and add it to the training set, which is termed data 
+	augmentation. 
+	Data augmentation is an efficient approach for various computer vision and 
+	DL tasks. 
+	Data augmentation includes randomly cropping a region from the original 
+	image, adjusting contrast, rotation for a small angle and flipping images, 
+	etc.~\cite{szegedy2015going}.
+	In this research work, the dataset is composed of 475 delamination cases 
+	which is not enough for a targeted DL model to perform well.
+	Therefore, all the images in the 475 delamination cases are flipped 
+	diagonally, horizontally, and vertically in order to enhance the 
+	performance of the proposed DL model. 
+	Therefore, the total dataset after data augmentation is now composed of 
+	1900 \((475\times4 = 1900)\) delamination cases.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Dataset division and preprocessing}\label{subsec3}
+	For training and evaluation of the proposed DL model, the dataset was 
+	divided into two sets: training and testing, with a ratio of \(80\%\) and 
+	\(20\%\), respectively.
+	Moreover, \(20\%\) of the training set was preserved as a validation set to 
+	validate the model during the training process.
+	
+	Moreover, the dataset was normalised to a range of \((0, 1)\) to improve 
+	the convergence of the gradient descent algorithm.
+	Due to memory limitations, \(32\) consecutive frames in each delamination 
+	case were selected for DL model training.
+	Additionally, frames displaying the propagation of guided waves before 
+	interaction with the delamination have no features to be extracted.
+	Hence, only a certain number of frames were selected from the initial 
+	occurrence of the interactions with the delamination.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{Proposed_model}
+	\section{The proposed DL model for supervised learning}
+	\label{sec:proposed_approach}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	In this research work, we developed a novel deep ConvLSTM autoencoder-based 
+	surrogate model utilising full wavefield frames of Lamb wave propagation 
+	for the purpose of data generation for delamination identification in thin 
+	plates made of composite materials.
+	The developed DL model takes as an input \(32\) frames without delamination 
+	(reference frames) representing the full wavefield and the delamination 
+	information of the respective delamination case in the form of binary image 
+	for the purpose of producing full wavefield propagation of Lamb waves 
+	through space and time (3D matrix).
+	The most important aspect of the DL model is the prediction of the 
+	interaction of Lamb waves with the delamination so that the delamination 
+	location, shape, and size can be estimated.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure} [h!]
+		\begin{center}
+			\includegraphics[width=9cm]{figure4.png}
+		\end{center}
+		\caption{The flowchart of the proposed DL model.} 
+		\label{fig:proposed_model}
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	The complete flowchart of the proposed DL model is presented in 
+	Fig.~\ref{fig:proposed_model}. 
+	The training and evaluation process of the proposed model can be summarized 
+	in 
+	the following three steps:  
+	\begin{enumerate}
+		\item{\textbf{Feature extraction:} As we have no labels for the 
+		dataset, the dataset is composed of delamination cases. 
+			So the first task was to extract features from all of the 
+			delamination cases, and then use these features as labels in the 
+			second step during model training.
+			Therefore, in this step, the encoder and decoder parts of the 
+			proposed model are trained jointly, so the decoder part can be used 
+			separately for full wavefield predictions.
+			During this step, the features are extracted with very minimal 
+			reconstruction error in a compressed form, which matches the 
+			dimensions of the latent space.}
+		\item{\textbf{Model training:} In this step, the actual model training 
+		is being carried out. 
+			The full wavefield frames in a plate without delamination along 
+			with the binary image of the respective delamination case are fed 
+			into the DL model for training. 
+			The features extracted from encoder part of the first step are used 
+			as labels in this step, as shown in Fig.~\ref{fig:proposed_model}}.
+		\item{\textbf{Evaluation of the proposed DL model on unseen data:} At 
+		this stage, both of the pre-trained models (pre-trained decoder from 
+		step 1, and pre-trained encoder from step 2) are utilised for the 
+		prediction of full wavefield frames on unseen data.
+			During this step, the model just takes reference frames with the 
+			delamination information and produces the output as the full 
+			wavefield frames containing interaction of Lamb waves with 
+			delamination.}
+	\end{enumerate}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{figure} [h!]
+		\begin{center}
+			\includegraphics[width=11cm]{figure5.png}
+		\end{center}
+		\caption{The architecture of the proposed ConvLSTM autoencoder model.} 
+		\label{fig:convlstm}
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	The proposed ConvLSTM autoencoder model takes \(32\) frames as input 
+	concatenated with a binary image which is replicated 32 times (see 
+	Fig.~\ref{fig:proposed_model}). 
+	The DL model consists of six ConvLSTM layers.
+	The first ConvLSTM layer has \(32\) filters, the second and third layer has 
+	\(192\) filters, the fourth layer has \(32\) filters, and the last two 
+	ConvLSTM layers has \(192\) filters.
+	The kernel size of the ConvLSTM layers was set to (\(3\times3\)) with a 
+	stride of \((1)\). 
+	Padding was set to "same", which makes the output the same as the input in 
+	the case of stride \(1\).
+	Furthermore, a \(\tanh\) (the hyperbolic tangent) activation function was 
+	used within the ConvLSTM layers that output values in a range between 
+	(\(-1\) and \(1\)).
+	Maxpooling and upsampling were applied at each ConvLSTM layer for reducing 
+	the size of features and reconstruction purposes, respectively. 
+	Moreover, a batch normalization technique~\cite{Santurkar2018} was applied 
+	at each of the ConvLSTM layers.
+	At the final output layer, a 2D convolutional layer followed by a sigmoid 
+	activation function is applied.
+	
+	To alleviate the over-fitting, we used an early-stopping mechanism that 
+	monitors the validation loss during the training of the model and stops the 
+	training of the model after 30 epochs if there is no improvement. 
+	Adam optimizer was employed for back-propagation and MSE as a loss function 
+	for both training steps.
+	
+	For evaluating the performance of the proposed model, two evaluation 
+	metrics, namely peak signal-to-noise ratio (PSNR), and Pearson correlation 
+	coefficient (Pearson CC) were utilized. 
+	The PSNR measures the maximum potential power of a signal and the power of 
+	the noise that affects the quality of its representation and is expressed 
+	mathematically in Eq.~(\ref{eqn:psnr}):
+	
+	\begin{equation}
+		\mathrm{PSNR}=20 \log _{10} \frac{L}{\sqrt{\mathrm{MSE}}}
+		\label{eqn:psnr}
+	\end{equation}
+	
+	Where \(L\) denotes the highest degree of variation present in the input 
+	image. 
+	Meanwhile, MSE stands for mean squared error, which represents the 
+	discrepancy 
+	between the predicted output and the relevant ground truth. The calculation 
+	of 
+	the MSE is shown in Eq.~(\ref{eqn:mse}): 
+	
+	\begin{equation}
+		M S E=\frac{1}{M * N} \sum_{M, N}\left(Y_{(m, n)}-\hat{Y}_{(m, 
+		n)}\right)^2
+		\label{eqn:mse}
+	\end{equation}
+	
+	Where \(M\) and \(N\) represent the number of rows and columns in the input 
+	images, $Y_{(m, n)}$ is the ground truth value, and $\hat{Y}_{(m, n)}$ is 
+	the predicted value.
+	
+	Pearson CC is a metric that estimates the linear connection between two 
+	sets of variables, \(\vect{x}\) (which represents the ground truth values) 
+	and \(\vect{y}\) (which represents the predicted values). 
+	The mathematical formula for computing Pearson CC is shown in 
+	Eq.~(\ref{eqn:pearsoncc}):
+	
+	\begin{equation}
+		r_{x 
+			y}=\frac{\sum_{k=1}^n\left(x_k-\bar{x}\right)\left(y_k-\bar{y}\right)}{\sqrt{\sum_{k=1}^n\left(x_k-\bar{x}\right)^2}
+			\sqrt{\sum_{k=1}^n\left(y_k-\bar{y}\right)^2}},
+		\label{eqn:pearsoncc}
+	\end{equation}
+	
+	where $r_{xy}$ represents the Pearson CC, \(n\) represents the number of 
+	data points in a sample, and $x_k$ and $y_k$ denote the values of the 
+	ground truth and predicted values, respectively, for each data point. 
+	Additionally, $\bar{x}$ denotes the mean value of the sample, $\bar{y}$ 
+	represents the mean value of the predicted values. 
+	The values of $r_{xy}$ ranges from ‘-1’ to ‘+1’. 
+	Value ‘0’ specifies that there is no relation between the samples and the 
+	predicted values. 
+	A value greater than ‘0’ indicates a positive relationship between the 
+	samples and the predicted data, whereas, a value less than ‘0’ represents a 
+	negative relationship between them.
+	
+	The maximum PSNR and Pearson CC values on the validation data were noted as 
+	23.7 dB and 0.99, respectively.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{Inverse_method}
+	\section{Inverse method for damage identification}
+	
+	A global-best PSO algorithm implemented in Python was used in the 
+	optimisation process~\cite{MirandaLesterJames}.
+	It takes a set of candidate solutions and tries to find the best solution 
+	using a position-velocity update method. 
+	It uses a star-topology where each particle is attracted to the 
+	best-performing particle.
+	The algorithm follows two basic steps:
+	\begin{itemize}
+		\item the position update:
+		\begin{equation}
+			x_i(t+1) = x_i(t) + v_i(t+1),\label{eq:position_update}
+		\end{equation}
+		\item and the velocity update:
+		\begin{equation}
+			v_{ij}(t+1) = w\, v_{ij}(t) + c_1\, r_{1j}(t) \,[y_{ij}(t) - 
+			x_{ij}(t)] + c_2\, r_{2j}(t)\,[\hat{y}_j(t) - 
+			x_{ij}(t)],\label{eq:velocity_update}
+		\end{equation}
+	\end{itemize}
+	where $r$ are random numbers, $y_{ij}$ is the particle's best-known 
+	position, $\hat{y}_j$ is the swarm's best known position, $c_1$ is the 
+	cognitive parameter, $c_2$ is the social parameter and $w$ is the inertia 
+	parameter which controls the swarm's movement.
+	Cognitive and social parameters control the particle's behaviour given two 
+	choices: (i) to follow its personal best or (ii) follow the swarm’s global 
+	best position.
+	Overall, this dictates if the swarm is explorative or exploitative in 
+	nature. 
+	In our tests, we used the following parameters: $c_1 = c_2 = 0.3$ and 
+	$w=0.8$.
+	Good convergence was achieved for these set of parameters, therefore 
+	further parameter tuning was unnecessary.
+	
+	The following decision variables were used in the PSO:
+	\begin{itemize}
+		\item delamination coordinates $(x_c, y_c)$ with bounds [0 mm, 500 m],
+		\item delamination elliptic shape represented by semi-major and 
+		semi-minor axis $a, b$ with bounds [5 mm, 20 mm],
+		\item delamination rotation angle $\alpha$ with bounds [$0^\circ$, 
+		$180^\circ$].
+	\end{itemize}
+	
+	Based on decision variables, binary images of $(256\times256)$ pixels are 
+	generated (one image per particle - see Fig.~\ref{fig:complete_flowchart}).
+	In these images, ones (white pixels) represent delamination whereas zeros 
+	(black pixels) represent healthy area.
+	
+	The most important component of the proposed inverse method is the 
+	surrogate DL model described in section~\ref{sec:proposed_approach}.
+	The trained DL model is used for ultrafast full wavefield prediction as 
+	illustrated in Fig.~\ref{fig:complete_flowchart}.
+	For a single particle and respective binary image, the DL model is 
+	evaluated 7 times for 32 consecutive frames giving as an output 224 frames. 
+	These predicted frames are compared to 'measured' frames by using the MSE 
+	metric which is utilised in the objective function.
+	However, for the sake of replicability of the results and compatibility 
+	with the available dataset~\cite{kudela_pawel_2021_5414555}, we used 
+	synthetic data instead of measured data (acquired by SLDV).
+	
+	For each PSO iteration, particles are updated according to 
+	Eqs.~(\ref{eq:position_update})-(\ref{eq:velocity_update}).
+	The termination criterion was assumed as 100 iterations but it was observed 
+	that the objective function value converges much faster.
+	In the final step, the best matching wavefields indicate coordinates, 
+	semi-major, semi-minor axis and rotation angle of the elliptic-shaped 
+	delamination. 
+	These parameters are used for a visual representation of the best-matched 
+	delamination in the form of binary image compared against the ground truth 
+	(see also Fig.~\ref{fig:complete_flowchart}).
+	
+	As an evaluation metric for assessing the accuracy of the identified 
+	delamination, we used the intersection over union (IoU), which measures the 
+	degree to which the predicted delamination overlaps the true delamination. 
+	It is defined as:
+	\begin{equation}
+		IoU=\frac{Intersection}{Union}=\frac{\hat{Y} \cap Y}{\hat{Y} \cup Y}
+		\label{eq:iou}
+	\end{equation}
+	where \(\hat{Y}\) is the predicted output, and \(Y\) is the ground truth 
+	(true delamination) in the form of binary images.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\input{Results_and_discussions}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\clearpage
-	\input{Conclusions}
+	\section{Results and discussions}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Evaluation of the surrogate DL model}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	In this section, we present the evaluation of the proposed DL model based 
+	on numerical test data of \(95\) delamination cases representing the frames 
+	of the full wavefield propagation, which was not shown in the proposed DL 
+	model during training. 
+	The proposed DL model was evaluated using numerical test data to 
+	demonstrate the capability to predict the interaction of Lamb waves with 
+	delamination of various locations, shapes and sizes.
+	
+	Three different representative cases were selected from the numerical 
+	dataset to show the performance of the developed DL model.
+	Figures~\ref{fig:num_415},~\ref{fig:num_453}, 
+	and~\ref{fig:num_462} shows three different frames from three selected 
+	numerical test cases.  
+	Frames on the left column represent the labels to which the prediction of 
+	the proposed DL model is compared.
+	Frames on the right column represent prediction by the DL model.
+	Particular frames were selected to show the interaction of propagating Lamb 
+	waves with the delamination, namely $10\textsuperscript{th}$, 
+	$20\textsuperscript{th}$ and $30\textsuperscript{th}$ frame after the 
+	interaction with the delamination. These frame numbers were easily 
+	extracted knowing the A0 mode velocity and modelled delamination location. 
+	
+	As can be seen in the first scenario (Fig~\ref{fig:num_415}), the 
+	delamination occurred at the upper-left side of the plate, in the second 
+	scenario (Fig~\ref{fig:num_453}), the delamination occurred at the top-left 
+	of the plate whereas in the third scenario, (Fig~\ref{fig:num_462}) the 
+	delamination occurred at the top-centre of the plate. 
+	
+	In all presented cases (Figs.~\ref{fig:num_415}--\ref{fig:num_462}), the 
+	change of wave velocity due to delamination is well reproduced by the DL 
+	model.
+	The wave reflections from the delamination are very well predicted in 
+	Fig.~\ref{fig:num_453} whereas in some cases and frames the reflection 
+	pattern differs between the label and the DL prediction - compare 
+	Fig.~\ref{fig:num_462_label3} to Fig.~\ref{fig:num_462_pred3}.
+	It should be underlined that these reflections are of much smaller 
+	amplitude than the main wavefront and the proposed DL model is not able to 
+	reproduce correctly all detailed intricacies of Lamb wave reflections. 
+	A more complex DL model could be required to further improve the results.
+	Nevertheless, testing results are satisfactory and very promising.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\centering
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure6a.png}
+		\caption*{Label, $10\textsuperscript{th}$ frame}
+		\label{fig:num_415_label1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure6b.png}
+		\caption*{Prediction, $10\textsuperscript{th}$ frame}
+		\label{fig:num_415_pred1}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure6c.png}
+		\caption*{Label, $20\textsuperscript{th}$ frame}
+		\label{fig:num_415_label2}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure6d.png}
+		\caption*{Prediction, $20\textsuperscript{th}$ frame}
+		\label{fig:num_415_pred2}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure6e.png}
+		\caption*{Label, $30\textsuperscript{th}$ frame}
+		\label{fig:num_415_label3}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure6f.png}
+		\caption*{Prediction, $30\textsuperscript{th}$ frame}
+		\label{fig:num_415_pred3}
+	\end{minipage}
+	\caption{First scenario: comparison of predicted frames with the label 
+	frames at $10\textsuperscript{th}$, $20\textsuperscript{th}$, and 
+	$30\textsuperscript{th}$ frame after the interaction with delamination.}
+	\label{fig:num_415}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\centering
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure7a.png}
+		\caption*{Label, $10\textsuperscript{th}$ frame}
+		\label{fig:num_453_label1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure7b.png}
+		\caption*{Prediction, $10\textsuperscript{th}$ frame}
+		\label{fig:num_453_pred1}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure7c.png}
+		\caption*{Label, $20\textsuperscript{th}$ frame}
+		\label{fig:num_453_label2}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure7d.png}
+		\caption*{Prediction, $20\textsuperscript{th}$ frame}
+		\label{fig:num_453_pred2}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure7e.png}
+		\caption*{Label, $30\textsuperscript{th}$ frame}
+		\label{fig:num_453_label3}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure7f.png}
+		\caption*{Prediction, $30\textsuperscript{th}$ frame}
+		\label{fig:num_453_pred3}
+	\end{minipage}
+	\caption{Second scenario: comparison of predicted frames with the label 
+	frames at $10\textsuperscript{th}$, $20\textsuperscript{th}$, and 
+	$30\textsuperscript{th}$ frame after the interaction with 
+	delamination.}
+\label{fig:num_453}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\centering
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure8a.png}
+		\caption*{Label, $10\textsuperscript{th}$ frame}
+		\label{fig:num_462_label1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure8b.png}
+		\caption*{Prediction, $10\textsuperscript{th}$ frame}
+		\label{fig:num_462_pred1}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure8c.png}
+		\caption*{Label, $20\textsuperscript{th}$ frame}
+		\label{fig:num_462_label2}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure8d.png}
+		\caption*{Prediction, $20\textsuperscript{th}$ frame}
+		\label{fig:num_462_pred2}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure8e.png}
+		\caption*{Label, $30\textsuperscript{th}$ frame}
+		\label{fig:num_462_label3}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{figure8f.png}
+		\caption*{Prediction, $30\textsuperscript{th}$ frame }
+		\label{fig:num_462_pred3}
+	\end{minipage}
+	\caption{Third scenario: comparison of predicted frames with the label 
+	frames at $10\textsuperscript{th}$, $20\textsuperscript{th}$, and 
+	$30\textsuperscript{th}$ frame after the interaction with 
+	delamination.}
+\label{fig:num_462}
+\end{figure}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	From all three scenarios, it can be confirmed that the proposed DL-based 
+	surrogate model has reconstructed the full wavefield containing 
+	delamination with minimal error. 
+	Furthermore, the PSNR and Pearson CC values of all these three scenarios 
+	are shown in Table~\ref{tab:psnr_pearson}. 
+	The mean PSNR value was 21.8 dB, and the mean Pearson CC value was 0.98 on 
+	all of the test data.
+	It confirms that the predictions by the proposed DL model are accurate.
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h]
+	\caption{DL surrogate model evaluation metrics for three numerical cases}
+	\label{tab:psnr_pearson}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llcc}
+		\toprule
+		\multicolumn{2}{c}{Scenario} & PSNR    & Pearson CC \\ 
+		\midrule
+		\multirow{3}{*}{First} & $10\textsuperscript{th}$ frame & 23.3 dB & 
+		0.96 \\ 
+		& $20\textsuperscript{th}$ frame & 23.4 dB & 0.98 \\ 
+		& $30\textsuperscript{th}$ frame & 23.7 dB & 0.98 \\ 
+		\midrule
+		\multirow{3}{*}{Second} & $10\textsuperscript{th}$ frame & 21.4 dB & 
+		0.96 \\ 
+		& $20\textsuperscript{th}$ frame & 22.1 dB & 0.98 \\ 
+		& $30\textsuperscript{th}$ frame & 22.6 dB & 0.98 \\ 
+		\midrule
+		\multirow{3}{*}{Third} & $10\textsuperscript{th}$ frame & 21.8 dB & 
+		0.97 \\ 
+		& $20\textsuperscript{th}$ frame & 22.1 dB & 0.98 \\ 
+		& $30\textsuperscript{th}$ frame & 22.3 dB & 0.99 \\ 
+		\bottomrule
+	\end{tabular*}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Delamination identification results}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	The delamination identification results obtained by using PSO aided by the 
+	DL-based surrogate model are presented in Fig.~\ref{fig:pso_identification}.
+	Several runs were performed due to the meta-heuristic nature of the PSO 
+	algorithm and the results were selected for two runs for illustration 
+	purposes.
+	The following cases were selected, namely case 1 
+	(Fig.~\ref{fig:pso_case391_run1}, Fig.~\ref{fig:pso_case391_run2}), case 2 
+	(Fig.~\ref{fig:pso_case462_run1}, Fig.~\ref{fig:pso_case462_run2}) and case 
+	3 (Fig.~\ref{fig:pso_case453_run1}, Fig.~\ref{fig:pso_case453_run2}),  
+	where the damage identification difficulty can be ranked from highest to 
+	lowest.
+	The most difficult case is case 1 in which delamination is in the corner of 
+	the plate.
+	The delamination for case 2 is located very close to the top edge of the 
+	plate where edge reflections can overshadow reflections from delamination.
+	The delamination for case 3 is quite large and far away from the plate's 
+	edges so it should be easily detected.
+	
+	Actually, the damage identification difficulty level is reflected in the 
+	obtained IoU values which are shown in the zoomed-in regions around 
+	delamination in Fig.~\ref{fig:pso_identification}.
+	On average, the lowest IoU values were obtained for case 1.
+	
+	The visualisation of damage identification results is performed in such a 
+	way that the delamination ground truth is shown in green colour, DL model 
+	prediction in red colour and the intersection of the two is made by colour 
+	mixing which gives yellow colour.
+	Therefore, the more yellow pixels, the greater overlap of delaminations 
+	and, in turn, better accuracy.
+	
+	It should be noted that despite low IoU values in certain cases, the 
+	identification algorithm performed remarkably well because delamination was 
+	localised accurately for each scenario.
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\centering
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case391_run1.png}
+		\caption*{Case 1, run 1}
+		\label{fig:pso_case391_run1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case391_run2.png}
+		\caption*{Case 1, run 2}
+		\label{fig:pso_case391_run2}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case462_run1.png}
+		\caption*{Case 2, run 1}
+		\label{fig:pso_case462_run1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case462_run2.png}
+		\caption*{Case 2, run 2}
+		\label{fig:pso_case462_run2}
+	\end{minipage}
+	\\
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case453_run1.png}
+		\caption*{Case 3, run 1}
+		\label{fig:pso_case453_run1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.44\textwidth}
+		\centering
+		\includegraphics[]{pso_case453_run2.png}
+		\caption*{Case 3, run 2}
+		\label{fig:pso_case453_run2}
+	\end{minipage}
+	\caption{Delamination identification results; green - ground truth, red 
+	- prediction, yellow - intersection.}
+	\label{fig:pso_identification}
+	\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	The delamination identification results in terms of IoU values are gathered 
+	in Table~\ref{tab:iou} where also the results from~\cite{Ullah2023} are 
+	added for comparison.
+	The method presented in~\cite{Ullah2023} is completely different than the 
+	one presented here but it relies on the same dataset.
+	However, the frame size was larger, namely \((512\times512)\)~pixels versus 
+	\((256\times256)\)~pixels here, giving better resolution of damage 
+	identification.
+	
+	Although, according to Table~\ref{tab:iou}, the current results are not as 
+	good as compared to our previous paper~\cite{Ullah2023}, the advantage of 
+	the proposed method is that it can be easily extended to the cases in which 
+	only a limited number of signals are available in comparison to full 
+	wavefield data.
+	This is extremely important for practical applications in structural health 
+	monitoring where only signals at sensor locations are available.
+	
+	It should also be stressed, that the complexity of the proposed DL model 
+	and dataset size used for training is limited by the memory of a single 
+	Nvidia Tesla V100 GPU (32 GB memory) which was available to us.
+	Certainly, the surrogate DL model can be improved by using a larger number 
+	of frames in the sequence of ConvLSTM layers. 
+	It is expected that damage identification would improve as well with a more 
+	accurate surrogate DL model.
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[ht]
+	\caption{Damage identification evaluation metrics for three numerical cases}
+	\label{tab:iou}
+	%\setlength{\tabcolsep}{5pt} % Adjust the column separation
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccc}
+		\toprule
+		\multicolumn{2}{c}{Case Number} & \multicolumn{2}{c}{IoU} \\ 
+		\cmidrule(lr){3-4} 
+		& & Current & \cite{Ullah2023}\\
+		\midrule
+		\multirow{3}{*}{1} & Run 1 & 0.25 & \multirow{3}{*}{0.74} \\ 
+		& Run 2 & 0.41 & \\ 
+		& Run 3 & 0.34 & \\ 
+		\midrule
+		\multirow{3}{*}{2} & Run 1 & 0.84 & \multirow{3}{*}{0.76} \\ 
+		& Run 2 & 0.32 & \\ 
+		& Run 3 & 0.34 & \\ 
+		\midrule
+		\multirow{3}{*}{3} & Run 1 & 0.78 & \multirow{3}{*}{0.88} \\ 
+		& Run 2 & 0.60 & \\ 
+		& Run 3 & 0.85 & \\ 
+		\bottomrule
+	\end{tabular*}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%\clearpage
+	\section{Conclusions and future work}
+	\label{conclusion}
+	In this research work, we presented a novel DL-based surrogate model. 
+	The developed model adopts the architecture of autoencoder-decoder in 
+	conjunction with the ConvLSTM for the prediction of a full wavefield 
+	containing interacting Lamb waves with delamination. 
+	In the proposed model, the encoder and decoder parts are trained jointly on 
+	a synthetic dataset consisting of frames which contain wave patterns of 
+	delamination reflections and changes of wavefront due to delamination. 
+	Then the encoder is trained separately on reference data without 
+	delamination. 
+	The delamination information in the form of binary images is also provided 
+	along with the reference images to the encoder part for training the 
+	encoder, and the final prediction of frames propagating in the plate with 
+	delamination.
+	In simple words, this DL-based surrogate model takes full wavefield frames 
+	of propagating waves in a healthy plate as input and predicts full 
+	wavefields in a plate which contains single delamination.
+	
+	The proposed DL model performed well as proved by the results.
+	The proposed DL model is helpful for the prediction of the full wavefield 
+	data from the time of excitation initiation to the desired simulation time. 
+	The predicted wavefield from the proposed architecture can be used for 
+	inverse problems in NDT (shown here) and SHM (possibly in future).
+	The wavefield prediction by the proposed DL model is ultrafast, therefore 
+	objective functions which require multiple evaluations can be applied in 
+	the inverse methods.
+	In contrast, such an approach is unfeasible with conventional forward 
+	solvers, e.g. based on p-FEM or SEM. 
+	
+	It is planned to test the proposed damage identification framework on 
+	experimental data in future.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	\clearpage	
