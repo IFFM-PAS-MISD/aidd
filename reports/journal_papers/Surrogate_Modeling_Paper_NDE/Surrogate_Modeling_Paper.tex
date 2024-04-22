@@ -39,7 +39,7 @@
 %%%journals
 %%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference 
 %%%Style/Chemistry Reference Style
-\documentclass[sn-mathphys-num]{sn-jnl}% Math and Physical Sciences Numbered 
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}% Math and Physical Sciences Numbered 
 %Reference Style 
 %%\documentclass[sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author 
 %%%Year Reference Style
@@ -108,7 +108,7 @@
 
 \raggedbottom
 %%\unnumbered% uncomment this for unnumbered level heads
-
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
 \graphicspath{{Graphics/}{//pkudela_odroid_sensors/ALPHORN/surrogate_modelling_paper/Graphics/}}
 
 \begin{document}
@@ -154,15 +154,13 @@
 
 \author[5]{\fnm{Wieslaw} \sur{Ostachowicz}}\email{wieslaw@imp.gda.pl}
 
-\affil*[1, 2, 3, 5]{\orgdiv{Institute of Fluid Flow Machinery}, \orgname{Polish 
-Academy of Sciences, Poland}, 
-\orgaddress{\street{Generała Józefa Fiszera 14}, \city{Gdańsk}, 
-\postcode{80-231}, \country{Poland}}}
+\affil[1,2,5]{\orgdiv{Institute of Fluid Flow Machinery}, \orgname{Polish Academy of Sciences, Poland}, 
+\orgaddress{\street{Fiszera 14}, \city{Seville}, \postcode{80-231}, \country{Poland}}}
 
-\affil[4]{\orgdiv{Department of Civil, Environmental, and Geomatic 
-Engineering}, \orgname{ETH Z\"{u}rich, Switzerland}, 
-\orgaddress{\street{Stefano-​Franscini-Platz 5}, \city{Z\"{u}rich}, 
-\postcode{8093}, \country{Switzerland}}}
+\affil[3]{\orgdiv{GRVC Robotics Laboratory}, \orgname{University of Seville}, 
+	\orgaddress{\street{San Fernando 4}, \city{Seville}, \postcode{41004}, \country{Spain}}}
+
+\affil[4]{\orgdiv{Department of Civil, Environmental, and Geomatic Engineering}, \orgname{ETH Zurich, Switzerland}, \orgaddress{\street{Stefano-Franscini-Platz 5}, \city{Zurich}, \postcode{8093}, \country{Switzerland}}}
 		
 \abstract{In this work, a novel approach of guided wave-based damage 		 
 	identification in composite laminates is proposed. 
@@ -192,6 +190,7 @@ Engineering}, \orgname{ETH Z\"{u}rich, Switzerland},
 	delamination identification, deep learning, autoencoders, ConvLSTM}
 	
 	\maketitle
+	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Introduction}\label{sec1}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -62,6 +62,13 @@ for k = 1:nFile
             run fig_param4;
             caxis([caxis_cut*Smin,caxis_cut*Smax]);
             print([figure_output_path,'frame110_DLSR_model_',num2str(k+1),'.png'],'-dpng','-r600');
+            
+            figure;
+            imagesc(int_recon_image);colormap(cmap);
+            %rectangle('Position',[206 300 101 101]);
+            run fig_param4;
+            caxis([caxis_cut*Smin,caxis_cut*Smax]);
+            print([figure_output_path,'frame110_DLSR_model_',num2str(k+1),'_v2.png'],'-dpng','-r600');
 
             %% END OF PROCESSING
             [filepath,name,ext] = fileparts(filename);
